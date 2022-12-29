@@ -1,0 +1,147 @@
+.login-box{
+    box-sizing: border-box;
+    position: absolute;
+    width: 525px;
+    height: 492px;
+    left: 120px;
+    top: 192px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #000000;
+    border-radius: 16px;
+}
+
+.login-head{
+    position: absolute;
+    width: 100%;
+    height: 18px;
+    /* left: 171px; */
+    top: 43px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.login-email-lable{
+    position: absolute;
+    width: 45px;
+    height: 21px;
+    left: 66px;
+    top: 90px;
+}
+
+.login-password-lable{
+    position: absolute;
+    width: 45px;
+    height: 21px;
+    left: 66px;
+    top: 190px;
+}
+
+.login-form-lable{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+.login-email-input{
+    box-sizing: border-box;
+    position: absolute;
+    width: 401px;
+    height: 54px;
+    left: 65px;
+    color: #FFFFFF;
+    top: 136px;
+    border: 1px solid #9D9D9D;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.login-password-input{
+    box-sizing: border-box;
+    position: absolute;
+    width: 401px;
+    height: 54px;
+    left: 65px;
+    color: #FFFFFF;
+    top: 236px;
+    border: 1px solid #9D9D9D;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.login-submit-button{
+    cursor: pointer;
+    position: absolute;
+    width: 175px;
+    height: 54px;
+    left: 65px;
+    top: 336px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.login-forget-password{
+    cursor: pointer;
+    position: absolute;
+    width: 112px;
+    height: 16px;
+    left: 371px;
+    top: 354px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+.login-signup-tag{
+    position: absolute;
+    width: 97px;
+    height: 16px;
+    left: 200px;
+    top: 436px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    
+}
+
+.login-signup-tag-danger{
+    cursor: pointer;
+    position: absolute;
+    width: 49px;
+    height: 16px;
+    left: 301px;
+    top: 436px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #FF4655;
+}
