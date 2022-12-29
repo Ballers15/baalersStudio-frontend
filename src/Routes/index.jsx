@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorPage from '../Pages/Error404';
 import Dashboard from '../Pages/Dashboard'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderSideBarFooter from '../Components/HeaderSideBarFoooter';
+import HeaderSideBarFooter from '../Components/HeaderNavBarFoooter';
 // import Toaster from 'Components/Toaster';
 
 

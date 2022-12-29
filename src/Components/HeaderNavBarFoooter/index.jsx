@@ -1,14 +1,10 @@
 import React from 'react';
-
-import Header from '../Header';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
 import { Outlet } from 'react-router-dom';
-
-const HeaderSideBarFooter = () => {
+const HeaderNavBarFooter = () => {
   return (
     <div>
-      <Header />
       <Navbar />
       <Outlet />
       <Footer />
@@ -16,4 +12,4 @@ const HeaderSideBarFooter = () => {
   );
 };
 
-export default HeaderSideBarFooter;
+export default HeaderNavBarFooter;
