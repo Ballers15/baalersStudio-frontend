@@ -1,7 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Navbar.css'
+import './Navbar.css';
+import { useAuth } from '../../Auth/authProvider';
 const Navbar = () => {
+  const auth = useAuth()
+  const handleLogout = (e) => {
+    auth.logout()
+  }
 
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -20,6 +25,7 @@ const Navbar = () => {
           <NavLink to='/roadmap' className='nav-item' style={navLinkStyles}>Roadmap</NavLink>
           <NavLink to='/pool' className='nav-item' style={navLinkStyles}>Pool</NavLink>
           <NavLink to='/wallet' className='nav-item' style={navLinkStyles}>Wallet</NavLink>
+          <NavLink   to='/'  className='nav-item'  onClick={handleLogout}>Logout</NavLink>
         </div>
         <div className='responsive-nav-tag'>
           <span className='responsive-nav-tag-item responsive-nav-tag-item-1'></span>
