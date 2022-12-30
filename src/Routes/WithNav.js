@@ -1,8 +1,8 @@
 import React from 'react';
-import Footer from '../Footer';
-import Navbar from '../Navbar';
+import Footer from '../Components/Footer';
+import Navbar from '../Components/Navbar';
 import { Outlet } from 'react-router-dom';
-const HeaderNavBarFooter = () => {
+const WithNav = () => {
   return (
     <div>
       <Navbar />
@@ -12,4 +12,4 @@ const HeaderNavBarFooter = () => {
   );
 };
 
-export default HeaderNavBarFooter;
+export default WithNav;

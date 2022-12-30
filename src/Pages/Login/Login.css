@@ -1,3 +1,12 @@
+.Login-component {
+    background-image: url(../../Assest/img/login-backgroung.png);
+    height: 100vh; 
+    width: 100vw; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .login-box{
     box-sizing: border-box;
     position: absolute;
@@ -38,7 +47,7 @@
     width: 45px;
     height: 21px;
     left: 66px;
-    top: 190px;
+    top: 200px;
 }
 
 .login-form-lable{
@@ -70,7 +79,7 @@
     height: 54px;
     left: 65px;
     color: #FFFFFF;
-    top: 236px;
+    top: 246px;
     border: 1px solid #9D9D9D;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.9);
