@@ -1,14 +1,14 @@
 import { useState,useEffect, createContext, useContext } from 'react'
 import {userLogin} from '../Services/Auth'
-import { Navigate,useNavigate, useLocation, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext(null)
 
 export default function AuthProvide({ children }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate()
-  const location = useLocation()
-  const redirectPath = location.state?.path || '/'
+  
+  const redirectPath =  '/metamask'
 
   useEffect(() => {
     let _u = localStorage.getItem('_u');
@@ -29,9 +29,9 @@ export default function AuthProvide({ children }) {
       } else {
         // show toaster
         setUser(login.data);
-        navigate(redirectPath, { replace: true })
-
         localStorage.setItem('_u', JSON.stringify(login.data))
+        navigate(redirectPath)
+
       }
     } catch (error) {
       // setLoading(false);
