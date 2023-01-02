@@ -12,6 +12,7 @@ import Wallet from '../Pages/Wallet';
 import Party from '../Pages/Party';
 import { Authenticator } from '../Auth/authenticator'
 import AuthProvider from '../Auth/authProvider';
+import Metamask from '../Components/Metamask'
 
 
 // import Toaster from 'Components/Toaster';
@@ -33,7 +34,10 @@ const NavigationRouter = () => {
                         <Route exact path="/party" element={<Party />} />
                         <Route exact path="/roadmap" element={<Roadmap />} />
                         <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} />
-                        <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
+                       <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
+                        <Route exact path="/metamask" element={<Metamask />} />
+                        {/* <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} /> */}
+                
                     </Route>
                 </Routes>
           </AuthProvider>
