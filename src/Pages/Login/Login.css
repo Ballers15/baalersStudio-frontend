@@ -38,16 +38,16 @@
     position: absolute;
     width: 45px;
     height: 21px;
-    left: 66px;
-    top: 90px;
+    /* left: 66px; */
+    bottom: 54px;
 }
 
 .login-password-lable{
     position: absolute;
     width: 45px;
     height: 21px;
-    left: 66px;
-    top: 200px;
+    /* left: 66px; */
+    bottom: 52px;
 }
 
 .login-form-lable{
@@ -153,4 +153,11 @@
     align-items: center;
     text-align: right;
     color: #FF4655;
+}
+
+.form-control{
+    padding: 0.8rem 0.75rem !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: #FFFFFF !important;
+    border: none !important;
 }

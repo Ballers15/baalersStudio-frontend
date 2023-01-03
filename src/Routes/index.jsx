@@ -15,9 +15,6 @@ import AuthProvider from '../Auth/authProvider';
 import Metamask from '../Components/Metamask'
 
 
-// import Toaster from 'Components/Toaster';
-
-
 const NavigationRouter = () => {
     return (
       <>
@@ -36,13 +33,10 @@ const NavigationRouter = () => {
                         <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} />
                        <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
                         <Route exact path="/metamask" element={<Metamask />} />
-                        {/* <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} /> */}
-                
                     </Route>
                 </Routes>
           </AuthProvider>
         </BrowserRouter>
-        {/* <Toaster /> */}
       </>
     );
   };

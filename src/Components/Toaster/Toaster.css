@@ -1,0 +1,14 @@
+  .toast-body {
+    padding: var(--bs-toast-padding-x);
+    word-wrap: break-word;
+    border-radius: 10px;
+    background: #fffafa;
+    box-shadow: inset 20px 20px 61px #063a70, inset -20px -20px 61px #ffffff;
+    color: aliceblue;
+  }
+
+  .toast{
+    position: relative !important;
+    bottom: 10px !important;
+    left: 4px !important;
+  }

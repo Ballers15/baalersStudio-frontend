@@ -1,13 +1,18 @@
 import { useState,useEffect, createContext, useContext } from 'react'
 import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
+import Loader from "../Components/Loader";
+import Toaster from "../Components/Toaster";
 
 const AuthContext = createContext(null)
 
 export default function AuthProvide({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [toasterMessage, setToasterMessage] = useState("");
+  const [toaster, showToaster] = useState(false);
+  const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
-  
   const redirectPath =  '/metamask'
 
   useEffect(() => {
@@ -20,21 +25,30 @@ export default function AuthProvide({ children }) {
   }, []) 
   
   const login = async (data) => {
-    // setLoading(true);
+    setLoading(true);
     try {
       const login = await userLogin(data);
-      // setLoading(false);
+      setLoading(false);
       if (login.error) {
-        // show toaster
+      console.log(login)
+
+        setToasterMessage(login?.message||'Something Went Worng');
+        setShowToaster(true);
       } else {
-        // show toaster
+      console.log(login)
+
         setUser(login.data);
         localStorage.setItem('_u', JSON.stringify(login.data))
+        setToasterMessage('Login Succesfully !!');
+        setShowToaster(true);
         navigate(redirectPath)
 
       }
     } catch (error) {
-      // setLoading(false);
+      console.log(error)
+      setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+      setShowToaster(true);
+      setLoading(false);
     }
   }
 
@@ -46,6 +60,12 @@ export default function AuthProvide({ children }) {
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
+      {loading ? <Loader /> : null}
+      {toaster && <Toaster
+                    message={toasterMessage}
+                    show={toaster}
+                    close={() => showToaster(false)} />
+                }
     </AuthContext.Provider>
   )
 }
