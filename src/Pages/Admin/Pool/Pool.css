@@ -1,0 +1,46 @@
+
+.addPot{
+    background-image: url('../../../Assest/img/pot.png');
+    height: 74.8vh;
+    padding: 30px;
+    margin-top: 80px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.pool-listing{
+    padding: 30px;
+    margin-top: 80px ;
+}
+
+.rewardpot-btn{
+    float: right;
+    margin: 50px;
+}
+
+.form-check-input{
+    cursor: pointer;
+}
+
+.add-pot-submit-button{
+    cursor: pointer;
+    width: 175px;
+    height: 54px;
+    float: right;
+    background: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.react-time-picker__wrapper{
+    margin-top: 4px;
+    border-radius: 8px;
+
+}
+:disabled{
+    cursor:not-allowed;
+}

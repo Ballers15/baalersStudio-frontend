@@ -13,7 +13,7 @@ export default function AuthProvide({ children }) {
   const [toaster, showToaster] = useState(false);
   const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
-  const redirectPath =  '/metamask'
+ 
 
   useEffect(() => {
     let _u = localStorage.getItem('_u');
@@ -35,16 +35,22 @@ export default function AuthProvide({ children }) {
         setToasterMessage(login?.message||'Something Went Worng');
         setShowToaster(true);
       } else {
-        if (login.data.user.role === 'USER') {
+        if (login?.data?.user?.role === 'ADMIN') {
+          
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
-          navigate(redirectPath)
+          navigate('/')
         } else {
-          setToasterMessage('False Login !!');
+        
+          setUser(login.data);
+          localStorage.setItem('_u', JSON.stringify(login.data))
+          setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
+          navigate('/metamask')
         }
+
       }
     } catch (error) {
       console.log(error)
