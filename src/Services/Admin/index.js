@@ -10,4 +10,8 @@ let config = {
 
 export function AddRewardPot(data) {
     return (axios.post(url + 'pot/v1/admin/create/reward/pot', data,{headers:config}).then(res => res.data))
-  }
+}
+  
+export function getAllRewardPot() {
+    return (axios.get(url + 'pot/v1/admin/getall/reward/pot',{headers:config}).then(res => res.data))
+}
