@@ -35,14 +35,16 @@ export default function AuthProvide({ children }) {
         setToasterMessage(login?.message||'Something Went Worng');
         setShowToaster(true);
       } else {
-      console.log(login)
-
-        setUser(login.data);
-        localStorage.setItem('_u', JSON.stringify(login.data))
-        setToasterMessage('Login Succesfully !!');
-        setShowToaster(true);
-        navigate(redirectPath)
-
+        if (login.data.user.role === 'USER') {
+          setUser(login.data);
+          localStorage.setItem('_u', JSON.stringify(login.data))
+          setToasterMessage('Login Succesfully !!');
+          setShowToaster(true);
+          navigate(redirectPath)
+        } else {
+          setToasterMessage('False Login !!');
+          setShowToaster(true);
+        }
       }
     } catch (error) {
       console.log(error)
