@@ -298,7 +298,7 @@ const Dashboard = () => {
                                     <h2 className="heading text-center">BALR TOKEN</h2>
                                     <h2 className="heading2 text-center">BALR TOKEN</h2>
                                 </div>
-                                <div class='light'></div>
+                                {/* <div class='light'></div> */}
                                  <div className="ballercoin text-center">
                                     <img src={ballerCoin} alt="Italian_Mafia_Boss" />         
                                 </div>                           
