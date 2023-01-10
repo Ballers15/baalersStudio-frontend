@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Metamask.css";
 import ErrorMessage from "./errorMessage";
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Metamask = () => {
 	const [error, setError] = useState("No Error");
@@ -61,7 +61,9 @@ const Metamask = () => {
 	let selectedChain = Object.keys(supportedChainList).map((e) => {
 	  if (supportedChainList[e].chainId === chainId) {
 		return supportedChainList[e];
-	  }
+    } else {
+      return null;
+    }
 	});
   
 	  let filteredSelectedChain = selectedChain.filter((e) => e);

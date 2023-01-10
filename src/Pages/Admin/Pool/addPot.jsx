@@ -33,7 +33,6 @@ const AddPot = () => {
     useEffect(() => {
         if (state?.id) {
             getRewardPotDetailById(state?.id);
-            // state.id = '';
             return;
         }
     }, []);
@@ -58,7 +57,6 @@ const AddPot = () => {
                           ...rewadPotDetail,
                           rewardTokenAmount: data?.rewardTokenAmount,
                           startDate: data?.startDate?.split('T')[0],
-                        //   endDate: data?.endDate?.split('T')[0],
                           assetType:data?.assetType,
                           potType: data?.potType,
                           assetDetails: {

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Carousel } from "react-bootstrap"
 import $ from 'jquery'
@@ -45,14 +47,14 @@ window.addEventListener(
     $(".item").removeClass('active');
     that.addClass('active');
     i.each(function(){
-      if($(this).data('index')==dataIndex){
+      if($(this).data('index')===dataIndex){
         $(this).addClass('active');
         $(this).css({
           "left":0,
           "right":0,
           "z-index":3,
         });
-        if(dataIndex=="1"){
+        if(dataIndex==="1"){
           $(".item[data-index=2]").css({
             "left":0,
             "right":-200,
@@ -63,7 +65,7 @@ window.addEventListener(
             "right":0,
             "z-index":1,
           })
-        }else if(dataIndex=="0"){
+        }else if(dataIndex==="0"){
           $(".item[data-index=2]").css({
             "left":-200,
             "right":0,
@@ -74,7 +76,7 @@ window.addEventListener(
             "right":-200,
             "z-index":1,
           })
-        }else if(dataIndex=="2"){
+        }else if(dataIndex==="2"){
           $(".item[data-index=1]").css({
             "left":-200,
             "right":0,

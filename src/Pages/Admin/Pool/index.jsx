@@ -24,12 +24,15 @@ const PoolListing = () => {
     const [toaster, showToaster] = useState(false);
     const [toasterMessage, setToasterMessage] = useState("");
     const [rewardPotDetailsArray, setRewardPotDetailsArray] = useState([]);
+    const [config, setConfig] = useState({});
     const setShowToaster = (param) => showToaster(param);
+    
     const onInit=(config)=>{
         getAllRewardPotDetails(config);
     }
 
-    const getAllRewardPotDetails = async(config) => {
+    const getAllRewardPotDetails = async (config) => {
+        setConfig(config);
         setLoading(true);
         try {
           const getPotDetails = await getAllRewardPot(config);
@@ -66,7 +69,7 @@ const PoolListing = () => {
           } else {
             setToasterMessage('Pot Status Updated Succesfully');
               setShowToaster(true); 
-              getAllRewardPotDetails();
+              getAllRewardPotDetails(config);
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
