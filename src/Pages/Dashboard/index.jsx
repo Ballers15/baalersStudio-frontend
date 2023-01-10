@@ -271,10 +271,10 @@ const Dashboard = () => {
                         </div>
                     </div>  
                     <div className="rotateDiv secPaddingY">
-                        <div class="marquee">
-                            <div class="marquee-item" data-dir='left'>
-                            <div class="marquee-row">BALR TOKEN <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> </div>
-                            <div class="marquee-row">BALR TOKEN <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> </div>  
+                        <div className="marquee">
+                            <div className="marquee-item" data-dir='left'>
+                            <div className="marquee-row">BALR TOKEN <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> </div>
+                            <div className="marquee-row">BALR TOKEN <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> BALR TOKEN  <img src={star} alt="star"/> </div>  
                             </div>                           
 
                         </div>
@@ -298,7 +298,7 @@ const Dashboard = () => {
                                     <h2 className="heading text-center">BALR TOKEN</h2>
                                     <h2 className="heading2 text-center">BALR TOKEN</h2>
                                 </div>
-                                {/* <div class='light'></div> */}
+                                {/* <div className='light'></div> */}
                                  <div className="ballercoin text-center">
                                     <img src={ballerCoin} alt="Italian_Mafia_Boss" />         
                                 </div>                           

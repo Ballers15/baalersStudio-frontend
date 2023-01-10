@@ -9,7 +9,14 @@ import { MDBSwitch } from 'mdb-react-ui-kit';
 
 const PoolListing = () => {
     useEffect(() => {
-        onInit();
+        let u = localStorage.getItem('_u');
+        let _u = JSON.parse(u);
+        let config = {
+        'x-access-user':_u?.user?.accountId,
+        'x-access-token': _u?.token
+        }
+
+        onInit(config);
     }, []);
 
     const navigate = useNavigate();
@@ -18,14 +25,14 @@ const PoolListing = () => {
     const [toasterMessage, setToasterMessage] = useState("");
     const [rewardPotDetailsArray, setRewardPotDetailsArray] = useState([]);
     const setShowToaster = (param) => showToaster(param);
-    const onInit=()=>{
-        getAllRewardPotDetails();
+    const onInit=(config)=>{
+        getAllRewardPotDetails(config);
     }
 
-    const getAllRewardPotDetails = async() => {
+    const getAllRewardPotDetails = async(config) => {
         setLoading(true);
         try {
-          const getPotDetails = await getAllRewardPot();
+          const getPotDetails = await getAllRewardPot(config);
           setLoading(false);
           if (getPotDetails.error) {
             setToasterMessage(getPotDetails?.message||'Something Went Worng');
