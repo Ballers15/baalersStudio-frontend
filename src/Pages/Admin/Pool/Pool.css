@@ -1,0 +1,111 @@
+
+.addPot{
+    background-image: url('../../../Assest/img/pot.png');
+    height: 74.8vh;
+    padding: 80px;
+    margin-top: 90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.pool-listing{
+    padding: 50px;
+    margin-top: 80px ;
+}
+
+.rewardpot-btn{
+    float: right;
+    margin: 50px;
+}
+
+.form-check-input{
+    cursor: pointer;
+}
+
+.add-pot-submit-button{
+    cursor: pointer;
+    width: 175px;
+    height: 54px;
+    float: right;
+    background: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.react-time-picker__wrapper{
+    margin-top: 4px;
+    border-radius: 8px;
+
+}
+:disabled{
+    cursor:not-allowed;
+}
+
+
+  .pot-list-edit-icon{
+    height: 30px;
+    cursor: pointer;
+  }
+
+
+  .pool-listing-table-body, td, tfoot, th, .pool-listing-table-head, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.pool-listing-table{
+  background: #EEF0F4;
+border-radius: 20px;
+box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF;
+}
+
+.pool-listing-table-body {
+  display: block;
+  height: 570px;
+  overflow: auto;
+}
+
+.pool-listing-table-head, .pool-listing-table-body tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;/* even columns width , fix width of table too*/
+}
+
+pool-listing-table-head {
+  width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
+.pool-listing-table {
+  margin-top: 68px;
+  width: 95vw;
+}
+.add-reward-btn{
+  background: #e967ad;
+  border-radius: 10px;
+  box-shadow: inset 9.91px 9.91px 15px #d45e9d, inset -9.91px -9.91px 15px #fe70bd;
+  float: right;
+  color:#201c1c
+}
+
+.addPot{
+  border-radius: 20px;
+  box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #4b4343;
+}
+
+.action-tab-pool-list{
+  display: flex;
+  justify-content: center;
+}
+
+.form-switch {
+  padding-left: 0.5em;
+}

@@ -8,6 +8,9 @@ const Navbar = () => {
     auth.logout()
   }
 
+  let strAuth = localStorage.getItem('_u');
+  let _u = JSON.parse(strAuth);
+
   const navLinkStyles = ({ isActive }) => {
     return {
       textDecoration: isActive ? 'none' : 'none',
@@ -20,11 +23,13 @@ const Navbar = () => {
       <div className='navbar'>
         <span className='nav-logo'></span>
         <div className='nav-items'>
-          <NavLink to='/about' className='nav-item' style={navLinkStyles}>About</NavLink>
-          <NavLink to='/party' className='nav-item' style={navLinkStyles}>Party</NavLink>
-          <NavLink to='/roadmap' className='nav-item' style={navLinkStyles}>Roadmap</NavLink>
-          <NavLink to='/pool' className='nav-item' style={navLinkStyles}>Pool</NavLink>
-          <NavLink to='/wallet' className='nav-item' style={navLinkStyles}>Wallet</NavLink>
+                                    <NavLink to='/' className='nav-item' style={navLinkStyles}>Dashboard</NavLink>
+          {_u?.user?.role!=='ADMIN'&&<NavLink to='/about' className='nav-item' style={navLinkStyles}>About</NavLink>}
+          {_u?.user?.role!=='ADMIN'&&<NavLink to='/party' className='nav-item' style={navLinkStyles}>Party</NavLink>}
+          {_u?.user?.role!=='ADMIN'&&<NavLink to='/roadmap' className='nav-item' style={navLinkStyles}>Roadmap</NavLink>}
+          {_u?.user?.role!=='ADMIN'&&<NavLink to='/pool' className='nav-item' style={navLinkStyles}>Pool</NavLink>}
+          {_u?.user?.role!=='ADMIN'&&<NavLink to='/wallet' className='nav-item' style={navLinkStyles}>Wallet</NavLink>}
+          {_u?.user?.role==='ADMIN'&&<NavLink to='/poolListing' className='nav-item' style={navLinkStyles}>Pool</NavLink>}
           <NavLink   to='/'  className='nav-item'  onClick={handleLogout}>Logout</NavLink>
         </div>
         <div className='responsive-nav-tag'>
