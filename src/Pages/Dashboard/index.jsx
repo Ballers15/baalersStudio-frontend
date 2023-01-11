@@ -27,7 +27,8 @@ import ith from '../../Assest/img/logos/ith.png'
 import logoo from '../../Assest/img/logoo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import teen from '../../Assest/img/teen.png'
-import arrowRight from '../../Assest/img/arrowRight.svg'
+import arrowRight from '../../Assest/img/arrowRight.svg' 
+import ellipse from '../../Assest/img/ellipse.png'
 
 window.addEventListener(
     "scroll",
@@ -40,25 +41,7 @@ window.addEventListener(
     false
   );
   
-const Dashboard = () => {
-    useEffect(() => {
-        const script1 = document.createElement('script');
-        const script2 = document.createElement('script');
-      
-        script1.src = "https://unpkg.co/gsap@3/dist/gsap.min.js";
-        script2.src = "https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js";
-
-        script1.async = true;
-        script2.async = true;
-      
-        document.body.appendChild(script1);
-        document.body.appendChild(script2);
-      
-        return () => {
-          document.body.removeChild(script1);
-          document.body.removeChild(script2);
-        }
-      }, []);
+const Dashboard = () => {    
     return (
         <React.Fragment>
             <div className="dashboard"> 
@@ -68,12 +51,14 @@ const Dashboard = () => {
                             <div className="col-12">
                                 <Carousel interval={null} >
                                     <Carousel.Item>
+                                      
                                         {/* <img
                                         className="d-block w-100"
                                         src="https://picsum.photos/500/300?img=1"
                                         alt="First slide"
                                         /> */}
                                         <Carousel.Caption>
+                                        <img src={ellipse} className="bgShade"/>
                                            <div className="container">
                                                 <div className="row">
                                                     <div className="col-sm-5 my-auto">
@@ -81,6 +66,24 @@ const Dashboard = () => {
                                                             <div>
                                                                 <p>A WEB 3.0 CLICKER <b>GAME</b> </p>
                                                                 <h1>BALLERS CITY </h1>
+                                                                {/* <svg width="100" height="100" viewBox="0 0 100 100" id="four">
+                                                                    <g className="group" opacity="0.8">
+                                                                        <g className="small">
+                                                                        <path id="small" d="M41.25,40 L42.5,10 L43.75,40 L45, 41.25 L75,42.5 L45,43.75
+                                                                                            L43.75,45 L42.5,75 L41.25,45 L40,43.75 L10,42.5 L40,41.25z " fill="#C51EE0" />
+                                                                        </g>
+                                                                        
+                                                                    </g>
+                                                                </svg> */}
+                                                                <svg width="100" height="100" viewBox="0 0 100 100" id="four">
+                                                                    <g className="group" opacity="0.8">
+                                                                        
+                                                                        <g className="small">
+                                                                        <path id="small" d="M41.25,40 L42.5,25 L43.75,40 L45,41.25 L60,42.5 L45,43.75
+                                                                                            L43.75,45 L42.5,60 L41.25,45 L40,43.75 L25,42.5 L40,41.25z" fill="#C51EE0" />
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
                                                                 <p className="textHeader mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.</p>
                                                                 <h5>WHY DON’T YOU TRY IT NOW ?</h5>
                                                             </div>
@@ -122,21 +125,24 @@ const Dashboard = () => {
                                         <img  className="d-block w-100 h-100" src={slide3} alt="Second slide"
                                         />
                                         <Carousel.Caption>
-                                        <div className="sCaption text-center">
-                                            <div>
-                                                <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
-                                                <h1>POOL </h1>
-                                                <p className="textHeader m-auto wth-4">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.
-                                                </p>
-                                                
+                                            <div className="row justify-content-center">
+                                                <div className="col-sm-6">
+                                                    <div className="sCaption text-center">
+                                                        <div>
+                                                            <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
+                                                            <h1>POOL </h1>
+                                                            <p className="textHeader">
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.
+                                                            </p>
+                                                        </div>
+                                                        <div className="playBtn marTopLeft">
+                                                                <a href="#"><span></span>LOTTERY POT</a>
+                                                        </div>   
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="playBtn">
-                                                    <a href="#"><span></span>LOTTERY POT</a>
-                                            </div>
-                                            
-                                            
-                                        </div>
+                                      
                                         </Carousel.Caption>
                                         </Carousel.Item>
                                 </Carousel>
@@ -280,32 +286,65 @@ const Dashboard = () => {
                             </div>                        
                         </div>
                     </div>
-                    <div className="news news--news_page">
-                        
-                        <div className="news-list">
-                            <div className="news-list-wrap">
-                                <div className="news-list-column system">
-                                    <a href="#" className="news-item star pink">
-                                        <img className="news-item-bg" src={image28} alt="" />
-                                    
-                                    </a>
-                                    <a href="#" className="news-item star black">
-                                        <img className="news-item-bg" src={image27} alt="" />
+                    <div className="container">
+                        <div className="news news--news_page">                            
+                            <div className="news-list">
+                                <div className="news-list-wrap">
+                                    <div className="news-list-column system">
+                                        <a href="#" className="news-item star pink">
+                                            <img className="news-item-bg" src={image28} alt="" />
                                         
-                                    </a>
-                                    <a href="#" className="news-item star white">
-                                        <img className="news-item-bg" src={image29} alt="" />
+                                        </a>
+                                        <a href="#" className="news-item star black">
+                                            <img className="news-item-bg" src={image28} alt="" />
+                                            
+                                        </a>
+                                        <a href="#" className="news-item star white">
+                                            <img className="news-item-bg" src={image28} alt="" />
+                                            
+                                        </a>
                                         
-                                    </a>
-                                    
+                                    </div>
+                                
                                 </div>
+                                <div>
+                                <div className="nftCollectionHead mt-5">
+                                <h2 className="heading">NFT COLLECTION</h2>
+                                <h2 className="heading2">NFT COLLECTION</h2>
+                                </div>
+                                </div>
+                            </div>
+                            <div className="news-caption-wrap">
+                                <div className="news-caption">
+                                    <div className="">                           
+                                        <p className="text-font">
+                                        Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. 
+                                        </p>
+                                        <p className="text-font">                               
+                                            And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                        </p>
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <div>Artwork</div>
+                                                <h5 className="num">25.1k</h5>
+                                            </div>
+                                            <div className="col-sm-3">
+                                                <div>Artist</div>
+                                                <h5 className="num">15.6k</h5>
+                                            </div>
+                                            <div className="col-sm-3">
+                                                <div>Aucition</div>
+                                                <h5 className="num">10.2k</h5>
+                                            </div>
+                                        </div>
+                                        <div className="innerBtn">
+                                            <a href="#"><span></span>View NFT's</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
-                            </div>
-                        </div>
-                        <div className="news-caption-wrap">
-                            <div className="news-caption">
-                                <h2 className="title section-title white news-title">News &  Resources</h2>
-                            </div>
+                            
                         </div>
                     </div>
                     
