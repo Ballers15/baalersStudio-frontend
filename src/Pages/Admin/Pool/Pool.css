@@ -48,8 +48,8 @@
 }
 
 
-  .pot-list-edit-icon{
-    height: 30px;
+  .fa-edit{
+    height: 0px;
     cursor: pointer;
   }
 
@@ -109,3 +109,8 @@ pool-listing-table-head {
 .form-switch {
   padding-left: 0.5em;
 }
+
+.small-lable{
+  font-size: 13px;
+}
+

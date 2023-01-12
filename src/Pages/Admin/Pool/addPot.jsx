@@ -275,10 +275,10 @@ const AddPot = () => {
                             </Row>
                     
                             <Row className="mb-3">
-                                <Form.Label>Claim Expiry Time</Form.Label><br />
+                                <Form.Label>Claim Expiry</Form.Label><br />
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small'>Claim Expiry Date</Form.Label>
+                                    <Form.Label className='small-lable'>Claim Expiry Date</Form.Label>
                                     <Form.Control
                                         type="text"
                                       value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} >
@@ -287,7 +287,7 @@ const AddPot = () => {
                         
                                 <Form.Group as={Col} md="3">
                             
-                                    <Form.Label className='small'>Claim Expiry Time</Form.Label>
+                                    <Form.Label className='small-lable'>Claim Expiry Time</Form.Label>
                                     <Form.Control
                                         type="text"
                                         value={rewadPotDetail?.claimExpiryDate?.time|| ''} disabled={true} >
@@ -339,7 +339,7 @@ const AddPot = () => {
                                 <Form.Label>Asset Details</Form.Label>
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small'>Ticker</Form.Label>
+                                    <Form.Label className='small-lable'>Ticker</Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
@@ -352,7 +352,7 @@ const AddPot = () => {
                                 </Form.Group>
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small'>Contract Address</Form.Label>
+                                    <Form.Label className='small-lable'>Contract Address</Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
@@ -365,7 +365,7 @@ const AddPot = () => {
                                 </Form.Group>
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small'>Asset Name</Form.Label>
+                                    <Form.Label className='small-lable'>Asset Name</Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
