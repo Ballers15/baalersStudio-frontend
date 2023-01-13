@@ -213,6 +213,7 @@ const AddPot = () => {
     return (
         <React.Fragment>
             <div className="addPot">
+            <div className="addPot-container">
             <Form noValidate validated={validated} onSubmit={addRewardPot}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="2">
@@ -385,8 +386,8 @@ const AddPot = () => {
                             </Row>
                     
                         <div>
-                        {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={updateRewardPot}>Update Pot</button>}
-                        {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={ addRewardPot}>Add Pot</button>}
+                        {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={updateRewardPot}><span></span><span></span><span></span>Update Pot</button>}
+                        {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={ addRewardPot}><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
                 {loading ? <Loader /> : null}
@@ -396,7 +397,8 @@ const AddPot = () => {
                     close={() => showToaster(false)} />
                 }
             </div>
-        </React.Fragment>
+        </div>
+    </React.Fragment>
     )
 }
 

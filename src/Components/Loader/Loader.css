@@ -15,7 +15,7 @@
     height: 20px;
     position: absolute;
     border-radius: 50%;
-    background-color: #fff;
+    background-image: linear-gradient(180deg, #baaedf 0%, rgba(185, 183, 194, 0.1) 145.5%);
     left: 15%;
     transform-origin: 50%;
     animation: loader-circle7124 .5s alternate infinite ease;
@@ -53,7 +53,7 @@
   
   .loader-shadow {
     width: 20px;
-    height: 4px;
+    height: 5px;
     border-radius: 50%;
     background-color: rgba(0,0,0,0.9);
     position: absolute;
@@ -83,7 +83,7 @@
   
   .loader-shadow:nth-child(4) {
     left: 45%;
-    animation-delay: .2s
+    animation-delay: .1s
   }
   
   .loader-shadow:nth-child(5) {

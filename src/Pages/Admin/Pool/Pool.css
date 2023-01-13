@@ -1,18 +1,27 @@
 
 .addPot{
-    background-image: url('../../../Assest/img/pot.png');
-    height: 74.8vh;
-    padding: 80px;
-    margin-top: 90px;
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
+}
+
+.addPot-container{
+    color: #fff;
+    padding: 40px;
+    height: 90.4vh !important;
     margin-left: 10px;
     margin-right: 10px;
-    background-position: bottom;
-    background-repeat: no-repeat;
+}
+
+.addPot-container form{
+  padding-top: 13vh;
 }
 
 .pool-listing{
     padding: 50px;
-    margin-top: 80px ;
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
+}
+
+.pool-list-container{
+    margin-top: 78px ;
 }
 
 .rewardpot-btn{
@@ -22,6 +31,14 @@
 
 .form-check-input{
     cursor: pointer;
+}
+
+.pool-listing hr {
+  margin: 0 !important;
+  color: inherit;
+  border: 0;
+  border-top: 2px solid;
+  opacity: .25;
 }
 
 .add-pot-submit-button{
@@ -43,29 +60,49 @@
     border-radius: 8px;
 
 }
+
 :disabled{
     cursor:not-allowed;
 }
 
+.fa-edit{
+  height: 0px;
+  cursor: pointer;
+}
 
-  .fa-edit{
-    height: 0px;
-    cursor: pointer;
-  }
-
-
-  .pool-listing-table-body, td, tfoot, th, .pool-listing-table-head, tr {
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
-    padding: 10px;
-    text-align: center;
+.pool-listing-table-body, td, tfoot, th, .pool-listing-table-head, tr {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  padding: 10px;
+  text-align: center;
 }
 
 .pool-listing-table{
-  background: #EEF0F4;
-border-radius: 20px;
-box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF;
+  color: #fff;
+  border-radius: 31px;
+  background: #110929;
+  /* box-shadow: inset 45px 45px 42px #0a0518,
+            inset -45px -45px 42px #180d3a; */
+
+  /* border-radius: 31px;
+  background: linear-gradient(145deg, #120a2c, #0f0825);
+  box-shadow:  45px 45px 42px #0a0518,
+             -45px -45px 42px #180d3a; */
+/* 
+  border-radius: 31px;
+  background: linear-gradient(145deg, #0f0825, #120a2c);
+  box-shadow:  45px 45px 42px #0a0518,
+             -45px -45px 42px #180d3a; */
+
+             /* border-radius: 31px;
+background: linear-gradient(315deg, #0f0825, #120a2c);
+box-shadow:  -45px -45px 42px #0a0518,
+             45px 45px 42px #180d3a; */
+             border-radius: 31px;
+background: #210e58;
+box-shadow: inset 45px -45px 42px #130834,
+            inset -45px 45px 42px #2f147c;
 }
 
 .pool-listing-table-body {
@@ -82,23 +119,15 @@ box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF
 
 pool-listing-table-head {
   width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+} 
+
+pool-listing-table-head tr {
+  border-bottom: 2px solid ;
 }
 
 .pool-listing-table {
   margin-top: 68px;
   width: 95vw;
-}
-.add-reward-btn{
-  background: #e967ad;
-  border-radius: 10px;
-  box-shadow: inset 9.91px 9.91px 15px #d45e9d, inset -9.91px -9.91px 15px #fe70bd;
-  float: right;
-  color:#201c1c
-}
-
-.addPot{
-  border-radius: 20px;
-  box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #4b4343;
 }
 
 .action-tab-pool-list{
@@ -114,3 +143,263 @@ pool-listing-table-head {
   font-size: 13px;
 }
 
+.pool-listing a{
+  position: relative;
+  padding: 9px 10px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  letter-spacing: 4px;
+  overflow: hidden;
+  border-radius: 7px;
+  border: 1px solid #fff;
+  background: rgba(255,255,255,.1);
+  box-shadow: 0 5px 5px rgb(0 0 0);
+  margin-bottom: 26px;
+}
+
+.pool-listing a:hover{
+border: none;
+}
+
+.pool-listing a:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: rgba(255,255,255,.1);
+}
+
+.pool-listing a:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+	transition: 0.5s;
+	transition-delay: 0.5s;
+}
+
+.pool-listing a:hover:after{
+	left: 100%;
+}
+
+.pool-listing a span{
+	position: absolute;
+	display: block;
+	transition: 0.5s ease;
+}
+
+.pool-listing a span:nth-child(1){
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: #fff;
+}
+
+.pool-listing a:hover span:nth-child(1){
+	width: 100%;
+	transform: translateX(100%);
+}
+
+.pool-listing a span:nth-child(3){
+	bottom: 0;
+	right: 0;
+	width: 0;
+	height: 1px;
+	background: #fff;
+}
+
+.pool-listing a:hover span:nth-child(3){
+	width: 100%;
+	transform: translateX(-100%);
+}
+
+.pool-listing a span:nth-child(2){
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 0;
+	background: #fff;
+}
+
+.pool-listing a:hover span:nth-child(2){
+	height: 100%;
+	transform: translateY(100%);
+}
+
+.pool-listing a span:nth-child(4){
+	bottom: 0;
+	right: 0;
+	width: 1px;
+	height: 0;
+	background: #fff;
+}
+
+.pool-listing a:hover span:nth-child(4){
+	height: 100%;
+	transform: translateY(-100%);
+}
+
+.addPot .add-pot-submit-button{
+  position: relative;
+  padding: 13px 7px;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  letter-spacing: 4px;
+  overflow: hidden;
+  border-radius: 7px;
+  border: 1px solid #fff;
+  background: rgba(255,255,255,.1);
+  box-shadow: 0 5px 5px rgb(0 0 0);
+  margin-top: 26px !important;
+  float: right;
+}
+
+.addPot .add-pot-submit-button:hover{
+border: none;
+}
+
+.addPot .add-pot-submit-button:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: rgba(255,255,255,.1);
+}
+
+.addPot .add-pot-submit-button:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+	transition: 0.5s;
+	transition-delay: 0.5s;
+}
+
+.addPot .add-pot-submit-button:hover:after{
+	left: 100%;
+}
+
+.addPot .add-pot-submit-button span{
+	position: absolute;
+	display: block;
+	transition: 0.5s ease;
+}
+
+.addPot .add-pot-submit-button span:nth-child(1){
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: #fff;
+}
+
+.addPot .add-pot-submit-button:hover span:nth-child(1){
+	width: 100%;
+	transform: translateX(100%);
+}
+
+.addPot .add-pot-submit-button span:nth-child(3){
+	bottom: 0;
+	right: 0;
+	width: 0;
+	height: 1px;
+	background: #fff;
+}
+
+.addPot .add-pot-submit-button:hover span:nth-child(3){
+	width: 100%;
+	transform: translateX(-100%);
+}
+
+.addPot .add-pot-submit-button span:nth-child(2){
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 0;
+	background: #fff;
+}
+
+.addPot .add-pot-submit-button:hover span:nth-child(2){
+	height: 100%;
+	transform: translateY(100%);
+}
+
+.addPot .add-pot-submit-button span:nth-child(4){
+	bottom: 0;
+	right: 0;
+	width: 1px;
+	height: 0;
+	background: #fff;
+}
+
+.addPot .add-pot-submit-button:hover span:nth-child(4){
+	height: 100%;
+	transform: translateY(-100%);
+}
+
+.addPot .react-time-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: 100%;
+  position: relative;
+  padding: 0 1px;
+  border: 0;
+  color: #fff;
+  background: none;
+  font: inherit;
+  box-sizing: content-box;
+  -moz-appearance: textfield;
+}
+
+.addPot .form-control {
+  display: block;
+  width: 100%;
+  padding: 0.675rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 530;
+  line-height: 1.5;
+  color: #093d70;
+  background-color: #d7d6e7;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.4em;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: blue rgb(180, 54, 238);
+  
+}
+
+/* Targtes on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(188, 126, 247);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid #FEAF2E;
+}
