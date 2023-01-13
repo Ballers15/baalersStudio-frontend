@@ -3,8 +3,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap"; 
-import '../../font/valorant/Valorant-Font.ttf'
-import $ from 'jquery'
+import '../../font/valorant/Valorant-Font.ttf' 
 import './Dashboard.css'
 import Italian_Mafia_Boss from '../../Assest/img/Italian_Mafia_Boss.png' 
 import slide2 from '../../Assest/img/slide2.png'
@@ -31,6 +30,8 @@ import gamecity from '../../Assest/img/gamecity.png'
 import teen from '../../Assest/img/teen.png'
 import arrowRight from '../../Assest/img/arrowRight.svg' 
 import ellipse from '../../Assest/img/ellipse.png'
+import house from '../../Assest/img/house.png'
+import house1 from '../../Assest/img/house1.png'
 
 window.addEventListener(
     "scroll",
@@ -52,13 +53,7 @@ const Dashboard = () => {
                         <div className="row mainSlider">
                             <div className="col-12">
                                 <Carousel interval={null} >
-                                    <Carousel.Item>
-                                      
-                                        {/* <img
-                                        className="d-block w-100"
-                                        src="https://picsum.photos/500/300?img=1"
-                                        alt="First slide"
-                                        /> */}
+                                    <Carousel.Item> 
                                         <Carousel.Caption>
                                         <img src={ellipse} className="bgShade"/>
                                            <div className="container">
@@ -66,17 +61,9 @@ const Dashboard = () => {
                                                     <div className="col-sm-5 my-auto">
                                                         <div className="sCaption">
                                                             <div>
-                                                                <p>A WEB 3.0 CLICKER <b>GAME</b> </p>
+                                                                <p>Play | Party | Earn </p>
                                                                 <h1>BALLERS CITY </h1>
-                                                                {/* <svg width="100" height="100" viewBox="0 0 100 100" id="four">
-                                                                    <g className="group" opacity="0.8">
-                                                                        <g className="small">
-                                                                        <path id="small" d="M41.25,40 L42.5,10 L43.75,40 L45, 41.25 L75,42.5 L45,43.75
-                                                                                            L43.75,45 L42.5,75 L41.25,45 L40,43.75 L10,42.5 L40,41.25z " fill="#C51EE0" />
-                                                                        </g>
-                                                                        
-                                                                    </g>
-                                                                </svg> */}
+                                                                 
                                                                 <svg width="100" height="100" viewBox="0 0 100 100" id="four">
                                                                     <g className="group" opacity="0.8">
                                                                         
@@ -86,14 +73,19 @@ const Dashboard = () => {
                                                                         </g>
                                                                     </g>
                                                                 </svg>
-                                                                <p className="textHeader mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.</p>
-                                                                <h5>WHY DON’T YOU TRY IT NOW ?</h5>
+                                                                <p className="textHeader mb-3">
+                                                                A Web 3.0 hyper casual game that is your gateway to play, engage and socialize with your gang at exclusive parties.
+                                                                </p>
+                                                                <h5>Early access to the Ballers City</h5>
                                                             </div>
-                                                        <div className="playBtn">
+                                                            <div className="positionRelative">
+                                                            <div className="playBtn">
                                                                 <a href="#"><span></span>Play now</a>
-                                                        </div>
-                                                            
-                                                            
+                                                            </div>
+                                                            <div className="shareBtn">
+                                                                <a href="#"><span></span>SHARE NOW</a>
+                                                            </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-7 text-right">
@@ -115,7 +107,7 @@ const Dashboard = () => {
                                                         <p className="fw-bold">A WEB 3.0 GAMING STUDIO</p>
                                                         <h1>BALLERS </h1>
                                                         <p className="textHeader wth-4">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.
+                                                        With Ballers Studio, you can experience high quality games, engage with like minded communities and win high value rewards, all powered by the $BALR token.
                                                         </p> 
                                                     </div>                                          
                                                             
@@ -134,13 +126,19 @@ const Dashboard = () => {
                                                             <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
                                                             <h1>POOL </h1>
                                                             <p className="textHeader">
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus, turpis massa arcu blandit justo enim. Mauris dis libero leo in amet proin sagittis fringilla.
+                                                            Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
                                                             </p>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-8">
+                                                    <div className="positionRelative text-center">
                                                         <div className="playBtn marTopLeft">
-                                                                <a href="#"><span></span>LOTTERY POT</a>
+                                                            <a href="#"><span></span>LOTTERY POT</a>
                                                         </div>   
-                                                        
+                                                        <div className="shareBtn">
+                                                            <a href="#"><span></span>SHARE NOW</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,6 +191,9 @@ const Dashboard = () => {
                         </div>
                    </div>
                 </div>
+               
+                
+ 
                 <div className="reward">
                     <div>
                         <svg width="100" height="100" viewBox="0 0 100 100" id="one">
@@ -224,7 +225,7 @@ const Dashboard = () => {
                             </g>
                         </svg>
                     </div>
-                    <div className="bggg"></div>
+                    {/* <div className="bggg"></div> */}
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-6">
@@ -247,10 +248,11 @@ const Dashboard = () => {
                                         <h2 className="heading2">Reward</h2>
                                     </div>
                                 
-                                    <p className="text-font">Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities.  
+                                    <p className="text-font">
+                                    Become a Baller and get a chance to win rewards. Play, Party, Earn and win $BALR Token and NFTs along with access to exclusive parties. 
                                     </p>
                                     <p className="text-font">                                
-                                    And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                    Our reward pools ensure that everyone earns with their engagement in the game. Ballers city is all about wealth generation, conquering the town, and partying with your gang.
                                     </p>
                                     <div className="innerBtn">
                                         <a href="#"><span></span>View pool</a>
@@ -261,94 +263,108 @@ const Dashboard = () => {
                     </div>
                     <div className="backCoin"> <img src={coin} alt="coin image" /></div>
                 </div>
-                <div className="gradientBackgroung secPaddingY">
-                    <div className="container">
-                        <div className="positionRelative">
-                            <h2 className="heading text-center">Crash the Party</h2>
-                            <h2 className="heading2 text-center">Crash the Party</h2>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-6 my-auto">                            
-                                <div className="">                           
-                                    <p className="text-font">
-                                    Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive. Take on foes across Competitive and Unranked modes as well as Deathmatch and Spike Rush.   
-                                    </p>
-                                    <p className="text-font">                         
-                                    Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive. Take on foes across Competitive and Unranked modes as well as Deathmatch and Spike Rush.
-                                    </p>
-                                    <div className="innerBtn">
-                                        <a href="#"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
+                <div className="">
+                    <div className="gradientBackgroung secPaddingY">
+                           
+                        <div className="container">
+                            <div className="scene section" id="sticky">
+                                <div className="positionRelative mt-5">
+                                    <h2 className="heading text-center">Party with your Gang</h2>
+                                    <h2 className="heading2 text-center">Party with your Gang</h2>
+                                </div>
+                                <div className="row positionRelative">
+                                    <div className="col-sm-6 my-auto">                            
+                                        <div className="">                           
+                                            <p className="text-font">
+                                            Assemble your gang in our ecosystem connecting gamers around the world, get access to real-world parties with our community of OG’s and awaken the true BALLER within you.
+                                            </p>
+                                            <p className="text-font">                         
+                                            We plan to host exclusive yacht parties, music festivals, cosplay events, etc where real ballers can party like there is no tomorrow.
+                                            </p>
+                                            <h4>Loveland party coming soon!</h4>
+                                            <div className="innerBtn">
+                                                <a href="#"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div className="col-sm-6"> 
+
+                                        <div className="dancingImg">
+                                            <div >
+                                                <div className="viewer"></div>
+                                            </div>
+                                            
+                                        </div>      
+                                        <div className="partyHard">PARTY HARD</div>                     
+                                    </div>                        
                                 </div>
                             </div>
-                            <div className="col-sm-6">
-                                 <div className="dancingImg">
-                                    <img src={SneefDog} alt="Italian_Mafia_Boss" />         
-                                </div>                           
-                            </div>                        
+                          
                         </div>
-                    </div>
-                    <div className="container">
-                        <div className="news news--news_page">                            
-                            <div className="news-list">
-                                <div className="news-list-wrap">
-                                    <div className="news-list-column system">
-                                        <a href="#" className="news-item star pink">
-                                            <img className="news-item-bg" src={image28} alt="" />
-                                        
-                                        </a>
-                                        <a href="#" className="news-item star black">
-                                            <img className="news-item-bg" src={image28} alt="" />
+                    
+                        <div className="container">
+                            <div className="news news--news_page row">                            
+                                <div className="news-list col-sm-6">
+                                    <div className="news-list-wrap">
+                                        <div className="news-list-column system">
+                                            <a href="#" className="news-item star pink">
+                                                <img className="news-item-bg" src={image28} alt="" />
                                             
-                                        </a>
-                                        <a href="#" className="news-item star white">
-                                            <img className="news-item-bg" src={image28} alt="" />
+                                            </a>
+                                            <a href="#" className="news-item star black">
+                                                <img className="news-item-bg" src={image28} alt="" />
+                                                
+                                            </a>
+                                            <a href="#" className="news-item star white">
+                                                <img className="news-item-bg" src={image28} alt="" />
+                                                
+                                            </a>
                                             
-                                        </a>
-                                        
+                                        </div>
+                                    
                                     </div>
-                                
+                                    
                                 </div>
+                                <div className="news-caption-wrap col-sm-6">
+                                    <div className="news-caption">
+                                        <div className="">                           
+                                            <p className="text-font">
+                                            Choose from our collection of 10,000 NFT characters, each having their own storyline and vibe. 
+                                            </p>
+                                            <p className="text-font">                               
+                                            Your only way to access the city that never sleeps. Get the exclusive Baller NFT to be part of the clan before the time runs out
+                                            </p>
+                                            <div className="row">
+                                                <div className="col-sm-3">
+                                                    <div>Total NFTs</div>
+                                                    <h5 className="num">10k</h5>
+                                                </div>
+                                                <div className="col-sm-3">
+                                                    <div>NFTs Sold</div>
+                                                    <h5 className="num">TBA</h5>
+                                                </div>
+                                                <div className="col-sm-3">
+                                                    <div>Volume</div>
+                                                    <h5 className="num">TBA</h5>
+                                                </div>
+                                            </div>
+                                            <div className="innerBtn">
+                                                <a href="#"><span></span>View NFT's</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-12">
                                 <div>
-                                <div className="nftCollectionHead mt-5">
-                                <h2 className="heading">NFT COLLECTION</h2>
-                                <h2 className="heading2">NFT COLLECTION</h2>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="news-caption-wrap">
-                                <div className="news-caption">
-                                    <div className="">                           
-                                        <p className="text-font">
-                                        Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. 
-                                        </p>
-                                        <p className="text-font">                               
-                                            And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
-                                        </p>
-                                        <div className="row">
-                                            <div className="col-sm-3">
-                                                <div>Artwork</div>
-                                                <h5 className="num">25.1k</h5>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div>Artist</div>
-                                                <h5 className="num">15.6k</h5>
-                                            </div>
-                                            <div className="col-sm-3">
-                                                <div>Aucition</div>
-                                                <h5 className="num">10.2k</h5>
-                                            </div>
-                                        </div>
-                                        <div className="innerBtn">
-                                            <a href="#"><span></span>View NFT's</a>
-                                        </div>
+                                    <div className="nftCollectionHead mt-5">
+                                    <h2 className="heading">NFT COLLECTION</h2>
+                                    <h2 className="heading2">NFT COLLECTION</h2>
                                     </div>
-                                </div>
+                                    </div>
+                                    </div>                           
+                                
                             </div>
-                            
-                            
                         </div>
-                    </div>
                     
                     {/* <div className="container" > 
                         <div>
@@ -410,14 +426,14 @@ const Dashboard = () => {
 
                         </div>
                     </div>
-                    <div className="container positionRelative">                        
+                    <div className="container positionRelative">        
                         <div className="row">
                             <div className="col-sm-6 my-auto">                            
                                 <div className="">                           
                                     <p className="text-font">
-                                    Blend your style and experience on a global, competitive stage. You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. 
+                                    <b>$BALR</b> token unlocks your ability to earn as you play. Get access to exclusive rewards and next-gen Web3 games through $BALR.
                                     </p>
-                                    <p className="text-font">And, with one life per-round, you'll need to think faster than your opponent if you want to survive.</p>
+                                  
                                     
                                     <div className="innerBtn">
                                         <a href="#"><span></span>PURCHASE NOW</a>
@@ -466,7 +482,7 @@ const Dashboard = () => {
                                 
                             </g>
                         </svg>
-                    </div>
+                     </div> 
                     </div>
                     <div className="container positionRelative mt-12rem">
                         <div className="divImage"><img src={image28} alt="card"/> </div>
@@ -547,7 +563,15 @@ const Dashboard = () => {
                                 </Accordion>
                             </div>
                             <div className="col-sm-6">
-                            {/* <img id="img" src={image28} /> */}
+                            <section className="comparisonSection">
+                                
+                                <div className="comparisonImage beforeImage">
+                                    <img src={house1} alt="before" />
+                                </div>
+                                <div className="comparisonImage afterImage">
+                                    <img src={house} alt="after" />
+                                </div>
+                            </section>                           
                             </div>
                         </div>
                     </div>
@@ -583,6 +607,7 @@ const Dashboard = () => {
                         
                            
                         </div>
+                    </div>
                     </div>
                      
                 </div>
