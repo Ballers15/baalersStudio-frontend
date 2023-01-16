@@ -97,7 +97,7 @@ const Dashboard = () => {
                                     </Carousel.Item>
                                     <Carousel.Item>
                                         <img  className="d-block w-100 h-100" src={slide2} alt="Second slide"
-                                        />
+                                        /> 
                                         <Carousel.Caption>
                                            <div className="container">
                                             <div className="sCaption secondSlide">
@@ -424,7 +424,7 @@ const Dashboard = () => {
 
                         </div>
                     </div>
-                    <div className="container positionRelative">        
+                    <div className="container positionRelative ballerSec">        
                         <div className="row">
                             <div className="col-sm-6 my-auto">                            
                                 <div className="">                           
@@ -442,9 +442,8 @@ const Dashboard = () => {
                                 <div className="positionRelative">
                                     <h2 className="heading text-center">BALR TOKEN</h2>
                                     <h2 className="heading2 text-center">BALR TOKEN</h2>
-                                </div>
-                                {/* <div className='light'></div>  */}
-                                {/* <div className="flashAnim"></div> */}
+                                </div>                                
+                                
                                  <div className="ballercoin text-center">
                                  
                                     <img src={ballerCoin} alt="Italian_Mafia_Boss" />         
@@ -525,42 +524,43 @@ const Dashboard = () => {
                             </div>
                             <Accordion defaultActiveKey="0">
                                 <Accordion.Item eventKey="0">
-                                    <Accordion.Header>Blend your style and experience on a global, competitive stage?</Accordion.Header>
+                                    <Accordion.Header>When will the $BALR token launch?</Accordion.Header>
                                     <Accordion.Body>
                                         <p>
-                                        You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                        The baller token TGE will occur in Q1, 2023
+
                                         </p>
                                    
                                     </Accordion.Body>
                                 </Accordion.Item>
                                 <Accordion.Item eventKey="1">
-                                    <Accordion.Header>Your style and experience on a global, competitive stage?</Accordion.Header>
+                                    <Accordion.Header>Where can I get $BALR token </Accordion.Header>
                                     <Accordion.Body>
                                    <p>
-                                   You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                   $BALR token, once launched will be available for purchase on all major exchanges
                                    </p>
                                     </Accordion.Body>
                                 </Accordion.Item>
                                 <Accordion.Item eventKey="2">
-                                    <Accordion.Header>Your style and experience on a global?</Accordion.Header>
+                                    <Accordion.Header>When will the studio launch its next project? </Accordion.Header>
                                     <Accordion.Body>
                                    <p>
-                                   You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                   Ballers Studio will soon launch a line of engaging and fun games with a high-end graphics shooter launch to be announced soon.
                                    </p>
                                     </Accordion.Body>
                                 </Accordion.Item>
                                 <Accordion.Item eventKey="3">
-                                    <Accordion.Header>Your style and experience on a global, competitive?</Accordion.Header>
+                                    <Accordion.Header>When will the Ballers NFT whitelist begin?</Accordion.Header>
                                     <Accordion.Body>
                                    <p>
-                                   You have 13 rounds to attack and defend your side using sharp gunplay and tactical abilities. And, with one life per-round, you'll need to think faster than your opponent if you want to survive.
+                                   The NFT whitelist will begin soon, you can follow our social channels to stay updated.
                                    </p>
                                     </Accordion.Body>
                                 </Accordion.Item>
                                 
                                 </Accordion>
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-6 my-auto">
                             <section className="comparisonSection">
                                 
                                 <div className="comparisonImage beforeImage">

@@ -415,27 +415,7 @@ content: "NFTs distributed Daily";
     animation-iteration-count: 1;
     animation-fill-mode: both;
 }
-/* .flashAnim{
-  background: linear-gradient(12deg, rgba(0,0,0,0) 16%,rgba(255,255,255,0.5) 45%,rgba(0,0,0,0) 60%);   
-  animation: translateY 3s infinite ease;
-  animation-play-state: paused;
-  animation-delay: calc(var(--scroll) * -1s);  
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-}
-@keyframes rotate
-{	
-	0%{transform: rotateX(30deg) rotateY(0deg);}
-	50%{transform: rotateX(-30deg) rotateY(-20deg);}	
-	100%{transform: rotateX(30deg);}
-}
 
-@keyframes translateY
-{	
-	0%{transform: translateY(5%) rotateZ(0deg);}
-	50%{transform: translateY(-40%) rotateZ(30deg);}	
-	100%{transform: translateY(5%);}
-} */
   @keyframes scrollUp {
     to {
       transform: translate(100px, 200px);
@@ -525,73 +505,6 @@ content: "NFTs distributed Daily";
     -webkit-text-stroke: 1px #fff;
     color: transparent;
 }
-
-/* .light {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(ellipse at center, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 100%;
-    z-index: 2;
-    -webkit-animation: 1s flash infinite;
-            animation: 1s flash infinite; 
-  }
-  
-@-webkit-keyframes flash {
-    0% {
-      width: 0;
-      height: 0;
-    }
-    20% {
-      width: 600px;
-      height: 50px;
-    }
-    25% {
-      width: 0;
-      height: 0;
-    }
-    45% {
-      width: 600px;
-      height: 50px;
-    }
-    50% {
-      width: 0;
-      height: 0;
-    }
-    100% {
-      width: 0;
-      height: 0;
-    }
-  }
-  @keyframes flash {
-    0% {
-      width: 0;
-      height: 0;
-    }
-    20% {
-      width: 600px;
-      height: 60px;
-    }
-    25% {
-      width: 0;
-      height: 0;
-    }
-    45% {
-      width: 600px;
-      height: 50px;
-    }
-    50% {
-      width: 0;
-      height: 0;
-    }
-    100% {
-      width: 0;
-      height: 0;
-    }
-  } */
   .joinCard{
     position: relative;
     background: linear-gradient(112.62deg, #8D1CFE 29.4%, #0038ED 105.15%);
@@ -710,7 +623,7 @@ content: "NFTs distributed Daily";
 .accordion-body:before {
   content: "";
   position: absolute;
-  height: 82%;
+  height: 66%;
   width: 4px;
   background: #fff;
   left: 0;
@@ -718,9 +631,12 @@ content: "NFTs distributed Daily";
 }
 .accordion-body {
   position: relative;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
 }
 .accordion-body p{ 
   opacity: .6;
+  margin-bottom: 0;
 }
 .secondSlide{
   position: absolute;
@@ -1346,4 +1262,84 @@ ul li {
   height: 100%;
   position: absolute;
   top: 0;
+}
+
+
+.ballercoin {
+  /* height: 300px;
+  width: 350px; */
+  margin: 0px auto;
+  margin-top: 100px;
+  position: relative;
+}
+.ballercoin:after, .ballercoin:before {
+  right: 5%;
+  -moz-transition-property: "left, opacity";
+  -o-transition-property: "left, opacity";
+  -webkit-transition-property: "left, opacity";
+  transition-property: "left, opacity";
+  -moz-transition-duration: ".6s, .6s";
+  -o-transition-duration: ".6s, .6s";
+  -webkit-transition-duration: ".6s, .6s";
+  transition-duration: ".6s, .6s";
+}  
+ 
+
+.ballerSec:hover .ballercoin::after, .ballerSec:hover .ballercoin::before {
+  right: 46%;
+  opacity: 1;
+      -webkit-animation: shiney 2.5s infinite;
+      -moz-animation: shiney 2.5s infinite;
+}
+@-webkit-keyframes shiney {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: rotate(0deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+@keyframes shiney {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+.ballercoin:before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 40%;
+  height: 65px;
+  width: 65px;
+  /* margin-left: -12px; */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuNSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMSIvPjxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==);
+  background: radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
+  z-index: 40;
+  background-repeat: no-repeat;
+}
+.ballercoin:after {
+  opacity: 0;
+  height: 20px;
+  width: 390px;
+  margin-right: -164px;
+  top: 46%;
+  content: "";
+  position: absolute;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPjxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==);
+  background: radial-gradient(50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 75%);
 }
