@@ -25,7 +25,7 @@ const PoolListing = () => {
     }
 
     const toTitleCase = (str) => {
-        var string = str.toLowerCase().split(" ");
+        var string = str?.toLowerCase().split(" ");
         for(var i = 0; i< string.length; i++){
            string[i] = string[i][0].toUpperCase() + string[i].slice(1);
         }
