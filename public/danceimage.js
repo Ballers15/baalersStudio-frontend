@@ -32,11 +32,11 @@ $(window).on('load', function () {
       let tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: "center center",
+            start: "top center",
             // makes the height of the scrolling (while pinning) match the width, thus the speed remains constant (vertical/horizontal)
-            end: () => "+=" + section.offsetWidth, 
+            end: () => "+=" + section.offsetHeight, 
             scrub: true,
-            pin: true,
+            // pin: true,
             anticipatePin: 1
           },
           defaults: {ease: "none"}

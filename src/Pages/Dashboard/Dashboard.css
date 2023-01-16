@@ -1325,6 +1325,7 @@ ul li {
 
 
 .comparisonSection {
+  overflow-y: hidden;
   position: relative;
   padding-bottom: 56.25%; /* to maintain aspect ratio (responsive!) */
 }
