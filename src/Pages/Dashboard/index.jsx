@@ -445,6 +445,11 @@ const Dashboard = () => {
                                 </div>                                
                                 
                                  <div className="ballercoin text-center">
+                                    <div className="flashDiv">
+                                    <div className="flashLight"></div>
+                                    <div className="flashLight2"></div>
+                                    </div>
+                                 
                                  
                                     <img src={ballerCoin} alt="Italian_Mafia_Boss" />         
                                 </div>                           

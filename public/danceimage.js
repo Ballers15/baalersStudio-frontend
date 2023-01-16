@@ -18,9 +18,9 @@ $(window).on('load', function () {
           ease: "steps(" + frame_count + ")", // use a stepped ease for the sprite sheet
           scrollTrigger: {
             trigger: ".scene",
-            start: "top top",
-            end: "+=" + (frame_count * offset_value),
-            pin: true,
+            start: "top center",
+            // end: "+=" + (frame_count * offset_value),
+            // pin: true,
             scrub: true
           }
         });
@@ -47,4 +47,29 @@ $(window).on('load', function () {
         // ...and the image the opposite way (at the same time)
         .fromTo(section.querySelector(".afterImage img"), {yPercent: -100, y: 0}, {yPercent: 0}, 0);
     });
+
+
+
+
+
+    const t2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".ballerSec",
+        scrub: true,
+        // pin: true,
+        start: "top center",
+        end: "+=200%"
+      }
+    })
+    
+    .from(".flashLight", {
+      scale: 1.5, 
+      opacity:1,
+      ease: "none"
+    })
+    .from(".flashLight2", {
+      scale: 1.5, 
+      opacity:1,
+      ease: "none"
+    })
   })
