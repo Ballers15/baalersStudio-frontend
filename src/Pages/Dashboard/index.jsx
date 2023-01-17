@@ -98,9 +98,10 @@ const Dashboard = () => {
                                     <Carousel.Item>
                                         <img  className="d-block w-100 h-100" src={slide2} alt="Second slide"
                                         /> 
+                                        
                                         <Carousel.Caption>
                                            <div className="container">
-                                            <div className="sCaption secondSlide">
+                                            <div className="sCaption secondSlide box">
                                                     <div>
                                                         <p className="fw-bold">A WEB 3.0 GAMING STUDIO</p>
                                                         <h1>BALLERS </h1>
@@ -116,7 +117,48 @@ const Dashboard = () => {
                                     <Carousel.Item>
                                         <img  className="d-block w-100 h-100" src={slide3} alt="Second slide"
                                         />
+                                        <div>
+                                        <svg width="100" height="100" viewBox="0 0 100 100" id="four">
+                                                <g className="group" opacity="0.8">
+                                                    
+                                                    <g className="small">
+                                                    <path id="small" d="M41.25,40 L42.5,25 L43.75,40 L45,41.25 L60,42.5 L45,43.75
+                                                                        L43.75,45 L42.5,60 L41.25,45 L40,43.75 L25,42.5 L40,41.25z" fill="white" />
+                                                    </g>
+                                                </g>
+                                            </svg> 
+                                                
+                                            <svg width="100" height="100" viewBox="0 0 100 100" id="two">
+                                                <g className="group" opacity="0.8">
+                                                    
+                                                    <g className="small">
+                                                    <path id="small" d="M41.25,40 L42.5,25 L43.75,40 L45,41.25 L60,42.5 L45,43.75
+                                                                        L43.75,45 L42.5,60 L41.25,45 L40,43.75 L25,42.5 L40,41.25z" fill="white" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                            <svg width="100" height="100" viewBox="0 0 100 100" id="three">
+                                                <g className="group" opacity="0.8">
+                                                    <g className="large">
+                                                    <path id="large" d="M41.25,40 L42.5,10 L43.75,40 L45, 41.25 L75,42.5 L45,43.75
+                                                                        L43.75,45 L42.5,75 L41.25,45 L40,43.75 L10,42.5 L40,41.25z " fill="#fad739" />
+                                                    </g>
+                                                    
+                                                </g>
+                                            </svg>
+                                                
+                                            <svg width="100" height="100" viewBox="0 0 100 100" id="five">
+                                                <g className="group" opacity="0.8">
+                                                    
+                                                    <g className="small">
+                                                    <path id="small" d="M41.25,40 L42.5,25 L43.75,40 L45,41.25 L60,42.5 L45,43.75
+                                                                        L43.75,45 L42.5,60 L41.25,45 L40,43.75 L25,42.5 L40,41.25z" fill="#fad739" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
                                         <Carousel.Caption>
+                                            
                                             <div className="row justify-content-center">
                                                 <div className="col-sm-6">
                                                     <div className="sCaption text-center">
@@ -130,7 +172,7 @@ const Dashboard = () => {
                                                     </div>
                                                 </div>
                                                 <div className="col-sm-8">
-                                                    <div className="positionRelative text-center">
+                                                    <div className="positionRelative text-center">                                                       
                                                         <div className="playBtn marTopLeft">
                                                             <a href="#"><span></span>LOTTERY POT</a>
                                                         </div>   
@@ -446,10 +488,9 @@ const Dashboard = () => {
                                 
                                  <div className="ballercoin text-center">
                                     <div className="flashDiv">
-                                    <div className="flashLight"></div>
-                                    <div className="flashLight2"></div>
-                                    </div>
-                                 
+                                        <div className="flashLight"></div>
+                                        <div className="flashLight2"></div>
+                                    </div>                                
                                  
                                     <img src={ballerCoin} alt="Italian_Mafia_Boss" />         
                                 </div>                           

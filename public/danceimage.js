@@ -57,11 +57,12 @@ $(window).on('load', function () {
         trigger: ".ballerSec",
         scrub: true,
         // pin: true,
-        start: "top center",
-        end: "+=200%"
+        start: "top top",
+        end: "center bottom",
+        // end: "+=200%"
       }
     })
-    
+     
     .from(".flashLight", {
       scale: 1.5, 
       opacity:1,

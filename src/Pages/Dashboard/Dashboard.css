@@ -665,6 +665,10 @@ content: "NFTs distributed Daily";
   position: absolute;
   transform: translate(300%, -226%);
 }
+#five {
+  position: absolute;
+  transform: translate(948%, -310%);
+}
 .group {
   -webkit-transform: translate(42.5px, 42.5px);
   -moz-transform: translate(42.5px, 42.5px);
@@ -1349,3 +1353,45 @@ ul li {
   /* background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPjxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==); */
   background: radial-gradient(50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 75%);
 }
+
+
+
+.box:after, .box:before {
+  left: 5%; 
+  -webkit-animation: shiney 3s infinite;
+  -moz-animation: shiney 3s infinite;
+}
+.box:after {
+  opacity: 0;
+  height: 30px;
+  width: 490px;
+  margin-left: -30px;
+  top: 10px;
+  content: "";
+  position: absolute;
+   background: -moz-radial-gradient(50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 75%);
+  background: -webkit-radial-gradient(50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 75%);
+  background: radial-gradient(50% 50%, rgb(255 255 255 / 83%) 0%, rgb(255 255 255 / 52%) 40%, rgba(255, 255, 255, 0) 75%);
+}
+.box:before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: -9px;
+  height: 60px;
+  width: 60px;
+  margin-left: -12px;
+   background: -moz-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
+  background: -webkit-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
+  background: radial-gradient(50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 75%);
+  z-index: 40;
+  background-repeat: no-repeat;
+}
+.box::after, .box::before {
+  left: 0;
+  opacity: 1;
+  right: 0;
+  margin: auto;
+}
+ 
+ 
