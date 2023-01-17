@@ -80,9 +80,9 @@ const Dashboard = () => {
                                                             <div className="playBtn">
                                                                 <a href="#"><span></span>Play now</a>
                                                             </div>
-                                                            <div className="shareBtn">
+                                                            {/* <div className="shareBtn">
                                                                 <a href="#"><span></span>SHARE NOW</a>
-                                                            </div>
+                                                            </div> */}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -98,17 +98,20 @@ const Dashboard = () => {
                                     <Carousel.Item>
                                         <img  className="d-block w-100 h-100" src={slide2} alt="Second slide"
                                         /> 
-                                        
+                                        <div className="box"></div>
                                         <Carousel.Caption>
                                            <div className="container">
-                                            <div className="sCaption secondSlide box">
+                                            <div className="sCaption secondSlide">
                                                     <div>
                                                         <p className="fw-bold">A WEB 3.0 GAMING STUDIO</p>
                                                         <h1>BALLERS </h1>
                                                         <p className="textHeader wth-4">
                                                         With Ballers Studio, you can experience high quality games, engage with like minded communities and win high value rewards, all powered by the $BALR token.
                                                         </p> 
-                                                    </div>                                          
+                                                    </div>   
+                                                    <div className="playBtn">
+                                                        <a href="#"><span></span>Play now</a>
+                                                    </div>                                       
                                                             
                                                 </div>
                                            </div>
@@ -159,9 +162,10 @@ const Dashboard = () => {
                                         </div>
                                         <Carousel.Caption>
                                             
-                                            <div className="row justify-content-center">
-                                                <div className="col-sm-6">
-                                                    <div className="sCaption text-center">
+                                            
+                                            <div className="w-100">
+                                                <div className="text-center thirdSlide">
+                                                   <div  className="sCaption text-center">
                                                         <div>
                                                             <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
                                                             <h1>POOL </h1>
@@ -169,18 +173,18 @@ const Dashboard = () => {
                                                             Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
                                                             </p>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-8">
-                                                    <div className="positionRelative text-center">                                                       
-                                                        <div className="playBtn marTopLeft">
-                                                            <a href="#"><span></span>LOTTERY POT</a>
+                                                        <div className="poolBtn text-center">                                                       
+                                                            <div className="playBtn">
+                                                                <a href="#"><span></span>LOTTERY POT</a>
+                                                            </div>   
+                                                            <div className="shareBtn">
+                                                                <a href="#"><span></span>REWARD POT</a>
+                                                            </div>
                                                         </div>   
-                                                        <div className="shareBtn">
-                                                            <a href="#"><span></span>SHARE NOW</a>
-                                                        </div>
-                                                    </div>
+                                                   </div>
                                                 </div>
+                                                                                      
+                                                
                                             </div>
                                       
                                         </Carousel.Caption>
@@ -294,9 +298,9 @@ const Dashboard = () => {
                                     <p className="text-font">                                
                                     Our reward pools ensure that everyone earns with their engagement in the game. Ballers city is all about wealth generation, conquering the town, and partying with your gang.
                                     </p>
-                                    <div className="innerBtn">
+                                    {/* <div className="innerBtn">
                                         <a href="#"><span></span>View pool</a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -377,7 +381,7 @@ const Dashboard = () => {
                                             <div className="row">
                                                 <div className="col-sm-3">
                                                     <div>Total NFTs</div>
-                                                    <h5 className="num">10k</h5>
+                                                    <h5 className="num">10K</h5>
                                                 </div>
                                                 <div className="col-sm-3">
                                                     <div>NFTs Sold</div>
@@ -389,7 +393,7 @@ const Dashboard = () => {
                                                 </div>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="#"><span></span>View NFT's</a>
+                                                <a href="#"><span></span>View NFT'<small>s</small></a>
                                             </div>
                                         </div>
                                     </div>
@@ -544,7 +548,8 @@ const Dashboard = () => {
                                 <div className="col-sm-3">
                                     <div className="">
                                         <img className="hex1" src={bg_yellow} alt="yellow background"/>
-                                        <img src={discord} className="discordIcon" alt="discord" />
+                                        <i className="fa fa-paper-plane" />
+                                        {/* <img src={discord} className="discordIcon" alt="discord" /> */}
                                       <div className="row">
                                         <div className="col-sm-6">
                                         <img className="hex2" src={bg_purple} alt="purple background"/>
