@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
+import user from '../../Assest/img/user.png'
 
 const Navbar = () => {
   const auth = useAuth()
@@ -30,7 +31,9 @@ const Navbar = () => {
             <NavLink to='/roadmap' className='nav-item' style={navLinkStyles}>Roadmap</NavLink>
             <NavLink to='/pool' className='nav-item' style={navLinkStyles}>Pool</NavLink>
             <NavLink to='/wallet' className='nav-item' style={navLinkStyles}>Wallet</NavLink>
-            <NavLink   to='/'  className='nav-item'  onClick={handleLogout}>Logout</NavLink>
+            {/* <NavLink to='/'  className='nav-item float-right'  onClick={handleLogout}>
+              <img src={user} alt="" />
+            </NavLink> */}
           </div>
           {/* <div className='responsive-nav-tag'>
             <span className='responsive-nav-tag-item responsive-nav-tag-item-1'></span>

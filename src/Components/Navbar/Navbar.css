@@ -21,6 +21,9 @@
     bottom: 0px;
     background: url(../../Assest/img/game-logo.png);
 } */
+.float-right{
+    float: right;
+}
 
 .nav-items{
     padding-left: 50px;
@@ -31,6 +34,7 @@
     right: 0;
     margin: auto;
     padding: 0;
+    width: 90%;
     text-align: center;
 }
 
