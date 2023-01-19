@@ -51,15 +51,36 @@ window.addEventListener(
 
 
 const Dashboard = () => {
-    const [show, setShow] = useState(false);
+    const [playModalShow, setPlayModalShow] = useState(false);
+    const [lotteryModalShow, setLotteryModalShow] = useState(false);
+    const [rewardModalShow, setRewardModalShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (modalName)=>{
+        if(modalName == 'play'){
+            setPlayModalShow(true);
+        }else if(modalName == 'lottery'){
+            setLotteryModalShow(true);
+        }
+        else if(modalName == 'reward'){
+            setRewardModalShow(true);
+        }
+    }
+    const handleHide = (modalName)=>{
+        if(modalName == 'play'){
+            setPlayModalShow(false);
+        }else if(modalName == 'lottery'){
+            setLotteryModalShow(false);
+        }
+        else if(modalName == 'reward'){
+            setRewardModalShow(false);
+        }
+        
+    }
     return (
         <React.Fragment>
             <Modal
-                show={show}
-                onHide={handleClose}
+                show={playModalShow}
+                onHide={()=> handleHide('play')}
                 backdrop="static"
                 keyboard={false}
                 size="lg"
@@ -74,11 +95,59 @@ const Dashboard = () => {
                     escape key.
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={()=> handleHide('play')}>
                         Close
                     </Button>
                     <Button variant="primary">Understood</Button>
                 </Modal.Footer>
+            </Modal>
+            <Modal
+                show={lotteryModalShow}
+                onHide={()=> handleHide('lottery')}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Lottery Pot</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <p>Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.</p>
+                </Modal.Body>
+                {/* <Modal.Footer>
+                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Understood</Button>
+                </Modal.Footer> */}
+            </Modal>
+            <Modal
+                show={rewardModalShow}
+                onHide={()=> handleHide('reward')}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Reward Pot</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                 <p>
+                 Greater rewards await those who participate in the Reward Pool.
+                 </p>
+                 <p>
+                Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!</p>
+                </Modal.Body>
+                {/* <Modal.Footer>
+                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Understood</Button>
+                </Modal.Footer> */}
             </Modal>
             <div className="dashboard">
                 <div className="homeBg">
@@ -116,11 +185,11 @@ const Dashboard = () => {
                                                                 <h5>Early access to the Ballers City</h5>
                                                             </div>
                                                             <div className="positionAbs">
-                                                                <div className="playBtn" onClick={handleShow}>
-                                                                    <a href="#" ><span></span>Play now</a>
+                                                                <div className="playBtn" >
+                                                                    <a  onClick={()=> handleShow('play')}><span></span>Play now</a>
                                                                 </div>
                                                                 <div className="shareBtn">
-                                                                    <a href="#"><span></span>SHARE NOW</a>
+                                                                    <a ><span></span>SHARE NOW</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -217,10 +286,10 @@ const Dashboard = () => {
                                                         </div>
                                                         <div className="poolBtn text-center">
                                                             <div className="playBtn">
-                                                                <a href="#"><span></span>LOTTERY POT</a>
+                                                                <a  onClick={()=> handleShow('lottery')}><span></span>LOTTERY POT</a>
                                                             </div>
                                                             <div className="shareBtn">
-                                                                <a href="#"><span></span>REWARD POT</a>
+                                                                <a  onClick={()=> handleShow('reward')}><span></span>REWARD POT</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -351,7 +420,7 @@ const Dashboard = () => {
                                                 <h4><b>Loveland party coming soon!</b> </h4>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="#"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -376,15 +445,15 @@ const Dashboard = () => {
                                 <div className="news-list col-sm-6">
                                     <div className="news-list-wrap">
                                         <div className="news-list-column system">
-                                            <a href="#" className="news-item star pink">
+                                            <a  className="news-item star pink">
                                                 <img className="news-item-bg" src={image28} alt="" />
 
                                             </a>
-                                            <a href="#" className="news-item star black">
+                                            <a  className="news-item star black">
                                                 <img className="news-item-bg" src={image28} alt="" />
 
                                             </a>
-                                            <a href="#" className="news-item star white">
+                                            <a  className="news-item star white">
                                                 <img className="news-item-bg" src={image28} alt="" />
 
                                             </a>
@@ -424,7 +493,7 @@ const Dashboard = () => {
                                                 </div>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="#"><span></span>View NFT'<small>s</small></a>
+                                                <a ><span></span>View NFT'<small>s</small></a>
                                             </div>
                                         </div>
                                     </div>
@@ -451,7 +520,7 @@ const Dashboard = () => {
 
                             </div>
                         </div>
-                        <div className="container positionRelative ballerSec">
+                        <div className="container positionRelative ballerSec" id="balrToken">
                             <div className="positionRelative text-right">
                                 <h2 className="heading">BALR TOKEN</h2>
                                 <h2 className="balrHead">BALR TOKEN</h2>
@@ -467,7 +536,7 @@ const Dashboard = () => {
 
 
                                         <div className="innerBtn">
-                                            <a href="#"><span></span>PURCHASE NOW</a>
+                                            <a ><span></span>PURCHASE NOW</a>
                                         </div>
                                     </div>
                                 </div>
@@ -507,16 +576,20 @@ const Dashboard = () => {
                                     <div className="col-sm-3">
                                         <div className="">
                                             <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <i className="fa fa-paper-plane" />
+                                            <a href="https://medium.com/m/signin"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                                          
                                             {/* <img src={discord} className="discordIcon" alt="discord" /> */}
                                             <div className="row">
                                                 <div className="col-sm-6">
                                                     <img className="hex2" src={bg_purple} alt="purple background" />
-                                                    <i className="fa fa-twitter" />
+                                                   <a href="https://twitter.com/Ballers_Studio"><i className="fa fa-twitter" /></a> 
                                                 </div>
                                                 <div className="col-sm-6">
                                                     <img className="hex3" src={bg_yellow} alt="yellow background" />
+                                                    <a href="https://www.instagram.com/ballers.studio/">
                                                     <i className="fa fa-instagram" ></i>
+                                                    </a>
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -616,6 +689,13 @@ const Dashboard = () => {
 
 
                             </div>
+                             <ul className="socialIcons">
+                                <li><a href="https://www.instagram.com/ballers.studio/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259"><img src={discord} alt="" /></a></li>
+                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="https://twitter.com/Ballers_Studio"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://medium.com/m/signin"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
+                             </ul>
                         </div>
                     </div>
 

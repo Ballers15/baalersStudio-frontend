@@ -27,10 +27,10 @@ const CollapsibleExample = () => {
             <Nav className="mx-auto">
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="#partyGang">Party</Nav.Link>
-            <Nav.Link href="/roadmap">Roadmap</Nav.Link> 
+            <Nav.Link href="">How To Play?</Nav.Link> 
               <Nav.Link href="/pool">Pool</Nav.Link>
             <OverlayTrigger
-          placement='top'
+          placement='bottom'
           overlay={
             <Tooltip >
               Coming soon
@@ -38,7 +38,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              {/* <Nav.Link href="">Wallet</Nav.Link> */}
+              <Nav.Link href="#balrToken">$Balr Token</Nav.Link>
              
             </Nav>
             <Nav>

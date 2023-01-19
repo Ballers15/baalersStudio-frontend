@@ -5,6 +5,9 @@
    url("../../font/valorant/Valorant-Font.ttf") format("truetype");
   font-weight: bold;
   }
+  a{
+    cursor: pointer;
+  }
   .small, small { 
     font-size: 12px;
 }
@@ -20,6 +23,10 @@ body, p,  h5{
 }
 .homeBg .container{
   z-index: 0;
+}
+.tooltip{
+font-size: 18px;
+background: #110929;
 }
 .bgShade{
   position: absolute;
@@ -342,11 +349,10 @@ content: "NFTs distributed Daily";
     text-transform: uppercase;
     text-decoration: none;
     text-align: center; 
-    background: #ECE8E1;
-    font-size: 18px; 
+    background: #ECE8E1; 
     letter-spacing: 2px; 
     padding: 1rem 2.68rem 0.85rem;
-    color: #121B26;
+    color: #121B26 !important;
     font-family: "Valorant";
     font-weight: 400;
     font-size: 20px;
@@ -451,7 +457,28 @@ content: "NFTs distributed Daily";
   height: 74%; 
   width: 100%;
 } */
- 
+.modal-content{
+  background: #110929d1;
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+ }
+ .modal-content .modal-body{  
+  font-size: 22px;
+  line-height: 34px;
+
+ }
+ .modal-title{ 
+  text-align: center;
+    font-family: "Valorant";
+    width: 100%;
+ }
+ .btn-close{
+  background: transparent url(../../Assest/img/cross.png) center/1em auto no-repeat;
+  position: absolute;
+  right: 1rem;
+  top: 0.51rem;
+ }
   .coinImage img{ 
     position: absolute;
     right: 35%;
@@ -644,7 +671,7 @@ content: "NFTs distributed Daily";
     border-radius: 100%; 
     top: -30px;
   }
-  .joinCard .discordIcon,  .joinCard i.fa.fa-paper-plane{
+  .joinCard .discordIcon,  .joinCard i.fa.fa-medium{
     position: absolute;
     right: 14%;
     top: 13%;
@@ -652,7 +679,21 @@ content: "NFTs distributed Daily";
     font-size: 35px; 
     /* transform: rotate(22deg); */
   }
-  
+  a i {
+    color: #fff;
+}
+.socialIcons{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.socialIcons li a{
+  font-size: 22px;
+  padding: 5px 12px;
+  border: 1px solid #fff;
+  margin: 8px;
+  border-radius: 0px 10px 0px 10px;
+}
 .joinCard i.fa.fa-twitter {
   position: absolute;
   right: 18%; 
