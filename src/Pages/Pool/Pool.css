@@ -1,3 +1,59 @@
-.pool{
-    margin-top: 80px ;
+.pool{ 
+    background-image: url(../../Assest/img/slide3.png);
+    height: 100vh;
+    bottom: 0;
+    top: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: #ECE8E1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+.pool #four { 
+    transform: translate(122%, 100%);
+}
+.pool .slideStar{
+    position: absolute;
+}
+.pool .slideStar #two {
+    transform: translate(208%, 348%);
+}
+.pool .slideStar #three {
+    transform: translate(1085%, 400%);
+}
+.pool #five {
+    transform: translate(710%,286%);
+}
+/* .pool .logoSlider:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    bottom: 5rem;
+} */
+.poolScreen::after,  .poolScreen::before {
+    position: absolute;
+    line-height: 23px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+  .poolScreen::before {
+    content: "Win Exclusive Rewards";
+    right: 3rem;
+    top: 18rem; 
+    transform: rotate(90deg); 
+    width: 140px;
+}
+ .poolScreen::after {
+    content: "NFTs distributed Daily";
+    left: 0rem;
+    bottom: 11rem;
+    transform: rotate(-90deg);  
+    width: 190px;
 }

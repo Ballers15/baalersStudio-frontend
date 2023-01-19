@@ -7,42 +7,11 @@
     background: linear-gradient(180deg, #110929 0%, rgba(17, 9, 41, 0.1) 145.5%);
     /* opacity: 0.7; */
 }
-/* .nav-logo{
-    margin-left: 6rem;
-} */
-.nav-logo img{
+ .navbar-brand img{
     width: 80%;
-} 
-/* .nav-logo{
-    position: absolute;
-    width: 193px;
-    height: 92px;
-    left: 122px;
-    bottom: 0px;
-    background: url(../../Assest/img/game-logo.png);
-} */
-.float-right{
-    float: right;
-}
-
-.nav-items{
-    padding-left: 50px;
-    position: absolute;
-    /* width: 45vw;
-    height: 20px; */
-    left: 0;
-    right: 0;
-    margin: auto;
-    padding: 0;
-    width: 90%;
-    text-align: center;
-}
-
-
-.nav-item{
-    cursor: pointer;
-    width: 82px;
-    height: 20px;
+}  
+.navbar-expand-lg .navbar-nav .nav-link{
+    cursor: pointer; 
     margin-left: 55px;
     font-family: 'Source Sans Pro';
     font-style: normal;
@@ -52,37 +21,4 @@
     letter-spacing: 0.25em;
     color: #ECE8E1;
 }
-
-.responsive-nav-tag{
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    /* left: 1308px; */
-    top: 11px;
-    border-radius: 15px;
-    right: 200px;
-    background-color: #FF4654;
-;
-}
-
-.responsive-nav-tag-item{
-    position: absolute;
-    width: 42px;
-    height: 2px;
-    /* left: 1321px; */
-    right: 10px;
-    border: 1px solid #ECE8E1;
-}
-.responsive-nav-tag-item-1{
-    top: 17px;
-}
-
-.responsive-nav-tag-item-2{
-    top: 27px;
-
-}
-
-.responsive-nav-tag-item-3{
-    top: 38px;
-
-}
+ 
