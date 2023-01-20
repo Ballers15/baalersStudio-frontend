@@ -22,6 +22,12 @@
     letter-spacing: 0.25em;
     color: #ECE8E1;
 }
+@media (max-width: 1500px){
+.navbar-expand-lg .navbar-nav .nav-link { 
+    margin-left: 34px; 
+    font-size: 15px;
+}
+}
 @media (max-width: 480px){
     .navbar-brand img {
         width: 70%;

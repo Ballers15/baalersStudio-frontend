@@ -10,6 +10,8 @@ import gamelogo from '../../Assest/img/gamelogo.png';
 import user from '../../Assest/img/user.png'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
+import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
+
 
 const CollapsibleExample = () => {
   const navigate = useNavigate();
@@ -17,12 +19,11 @@ const CollapsibleExample = () => {
   const handleLogout = (e) => {
     auth.logout()
   }
-  const goToAbout = (param, id)=>{
-    if(id){
-      param = param+`/${id}`
-    }
+  const goToAbout = (param)=>{
     navigate(param) 
   }
+
+ 
 
   return (
     
@@ -33,9 +34,9 @@ const CollapsibleExample = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-            <Nav.Link onClick={()=>{goToAbout('/about')}}>About</Nav.Link>
-            <Nav.Link onClick={()=>{goToAbout('/partyGang' )}} id="party">Party</Nav.Link>
-            <Nav.Link href="https://medium.com/m/signin">How To Play?</Nav.Link> 
+            <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link>
+            <Nav.Link onClick={()=>{goToAbout('/partyGang' )}}>Party</Nav.Link>
+            <Nav.Link href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
               <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
             <OverlayTrigger
           placement='bottom'
@@ -46,7 +47,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}} id="balr">$Balr Token</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}}>$Balr Token</Nav.Link>
              
             </Nav>
             <Nav>

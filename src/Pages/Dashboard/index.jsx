@@ -98,19 +98,17 @@ const Dashboard = () => {
     }
     useEffect(() => {
         // Update the document title using the browser API
-      if(id){
-        $("#party").click(function() {
+        if(id == 'partyGang'){
             $('html, body').animate({
                 scrollTop: $("#partyGang").offset().top
-            }, 20);
-        });
-        $("#balr").click(function() {
-            $('html, body').animate({
-                scrollTop: $("#balrToken").offset().top
-            }, 20);
-        });
-        console.log(id, "ddddd");
-      }
+            }, 20);            
+          }
+          else if(id == 'balrToken'){
+            console.log("id",id);
+                 $('html, body').animate({
+                    scrollTop: $("#balrToken").offset().top
+                }, 20);
+          }        
       });
 
     return (
@@ -227,7 +225,7 @@ const Dashboard = () => {
                                                     <div className="col-sm-5 my-auto">
                                                         <div className="sCaption">
                                                             <div>
-                                                                <p>Play | Party | Earn </p>
+                                                                <p>Play | Party | <b>Earn</b> </p>
                                                                 <h1>BALLERS CITY </h1>
                                                                 <div className="fStar">
                                                                      
@@ -543,11 +541,11 @@ const Dashboard = () => {
                                                   These NFTs are your only way to access the city that never sleeps. Get the exclusive Ballers NFT to join the clan before the time runs out!
                                                 </p>
                                                 <div className="row">
-                                                    <div className="col-sm-4">
+                                                    <div className="col-6 col-sm-4">
                                                         <div> Total Unique NFTs</div>
                                                         <h5 className="num">17K</h5>
                                                     </div>
-                                                    <div className="col-sm-4">
+                                                    <div className="col-6 col-sm-4">
                                                         <div>Total Number of NFTs</div>
                                                         <h5 className="num">10,000</h5>
                                                     </div>
@@ -725,10 +723,10 @@ const Dashboard = () => {
                         </div>
                         <div className="container mt-4">
                             <div className="row align-items-center">
-                                <div className="col-sm-3">
+                                <div className="col-5 col-sm-3">
                                     <img src={logoo} alt="logo" />
                                 </div>
-                                <div className="col-sm-3">
+                                <div className="col-7 col-sm-3">
                                     <div className="d-flex align-items-center">
                                         <img src={teen} alt="logo" />
                                         <ul>
@@ -741,10 +739,10 @@ const Dashboard = () => {
                                     </div>
 
                                 </div>
-                                <div className="col-sm-3">
-                                    <img src={gamecity} alt="logo" />
+                                <div className="col-5 col-sm-3">
+                                    <img src={gamecity} alt="logo" className="mob-wth" />
                                 </div>
-                                <div className="col-sm-3">
+                                <div className="col-7 col-sm-3">
                                     <ul className="policy">
                                         <li>Privacy notice</li>
                                         <li>Term of service</li>

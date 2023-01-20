@@ -698,12 +698,12 @@ content: "NFTs distributed Daily";
   }
   .bg-circle{
     background: #8114D5;
-    width: 542px;
-    height: 542px;
+    width: 550px;
+    height: 550px;
     position: absolute;
-    right: -172px; 
-    border-radius: 100%; 
-    top: -30px;
+    right: -189px;
+    border-radius: 100%;
+    top: -12px;
   }
   .joinCard .discordIcon,  .joinCard i.fa.fa-medium{
     position: absolute;
@@ -1798,6 +1798,18 @@ line-height: 100%;
   right: 35%;
 }
 }
+@media (max-width: 1024px){
+  .mainSlider .carousel-item img{
+    object-fit: cover;
+  }
+  .news-item-bg {
+    height: 100%;
+    width: 85%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+  }
+}
 @media (max-width: 500px){
   .news-caption{
     width: 100%;
@@ -1808,6 +1820,9 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
+  .flashDiv { 
+    right: 9rem;
+  }
   .wth-4 {
     width: 100%;
 }
@@ -1923,5 +1938,99 @@ line-height: 100%;
 }
 .nftCollectionHead{
   left: 0;
+}
+.news-caption {
+  width: 100%;
+  right: 0;
+  padding: 1rem;
+}
+.balrHead { 
+  font-size: 56px;
+  left: 0; 
+  right: 0; 
+  top: -30%;
+}
+.ballercoin img {
+  width: 100%;
+}
+.divImage { 
+  top: -19%; 
+  left: 3.5rem; 
+}
+.bg-circle { 
+  bottom: -228px;
+    top: inherit;
+} 
+.joinCard {
+  height: 750px;
+}
+.joinCard .discordIcon, .joinCard i.fa.fa-medium{
+  top: inherit;
+  bottom: 19rem; 
+  right: 15%;  
+  font-size: 44px;
+}
+.joinCard .hex3 {
+  margin-top: -4rem; 
+  margin-left: 13rem;
+  width: 36%;
+}
+.joinCard .hex1 {
+  width: 46%;
+  position: absolute;
+  right: 0;
+  bottom: 14rem;
+}
+.joinCard .hex2 {
+  margin-top: 50%; 
+  width: 37%;
+  margin-left: 65px;
+} 
+.joinCard i.fa.fa-twitter {
+  right: inherit;
+  bottom: 11rem;
+  left: 8.16rem;
+}
+.joinCard i.fa.fa-instagram {
+  right: 5.37rem;
+  bottom: 6rem;
+}
+.policy { 
+  float: inherit;
+}
+.mob-wth{
+  width: 100%;
+}
+.socialIcons { 
+  margin-top: 3rem;
+}
+.footer-content {
+  font-size: 11px;
+}
+.faqHead{
+  text-align: center;
+}
+.news-caption-wrap{
+  position: relative
+}
+.news--news_page .news-list{
+  height: auto;
+  top: 6.5rem;
+}
+}
+@media (max-width: 400px){
+  .joinCard i.fa.fa-twitter {
+    right: inherit;
+    bottom: 12rem;
+    left: 8rem;
+  }
+  .joinCard i.fa.fa-instagram {
+    right: 4.25rem;
+    bottom: 7.8rem;
+  }
+}
+@media (max-width: 380px){
+  .viewer {
+    height: 95vh;
 }
 }
