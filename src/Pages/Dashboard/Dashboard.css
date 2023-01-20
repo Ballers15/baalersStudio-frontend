@@ -94,8 +94,8 @@ background: #110929;
     position: relative;
     /* padding-top: 7rem;  */
     background: url("../../Assest/img/reward.png") #260059;  
-    background-size: 48%;
-    background-position: 0% 9rem;
+    background-size: 66%;
+    background-position: 0% 5rem;
     background-repeat: no-repeat;
 }
 .reward::before {
@@ -311,6 +311,17 @@ content: "NFTs distributed Daily";
   /* border-top: 0.25px solid #FFFFFF; */
   padding-bottom: 0;
 }
+.carousel-control-next-icon{
+  background-image: url(../../Assest/img/arrowLeft.svg);
+}
+.carousel-control-prev-icon{
+  background-image: url(../../Assest/img/arrowRight2.svg);
+}
+.carousel-control-next-icon, .carousel-control-prev-icon { 
+  width: 3rem;
+  height: 3rem; 
+  opacity: 1;
+}
 .sCaption h1{
     font-family: "Valorant";
     font-weight: 400;
@@ -438,6 +449,14 @@ content: "NFTs distributed Daily";
     width: calc( 266px / 2);
     height: calc( 70px / 2);
 }
+.btnWith{
+  width: 240px;
+  transition: all .3s;
+}
+.purchaseWith{
+  width: 250px;
+  transition: all .3s;
+}
 .rewardImage{
     position: relative;
   max-width: 920px;
@@ -457,11 +476,18 @@ content: "NFTs distributed Daily";
   height: 74%; 
   width: 100%;
 } */
+.fade.modal.show {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
 .modal-content{
-  background: #110929d1;
-    color: #fff;
-    text-align: center;
-    padding: 2rem;
+  background: #110929a3;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid #5a3ef869;
  }
  .modal-content .modal-body{  
   font-size: 22px;
@@ -472,6 +498,10 @@ content: "NFTs distributed Daily";
   text-align: center;
     font-family: "Valorant";
     width: 100%;
+ }
+ .form-control{
+  text-align: center;
+  font-size: 20px;
  }
  .btn-close{
   background: transparent url(../../Assest/img/cross.png) center/1em auto no-repeat;
@@ -811,7 +841,7 @@ content: "NFTs distributed Daily";
   align-content: space-between;
 }
 .poolBtn{ 
-  width: 26rem;
+  width: 96%;
   position: relative;
   height: 80px;
   margin: auto;
@@ -1540,6 +1570,7 @@ ul li {
 .fStar .starSmall{
   width: 14% !important;
 }
+
 @media (min-width: 1400px){
  
   #five { 
@@ -1559,17 +1590,20 @@ ul li {
     transform: translate(1043%, -330%);
 }
   .bg-move img:nth-child(2) { 
-    top: 70%;
+    top: 60%;
   }
   .bg-move img { 
     left: -6%;
     width: 31%; 
-    top: 82%;
+    top: 73%;
 }
  
 }
 
 @media (min-width: 1800px){
+  .poolBtn {
+    width: 86%;
+  }
 
   .bg-move img {
     left: -13%;
@@ -1596,6 +1630,11 @@ ul li {
     transform: translate(1215%,-387%);
 }
 
+}
+@media (min-width: 1900px){
+  .poolBtn {
+    width: 80%;
+  }
 }
 @media only screen and (min-width: 1368px) {
   /* .news--news_page .news-caption {
@@ -1655,6 +1694,7 @@ ul li {
     font-size: 4.11vw;
   }
 }
+
 @media (max-width: 1670px){
   .sCaption h5 { 
     font-size: 20px;
@@ -1664,7 +1704,85 @@ ul li {
     font-size: 110px;
   }
 }
+@media (max-width: 1500px){
+  .bg-move img:nth-child(2) {
+    left: 33%; 
+    top: 63%;
+  }
+  .bg-move img { 
+    left: 10%; 
+    top: 78%;
+  }
+  .playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after {
+    width: 78px;
+  }
+  .logoSlider { 
+    bottom: -8rem
+  }
+  .mainSlider .carousel-item {
+    height: 118vh;
+}
+.playBtn a {
+  padding: 0.85rem 2rem 0.65rem;    
+  font-size: 18px;
+  line-height: 100%;
+}
+.shareBtn a{
+font-size: 18px;
+line-height: 100%;
+}
+}
 @media (max-width: 1300px){
+  .mainSlider .carousel-item::before { 
+    top: 16rem;
+  }
+  .logoSlider .carousel-item {
+    height: 84px;
+}
+.logoSlider {
+  bottom: -7rem;
+}
+  .positionAbs { 
+    bottom: 11.5rem;
+  }
+  .playBtn a {
+    padding: 0.85rem 2rem 0.65rem;    
+    font-size: 16px; 
+}
+.shareBtn a{
+  font-size: 16px; 
+}
+
+.innerBtn a{
+  font-size: 16px; 
+}
+.bg-move img:nth-child(2) {
+  left: 32%; 
+  top: 78%;
+}
+.bg-move img { 
+  left: 12%; 
+  top: 98%;
+}
+  .sCaption h1 {
+    font-size: 90px;
+}
+.text-font {
+  font-size: 18px;
+  line-height: 24px;
+}
+.mainSlider .carousel-caption img {
+  width: 75%;
+}
+.sCaption .textHeader { 
+  font-size: 12px;
+  line-height: 15px;
+  margin-bottom: 1.75rem !important;
+}
+.sCaption h5 {
+  font-size: 17px;
+  line-height: 19px;
+}
   .joinCard i.fa.fa-twitter { 
     right: 17%; 
     bottom: 6rem;
@@ -1684,4 +1802,13 @@ ul li {
     position: relative;
     width: 100%;
   }
+}
+@media (max-width: 480px){
+  .sCaption p { 
+    font-size: 14px;
+  }
+  .sCaption h1 {
+    font-size: 64px;
+}
+
 }

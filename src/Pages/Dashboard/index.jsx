@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
@@ -49,11 +50,21 @@ window.addEventListener(
     false
 );
 
-
+function useHover() {
+    const [hovering, setHovering] = useState(false)
+    const onHoverProps = {
+      onMouseEnter: () => setHovering(true),
+      onMouseLeave: () => setHovering(false),
+    }
+    return [hovering, onHoverProps]
+  }
 const Dashboard = () => {
+    const [buttonAIsHovering, buttonAHoverProps] = useHover() 
+    
     const [playModalShow, setPlayModalShow] = useState(false);
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
+    const [trailerModalShow, setTrailerModalShow] = useState(false);
 
     const handleShow = (modalName)=>{
         if(modalName == 'play'){
@@ -64,6 +75,9 @@ const Dashboard = () => {
         else if(modalName == 'reward'){
             setRewardModalShow(true);
         }
+        else if(modalName == 'trailer'){
+            setTrailerModalShow(true);
+        }
     }
     const handleHide = (modalName)=>{
         if(modalName == 'play'){
@@ -73,6 +87,9 @@ const Dashboard = () => {
         }
         else if(modalName == 'reward'){
             setRewardModalShow(false);
+        }
+        else if(modalName == 'trailer'){
+            setTrailerModalShow(false);
         }
         
     }
@@ -88,18 +105,41 @@ const Dashboard = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title>stay tuned</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    I will not close if you click outside me. Don't even try to press
-                    escape key.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('play')}>
-                        Close
+                <Form>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        {/* <Form.Label>Email address</Form.Label> */}
+                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+ 
+                    <Button variant="primary" type="submit">
+                        Submit
                     </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer>
+                </Form>
+                </Modal.Body>
+                
+            </Modal>
+            <Modal
+                show={trailerModalShow}
+                onHide={()=> handleHide('trailer')}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                   
+                </Modal.Header>
+                <Modal.Body>
+                 <p>trailer</p>
+                </Modal.Body>
+                
             </Modal>
             <Modal
                 show={lotteryModalShow}
@@ -111,10 +151,12 @@ const Dashboard = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Lottery Pot</Modal.Title>
+                    <Modal.Title>Lottery Pool</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <p>Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.</p>
+                <p>
+                Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
+                </p>
                 </Modal.Body>
                 {/* <Modal.Footer>
                     <Button variant="secondary" onClick={()=> handleHide('lottery')}>
@@ -133,14 +175,15 @@ const Dashboard = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Reward Pot</Modal.Title>
+                    <Modal.Title>Reward Pool</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                  <p>
                  Greater rewards await those who participate in the Reward Pool.
                  </p>
                  <p>
-                Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!</p>
+                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!
+                 </p>
                 </Modal.Body>
                 {/* <Modal.Footer>
                     <Button variant="secondary" onClick={()=> handleHide('lottery')}>
@@ -189,7 +232,7 @@ const Dashboard = () => {
                                                                     <a  onClick={()=> handleShow('play')}><span></span>Play now</a>
                                                                 </div>
                                                                 <div className="shareBtn">
-                                                                    <a ><span></span>SHARE NOW</a>
+                                                                    <a onClick={()=> handleShow('trailer')}><span></span>SHARE NOW</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -215,7 +258,7 @@ const Dashboard = () => {
                                             <div className="container">
                                                 <div className="sCaption secondSlide">
                                                     <div>
-                                                        <p className="fw-bold">A WEB 3.0 GAMING STUDIO</p>
+                                                        <p className="fw-bold">$BALR powered Web3 engagement Venture</p>
                                                         <h1>BALLERS </h1>
                                                         <p className="textHeader wth-4">
                                                             With Ballers Studio, you can experience high quality games, engage with like minded communities and win high value rewards, all powered by the $BALR token.
@@ -278,7 +321,7 @@ const Dashboard = () => {
                                                 <div className="text-center thirdSlide">
                                                     <div className="sCaption text-center">
                                                         <div>
-                                                            <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
+                                                            <p>Play & Earn </p>
                                                             <h1>POOL </h1>
                                                             <p className="textHeader">
                                                                 Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
@@ -286,10 +329,10 @@ const Dashboard = () => {
                                                         </div>
                                                         <div className="poolBtn text-center">
                                                             <div className="playBtn">
-                                                                <a  onClick={()=> handleShow('lottery')}><span></span>LOTTERY POT</a>
+                                                                <a  onClick={()=> handleShow('lottery')}><span></span> Lottery Pool</a>
                                                             </div>
                                                             <div className="shareBtn">
-                                                                <a  onClick={()=> handleShow('reward')}><span></span>REWARD POT</a>
+                                                                <a  onClick={()=> handleShow('reward')}><span></span> Reward Pool </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -379,11 +422,13 @@ const Dashboard = () => {
 
                                     <div className="mb-4">
                                         <p className="text-font">
-                                            Become a Baller and get a chance to win rewards. Play, Party, Earn and win $BALR Token and NFTs along with access to exclusive parties.
+                                        Ballers City is one of the only games that enables you to earn on a daily basis. Players can win rewards from Reward pools, Lottery Pots and Quests! No matter what your skill level or collection size, there is always an opportunity to earn!
+
                                         </p>
                                         <p className="text-font">
-                                            Our reward pools ensure that everyone earns with their engagement in the game. Ballers city is all about wealth generation, conquering the town, and partying with your gang.
+                                        Among the many prizes you may win are collectible cards of varying rarity, $BALR tokens, Party tickets and many more!
                                         </p>
+                                        <p className="text-font"> <b>Ballers city is all about Play, Party and Earn </b> </p>
                                     </div>
                                     <div className="innerBtn">
                                         <a href="/pool" ><span></span>View pool</a>
@@ -411,16 +456,15 @@ const Dashboard = () => {
                                     <div className="col-sm-7 my-auto">
                                         <div className="">
                                             <div className="mb-5">
+                                                <p className="text-font"> Work hard, play hard, and party even harder. </p>
+                                                <p className="text-font">Assemble your gang and join the Baller's community where you can party like never before with Crypto OGs, gamers and other like minded people across the globe and awaken the true BALLER within you!</p>
                                                 <p className="text-font">
-                                                    Assemble your gang in our ecosystem connecting gamers around the world, get access to real-world parties with our community of OG’s and awaken the true BALLER within you.
-                                                </p>
-                                                <p className="text-font">
-                                                    We plan to host exclusive yacht parties, music festivals, cosplay events, etc where real ballers can party like there is no tomorrow.
+                                                We are hosting exclusive private parties, E sports competitions and Cosplay events, so that every Baller can have have night worth remembering
                                                 </p>
                                                 <h4><b>Loveland party coming soon!</b> </h4>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
                                             </div>
                                         </div>
                                     </div>
@@ -475,25 +519,25 @@ const Dashboard = () => {
                                                     Choose from our collection of 10,000 NFT characters, each having their own storyline and vibe.
                                                 </p>
                                                 <p className="text-font">
-                                                    Your only way to access the city that never sleeps. Get the exclusive Baller NFT to be part of the clan before the time runs out
+                                                  These NFTs are your only way to access the city that never sleeps. Get the exclusive Ballers NFT to join the clan before the time runs out!
                                                 </p>
                                                 <div className="row">
-                                                    <div className="col-sm-3">
-                                                        <div>Total NFTs</div>
-                                                        <h5 className="num">10K</h5>
+                                                    <div className="col-sm-4">
+                                                        <div> Total Unique NFTs</div>
+                                                        <h5 className="num">17K</h5>
                                                     </div>
-                                                    <div className="col-sm-3">
-                                                        <div>NFTs Sold</div>
-                                                        <h5 className="num">TBA</h5>
+                                                    <div className="col-sm-4">
+                                                        <div>Total Number of NFTs</div>
+                                                        <h5 className="num">10,000</h5>
                                                     </div>
-                                                    <div className="col-sm-3">
+                                                    {/* <div className="col-sm-3">
                                                         <div>Volume</div>
                                                         <h5 className="num">TBA</h5>
-                                                    </div>
-                                                </div>
+                                                    </div> */}
+                                                </div>                                                
                                             </div>
-                                            <div className="innerBtn">
-                                                <a ><span></span>View NFT'<small>s</small></a>
+                                            <div className="innerBtn"  {...buttonAHoverProps}>
+                                                <a className="btnWith"><span></span>    {buttonAIsHovering ? "coming soon" : "View NFT's"} </a>
                                             </div>
                                         </div>
                                     </div>
@@ -530,14 +574,15 @@ const Dashboard = () => {
                                     <div className="">
                                         <div className="pb-4">
                                             <p className="text-font">
-                                                <b>$BALR</b> token unlocks your ability to earn as you play. Get access to exclusive rewards and next-gen Web3 games through $BALR.
+                                                <b>$BALR</b> $BALR unlocks your ability to earn and win exclusive rewards based on your In-game engagement.
                                             </p>
+                                            <p className="text-font">Experience the complete vibe of our next-gen Web3.0 games through the power of $BALR</p>
                                         </div>
 
-
-                                        <div className="innerBtn">
-                                            <a ><span></span>PURCHASE NOW</a>
+                                        <div className="innerBtn"  {...buttonAHoverProps}>
+                                            <a className="purchaseWith"><span></span>    {buttonAIsHovering ? "coming soon" : "PURCHASE NOW"} </a>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
@@ -567,26 +612,26 @@ const Dashboard = () => {
                                     <div className="col-sm-3">
                                         <div className="imgBg"></div>
                                     </div>
-                                    <div className="col-sm-6 text-center mt-5">
+                                    <div className="col-sm-6 text-center my-auto">
                                         <p className="joinUs">Join Our Community</p>
-                                        <div className="semiCircle">
+                                        {/* <div className="semiCircle">
                                             <a href="" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="col-sm-3">
                                         <div className="">
                                             <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <a href="https://medium.com/m/signin"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                                            <a href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a>
                                           
                                             {/* <img src={discord} className="discordIcon" alt="discord" /> */}
                                             <div className="row">
                                                 <div className="col-sm-6">
                                                     <img className="hex2" src={bg_purple} alt="purple background" />
-                                                   <a href="https://twitter.com/Ballers_Studio"><i className="fa fa-twitter" /></a> 
+                                                   <a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" /></a> 
                                                 </div>
                                                 <div className="col-sm-6">
                                                     <img className="hex3" src={bg_yellow} alt="yellow background" />
-                                                    <a href="https://www.instagram.com/ballers.studio/">
+                                                    <a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer">
                                                     <i className="fa fa-instagram" ></i>
                                                     </a>
                                                   
@@ -690,11 +735,11 @@ const Dashboard = () => {
 
                             </div>
                              <ul className="socialIcons">
-                                <li><a href="https://www.instagram.com/ballers.studio/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259"><img src={discord} alt="" /></a></li>
-                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="https://twitter.com/Ballers_Studio"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="https://medium.com/m/signin"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><img src={discord} alt="" /></a></li>
+                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
                              </ul>
                         </div>
                     </div>

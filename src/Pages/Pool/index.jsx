@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import './Pool.css'
-import { Carousel } from "react-bootstrap"
+import { Carousel } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import tdefi from '../../Assest/img/logos/tdefi.png'
 import tradedog from '../../Assest/img/logos/tradedog.png'
 import tdmm from '../../Assest/img/logos/tdmm.png'
@@ -8,8 +10,80 @@ import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
 
 const Pool = () => {
+    const [lotteryModalShow, setLotteryModalShow] = useState(false);
+    const [rewardModalShow, setRewardModalShow] = useState(false);
+    const handleShow = (modalName)=>{
+       if(modalName == 'lottery'){
+            setLotteryModalShow(true);
+        }
+        else if(modalName == 'reward'){
+            setRewardModalShow(true);
+        }
+        
+    }
+    const handleHide = (modalName)=>{
+        if(modalName == 'lottery'){
+            setLotteryModalShow(false);
+        }
+        else if(modalName == 'reward'){
+            setRewardModalShow(false);
+        }
+        
+        
+    }
     return (
         <React.Fragment>
+                <Modal
+                show={lotteryModalShow}
+                onHide={()=> handleHide('lottery')}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Lottery Pool</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <p>
+                Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
+                </p>
+                </Modal.Body>
+                {/* <Modal.Footer>
+                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Understood</Button>
+                </Modal.Footer> */}
+            </Modal>
+            <Modal
+                show={rewardModalShow}
+                onHide={()=> handleHide('reward')}
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Reward Pool</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                 <p>
+                 Greater rewards await those who participate in the Reward Pool.
+                 </p>
+                 <p>
+                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!
+                 </p>
+                </Modal.Body>
+                {/* <Modal.Footer>
+                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Understood</Button>
+                </Modal.Footer> */}
+            </Modal>
             <div className="pool"> 
                <div className="poolScreen w-100">
                     <div className="container">
@@ -65,12 +139,13 @@ const Pool = () => {
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">
-                                            <a href="#"><span></span>LOTTERY POT</a>
+                                            <a  onClick={()=> handleShow('lottery')}><span></span> Lottery Pool</a>
                                         </div>
                                         <div className="shareBtn">
-                                            <a href="#"><span></span>REWARD POT</a>
+                                            <a  onClick={()=> handleShow('reward')}><span></span> Reward Pool </a>
                                         </div>
                                     </div>
+                                   
                                 </div>
                             </div>
 

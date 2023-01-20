@@ -27,7 +27,7 @@ const CollapsibleExample = () => {
             <Nav className="mx-auto">
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="#partyGang">Party</Nav.Link>
-            <Nav.Link href="">How To Play?</Nav.Link> 
+            <Nav.Link href="https://medium.com/m/signin">How To Play?</Nav.Link> 
               <Nav.Link href="/pool">Pool</Nav.Link>
             <OverlayTrigger
           placement='bottom'

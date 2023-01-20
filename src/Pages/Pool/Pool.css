@@ -57,3 +57,19 @@
     transform: rotate(-90deg);  
     width: 190px;
 }
+
+.pool .thirdSlide .sCaption{
+    width: 30rem;
+}
+.pool .poolBtn {
+    width: 100%;
+}
+@media (max-width: 1500px){
+    .pool .thirdSlide .sCaption {
+        width: 26rem;
+    }
+    .pool .logoSlider {
+         
+        bottom: 0;
+    }
+}

@@ -26,13 +26,13 @@ const NavigationRouter = () => {
                         <Route path="*" element={<ErrorPage />} />
                     </Route>
                     <Route element={<WithNav />}>
-                        <Route exact path="/" element={<Dashboard />} />
-                        <Route exact path="/about" element={<About />} />
-                        <Route exact path="/party" element={<Party />} />
-                        <Route exact path="/roadmap" element={<Roadmap />} />
-                        <Route exact path="/pool" element={<Pool />} />
-                       <Route exact path="/wallet" element={<Wallet />} />
-                        <Route exact path="/metamask" element={<Metamask />} />
+                        <Route exact  path="/" element={<Dashboard />} />
+                        <Route  path="/about" element={<About />} />
+                        <Route  path="/party" element={<Party />} />
+                        <Route  path="/roadmap" element={<Roadmap />} />
+                        <Route  path="/pool" element={<Pool />} />
+                       <Route  path="/wallet" element={<Wallet />} />
+                        <Route  path="/metamask" element={<Metamask />} />
                     </Route>
                 </Routes>
           </AuthProvider>
