@@ -28,7 +28,7 @@ const NavigationRouter = () => {
                     <Route element={<WithNav />}>
                         <Route exact  path="/" element={<Dashboard />} />
                         <Route  path="/about" element={<About />} />
-                        <Route  path="/party" element={<Party />} />
+                        <Route  path="/:id" element={<Dashboard />} />
                         <Route  path="/roadmap" element={<Roadmap />} />
                         <Route  path="/pool" element={<Pool />} />
                        <Route  path="/wallet" element={<Wallet />} />

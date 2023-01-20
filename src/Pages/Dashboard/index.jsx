@@ -3,6 +3,7 @@ import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import $ from 'jquery'; 
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
@@ -38,7 +39,9 @@ import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
-
+import {
+    useParams,
+  } from "react-router-dom";
 window.addEventListener(
     "scroll",
     () => {
@@ -65,7 +68,7 @@ const Dashboard = () => {
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
     const [trailerModalShow, setTrailerModalShow] = useState(false);
-
+    const { id } = useParams();
     const handleShow = (modalName)=>{
         if(modalName == 'play'){
             setPlayModalShow(true);
@@ -93,6 +96,23 @@ const Dashboard = () => {
         }
         
     }
+    useEffect(() => {
+        // Update the document title using the browser API
+      if(id){
+        $("#party").click(function() {
+            $('html, body').animate({
+                scrollTop: $("#partyGang").offset().top
+            }, 20);
+        });
+        $("#balr").click(function() {
+            $('html, body').animate({
+                scrollTop: $("#balrToken").offset().top
+            }, 20);
+        });
+        console.log(id, "ddddd");
+      }
+      });
+
     return (
         <React.Fragment>
             <Modal
@@ -108,6 +128,7 @@ const Dashboard = () => {
                     <Modal.Title>stay tuned</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <h4>Stay tuned for our Testnet competition to win $BALR token</h4>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         {/* <Form.Label>Email address</Form.Label> */}
@@ -352,19 +373,19 @@ const Dashboard = () => {
                                     <Carousel.Caption>
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
-                                                <div className="col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={tradedog} alt="tradedog" />
                                                 </div>
-                                                <div className="col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={tdx} alt="tdx" />
                                                 </div>
-                                                <div className="col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={tdefi} alt="tdefi" />
                                                 </div>
-                                                <div className="col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={tdmm} alt="tdmm" />
                                                 </div>
-                                                <div className="col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={ith} alt="ith" />
                                                 </div>
                                             </div>

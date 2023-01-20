@@ -9,11 +9,19 @@ import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import user from '../../Assest/img/user.png'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { useNavigate  } from "react-router-dom";
 
 const CollapsibleExample = () => {
+  const navigate = useNavigate();
   const auth = useAuth()
   const handleLogout = (e) => {
     auth.logout()
+  }
+  const goToAbout = (param, id)=>{
+    if(id){
+      param = param+`/${id}`
+    }
+    navigate(param) 
   }
 
   return (
@@ -21,14 +29,14 @@ const CollapsibleExample = () => {
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home"><img src={gamelogo} alt="logo" /></Navbar.Brand>
+          <Navbar.Brand onClick={()=>{goToAbout('/')}}><img src={gamelogo} alt="logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="#partyGang">Party</Nav.Link>
+            <Nav.Link onClick={()=>{goToAbout('/about')}}>About</Nav.Link>
+            <Nav.Link onClick={()=>{goToAbout('/partyGang' )}} id="party">Party</Nav.Link>
             <Nav.Link href="https://medium.com/m/signin">How To Play?</Nav.Link> 
-              <Nav.Link href="/pool">Pool</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
             <OverlayTrigger
           placement='bottom'
           overlay={
@@ -38,7 +46,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link href="#balrToken">$Balr Token</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}} id="balr">$Balr Token</Nav.Link>
              
             </Nav>
             <Nav>
