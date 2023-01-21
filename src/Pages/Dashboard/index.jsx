@@ -640,7 +640,7 @@ const Dashboard = () => {
                                     <div className="col-sm-3">
                                         <div className="">
                                             <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <a href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                                            <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a>
                                           
                                             {/* <img src={discord} className="discordIcon" alt="discord" /> */}
                                             <div className="row">
@@ -758,7 +758,7 @@ const Dashboard = () => {
                                 <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><img src={discord} alt="" /></a></li>
                                 <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                 <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
+                                <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
                              </ul>
                         </div>
                     </div>
