@@ -34,7 +34,8 @@ const CollapsibleExample = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-            <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link>
+            <Nav.Link href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
+            {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
             <Nav.Link onClick={()=>{goToAbout('/partyGang' )}}>Party</Nav.Link>
             <Nav.Link href="https://medium.com/m/signin" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
               <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
