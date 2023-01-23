@@ -16,10 +16,13 @@
     font-weight: 300;
     font-size: 18px; 
     margin-top: 20px;
-    color: #FFFFFF; 
+    color: #FFFFFF;
+    width: 84%;
+    margin: 2rem auto;
 }
 
+
 @media (max-width: 1300px){
-    .footer-content{   
+    .footer-content{   width: 100%;
         font-size: 16px; }
 }

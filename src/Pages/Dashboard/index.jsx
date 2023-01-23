@@ -7,7 +7,7 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import Italian_Mafia_Boss from '../../Assest/img/Italian_Mafia_Boss.png'
+import Man from '../../Assest/img/Man.gif'
 import slide2 from '../../Assest/img/slide2.png'
 import slide3 from '../../Assest/img/slide3.png'
 import reward_card from '../../Assest/img/reward_card.png'
@@ -17,6 +17,7 @@ import semiCoin from '../../Assest/img/semiCoin.png'
 import image27 from '../../Assest/img/image27.png'
 import image28 from '../../Assest/img/image28.png'
 import image29 from '../../Assest/img/image29.png'
+import Walter_Black from '../../Assest/img/Walter_Black.png'
 import ballerCoin from '../../Assest/img/ballerCoin.png'
 import star from '../../Assest/img/Star.svg'
 import bg_purple from '../../Assest/img/bg_purple.png'
@@ -31,6 +32,8 @@ import logoo from '../../Assest/img/logoo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import teen from '../../Assest/img/teen.png'
 import arrowRight from '../../Assest/img/arrowRight.svg'
+import arrowUp from '../../Assest/img/arrowUp.svg'
+import arrowDown from '../../Assest/img/arrowDown.svg'
 import ellipse from '../../Assest/img/ellipse.png'
 import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
@@ -42,6 +45,10 @@ import starS from '../../Assest/img/starS.svg'
 import {
     useParams,
   } from "react-router-dom";
+import {subscribeMailJet} from '../../Services/User';
+import Loader from "../../Components/Loader";
+import Toaster from "../../Components/Toaster";
+
 window.addEventListener(
     "scroll",
     () => {
@@ -65,12 +72,20 @@ const Dashboard = () => {
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     
     const [playModalShow, setPlayModalShow] = useState(false);
+    const [email, setEmail] = useState("");
+    const [validated, setValidated] = useState(false);
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
     const [trailerModalShow, setTrailerModalShow] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [toasterMessage, setToasterMessage] = useState("");
+    const [toaster, showToaster] = useState(false);
+    const setShowToaster = (param) => showToaster(param);
+
     const { id } = useParams();
     const handleShow = (modalName)=>{
         if(modalName == 'play'){
+            setEmail('');
             setPlayModalShow(true);
         }else if(modalName == 'lottery'){
             setLotteryModalShow(true);
@@ -111,6 +126,44 @@ const Dashboard = () => {
           }        
       });
 
+      const handleSubmit =async(e)=>{
+        console.log(email,'-----------email value');
+        setValidated(true);
+        e.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (email) {
+            let dataToSend = {
+                email: email
+            }
+            // auth.login(dataToSend)
+            setLoading(true);
+            try {
+              const subscribe = await subscribeMailJet(dataToSend);
+              setLoading(false);
+              if (subscribe.error) {
+              console.log(subscribe)
+        
+                setToasterMessage(subscribe?.error?.message||'Something Went Worng');
+                setShowToaster(true);
+              } else {
+                setToasterMessage('Mail subscribed succesfully!!');
+                setShowToaster(true);
+                setPlayModalShow(false);
+              }
+            } catch (error) {
+              console.log(error)
+              setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+              setShowToaster(true);
+              setLoading(false);
+            }
+        } else {
+            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+        }
+      }
+   
+
     return (
         <React.Fragment>
             <Modal
@@ -127,19 +180,29 @@ const Dashboard = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <h4>Stay tuned for our Testnet competition to win $BALR token</h4>
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        {/* <Form.Label>Email address</Form.Label> */}
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
- 
-                    <Button variant="primary" type="submit">
+
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                          <Form.Group   >
+                           
+                            <Form.Control
+                                required
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={({ target }) => setEmail(target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Valid E-mail is required
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    <div>
+                        <Button variant="primary" onClick={handleSubmit} type="submit">
                         Submit
                     </Button>
-                </Form>
+                    </div>
+                    </Form>
+                {loading ? <Loader /> : null}
+
                 </Modal.Body>
                 
             </Modal>
@@ -221,6 +284,7 @@ const Dashboard = () => {
                                         <Carousel.Caption>
                                             <img src={ellipse} className="bgShade" />
                                             <div className="container">
+                                                <p className="firstText">UNLOCK NEW CITIES</p>
                                                 <div className="row">
                                                     <div className="col-sm-5 my-auto">
                                                         <div className="sCaption">
@@ -241,7 +305,7 @@ const Dashboard = () => {
                                                                         </g>
                                                                     </g>
                                                                 </svg> */}
-                                                                <p className="textHeader mb-5">
+                                                                <p className="textHeader ">
                                                                     A Web 3.0 hyper casual game that is your gateway to play, engage and socialize with your gang at exclusive parties.
                                                                 </p>
                                                                 <h5>Early access to the Ballers City</h5>
@@ -257,9 +321,10 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-7 text-right">
-                                                        <img src={Italian_Mafia_Boss} alt="Italian_Mafia_Boss" />
+                                                        <img src={Man} alt="Italian_Mafia_Boss" />
                                                     </div>
                                                 </div>
+                                                <p className="secondText">Awaken the Baller within you</p>
                                             </div>
 
 
@@ -275,7 +340,8 @@ const Dashboard = () => {
                                         <div className="box"></div>
                                         <Carousel.Caption>
                                             <div className="container">
-                                                <div className="sCaption secondSlide">
+                                                 <p className="firstText">Play, Party and Earn</p>
+                                                <div className="sCaption secondSlide mb-0">
                                                     <div>
                                                         <p className="fw-bold">$BALR powered Web3 engagement Venture</p>
                                                         <h1>BALLERS </h1>
@@ -285,6 +351,7 @@ const Dashboard = () => {
                                                     </div>
 
                                                 </div>
+                                                <p className="secondText">Announcing the next project soon!</p>
                                             </div>
                                         </Carousel.Caption>
                                     </Carousel.Item>
@@ -334,9 +401,8 @@ const Dashboard = () => {
                                             </div>
                                         </div>
                                         <Carousel.Caption>
-
-
-                                            <div className="w-100">
+                                            <div className="container w-100">
+                                                 <p className="firstText">Win Exclusive Rewards</p>
                                                 <div className="text-center thirdSlide">
                                                     <div className="sCaption text-center">
                                                         <div>
@@ -356,7 +422,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <p className="secondText">NFT<small>s</small> distributed Daily</p>
 
                                             </div>
 
@@ -429,7 +495,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 my-auto">
+                            <div className="col-sm-6 my-auto px-0">
                                 <div className="rewadText">
                                     <div className="coinImage">
                                         <img src={coin} alt="coin image" />
@@ -439,7 +505,7 @@ const Dashboard = () => {
                                         <h2 className="heading2">Reward</h2>
                                     </div>
 
-                                    <div className="mb-4">
+                                    <div className="py-5">
                                         <p className="text-font">
                                         Ballers City is one of the only games that enables you to earn on a daily basis. Players can win rewards from Reward pools, Lottery Pots and Quests! No matter what your skill level or collection size, there is always an opportunity to earn!
 
@@ -509,7 +575,7 @@ const Dashboard = () => {
                                     <div className="news-list-wrap">
                                         <div className="news-list-column system">
                                             <a  className="news-item star pink">
-                                                <img className="news-item-bg" src={image28} alt="" />
+                                                <img className="news-item-bg" src={image27} alt="" />
 
                                             </a>
                                             <a  className="news-item star black">
@@ -517,7 +583,7 @@ const Dashboard = () => {
 
                                             </a>
                                             <a  className="news-item star white">
-                                                <img className="news-item-bg" src={image28} alt="" />
+                                                <img className="news-item-bg" src={image29} alt="" />
 
                                             </a>
 
@@ -541,11 +607,11 @@ const Dashboard = () => {
                                                   These NFTs are your only way to access the city that never sleeps. Get the exclusive Ballers NFT to join the clan before the time runs out!
                                                 </p>
                                                 <div className="row">
-                                                    <div className="col-6 col-sm-4">
+                                                    <div className="col-6 col-xl-4">
                                                         <div> Total Unique NFTs</div>
-                                                        <h5 className="num">17K</h5>
+                                                        <h5 className="num">17</h5>
                                                     </div>
-                                                    <div className="col-6 col-sm-4">
+                                                    <div className="col-6 col-xl-5">
                                                         <div>Total Number of NFTs</div>
                                                         <h5 className="num">10,000</h5>
                                                     </div>
@@ -561,6 +627,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <img src={arrowUp} alt="" className="arrowUp" />
                                 <div className="col-sm-12">
                                     <div>
                                         <div className="nftCollectionHead mt-5">
@@ -583,17 +650,18 @@ const Dashboard = () => {
 
                             </div>
                         </div>
-                        <div className="container positionRelative ballerSec" id="balrToken">
+                        <div className="container positionRelative ballerSec mt-5" id="balrToken">
                             <div className="positionRelative text-right">
                                 <h2 className="heading">BALR TOKEN</h2>
                                 <h2 className="balrHead">BALR TOKEN</h2>
                             </div>
+                            <img src={arrowDown} alt="" className="arrowDown" />
                             <div className="row">
                                 <div className="col-sm-6 my-auto">
                                     <div className="">
                                         <div className="pb-4">
                                             <p className="text-font">
-                                                <b>$BALR</b> $BALR unlocks your ability to earn and win exclusive rewards based on your In-game engagement.
+                                                <b>$BALR</b> unlocks your ability to earn and win exclusive rewards based on your In-game engagement.
                                             </p>
                                             <p className="text-font">Experience the complete vibe of our next-gen Web3.0 games through the power of $BALR</p>
                                         </div>
@@ -624,7 +692,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="container positionRelative mt-12rem">
-                            <div className="divImage"><img src={image28} alt="card" /> </div>
+                            <div className="divImage"><img src={Walter_Black} alt="card" /> </div>
                             <div className="joinCard">
                                 <div className="bg-circle"></div>
                                 <div className="row">
@@ -640,7 +708,7 @@ const Dashboard = () => {
                                     <div className="col-sm-3">
                                         <div className="">
                                             <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                                            <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a>
                                           
                                             {/* <img src={discord} className="discordIcon" alt="discord" /> */}
                                             <div className="row">
@@ -746,7 +814,7 @@ const Dashboard = () => {
                                     <ul className="policy">
                                         <li>Privacy notice</li>
                                         <li>Term of service</li>
-                                        <li>Cookie prefrence</li>
+                                        <li>Cookie preference</li>
                                     </ul>
 
                                 </div>
@@ -754,16 +822,21 @@ const Dashboard = () => {
 
                             </div>
                              <ul className="socialIcons">
-                                <li><a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
                                 <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><img src={discord} alt="" /></a></li>
-                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i class="fa fa-medium" aria-hidden="true"></i></a></li>
+                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a></li>
                              </ul>
                         </div>
                     </div>
 
                 </div>
+                {toaster && <Toaster
+                    message={toasterMessage}
+                    show={toaster}
+                    close={() => showToaster(false)} />
+                }
 
             </div>
 

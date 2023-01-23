@@ -5,7 +5,7 @@ const Footer = () => {
     <div className='footer'>
       <div className="container text-center b-top">
         <div className="row justify-content-center">
-          <div className="col-sm-6">
+          <div className="col-sm-8">
             <p className='footer-content'>
               © 2023 Ballers Studio, Inc. Ballers,CITY, and any associated logos are trademarks, service marks, and/or registered trademarks of Ballers Studio,Inc.
             </p>

@@ -123,15 +123,19 @@ background: #110929;
 .reward #one {
   position: absolute;
   left: 26rem;
-  top: -30rem;
+  top: -44rem;
   bottom: 0;
   margin: auto;
-  width: 4%;
+  width: 60px;
 }
 .reward #two {
   position: absolute;
-  top: 25rem; 
-  left: 10rem;
+  top: 22rem;
+  left: 12rem;
+}
+.reward #three { 
+  right: 14rem;
+  top: 18rem;
 }
 .heading{
     font-weight: 400;
@@ -204,11 +208,39 @@ background: #110929;
   margin: auto;
   border-top: 2px dashed #D7BEFF;
 }
-.mainSlider .carousel-item:first-child::before,
-.mainSlider .carousel-item:first-child::after {
+.mainSlider .carousel-item:first-child .secondText, .mainSlider .carousel-item:first-child .firstText{
   color: #AC47ED;
 }
-.mainSlider .carousel-item::before, .mainSlider .carousel-item::after{
+.secondText, .firstText{
+  color: #fff;
+  position: absolute;
+  line-height: 23px;
+  /* color: #fff; */
+  font-weight: 400;
+  font-size: 18px;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+ 
+ 
+}
+.firstText{
+  right: -8rem;
+  top: 36%;
+  width: 14%;
+  transform: rotate(90deg); 
+}
+.secondText{ 
+  transform: rotate(-90deg);
+  left: -5rem;
+  bottom: 12rem;
+  width: 17%;
+}
+/* .mainSlider .carousel-item:first-child::before,
+.mainSlider .carousel-item:first-child::after {
+  color: #AC47ED;
+} */
+/* .mainSlider .carousel-item::before, .mainSlider .carousel-item::after{
   position: absolute;
   line-height: 23px;
   color: #fff;
@@ -242,7 +274,7 @@ content: "Awaken the Baller within you";
 }
 .mainSlider .carousel-item:last-child::after{
 content: "NFTs distributed Daily";
-}
+} */
 .text-right{
     text-align: right;
 }
@@ -270,7 +302,8 @@ content: "NFTs distributed Daily";
 .mainSlider .carousel-caption::before {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 96%;
+    right: 0;
     height: 1px;
     background: #fff;
     bottom: 5rem;
@@ -278,12 +311,12 @@ content: "NFTs distributed Daily";
 .positionAbs{
   position: absolute;
   width: 100%;
-  bottom: 12rem;
+  bottom: 14rem;
   width: 24rem;
 }
 .mainSlider .carousel-indicators {    
     left: inherit; 
-    bottom: 7rem;
+    bottom: 9rem;
     margin-right: 10%;
 }
 .carousel-indicators [data-bs-target]{
@@ -346,6 +379,7 @@ content: "NFTs distributed Daily";
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.25em;
+  margin-bottom: 3rem;
 }
 .sCaption h5{ 
     width: 73%;
@@ -394,9 +428,9 @@ content: "NFTs distributed Daily";
     text-transform: uppercase;
     text-decoration: none;
     text-align: center; 
-    font-size: 18px;  
+    font-size: 20px;  
     letter-spacing: 2px;
-    padding: 0.5rem 2.25rem 0.25rem;
+    padding: 1.25rem 2.25rem 1.25rem;
     color: #ECE8E1;
     font-family: "Valorant";
 }
@@ -423,6 +457,9 @@ content: "NFTs distributed Daily";
     margin: -4px;
     /* -webkit-mix-blend-mode: hue; */
 }
+.rewadText .innerBtn a::before, .rewadText .innerBtn a::after, .rewadText .innerBtn a span::before, .rewadText .innerBtn a span::after{
+  width: 96px;
+}
 
 .playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after{
   width: 96px;
@@ -431,10 +468,10 @@ content: "NFTs distributed Daily";
   width: 114px;
 }
 .ballerSec .innerBtn a::before, .ballerSec .innerBtn a::after, .ballerSec .innerBtn a span::before, .ballerSec .innerBtn a span::after {
-  width: 115px;
+  width: 135px;
 }
 .news-caption .innerBtn a::before, .news-caption .innerBtn a::after, .news-caption .innerBtn a span::before, .news-caption .innerBtn a span::after {
-  width: 83px;
+  width: 128px;
 }
 .playBtn a span::before, .innerBtn a span::before {
     bottom: -2px;
@@ -450,15 +487,15 @@ content: "NFTs distributed Daily";
 } 
 .playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after,
 .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after  {
-    width: calc( 266px / 2);
-    height: calc( 70px / 2);
+    width: calc( 326px / 2);
+    /* height: calc( 70px / 2); */
 }
 .btnWith{
-  width: 240px;
+  width: 270px;
   transition: all .3s;
 }
 .purchaseWith{
-  width: 250px;
+  width: 285px;
   transition: all .3s;
 }
 .rewardImage{
@@ -507,6 +544,13 @@ content: "NFTs distributed Daily";
   text-align: center;
   font-size: 20px;
  }
+ input#formBasicEmail {
+  border: 1px solid #5a3ef869 !important;
+  color: #fff !important;
+  background: #2d1f79 !important;
+  width: 78%;
+  margin: 2rem auto;
+}
  .btn-close{
   background: transparent url(../../Assest/img/cross.png) center/1em auto no-repeat;
   position: absolute;
@@ -515,9 +559,9 @@ content: "NFTs distributed Daily";
  }
   .coinImage img{ 
     position: absolute;
-    right: 35%;
+    right: 30%;
     top: -18%;
-    width: 25.5%;
+    width: 32.5%;
     z-index: 1;
     animation: rotate .25s linear infinite;
     animation-play-state: paused;
@@ -637,7 +681,16 @@ content: "NFTs distributed Daily";
     opacity: 1; 
     transform: scale(1);
   } */
-  
+  .arrowUp{
+    position: absolute;
+    width: 9%;
+    bottom: 19%;
+    left: -8%;
+  }
+  .arrowDown{
+    position: absolute;
+    right: -3%;
+  }
   .rotateDiv{
     -ms-transform: rotate(6deg); /* IE 9 */
     transform: rotate(-6deg);
@@ -647,8 +700,8 @@ content: "NFTs distributed Daily";
     overflow: hidden;
     white-space: nowrap; 
     font-weight: 800;
-    font-size: 136px;
-    line-height: 146px;
+    font-size: 190px;
+    line-height: 198px;
     background: linear-gradient(112.62deg, #8D1CFE 29.4%, #0038ED 105.15%); 
     letter-spacing: -0.03em;  
     width: calc(200px * 20);
@@ -665,8 +718,10 @@ content: "NFTs distributed Daily";
     }
   }
  .marquee img{
+  vertical-align: unset;
     -webkit-animation: shiney 1.5s infinite;
     -moz-animation: shiney 1.5s infinite;
+    margin-bottom: 20px;
   }
 .marquee-item {
     display: flex;
@@ -730,7 +785,7 @@ content: "NFTs distributed Daily";
 }
 .joinCard i.fa.fa-twitter {
   position: absolute;
-  right: 18%; 
+  right: 17.5%; 
   font-size: 35px; 
   margin-top: 4px;
 }
@@ -781,7 +836,7 @@ content: "NFTs distributed Daily";
     height: 225px;
     border-radius: 50%;
     margin-left: -6rem;
-    margin-top: -2rem;
+    margin-top: -3rem;
   }
   .divImage{
     position: absolute;
@@ -790,9 +845,12 @@ content: "NFTs distributed Daily";
     transform: rotate(-17deg);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     left: 5.5rem; 
-    width: 220px;
+    width: 200px;
   }
   .divImage img{width: 100%;}
+  .accordion-button::after{
+    display: none;
+  }
   .accordion-button{
     font-weight: 600;
   }
@@ -811,19 +869,25 @@ content: "NFTs distributed Daily";
 .accordion-body:before {
   content: "";
   position: absolute;
-  height: 66%;
+  height: 85%;
   width: 4px;
   background: #fff;
   left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
   border-radius: 30px;
 }
 .accordion-body {
   position: relative;
   padding-bottom: 0;
   margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding-top: 0;
 }
 .accordion-body p{ 
   opacity: .6;
+  line-height: 20px;
   margin-bottom: 0;
 }
 .secondSlide{
@@ -1574,7 +1638,20 @@ ul li {
 .fStar .starSmall{
   width: 14% !important;
 }
-
+.carousel-control-prev {
+  left: 7%;
+}
+.carousel-control-next {
+  right: 4%;
+}
+.secondSlide {
+  position: absolute;
+  bottom: 12%;
+  margin-left: 4%;
+}
+.sCaption {
+  margin-bottom: 6rem;
+}
 @media (min-width: 1400px){
  
   #five { 
@@ -1586,6 +1663,7 @@ ul li {
 }
 
 @media (min-width: 1500px){
+
  
   #three { 
     transform: translate(590%, -255%);
@@ -1605,6 +1683,44 @@ ul li {
 }
 
 @media (min-width: 1800px){
+  .mainSlider .carousel-caption::before{
+    width: 92%;
+  }
+  .starSmall {
+    margin-right: 18rem;
+    margin-top: -19rem;
+}
+  .carousel-control-prev {
+    left: 10%;
+}
+.secondSlide {
+  position: absolute;
+  bottom: 12%;
+  margin-left: 4%;
+}
+  .mainSlider .carousel-indicators { 
+    bottom: 10.25rem; 
+    /* margin-right: 6%; */
+}
+/* .carousel-caption {
+  width: 86%;
+} */
+  .positionAbs { 
+    bottom: 15.5rem;
+  }
+  .firstText{
+    top: 31%;
+    right: -3.5rem;
+    width: 12%;
+  }
+  .secondText { 
+    left: -4rem;
+    bottom: 13rem; 
+}
+
+  .thirdSlide .sCaption {
+    width: 45%;
+  }
   .poolBtn {
     width: 86%;
   }
@@ -1636,9 +1752,67 @@ ul li {
 
 }
 @media (min-width: 1900px){
+  .mainSlider .carousel-caption::before{
+    width: 90%;
+  }
+  .carousel-control-prev {
+    left: 13%;
+}
+  .thirdSlide .sCaption {
+    width: 48%;
+}
+  .firstText {
+    right: -4rem;
+  }
+  .secondText { 
+    left: -2rem;
+    bottom: 13rem; 
+}
+
   .poolBtn {
     width: 80%;
   }
+}
+@media (min-width: 2000px){
+  .carousel-control-next {
+    right: 15%;
+}
+.firstText {
+  right: 12rem;
+}
+.mainSlider .carousel-indicators { 
+  margin-right: 20%;
+}
+.mainSlider .carousel-caption::before {
+  width: 73%;
+  margin: auto;
+  left: 3%;
+}
+  .bg-move img {
+      left: -18%;
+    width: 39%;
+    top: 76%;
+}
+.bg-move img:nth-child(2) {
+  left: 12%;
+  width: 28%;
+  top: 67%;
+} 
+  .carousel-control-prev {
+    left: 16%;
+  }
+  .firstText { 
+    width: 10%;
+  }
+  .secondText { 
+    left: 4rem;
+    bottom: 13rem;
+    width: 15%;
+}
+.mainSlider .carousel-caption img {
+  width: 88%;
+}
+
 }
 @media only screen and (min-width: 1368px) {
   /* .news--news_page .news-caption {
@@ -1700,6 +1874,25 @@ ul li {
 }
 
 @media (max-width: 1670px){
+  .thirdSlide .sCaption {
+    width: 40%;
+  }
+  .firstText{
+    right: -4rem;
+    top: 30%;
+    width: 14%; 
+  }
+  .secondText{  
+    left: -10rem;
+    bottom: 12rem;
+    width: 20%;
+  }
+  .mainSlider .carousel-item::before{
+    top: 15rem;
+  }
+  /* .sCaption .textHeader{
+    margin-bottom: 2rem;
+  } */
   .sCaption h5 { 
     font-size: 20px;
     line-height: 24px;
@@ -1709,6 +1902,49 @@ ul li {
   }
 }
 @media (max-width: 1500px){
+  .carousel-control-prev {
+    left: 3%;
+}
+  .mainSlider .carousel-caption img {
+    width: 74%;
+}
+  .firstText {
+    right: -2rem; 
+    width: 13%;
+}
+.secondText {
+  left: -9rem; 
+  width: 19%;
+}
+  .carousel-caption {
+    width: 84%;
+  }
+  .mainSlider .carousel-caption::before { 
+    width: 100%;
+  }
+  .backCoin img {
+    width: 15%;
+  }
+  .reward #one { 
+    top: -36rem; 
+    width: 40px;
+}
+  .reward #two { 
+    top: 19rem;
+    left: 8rem;
+}
+.reward #three {
+  right: 14rem;
+  top: 11rem;
+}
+  .positionAbs { 
+    width: 21rem;
+}
+  .secondText, .firstText { 
+    line-height: 17px; 
+    font-size: 15px; 
+    letter-spacing: 0.15em;
+}
   .bg-move img:nth-child(2) {
     left: 33%; 
     top: 63%;
@@ -1735,6 +1971,58 @@ ul li {
 font-size: 18px;
 line-height: 100%;
 }
+}
+@media (max-width: 1350px){
+  .secondText {
+    left: -8rem;
+    width: 17%;
+    bottom: 10rem;
+}
+  .joinCard i.fa.fa-twitter { 
+    right: 17%; 
+    bottom: 6rem;
+}
+.joinCard i.fa.fa-medium { 
+  top: 9%;
+}
+.joinCard i.fa.fa-instagram { 
+  right: 4rem; }
+  .viewer {
+    height: 87vh;
+  }
+  .partyHard {  
+    font-size: 85px;  
+    right: -13rem;
+    top: 13rem;
+}
+
+  .text-font {
+    font-size: 18px;
+    line-height: 24px;
+}
+  .coinImage img { 
+    right: 31%;
+    top: -8%;
+  }
+  .reward #one {
+    top: -31rem; 
+    left: 20rem;
+}
+.reward #two {
+  top: 19rem;
+  left: 7rem;
+  width: 40px;
+}
+.reward #three {
+  right: 14rem;
+  top: 8rem;
+}
+  .positionAbs { 
+    bottom: 11.5rem;
+  }
+  .joinUs { 
+    font-size: 32px;
+  }
 }
 @media (max-width: 1300px){
   .mainSlider .carousel-item::before { 
@@ -1781,7 +2069,7 @@ line-height: 100%;
 .sCaption .textHeader { 
   font-size: 12px;
   line-height: 15px;
-  margin-bottom: 1.75rem !important;
+  margin-bottom: 1.75rem;
 }
 .sCaption h5 {
   font-size: 17px;
@@ -1798,6 +2086,64 @@ line-height: 100%;
   right: 35%;
 }
 }
+@media (max-width: 1200px){
+  .text-font {
+    font-size: 15px;
+    line-height: 21px;
+}
+  .heading2 { 
+    font-size: 73px;
+  }
+  .footer-content {
+    font-size: 13px;
+}
+  .viewer {
+    height: 100vh;
+  }
+  .coinImage img { 
+    right: 22%;
+    top: -8%; 
+  }
+  .joinUs {
+    font-size: 25px;
+}
+  .divImage { 
+    top: -55%; 
+    left: 4.5rem;
+    width: 200px;
+}
+  .mainSlider .carousel-item {
+    height: 134vh;
+}
+.logoSlider {
+  bottom: -12rem;
+}
+.playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after{
+  width: 66px;
+  height: 41px;
+}
+.playBtn a {
+  padding: 0.65rem 1.5rem 0.5rem;
+  font-size: 13px;
+}
+.shareBtn a{
+  font-size: 13px;
+}
+.positionAbs { 
+  bottom: 11rem;
+  width: 17rem;
+}
+.mainSlider .carousel-item::before, .mainSlider .carousel-item::after { 
+  line-height: 17px; 
+  font-size: 15px; 
+}
+.mainSlider .carousel-item::after { 
+  width: 160px;
+}
+.mainSlider .carousel-item::before { 
+  width: 104px;
+}
+}
 @media (max-width: 1024px){
   .mainSlider .carousel-item img{
     object-fit: cover;
@@ -1808,6 +2154,22 @@ line-height: 100%;
     object-fit: cover;
     display: block;
     margin: auto;
+  }
+}
+@media (min-height:760px) and (max-height: 825px){
+  .bg-move img:nth-child(2) {
+    left: 37%;
+    top: 36%;
+}
+.bg-move img {
+  left: 18%;
+  top: 47%;
+}
+.viewer {
+  height: 78vh;
+}
+  .mainSlider .carousel-item{
+    height: 100vh;
   }
 }
 @media (max-width: 500px){
