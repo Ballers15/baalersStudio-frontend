@@ -42,6 +42,7 @@ import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
+import trailer from '../../Assest/img/trailer.mp4'
 import {
     useParams,
   } from "react-router-dom";
@@ -162,6 +163,12 @@ const Dashboard = () => {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
       }
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#video1')[0].play();
+      })
+      $('#myModal').on('hidden.bs.modal', function () {
+        $('#video1')[0].pause();
+      })
    
 
     return (
@@ -181,9 +188,9 @@ const Dashboard = () => {
                 <Modal.Body>
                     <h4>Stay tuned for our Testnet competition to win $BALR token</h4>
 
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                          <Form.Group   >
-                           
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="formFlex">
+                        <Form.Group>
+                        
                             <Form.Control
                                 required
                                 type="email"
@@ -195,11 +202,11 @@ const Dashboard = () => {
                                 Valid E-mail is required
                             </Form.Control.Feedback>
                         </Form.Group>
-                    <div>
-                        <Button variant="primary" onClick={handleSubmit} type="submit">
-                        Submit
-                    </Button>
-                    </div>
+                        <div>
+                            <Button className="subscribeBtn" variant="primary" onClick={handleSubmit} type="submit">
+                                Submit
+                            </Button>
+                        </div>
                     </Form>
                 {loading ? <Loader /> : null}
 
@@ -211,15 +218,26 @@ const Dashboard = () => {
                 onHide={()=> handleHide('trailer')}
                 backdrop="static"
                 keyboard={false}
+                className="trailerStyle"
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                   
+                <Modal.Header closeButton>                   
                 </Modal.Header>
                 <Modal.Body>
-                 <p>trailer</p>
+                <iframe width="750" height="415" src='https://www.youtube.com/embed/r8yd_aAKG7U?autoplay=1&mute=1' 
+                        allow='autoplay; encrypted-media'
+                        allowFullScreen
+                        title='video'
+                />
+                    {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/r8yd_aAKG7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                {/* <video width="750" height="500" controls id="video1" autoplay muted >
+                    <source src={trailer} type="video/mp4"/>
+                </video> */}
+                {/* <video width="750" height="500" controls autoplay>
+                    <source src={trailer} type="video/mp4"/>
+                </video> */}
                 </Modal.Body>
                 
             </Modal>
@@ -541,12 +559,13 @@ const Dashboard = () => {
                                     <div className="col-sm-7 my-auto">
                                         <div className="">
                                             <div className="mb-5">
-                                                <p className="text-font"> Work hard, play hard, and party even harder. </p>
+                                                <h4><b>Work hard, play hard, and party even harder.</b> </h4>
+                                                <p className="text-font">  </p>
                                                 <p className="text-font">Assemble your gang and join the Baller's community where you can party like never before with Crypto OGs, gamers and other like minded people across the globe and awaken the true BALLER within you!</p>
                                                 <p className="text-font">
                                                 We are hosting exclusive private parties, E sports competitions and Cosplay events, so that every Baller can have have night worth remembering
                                                 </p>
-                                                <h4><b>Loveland party coming soon!</b> </h4>
+                                                <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
                                             <div className="innerBtn">
                                                 <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
@@ -650,8 +669,8 @@ const Dashboard = () => {
 
                             </div>
                         </div>
-                        <div className="container positionRelative ballerSec mt-5" id="balrToken">
-                            <div className="positionRelative text-right">
+                        <div className="container positionRelative ballerSec pt-4 mt-5" id="balrToken">
+                            <div className="positionRelative text-right mx-4">
                                 <h2 className="heading">BALR TOKEN</h2>
                                 <h2 className="balrHead">BALR TOKEN</h2>
                             </div>
@@ -674,7 +693,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm-6">
 
-                                    <div className="ballercoin text-center">
+                                    <div className="ballercoin text-right">
                                         <div className="flashDiv">
                                             <div className="flashLight"></div>
                                             <div className="flashLight2"></div>
