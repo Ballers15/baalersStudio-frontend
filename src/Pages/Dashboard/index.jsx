@@ -10,7 +10,9 @@ import './Dashboard.css'
 import Man from '../../Assest/img/Man.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.png'
-import ambassadorOver from '../../Assest/img/ambassadorOver.png'
+import ambassadorMob from '../../Assest/img/ambassadorMob.png'
+// import ambassadorOver from '../../Assest/img/ambassadorOver.png'
+import slide2 from '../../Assest/img/slide2.png'
 import slide3 from '../../Assest/img/slide3.png'
 import reward_card from '../../Assest/img/reward_card.png'
 import r1 from '../../Assest/img/r1.png'
@@ -62,6 +64,7 @@ window.addEventListener(
     false
 );
 
+
 function useHover() {
     const [hovering, setHovering] = useState(false)
     const onHoverProps = {
@@ -72,6 +75,7 @@ function useHover() {
   }
 const Dashboard = () => {
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
+    const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
     
     const [playModalShow, setPlayModalShow] = useState(false);
     const [email, setEmail] = useState("");
@@ -343,8 +347,8 @@ const Dashboard = () => {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        {/* <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
-                                        /> */}
+                                        <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
+                                        />
                                          <div className="stars slideStar">
                                             <img src={starM} className="starMed large" alt="" />
                                             <img src={starS} className="starSmall small" alt="" />
@@ -551,7 +555,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="row positionRelative">
                                     <div className="col-sm-7 my-auto">
-                                        <div className="">
+                                        <div className="mob-content">
                                             <div className="mb-5">
                                                 <h4><b>Work hard, play hard, and party even harder.</b> </h4>
                                                 <p className="text-font">  </p>
@@ -606,7 +610,16 @@ const Dashboard = () => {
                                     </div>
 
                                 </div>
-                                <div className="news-caption-wrap col-sm-6">
+                                <div className="col-sm-12 order-sm-2">
+                                    <div>
+                                    <img src={arrowUp} alt="" className="arrowUp" />
+                                        <div className="nftCollectionHead mt-5">
+                                            <h2 className="heading">NFT COLLECTION</h2>
+                                            <h2 className="heading2">NFT COLLECTION</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="news-caption-wrap col-sm-6 order-sm-1">
                                     <div className="stars">
                                         <img src={starM} className="starMed large" alt="" />
                                     </div>
@@ -635,21 +648,14 @@ const Dashboard = () => {
                                                     </div> */}
                                                 </div>                                                
                                             </div>
-                                            <div className="innerBtn"  {...buttonAHoverProps}>
-                                                <a className="btnWith"><span></span>    {buttonAIsHovering ? "coming soon" : "View NFT's"} </a>
+                                            <div className="innerBtn"  {...buttonAHoverProps2}>
+                                                <a className="btnWith"><span></span>    {buttonAIsHovering2 ? "coming soon" : "View NFT's"} </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img src={arrowUp} alt="" className="arrowUp" />
-                                <div className="col-sm-12">
-                                    <div>
-                                        <div className="nftCollectionHead mt-5">
-                                            <h2 className="heading">NFT COLLECTION</h2>
-                                            <h2 className="heading2">NFT COLLECTION</h2>
-                                        </div>
-                                    </div>
-                                </div>
+                               
+                                
 
                             </div>
                         </div>
@@ -698,6 +704,8 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
+                            <img src={ellipse2} className="bgShadeBalr" />
+
                             <div>
                                 <img src={starL} id="one" className="large" alt="" />
                                 <img src={starM} id="two" className="small" alt="" />
@@ -709,9 +717,14 @@ const Dashboard = () => {
 
                     <div className="container-fluid bgColor joinCard">
                         <div className="container positionRelative p-0"> 
-                            <div className="joinCard"> 
+                            <div className="joinCard">  
+                            <div className="desk">
                             <img className="image" src={ambassador} alt="" />
-                            <img src={ambassadorOver} alt="" className="overlayImg" />
+                            {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
+                            </div>
+                            <div className="mob">
+                            <img className="image" src={ambassadorMob} alt="" /> 
+                            </div>
                             <div className="contentJoin">
                                 <div className="row justify-content-center">                                    
                                     <div className="col-sm-12 text-center my-auto">
@@ -772,8 +785,8 @@ const Dashboard = () => {
                             <div className="row">
                                 <div className="col-sm-5">
                                     <div className="positionRelative mb-5">
-                                        <h2 className="heading">FAQ</h2>
-                                        <h2 className="faqHead">FAQ</h2>
+                                        <h2 className="heading text-left">FAQ</h2>
+                                        <h2 className="faqHead text-left">FAQ</h2>
                                         <p>Blend your style and experience on a global, competitive stage.</p>
                                     </div>
                                     <Accordion defaultActiveKey="0">
@@ -829,12 +842,12 @@ const Dashboard = () => {
                         </div>
                         <div className="container mt-4">
                             <div className="row align-items-center">
-                                <div className="col-5 col-sm-3">
-                                    <img src={logoo} alt="logo" />
+                                <div className="col-2 col-sm-3">
+                                    <img src={logoo} alt="logo"  className="mob-wth"/>
                                 </div>
-                                <div className="col-7 col-sm-3">
+                                <div className="col-4 col-sm-3">
                                     <div className="d-flex align-items-center">
-                                        <img src={teen} alt="logo" />
+                                        <img src={teen} alt="logo"  className="mob-wth-px"/>
                                         <ul>
                                             <li>Blood </li>
                                             <li>Language</li>
@@ -845,10 +858,10 @@ const Dashboard = () => {
                                     </div>
 
                                 </div>
-                                <div className="col-5 col-sm-3">
+                                <div className="col-3 col-sm-3">
                                     <img src={gamecity} alt="logo" className="mob-wth" />
                                 </div>
-                                <div className="col-7 col-sm-3">
+                                <div className="col-3 col-sm-3">
                                     <ul className="policy">
                                         <li>Privacy notice</li>
                                         <li>Term of service</li>
