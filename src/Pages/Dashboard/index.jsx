@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
@@ -50,9 +51,9 @@ import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg' 
-import {
-    useParams,
-  } from "react-router-dom";
+// import {
+//     useParams,
+//   } from "react-router-dom";
 import {subscribeMailJet} from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
@@ -82,6 +83,7 @@ function useHover() {
     return [hovering, onHoverProps]
   }
 const Dashboard = () => {
+ 
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
     const [playModalShow, setPlayModalShow] = useState(false);
@@ -95,7 +97,6 @@ const Dashboard = () => {
     const [toaster, showToaster] = useState(false);
     const setShowToaster = (param) => showToaster(param);
 
-    const { id } = useParams();
     const handleShow = (modalName)=>{
         if(modalName === 'play'){
             setEmail('');
@@ -126,21 +127,7 @@ const Dashboard = () => {
     }
    
     
-    useEffect(() => {
-        // Update the document title using the browser API
-        console.log("HI",id);
-        if(id === 'partyGang'){
-            $('html, body').animate({
-                scrollTop: $("#partyGang").offset().top
-            }, 20);            
-          }
-          else if(id === 'balrToken'){
-            console.log("id",id);
-                 $('html, body').animate({
-                    scrollTop: $("#balrToken").offset().top
-                }, 20);
-          }        
-      });
+  
 
       const handleSubmit =async(e)=>{
         console.log(email,'-----------email value');
