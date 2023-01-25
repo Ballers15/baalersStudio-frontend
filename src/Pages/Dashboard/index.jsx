@@ -8,7 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
 import Man from '../../Assest/img/Man.gif'
-import slide2 from '../../Assest/img/slide2.png'
+import SneefDog from '../../Assest/img/SneefDog.gif'
+import ambassador from '../../Assest/img/ambassador.png'
+import ambassadorOver from '../../Assest/img/ambassadorOver.png'
 import slide3 from '../../Assest/img/slide3.png'
 import reward_card from '../../Assest/img/reward_card.png'
 import r1 from '../../Assest/img/r1.png'
@@ -41,8 +43,7 @@ import house from '../../Assest/img/house.png'
 import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
-import starS from '../../Assest/img/starS.svg'
-import trailer from '../../Assest/img/trailer.mp4'
+import starS from '../../Assest/img/starS.svg' 
 import {
     useParams,
   } from "react-router-dom";
@@ -230,14 +231,7 @@ const Dashboard = () => {
                         allow='autoplay; encrypted-media'
                         allowFullScreen
                         title='video'
-                />
-                    {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/r8yd_aAKG7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
-                {/* <video width="750" height="500" controls id="video1" autoplay muted >
-                    <source src={trailer} type="video/mp4"/>
-                </video> */}
-                {/* <video width="750" height="500" controls autoplay>
-                    <source src={trailer} type="video/mp4"/>
-                </video> */}
+                /> 
                 </Modal.Body>
                 
             </Modal>
@@ -333,7 +327,7 @@ const Dashboard = () => {
                                                                     <a  onClick={()=> handleShow('play')}><span></span>Play now</a>
                                                                 </div>
                                                                 <div className="shareBtn">
-                                                                    <a onClick={()=> handleShow('trailer')}><span></span>SHARE NOW</a>
+                                                                    <a onClick={()=> handleShow('trailer')}><span></span>Watch Trailer</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -349,8 +343,8 @@ const Dashboard = () => {
                                         </Carousel.Caption>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
-                                        />
+                                        {/* <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
+                                        /> */}
                                          <div className="stars slideStar">
                                             <img src={starM} className="starMed large" alt="" />
                                             <img src={starS} className="starSmall small" alt="" />
@@ -481,7 +475,7 @@ const Dashboard = () => {
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
                                                 <div className="col-sm-12">
-                                                    <p className="fw-bold">A WEB 3.0 CLICKER GAME</p>
+                                                    <p className="fw-bold">Our Partners </p>
                                                 </div>
 
                                             </div>
@@ -519,8 +513,8 @@ const Dashboard = () => {
                                         <img src={coin} alt="coin image" />
                                     </div>
                                     <div className="positionRelative mb-4">
-                                        <h2 className="heading">Reward</h2>
-                                        <h2 className="heading2">Reward</h2>
+                                        <h2 className="heading">REWARD</h2>
+                                        <h2 className="heading2">REWARD</h2>
                                     </div>
 
                                     <div className="py-5">
@@ -543,7 +537,7 @@ const Dashboard = () => {
                     <div className="backCoin"> <img src={semiCoin} alt="coin image" /></div>
                 </div>
                 <div className="">
-                    <div className="gradientBackgroung secPaddingY">
+                    <div className="gradientBackgroung secPaddingY pb-8">
 
                         <div className="container" id="partyGang">
                             <div className="stars">
@@ -575,9 +569,10 @@ const Dashboard = () => {
                                     <div className="col-sm-5">
 
                                         <div className="dancingImg">
-                                            <div >
+                                            <img src={SneefDog} alt="" />
+                                            {/* <div >
                                                 <div className="viewer"></div>
-                                            </div>
+                                            </div> */}
 
                                         </div>
                                         <div className="partyHard">PARTY HARD</div>
@@ -710,7 +705,30 @@ const Dashboard = () => {
 
                             </div>
                         </div>
-                        <div className="container positionRelative mt-12rem">
+                    </div>
+
+                    <div className="container-fluid bgColor joinCard">
+                        <div className="container positionRelative p-0"> 
+                            <div className="joinCard"> 
+                            <img className="image" src={ambassador} alt="" />
+                            <img src={ambassadorOver} alt="" className="overlayImg" />
+                            <div className="contentJoin">
+                                <div className="row justify-content-center">                                    
+                                    <div className="col-sm-12 text-center my-auto">
+                                        <p className="joinUs">BECOME <br></br> Ballers AMBASSADOR </p>
+                                        <p className="joinText"> to win $BALR tokens, In-game cash, NFT’s & many more..</p>
+                                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSevvqZ__LcppAzh1pIuQZb4CXLv53-5HBDPzkxxwQ-3GXGLKQ/viewform" target="blank" rel="noopener noreferrer" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
+                                    </div>                                    
+                                </div>
+                            </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+                       
+                        {/* <div className="container positionRelative mt-12rem">
                             <div className="divImage"><img src={Walter_Black} alt="card" /> </div>
                             <div className="joinCard">
                                 <div className="bg-circle"></div>
@@ -720,16 +738,15 @@ const Dashboard = () => {
                                     </div>
                                     <div className="col-sm-6 text-center my-auto">
                                         <p className="joinUs">Join Our Community</p>
-                                        {/* <div className="semiCircle">
+                                        <div className="semiCircle">
                                             <a href="" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
-                                        </div> */}
+                                        </div>
                                     </div>
                                     <div className="col-sm-3">
                                         <div className="">
                                             <img className="hex1" src={bg_yellow} alt="yellow background" />
                                             <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a>
-                                          
-                                            {/* <img src={discord} className="discordIcon" alt="discord" /> */}
+                                           
                                             <div className="row">
                                                 <div className="col-sm-6">
                                                     <img className="hex2" src={bg_purple} alt="purple background" />
@@ -747,7 +764,9 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+
+                    <div className="gradientBackgroung secPaddingY">
                         <div className="container paddingY-5 mt-5 positionRelative">
                             <img src={ellipse3} className="bgShade3" />
                             <div className="row">
@@ -840,13 +859,7 @@ const Dashboard = () => {
 
 
                             </div>
-                             <ul className="socialIcons">
-                                <li><a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><img src={discord} alt="" /></a></li>
-                                <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a></li>
-                             </ul>
+                         
                         </div>
                     </div>
 

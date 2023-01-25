@@ -49,7 +49,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}}>$Balr Token</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}}>$BALR TOKEN</Nav.Link>
              
             </Nav>
             <Nav>

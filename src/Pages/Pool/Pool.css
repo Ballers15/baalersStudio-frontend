@@ -25,38 +25,7 @@
 }
 .pool #five {
     transform: translate(710%,286%);
-}
-/* .pool .logoSlider:before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: #fff;
-    bottom: 5rem;
-} */
-.poolScreen::after,  .poolScreen::before {
-    position: absolute;
-    line-height: 23px;
-    color: #fff;
-    font-weight: 400;
-    font-size: 18px;
-    opacity: 0.75;
-    text-transform: uppercase;
-  }
-  .poolScreen::before {
-    content: "Win Exclusive Rewards";
-    right: 3rem;
-    top: 18rem; 
-    transform: rotate(90deg); 
-    width: 140px;
-}
- .poolScreen::after {
-    content: "NFTs distributed Daily";
-    left: 0rem;
-    bottom: 11rem;
-    transform: rotate(-90deg);  
-    width: 190px;
-}
+} 
 
 .pool .thirdSlide .sCaption{
     width: 30rem;
@@ -64,6 +33,21 @@
 .pool .poolBtn {
     width: 100%;
 }
+.pool .secondText {
+    left: 2rem;
+    width: 12%;
+}
+.pool .firstText {
+    right: 7rem;
+}
+.pool:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    opacity: .4;
+  }
 @media (max-width: 1500px){
     .pool .thirdSlide .sCaption {
         width: 26rem;

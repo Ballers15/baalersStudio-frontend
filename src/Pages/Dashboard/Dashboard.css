@@ -2,8 +2,11 @@
 @font-face {
   font-family: "Valorant";
   src: local("Valorant"),
-   url("../../font/valorant/Valorant\ Font.ttf") format("truetype");
+   url("../../font/valorant/Valorant-Font.ttf") format("truetype");
   font-weight: bold;
+  }
+  body{
+    background: #09031D;
   }
   a{
     cursor: pointer;
@@ -25,6 +28,7 @@ body, p,  h5{
   z-index: 0;
 }
 .tooltip{
+  z-index: 9999;
 font-size: 18px;
 background: #110929;
 }
@@ -69,6 +73,7 @@ background: #110929;
     font-weight: 700;
     font-size: 28px;
 }
+
 .paddingY-5{
   padding-top: 5rem;
     padding-bottom: 5rem;
@@ -82,6 +87,9 @@ background: #110929;
     color: #ECE8E1;
     background: #110929;
     /* background: linear-gradient(158deg, #110929 , #1109296b 70.71%), linear-gradient(197deg, #3a2df4, rgb(35 28 55 / 47%) 70.71%), linear-gradient(44deg, #21037c , rgb(25 17 81 / 56%) 70.71%); */
+}
+.pb-8{
+  padding-bottom: 8rem;
 }
 .reward{    
     height: 100vh;
@@ -143,7 +151,7 @@ background: #110929;
     position: relative;
     z-index: 1;
     font-family: "Valorant";
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 .heading2{
   font-family: "Valorant";
@@ -156,7 +164,7 @@ background: #110929;
     top: -40%;
     color: #831EC3;
     opacity: .2;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     z-index: 0;
 }
 .faqHead{
@@ -169,8 +177,7 @@ background: #110929;
     margin: auto;
     top: -20%;
     color: #831EC3;
-    opacity: .2;
-    text-transform: uppercase;
+    opacity: .2;    
     z-index: 0;
 
 }
@@ -184,7 +191,6 @@ background: #110929;
   top: -28%;
   color: #831EC3;
   opacity: .2;
-  text-transform: uppercase;
   z-index: 0;
 }
 .text-font{
@@ -235,46 +241,7 @@ background: #110929;
   left: -5rem;
   bottom: 12rem;
   width: 17%;
-}
-/* .mainSlider .carousel-item:first-child::before,
-.mainSlider .carousel-item:first-child::after {
-  color: #AC47ED;
-} */
-/* .mainSlider .carousel-item::before, .mainSlider .carousel-item::after{
-  position: absolute;
-  line-height: 23px;
-  color: #fff;
-  font-weight: 400;
-  font-size: 18px;
-  opacity: 0.75;
-  text-transform: uppercase;
-}
-.mainSlider .carousel-item::before {
-    content: 'Play, Party and Earn'; 
-    right: 3rem;
-    top: 18rem; 
-    transform: rotate(90deg); 
-    width: 140px;
-}
-.mainSlider .carousel-item::after {
-    content: 'Announcing the next project soon!';   
-    left: 0rem;
-    bottom: 11rem;
-    transform: rotate(-90deg);  
-    width: 190px;
-}
-.mainSlider .carousel-item:first-child::before{
-content: "UNLOCK NEW CITIES";
-}
-.mainSlider .carousel-item:last-child::before{
-content: "Win Exclusive Rewards";
-}
-.mainSlider .carousel-item:first-child::after{
-content: "Awaken the Baller within you";
-}
-.mainSlider .carousel-item:last-child::after{
-content: "NFTs distributed Daily";
-} */
+} 
 .text-right{
     text-align: right;
 }
@@ -312,7 +279,7 @@ content: "NFTs distributed Daily";
   position: absolute;
   width: 100%;
   bottom: 14rem;
-  width: 24rem;
+  width: 27rem;
 }
 .mainSlider .carousel-indicators {    
     left: inherit; 
@@ -325,6 +292,27 @@ content: "NFTs distributed Daily";
   margin-right: 0px;
   margin-left: 14px;  
   border-radius: 8px; 
+}
+.mainSlider .carousel-item:nth-child(2){
+  background-image: url('../../Assest/img/slide21.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mainSlider .carousel-item:nth-child(2):before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: absolute;
+  opacity: .2;
+}
+.mainSlider .carousel-item:nth-child(3):before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: absolute;
+  opacity: .4;
 }
 .logoSlider{
   position: absolute;
@@ -357,7 +345,7 @@ content: "NFTs distributed Daily";
   opacity: 1;
 }
 .carousel-control-next, .carousel-control-prev{
-  z-index: 999;
+  z-index: 99;
 }
 .sCaption h1{
     font-family: "Valorant";
@@ -391,11 +379,10 @@ content: "NFTs distributed Daily";
 .playBtn, .innerBtn{
     position: relative;
     margin-top: 2rem;
-    text-transform: uppercase;
+    
 }
 .playBtn a {
-    position: absolute; 
-    text-transform: uppercase;
+    position: absolute;     
     text-decoration: none;
     text-align: center; 
     background: #ECE8E1; 
@@ -406,6 +393,7 @@ content: "NFTs distributed Daily";
     font-weight: 400;
     font-size: 20px;
     line-height: 109.84%;
+    text-transform: uppercase;
 
 }
 .shareBtn {
@@ -425,7 +413,6 @@ content: "NFTs distributed Daily";
 }
 .innerBtn a {
     position: absolute; 
-    text-transform: uppercase;
     text-decoration: none;
     text-align: center; 
     font-size: 20px;  
@@ -634,6 +621,9 @@ content: "NFTs distributed Daily";
     animation-iteration-count: 1;
     animation-fill-mode: both; */
 }
+.dancingImg img {
+  width: 85%;
+}
 .dancingImg img{
     /* animation: semiRotate .51s linear infinite;
     animation-play-state: paused;
@@ -758,15 +748,54 @@ content: "NFTs distributed Daily";
     -webkit-text-stroke: 3px #fff;
     color: transparent;
 }
+.bgColor{
+    background: #09031D;
+    box-shadow: inset 10px 15px 30px rgba(0, 0, 0, 0.05);
+}
   .joinCard{
     position: relative;
-    background: linear-gradient(112.62deg, #8D1CFE 29.4%, #0038ED 105.15%);
-    border-radius: 10px;
-    padding: 1rem;
-    overflow: hidden;
+    color: #ECE8E1;
+    height: 350px;
+    /* background: linear-gradient(112.62deg, #8D1CFE 29.4%, #0038ED 105.15%); */
+    /* border-radius: 10px; */
+    z-index: 1; 
+    /* overflow: hidden;
+    background-image: url('../../Assest/img/ambassador.png'); */
 
   }
-  .joinCard .hex1{
+  .joinCard .image{
+    width: 100%;
+    margin-top: -5rem;
+  }
+  .overlayImg{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -19%;
+    bottom: 0;
+    height: 510px;
+  }
+  .joinText{
+    
+    margin-bottom: 3rem;
+
+  }
+  .contentJoin {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    /* background-image: url('../../Assest/img/ambassadorOver.png'); */
+    /* background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+    background-position: center; */
+}
+  /* .joinCard .hex1{
     margin-top: -58px; 
     transform: rotate(50deg);
     width: 65%;
@@ -794,23 +823,22 @@ content: "NFTs distributed Daily";
     right: 14%;
     top: 13%;
     width: 44px;
-    font-size: 35px; 
-    /* transform: rotate(22deg); */
-  }
+    font-size: 35px;  
+  } */
   a i {
     color: #fff;
 }
 .socialIcons{
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 .socialIcons li a{
-  font-size: 22px;
+  font-size: 25px;
   padding: 5px 12px;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
   margin: 8px;
-  border-radius: 0px 10px 0px 10px;
+  /* border-radius: 0px 10px 0px 10px; */
 }
 .joinCard i.fa.fa-twitter {
   position: absolute;
@@ -827,10 +855,16 @@ content: "NFTs distributed Daily";
 }
   .joinUs{
     font-weight: 400;
-    font-size: 40px;
-    line-height: 44px;
+    font-size: 36px;
+    line-height: 120%;
     color: #fff ;
     font-family: "Valorant";
+  }
+  .joinText{
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 104%;
+    opacity: .87;
   }
   .getStart{
     font-size: 20px; 
@@ -867,7 +901,7 @@ content: "NFTs distributed Daily";
     margin-left: -6rem;
     margin-top: -3rem;
   }
-  .divImage{
+  /* .divImage{
     position: absolute;
     z-index: 1;
     top: -38%;
@@ -876,7 +910,7 @@ content: "NFTs distributed Daily";
     left: 5.5rem; 
     width: 200px;
   }
-  .divImage img{width: 100%;}
+  .divImage img{width: 100%;} */
   .accordion-button::after{
     display: none;
   }
@@ -1602,7 +1636,7 @@ ul li {
   top: 0;
   bottom: 0;
   margin: auto; 
-  left: 0;
+  left: 14%;
   right: 0;
 }
 .box:after, .box:before {
@@ -1627,8 +1661,8 @@ ul li {
   content: "";
   position: absolute;
   top: -9px;
-  height: 60px;
-  width: 60px;
+  height: 165px;
+  width: 165px;
   margin-left: -12px;
    background: -moz-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
   background: -webkit-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
@@ -1729,6 +1763,12 @@ ul li {
 }
 
 @media (min-width: 1800px){
+  .joinUs{ 
+    font-size: 40px;   
+  }
+  .joinText{ 
+    font-size: 28px; 
+  }
   .joinCard .discordIcon, .joinCard i.fa.fa-medium{
     font-size: 55px;
     right: 15%;
@@ -1776,10 +1816,9 @@ ul li {
     left: -11rem;
     bottom: 13rem; 
 }
-
-  .thirdSlide .sCaption {
-    width: 45%;
-  }
+.thirdSlide .sCaption {
+  width: 38%;
+} 
   .poolBtn {
     width: 86%;
   }
@@ -1872,7 +1911,7 @@ ul li {
     line-height: 38px;
   }
   .positionAbs { 
-    width: 32rem;
+    width: 34rem;
     bottom: 17rem;
 }
   .playBtn a { 
@@ -1886,10 +1925,10 @@ ul li {
   font-size: 26px;
 }
   .carousel-control-next {
-    right: 10%;
+    right: 7%;
 }
 .firstText {
-  right: 5rem;
+  right: 1rem;
 }
 .mainSlider .carousel-indicators { 
   margin-right: 16%;
@@ -1916,19 +1955,38 @@ ul li {
   top: 48%;
 }
   .carousel-control-prev {
-    left: 10%;
+    left: 8%;
   }
   .firstText { 
     width: 10%;
   }
   .secondText {
-    left: -4rem;
+    left: 12rem;
     bottom: 13rem;
     width: 15%;
 }
 .mainSlider .carousel-caption img {
   width: 88%;
 }
+
+}
+@media (min-width: 2100px){
+  
+  .carousel-control-next {
+    right: 10%;
+}
+.firstText {
+  right: 5rem;
+} 
+  .carousel-control-prev {
+    left: 10%;
+  } 
+  .secondText {
+    left: -4rem;
+    bottom: 13rem;
+    width: 15%;
+}
+ 
 
 }
 @media only screen and (min-width: 1368px) {
@@ -1991,6 +2049,10 @@ ul li {
 }
 
 @media (max-width: 1670px){
+  .joinCard { 
+    height: 280px;
+
+  }
   .balrHead { 
     right: -6%;
   }
@@ -2010,9 +2072,7 @@ ul li {
     bottom: 12rem;
     width: 20%;
   }
-  .mainSlider .carousel-item::before{
-    top: 15rem;
-  }
+ 
   /* .sCaption .textHeader{
     margin-bottom: 2rem;
   } */
@@ -2025,6 +2085,9 @@ ul li {
   }
 }
 @media (max-width: 1500px){
+  .joinCard { 
+    height: 265px;
+  }
   .carousel-control-prev {
     left: 3%;
 }
@@ -2061,7 +2124,7 @@ ul li {
   top: 11rem;
 }
   .positionAbs { 
-    width: 21rem;
+    width: 23rem;
 }
   .secondText, .firstText { 
     line-height: 17px; 
@@ -2096,6 +2159,12 @@ line-height: 100%;
 }
 }
 @media (max-width: 1350px){
+  .joinUs{ 
+    font-size: 30px;   
+  }
+  .joinText{ 
+    font-size: 21px; 
+  }
   .secondText {
     left: -8rem;
     width: 17%;
@@ -2148,9 +2217,7 @@ line-height: 100%;
   }
 }
 @media (max-width: 1300px){
-  .mainSlider .carousel-item::before { 
-    top: 16rem;
-  }
+  
   .logoSlider .carousel-item {
     height: 84px;
 }
@@ -2228,11 +2295,11 @@ line-height: 100%;
   .joinUs {
     font-size: 25px;
 }
-  .divImage { 
+  /* .divImage { 
     top: -55%; 
     left: 4.5rem;
     width: 200px;
-}
+} */
   .mainSlider .carousel-item {
     height: 134vh;
 }
@@ -2254,16 +2321,7 @@ line-height: 100%;
   bottom: 11rem;
   width: 17rem;
 }
-.mainSlider .carousel-item::before, .mainSlider .carousel-item::after { 
-  line-height: 17px; 
-  font-size: 15px; 
-}
-.mainSlider .carousel-item::after { 
-  width: 160px;
-}
-.mainSlider .carousel-item::before { 
-  width: 104px;
-}
+ 
 }
 @media (max-width: 1024px){
   .mainSlider .carousel-item img{
@@ -2353,14 +2411,8 @@ line-height: 100%;
 .thirdSlide .playBtn a::before, .thirdSlide .playBtn a::after, .thirdSlide .playBtn a span::before, .thirdSlide .playBtn a span::after {
   width: 80px;
 }
-.mainSlider .carousel-item::before {
-  top: 13rem;
-  right: -2rem;
-}
-.mainSlider .carousel-item::after { 
-  left: -4rem;
-  bottom: 16rem;
-}
+
+
 .logoSlider {
   bottom: -9rem;
 }
@@ -2436,16 +2488,32 @@ line-height: 100%;
 .ballercoin img {
   width: 100%;
 }
-.divImage { 
+/* .divImage { 
   top: -19%; 
   left: 3.5rem; 
-}
-.bg-circle { 
+} */
+/* .bg-circle { 
   bottom: -228px;
     top: inherit;
-} 
+}  */
 .joinCard {
   height: 750px;
+
+  height: auto;
+}
+.overlayImg { 
+  top: 0; 
+  margin: auto;
+  height: auto;
+}
+.contentJoin{
+  align-items: center;
+}
+.joinUs {
+  font-size: 17px;
+}
+.joinText {
+  font-size: 12px;
 }
 .joinCard .discordIcon, .joinCard i.fa.fa-medium{
   top: inherit;

@@ -128,14 +128,15 @@ const Pool = () => {
                             </svg>
                         </div>
                         <div className="">
+                        <p className="firstText">Win Exclusive Rewards</p>
                             <div className="text-center thirdSlide">
                                 <div className="sCaption text-center">
                                     <div>
-                                        <p>A PLAY & EARN REWARD <b>SYSTEM</b> </p>
-                                        <h1>POOL </h1>
-                                        <p className="textHeader">
-                                            Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
-                                        </p>
+                                    <p>Play & Earn </p>
+                                    <h1>POOL </h1>
+                                    <p className="textHeader">
+                                        Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
+                                    </p>
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">
@@ -148,6 +149,7 @@ const Pool = () => {
                                    
                                 </div>
                             </div>
+                            <p className="secondText">NFT<small>s</small> distributed Daily</p>
 
 
                         </div>
@@ -183,7 +185,7 @@ const Pool = () => {
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
                                                 <div className="col-sm-12">
-                                                    <p className="fw-bold">A WEB 3.0 CLICKER GAME</p>
+                                                    <p className="fw-bold">Our Partners  </p>
                                                 </div>
 
                                             </div>

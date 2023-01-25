@@ -1,4 +1,5 @@
 export const environment = {
 	production: false,
-	apiUrl: 'http://192.168.29.134:8000/',
+	apiUrl: 'https://calls.ballers.fun/',
+	// https://calls.ballers.fun/auth/v1/user/register/mailjet
 };

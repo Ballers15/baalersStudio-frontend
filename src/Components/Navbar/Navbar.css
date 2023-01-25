@@ -5,7 +5,7 @@
     left: 0px;
     top: 0px;
     padding: 0;
-    z-index: 9999;
+    z-index: 999;
     background: linear-gradient(180deg, #110929 0%, rgba(17, 9, 41, 0.1) 145.5%);
     /* opacity: 0.7; */
 }

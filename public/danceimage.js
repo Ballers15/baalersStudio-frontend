@@ -43,9 +43,9 @@ $(window).on('load', function () {
           defaults: {ease: "none"}
         });
       // animate the container one way...
-      tl.fromTo(section.querySelector(".afterImage"), { yPercent: 100, y: 0}, {yPercent: 0})
+      tl.fromTo(section.querySelector(".afterImage"), { yPercent: 50, y: 0}, {yPercent: 0})
         // ...and the image the opposite way (at the same time)
-        .fromTo(section.querySelector(".afterImage img"), {yPercent: -100, y: 0}, {yPercent: 0}, 0);
+        .fromTo(section.querySelector(".afterImage img"), {yPercent: -50, y: 0}, {yPercent: 0}, 0);
     });
 
 
