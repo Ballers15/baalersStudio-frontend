@@ -10,6 +10,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
+    overflow: hidden;
 } 
 .pool #four { 
     transform: translate(122%, 100%);
@@ -55,5 +57,25 @@
     .pool .logoSlider {
          
         bottom: 0;
+    }
+}
+
+@media (max-width: 480px){
+    .pool .thirdSlide {
+        height: 65vh;
+        width: 84%;
+    }
+    .pool .secondText {
+        left: -2rem;
+        width: 42%;
+        bottom: 7rem;
+    }
+    .pool .firstText { 
+        right: -2rem;
+        top: 23%;
+        width: 32%;
+    }
+    .pool .thirdSlide .sCaption {
+        width: 96%;
     }
 }

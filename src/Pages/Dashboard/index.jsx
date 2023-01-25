@@ -649,11 +649,11 @@ const Dashboard = () => {
                                                 </p>
                                                 <div className="row">
                                                     <div className="col-6 col-xl-4">
-                                                        <div> Total Unique NFTs</div>
+                                                        <div className="countHead"> Total Unique NFTs</div>
                                                         <h5 className="num">17</h5>
                                                     </div>
                                                     <div className="col-6 col-xl-5">
-                                                        <div>Total Number of NFTs</div>
+                                                        <div className="countHead">Total Number of NFTs</div>
                                                         <h5 className="num">10,000</h5>
                                                     </div>
                                                     {/* <div className="col-sm-3">

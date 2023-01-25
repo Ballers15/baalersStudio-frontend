@@ -2072,6 +2072,9 @@ ul li {
     height: 280px;
 
   }
+  .positionAbs {
+    bottom: 13rem;
+  }
   .balrHead { 
     right: -6%;
   }
@@ -2633,6 +2636,7 @@ ul li {
   top: 0;
 }
 .balrHead { 
+  text-align: center;
   font-size: 56px;
   left: 0; 
   right: 0; 
@@ -2775,20 +2779,15 @@ ul li {
   }
 }
 @media (max-width: 380px){
-  
-  .viewer {
-    height: 95vh;
+  .sCaption {
+    margin-bottom: -3rem;
 }
+
+.mainSlider .carousel-item {
+  height: 142vh;
 }
-@media (max-width: 320px){
-  .flashDiv {
-    right: 4rem;
-}
-  .logoSlider {
-    bottom: -15rem;
-}
-  .mainSlider .carousel-item {
-    height: 142vh;
+.sCaption h1 {
+  font-size: 50px;
 }
 .sCaption .textHeader {
   font-size: 9px;
@@ -2798,6 +2797,7 @@ ul li {
   font-size: 13px;
   line-height: 16px;
 }
+
 .playBtn a, .shareBtn a {
   font-size: 12px;
 }
@@ -2807,14 +2807,44 @@ ul li {
 .thirdSlide .poolBtn {
   bottom: 6rem;
 }
-/* .bg-move img:nth-child(2) {
-  left: 46%;
-  top: 86%;
+.logoSlider {
+  bottom: -17rem;
 }
-.bg-move img {
-  left: 26%;
-  top: 99%;
-} */
+  .innerBtn .purchaseWith {
+    width: 72%;
+}
+.innerBtn a { 
+  width: 49%;
+}
+  .joinCard {
+    height: 346px;
+}
+  .viewer {
+    height: 95vh;
+}
+.news{height: 140vh;}
+.news-caption { 
+  top: -3rem;
+}
+.news--news_page .news-list { 
+  top: 6.5rem;
+}
+.text-font {
+  font-size: 13px;
+}
+.countHead{
+  font-size: 14px;
+
+}
+}
+@media (max-width: 360px){
+  .flashDiv {
+    right: 4rem;
+}
+  .logoSlider {
+    bottom: -15rem;
+}  
+   
 .reward::before {
   left: -33%;
   top: -3%;
@@ -2833,7 +2863,7 @@ ul li {
 .balrHead {
   font-size: 30px; 
 }
-.news{height: 140vh;}
+
 #partyGang h4{
   font-size: 18px;
 }
@@ -2844,15 +2874,11 @@ ul li {
 .partyHard { 
   top: 28rem;
 }
-.news--news_page .news-list { 
-  top: 6.5rem;
-}
+
 .arrowUp {
   bottom: 52%;
 }
-.news-caption { 
-  top: -3rem;
-}
+
 .joinCard {
   height: 288px;
 }
@@ -2860,19 +2886,10 @@ ul li {
   width: 100%;
   margin-top: -3rem;
 }
-
-
-
 .rewardImage {
   min-height: 67vh;
 }
 
-  .sCaption h1 {
-    font-size: 50px;
-}
-.sCaption {
-  margin-bottom: -3rem;
-}
 .nftCollectionHead { 
   top: -4rem;
 }
