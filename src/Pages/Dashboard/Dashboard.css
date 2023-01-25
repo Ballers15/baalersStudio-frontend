@@ -2296,6 +2296,9 @@ line-height: 100%;
 }
 }
 @media (max-width: 1200px){
+  .shareBtn {
+    padding-top: 5px;
+  }
   .text-font {
     font-size: 15px;
     line-height: 21px;
@@ -2602,7 +2605,7 @@ padding-bottom: .5rem !important;
 .rewadText .heading, .rewadText .heading2 {
   text-align: left;
 }
-.heading2, .faqHead { 
+.heading2, .faqHead, .balrHead { 
   font-size: 50px;
   left: 0;
   top: -19%;
@@ -2730,7 +2733,22 @@ ul li {
 .bgShade2 { 
   width: 100% !important; 
   top: 170rem;
-  right: -2rem;
+  /* right: -2rem; */
+}
+
+.modal-content{
+  width: 88%;
+  margin: auto;
+}
+.formFlex .form-control{
+  width: 160px;
+}
+.houseImg img{
+  width: 100%;
+}
+.paddingY-5 {
+  padding-top: 0rem;
+  padding-bottom: 1rem;
 }
 }
 @media (max-width: 400px){
@@ -2757,7 +2775,129 @@ ul li {
   }
 }
 @media (max-width: 380px){
+  
   .viewer {
     height: 95vh;
 }
+}
+@media (max-width: 320px){
+  .flashDiv {
+    right: 4rem;
+}
+  .logoSlider {
+    bottom: -15rem;
+}
+  .mainSlider .carousel-item {
+    height: 142vh;
+}
+.sCaption .textHeader {
+  font-size: 9px;
+  line-height: 12px;
+}
+.sCaption h5 {
+  font-size: 13px;
+  line-height: 16px;
+}
+.playBtn a, .shareBtn a {
+  font-size: 12px;
+}
+.firstText, .secondText {
+  font-size: 12px;
+}
+.thirdSlide .poolBtn {
+  bottom: 6rem;
+}
+/* .bg-move img:nth-child(2) {
+  left: 46%;
+  top: 86%;
+}
+.bg-move img {
+  left: 26%;
+  top: 99%;
+} */
+.reward::before {
+  left: -33%;
+  top: -3%;
+}
+.coinImage img {
+  right: 11%;
+  top: -7%;
+}
+.innerBtn a{width: 60%;}
+.heading {
+  font-size: 32px;
+}
+.heading2, .faqHead {
+  font-size: 35px; 
+}
+.balrHead {
+  font-size: 30px; 
+}
+.news{height: 140vh;}
+#partyGang h4{
+  font-size: 18px;
+}
+.text-font {
+  font-size: 12px;
+  line-height: 16px;
+}
+.partyHard { 
+  top: 28rem;
+}
+.news--news_page .news-list { 
+  top: 6.5rem;
+}
+.arrowUp {
+  bottom: 52%;
+}
+.news-caption { 
+  top: -3rem;
+}
+.joinCard {
+  height: 288px;
+}
+.joinCard .image {
+  width: 100%;
+  margin-top: -3rem;
+}
+
+
+
+.rewardImage {
+  min-height: 67vh;
+}
+
+  .sCaption h1 {
+    font-size: 50px;
+}
+.sCaption {
+  margin-bottom: -3rem;
+}
+.nftCollectionHead { 
+  top: -4rem;
+}
+.gradientBackgroung {
+  padding: 5rem 1rem;
+}
+.innerBtn .btnWith {
+  width: 62%;
+}
+.innerBtn .purchaseWith {
+  width: 80%;
+}
+.ballercoin img {
+  width: 84%;
+}
+.arrowDown {
+  right: 3%;
+  top: 18rem;
+  width: 10%;
+}
+.joinUs {
+  font-size: 25px;
+}
+.joinText {
+  font-size: 14px;
+}
+
 }
