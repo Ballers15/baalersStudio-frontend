@@ -27,6 +27,9 @@ body, p,  h5{
 .homeBg .container{
   z-index: 0;
 }
+.text-left{
+  text-align: left !important;
+}
 .tooltip{
   z-index: 9999;
 font-size: 18px;
@@ -56,6 +59,16 @@ background: #110929;
   right: 0;
   filter: blur(45px);
 }
+.bgShadeBalr{
+  position: absolute;
+  width: 55% !important;
+  z-index: 0;
+  top: 0rem;
+  right: -12rem;
+  filter: blur(45px); 
+}
+
+
 .wth-4{
   width: 40%;
 } 
@@ -293,11 +306,11 @@ background: #110929;
   margin-left: 14px;  
   border-radius: 8px; 
 }
-.mainSlider .carousel-item:nth-child(2){
+/* .mainSlider .carousel-item:nth-child(2){
   background-image: url('../../Assest/img/slide21.png');
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 .mainSlider .carousel-item:nth-child(2):before{
   content: "";
   width: 100%;
@@ -333,12 +346,7 @@ background: #110929;
   /* border-top: 0.25px solid #FFFFFF; */
   padding-bottom: 0;
 }
-.carousel-control-next-icon{
-  background-image: url(../../Assest/img/arrowLeft.svg);
-}
-.carousel-control-prev-icon{
-  background-image: url(../../Assest/img/arrowRight2.svg);
-}
+
 .carousel-control-next-icon, .carousel-control-prev-icon { 
   width: 3rem;
   height: 3rem; 
@@ -702,9 +710,9 @@ background: #110929;
   } */
   .arrowUp{
     position: absolute;
-    width: 9%;
-    bottom: 19%;
-    left: -8%;
+    /* width: 9%; */
+    bottom: 26%;
+    left: 0%;
   }
   .arrowDown{
     position: absolute;
@@ -767,14 +775,14 @@ background: #110929;
     width: 100%;
     margin-top: -5rem;
   }
-  .overlayImg{
+  /* .overlayImg{
     position: absolute;
     left: 0;
     right: 0;
     top: -19%;
     bottom: 0;
     height: 510px;
-  }
+  } */
   .joinText{
     
     margin-bottom: 3rem;
@@ -1732,6 +1740,17 @@ ul li {
   width: 100%;
     /* height: 100%; */
 }
+.mob{
+  display: none;
+}
+@media (min-width: 900px){
+  .carousel-control-next-icon{
+    background-image: url(../../Assest/img/arrowLeft.svg);
+  }
+  .carousel-control-prev-icon{
+    background-image: url(../../Assest/img/arrowRight2.svg);
+  }
+}
 @media (min-width: 1400px){
  
   #five { 
@@ -2352,6 +2371,11 @@ line-height: 100%;
   }
 }
 @media (max-width: 500px){
+  .bgShade { 
+    left: -3rem;
+    width: 200% !important; 
+    top: 3rem; 
+}
   .news-caption{
     width: 100%;
   }
@@ -2361,21 +2385,108 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
+  .bgShade3 { 
+    left: -2rem;
+    width: 100%; 
+    bottom: inherit; 
+    top: -15rem;
+}
+  .desk{
+    display: none;
+  }
+  .mob{
+    display: block;
+  }
+  #balrToken{
+    text-align: center;
+  }
+  .marquee { 
+    font-size: 86px;
+    line-height: 118px;
+  }
+  .marquee img { 
+    margin-bottom: 0;
+    width: 50px;
+}
+  .mob-content{
+    text-align: center;
+  }
+  .gradientBackgroung {
+    padding: 5rem 2rem;
+} 
+.rewadText .innerBtn a::before, .rewadText .innerBtn a::after, .rewadText .innerBtn a span::before, .rewadText .innerBtn a span::after {
+  width: 74px;
+}
+.ballerSec .innerBtn a::before, .ballerSec .innerBtn a::after, .ballerSec .innerBtn a span::before, .ballerSec .innerBtn a span::after {
+  width: 100px;
+}
+  .innerBtn a {
+    font-size: 15px;
+    padding: 0.5rem 1.25rem 0.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 45%;
+}
+.innerBtn .btnWith{
+  width: 56%;
+}
+.innerBtn .purchaseWith{
+ width: 65%;
+}
+  .rewadText { 
+    padding: 0 2rem;
+}
+.arrowDown { 
+  right: 3%;
+  top: 20rem; 
+  width: 12%;
+}
+.dancingImg {
+  margin-top: 3rem;
+}
+  .box{
+    display: none;
+  }
+  .mainSlider .carousel-caption::before {
+    width: 94%;
+    left: 0;
+    margin: auto;
+}
+  .mainSlider .carousel-item {
+    height: 116vh;
+}
+  .sCaption{
+    margin-bottom: -6rem;
+    margin-top: 4rem;
+  }
+  .firstText {
+    right: -2rem;
+    top: 17%;
+    width: 32%;
+}
+.secondText {
+  left: -4rem;
+  width: 47%;
+  bottom: 10rem;
+}
+
   .flashDiv { 
     right: 9rem;
   }
   .wth-4 {
     width: 100%;
 }
-.secondSlide { 
-  bottom: 17%;
-  left: 13%;
-}
+ 
   .mainSlider .carousel-item img{
-    object-fit: cover;
+    object-fit: cover; 
   }
+  .secondSlide {
+    bottom: 25%;
+    left: 9%;
+}
   .mainSlider .carousel-caption img {
-    width: 90%;
+    width: 100%;
 }
 .shareBtn { 
   right: 2rem;
@@ -2390,13 +2501,23 @@ line-height: 100%;
   width: 94%;
 }
   .sCaption p { 
-    font-size: 14px;
+    font-size: 10px;
+    line-height: 13px;
   }
   .sCaption h1 {
     font-size: 64px;
 }
 .thirdSlide .sCaption {
   width: 100%;
+}
+.poolBtn .shareBtn { 
+  right: 0;
+  left: 0;
+  top: 4rem;
+}
+.poolBtn .playBtn {  
+  width: 50%;
+  margin: auto;
 }
 .playBtn a {
   padding: 0.85rem 1rem 0.65rem;
@@ -2406,7 +2527,7 @@ line-height: 100%;
   font-size: 15px;
 }
 .thirdSlide .poolBtn { 
-  bottom: 11rem;
+  bottom: 16rem;
 }
 .thirdSlide .playBtn a::before, .thirdSlide .playBtn a::after, .thirdSlide .playBtn a span::before, .thirdSlide .playBtn a span::after {
   width: 80px;
@@ -2423,25 +2544,36 @@ line-height: 100%;
   height: 60px;
 }
 .reward::before{
-  display: none;
+  left: -22%;
+  top: -3%;
 }
+
 .reward{ 
   height: 100%;
-  padding-bottom: 5rem;
+  padding-bottom: 10rem;
   background-size: 135%;
 }
 .coinImage img {
-  right: 0%;
-  top: -3%;
+  right: 21%;
+  top: -13%;
+  width: 36.5%;
 }
 .backCoin img {
-  width: 50%;
+  width: 40%;
+  opacity: .7;
+  bottom: -3%;
 }
 .reward::after { 
   right: -25%;
 }
 .rewardImage { 
   min-height: 50vh;
+}
+.rewadText .innerBtn a{
+  right: inherit;
+}
+.rewadText .py-5{
+padding-bottom: .5rem !important;
 }
 .bg-move img {
   left: 25%;
@@ -2451,33 +2583,51 @@ line-height: 100%;
   left: 40%;
   top: 68%;
 }
-.partyHard { 
-  font-size: 90px; 
-  right: -12rem;
-  top: 28rem;
+.partyHard {
+  font-size: 44px;
+  right: -6rem;
+  top: 32rem;
 }
 .text-font {
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 20px;
 }
+.accordion-button{
+  font-size: 14px;
+}
+
 .heading, .heading2{
   text-align: center;
 }
-.heading2 { 
-  font-size: 56px;
+.rewadText .heading, .rewadText .heading2 {
+  text-align: left;
+}
+.heading2, .faqHead { 
+  font-size: 50px;
   left: 0;
   top: -19%;
 }
+.mob-wth-px{
+  width: 26px;
+}
+ul li { 
+  font-size: 6px;
+}
+.policy li { 
+  font-size: 7px;
+}
 .heading { 
-  font-size: 50px;
+  font-size: 42px;
 }
 .nftCollectionHead{
+  position: relative;
   left: 0;
 }
 .news-caption {
   width: 100%;
   right: 0;
   padding: 1rem;
+  top: 0;
 }
 .balrHead { 
   font-size: 56px;
@@ -2497,31 +2647,34 @@ line-height: 100%;
     top: inherit;
 }  */
 .joinCard {
-  height: 750px;
-
-  height: auto;
+  height: 400px; 
 }
-.overlayImg { 
+/* .overlayImg { 
   top: 0; 
   margin: auto;
   height: auto;
-}
+} */
 .contentJoin{
   align-items: center;
 }
 .joinUs {
-  font-size: 17px;
+  font-size: 36px;
+}
+.joinCard .image { 
+  margin-left: 0.51rem;
 }
 .joinText {
-  font-size: 12px;
+  font-size: 18px;
+  padding: 0 3rem;
+  line-height: 129%;
 }
-.joinCard .discordIcon, .joinCard i.fa.fa-medium{
+/* .joinCard .discordIcon, .joinCard i.fa.fa-medium{
   top: inherit;
   bottom: 19rem; 
   right: 15%;  
   font-size: 44px;
-}
-.joinCard .hex3 {
+} */
+/* .joinCard .hex3 {
   margin-top: -4rem; 
   margin-left: 13rem;
   width: 36%;
@@ -2536,7 +2689,7 @@ line-height: 100%;
   margin-top: 50%; 
   width: 37%;
   margin-left: 65px;
-} 
+}  */
 .joinCard i.fa.fa-twitter {
   right: inherit;
   bottom: 11rem;
@@ -2552,22 +2705,47 @@ line-height: 100%;
 .mob-wth{
   width: 100%;
 }
-.socialIcons { 
-  margin-top: 3rem;
-}
+.arrowUp { 
+  bottom: 46%;
+  width: 9%;
+  left: 16%;
 
+}
 .faqHead{
   text-align: center;
 }
 .news-caption-wrap{
-  position: relative
+  position: relative;
+  height: auto;
 }
 .news--news_page .news-list{
-  height: auto;
-  top: 6.5rem;
+  height: 244px;
+  top: 9.5rem;
+}
+.bgShadeBalr { 
+  width: 86% !important; 
+  top: 24rem;
+  right: -4rem;
+}
+.bgShade2 { 
+  width: 100% !important; 
+  top: 170rem;
+  right: -2rem;
 }
 }
 @media (max-width: 400px){
+  .heading { 
+    font-size: 38px;
+  }
+  .firstText { 
+    width: 36%;
+}
+.secondText { 
+  width: 50%;
+}
+  .poolBtn .playBtn {  
+    width: 55%; 
+  }
   .joinCard i.fa.fa-twitter {
     right: inherit;
     bottom: 12rem;
