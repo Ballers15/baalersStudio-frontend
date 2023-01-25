@@ -148,7 +148,7 @@ const Dashboard = () => {
                 setToasterMessage(subscribe?.error?.message||'Something Went Worng');
                 setShowToaster(true);
               } else {
-                setToasterMessage('Mail subscribed succesfully!!');
+                setToasterMessage(' THANK YOU FOR SUBSCRIBING!!');
                 setShowToaster(true);
                 setPlayModalShow(false);
               }
@@ -828,8 +828,8 @@ const Dashboard = () => {
 
                                     </Accordion>
                                 </div>
-                                <div className="col-sm-7 my-auto">
-                                    <section className="comparisonSection">
+                                <div className="col-sm-7 my-auto desk">
+                                    <section className="comparisonSection ">
 
                                         <div className="comparisonImage beforeImage">
                                             <img src={house1} alt="before" />
@@ -838,7 +838,13 @@ const Dashboard = () => {
                                             <img src={house} alt="after" />
                                         </div>
                                     </section>
+                                    
                                 </div>
+                                <div className="col-sm-7 mob"> 
+                                        <div className="houseImg">
+                                            <img src={house} alt="after" />
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         <div className="container mt-4">

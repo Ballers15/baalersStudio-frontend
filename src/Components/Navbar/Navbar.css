@@ -15,7 +15,7 @@
 .navbar-expand-lg .navbar-nav .nav-link{
     cursor: pointer; 
     margin-left: 55px;
-    font-family: 'Source Sans Pro';
+    font-family: "Valorant";
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -37,6 +37,11 @@
 }
 @media (max-width: 480px){
     .navbar-brand img {
-        width: 40%;
+        width: 38%;
     }
+ }
+ @media (max-width: 350px){
+    .navbar-brand img {
+        width: 27%;
+      }
  }
