@@ -78,7 +78,8 @@ function useHover() {
       onMouseLeave: () => setHovering(false),
     }
     return [hovering, onHoverProps]
-  }
+}
+  
 const Dashboard = () => {
  
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
@@ -122,11 +123,8 @@ const Dashboard = () => {
         }
         
     }
-   
-    
-  
 
-      const handleSubmit =async(e)=>{
+    const handleSubmit = async (e) => {
         console.log(email,'-----------email value');
         setValidated(true);
         e.preventDefault();
@@ -162,13 +160,14 @@ const Dashboard = () => {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
       }
-      $('#myModal').on('shown.bs.modal', function () {
-        $('#video1')[0].play();
-      })
-      $('#myModal').on('hidden.bs.modal', function () {
-        $('#video1')[0].pause();
-      })
+    
+    $('#myModal').on('shown.bs.modal', function () {
+    $('#video1')[0].play();
+    })
 
+    $('#myModal').on('hidden.bs.modal', function () {
+    $('#video1')[0].pause();
+    })
     
     const hiddenButtonClicked = () => {
         console.log('hidden button clicked---------------------')
@@ -176,8 +175,11 @@ const Dashboard = () => {
 
     return (
         <React.Fragment>
-              <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
-             <ScriptTag type="text/javascript" src={gsapScript} />
+        
+
+            <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
+            <ScriptTag type="text/javascript" src={gsapScript} />
+            
             <Modal
                 show={playModalShow}
                 onHide={()=> handleHide('play')}
@@ -218,6 +220,7 @@ const Dashboard = () => {
                 </Modal.Body>
                 
             </Modal>
+
             <Modal
                 show={trailerModalShow}
                 onHide={()=> handleHide('trailer')}
@@ -239,6 +242,7 @@ const Dashboard = () => {
                 </Modal.Body>
                 
             </Modal>
+
             <Modal
                 show={lotteryModalShow}
                 onHide={()=> handleHide('lottery')}
@@ -263,6 +267,7 @@ const Dashboard = () => {
                     <Button variant="primary">Understood</Button>
                 </Modal.Footer> */}
             </Modal>
+
             <Modal
                 show={rewardModalShow}
                 onHide={()=> handleHide('reward')}
@@ -290,6 +295,7 @@ const Dashboard = () => {
                     <Button variant="primary">Understood</Button>
                 </Modal.Footer> */}
             </Modal>
+
             <div className="dashboard">
                 <div className="homeBg">
                     <div>

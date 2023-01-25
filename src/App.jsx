@@ -1,10 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './App.css';
 import NavigationRouter from './Routes';
 
-function App() {
+
+function App({ hideLoader }) {
+  useEffect(() => {
+    hideLoader();
+  });
+
   return (
     <React.Fragment>
      <NavigationRouter />
