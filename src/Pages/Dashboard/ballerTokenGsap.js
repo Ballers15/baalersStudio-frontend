@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-
+const loader = document.querySelector(".loader-wrapper");
 $(window).on('click', function () {
   console.log('--------------------click detected---------------')
     //   gsap.registerPlugin(ScrollTrigger);
@@ -60,4 +60,8 @@ $(window).on('click', function () {
       opacity:1,
       ease: "none"
     })
+  setTimeout(() => {
+    loader?.classList?.add("loader--hide");
+  },0)
+  
   })

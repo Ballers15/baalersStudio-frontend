@@ -56,6 +56,8 @@ import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 import ScriptTag from 'react-script-tag';
 import gsapScript from './ballerTokenGsap';
+// const loader = document.querySelector(".loader-wrapper");
+// const hideLoader = () => loader?.classList?.add("loader--hide");
 window.addEventListener(
     "scroll",
     () => {
@@ -81,7 +83,11 @@ function useHover() {
 }
   
 const Dashboard = () => {
- 
+
+    // useEffect(() => {
+    //     hideLoader();
+    // }, []);
+    
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
     const [playModalShow, setPlayModalShow] = useState(false);
@@ -109,6 +115,7 @@ const Dashboard = () => {
             setTrailerModalShow(true);
         }
     }
+
     const handleHide = (modalName)=>{
         if(modalName === 'play'){
             setPlayModalShow(false);

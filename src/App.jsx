@@ -5,11 +5,7 @@ import './App.css';
 import NavigationRouter from './Routes';
 
 
-function App({ hideLoader }) {
-  useEffect(() => {
-    hideLoader();
-  });
-
+function App() {
   return (
     <React.Fragment>
      <NavigationRouter />
