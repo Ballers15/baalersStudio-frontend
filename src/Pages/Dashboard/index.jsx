@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
@@ -50,7 +54,8 @@ import {
 import {subscribeMailJet} from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
-
+import ScriptTag from 'react-script-tag';
+import gsapScript from './ballerTokenGsap';
 window.addEventListener(
     "scroll",
     () => {
@@ -62,6 +67,10 @@ window.addEventListener(
     false
 );
 
+$(function() {
+    document.getElementById('hiddenButton').click();
+});
+
 function useHover() {
     const [hovering, setHovering] = useState(false)
     const onHoverProps = {
@@ -72,7 +81,6 @@ function useHover() {
   }
 const Dashboard = () => {
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
-    
     const [playModalShow, setPlayModalShow] = useState(false);
     const [email, setEmail] = useState("");
     const [validated, setValidated] = useState(false);
@@ -86,41 +94,44 @@ const Dashboard = () => {
 
     const { id } = useParams();
     const handleShow = (modalName)=>{
-        if(modalName == 'play'){
+        if(modalName === 'play'){
             setEmail('');
             setPlayModalShow(true);
-        }else if(modalName == 'lottery'){
+        }else if(modalName === 'lottery'){
             setLotteryModalShow(true);
         }
-        else if(modalName == 'reward'){
+        else if(modalName === 'reward'){
             setRewardModalShow(true);
         }
-        else if(modalName == 'trailer'){
+        else if(modalName === 'trailer'){
             setTrailerModalShow(true);
         }
     }
     const handleHide = (modalName)=>{
-        if(modalName == 'play'){
+        if(modalName === 'play'){
             setPlayModalShow(false);
-        }else if(modalName == 'lottery'){
+        }else if(modalName === 'lottery'){
             setLotteryModalShow(false);
         }
-        else if(modalName == 'reward'){
+        else if(modalName === 'reward'){
             setRewardModalShow(false);
         }
-        else if(modalName == 'trailer'){
+        else if(modalName === 'trailer'){
             setTrailerModalShow(false);
         }
         
     }
+   
+    
     useEffect(() => {
         // Update the document title using the browser API
-        if(id == 'partyGang'){
+        console.log("HI",id);
+        if(id === 'partyGang'){
             $('html, body').animate({
                 scrollTop: $("#partyGang").offset().top
             }, 20);            
           }
-          else if(id == 'balrToken'){
+          else if(id === 'balrToken'){
             console.log("id",id);
                  $('html, body').animate({
                     scrollTop: $("#balrToken").offset().top
@@ -170,10 +181,16 @@ const Dashboard = () => {
       $('#myModal').on('hidden.bs.modal', function () {
         $('#video1')[0].pause();
       })
-   
+
+    
+    const hiddenButtonClicked = () => {
+        console.log('hidden button clicked---------------------')
+    }
 
     return (
         <React.Fragment>
+              <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
+             <ScriptTag type="text/javascript" src={gsapScript} />
             <Modal
                 show={playModalShow}
                 onHide={()=> handleHide('play')}
@@ -325,6 +342,7 @@ const Dashboard = () => {
                                                             <div className="positionAbs">
                                                                 <div className="playBtn" >
                                                                     <a  onClick={()=> handleShow('play')}><span></span>Play now</a>
+
                                                                 </div>
                                                                 <div className="shareBtn">
                                                                     <a onClick={()=> handleShow('trailer')}><span></span>Watch Trailer</a>
@@ -871,9 +889,6 @@ const Dashboard = () => {
                 }
 
             </div>
-
-
-
         </React.Fragment>
     )
 }

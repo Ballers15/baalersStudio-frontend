@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 // import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -12,6 +13,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 
+import { Link } from "react-router-dom";
 
 const CollapsibleExample = () => {
   const navigate = useNavigate();
@@ -20,10 +22,17 @@ const CollapsibleExample = () => {
     auth.logout()
   }
   const goToAbout = (param)=>{
-    navigate(param) 
+    navigate(param);
+
+  }
+  const goToParty = (param)=>{
+    navigate(param);
+    <Link to={{ pathname: param}}> </Link>
+    
+    // window.location.reload(true);
+
   }
 
- 
 
   return (
     
@@ -36,7 +45,7 @@ const CollapsibleExample = () => {
             <Nav className="mx-auto">
             <Nav.Link href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
             {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
-            <Nav.Link onClick={()=>{goToAbout('/partyGang' )}}>Party</Nav.Link>
+            <Nav.Link onClick={()=>{goToParty('/partyGang' )}}>Party</Nav.Link>
             {/* https://medium.com/@Ballers_Studio */}
             <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
               <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>

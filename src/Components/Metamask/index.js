@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import "./Metamask.css";
 import ErrorMessage from "./errorMessage";

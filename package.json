@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-modal-video": "^2.0.0",
     "react-router-dom": "^6.5.0",
+    "react-script-tag": "^1.1.2",
     "react-scripts": "5.0.1",
     "react-tooltip": "^5.5.1",
     "web-vitals": "^2.1.4",
@@ -33,7 +34,11 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "eqeqeq": "off",
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": {
     "production": [

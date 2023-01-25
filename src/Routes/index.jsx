@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import ErrorPage from '../Pages/Error404';
 import Dashboard from '../Pages/Dashboard';

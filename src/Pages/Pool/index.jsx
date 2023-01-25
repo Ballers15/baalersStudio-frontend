@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import './Pool.css'
 import { Carousel } from "react-bootstrap";
@@ -13,19 +15,19 @@ const Pool = () => {
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
     const handleShow = (modalName)=>{
-       if(modalName == 'lottery'){
+       if(modalName === 'lottery'){
             setLotteryModalShow(true);
         }
-        else if(modalName == 'reward'){
+        else if(modalName === 'reward'){
             setRewardModalShow(true);
         }
         
     }
     const handleHide = (modalName)=>{
-        if(modalName == 'lottery'){
+        if(modalName === 'lottery'){
             setLotteryModalShow(false);
         }
-        else if(modalName == 'reward'){
+        else if(modalName === 'reward'){
             setRewardModalShow(false);
         }
         
