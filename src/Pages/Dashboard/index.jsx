@@ -51,9 +51,6 @@ import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg' 
-// import {
-//     useParams,
-//   } from "react-router-dom";
 import {subscribeMailJet} from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect} from 'react';
 // import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -13,9 +13,25 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
-import { Link } from "react-router-dom";
-
+import {useParams} from "react-router-dom"
 const CollapsibleExample = () => {
+  const { id } = useParams();
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log("HI",id);
+    if (id === 'partyGang' ) {
+        $('html, body').animate({
+            scrollTop: $("#partyGang").offset().top
+        }, 20);            
+      }
+    else if (id === 'balrToken' ) {
+        
+        console.log("id",id);
+             $('html, body').animate({
+                scrollTop: $("#balrToken").offset().top
+            }, 20);
+      }        
+  },[id]);
   const navigate = useNavigate();
   const auth = useAuth()
   const handleLogout = (e) => {
@@ -23,29 +39,24 @@ const CollapsibleExample = () => {
   }
   const goToAbout = (param)=>{
     navigate(param);
-
+   
   }
-  const goToParty = (param)=>{
-    navigate(param);
-    <Link to={{ pathname: param}}> </Link>
-    
-    // window.location.reload(true);
-
-  }
-  const handleScroll = (id) => {
-    if (id === 'partyGang') {
-      $('html, body').animate({
-          scrollTop: $("#partyGang").offset().top
-      }, 20);            
-    }
-  else if (id === 'balrToken' ) {
+ 
+  // const handleScroll = () => {
+  //   console.log("JJJ",id)
+  //   if (id === 'partyGang') {
+  //     $('html, body').animate({
+  //         scrollTop: $("#partyGang")?.offset()?.top
+  //     }, 20);            
+  //   }
+  // else if (id === 'balrToken' ) {
       
-      console.log("id",id);
-           $('html, body').animate({
-              scrollTop: $("#balrToken").offset().top
-          }, 20);
-    }        
-  }
+  //     console.log("id",id);
+  //          $('html, body').animate({
+  //             scrollTop: $("#balrToken")?.offset()?.top
+  //         }, 20);
+  //   }        
+  // }
 
 
   return (
@@ -59,7 +70,7 @@ const CollapsibleExample = () => {
             <Nav className="mx-auto">
             <Nav.Link href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
             {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
-              <Nav.Link onClick={() => { goToParty('/partyGang'); handleScroll('partyGang'); }}>Party</Nav.Link>
+              <Nav.Link onClick={() => { goToAbout('/partyGang') }}>Party</Nav.Link>
             {/* https://medium.com/@Ballers_Studio */}
             <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
               <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
@@ -72,7 +83,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link onClick={()=>{goToAbout('/balrToken' ); handleScroll('balrToken'); }}>$BALR TOKEN</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/balrToken' ) }}>$BALR TOKEN</Nav.Link>
              
             </Nav>
             <Nav>
