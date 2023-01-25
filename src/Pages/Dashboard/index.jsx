@@ -298,7 +298,7 @@ const Dashboard = () => {
                                 <Carousel interval={null} wrap={false} >
                                     <Carousel.Item>
                                         <Carousel.Caption>
-                                            <img src={ellipse} className="bgShade" />
+                                            <img src={ellipse} className="bgShade" alt="Eclipse"/>
                                             <div className="container">
                                                 <p className="firstText">UNLOCK NEW CITIES</p>
                                                 <div className="row">
@@ -309,7 +309,7 @@ const Dashboard = () => {
                                                                 <h1>BALLERS CITY </h1>
                                                                 <div className="fStar">
                                                                      
-                                                                    <img src={starS} className="starSmall small" alt="" />
+                                                                    <img src={starS} className="starSmall small" alt="Star" />
                                                                 </div>
 
                                                                 {/* <svg width="100" height="100" viewBox="0 0 100 100" id="four">
@@ -351,8 +351,8 @@ const Dashboard = () => {
                                         <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
                                         />
                                          <div className="stars slideStar">
-                                            <img src={starM} className="starMed large" alt="" />
-                                            <img src={starS} className="starSmall small" alt="" />
+                                            <img src={starM} className="starMed large" alt="Star" />
+                                            <img src={starS} className="starSmall small" alt="Star" />
                                         </div>
                                         <div className="box"></div>
                                         <Carousel.Caption>
@@ -495,9 +495,9 @@ const Dashboard = () => {
 
                 <div className="reward">
                     <div>
-                        <img src={starL} id="one" className="large" alt="" />
-                        <img src={starM} id="two" className="small" alt="" />
-                        <img src={starS} id="three" className="large" alt="" />
+                        <img src={starL} id="one" className="large" alt="Star" />
+                        <img src={starM} id="two" className="small" alt="Star" />
+                        <img src={starS} id="three" className="large" alt="Star" />
                     </div>
                     {/* <div className="bggg"></div> */}
                     <div className="container">
@@ -546,8 +546,8 @@ const Dashboard = () => {
 
                         <div className="container" id="partyGang">
                             <div className="stars">
-                                <img src={starM} className="starMed large" alt="" />
-                                <img src={starS} className="starSmall small" alt="" />
+                                <img src={starM} className="starMed large" alt="Star" />
+                                <img src={starS} className="starSmall small" alt="Star" />
                             </div>
                             <div className="scene section" id="sticky">
                                 <div className="positionRelative mt-5">
@@ -567,14 +567,14 @@ const Dashboard = () => {
                                                 <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><span></span>Join <img src={discord} className="discordIcon" alt="discord" /></a>
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><span></span>Join <img src={discord} className="discordIcon" alt="discord logo" /></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-sm-5">
 
                                         <div className="dancingImg">
-                                            <img src={SneefDog} alt="" />
+                                            <img src={SneefDog} alt="Snoopdog " />
                                             {/* <div >
                                                 <div className="viewer"></div>
                                             </div> */}
@@ -586,7 +586,7 @@ const Dashboard = () => {
                             </div>
 
                         </div>
-                        <img src={ellipse2} className="bgShade2" />
+                        <img src={ellipse2} className="bgShade2" alt="Eclipse"/>
 
                         <div className="container">
                             <div className="news news--news_page row">
@@ -594,15 +594,15 @@ const Dashboard = () => {
                                     <div className="news-list-wrap">
                                         <div className="news-list-column system">
                                             <a  className="news-item star pink">
-                                                <img className="news-item-bg" src={image27} alt="" />
+                                                <img className="news-item-bg" src={image27} alt="NFT Avatar" />
 
                                             </a>
                                             <a  className="news-item star black">
-                                                <img className="news-item-bg" src={image28} alt="" />
+                                                <img className="news-item-bg" src={image28} alt="NFT Avatar" />
 
                                             </a>
                                             <a  className="news-item star white">
-                                                <img className="news-item-bg" src={image29} alt="" />
+                                                <img className="news-item-bg" src={image29} alt="NFT Avatar" />
 
                                             </a>
 
@@ -613,7 +613,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm-12 order-sm-2">
                                     <div>
-                                    <img src={arrowUp} alt="" className="arrowUp" />
+                                    <img src={arrowUp} alt="Arrow" className="arrowUp" />
                                         <div className="nftCollectionHead mt-5">
                                             <h2 className="heading">NFT COLLECTION</h2>
                                             <h2 className="heading2">NFT COLLECTION</h2>
@@ -622,7 +622,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="news-caption-wrap col-sm-6 order-sm-1">
                                     <div className="stars">
-                                        <img src={starM} className="starMed large" alt="" />
+                                        <img src={starM} className="starMed large" alt="Star" />
                                     </div>
                                     <div className="news-caption">
                                         <div className="">
@@ -676,7 +676,7 @@ const Dashboard = () => {
                                 <h2 className="heading">BALR TOKEN</h2>
                                 <h2 className="balrHead">BALR TOKEN</h2>
                             </div>
-                            <img src={arrowDown} alt="" className="arrowDown" />
+                            <img src={arrowDown} alt="Arrow" className="arrowDown" />
                             <div className="row">
                                 <div className="col-sm-6 my-auto">
                                     <div className="">
@@ -705,12 +705,12 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            <img src={ellipse2} className="bgShadeBalr" />
+                            <img src={ellipse2} className="bgShadeBalr" alt="Eclipse" />
 
                             <div>
-                                <img src={starL} id="one" className="large" alt="" />
-                                <img src={starM} id="two" className="small" alt="" />
-                                <img src={starS} id="three" className="large" alt="" />
+                                <img src={starL} id="one" className="large" alt="Star" />
+                                <img src={starM} id="two" className="small" alt="Star" />
+                                <img src={starS} id="three" className="large" alt="Star" />
 
                             </div>
                         </div>
@@ -720,11 +720,11 @@ const Dashboard = () => {
                         <div className="container positionRelative p-0"> 
                             <div className="joinCard">  
                             <div className="desk">
-                            <img className="image" src={ambassador} alt="" />
+                            <img className="image" src={ambassador} alt="Ballers AMBASSADOR program" />
                             {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
                             </div>
                             <div className="mob">
-                            <img className="image" src={ambassadorMob} alt="" /> 
+                            <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program" /> 
                             </div>
                             <div className="contentJoin">
                                 <div className="row justify-content-center">                                    
@@ -782,7 +782,7 @@ const Dashboard = () => {
 
                     <div className="gradientBackgroung secPaddingY">
                         <div className="container paddingY-5 mt-5 positionRelative">
-                            <img src={ellipse3} className="bgShade3" />
+                            <img src={ellipse3} className="bgShade3" alt="Eclipse" />
                             <div className="row">
                                 <div className="col-sm-5">
                                     <div className="positionRelative mb-5">

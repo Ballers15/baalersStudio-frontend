@@ -130,7 +130,7 @@ const Pool = () => {
                             </svg>
                         </div>
                         <div className="">
-                        <p className="firstText">Win Exclusive Rewards</p>
+                            <p className="firstText">Win Exclusive Rewards</p>
                             <div className="text-center thirdSlide">
                                 <div className="sCaption text-center">
                                     <div>
