@@ -2754,6 +2754,13 @@ ul li {
   padding-top: 0rem;
   padding-bottom: 1rem;
 }
+.accordion-body{
+  font-size: 13px;
+}
+.num {
+  font-weight: 700;
+  font-size: 21px;
+}
 }
 @media (max-width: 400px){
   .heading { 
@@ -2779,6 +2786,13 @@ ul li {
   }
 }
 @media (max-width: 380px){
+  .footer-content {
+    font-size: 9px;
+}
+  .footerIcon .col-3,   .footerIcon .col-4,   .footerIcon .col-2{
+    padding-right: 0;
+    padding-left: 5px;
+  }
   .sCaption {
     margin-bottom: -3rem;
 }
@@ -2822,12 +2836,17 @@ ul li {
   .viewer {
     height: 95vh;
 }
-.news{height: 140vh;}
+.news {
+  height: 122vh;
+}
 .news-caption { 
   top: -3rem;
 }
 .news--news_page .news-list { 
   top: 6.5rem;
+}
+.arrowUp {
+  bottom: 51%; 
 }
 .text-font {
   font-size: 13px;
@@ -2836,8 +2855,20 @@ ul li {
   font-size: 14px;
 
 }
+
+.nftCollectionHead { 
+  top: -4rem;
+}
 }
 @media (max-width: 360px){
+  .countHead {
+    font-size: 12px;
+}
+  .coinImage img {
+    right: 20%;
+    top: -8%;
+}
+.news{height: 140vh;}
   .flashDiv {
     right: 4rem;
 }
@@ -2848,11 +2879,7 @@ ul li {
 .reward::before {
   left: -33%;
   top: -3%;
-}
-.coinImage img {
-  right: 11%;
-  top: -7%;
-}
+} 
 .innerBtn a{width: 60%;}
 .heading {
   font-size: 32px;

@@ -61,6 +61,9 @@
 }
 
 @media (max-width: 480px){
+    .pool .poolBtn .playBtn{
+        width: 54%;
+    }
     .pool .thirdSlide {
         height: 65vh;
         width: 84%;
@@ -73,7 +76,7 @@
     .pool .firstText { 
         right: -2rem;
         top: 23%;
-        width: 32%;
+        width: 34%;
     }
     .pool .thirdSlide .sCaption {
         width: 96%;

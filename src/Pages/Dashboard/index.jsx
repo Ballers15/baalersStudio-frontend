@@ -860,7 +860,7 @@ const Dashboard = () => {
                                     </div>
                             </div>
                         </div>
-                        <div className="container mt-4">
+                        <div className="container mt-4 footerIcon">
                             <div className="row align-items-center">
                                 <div className="col-2 col-sm-3">
                                     <img src={logoo} alt="logo"  className="mob-wth"/>
