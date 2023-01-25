@@ -12,7 +12,7 @@ import user from '../../Assest/img/user.png'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
-
+import $ from 'jquery'; 
 import { Link } from "react-router-dom";
 
 const CollapsibleExample = () => {
@@ -32,6 +32,20 @@ const CollapsibleExample = () => {
     // window.location.reload(true);
 
   }
+  const handleScroll = (id) => {
+    if (id === 'partyGang') {
+      $('html, body').animate({
+          scrollTop: $("#partyGang").offset().top
+      }, 20);            
+    }
+  else if (id === 'balrToken' ) {
+      
+      console.log("id",id);
+           $('html, body').animate({
+              scrollTop: $("#balrToken").offset().top
+          }, 20);
+    }        
+  }
 
 
   return (
@@ -39,13 +53,13 @@ const CollapsibleExample = () => {
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand onClick={()=>{goToAbout('/')}}><img src={logoo} alt="logo" /></Navbar.Brand>
+          <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={logoo} alt="logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
             <Nav.Link href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
             {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
-            <Nav.Link onClick={()=>{goToParty('/partyGang' )}}>Party</Nav.Link>
+              <Nav.Link onClick={() => { goToParty('/partyGang'); handleScroll('partyGang'); }}>Party</Nav.Link>
             {/* https://medium.com/@Ballers_Studio */}
             <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
               <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
@@ -58,7 +72,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link onClick={()=>{goToAbout('/balrToken' )}}>$BALR TOKEN</Nav.Link>
+              <Nav.Link onClick={()=>{goToAbout('/balrToken' ); handleScroll('balrToken'); }}>$BALR TOKEN</Nav.Link>
              
             </Nav>
             <Nav>
