@@ -130,7 +130,7 @@ const Dashboard = () => {
     }
 
     const handleSubmit = async (e) => {
-        console.log(email,'-----------email value');
+        // console.log(email,'-----------email value');
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
@@ -146,7 +146,7 @@ const Dashboard = () => {
               const subscribe = await subscribeMailJet(dataToSend);
               setLoading(false);
               if (subscribe.error) {
-              console.log(subscribe)
+            //   console.log(subscribe)
         
                 setToasterMessage(subscribe?.error?.message||'Something Went Worng');
                 setShowToaster(true);
@@ -156,13 +156,13 @@ const Dashboard = () => {
                 setPlayModalShow(false);
               }
             } catch (error) {
-              console.log(error)
+            //   console.log(error)
               setToasterMessage(error?.response?.data?.message||'Something Went Worng');
               setShowToaster(true);
               setLoading(false);
             }
         } else {
-            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+            // console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
       }
     
@@ -175,7 +175,7 @@ const Dashboard = () => {
     })
     
     const hiddenButtonClicked = () => {
-        console.log('hidden button clicked---------------------')
+        // console.log('hidden button clicked---------------------')
     }
 
     return (
