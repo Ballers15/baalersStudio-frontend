@@ -2349,6 +2349,26 @@ line-height: 100%;
  
 }
 @media (max-width: 1024px){
+  .ipadWth{
+    width: 100%;
+  }
+  .firstText {
+    right: -4rem;
+    width: 19%;
+    top: 33%;
+}
+.secondText { 
+  width: 23%;
+}
+.thirdSlide {
+  height: 54vh;
+}
+.joinCard {
+  height: 200px;
+}
+.joinCard .image { 
+  margin-top: -4rem;
+}
   .mainSlider .carousel-item img{
     object-fit: cover;
   }
@@ -2375,6 +2395,118 @@ line-height: 100%;
   .mainSlider .carousel-item{
     height: 100vh;
   }
+}
+@media (min-width:768px) and (max-width: 900px){
+  
+  .marquee { 
+    font-size: 148px;
+    line-height: 160px;
+  }
+  .news--news_page .news-list { 
+    height: calc(60vh + 120px);
+}
+.news-caption { 
+  top: 30%;
+}
+.playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after, .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after {
+  width: calc( 240px / 2);
+}
+.news-caption .innerBtn a::before, .news-caption .innerBtn a::after, .news-caption .innerBtn a span::before, .news-caption .innerBtn a span::after {
+  width: 96px;
+}
+  .heading2 {
+    font-size: 55px;
+    left: -16px;
+}
+.heading { 
+  font-size: 52px;
+}
+  .reward { 
+    background-size: 72%;
+    background-position: 0% 14rem; 
+    height: 100%;
+}
+.bg-move img:nth-child(2) {
+  left: 38%;
+  top: 50%;
+}
+.bg-move img {
+  left: 17%;
+  top: 55%;
+}
+.coinImage img {
+  right: -6%; 
+  width: 40%;
+}
+  .box{
+    left: 78%;
+  }
+  .mainSlider .carousel-item{
+    height: 100vh;
+  }
+  .logoSlider {
+    bottom: 0rem;
+  }
+  .backCoin img {
+    width: 22%;
+    bottom: -3%;
+}
+.mob-content {
+  padding: 3rem 0;
+  margin-bottom: 4rem;
+}
+.partyHard {
+  font-size: 62px;
+  right: -9rem; 
+}
+  .reward::before { 
+    left: -10%;
+    top: -6%;
+  }
+  .reward::after { 
+    right: -9%;
+  }
+  .wth-4 {
+    width: 60%;
+}
+.thirdSlide .sCaption {
+  width: 60%;
+}
+.poolBtn {
+  width: 85%;
+}
+.sCaption {
+  margin-bottom: 0rem;
+}
+.sCaption h1 {
+  font-size: 68px;
+}
+.sCaption h5 {
+  font-size: 15px;
+}
+.mainSlider .carousel-caption img {
+  width: 100%;
+}
+.firstText {
+  right: -4rem;
+  width: 20%;
+  top: 20%;
+}
+.secondText {
+  left: -8rem;
+  width: 32%;
+  bottom: 11rem;
+}
+.innerBtn a { 
+  padding: 1rem 2.25rem 0.85rem;
+}
+.btnWith {
+  width: 220px;
+}
+.countHead {
+  font-size: 14px;
+}
+
 }
 @media (max-width: 500px){
   .bgShade { 

@@ -877,7 +877,7 @@ const Dashboard = () => {
 
                                 </div>
                                 <div className="col-3 col-sm-3">
-                                    <img src={gamecity} alt="logo" className="mob-wth" />
+                                    <img src={gamecity} alt="logo" className="mob-wth ipadWth" />
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">

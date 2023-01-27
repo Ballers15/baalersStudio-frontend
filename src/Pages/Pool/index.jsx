@@ -161,7 +161,7 @@ const Pool = () => {
                                     <Carousel.Caption>
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
-                                                <div className="col-2 col-sm-2">
+                                                {/* <div className="col-2 col-sm-2">
                                                     <img src={tradedog} alt="tradedog" />
                                                 </div>
                                                 <div className="col-2 col-sm-2">
@@ -169,7 +169,7 @@ const Pool = () => {
                                                 </div>
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdefi} alt="tdefi" />
-                                                </div>
+                                                </div> */}
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdmm} alt="tdmm" />
                                                 </div>
