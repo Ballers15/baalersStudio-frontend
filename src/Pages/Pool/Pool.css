@@ -59,8 +59,35 @@
         bottom: 0;
     }
 }
-
+@media (max-width: 1024px){
+    .pool .secondText {
+        left: 0rem;
+        width: 17%;
+    }
+    .pool .poolBtn {
+        width: 74%;
+    }
+    
+    
+}
+@media (min-width:768px) and (max-width: 900px){
+    .pool .firstText {
+        right: 0rem;
+        top: 21%;
+    }
+    .pool .secondText {
+        left: -3rem;
+        width: 22%;
+        bottom: 10rem;
+    }
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
 @media (max-width: 480px){
+    .pool .poolBtn {
+        width: 100%;
+    }
     .pool .poolBtn .playBtn{
         width: 54%;
     }

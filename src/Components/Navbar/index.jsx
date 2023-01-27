@@ -61,7 +61,7 @@ const CollapsibleExample = () => {
   return (
     
     <React.Fragment> 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
           <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={logoo} alt="logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
