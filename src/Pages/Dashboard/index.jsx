@@ -30,10 +30,10 @@ import Walter_Black from '../../Assest/img/Walter_Black.png'
 import ballerCoin from '../../Assest/img/ballerCoin.png'
 import star from '../../Assest/img/Star.svg' 
 import discord from '../../Assest/img/discord.svg'
-import tdefi from '../../Assest/img/logos/tdefi.png'
-import tradedog from '../../Assest/img/logos/tradedog.png'
+// import tdefi from '../../Assest/img/logos/tdefi.png'
+// import tradedog from '../../Assest/img/logos/tradedog.png'
 import tdmm from '../../Assest/img/logos/tdmm.png'
-import tdx from '../../Assest/img/logos/tdx.png'
+// import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
 import logoo from '../../Assest/img/logoo.png'
 import gamecity from '../../Assest/img/gamecity.png'
@@ -348,7 +348,7 @@ const Dashboard = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="col-sm-7 text-right">
+                                                    <div className="col-sm-7 text-right mob-center">
                                                         <img src={Man} alt="Italian_Mafia_Boss" />
                                                     </div>
                                                 </div>
@@ -465,7 +465,7 @@ const Dashboard = () => {
                                     <Carousel.Caption>
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
-                                                <div className="col-2 col-sm-2">
+                                                {/* <div className="col-2 col-sm-2">
                                                     <img src={tradedog} alt="tradedog" />
                                                 </div>
                                                 <div className="col-2 col-sm-2">
@@ -473,7 +473,7 @@ const Dashboard = () => {
                                                 </div>
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdefi} alt="tdefi" />
-                                                </div>
+                                                </div> */}
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdmm} alt="tdmm" />
                                                 </div>

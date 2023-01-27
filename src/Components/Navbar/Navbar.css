@@ -37,7 +37,7 @@
 }
 @media (max-width: 480px){
     .navbar-brand img {
-        width: 38%;
+        width: 30%;
     }
  }
  @media (max-width: 380px){

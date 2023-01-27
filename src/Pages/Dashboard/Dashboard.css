@@ -1639,12 +1639,12 @@ ul li {
 .box{
   height: 100vh;
   width: 60%;
-  position: absolute;
-  z-index: 999;
-  top: 0;
+  position: absolute; 
+  z-index: 99;
+  top: 47px;
   bottom: 0;
-  margin: auto; 
-  left: 14%;
+  margin: auto;
+  left: 50%;
   right: 0;
 }
 .box:after, .box:before {
@@ -1655,7 +1655,7 @@ ul li {
 .box:after {
   opacity: 0;
   height: 30px;
-  width: 490px;
+  width: 700px;
   margin-left: -30px;
   top: 10px;
   content: "";
@@ -1669,8 +1669,8 @@ ul li {
   content: "";
   position: absolute;
   top: -9px;
-  height: 165px;
-  width: 165px;
+  height: 260px;
+  width: 260px;
   margin-left: -12px;
    background: -moz-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
   background: -webkit-radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%);
@@ -2391,6 +2391,19 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
+  .fStar{display: none;}
+ .mob-center{
+  text-align: center !important;
+ }
+ .carousel-indicators [data-bs-target] {
+  width: 13px;
+  height: 2px; 
+  margin-left: 6px;
+ }
+ .mainSlider .carousel-indicators { 
+  bottom: 5rem;
+
+ }
   .bgShade3 { 
     left: -2rem;
     width: 100%; 
@@ -2762,7 +2775,54 @@ ul li {
   font-size: 21px;
 }
 }
+@media (max-width: 480px){
+  .logoSlider {
+    bottom: -2.5rem;
+}
+.thirdSlide .sCaption {
+  width: 88%;
+}
+  .positionAbs { 
+    width: 86%;
+}
+.firstText { 
+  top: 20%;
+  width: 35%;
+}
+  .mainSlider .carousel-caption::before {  
+    bottom: 3.5rem; 
+    display: none;
+}
+  .fw-bold{
+    margin-bottom: 0;
+  }
+  .mainSlider .carousel-item {
+    height: 100vh;
+}
+.mainSlider .carousel-caption img {
+  width: 76%;
+  margin-bottom: -4rem;
+  padding-top: 4rem;
+}
+.sCaption .textHeader {
+  font-size: 9px;
+  line-height: 10px;
+  margin-bottom: 0.75rem;
+}
+.sCaption h5 {
+  padding-left: 7px;
+  font-size: 14px;
+  line-height: 16px;
+}
+}
 @media (max-width: 400px){
+  .playBtn a, .shareBtn a{
+    font-size: 13px;
+  }
+
+  /* .logoSlider {
+    bottom: -8rem;
+} */
   .heading { 
     font-size: 38px;
   }
@@ -2786,6 +2846,11 @@ ul li {
   }
 }
 @media (max-width: 380px){
+  .mainSlider .carousel-caption img {
+    width: 72%;
+    margin-bottom: -3rem;
+    padding-top: 0;
+}
   .footer-content {
     font-size: 9px;
 }
@@ -2797,16 +2862,16 @@ ul li {
     margin-bottom: -3rem;
 }
 
-.mainSlider .carousel-item {
+/* .mainSlider .carousel-item {
   height: 142vh;
-}
+} */
 .sCaption h1 {
   font-size: 50px;
 }
-.sCaption .textHeader {
+/* .sCaption .textHeader {
   font-size: 9px;
   line-height: 12px;
-}
+} */
 .sCaption h5 {
   font-size: 13px;
   line-height: 16px;
@@ -2821,9 +2886,9 @@ ul li {
 .thirdSlide .poolBtn {
   bottom: 6rem;
 }
-.logoSlider {
+/* .logoSlider {
   bottom: -17rem;
-}
+} */
   .innerBtn .purchaseWith {
     width: 72%;
 }
@@ -2861,6 +2926,9 @@ ul li {
 }
 }
 @media (max-width: 360px){
+  .positionAbs {
+    width: 98%;
+}
   .countHead {
     font-size: 12px;
 }
@@ -2872,10 +2940,10 @@ ul li {
   .flashDiv {
     right: 4rem;
 }
-  .logoSlider {
+  /* .logoSlider {
     bottom: -15rem;
 }  
-   
+    */
 .reward::before {
   left: -33%;
   top: -3%;
@@ -2944,4 +3012,9 @@ ul li {
   font-size: 14px;
 }
 
+}
+@media (max-width: 320px){
+  .logoSlider {
+    bottom: -.5rem;
+}
 }

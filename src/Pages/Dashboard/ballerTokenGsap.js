@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const loader = document.querySelector(".loader-wrapper");
 $(window).on('click', function () {
-  console.log('--------------------click detected---------------')
+  // console.log('--------------------click detected---------------')
     //   gsap.registerPlugin(ScrollTrigger);
     // var frame_count  = 9,
     //     offset_value = 100;
@@ -32,7 +32,7 @@ $(window).on('click', function () {
           },
           defaults: {ease: "none"}
         });
-        console.log(tl)
+        // console.log(tl)
       tl.fromTo(section.querySelector(".afterImage"), { yPercent: 50, y: 0}, {yPercent: 0})
         tl.fromTo(section.querySelector(".afterImage img"), {yPercent: -50, y: 0}, {yPercent: 0}, 0);
     });
