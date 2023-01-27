@@ -861,11 +861,11 @@ const Dashboard = () => {
                         <div className="container mt-4 footerIcon">
                             <div className="row align-items-center">
                                 <div className="col-2 col-sm-3">
-                                    <img src={logoo} alt="logo"  className="mob-wth"/>
+                                    <img src={logoo} alt="logo"  className="mob-wth img-fluid"/>
                                 </div>
                                 <div className="col-4 col-sm-3">
                                     <div className="d-flex align-items-center">
-                                        <img src={teen} alt="logo"  className="mob-wth-px"/>
+                                        <img src={teen} alt="logo"  className="mob-wth-px img-fluid"/>
                                         <ul>
                                             <li>Blood </li>
                                             <li>Language</li>
@@ -877,7 +877,7 @@ const Dashboard = () => {
 
                                 </div>
                                 <div className="col-3 col-sm-3">
-                                    <img src={gamecity} alt="logo" className="mob-wth ipadWth" />
+                                    <img src={gamecity} alt="logo" className="ipadWth img-fluid" />
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">

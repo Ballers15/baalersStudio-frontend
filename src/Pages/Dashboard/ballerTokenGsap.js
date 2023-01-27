@@ -60,8 +60,8 @@ $(window).on('click', function () {
       opacity:1,
       ease: "none"
     })
-  // setTimeout(() => {
-  //   loader?.classList?.add("loader--hide");
-  // },0)
+  setTimeout(() => {
+    loader?.classList?.add("loader--hide");
+  },0)
   
   })

@@ -2349,6 +2349,9 @@ line-height: 100%;
  
 }
 @media (max-width: 1024px){
+  .mob-wth {
+    width: 48%;
+}
   .ipadWth{
     width: 100%;
   }
@@ -2397,6 +2400,13 @@ line-height: 100%;
   }
 }
 @media (min-width:768px) and (max-width: 900px){
+  .footerIcon ul li {
+    list-style: none;
+    font-size: 12px;
+}
+  .mob-wth {
+    width: 68%;
+}
   .flashDiv {
     right: 4rem;
 }
@@ -2877,7 +2887,7 @@ ul li {
 .policy { 
   float: inherit;
 }
-.mob-wth{
+.mob-wth, .ipadWth{
   width: 100%;
 }
 .arrowUp { 
@@ -2933,6 +2943,9 @@ ul li {
 @media (max-width: 480px){
   .logoSlider {
     bottom: -2.5rem;
+}
+.thirdSlide{
+  height: 70vh;
 }
 .thirdSlide .sCaption {
   width: 88%;

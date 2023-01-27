@@ -13,7 +13,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
-import {useParams} from "react-router-dom"
+import {useParams} from "react-router-dom" 
 const CollapsibleExample = () => {
   const { id } = useParams();
   useEffect(() => {
@@ -40,8 +40,7 @@ const CollapsibleExample = () => {
   const goToAbout = (param)=>{
     navigate(param);
    
-  }
- 
+  } 
   // const handleScroll = () => {
   //   console.log("JJJ",id)
   //   if (id === 'partyGang') {
@@ -57,11 +56,11 @@ const CollapsibleExample = () => {
   //         }, 20);
   //   }        
   // }
-
+  
 
   return (
     
-    <React.Fragment>
+    <React.Fragment> 
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={logoo} alt="logo" /></Navbar.Brand>

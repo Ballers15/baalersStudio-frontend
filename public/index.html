@@ -25,7 +25,7 @@
     <meta name="twitter:description" content="Ballers Studio is a gaming & entertainment venture that specializes in creating Web 3 games. The studio uses cutting-edge technology and innovative game design to bring the next generation of gaming to the Web 3 space.">
     <meta name="twitter:image" content="https://ballers.fun/banner.jpg">
     <meta name="robots" content="follow">
-    <link rel="icon" href="favi.ico" />
+    <link rel="icon" href="https://ballers.fun/favi.ico" />
     <link rel="canonical" href="https://ballers.fun/" />
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
@@ -49,10 +49,17 @@
 
       gtag('config', 'G-8VZNXCFNEJ');
     </script>
-
-  
-    <!-- <script src="ballerTokenGsap.js"></script> -->
-    <!-- <script src="script.js"></script> -->
+    
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ballers",
+      "url": "https://banner.fun",
+      "logo": "https://ballers.fun/favi.ico"                                                
+    }
+    </script>
+    
   </head>
   <body>
       <!-- Google Tag Manager (noscript) -->
@@ -70,40 +77,13 @@
     <div class="loader-shadow"></div>
     <div class="loader-shadow"></div></div> -->
 
-     <!-- loading -->
-     <div id="loading" class="loader-wrapper">
-      <div id="loading-center">
-          <div class='loader loader2'>
-              <div>
-                  <div>
-                      <div>
-                          <div>
-                              <div>
-                                  <div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- loading End -->
-
  <!-- back-to-top -->
  <div id="back-to-top">
   <a class="top" id="top" href="#top"><i class="fa fa-angle-double-up" aria-hidden="true"></i> </a>
 </div>
-<script rel="preload" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+ 
     <script>
-         /*------------------------
-    Page Loader
-    --------------------------*/
-    jQuery("#load").fadeOut();
-    jQuery("#loading").delay(0).fadeOut("slow");
-    
+  
      /*------------------------
     Back To Top
     --------------------------*/
@@ -122,7 +102,7 @@
             scrollTop: 0
         }, 800);
         return false;
-    });
+    });  
     </script>
   </body>
 </html>
