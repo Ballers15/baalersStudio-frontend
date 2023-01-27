@@ -2397,7 +2397,9 @@ line-height: 100%;
   }
 }
 @media (min-width:768px) and (max-width: 900px){
-  
+  .flashDiv {
+    right: 4rem;
+}
   .marquee { 
     font-size: 148px;
     line-height: 160px;
@@ -2409,10 +2411,31 @@ line-height: 100%;
   top: 30%;
 }
 .playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after, .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after {
-  width: calc( 240px / 2);
+  width: calc( 270px / 2);
 }
 .news-caption .innerBtn a::before, .news-caption .innerBtn a::after, .news-caption .innerBtn a span::before, .news-caption .innerBtn a span::after {
   width: 96px;
+}
+.purchaseWith {
+  width: 235px;
+}
+.joinCard .image {
+  margin-top: -3rem;
+}
+.joinCard {
+  height: 150px;
+}
+.accordion {
+  width: 60%;
+}
+.bgShade3 { 
+  left: -4rem;
+  width: 50%; 
+  bottom: 40rem;
+}
+.bgShadeBalr { 
+  top: 5rem;
+  right: -2rem;
 }
   .heading2 {
     font-size: 55px;

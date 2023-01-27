@@ -795,7 +795,7 @@ const Dashboard = () => {
                         <div className="container paddingY-5 mt-5 positionRelative">
                             <img src={ellipse3} className="bgShade3" alt="Eclipse" />
                             <div className="row">
-                                <div className="col-sm-5">
+                                <div className="col-lg-5">
                                     <div className="positionRelative mb-5">
                                         <h2 className="heading text-left">FAQ</h2>
                                         <h2 className="faqHead text-left">FAQ</h2>
@@ -839,7 +839,7 @@ const Dashboard = () => {
 
                                     </Accordion>
                                 </div>
-                                <div className="col-sm-7 my-auto desk">
+                                <div className="col-lg-7 my-auto desk">
                                     <section className="comparisonSection ">
 
                                         <div className="comparisonImage beforeImage">
