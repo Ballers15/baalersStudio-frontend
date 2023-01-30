@@ -4,7 +4,6 @@ import 'bootstrap/dist/js/bootstrap.js';
 import './App.css';
 import NavigationRouter from './Routes';
 
-
 function App() {
   return (
     <React.Fragment>

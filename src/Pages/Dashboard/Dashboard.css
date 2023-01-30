@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
-@font-face {
-  font-family: "Valorant";
-  src: local("Valorant"),
-   url("../../font/valorant/Valorant-Font.ttf") format("truetype");
-  font-weight: bold;
-  }
+
   body{
     background: #09031D;
   }
@@ -13,6 +8,9 @@
   }
   .small, small { 
     font-size: 12px;
+}
+.imgHeight{
+  height: 128px;
 }
 .dashboard{
     overflow: hidden; 
@@ -1799,6 +1797,9 @@ ul li {
 }
 
 @media (min-width: 1800px){
+  .comparisonSection { 
+    padding-bottom: 58.25%;
+  }
   .joinUs{ 
     font-size: 40px;   
   }
@@ -2863,7 +2864,10 @@ ul li {
   width: 100%;
   right: 0;
   padding: 1rem;
-  top: 0;
+  top: 2rem;
+}
+.news {  
+  margin-bottom: 5rem;
 }
 .balrHead { 
   text-align: center; 
@@ -2939,8 +2943,11 @@ ul li {
   float: inherit;
   padding: 0;
 }
-.mob-wth, .ipadWth{
+.ipadWth{
   width: 100%;
+}
+.mob-wth {
+  width: 84%;
 }
 .arrowUp { 
   bottom: 41%;
@@ -2993,6 +3000,19 @@ ul li {
 }
 }
 @media (max-width: 480px){
+  .col-4 .d-flex.align-items-center{
+    justify-content: center;
+  }
+  .starMed {
+    margin-right: 14rem;
+    margin-top: 35rem;
+    width: 40px;
+}
+.starSmall {
+  margin-right: 2rem;
+  margin-top: 25rem;
+  width: 23px;
+}
   .logoSlider {
     bottom: -2.5rem;
 }
@@ -3042,6 +3062,9 @@ ul li {
   .thirdSlide .poolBtn { 
     bottom: 8rem;
   }
+  .mainSlider .carousel-item {
+    height: 120vh;
+}
 }
 @media (max-width: 400px){
   .playBtn a, .shareBtn a{
@@ -3085,7 +3108,7 @@ ul li {
   .footer-content {
     font-size: 9px;
 }
-  .footerIcon .col-3,   .footerIcon .col-4,   .footerIcon .col-2{
+  .footerIcon .col-3, .footerIcon .col-4, .footerIcon .col-2{
     padding-right: 0;
     padding-left: 5px;
   }

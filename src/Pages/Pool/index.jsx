@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import React, { useState ,useEffect} from "react";
+import React, { useState} from "react";
 import './Pool.css'
 import { Carousel } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
@@ -11,20 +11,8 @@ import tdmm from '../../Assest/img/logos/tdmm.png'
 import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
 
-const loader = document.querySelector(".loader-wrapper");
 
-const Pool = () => {
-    useEffect(() => {
-        document.fonts.ready.then(function(font_face_set) {
-            // all fonts have been loaded
-            console.log("FONT LOADED");
-            loader?.classList?.add("loader--hide");
-
-        });
-
-
-
-    }, []);
+const Pool = () => { 
 
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);

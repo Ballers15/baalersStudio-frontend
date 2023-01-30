@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Tooltip from 'react-bootstrap/Tooltip';
 import './Navbar.css';
 import { useAuth } from '../../Auth/authProvider';
-import logoo from '../../Assest/img/logoo.png';
+import gamelogo from '../../Assest/img/gamelogo.png';
 import user from '../../Assest/img/user.png'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { useNavigate  } from "react-router-dom";
@@ -63,7 +63,7 @@ const CollapsibleExample = () => {
     <React.Fragment> 
       <Navbar collapseOnSelect expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={logoo} alt="logo" /></Navbar.Brand>
+          <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={gamelogo} alt="logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">

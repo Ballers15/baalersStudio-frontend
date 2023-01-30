@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
@@ -35,8 +35,9 @@ import discord from '../../Assest/img/discord.svg'
 import tdmm from '../../Assest/img/logos/tdmm.png'
 // import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
-import logoo from '../../Assest/img/logoo.png'
+import gamelogo from '../../Assest/img/gamelogo.png'
 import gamecity from '../../Assest/img/gamecity.png'
+import footerLogo from '../../Assest/img/footerLogo.png'
 import teen from '../../Assest/img/teen.png'
 import arrowRight from '../../Assest/img/arrowRight.svg'
 import arrowUp from '../../Assest/img/arrowUp.svg'
@@ -80,21 +81,7 @@ function useHover() {
     return [hovering, onHoverProps]
 }
   
-
-const loader = document.querySelector(".loader-wrapper");
-const Dashboard = () => {
-
-    useEffect(() => {
-        document.fonts.ready.then(function(font_face_set) {
-            // all fonts have been loaded
-            console.log("FONT LOADED");
-            loader?.classList?.add("loader--hide");
-
-        });
-
-
-
-    }, []);
+const Dashboard = () => { 
     
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
@@ -877,7 +864,8 @@ const Dashboard = () => {
                         <div className="container mt-4 footerIcon">
                             <div className="row align-items-center">
                                 <div className="col-2 col-sm-3">
-                                    <img src={logoo} alt="logo"  className="mob-wth img-fluid"/>
+                                    <img src={footerLogo} alt="logo"  className="mob-wth img-fluid desk imgHeight"/>
+                                    <img src={gamelogo} alt="logo"  className="mob-wth img-fluid mob"/>
                                 </div>
                                 <div className="col-4 col-sm-3">
                                     <div className="d-flex align-items-center">
