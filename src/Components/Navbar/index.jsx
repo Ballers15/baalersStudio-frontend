@@ -67,12 +67,12 @@ const CollapsibleExample = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-            <Nav.Link href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
+            <Nav.Link  eventKey="1" href= {deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>
             {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
-              <Nav.Link onClick={() => { goToAbout('/partyGang') }}>Party</Nav.Link>
+              <Nav.Link  eventKey="2" onClick={() => { goToAbout('/partyGang') }}>Party</Nav.Link>
             {/* https://medium.com/@Ballers_Studio */}
             <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> 
-              <Nav.Link onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
+              <Nav.Link eventKey="3" onClick={()=>{goToAbout('/pool')}}>Pool</Nav.Link>
             <OverlayTrigger
           placement='bottom'
           overlay={
@@ -82,7 +82,7 @@ const CollapsibleExample = () => {
           }
         ><Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> 
            
-              <Nav.Link onClick={()=>{goToAbout('/balrToken' ) }}>$BALR TOKEN</Nav.Link>
+              <Nav.Link  eventKey="4" onClick={()=>{goToAbout('/balrToken' ) }}>$BALR TOKEN</Nav.Link>
              
             </Nav>
             <Nav>
