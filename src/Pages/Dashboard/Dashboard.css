@@ -194,6 +194,22 @@ background: #110929;
     z-index: 0;
 
 }
+#partyGang{
+  padding-top: 6rem;
+}
+#balrToken{
+  padding-top: 5rem;
+}
+ 
+
+/* svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 56%;
+  margin: auto;
+  top: 9.5px;
+} */
 .balrHead {
   font-family: "Valorant";
   font-weight: 800;
@@ -279,7 +295,7 @@ background: #110929;
     align-items: center;
     color: #ECE8E1;
 }
-.mainSlider .carousel-caption::before {
+/* .mainSlider .carousel-caption::before {
     content: "";
     position: absolute;
     width: 96%;
@@ -287,7 +303,7 @@ background: #110929;
     height: 1px;
     background: #fff;
     bottom: 5rem;
-}
+} */
 .positionAbs{
   position: absolute;
   width: 100%;
@@ -482,7 +498,7 @@ background: #110929;
 } 
 .playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after,
 .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after  {
-    width: calc( 326px / 2);
+    width: calc( 326px / 2) !important;
     /* height: calc( 70px / 2); */
 }
 .btnWith{
@@ -1089,8 +1105,8 @@ path {
   }
   100% {
     opacity: 0;
-    -webkit-transform: rotate(360deg) scale(1.5);
-    transform: rotate(360deg) scale(1.5);
+    -webkit-transform: rotate(0deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
   }
 }
 @keyframes large {
@@ -1103,7 +1119,7 @@ path {
   }
   100% {
     opacity: 0;
-    transform: rotate(360deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
   }
 }
 @-webkit-keyframes large-2 {
@@ -1145,8 +1161,8 @@ path {
   }
   100% {
     opacity: 0;
-    -webkit-transform: rotate(-360deg) scale(1);
-    transform: rotate(-360deg) scale(1.5);
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1.5);
   }
 }
 @keyframes small {
@@ -1159,7 +1175,7 @@ path {
   }
   100% {
     opacity: 0;
-    transform: rotate(-360deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
   }
 }
  
@@ -1532,7 +1548,8 @@ ul li {
 
 .comparisonSection {
   position: relative;
-  padding-bottom: 56.25%; /* to maintain aspect ratio (responsive!) */
+  padding-bottom: 70.25%; /* to maintain aspect ratio (responsive!) */
+  width: 800px;
 }
 .comparisonImage {
   width: 100%;
@@ -1850,9 +1867,9 @@ ul li {
   .coinImage img { 
     right: 34%;
   }
-  .mainSlider .carousel-caption::before{
+  /* .mainSlider .carousel-caption::before{
     width: 100%;
-  }
+  } */
   .bg-move img {
     left: -5%;
     width: 33%;
@@ -1953,12 +1970,12 @@ ul li {
   margin-right: 16%;
   bottom: 10.65rem;
 }
-.mainSlider .carousel-caption::before {
+/* .mainSlider .carousel-caption::before {
   width: 85%;
   margin: auto;
   left: 0;
   right: 0;
-}
+} */
   .bg-move img {
       left: -18%;
     width: 39%;
@@ -2127,9 +2144,9 @@ ul li {
   .carousel-caption {
     width: 84%;
   }
-  .mainSlider .carousel-caption::before { 
+  /* .mainSlider .carousel-caption::before { 
     width: 100%;
-  }
+  } */
   .backCoin img {
     width: 15%;
   }
@@ -2556,7 +2573,38 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
-  .fStar{display: none;}
+  .playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after {
+    width: 58px;
+  }
+  .playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after, .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after {
+    width: calc( 158px / 2) !important;
+  }
+  div#balrToken .positionRelative {
+    width: 60%;
+    margin: auto !important;
+}
+  .reward #one {
+    top: -43rem;
+  }
+  .reward #three {
+    right: 6rem;
+    top: 3rem;
+}
+.reward #two {
+  top: 11rem;
+  left: 4rem;
+  width: 34px;
+}
+  .ballercoin { 
+    text-align: center;
+    margin-bottom: 5rem;
+    margin-top: 10rem;
+}
+
+.ballercoin img {
+  width: 54%;
+}
+  .fStar, .stars.slideStar{display: none;}
  .mob-center{
   text-align: center !important;
  }
@@ -2594,15 +2642,19 @@ line-height: 100%;
 }
   .mob-content{
     text-align: center;
+    margin-top: 1.5rem;
   }
+  b, strong { 
+    font-weight: 600;
+}
   .gradientBackgroung {
-    padding: 5rem 2rem;
+    padding-bottom: 2rem;
 } 
 .rewadText .innerBtn a::before, .rewadText .innerBtn a::after, .rewadText .innerBtn a span::before, .rewadText .innerBtn a span::after {
   width: 74px;
 }
 .ballerSec .innerBtn a::before, .ballerSec .innerBtn a::after, .ballerSec .innerBtn a span::before, .ballerSec .innerBtn a span::after {
-  width: 100px;
+  width: 88px;
 }
   .innerBtn a {
     font-size: 15px;
@@ -2613,18 +2665,18 @@ line-height: 100%;
     width: 45%;
 }
 .innerBtn .btnWith{
-  width: 56%;
+  width: 52%;
 }
 .innerBtn .purchaseWith{
- width: 65%;
+ width: 53%;
 }
   .rewadText { 
     padding: 0 2rem;
 }
-.arrowDown { 
-  right: 3%;
-  top: 20rem; 
-  width: 12%;
+.arrowDown {
+  right: 17%;
+  top: 28rem;
+  width: 10%;
 }
 .dancingImg {
   margin-top: 3rem;
@@ -2632,11 +2684,11 @@ line-height: 100%;
   .box{
     display: none;
   }
-  .mainSlider .carousel-caption::before {
+  /* .mainSlider .carousel-caption::before {
     width: 94%;
     left: 0;
     margin: auto;
-}
+} */
   .mainSlider .carousel-item {
     height: 116vh;
 }
@@ -2655,9 +2707,9 @@ line-height: 100%;
   bottom: 10rem;
 }
 
-  .flashDiv { 
+  /* .flashDiv { 
     right: 9rem;
-  }
+  } */
   .wth-4 {
     width: 100%;
 }
@@ -2700,18 +2752,18 @@ line-height: 100%;
   top: 4rem;
 }
 .poolBtn .playBtn {  
-  width: 50%;
+  width: 52%;
   margin: auto;
 }
 .playBtn a {
   padding: 0.85rem 1rem 0.65rem;
-  font-size: 15px;
+  font-size: 13px;
 }
 .shareBtn a{
-  font-size: 15px;
+  font-size: 13px;
 }
 .thirdSlide .poolBtn { 
-  bottom: 16rem;
+  bottom: 13rem;
 }
 .thirdSlide .playBtn a::before, .thirdSlide .playBtn a::after, .thirdSlide .playBtn a span::before, .thirdSlide .playBtn a span::after {
   width: 80px;
@@ -2738,7 +2790,7 @@ line-height: 100%;
   background-size: 135%;
 }
 .coinImage img {
-  right: 21%;
+  right: 11%;
   top: -13%;
   width: 36.5%;
 }
@@ -2801,7 +2853,7 @@ ul li {
   font-size: 7px;
 }
 .heading { 
-  font-size: 42px;
+  font-size: 50px;
 }
 .nftCollectionHead{
   position: relative;
@@ -2814,15 +2866,14 @@ ul li {
   top: 0;
 }
 .balrHead { 
-  text-align: center;
-  font-size: 56px;
+  text-align: center; 
   left: 0; 
   right: 0; 
   top: -30%;
 }
-.ballercoin img {
+/* .ballercoin img {
   width: 100%;
-}
+} */
 /* .divImage { 
   top: -19%; 
   left: 3.5rem; 
@@ -2886,12 +2937,13 @@ ul li {
 }
 .policy { 
   float: inherit;
+  padding: 0;
 }
 .mob-wth, .ipadWth{
   width: 100%;
 }
 .arrowUp { 
-  bottom: 46%;
+  bottom: 41%;
   width: 9%;
   left: 16%;
 
@@ -2904,7 +2956,7 @@ ul li {
   height: auto;
 }
 .news--news_page .news-list{
-  height: 244px;
+  height: 325px;
   top: 9.5rem;
 }
 .bgShadeBalr { 
@@ -2946,6 +2998,7 @@ ul li {
 }
 .thirdSlide{
   height: 70vh;
+  top: 4rem;
 }
 .thirdSlide .sCaption {
   width: 88%;
@@ -2957,10 +3010,11 @@ ul li {
   top: 20%;
   width: 35%;
 }
-  .mainSlider .carousel-caption::before {  
+  /* .mainSlider .carousel-caption::before {  
     bottom: 3.5rem; 
     display: none;
-}
+} */
+
   .fw-bold{
     margin-bottom: 0;
   }
@@ -2983,16 +3037,19 @@ ul li {
   line-height: 16px;
 }
 }
+
+@media (min-width:413px) and (max-width: 430px){
+  .thirdSlide .poolBtn { 
+    bottom: 8rem;
+  }
+}
 @media (max-width: 400px){
   .playBtn a, .shareBtn a{
     font-size: 13px;
   }
 
-  /* .logoSlider {
-    bottom: -8rem;
-} */
-  .heading { 
-    font-size: 38px;
+  .arrowDown { 
+    top: 28rem;
   }
   .firstText { 
     width: 36%;
@@ -3014,6 +3071,12 @@ ul li {
   }
 }
 @media (max-width: 380px){
+  .mainSlider .carousel-item {
+    height: 120vh;
+}
+  .secondSlide {
+    bottom: 20%;
+  }
   .mainSlider .carousel-caption img {
     width: 72%;
     margin-bottom: -3rem;
@@ -3058,7 +3121,7 @@ ul li {
   bottom: -17rem;
 } */
   .innerBtn .purchaseWith {
-    width: 72%;
+    width: 55%;
 }
 .innerBtn a { 
   width: 49%;
@@ -3157,17 +3220,17 @@ ul li {
   top: -4rem;
 }
 .gradientBackgroung {
-  padding: 5rem 1rem;
+  padding-bottom: 1rem;
 }
 .innerBtn .btnWith {
   width: 62%;
 }
 .innerBtn .purchaseWith {
-  width: 80%;
+  width: 60%;
 }
-.ballercoin img {
+/* .ballercoin img {
   width: 84%;
-}
+} */
 .arrowDown {
   right: 3%;
   top: 18rem;

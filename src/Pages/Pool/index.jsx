@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import './Pool.css'
 import { Carousel } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,21 @@ import tdmm from '../../Assest/img/logos/tdmm.png'
 import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
 
+const loader = document.querySelector(".loader-wrapper");
+
 const Pool = () => {
+    useEffect(() => {
+        document.fonts.ready.then(function(font_face_set) {
+            // all fonts have been loaded
+            console.log("FONT LOADED");
+            loader?.classList?.add("loader--hide");
+
+        });
+
+
+
+    }, []);
+
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
     const handleShow = (modalName)=>{
@@ -73,10 +87,10 @@ const Pool = () => {
                 </Modal.Header>
                 <Modal.Body>
                  <p>
-                 Greater rewards await those who participate in the Reward Pool.
+                 Greater rewards await for those who participate in the Reward Pool.
                  </p>
                  <p>
-                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!
+                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
                 </Modal.Body>
                 {/* <Modal.Footer>
@@ -152,50 +166,8 @@ const Pool = () => {
                                 </div>
                             </div>
                             <p className="secondText">NFT<small>s</small> distributed Daily</p>
-
-
                         </div>
-                        <div className="logoSlider">
-                            <Carousel>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                {/* <div className="col-2 col-sm-2">
-                                                    <img src={tradedog} alt="tradedog" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdx} alt="tdx" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdefi} alt="tdefi" />
-                                                </div> */}
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdmm} alt="tdmm" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={ith} alt="ith" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                <div className="col-sm-12">
-                                                    <p className="fw-bold">Our Partners  </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            </Carousel>
-                        </div>
+                        
                     </div>
                </div>
             </div>

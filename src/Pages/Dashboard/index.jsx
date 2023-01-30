@@ -80,11 +80,21 @@ function useHover() {
     return [hovering, onHoverProps]
 }
   
+
+const loader = document.querySelector(".loader-wrapper");
 const Dashboard = () => {
 
-    // useEffect(() => {
-    //     hideLoader();
-    // }, []);
+    useEffect(() => {
+        document.fonts.ready.then(function(font_face_set) {
+            // all fonts have been loaded
+            console.log("FONT LOADED");
+            loader?.classList?.add("loader--hide");
+
+        });
+
+
+
+    }, []);
     
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
@@ -287,10 +297,10 @@ const Dashboard = () => {
                 </Modal.Header>
                 <Modal.Body>
                  <p>
-                 Greater rewards await those who participate in the Reward Pool.
+                 Greater rewards await for those who participate in the Reward Pool.
                  </p>
                  <p>
-                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Ballers!
+                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
                 </Modal.Body>
                 {/* <Modal.Footer>
@@ -459,13 +469,13 @@ const Dashboard = () => {
                                 </Carousel>
                             </div>
                         </div>
-                        <div className="logoSlider">
+                        {/* <div className="logoSlider">
                             <Carousel>
                                 <Carousel.Item>
                                     <Carousel.Caption>
                                         <div className="container">
                                             <div className="row align-items-center justify-content-center">
-                                                {/* <div className="col-2 col-sm-2">
+                                                <div className="col-2 col-sm-2">
                                                     <img src={tradedog} alt="tradedog" />
                                                 </div>
                                                 <div className="col-2 col-sm-2">
@@ -473,7 +483,7 @@ const Dashboard = () => {
                                                 </div>
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdefi} alt="tdefi" />
-                                                </div> */}
+                                                </div>
                                                 <div className="col-2 col-sm-2">
                                                     <img src={tdmm} alt="tdmm" />
                                                 </div>
@@ -499,7 +509,7 @@ const Dashboard = () => {
                                     </Carousel.Caption>
                                 </Carousel.Item>
                             </Carousel>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -553,7 +563,7 @@ const Dashboard = () => {
                     <div className="backCoin"> <img src={semiCoin} alt="coin image" /></div>
                 </div>
                 <div className="">
-                    <div className="gradientBackgroung secPaddingY pb-8">
+                    <div className="gradientBackgroung pb-8">
 
                         <div className="container" id="partyGang">
                             <div className="stars">
@@ -682,7 +692,7 @@ const Dashboard = () => {
 
                             </div>
                         </div>
-                        <div className="container positionRelative ballerSec pt-4 mt-5" id="balrToken">
+                        <div className="container positionRelative ballerSec" id="balrToken">
                             <div className="positionRelative text-right mx-4">
                                 <h2 className="heading">BALR TOKEN</h2>
                                 <h2 className="balrHead">BALR TOKEN</h2>
@@ -711,8 +721,14 @@ const Dashboard = () => {
                                             <div className="flashLight"></div>
                                             <div className="flashLight2"></div>
                                         </div>
-
-                                        <img src={ballerCoin} alt="Italian_Mafia_Boss" />
+                                        {/* <svg preserveAspectRatio="xMidYMid meet" data-bbox="1 1 160 160" viewBox="0 0 162 162" height="162" width="162" xmlns="http://www.w3.org/2000/svg" data-type="ugc" role="img" aria-labelledby="svgcid-300jcsd0qy3">
+                                            <g fill-rule="evenodd">
+                                            <path stroke="#FFAE39" stroke-width="2" fill="none" d="M161 81c0 44.183-35.817 80-80 80S1 125.183 1 81 36.817 1 81 1s80 35.817 80 80z">
+                                            </path>
+                                            <path stroke-width="2" stroke="#FFFFFF" fill="#FFAB00" d="M139 22a8 8 0 1 1-16 0 8 8 0 0 1 16 0z"></path>
+                                            </g>
+                                        </svg> */}
+                                        <img src={ballerCoin} alt="Baller Coin"  /> 
                                     </div>
                                 </div>
                             </div>
