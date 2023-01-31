@@ -36,11 +36,13 @@
     width: 100%;
 }
 .pool .secondText {
-    left: 2rem;
-    width: 12%;
+    left: 0;
+    width: 16%;
 }
+
 .pool .firstText {
-    right: 7rem;
+    right: 5rem;
+    top: 32%;
 }
 .pool:before {
     content: "";
@@ -50,7 +52,20 @@
     position: absolute;
     opacity: .4;
   }
+  .pool .thirdSlide {
+    height: 61vh; 
+}
+@media (min-width: 1750px){
+    .pool .secondText {
+        left: 0;
+        width: 12%;
+    }
+}
 @media (max-width: 1500px){
+    .pool .secondText {
+        left: 2rem;
+        width: 14%;
+    }
     .pool .thirdSlide .sCaption {
         width: 26rem;
     }

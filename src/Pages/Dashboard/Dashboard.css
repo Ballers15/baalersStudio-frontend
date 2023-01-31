@@ -198,16 +198,7 @@ background: #110929;
 #balrToken{
   padding-top: 5rem;
 }
- 
-
-/* svg {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 56%;
-  margin: auto;
-  top: 9.5px;
-} */
+  
 .balrHead {
   font-family: "Valorant";
   font-weight: 800;
@@ -506,6 +497,9 @@ background: #110929;
 .purchaseWith{
   width: 285px;
   transition: all .3s;
+} 
+.innerBtn{
+  margin-left: 9px;
 }
 .rewardImage{
     position: relative;
@@ -653,6 +647,7 @@ background: #110929;
     animation-iteration-count: 1;
     animation-fill-mode: both; */
 }
+ 
 .ballercoin img{
     /* position: absolute;
     right: 54%;
@@ -664,8 +659,7 @@ background: #110929;
     animation-delay: calc(var(--scroll) * -1s);  
     animation-iteration-count: 1;
     animation-fill-mode: both; */
-}
-
+} 
   @keyframes scrollUp {
     to {
       transform: translate(-150px, -250px);
@@ -682,13 +676,7 @@ background: #110929;
       transform: rotate(360deg);
     }
   }
-
-  /* @keyframes semiRotate {
-    to {
-      transform: rotate(10deg);
-    }
-  } */
-  
+ 
   .rewadText{    
     z-index: 1;
     position: relative;
@@ -1576,6 +1564,7 @@ ul li {
   margin: 0px auto;
   margin-top: 100px;
   position: relative;
+  z-index: 1;
 }
 .flashDiv{
   position: absolute;
@@ -2199,6 +2188,9 @@ line-height: 100%;
 }
 }
 @media (max-width: 1350px){
+  .innerBtn a { 
+    padding: 0.75rem 2.25rem;
+  }
   .joinUs{ 
     font-size: 30px;   
   }
@@ -2314,6 +2306,14 @@ line-height: 100%;
 }
 .coinImage img { 
   right: 35%;
+}
+}
+@media (max-width: 1270px){
+  .playBtn a span:after, .playBtn a span:before, .playBtn a:after, .playBtn a:before, .rewadText .innerBtn a span:after, .rewadText .innerBtn a span:before, .rewadText .innerBtn a:after, .rewadText .innerBtn a:before {
+    width: 80px;
+}
+  .coinImage img {
+    right: 29%;
 }
 }
 @media (max-width: 1200px){
@@ -2578,7 +2578,7 @@ line-height: 100%;
     width: 58px;
   }
   .playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after, .innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after {
-    width: calc( 158px / 2) !important;
+    width: calc( 238px / 2) !important;
   }
   div#balrToken .positionRelative {
     width: 60%;
@@ -2604,6 +2604,44 @@ line-height: 100%;
 
 .ballercoin img {
   width: 54%;
+}
+.ballercoin::before { 
+background-image: url('../../Assest/img/ballerCoin.png');
+  content: "";
+
+  height: 370px;
+
+  width: 370px;
+
+  z-index: 0;
+border: 2px solid #fff;
+  -webkit-animation: rotation 27s infinite;
+
+  animation: rotation 27s infinite;
+
+  opacity: 1;
+
+  top: 10px;
+
+  left: 0;
+
+  position: absolute;
+
+}
+@-webkit-keyframes rotation {
+
+  from {
+
+    -webkit-transform: rotate(0);
+
+  }
+
+  to {
+
+    -webkit-transform: rotate(359deg);
+
+  }
+
 }
   .fStar, .stars.slideStar{display: none;}
  .mob-center{
@@ -2664,6 +2702,7 @@ line-height: 100%;
     right: 0;
     margin: auto;
     width: 45%;
+    z-index: 2;
 }
 .innerBtn .btnWith{
   width: 52%;
@@ -2950,7 +2989,7 @@ ul li {
   width: 84%;
 }
 .arrowUp { 
-  bottom: 41%;
+  bottom: 38%;
   width: 9%;
   left: 16%;
 
@@ -3000,6 +3039,12 @@ ul li {
 }
 }
 @media (max-width: 480px){
+  .news-list{
+    max-width: 50%;
+  }
+  .news-caption .innerBtn a::before, .news-caption .innerBtn a::after, .news-caption .innerBtn a span::before, .news-caption .innerBtn a span::after {
+    width: 86px;
+}
   .col-4 .d-flex.align-items-center{
     justify-content: center;
   }

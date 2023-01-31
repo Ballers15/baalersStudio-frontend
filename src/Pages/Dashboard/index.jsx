@@ -47,6 +47,7 @@ import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
 import house from '../../Assest/img/house.png'
 import house1 from '../../Assest/img/house1.png'
+import houseMob from '../../Assest/img/houseMob.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg' 
@@ -697,24 +698,16 @@ const Dashboard = () => {
 
                                         <div className="innerBtn"  {...buttonAHoverProps}>
                                             <a className="purchaseWith"><span></span>    {buttonAIsHovering ? "coming soon" : "PURCHASE NOW"} </a>
-                                        </div>
-                                        
+                                        </div>                                        
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
 
-                                    <div className="ballercoin text-right">
+                                    <div className="ballercoin text-right"> 
                                         <div className="flashDiv">
                                             <div className="flashLight"></div>
                                             <div className="flashLight2"></div>
-                                        </div>
-                                        {/* <svg preserveAspectRatio="xMidYMid meet" data-bbox="1 1 160 160" viewBox="0 0 162 162" height="162" width="162" xmlns="http://www.w3.org/2000/svg" data-type="ugc" role="img" aria-labelledby="svgcid-300jcsd0qy3">
-                                            <g fill-rule="evenodd">
-                                            <path stroke="#FFAE39" stroke-width="2" fill="none" d="M161 81c0 44.183-35.817 80-80 80S1 125.183 1 81 36.817 1 81 1s80 35.817 80 80z">
-                                            </path>
-                                            <path stroke-width="2" stroke="#FFFFFF" fill="#FFAB00" d="M139 22a8 8 0 1 1-16 0 8 8 0 0 1 16 0z"></path>
-                                            </g>
-                                        </svg> */}
+                                        </div>                                        
                                         <img src={ballerCoin} alt="Baller Coin"  /> 
                                     </div>
                                 </div>
@@ -856,7 +849,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm-7 mob"> 
                                         <div className="houseImg">
-                                            <img src={house} alt="after" />
+                                            <img src={houseMob} alt="after" />
                                         </div>
                                     </div>
                             </div>
