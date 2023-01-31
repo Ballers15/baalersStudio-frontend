@@ -445,7 +445,10 @@ const Dashboard = () => {
                                                             <p>Play & Earn </p>
                                                             <h1>POOL </h1>
                                                             <p className="textHeader">
-                                                                Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
+                                                            Join the ultimate Play and Earn experience and win rewards with real-world value in Ballers City. Compete for a chance to win $BALR tokens, collectible NFTs, and tickets to exclusive physical parties around the world. 
+                                                            </p>
+                                                            <p className="textHeader">
+                                                                <b>Start playing now and bring your rewards to life!</b>
                                                             </p>
                                                         </div>
                                                         <div className="poolBtn text-center">
@@ -543,13 +546,10 @@ const Dashboard = () => {
 
                                     <div className="py-5">
                                         <p className="text-font">
-                                        Ballers City is one of the only games that enables you to earn on a daily basis. Players can win rewards from Reward pools, Lottery Pots and Quests! No matter what your skill level or collection size, there is always an opportunity to earn!
-
+                                        Join the ultimate Play, Party and Earn experience in Ballers City - a web3 game that rewards you daily. Compete for exclusive collectible cards, $BALR tokens, and Party tickets in thrilling Reward pools, Lottery Pots, and Quests. No matter your skill level or collection size, there's always a chance to win big. Start playing and get ready to party with the power of $BALR token!
                                         </p>
-                                        <p className="text-font">
-                                        Among the many prizes you may win are collectible cards of varying rarity, $BALR tokens, Party tickets and many more!
-                                        </p>
-                                        <p className="text-font"> <b>Ballers city is all about Play, Party and Earn </b> </p>
+                                        
+                                        <p className="text-font"> <b>Get Ready to Play, Party and Earn in Ballers City</b> </p>
                                     </div>
                                     <div className="innerBtn">
                                         <a href="/pool" ><span></span>View pool</a>
@@ -648,10 +648,10 @@ const Dashboard = () => {
 
                                             <div className="mb-5">
                                                 <p className="text-font">
-                                                    Choose from our collection of 10,000 NFT characters, each having their own storyline and vibe.
+                                                Unlock the vibrant world of Ballers City with our limited-edition NFT characters. Choose from 17 unique and rare NFTs, each representing a different district with its own distinct personality and story. 
                                                 </p>
                                                 <p className="text-font">
-                                                  These NFTs are your only way to access the city that never sleeps. Get the exclusive Ballers NFT to join the clan before the time runs out!
+                                                With only 588 copies of each character, this is your chance to get exclusive access to the city that never sleeps. Claim your Ballers NFT now and join the clan before it's too late
                                                 </p>
                                                 <div className="row">
                                                     <div className="col-6 col-xl-4">
@@ -714,10 +714,10 @@ const Dashboard = () => {
                                 <div className="col-sm-6">
 
                                     <div className="ballercoin text-right"> 
-                                        <div className="flashDiv">
+                                        {/* <div className="flashDiv">
                                             <div className="flashLight"></div>
                                             <div className="flashLight2"></div>
-                                        </div>                                        
+                                        </div>             */}
                                         <img src={ballerCoin} alt="Baller Coin"  /> 
                                     </div>
                                 </div>

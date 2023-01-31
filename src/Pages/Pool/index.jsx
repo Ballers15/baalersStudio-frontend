@@ -139,8 +139,9 @@ const Pool = () => {
                                     <p>Play & Earn </p>
                                     <h1>POOL </h1>
                                     <p className="textHeader">
-                                        Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
+                                    Join the ultimate Play and Earn experience and win rewards with real-world value in Ballers City. Compete for a chance to win $BALR tokens, collectible NFTs, and tickets to exclusive physical parties around the world. 
                                     </p>
+                                    <p className="textHeader"> <b>Start playing now and bring your rewards to life!</b></p>
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">

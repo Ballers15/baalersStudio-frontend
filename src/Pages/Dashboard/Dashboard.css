@@ -33,6 +33,30 @@ body, p,  h5{
 font-size: 18px;
 background: #110929;
 }
+
+::-webkit-scrollbar {
+
+  width: 5px;
+
+}
+
+::-webkit-scrollbar-track {
+
+  background: #111;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: #22187f;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: #260059;
+
+}
 .bgShade{
   position: absolute;
   left: -14rem;
@@ -1384,6 +1408,7 @@ ul li {
   animation-delay: calc(var(--scroll) * -1s);  
   animation-iteration-count: 1;
   animation-fill-mode: both;
+  
 }
 .white.star img {
   /* background-color: #fff; */
@@ -2558,7 +2583,7 @@ line-height: 100%;
   font-size: 14px;
 }
 
-}
+} 
 @media (max-width: 500px){
   .bgShade { 
     left: -3rem;
@@ -2574,6 +2599,12 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
+  /* .black.star img{
+    margin-left: 10rem;
+  } */
+  /* .pink.star img { 
+    margin-left: 3rem;
+} */
   .playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after {
     width: 58px;
   }
@@ -2605,44 +2636,7 @@ line-height: 100%;
 .ballercoin img {
   width: 54%;
 }
-.ballercoin::before { 
-background-image: url('../../Assest/img/ballerCoin.png');
-  content: "";
 
-  height: 370px;
-
-  width: 370px;
-
-  z-index: 0;
-border: 2px solid #fff;
-  -webkit-animation: rotation 27s infinite;
-
-  animation: rotation 27s infinite;
-
-  opacity: 1;
-
-  top: 10px;
-
-  left: 0;
-
-  position: absolute;
-
-}
-@-webkit-keyframes rotation {
-
-  from {
-
-    -webkit-transform: rotate(0);
-
-  }
-
-  to {
-
-    -webkit-transform: rotate(359deg);
-
-  }
-
-}
   .fStar, .stars.slideStar{display: none;}
  .mob-center{
   text-align: center !important;
@@ -2686,6 +2680,9 @@ border: 2px solid #fff;
   b, strong { 
     font-weight: 600;
 }
+.sCaption b, .sCaption strong { 
+  font-weight: 800; 
+}
   .gradientBackgroung {
     padding-bottom: 2rem;
 } 
@@ -2696,7 +2693,7 @@ border: 2px solid #fff;
   width: 88px;
 }
   .innerBtn a {
-    font-size: 15px;
+    font-size: 13px;
     padding: 0.5rem 1.25rem 0.5rem;
     left: 0;
     right: 0;
@@ -2764,8 +2761,8 @@ border: 2px solid #fff;
   .mainSlider .carousel-caption img {
     width: 100%;
 }
-.shareBtn { 
-  right: 2rem;
+.shareBtn {
+  right: 3rem;
   padding-top: 10px;
 }
 .positionAbs{
@@ -3112,6 +3109,9 @@ ul li {
 }
 }
 @media (max-width: 400px){
+  .shareBtn { 
+    right: 2rem;
+  }
   .playBtn a, .shareBtn a{
     font-size: 13px;
   }
@@ -3137,6 +3137,27 @@ ul li {
     right: 4.25rem;
     bottom: 7.8rem;
   }
+}
+@media (min-width:389px) and (max-width: 415px){
+  .news {
+    margin-bottom: 11rem;
+}
+.news--news_page .news-list {
+  height: 373px;
+  top: 8.5rem;
+}
+.nftCollectionHead { 
+  margin-bottom: 6rem;
+}
+.news-list {
+  max-width: 40%;
+  left: 17%;
+}
+.arrowUp {
+  bottom: 36%;
+  width: 8%;
+  left: 20%;
+}
 }
 @media (max-width: 380px){
   .mainSlider .carousel-item {
@@ -3248,15 +3269,15 @@ ul li {
   top: -3%;
 } 
 .innerBtn a{width: 60%;}
-.heading {
+/* .heading {
   font-size: 32px;
 }
 .heading2, .faqHead {
   font-size: 35px; 
-}
-.balrHead {
+} */
+/* .balrHead {
   font-size: 30px; 
-}
+} */
 
 #partyGang h4{
   font-size: 18px;
@@ -3274,7 +3295,7 @@ ul li {
 }
 
 .joinCard {
-  height: 288px;
+  height: 372px;
 }
 .joinCard .image {
   width: 100%;
@@ -3303,30 +3324,51 @@ ul li {
   right: 3%;
   top: 18rem;
   width: 10%;
-}
-.joinUs {
-  font-size: 25px;
-}
+} 
 .joinText {
   font-size: 14px;
 }
+.joinUs {
+  font-size: 25px;
+  width: 84%;
+  margin-left: auto;
+  margin-right: auto;
+}
+}
 
+
+@media (min-width:359px) and (max-width: 366px){
+  .shareBtn {
+    right: 4rem;
+  }
+  .coinImage img {
+    right: 0%;
+    top: -12%;
+}
 }
 @media (max-width: 320px){
   .logoSlider {
     bottom: -.5rem;
 }
 }
-
-#loader {
-  border: 12px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 12px solid #444444;
-  width: 70px;
-  height: 70px;
+#loader{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+.loader {
+  border: 0;
+  border-radius: 50%; 
+  background: #000;
+  padding: 8px;
+  width: 90px;
+  height: 90px;
   animation: spin 1s linear infinite;
 }
-
+#loader img{
+  width: 100%;
+}
 @keyframes spin {
   100% {
       transform: rotate(360deg);
