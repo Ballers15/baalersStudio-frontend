@@ -9,6 +9,9 @@
   .small, small { 
     font-size: 12px;
 }
+img{
+  height: auto;
+}
 .imgHeight{
   height: 128px;
 }
@@ -242,7 +245,7 @@ background: #110929;
   padding-top: 6rem;
 }
 #balrToken{
-  padding-top: 5rem;
+  padding-top: 8rem;
 }
   
 .balrHead {
@@ -1566,29 +1569,7 @@ ul li {
   align-items: center;
   height: 100%;
 }
-
-/* .viewer {
-  height: 77vh;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 200px;
-  width: 100vw;
-  background-image: url(../../Assest/img/doodle-sprite.png);
-  background-repeat: no-repeat;
-  background-position: 0 50%;
-} */
-
-
-
-.comparisonSection {
-  position: relative;
-  padding-bottom: 70.25%; /* to maintain aspect ratio (responsive!) */
-  width: 800px;
-}
-.comparisonImage {
-  width: 100%;
-  height: 100%;
-}
+  
 .afterImage {
   position: absolute;
   overflow: hidden;
@@ -1598,14 +1579,7 @@ ul li {
 .afterImage img {
   transform: translate(0px, -100%);
 }
-.comparisonImage img {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-}
-
-
+ 
 .ballercoin {
   /* height: 300px;
   width: 350px; */
@@ -1614,25 +1588,7 @@ ul li {
   position: relative;
   z-index: 1;
 }
-.flashDiv{
-  position: absolute;
-    right: 12rem;
-    top: 0;
-    bottom: 0;
-}
-.flashLight, .flashLight2 {
-  right: 5%;
-  -moz-transition-property: "left, opacity";
-  -o-transition-property: "left, opacity";
-  -webkit-transition-property: "left, opacity";
-  transition-property: "left, opacity";
-  -moz-transition-duration: ".6s, .6s";
-  -o-transition-duration: ".6s, .6s";
-  -webkit-transition-duration: ".6s, .6s";
-  transition-duration: ".6s, .6s"; 
-  opacity: 0;
-  transform: scale(0, 0);
-}   
+ 
 @-webkit-keyframes shiney {
   0% {
     opacity: 0.2;
@@ -1660,32 +1616,7 @@ ul li {
     opacity: 0.2;
     transform: rotate(0deg) scale(1.5);
   }
-}
-.flashLight2 {
-  /* opacity: 1; */
-  content: "";
-  position: absolute;
-  top: 40%;
-  height: 65px;
-  width: 65px;
-  /* margin-left: -12px; */
-  /* background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuNSIvPjxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMSIvPjxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==); */
-  /* background: radial-gradient(50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0) 75%); */
-  background: radial-gradient(50% 50%, rgb(255 255 255 / 83%) 0%, rgb(255 255 255 / 52%) 40%, rgba(255, 255, 255, 0) 75%);
-  z-index: 40;
-  background-repeat: no-repeat;
-}
-.flashLight {
-  /* opacity: 1; */
-  height: 20px;
-  width: 390px;
-  margin-right: -164px;
-  top: 46%;
-  content: "";
-  position: absolute;
-  /* background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOSIvPjxzdG9wIG9mZnNldD0iNzUlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==); */
-  background: radial-gradient(50% 50%, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 75%);
-}
+} 
 
 
 .box{
@@ -1834,9 +1765,7 @@ ul li {
 }
 
 @media (min-width: 1800px){
-  .comparisonSection { 
-    padding-bottom: 58.25%;
-  }
+ 
   .joinUs{ 
     font-size: 40px;   
   }
@@ -1968,6 +1897,9 @@ ul li {
   }
 }
 @media (min-width: 2000px){
+  .poolBtn {
+    width: 90%;
+}
   .sCaption h1 { 
     font-size: 160px;
     line-height: 90%;
@@ -2132,10 +2064,7 @@ ul li {
   }
   .balrHead { 
     right: -6%;
-  }
-  .flashDiv{
-    right: 10rem; 
-  }
+  } 
   .thirdSlide .sCaption {
     width: 40%;
   }
@@ -2235,7 +2164,18 @@ font-size: 18px;
 line-height: 100%;
 }
 }
-@media (max-width: 1350px){
+@media (min-height:890px) and (max-height: 919px){
+  .mainSlider .carousel-item {
+    height: 100vh;
+}
+.bg-move img:nth-child(2) { 
+  top: 270px;
+}
+.bg-move img {  
+  top: 379px;
+}
+}
+@media (max-width: 1367px){
   .innerBtn a { 
     padding: 0.75rem 2.25rem;
   }
@@ -2259,9 +2199,7 @@ line-height: 100%;
 }
 .joinCard i.fa.fa-instagram { 
   right: 4rem; }
-  .viewer {
-    height: 87vh;
-  }
+ 
   .partyHard {  
     font-size: 85px;  
     right: -13rem;
@@ -2272,10 +2210,10 @@ line-height: 100%;
     font-size: 18px;
     line-height: 24px;
 }
-  .coinImage img { 
-    right: 31%;
-    top: -8%;
-  }
+ .coinImage img {
+    right: 29%;
+    top: -14%;
+}
   .reward #one {
     top: -31rem; 
     left: 20rem;
@@ -2352,9 +2290,9 @@ line-height: 100%;
 .joinCard i.fa.fa-instagram { 
   right: 4.25rem;
 }
-.coinImage img { 
+/* .coinImage img { 
   right: 35%;
-}
+} */
 }
 @media (max-width: 1270px){
   .playBtn a span:after, .playBtn a span:before, .playBtn a:after, .playBtn a:before, .rewadText .innerBtn a span:after, .rewadText .innerBtn a span:before, .rewadText .innerBtn a:after, .rewadText .innerBtn a:before {
@@ -2375,10 +2313,7 @@ line-height: 100%;
   .heading2 { 
     font-size: 73px;
   }
- 
-  .viewer {
-    height: 100vh;
-  }
+  
   .coinImage img { 
     right: 22%;
     top: -8%; 
@@ -2458,9 +2393,7 @@ line-height: 100%;
   left: 18%;
   top: 47%;
 }
-.viewer {
-  height: 78vh;
-}
+ 
   .mainSlider .carousel-item{
     height: 100vh;
   }
@@ -2472,10 +2405,7 @@ line-height: 100%;
 }
   .mob-wth {
     width: 68%;
-}
-  .flashDiv {
-    right: 4rem;
-}
+} 
   .marquee { 
     font-size: 148px;
     line-height: 160px;
@@ -2766,10 +2696,7 @@ line-height: 100%;
   width: 47%;
   bottom: 10rem;
 }
-
-  /* .flashDiv { 
-    right: 9rem;
-  } */
+ 
   .wth-4 {
     width: 100%;
 }
@@ -3131,7 +3058,21 @@ ul li {
     height: 120vh;
 }
 }
+@media (max-width: 413px){
+  .thirdSlide .poolBtn {
+    bottom: 8rem;
+}
+  .sCaption { 
+    margin-top: 7rem;
+}
+.arrowDown { 
+  top: 31rem;
+}
+}
 @media (max-width: 400px){
+  .coinImage img { 
+    right: 6%;
+}
   .shareBtn { 
     right: 2rem;
   }
@@ -3241,9 +3182,7 @@ ul li {
   .joinCard {
     height: 346px;
 }
-  .viewer {
-    height: 95vh;
-}
+ 
 .news {
   height: 122vh;
 }
@@ -3280,9 +3219,7 @@ ul li {
     top: -8%;
 }
 .news{height: 140vh;}
-  .flashDiv {
-    right: 4rem;
-}
+ 
   /* .logoSlider {
     bottom: -15rem;
 }  

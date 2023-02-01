@@ -55,6 +55,18 @@
   .pool .thirdSlide {
     height: 61vh; 
 }
+@media (min-width: 1900px){
+    .loader { 
+        width: 185px;
+        height: 185px;
+    }    
+    .pool .thirdSlide .sCaption {
+        width: 48%;
+    }
+    .pool .poolBtn {
+        width: 90%;
+    }
+}
 @media (min-width: 1750px){
     .pool .secondText {
         left: 0;

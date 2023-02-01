@@ -32,9 +32,9 @@ import star from '../../Assest/img/Star.svg'
 import discord from '../../Assest/img/discord.svg'
 // import tdefi from '../../Assest/img/logos/tdefi.png'
 // import tradedog from '../../Assest/img/logos/tradedog.png'
-import tdmm from '../../Assest/img/logos/tdmm.png'
+// import tdmm from '../../Assest/img/logos/tdmm.png'
 // import tdx from '../../Assest/img/logos/tdx.png'
-import ith from '../../Assest/img/logos/ith.png'
+// import ith from '../../Assest/img/logos/ith.png'
 import gamelogo from '../../Assest/img/gamelogo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import footerLogo from '../../Assest/img/footerLogo.png'
@@ -54,8 +54,8 @@ import starS from '../../Assest/img/starS.svg'
 import {subscribeMailJet} from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
-import ScriptTag from 'react-script-tag';
-import gsapScript from './ballerTokenGsap';
+// import ScriptTag from 'react-script-tag';
+// import gsapScript from './ballerTokenGsap';
 // const loader = document.querySelector(".loader-wrapper");
 // const hideLoader = () => loader?.classList?.add("loader--hide");
 window.addEventListener(
@@ -95,31 +95,19 @@ function useHover() {
 const Dashboard = () => { 
     useEffect(() => {
         $(window).scroll(function() {
-
-            var scrollTop = $(this).scrollTop();
-            // var scrollBottom = $(window).scrollTop() + $(window).height();
+            var scrollTop = $(this).scrollTop(); 
             var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-
-
-            console.log("sc",scrollBottom);
-            console.log("scroll top ",scrollTop);
-        //   if(scrollTop>=4500){
-            console.log($('#scrollImg'))
-            
             $('#scrollImg').css({
                 opacity: function() {
                   var elementHeight = $(this).height();
-
-                  console.log("element",elementHeight);
                       let opacity = (( - (elementHeight - scrollBottom) / elementHeight) );
-                    console.log("opaci",opacity)
+                      if(opacity>0.5){ 
+                        opacity=1; 
+                    } 
                   return opacity;
                 }
-              });
-            // }
-          });      
- 
-            
+              }); 
+          });                  
     })
     
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
@@ -239,7 +227,7 @@ const Dashboard = () => {
         
 
             <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
-            <ScriptTag type="text/javascript" src={gsapScript} />
+            {/* <ScriptTag type="text/javascript" src={gsapScript} /> */}
             
             <Modal
                 show={playModalShow}
@@ -324,12 +312,7 @@ const Dashboard = () => {
                 Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
                 </p>
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
+               
             </Modal>
 
             <Modal
@@ -352,12 +335,7 @@ const Dashboard = () => {
                  Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
+                 
             </Modal>
 
             <div className="dashboard">
@@ -368,7 +346,7 @@ const Dashboard = () => {
                                 <Carousel interval={null} wrap={false} >
                                     <Carousel.Item>
                                         <Carousel.Caption>
-                                            <img src={ellipse} className="bgShade" alt="Eclipse"/>
+                                            <img src={ellipse} className="bgShade" alt="Eclipse"  width="1459" height="1529"/>
                                             <div className="container">
                                                 <p className="firstText">UNLOCK NEW CITIES</p>
                                                 <div className="row">
@@ -377,20 +355,9 @@ const Dashboard = () => {
                                                             <div>
                                                                 <p>Play | Party | <b>Earn</b> </p>
                                                                 <h1>BALLERS CITY </h1>
-                                                                <div className="fStar">
-                                                                     
-                                                                    <img src={starS} className="starSmall small" alt="Star" />
+                                                                <div className="fStar">                                                                     
+                                                                    <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                                                                 </div>
-
-                                                                {/* <svg width="100" height="100" viewBox="0 0 100 100" id="four">
-                                                                    <g className="group" opacity="0.8">
-
-                                                                        <g className="small">
-                                                                            <path id="small" d="M41.25,40 L42.5,25 L43.75,40 L45,41.25 L60,42.5 L45,43.75
-                                                                                            L43.75,45 L42.5,60 L41.25,45 L40,43.75 L25,42.5 L40,41.25z" fill="#C51EE0" />
-                                                                        </g>
-                                                                    </g>
-                                                                </svg> */}
                                                                 <p className="textHeader ">
                                                                     A Web 3.0 hyper casual game that is your gateway to play, engage and socialize with your gang at exclusive parties.
                                                                 </p>
@@ -421,8 +388,8 @@ const Dashboard = () => {
                                         <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
                                         />
                                          <div className="stars slideStar">
-                                            <img src={starM} className="starMed large" alt="Star" />
-                                            <img src={starS} className="starSmall small" alt="Star" />
+                                            <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
+                                            <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                                         </div>
                                         <div className="box"></div>
                                         <Carousel.Caption>
@@ -568,9 +535,9 @@ const Dashboard = () => {
 
                 <div className="reward">
                     <div>
-                        <img src={starL} id="one" className="large" alt="Star" />
-                        <img src={starM} id="two" className="small" alt="Star" />
-                        <img src={starS} id="three" className="large" alt="Star" />
+                        <img src={starL} id="one" width={61} height={60} className="large" alt="Star" />
+                        <img src={starM} id="two" width={60} height={60} className="small" alt="Star" />
+                        <img src={starS} id="three" width={47} height={47} className="large" alt="Star" />
                     </div>
                     {/* <div className="bggg"></div> */}
                     <div className="container">
@@ -579,8 +546,8 @@ const Dashboard = () => {
                                 <div className="">
                                     <div className="rewardImage bg-static">
                                         <div className="bg-move">
-                                            <img src={reward_card} alt="Italian_Mafia_Boss" />
-                                            <img src={r1} alt="Italian_Mafia_Boss" />
+                                            <img src={reward_card} alt="reward" width="117" height="117" />
+                                            <img src={r1} alt="reward" width="182" height="182"/>
                                         </div>
                                     </div>
                                 </div>
@@ -588,7 +555,7 @@ const Dashboard = () => {
                             <div className="col-sm-6 my-auto px-0">
                                 <div className="rewadText">
                                     <div className="coinImage">
-                                        <img src={coin} alt="coin image" />
+                                        <img src={coin} alt="coin image" width="199" height="199" />
                                     </div>
                                     <div className="positionRelative mb-4">
                                         <h2 className="heading">REWARD</h2>
@@ -609,15 +576,15 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="backCoin"> <img src={semiCoin} alt="coin image" /></div>
+                    <div className="backCoin"> <img src={semiCoin} alt="coin image"  width="292" height="471" /></div>
                 </div>
                 <div className="">
                     <div className="gradientBackgroung pb-8">
 
                         <div className="container" id="partyGang">
                             <div className="stars">
-                                <img src={starM} className="starMed large" alt="Star" />
-                                <img src={starS} className="starSmall small" alt="Star" />
+                                <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
+                                <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                             </div>
                             <div className="scene section" id="sticky">
                                 <div className="positionRelative mt-5">
@@ -637,17 +604,15 @@ const Dashboard = () => {
                                                 <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><span></span>Join <img src={discord} className="discordIcon" alt="discord logo" /></a>
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer">
+                                                    <span></span>Join <img src={discord} className="discordIcon" alt="discord logo" width={27} height={20} /></a>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-sm-5">
 
                                         <div className="dancingImg">
-                                            <img src={SneefDog} alt="Snoopdog " />
-                                            {/* <div >
-                                                <div className="viewer"></div>
-                                            </div> */}
+                                            <img src={SneefDog} alt="Snoopdog" width="413" height="734" />                                      
 
                                         </div>
                                         <div className="partyHard">PARTY HARD</div>
@@ -656,7 +621,7 @@ const Dashboard = () => {
                             </div>
 
                         </div>
-                        <img src={ellipse2} className="bgShade2" alt="Eclipse"/>
+                        <img src={ellipse2} className="bgShade2"  width="1003" height="1788" alt="Eclipse"/>
 
                         <div className="container">
                             <div className="news news--news_page row">
@@ -692,7 +657,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="news-caption-wrap col-sm-6 order-sm-1">
                                     <div className="stars">
-                                        <img src={starM} className="starMed large" alt="Star" />
+                                        <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
                                     </div>
                                     <div className="news-caption">
                                         <div className="">
@@ -712,11 +677,7 @@ const Dashboard = () => {
                                                     <div className="col-6 col-xl-5">
                                                         <div className="countHead">Total Number of NFTs</div>
                                                         <h5 className="num">10,000</h5>
-                                                    </div>
-                                                    {/* <div className="col-sm-3">
-                                                        <div>Volume</div>
-                                                        <h5 className="num">TBA</h5>
-                                                    </div> */}
+                                                    </div> 
                                                 </div>                                                
                                             </div>
                                             <div className="innerBtn"  {...buttonAHoverProps2}>
@@ -765,20 +726,17 @@ const Dashboard = () => {
                                 <div className="col-sm-6">
 
                                     <div className="ballercoin text-right"> 
-                                        {/* <div className="flashDiv">
-                                            <div className="flashLight"></div>
-                                            <div className="flashLight2"></div>
-                                        </div>             */}
-                                        <img src={ballerCoin} alt="Baller Coin"  /> 
+                                         
+                                        <img src={ballerCoin} alt="Baller Coin" width="382" height="382"/> 
                                     </div>
                                 </div>
                             </div>
-                            <img src={ellipse2} className="bgShadeBalr" alt="Eclipse" />
+                            <img src={ellipse2} className="bgShadeBalr" alt="Eclipse"  width="673" height="1198"/>
 
                             <div>
-                                <img src={starL} id="one" className="large" alt="Star" />
-                                <img src={starM} id="two" className="small" alt="Star" />
-                                <img src={starS} id="three" className="large" alt="Star" />
+                                <img src={starL} id="one" width={61} height={60} className="large" alt="Star" />
+                                <img src={starM} id="two" width={60} height={60} className="small" alt="Star" />
+                                <img src={starS} id="three" width={47} height={47} className="large" alt="Star" />
 
                             </div>
                         </div>
@@ -788,11 +746,11 @@ const Dashboard = () => {
                         <div className="container positionRelative p-0"> 
                             <div className="joinCard">  
                             <div className="desk">
-                            <img className="image" src={ambassador} alt="Ballers AMBASSADOR program" />
+                            <img className="image" src={ambassador} alt="Ballers AMBASSADOR program"  width="1500" height="571" />
                             {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
                             </div>
                             <div className="mob">
-                            <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program" /> 
+                            <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program"  width="404" height="595" /> 
                             </div>
                             <div className="contentJoin">
                                 <div className="row justify-content-center">                                    
@@ -850,9 +808,9 @@ const Dashboard = () => {
 
                     <div className="gradientBackgroung secPaddingY">
                         <div className="container paddingY-5 mt-5 positionRelative">
-                            <img src={ellipse3} className="bgShade3" alt="Eclipse" />
+                            <img src={ellipse3} className="bgShade3"  width="612" height="988" alt="Eclipse" />
                             <div className="row">
-                                <div className="col-lg-5">
+                                <div className="col-lg-5 my-auto">
                                     <div className="positionRelative mb-5">
                                         <h2 className="heading text-left">FAQ</h2>
                                         <h2 className="faqHead text-left">FAQ</h2>
@@ -897,23 +855,13 @@ const Dashboard = () => {
                                     </Accordion>
                                 </div>
                                 <div className="col-lg-7 my-auto">
-                                    <div class='nice-header'>
-                                        <img src={house} alt="before" className="img-fluid"/>
-                                        <div class='header-overlay' id="scrollImg">
-                                        <img src={house1} alt="after" className="img-fluid" />
+                                    <div className='nice-header'>
+                                        <img src={house} alt="before" className="img-fluid" width="851" height="700"/>
+                                        <div className='header-overlay' id="scrollImg">
+                                        <img src={house1} alt="after" className="img-fluid"  width="851" height="700"/>
 
                                         </div>
-                                    </div>
-                                    {/* <section className="comparisonSection ">
-
-                                        <div className="comparisonImage beforeImage">
-                                            <img src={house1} alt="before" />
-                                        </div>
-                                        <div className="comparisonImage afterImage">
-                                            <img src={house} alt="after" />
-                                        </div>
-                                    </section> */}
-                                    
+                                    </div>                                    
                                 </div>
                                 
                             </div>
@@ -921,12 +869,12 @@ const Dashboard = () => {
                         <div className="container mt-4 footerIcon">
                             <div className="row align-items-center">
                                 <div className="col-2 col-sm-3">
-                                    <img src={footerLogo} alt="logo"  className="mob-wth img-fluid desk imgHeight"/>
-                                    <img src={gamelogo} alt="logo"  className="mob-wth img-fluid mob"/>
+                                    <img src={footerLogo} alt="logo"  className="mob-wth img-fluid desk imgHeight"  width="200" height="128"/>
+                                    <img src={gamelogo} alt="logo"  className="mob-wth img-fluid mob"  width="40" height="51"/>
                                 </div>
                                 <div className="col-4 col-sm-3">
                                     <div className="d-flex align-items-center">
-                                        <img src={teen} alt="logo"  className="mob-wth-px img-fluid"/>
+                                        <img src={teen} alt="logo"  width="65" height="97" className="mob-wth-px img-fluid"/>
                                         <ul>
                                             <li>Blood </li>
                                             <li>Language</li>
@@ -938,18 +886,15 @@ const Dashboard = () => {
 
                                 </div>
                                 <div className="col-3 col-sm-3">
-                                    <img src={gamecity} alt="logo" className="ipadWth img-fluid" />
+                                    <img src={gamecity} alt="logo"  width="351" height="167" className="ipadWth img-fluid" />
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">
                                         <li>Privacy notice</li>
-                                        <li>Term of service</li>
+                                        <li>Terms of service</li>
                                         <li>Cookie preference</li>
                                     </ul>
-
                                 </div>
-
-
                             </div>
                          
                         </div>
