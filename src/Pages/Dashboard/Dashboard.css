@@ -216,6 +216,28 @@ background: #110929;
     z-index: 0;
 
 }
+
+.nice-header {
+  position: relative;
+  /* height: 300px; */
+  background: center center;
+  background-size: cover;
+  /* background-image: url(../../Assest/img/house.png);     */
+  /* animation-play-state: paused;
+  animation-delay: calc(var(--scroll) * -1s);  
+  animation-iteration-count: 1;
+  animation-fill-mode: both; */
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-image: url(../../Assest/img/house1.png); */
+  opacity: 0.2;
+}
 #partyGang{
   padding-top: 6rem;
 }
