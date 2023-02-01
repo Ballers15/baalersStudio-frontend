@@ -133,11 +133,13 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [toasterMessage, setToasterMessage] = useState("");
     const [toaster, showToaster] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(null);
     const setShowToaster = (param) => showToaster(param);
 
     const handleShow = (modalName)=>{
         if(modalName === 'play'){
             setEmail('');
+            setValidated(false);
             setPlayModalShow(true);
         }else if(modalName === 'lottery'){
             setLotteryModalShow(true);
@@ -164,6 +166,13 @@ const Dashboard = () => {
         }
         
     }
+    const setErrorMsgFunc=()=>{
+        if(!emailValidation()){
+            setErrorMsg('Enter a Valid Email !');
+        }else{
+            setErrorMsg(null)
+        }
+    }
 
     const handleSubmit = async (e) => {
         // console.log(email,'-----------email value');
@@ -171,8 +180,9 @@ const Dashboard = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+       
 
-        if (email) {
+        if (email && !errorMsg) {
             let dataToSend = {
                 email: email
             }
@@ -187,9 +197,10 @@ const Dashboard = () => {
                 setToasterMessage(subscribe?.error?.message||'Something Went Worng');
                 setShowToaster(true);
               } else {
-                setToasterMessage(' THANK YOU FOR SUBSCRIBING!!');
+                setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
                 setShowToaster(true);
-                setPlayModalShow(false);
+                  setPlayModalShow(false);
+                  setErrorMsg(null);
               }
             } catch (error) {
             //   console.log(error)
@@ -198,7 +209,7 @@ const Dashboard = () => {
               setLoading(false);
             }
         } else {
-            // console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
       }
     
@@ -212,6 +223,15 @@ const Dashboard = () => {
     
     const hiddenButtonClicked = () => {
         // console.log('hidden button clicked---------------------')
+    }
+
+    const emailValidation=()=>{
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+        if(!email || regex.test(email) === false){
+            
+            return false;
+        }
+        return true;
     }
 
     return (
@@ -244,10 +264,13 @@ const Dashboard = () => {
                                 type="email"
                                 placeholder="Email"
                                 value={email}
-                                onChange={({ target }) => setEmail(target.value)}
+                                onChange={({ target }) => { setErrorMsgFunc(); setEmail(target.value) }}
                             />
                             <Form.Control.Feedback type="invalid">
-                                Valid E-mail is required
+                                Valid E-mail is required !
+                            </Form.Control.Feedback>
+                            <Form.Control.Feedback >
+                              <span className='custom-error-msg'> { errorMsg&&'Valid E-mail is required !'}</span>
                             </Form.Control.Feedback>
                         </Form.Group>
                         <div>
