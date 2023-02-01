@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
@@ -12,7 +12,7 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import Man from '../../Assest/img/Man.gif'
+import man from '../../Assest/img/man.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.png'
 import ambassadorMob from '../../Assest/img/ambassadorMob.png'
@@ -93,6 +93,34 @@ function useHover() {
 }
   
 const Dashboard = () => { 
+    useEffect(() => {
+        $(window).scroll(function() {
+
+            var scrollTop = $(this).scrollTop();
+            // var scrollBottom = $(window).scrollTop() + $(window).height();
+            var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+
+
+            console.log("sc",scrollBottom);
+            console.log("scroll top ",scrollTop);
+        //   if(scrollTop>=4500){
+            console.log($('#scrollImg'))
+            
+            $('#scrollImg').css({
+                opacity: function() {
+                  var elementHeight = $(this).height();
+
+                  console.log("element",elementHeight);
+                      let opacity = (( - (elementHeight - scrollBottom) / elementHeight) * 0.8) + 0.2;
+                    console.log("opaci",opacity)
+                  return opacity;
+                }
+              });
+            // }
+          });      
+ 
+            
+    })
     
     const [buttonAIsHovering, buttonAHoverProps] = useHover() 
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
@@ -357,7 +385,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-7 text-right mob-center">
-                                                        <img src={Man} alt="Italian_Mafia_Boss" />
+                                                        <img src={man} alt="Italian_Mafia_Boss" />
                                                     </div>
                                                 </div>
                                                 <p className="secondText">Awaken the Baller within you</p>
@@ -846,7 +874,14 @@ const Dashboard = () => {
                                     </Accordion>
                                 </div>
                                 <div className="col-lg-7 my-auto desk">
-                                    <section className="comparisonSection ">
+                                    <div class='nice-header'>
+                                        <img src={house} alt="before" className="img-fluid"/>
+                                        <div class='header-overlay' id="scrollImg">
+                                        <img src={house1} alt="after" className="img-fluid" />
+
+                                        </div>
+                                    </div>
+                                    {/* <section className="comparisonSection ">
 
                                         <div className="comparisonImage beforeImage">
                                             <img src={house1} alt="before" />
@@ -854,14 +889,10 @@ const Dashboard = () => {
                                         <div className="comparisonImage afterImage">
                                             <img src={house} alt="after" />
                                         </div>
-                                    </section>
+                                    </section> */}
                                     
                                 </div>
-                                <div className="col-sm-7 mob"> 
-                                        <div className="houseImg">
-                                            <img src={houseMob} alt="after" />
-                                        </div>
-                                    </div>
+                                
                             </div>
                         </div>
                         <div className="container mt-4 footerIcon">
