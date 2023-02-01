@@ -111,7 +111,7 @@ const Dashboard = () => {
                   var elementHeight = $(this).height();
 
                   console.log("element",elementHeight);
-                      let opacity = (( - (elementHeight - scrollBottom) / elementHeight) * 0.8) + 0.2;
+                      let opacity = (( - (elementHeight - scrollBottom) / elementHeight) );
                     console.log("opaci",opacity)
                   return opacity;
                 }
@@ -873,7 +873,7 @@ const Dashboard = () => {
 
                                     </Accordion>
                                 </div>
-                                <div className="col-lg-7 my-auto desk">
+                                <div className="col-lg-7 my-auto">
                                     <div class='nice-header'>
                                         <img src={house} alt="before" className="img-fluid"/>
                                         <div class='header-overlay' id="scrollImg">
