@@ -317,6 +317,7 @@ background: #110929;
   margin: auto;
 }
 .mainSlider .carousel-caption img{
+  height: auto;
     width: 81%;
 }
 .mainSlider .carousel-item{

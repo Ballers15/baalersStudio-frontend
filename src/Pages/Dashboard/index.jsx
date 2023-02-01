@@ -385,7 +385,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-7 text-right mob-center">
-                                                        <img src={man} alt="Italian_Mafia_Boss" />
+                                                        <img src={man} alt="Italian_Mafia_Boss" width="558" height="993" />
                                                     </div>
                                                 </div>
                                                 <p className="secondText">Awaken the Baller within you</p>
