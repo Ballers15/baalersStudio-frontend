@@ -625,6 +625,12 @@ background: #110929;
   margin: auto;
   font-size: 16px;
   text-align: center;
+  width: 66%; 
+  text-align: left;
+}
+.valid-feedback{
+  width: 66%; 
+  text-align: left;
 }
  input#formBasicEmail {
   border: 1px solid #5a3ef869 !important;
@@ -2091,6 +2097,9 @@ ul li {
   }
 }
 @media (max-width: 1500px){
+  .innerBtn a { 
+    padding: 0.75rem 2.25rem;
+  }
   .joinCard { 
     height: 265px;
   }
@@ -2552,6 +2561,12 @@ line-height: 100%;
   }
 }
 @media (max-width: 480px){
+  .formFlex .invalid-feedback { 
+    width: 82%;  
+  }
+  .valid-feedback{
+    width: 82%;  
+  }
   /* .black.star img{
     margin-left: 10rem;
   } */
