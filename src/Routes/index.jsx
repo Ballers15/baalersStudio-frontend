@@ -1,6 +1,8 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React,{useEffect} from 'react';
 import ErrorPage from '../Pages/Error404';
 import Dashboard from '../Pages/Dashboard';
+import AdminDashboard from '../Pages/AdminDashboard';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../Pages/Login';
 import WithoutNav from './WithoutNav';
@@ -19,6 +21,10 @@ import Metamask from '../Components/Metamask'
 
 
 const NavigationRouter = () => {
+ 
+  let strAuth = localStorage.getItem('_u');
+  let _u = JSON.parse(strAuth);
+
     return (
       <>
           <BrowserRouter>
@@ -29,8 +35,10 @@ const NavigationRouter = () => {
                         <Route path="*" element={<ErrorPage />} />
                     </Route>
                     <Route element={<WithNav />}>
-                        <Route exact path="/" element={<Dashboard />} />
+                {_u?.user?.role !== 'ADMIN' && <Route exact path="/" element={<Dashboard />} />}
+                {_u?.user?.role == 'ADMIN' && <Route exact path="/" element={<AdminDashboard />} />}
                         <Route exact path="/about" element={<About />} />
+                        <Route  path="/:id" element={<Dashboard />} />
                         <Route exact path="/party" element={<Party />} />
                         <Route exact path="/roadmap" element={<Roadmap />} />
                         <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} />
@@ -48,3 +56,12 @@ const NavigationRouter = () => {
   
   export default NavigationRouter;
  
+
+//   <Route exact path="/" element={<Dashboard/>} />
+//   <Route  path="/about" element={<About />} />
+//   <Route  path="/:id" element={<Dashboard />} />
+//   <Route  path="/roadmap" element={<Roadmap />} />
+//   <Route  path="/pool" element={<Pool />} />
+//  <Route  path="/wallet" element={<Wallet />} />
+//   <Route  path="/metamask" element={<Metamask />} />
+// </Route>

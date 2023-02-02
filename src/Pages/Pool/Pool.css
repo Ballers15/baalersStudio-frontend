@@ -1,4 +1,138 @@
-.pool{
-    padding: 30px;
-    margin-top: 80px ;
+.pool{ 
+    background-image: url(../../Assest/img/slide3.png);
+    height: 100vh;
+    bottom: 0;
+    top: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: #ECE8E1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+} 
+.pool #four { 
+    transform: translate(122%, 100%);
+}
+.pool .slideStar{
+    position: absolute;
+}
+.pool .slideStar #two {
+    transform: translate(208%, 348%);
+}
+.pool .slideStar #three {
+    transform: translate(1085%, 400%);
+}
+.pool #five {
+    transform: translate(710%,286%);
+} 
+
+.pool .thirdSlide .sCaption{
+    width: 30rem;
+}
+.pool .poolBtn {
+    width: 100%;
+}
+.pool .secondText {
+    left: 0;
+    width: 16%;
+}
+
+.pool .firstText {
+    right: 5rem;
+    top: 32%;
+}
+.pool:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    opacity: .4;
+  }
+  .pool .thirdSlide {
+    height: 61vh; 
+}
+@media (min-width: 1900px){
+    .loader { 
+        width: 185px;
+        height: 185px;
+    }    
+    .pool .thirdSlide .sCaption {
+        width: 48%;
+    }
+    .pool .poolBtn {
+        width: 90%;
+    }
+}
+@media (min-width: 1750px){
+    .pool .secondText {
+        left: 0;
+        width: 12%;
+    }
+}
+@media (max-width: 1500px){
+    .pool .secondText {
+        left: 2rem;
+        width: 14%;
+    }
+    /* .pool .thirdSlide .sCaption {
+        width: 26rem;
+    } */
+    .pool .logoSlider {
+         
+        bottom: 0;
+    }
+}
+@media (max-width: 1024px){
+    .pool .secondText {
+        left: 0rem;
+        width: 17%;
+    }
+    .pool .poolBtn {
+        width: 74%;
+    }
+    
+    
+}
+@media (min-width:768px) and (max-width: 900px){
+    .pool .firstText {
+        right: 0rem;
+        top: 21%;
+    }
+    .pool .secondText {
+        left: -3rem;
+        width: 22%;
+        bottom: 10rem;
+    }
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 480px){
+    .pool .poolBtn {
+        width: 100%;
+    }
+    .pool .poolBtn .playBtn{
+        width: 54%;
+    }
+    .pool .thirdSlide {
+        height: 65vh;
+        width: 84%;
+    }
+    .pool .secondText {
+        left: -2rem;
+        width: 42%;
+        bottom: 7rem;
+    }
+    .pool .firstText { 
+        right: -2rem;
+        top: 23%;
+        width: 34%;
+    }
+    .pool .thirdSlide .sCaption {
+        width: 96%;
+    }
 }

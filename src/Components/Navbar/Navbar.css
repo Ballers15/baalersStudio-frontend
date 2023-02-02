@@ -1,84 +1,55 @@
 .navbar{
-    position: absolute;
+    position: fixed;
     width: 100%;
     /* height: 80px; */
     left: 0px;
     top: 0px;
+    padding: 0;
+    z-index: 999;
     background: linear-gradient(180deg, #110929 0%, rgba(17, 9, 41, 0.1) 145.5%);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+
     /* opacity: 0.7; */
 }
-/* .nav-logo{
-    margin-left: 6rem;
-} */
-.nav-logo img{
-    width: 75%;
-} 
-/* .nav-logo{
-    position: absolute;
-    width: 193px;
-    height: 92px;
-    left: 122px;
-    bottom: 0px;
-    background: url(../../Assest/img/game-logo.png);
-} */
-
-.nav-items{
-    padding-left: 50px;
-    position: absolute;
-    /* width: 45vw;
-    height: 20px; */
-    left: 0;
-    right: 0;
-    margin: auto;
-    padding: 0;
-    text-align: center;
+.navbar-brand { 
+    width: 120px;
 }
-
-
-.nav-item{
-    cursor: pointer;
-    width: 82px;
-    height: 20px;
-    margin-left: 55px;
-    font-family: 'Source Sans Pro';
+.navbar-brand img {
+    width: 66%;
+} 
+.navbar-expand-lg .navbar-nav .nav-link{
+    cursor: pointer; 
+    margin-left: 36px;
+    font-family: "Valorant";
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
     letter-spacing: 0.25em;
     color: #ECE8E1;
 }
 
-.responsive-nav-tag{
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    /* left: 1308px; */
-    top: 11px;
-    border-radius: 15px;
-    right: 200px;
-    background-color: #FF4654;
-;
+@media (max-width: 1500px){
+.navbar-expand-lg .navbar-nav .nav-link { 
+    margin-left: 34px; 
+    font-size: 15px;
 }
-
-.responsive-nav-tag-item{
-    position: absolute;
-    width: 42px;
-    height: 2px;
-    /* left: 1321px; */
-    right: 10px;
-    border: 1px solid #ECE8E1;
 }
-.responsive-nav-tag-item-1{
-    top: 17px;
+@media (max-width: 1350px){
+    .navbar-expand-lg .navbar-nav .nav-link {
+      margin-left: 23px;
+      font-size: 12px;
+  }
 }
-
-.responsive-nav-tag-item-2{
-    top: 27px;
-
-}
-
-.responsive-nav-tag-item-3{
-    top: 38px;
-
-}
+@media (max-width: 480px){
+    .navbar-brand img {
+        width: 40%;
+    }
+ }
+ @media (max-width: 380px){
+    .navbar-brand img {
+        width: 30%;
+    }
+ }
+ 

@@ -92,3 +92,6 @@
     animation-delay: .3s;
   }
   
+  .loader--hide{
+    display: none;
+  }

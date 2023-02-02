@@ -63,6 +63,8 @@ export default function AuthProvide({ children }) {
   const logout =  () => {
     setUser(null);
     localStorage.clear(); 
+    navigate('/login');
+
   }
 
   return (
