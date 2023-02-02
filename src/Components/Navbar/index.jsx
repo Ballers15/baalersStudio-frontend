@@ -69,31 +69,17 @@ const CollapsibleExample = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>}
-            {/* <Nav.Link onClick={()=>{goToAbout('/about')}} >About</Nav.Link> */}
             {_u?.user?.role !== 'ADMIN'&&<Nav.Link  eventKey="2" onClick={() => { goToAbout('/partyGang') }}>Party</Nav.Link>}
-            {/* https://medium.com/@Ballers_Studio */}
             {_u?.user?.role !== 'ADMIN'&& <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> }
               {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="3" onClick={() => { goToAbout('/pool') }}>Pool</Nav.Link>}
-              {_u?.user?.role !== 'ADMIN'&& <OverlayTrigger
-                placement='bottom'
-                overlay={
-                  <Tooltip >
-                    Coming soon
-                  </Tooltip>
-                }>
-                
+              {_u?.user?.role !== 'ADMIN'&& <OverlayTrigger placement='bottom'  overlay={<Tooltip >Coming soon</Tooltip>}>
                 <Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> }
-           
               {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/balrToken') }}>$BALR TOKEN</Nav.Link>}
               {_u?.user?.role == 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/') }}>Dashboard</Nav.Link>}
               {_u?.user?.role == 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }}>Pool</Nav.Link>}
               <Nav.Link eventKey="4" onClick={() => { handleLogout()}}>Logout</Nav.Link>
             </Nav>
             <Nav>
-              {/* <Nav.Link href="#deets"><img src={user} alt="user" /></Nav.Link> */}
-              {/* <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-              </Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

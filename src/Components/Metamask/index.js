@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom'
 const Metamask = () => {
 	const [error, setError] = useState("No Error");
 	const [accountDetails, setAccountDetails] = useState('');
-	const navigate = useNavigate()
-	const redirectPath = '/'
+  const navigate = useNavigate();
+  const redirectPath = '/';
+
 	const supportedChainList = {
 		Polygon: {
 			chainId: '0x89',
@@ -24,7 +25,6 @@ const Metamask = () => {
 			},
 		}
 	};
-	
 
   const getAccountDetails = async ({ networkName, setError }) => {
     if (typeof window.ethereum !== "undefined") {
@@ -33,7 +33,6 @@ const Metamask = () => {
           method: "eth_requestAccounts"
         })
         .then((res) => {
-        //   const address = res[0];
           window.ethereum
             .request({
               method: "eth_chainId",

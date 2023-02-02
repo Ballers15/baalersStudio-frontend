@@ -3,7 +3,6 @@ import { Navigate, useLocation } from 'react-router-dom'
 
 export const Authenticator = ({ children }) => {
   const location = useLocation()
-  // const auth = useAuth()
   let strAuth = localStorage.getItem('_u');
   let wallet = localStorage.getItem('isConnected');
   let auth = JSON.parse(strAuth);

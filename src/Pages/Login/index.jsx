@@ -35,8 +35,6 @@ const Login = () => {
                     <span className="login-head">
                         SIGN IN FOR UPDATES!
                     </span>
-                        {/* <span className="login-form-lable login-email-lable">Email</span>
-                        <input type="text" className="login-email-input"  onChange={({ target }) => setEmail(target.value)}></input> */}
                     <Form noValidate validated={validated} onSubmit={handleLogin}>
                           <Form.Group  className="login-email-input" >
                             <Form.Label className="login-form-lable login-email-lable">Email</Form.Label>
@@ -76,10 +74,6 @@ const Login = () => {
                         <span className="login-signup-tag-danger">Sign Up</span>
                     </div>
                     </Form>
-                    
-                        {/* <span className="login-form-lable login-password-lable">Password</span>
-                        <input type="text" className="login-password-input"  onChange={({ target }) => setPassword(target.value)}></input> */}
-                      
                 </div>
             </div>
                

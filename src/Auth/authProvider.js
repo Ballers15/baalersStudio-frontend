@@ -3,8 +3,7 @@ import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
 import Loader from "../Components/Loader";
 import Toaster from "../Components/Toaster";
-
-const AuthContext = createContext(null)
+const AuthContext = createContext(null);
 
 export default function AuthProvide({ children }) {
   const [user, setUser] = useState(null);
@@ -13,7 +12,6 @@ export default function AuthProvide({ children }) {
   const [toaster, showToaster] = useState(false);
   const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
- 
 
   useEffect(() => {
     let _u = localStorage.getItem('_u');

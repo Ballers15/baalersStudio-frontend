@@ -18,7 +18,6 @@ import man from '../../../src/Assest/img/Man.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.png'
 import ambassadorMob from '../../Assest/img/ambassadorMob.png'
-// import ambassadorOver from '../../Assest/img/ambassadorOver.png'
 import slide2 from '../../Assest/img/slide2.png'
 import slide3 from '../../Assest/img/slide3.png'
 import reward_card from '../../Assest/img/reward_card.png'
@@ -32,11 +31,6 @@ import Walter_Black from '../../Assest/img/Walter_Black.png'
 import ballerCoin from '../../Assest/img/ballerCoin.png'
 import star from '../../Assest/img/Star.svg' 
 import discord from '../../Assest/img/discord.svg'
-// import tdefi from '../../Assest/img/logos/tdefi.png'
-// import tradedog from '../../Assest/img/logos/tradedog.png'
-// import tdmm from '../../Assest/img/logos/tdmm.png'
-// import tdx from '../../Assest/img/logos/tdx.png'
-// import ith from '../../Assest/img/logos/ith.png'
 import gamelogo from '../../Assest/img/gamelogo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import footerLogo from '../../Assest/img/footerLogo.png'
@@ -56,10 +50,7 @@ import starS from '../../Assest/img/starS.svg'
 import {subscribeMailJet} from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
-// import ScriptTag from 'react-script-tag';
-// import gsapScript from './ballerTokenGsap';
-// const loader = document.querySelector(".loader-wrapper");
-// const hideLoader = () => loader?.classList?.add("loader--hide");
+
 window.addEventListener(
     "scroll",
     () => {
@@ -81,10 +72,6 @@ document.onreadystatechange = function() {
     }
 };
 
-$(function() {
-    document.getElementById('hiddenButton').click();
-});
-
 function useHover() {
     const [hovering, setHovering] = useState(false)
     const onHoverProps = {
@@ -95,6 +82,7 @@ function useHover() {
 }
   
 const Dashboard = () => { 
+
     useEffect(() => {
         $(window).scroll(function() {
             var scrollTop = $(this).scrollTop(); 
@@ -156,6 +144,7 @@ const Dashboard = () => {
         }
         
     }
+
     const setErrorMsgFunc=()=>{
         if(!emailValidation()){
             setErrorMsg('Enter a Valid Email !');
@@ -165,7 +154,6 @@ const Dashboard = () => {
     }
 
     const handleSubmit = async (e) => {
-        // console.log(email,'-----------email value');
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
@@ -176,14 +164,11 @@ const Dashboard = () => {
             let dataToSend = {
                 email: email
             }
-            // auth.login(dataToSend)
             setLoading(true);
             try {
               const subscribe = await subscribeMailJet(dataToSend);
               setLoading(false);
               if (subscribe.error) {
-            //   console.log(subscribe)
-        
                 setToasterMessage(subscribe?.error?.message||'Something Went Worng');
                 setShowToaster(true);
               } else {
@@ -193,7 +178,6 @@ const Dashboard = () => {
                   setErrorMsg(null);
               }
             } catch (error) {
-            //   console.log(error)
               setToasterMessage(error?.response?.data?.message||'Something Went Worng');
               setShowToaster(true);
               setLoading(false);
@@ -210,10 +194,6 @@ const Dashboard = () => {
     $('#myModal').on('hidden.bs.modal', function () {
     $('#video1')[0].pause();
     })
-    
-    const hiddenButtonClicked = () => {
-        // console.log('hidden button clicked---------------------')
-    }
 
     const emailValidation=()=>{
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
@@ -224,13 +204,11 @@ const Dashboard = () => {
         return true;
     }
 
+  
+
     return (
         <React.Fragment>
-        
 
-            <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
-            {/* <ScriptTag type="text/javascript" src={gsapScript} /> */}
-            
             <Modal
                 show={playModalShow}
                 onHide={()=> handleHide('play')}
@@ -238,8 +216,8 @@ const Dashboard = () => {
                 keyboard={false}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
+                
                 <Modal.Header closeButton>
                     <Modal.Title>stay tuned</Modal.Title>
                 </Modal.Header>
@@ -270,9 +248,7 @@ const Dashboard = () => {
                         </div>
                     </Form>
                 {loading ? <Loader /> : null}
-
                 </Modal.Body>
-                
             </Modal>
 
             <Modal
@@ -283,18 +259,15 @@ const Dashboard = () => {
                 className="trailerStyle"
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
                 <Modal.Header closeButton>                   
                 </Modal.Header>
                 <Modal.Body>
                 <iframe width="750" height="415" src='https://www.youtube.com/embed/r8yd_aAKG7U?autoplay=1&mute=1' 
                         allow='autoplay; encrypted-media'
                         allowFullScreen
-                        title='video'
-                /> 
+                        title='video'/> 
                 </Modal.Body>
-                
             </Modal>
 
             <Modal
@@ -304,8 +277,7 @@ const Dashboard = () => {
                 keyboard={false}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Lottery Pool</Modal.Title>
                 </Modal.Header>
@@ -314,7 +286,6 @@ const Dashboard = () => {
                 Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
                 </p>
                 </Modal.Body>
-               
             </Modal>
 
             <Modal
@@ -324,8 +295,7 @@ const Dashboard = () => {
                 keyboard={false}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Reward Pool</Modal.Title>
                 </Modal.Header>
@@ -337,7 +307,6 @@ const Dashboard = () => {
                  Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
                 </Modal.Body>
-                 
             </Modal>
 
             <div className="dashboard">
@@ -346,6 +315,7 @@ const Dashboard = () => {
                         <div className="row mainSlider">
                             <div className="col-12">
                                 <Carousel interval={null} wrap={false} >
+                                    
                                     <Carousel.Item>
                                         <Carousel.Caption>
                                             <img src={ellipse} className="bgShade" alt="Eclipse"  width="1459" height="1529"/>
@@ -382,13 +352,11 @@ const Dashboard = () => {
                                                 </div>
                                                 <p className="secondText">Awaken the Baller within you</p>
                                             </div>
-
-
                                         </Carousel.Caption>
                                     </Carousel.Item>
+
                                     <Carousel.Item>
-                                        <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
-                                        />
+                                        <img className="d-block w-100 h-100" src={slide2} alt="Second slide"/>
                                          <div className="stars slideStar">
                                             <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
                                             <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
@@ -411,9 +379,9 @@ const Dashboard = () => {
                                             </div>
                                         </Carousel.Caption>
                                     </Carousel.Item>
+
                                     <Carousel.Item>
-                                        <img className="d-block w-100 h-100" src={slide3} alt="Second slide"
-                                        />
+                                        <img className="d-block w-100 h-100" src={slide3} alt="Second slide"/>
                                         <div>
                                             <div className="slideStar">
                                                 <svg width="100" height="100" viewBox="0 0 100 100" id="four">
@@ -487,50 +455,10 @@ const Dashboard = () => {
 
                                         </Carousel.Caption>
                                     </Carousel.Item>
+
                                 </Carousel>
                             </div>
                         </div>
-                        {/* <div className="logoSlider">
-                            <Carousel>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tradedog} alt="tradedog" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdx} alt="tdx" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdefi} alt="tdefi" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdmm} alt="tdmm" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={ith} alt="ith" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                <div className="col-sm-12">
-                                                    <p className="fw-bold">Our Partners </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            </Carousel>
-                        </div> */}
                     </div>
                 </div>
 
@@ -541,7 +469,6 @@ const Dashboard = () => {
                         <img src={starM} id="two" width={60} height={60} className="small" alt="Star" />
                         <img src={starS} id="three" width={47} height={47} className="large" alt="Star" />
                     </div>
-                    {/* <div className="bggg"></div> */}
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-6">
@@ -568,7 +495,6 @@ const Dashboard = () => {
                                         <p className="text-font">
                                         Join the ultimate Play, Party and Earn experience in Ballers City - a web3 game that rewards you daily. Compete for exclusive collectible cards, $BALR tokens, and Party tickets in thrilling Reward pools, Lottery Pots, and Quests. No matter your skill level or collection size, there's always a chance to win big. Start playing and get ready to party with the power of $BALR token!
                                         </p>
-                                        
                                         <p className="text-font"> <b>Get Ready to Play, Party and Earn in Ballers City</b> </p>
                                     </div>
                                     <div className="innerBtn">
@@ -580,6 +506,7 @@ const Dashboard = () => {
                     </div>
                     <div className="backCoin"> <img src={semiCoin} alt="coin image"  width="292" height="471" /></div>
                 </div>
+
                 <div className="">
                     <div className="gradientBackgroung pb-8">
 
@@ -612,19 +539,17 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                     <div className="col-sm-5">
-
                                         <div className="dancingImg">
                                             <img src={SneefDog} alt="Snoopdog" width="413" height="734" />                                      
-
                                         </div>
                                         <div className="partyHard">PARTY HARD</div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <img src={ellipse2} className="bgShade2"  width="1003" height="1788" alt="Eclipse"/>
 
+                        <img src={ellipse2} className="bgShade2" width="1003" height="1788" alt="Eclipse" />
+                        
                         <div className="container">
                             <div className="news news--news_page row">
                                 <div className="news-list col-sm-6">
@@ -648,6 +573,7 @@ const Dashboard = () => {
                                     </div>
 
                                 </div>
+
                                 <div className="col-sm-12 order-sm-2">
                                     <div>
                                     <img src={arrowUp} alt="Arrow" className="arrowUp" />
@@ -657,6 +583,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="news-caption-wrap col-sm-6 order-sm-1">
                                     <div className="stars">
                                         <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
@@ -688,12 +615,8 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-                               
-                                
-
                             </div>
                         </div>
-
 
                         <div className="rotateDiv secPaddingY">
                             <div className="marquee">
@@ -701,9 +624,9 @@ const Dashboard = () => {
                                     <div className="marquee-row">BALR TOKEN <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> </div>
                                     <div className="marquee-row">BALR TOKEN <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> BALR TOKEN  <img src={star} alt="star" /> </div>
                                 </div>
-
                             </div>
                         </div>
+
                         <div className="container positionRelative ballerSec" id="balrToken">
                             <div className="positionRelative text-right mx-4">
                                 <h2 className="heading">BALR TOKEN</h2>
@@ -768,46 +691,6 @@ const Dashboard = () => {
                         </div>
                     </div>
 
-
-                       
-                        {/* <div className="container positionRelative mt-12rem">
-                            <div className="divImage"><img src={Walter_Black} alt="card" /> </div>
-                            <div className="joinCard">
-                                <div className="bg-circle"></div>
-                                <div className="row">
-                                    <div className="col-sm-3">
-                                        <div className="imgBg"></div>
-                                    </div>
-                                    <div className="col-sm-6 text-center my-auto">
-                                        <p className="joinUs">Join Our Community</p>
-                                        <div className="semiCircle">
-                                            <a href="" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3">
-                                        <div className="">
-                                            <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a>
-                                           
-                                            <div className="row">
-                                                <div className="col-sm-6">
-                                                    <img className="hex2" src={bg_purple} alt="purple background" />
-                                                   <a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" /></a> 
-                                                </div>
-                                                <div className="col-sm-6">
-                                                    <img className="hex3" src={bg_yellow} alt="yellow background" />
-                                                    <a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer">
-                                                    <i className="fa fa-instagram" ></i>
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-
                     <div className="gradientBackgroung secPaddingY">
                         <div className="container paddingY-5 mt-5 positionRelative">
                             <img src={ellipse3} className="bgShade3"  width="612" height="988" alt="Eclipse" />
@@ -824,7 +707,6 @@ const Dashboard = () => {
                                             <Accordion.Body>
                                                 <p>
                                                     The baller token TGE will occur in Q1, 2023
-
                                                 </p>
 
                                             </Accordion.Body>
@@ -853,7 +735,6 @@ const Dashboard = () => {
                                                 </p>
                                             </Accordion.Body>
                                         </Accordion.Item>
-
                                     </Accordion>
                                 </div>
                                 <div className="col-lg-7 my-auto">
@@ -901,14 +782,12 @@ const Dashboard = () => {
                          
                         </div>
                     </div>
-
                 </div>
                 {toaster && <Toaster
                     message={toasterMessage}
                     show={toaster}
                     close={() => showToaster(false)} />
                 }
-
             </div>
         </React.Fragment>
     )

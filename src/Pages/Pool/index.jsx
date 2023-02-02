@@ -16,6 +16,7 @@ const Pool = () => {
 
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
+
     const handleShow = (modalName)=>{
        if(modalName === 'lottery'){
             setLotteryModalShow(true);
@@ -25,6 +26,7 @@ const Pool = () => {
         }
         
     }
+
     const handleHide = (modalName)=>{
         if(modalName === 'lottery'){
             setLotteryModalShow(false);
@@ -32,9 +34,8 @@ const Pool = () => {
         else if(modalName === 'reward'){
             setRewardModalShow(false);
         }
-        
-        
     }
+
     return (
         <React.Fragment>
                 <Modal
@@ -44,8 +45,7 @@ const Pool = () => {
                 keyboard={false}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Lottery Pool</Modal.Title>
                 </Modal.Header>
@@ -54,12 +54,6 @@ const Pool = () => {
                 Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
                 </p>
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
             </Modal>
             <Modal
                 show={rewardModalShow}
@@ -68,8 +62,7 @@ const Pool = () => {
                 keyboard={false}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+                centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Reward Pool</Modal.Title>
                 </Modal.Header>
@@ -81,12 +74,6 @@ const Pool = () => {
                  Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
             </Modal>
             <div className="pool"> 
                <div className="poolScreen w-100">

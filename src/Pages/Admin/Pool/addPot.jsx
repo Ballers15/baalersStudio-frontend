@@ -30,6 +30,7 @@ const AddPot = () => {
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
+
     useEffect(() => {
         if (state?.id) {
             getRewardPotDetailById(state?.id);
@@ -87,7 +88,6 @@ const AddPot = () => {
             }
     }
     
-    
     const getClaimExpiryTime = (e, data) => {
         const date = new Date(e);
         date.setDate(date.getDate() + 1);
@@ -110,7 +110,6 @@ const AddPot = () => {
           day = ("0" + date?.getDate())?.slice(-2);
         return [date?.getFullYear(), mnth, day]?.join("-");
     }
-    
     
     const addRewardPot =async (e) => {
         setValidated(true);

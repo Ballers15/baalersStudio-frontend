@@ -1,10 +1,4 @@
   .toast-body {
-    /* padding: var(--bs-toast-padding-x);
-    word-wrap: break-word;
-    border-radius: 5px;
-    background: #fffafa;
-    box-shadow: inset 20px 20px 61px #063a70, inset -20px -20px 61px #ffffff;
-    color: aliceblue; */
     position: relative;
     overflow: hidden;
     margin: 0 0 6px;
@@ -17,6 +11,7 @@
     color: rgb(44, 40, 40);
     border-image-slice: 20 !important;
   }
+  
   .toast {
     position: relative !important;
     bottom: 10px !important;
