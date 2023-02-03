@@ -29,7 +29,12 @@
     letter-spacing: 0.25em;
     color: #ECE8E1;
 }
-
+.navbar-toggler-icon{
+    background-image:url('../../Assest/img/menuIcon.svg')
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 34px; 

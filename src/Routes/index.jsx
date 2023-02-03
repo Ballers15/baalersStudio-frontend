@@ -14,6 +14,7 @@ import Party from '../Pages/Party';
 import { Authenticator } from '../Auth/authenticator'
 import AuthProvider from '../Auth/authProvider';
 import Metamask from '../Components/Metamask'
+import Privacy from '../Pages/PrivacyPolicy';
 
 
 const NavigationRouter = () => {
@@ -36,6 +37,7 @@ const NavigationRouter = () => {
                         <Route  path="/pool" element={<Pool />} />
                        <Route  path="/wallet" element={<Wallet />} />
                         <Route  path="/metamask" element={<Metamask />} />
+                        <Route  path="/privacy" element={<Privacy />} />
                     </Route>
                 </Routes>
           </AuthProvider>

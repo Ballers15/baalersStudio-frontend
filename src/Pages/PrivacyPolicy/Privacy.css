@@ -1,0 +1,28 @@
+.privacy{ 
+    color: #ECE8E1;
+    background: linear-gradient(258deg, #110929 , #1109296b 70.71%), linear-gradient(164deg, #3a2df4, rgb(35 28 55 / 47%) 70.71%), linear-gradient(44deg, #110929 , rgb(25 17 81 / 56%) 70.71%);
+    background-attachment: fixed;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.topHead{
+    padding: 11rem 0 5rem;
+}
+.privacy a {
+    color: #fff;
+    text-decoration: none;
+    font-family: "Valorant";
+    font-weight: 700;
+}
+.privacy li{
+    list-style: inside;
+    font-size: 20px;
+}
+.privacy h3{
+    margin-top: 2rem;
+    font-family: "Valorant";
+}
+@media (max-width: 480px){
+    .privacy .heading {
+        font-size: 34px;
+    }
+}

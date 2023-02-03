@@ -101,7 +101,8 @@ const Dashboard = () => {
                 opacity: function() {
                   var elementHeight = $(this).height();
                       let opacity = (( - (elementHeight - scrollBottom) / elementHeight) );
-                      if(opacity>0.5){ 
+                      console.log('opacity', opacity)
+                      if(opacity>0.3){ 
                         opacity=1; 
                     } 
                   return opacity;
@@ -629,15 +630,15 @@ const Dashboard = () => {
                                     <div className="news-list-wrap">
                                         <div className="news-list-column system">
                                             <a  className="news-item star pink">
-                                                <img className="news-item-bg" src={image27} alt="NFT Avatar" />
+                                                <img className="news-item-bg" src={image27} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
                                             <a  className="news-item star black">
-                                                <img className="news-item-bg" src={image28} alt="NFT Avatar" />
+                                                <img className="news-item-bg" src={image28} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
                                             <a  className="news-item star white">
-                                                <img className="news-item-bg" src={image29} alt="NFT Avatar" />
+                                                <img className="news-item-bg" src={image29} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
 
@@ -890,7 +891,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">
-                                        <li>Privacy notice</li>
+                                        <li><a href="/privacy">Privacy notice</a></li>
                                         <li>Terms of service</li>
                                         <li>Cookie preference</li>
                                     </ul>
