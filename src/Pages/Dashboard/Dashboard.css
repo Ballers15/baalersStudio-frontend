@@ -2628,7 +2628,7 @@ line-height: 100%;
     width: calc( 238px / 2) !important;
   }
   div#balrToken .positionRelative {
-    width: 60%;
+    width: 45%;
     margin: auto !important;
 }
   .reward #one {
@@ -2790,8 +2790,11 @@ line-height: 100%;
     font-size: 10px;
     line-height: 13px;
   }
+  .sCaption{
+    width: 80%;
+  }
   .sCaption h1 {
-    font-size: 64px;
+    font-size: 47px;
 }
 .thirdSlide .sCaption {
   width: 100%;
@@ -2839,9 +2842,10 @@ line-height: 100%;
   padding-bottom: 10rem;
   background-size: 135%;
 }
+ 
 .coinImage img {
-  right: 11%;
-  top: -13%;
+  right: 33%;
+  top: -24%;
   width: 36.5%;
 }
 .backCoin img {
@@ -2875,8 +2879,8 @@ padding-bottom: .5rem !important;
   top: 32rem;
 }
 .text-font {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
 }
 .accordion-button{
   font-size: 14px;
@@ -2889,9 +2893,12 @@ padding-bottom: .5rem !important;
   text-align: left;
 }
 .heading2, .faqHead, .balrHead { 
-  font-size: 50px;
+  font-size: 37px;
   left: 0;
   top: -19%;
+}
+.headWth{
+  width: 65%; 
 }
 .mob-wth-px{
   width: 26px;
@@ -2903,7 +2910,7 @@ ul li {
   font-size: 7px;
 }
 .heading { 
-  font-size: 50px;
+  font-size: 32px;
 }
 .nftCollectionHead{
   position: relative;
@@ -3049,6 +3056,24 @@ ul li {
 }
 }
 @media (max-width: 480px){
+  #one { 
+    left: 33px;
+    top: 20px;
+}
+#two {  
+  width: 30px;
+  right: 98px;
+}
+.ballerSec #three{
+display: none;
+}
+  .socialIcons li a {
+    font-size: 18px;
+    padding: 5px 5px;
+  }
+  .socialIcons li a img{    
+    width: 20px;
+  }
   .news-list {
     max-width: 90%;
     max-width: 50%;
@@ -3066,10 +3091,10 @@ ul li {
     justify-content: center;
   }
   .starMed {
-    margin-right: 14rem;
-    margin-top: 35rem;
-    width: 40px;
-}
+    margin-right: 20rem;
+    margin-top: -88rem;
+    width: 30px;
+  }
 .starSmall {
   margin-right: 2rem;
   margin-top: 25rem;
@@ -3085,9 +3110,7 @@ ul li {
 .thirdSlide .sCaption {
   width: 88%;
 }
-  .positionAbs { 
-    width: 86%;
-}
+ 
 .firstText { 
   top: 20%;
   width: 35%;
@@ -3140,9 +3163,7 @@ ul li {
 }
 }
 @media (max-width: 400px){
-  .coinImage img { 
-    right: 6%;
-}
+ 
   .shareBtn { 
     right: 2rem;
   }
@@ -3171,6 +3192,17 @@ ul li {
     right: 4.25rem;
     bottom: 7.8rem;
   }
+  .heading2, .faqHead, .balrHead {
+    font-size: 35px;
+  }
+  .heading {
+    font-size: 30px;
+}
+
+.coinImage img {
+  right: 29%;
+  top: -20%;
+}
 }
 @media (min-width:389px) and (max-width: 415px){
   .news {
@@ -3185,12 +3217,21 @@ ul li {
 }
  
 .arrowUp {
-  bottom: 36%;
+  bottom: 40%;
   width: 8%;
   left: 20%;
 }
 }
 @media (max-width: 380px){
+  .starMed { 
+    margin-top: -82rem; 
+  }
+  .headWth {
+    width: 70%;
+  }
+  .rewardImage { 
+    min-height: 62vh;
+  }
   .mainSlider .carousel-item {
     height: 120vh;
 }
@@ -3217,7 +3258,7 @@ ul li {
   height: 142vh;
 } */
 .sCaption h1 {
-  font-size: 50px;
+  font-size: 42px;
 }
 /* .sCaption .textHeader {
   font-size: 9px;
@@ -3275,6 +3316,12 @@ ul li {
 }
 }
 @media (max-width: 360px){
+  .headWth {
+    width: 80%;
+  }
+  .sCaption {
+    width: 100%;
+}
   .positionAbs {
     width: 98%;
 }
@@ -3282,8 +3329,11 @@ ul li {
     font-size: 12px;
 }
   .coinImage img {
-    right: 20%;
+    right: 23%;
     top: -8%;
+}
+.innerBtn a {
+  font-size: 11px;
 }
 .news{height: 140vh;}
  

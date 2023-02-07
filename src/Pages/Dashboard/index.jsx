@@ -558,7 +558,7 @@ const Dashboard = () => {
                                     <div className="coinImage">
                                         <img src={coin} alt="coin image" width="199" height="199" />
                                     </div>
-                                    <div className="positionRelative mb-4">
+                                    <div className="positionRelative mb-4 headWth">
                                         <h2 className="heading">REWARD</h2>
                                         <h2 className="heading2">REWARD</h2>
                                     </div>
@@ -588,7 +588,7 @@ const Dashboard = () => {
                                 <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                             </div>
                             <div className="scene section" id="sticky">
-                                <div className="positionRelative mt-5">
+                                <div className="positionRelative mt-5 headWth mx-auto">
                                     <h2 className="heading text-center">Party with your Gang</h2>
                                     <h2 className="heading2 text-center">Party with your Gang</h2>
                                 </div>
@@ -650,7 +650,7 @@ const Dashboard = () => {
                                 <div className="col-sm-12 order-sm-2">
                                     <div>
                                     <img src={arrowUp} alt="Arrow" className="arrowUp" />
-                                        <div className="nftCollectionHead mt-5">
+                                        <div className="nftCollectionHead mt-5 headWth mx-auto">
                                             <h2 className="heading">NFT COLLECTION</h2>
                                             <h2 className="heading2">NFT COLLECTION</h2>
                                         </div>
