@@ -645,16 +645,22 @@ background: #110929;
   right: 1rem;
   top: 0.51rem;
  }
+ 
   .coinImage img{ 
     position: absolute;
     right: 30%;
     top: -18%;
     width: 32.5%;
     z-index: 1;
+    -webkit-animation: rotate .25s linear infinite;
     animation: rotate .25s linear infinite;
+    -webkit-animation-play-state: paused;
     animation-play-state: paused;
+    -webkit-animation-delay: calc(var(--scroll)*-1s);
     animation-delay: calc(var(--scroll) * -1s);  
+    -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
+    -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
   .bg-move img{ 
@@ -726,10 +732,15 @@ background: #110929;
       transform: translate(-150px, -250px);
     }
   }
-  
+  @-webkit-keyframes rotate{
+    to { 
+      transform: rotate(360deg) translateX(0%);
+    }
+  }
 @keyframes rotate {
     to {
-      transform: rotate(360deg);
+      /* transform: rotate(360deg); */
+      transform: rotate(360deg) translateX(0%);
     }
   }
  
@@ -1736,6 +1747,7 @@ ul li {
 .mob{
   display: none;
 }
+
 @media (min-width: 900px){
   .carousel-control-next-icon{
     background-image: url(../../Assest/img/arrowLeft.svg);
@@ -2062,6 +2074,17 @@ ul li {
   .news--news_page .news-title {
     font-size: 4.11vw;
   }
+}
+@media (min-width: 2500px){
+  .news--news_page .news-list { 
+    height: calc(70vh + 6.25vw);
+}
+.news-caption-wrap{
+  height: 100%;
+}
+.news { 
+  min-height: 80vh;
+}
 }
 
 @media (max-width: 1670px){
@@ -2636,6 +2659,7 @@ line-height: 100%;
   }
   .reward #three {
     right: 6rem;
+    width: 30px;
     top: 3rem;
 }
 .reward #two {
@@ -2857,7 +2881,7 @@ line-height: 100%;
   right: -25%;
 }
 .rewardImage { 
-  min-height: 50vh;
+  min-height: 60vh;
 }
 .rewadText .innerBtn a{
   right: inherit;
@@ -2867,12 +2891,15 @@ padding-bottom: .5rem !important;
 }
 .bg-move img {
   left: 25%;
-  top: 74%;
+  top: 64%;
+  width: 80px;
 }
 .bg-move img:nth-child(2) {
-  left: 40%;
-  top: 68%;
+  left: 45%;
+  top: 55%;
+  width: 53px;
 }
+ 
 .partyHard {
   font-size: 44px;
   right: -6rem;
@@ -2963,6 +2990,7 @@ ul li {
   font-size: 18px;
   padding: 0 3rem;
   line-height: 129%;
+  margin-bottom: 6rem;
 }
 /* .joinCard .discordIcon, .joinCard i.fa.fa-medium{
   top: inherit;
@@ -3095,6 +3123,11 @@ display: none;
     margin-top: -88rem;
     width: 30px;
   }
+  #partyGang .starMed {
+    margin-right: 15rem;
+    margin-top: 522px;
+    width: 30px;
+}
 .starSmall {
   margin-right: 2rem;
   margin-top: 25rem;
@@ -3142,7 +3175,6 @@ display: none;
   line-height: 16px;
 }
 }
-
 @media (min-width:413px) and (max-width: 430px){
   .thirdSlide .poolBtn { 
     bottom: 8rem;
@@ -3152,6 +3184,12 @@ display: none;
 }
 }
 @media (max-width: 413px){
+  .poolBtn .playBtn {
+    width: 58%;
+  }
+  .thirdSlide .sCaption {
+    width: 78%;
+}
   .thirdSlide .poolBtn {
     bottom: 8rem;
 }
@@ -3163,7 +3201,19 @@ display: none;
 }
 }
 @media (max-width: 400px){
- 
+  .bg-move img {
+    left: 23%;
+    top: 60%;
+    width: 80px;
+}
+.bg-move img:nth-child(2) {
+  left: 42%;
+  top: 48%;
+  width: 53px;
+}
+  .rewardImage { 
+    min-height: 67vh;
+  }
   .shareBtn { 
     right: 2rem;
   }
@@ -3202,6 +3252,12 @@ display: none;
 .coinImage img {
   right: 29%;
   top: -20%;
+}
+.playBtn a, .shareBtn a {
+  font-size: 12px;
+}
+.sCaption {
+  width: 82%;
 }
 }
 @media (min-width:389px) and (max-width: 415px){
@@ -3330,7 +3386,8 @@ display: none;
 }
   .coinImage img {
     right: 23%;
-    top: -8%;
+    top: -13%;
+    
 }
 .innerBtn a {
   font-size: 11px;
@@ -3412,15 +3469,13 @@ display: none;
   margin-right: auto;
 }
 }
-
-
 @media (min-width:359px) and (max-width: 366px){
   .shareBtn {
     right: 4rem;
   }
   .coinImage img {
-    right: 0%;
-    top: -12%;
+    right: 29%;
+    top: -18%;
 }
 }
 @media (max-width: 320px){
@@ -3434,7 +3489,7 @@ display: none;
   position: fixed;
   top: 0;
 }
-.loader {
+/* .loader {
   border: 0;
   border-radius: 50%; 
   background: #000;
@@ -3450,7 +3505,7 @@ display: none;
   100% {
       transform: rotate(360deg);
   }
-}
+} */
 
 .center {
   position: absolute;
