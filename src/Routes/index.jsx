@@ -18,11 +18,18 @@ import { Authenticator } from '../Auth/authenticator'
 import { AuthenticatorAdmin } from '../Auth/authenticatorAdmin'
 import AuthProvider from '../Auth/authProvider';
 import Metamask from '../Components/Metamask'
+import { useState } from 'react'
+
 
 const NavigationRouter = () => {
-
-  let strAuth = localStorage.getItem('_u');
-  let _u = JSON.parse(strAuth);
+  const [role, setRole] = useState(null)
+  useEffect(() => {
+    let strAuth = localStorage.getItem('_u')
+    let _u = JSON.parse(strAuth)
+    let r = _u?.user?.role
+    setRole(r)
+    // console.log('u', r)
+  }, [role])
   return (
     <>
       <BrowserRouter>
@@ -33,8 +40,17 @@ const NavigationRouter = () => {
               <Route path="*" element={<ErrorPage />} />
             </Route>
             <Route element={<WithNav />}>
-              {_u?.user?.role !== 'ADMIN' && <Route exact path="/" element={<Dashboard />} />}
-              {_u?.user?.role == 'ADMIN' && <Route exact path="/" element={<AdminDashboard />} />}
+            if(role === 'ADMIN' )
+              {
+                <Route
+                  exact
+                  path="/admin-dashboard"
+                  element={<AdminDashboard />}
+                />
+              }
+              else {<Route exact path="/" element={<Dashboard />} />}
+              {/* {_u?.user?.role !== 'ADMIN' && <Route exact path="/" element={<Dashboard />} />}
+              {_u?.user?.role == 'ADMIN' && <Route exact path="/" element={<AdminDashboard />} />} */}
               <Route exact path="/about" element={<About />} />
               <Route path="/:id" element={<Dashboard />} />
               <Route exact path="/party" element={<Party />} />
