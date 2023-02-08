@@ -8,7 +8,7 @@ import { Carousel } from "react-bootstrap"
 import { Accordion } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import $ from 'jquery'; 
+import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
@@ -25,9 +25,9 @@ import coin from '../../Assest/img/coin.png'
 import semiCoin from '../../Assest/img/semiCoin.png'
 import image27 from '../../Assest/img/image27.png'
 import image28 from '../../Assest/img/image28.png'
-import image29 from '../../Assest/img/image29.png' 
+import image29 from '../../Assest/img/image29.png'
 import ballerCoin from '../../Assest/img/ballerCoin.png'
-import star from '../../Assest/img/Star.svg' 
+import star from '../../Assest/img/Star.svg'
 import discord from '../../Assest/img/discord.svg'
 // import tdefi from '../../Assest/img/logos/tdefi.png'
 // import tradedog from '../../Assest/img/logos/tradedog.png'
@@ -45,11 +45,11 @@ import ellipse from '../../Assest/img/ellipse.png'
 import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
 import house from '../../Assest/img/house.png'
-import house1 from '../../Assest/img/house1.png' 
+import house1 from '../../Assest/img/house1.png'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
-import starS from '../../Assest/img/starS.svg' 
-import {subscribeMailJet} from '../../Services/User';
+import starS from '../../Assest/img/starS.svg'
+import { subscribeMailJet } from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 // import ScriptTag from 'react-script-tag';
@@ -67,7 +67,7 @@ window.addEventListener(
     false
 );
 
-document.onreadystatechange = function() {
+document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
         document.querySelector("#loader").style.visibility = "visible";
@@ -77,40 +77,40 @@ document.onreadystatechange = function() {
     }
 };
 
-$(function() {
+$(function () {
     document.getElementById('hiddenButton').click();
 });
 
 function useHover() {
     const [hovering, setHovering] = useState(false)
     const onHoverProps = {
-      onMouseEnter: () => setHovering(true),
-      onMouseLeave: () => setHovering(false),
+        onMouseEnter: () => setHovering(true),
+        onMouseLeave: () => setHovering(false),
     }
     return [hovering, onHoverProps]
 }
-  
-const Dashboard = () => { 
+
+const Dashboard = () => {
     useEffect(() => {
-        $(window).scroll(function() {
-            var scrollTop = $(this).scrollTop(); 
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop();
             var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
             $('#scrollImg').css({
-                opacity: function() {
-                  var elementHeight = $(this).height();
-                      let opacity = (( - (elementHeight - scrollBottom) / elementHeight) );
-                      console.log('opacity', opacity)
-                      if(opacity>0.3){ 
-                        opacity=1; 
-                    } 
-                  return opacity;
+                opacity: function () {
+                    var elementHeight = $(this).height();
+                    let opacity = ((- (elementHeight - scrollBottom) / elementHeight));
+                    console.log('opacity', opacity)
+                    if (opacity > 0.3) {
+                        opacity = 1;
+                    }
+                    return opacity;
                 }
-              }); 
-          });                  
+            });
+        });
     })
-    
-    const [buttonAIsHovering, buttonAHoverProps] = useHover() 
-    const [buttonAIsHovering2, buttonAHoverProps2] = useHover() 
+
+    const [buttonAIsHovering, buttonAHoverProps] = useHover()
+    const [buttonAIsHovering2, buttonAHoverProps2] = useHover()
     const [playModalShow, setPlayModalShow] = useState(false);
     const [email, setEmail] = useState("");
     const [validated, setValidated] = useState(false);
@@ -123,40 +123,40 @@ const Dashboard = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const setShowToaster = (param) => showToaster(param);
 
-    const handleShow = (modalName)=>{
-        if(modalName === 'play'){
+    const handleShow = (modalName) => {
+        if (modalName === 'play') {
             setEmail('');
             setValidated(false);
             setPlayModalShow(true);
-        }else if(modalName === 'lottery'){
+        } else if (modalName === 'lottery') {
             setLotteryModalShow(true);
         }
-        else if(modalName === 'reward'){
+        else if (modalName === 'reward') {
             setRewardModalShow(true);
         }
-        else if(modalName === 'trailer'){
+        else if (modalName === 'trailer') {
             setTrailerModalShow(true);
         }
     }
 
-    const handleHide = (modalName)=>{
-        if(modalName === 'play'){
+    const handleHide = (modalName) => {
+        if (modalName === 'play') {
             setPlayModalShow(false);
-        }else if(modalName === 'lottery'){
+        } else if (modalName === 'lottery') {
             setLotteryModalShow(false);
         }
-        else if(modalName === 'reward'){
+        else if (modalName === 'reward') {
             setRewardModalShow(false);
         }
-        else if(modalName === 'trailer'){
+        else if (modalName === 'trailer') {
             setTrailerModalShow(false);
         }
-        
+
     }
-    const setErrorMsgFunc=()=>{
-        if(!emailValidation()){
+    const setErrorMsgFunc = () => {
+        if (!emailValidation()) {
             setErrorMsg('Enter a Valid Email !');
-        }else{
+        } else {
             setErrorMsg(null)
         }
     }
@@ -167,7 +167,7 @@ const Dashboard = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-       
+
 
         if (email && !errorMsg) {
             let dataToSend = {
@@ -176,46 +176,46 @@ const Dashboard = () => {
             // auth.login(dataToSend)
             setLoading(true);
             try {
-              const subscribe = await subscribeMailJet(dataToSend);
-              setLoading(false);
-              if (subscribe.error) {
-            //   console.log(subscribe)
-        
-                setToasterMessage(subscribe?.error?.message||'Something Went Worng');
-                setShowToaster(true);
-              } else {
-                setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
-                setShowToaster(true);
-                  setPlayModalShow(false);
-                  setErrorMsg(null);
-              }
+                const subscribe = await subscribeMailJet(dataToSend);
+                setLoading(false);
+                if (subscribe.error) {
+                    //   console.log(subscribe)
+
+                    setToasterMessage(subscribe?.error?.message || 'Something Went Worng');
+                    setShowToaster(true);
+                } else {
+                    setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
+                    setShowToaster(true);
+                    setPlayModalShow(false);
+                    setErrorMsg(null);
+                }
             } catch (error) {
-            //   console.log(error)
-              setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-              setShowToaster(true);
-              setLoading(false);
+                //   console.log(error)
+                setToasterMessage(error?.response?.data?.message || 'Something Went Worng');
+                setShowToaster(true);
+                setLoading(false);
             }
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
-      }
-    
+    }
+
     $('#myModal').on('shown.bs.modal', function () {
-    $('#video1')[0].play();
+        $('#video1')[0].play();
     })
 
     $('#myModal').on('hidden.bs.modal', function () {
-    $('#video1')[0].pause();
+        $('#video1')[0].pause();
     })
-    
+
     const hiddenButtonClicked = () => {
         // console.log('hidden button clicked---------------------')
     }
 
-    const emailValidation=()=>{
+    const emailValidation = () => {
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
-        if(!email || regex.test(email) === false){
-            
+        if (!email || regex.test(email) === false) {
+
             return false;
         }
         return true;
@@ -223,14 +223,14 @@ const Dashboard = () => {
 
     return (
         <React.Fragment>
-        
+
 
             <Button id="hiddenButton" onClick={hiddenButtonClicked} type="submit" hidden={true}></Button>
             {/* <ScriptTag type="text/javascript" src={gsapScript} /> */}
-            
+
             <Modal
                 show={playModalShow}
-                onHide={()=> handleHide('play')}
+                onHide={() => handleHide('play')}
                 backdrop="static"
                 keyboard={false}
                 size="lg"
@@ -245,7 +245,7 @@ const Dashboard = () => {
 
                     <Form noValidate validated={validated} onSubmit={handleSubmit} className="formFlex">
                         <Form.Group>
-                        
+
                             <Form.Control
                                 required
                                 type="email"
@@ -257,7 +257,7 @@ const Dashboard = () => {
                                 Valid E-mail is required !
                             </Form.Control.Feedback>
                             <Form.Control.Feedback >
-                              <span className='custom-error-msg'> { errorMsg&&'Valid E-mail is required !'}</span>
+                                <span className='custom-error-msg'> {errorMsg && 'Valid E-mail is required !'}</span>
                             </Form.Control.Feedback>
                         </Form.Group>
                         <div>
@@ -266,15 +266,15 @@ const Dashboard = () => {
                             </Button>
                         </div>
                     </Form>
-                {loading ? <Loader /> : null}
+                    {loading ? <Loader /> : null}
 
                 </Modal.Body>
-                
+
             </Modal>
 
             <Modal
                 show={trailerModalShow}
-                onHide={()=> handleHide('trailer')}
+                onHide={() => handleHide('trailer')}
                 backdrop="static"
                 keyboard={false}
                 className="trailerStyle"
@@ -282,21 +282,21 @@ const Dashboard = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>                   
+                <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
-                <iframe width="750" height="415" src='https://www.youtube.com/embed/r8yd_aAKG7U?autoplay=1&mute=1' 
+                    <iframe width="750" height="415" src='https://www.youtube.com/embed/r8yd_aAKG7U?autoplay=1&mute=1'
                         allow='autoplay; encrypted-media'
                         allowFullScreen
                         title='video'
-                /> 
+                    />
                 </Modal.Body>
-                
+
             </Modal>
 
             <Modal
                 show={lotteryModalShow}
-                onHide={()=> handleHide('lottery')}
+                onHide={() => handleHide('lottery')}
                 backdrop="static"
                 keyboard={false}
                 size="lg"
@@ -307,16 +307,16 @@ const Dashboard = () => {
                     <Modal.Title>Lottery Pool</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <p>
-                Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
-                </p>
+                    <p>
+                        Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
+                    </p>
                 </Modal.Body>
-               
+
             </Modal>
 
             <Modal
                 show={rewardModalShow}
-                onHide={()=> handleHide('reward')}
+                onHide={() => handleHide('reward')}
                 backdrop="static"
                 keyboard={false}
                 size="lg"
@@ -327,14 +327,14 @@ const Dashboard = () => {
                     <Modal.Title>Reward Pool</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                 <p>
-                 Greater rewards await for those who participate in the Reward Pool.
-                 </p>
-                 <p>
-                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
-                 </p>
+                    <p>
+                        Greater rewards await for those who participate in the Reward Pool.
+                    </p>
+                    <p>
+                        Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
+                    </p>
                 </Modal.Body>
-                 
+
             </Modal>
 
             <div className="dashboard">
@@ -345,7 +345,7 @@ const Dashboard = () => {
                                 <Carousel interval={null} wrap={false} >
                                     <Carousel.Item>
                                         <Carousel.Caption>
-                                            <img src={ellipse} className="bgShade" alt="Eclipse"  width="1459" height="1529"/>
+                                            <img src={ellipse} className="bgShade" alt="Eclipse" width="1459" height="1529" />
                                             <div className="container">
                                                 <p className="firstText">UNLOCK NEW CITIES</p>
                                                 <div className="row">
@@ -354,7 +354,7 @@ const Dashboard = () => {
                                                             <div>
                                                                 <p>Play | Party | <b>Earn</b> </p>
                                                                 <h1>BALLERS CITY </h1>
-                                                                <div className="fStar">                                                                     
+                                                                <div className="fStar">
                                                                     <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                                                                 </div>
                                                                 <p className="textHeader ">
@@ -364,11 +364,11 @@ const Dashboard = () => {
                                                             </div>
                                                             <div className="positionAbs">
                                                                 <div className="playBtn" >
-                                                                    <a  onClick={()=> handleShow('play')}><span></span>Play now</a>
+                                                                    <a onClick={() => handleShow('play')}><span></span>Play now</a>
 
                                                                 </div>
                                                                 <div className="shareBtn">
-                                                                    <a onClick={()=> handleShow('trailer')}><span></span>Watch Trailer</a>
+                                                                    <a onClick={() => handleShow('trailer')}><span></span>Watch Trailer</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -386,14 +386,14 @@ const Dashboard = () => {
                                     <Carousel.Item>
                                         <img className="d-block w-100 h-100" src={slide2} alt="Second slide"
                                         />
-                                         <div className="stars slideStar">
+                                        <div className="stars slideStar">
                                             <img src={starM} className="starMed large" width={60} height={60} alt="Star" />
                                             <img src={starS} className="starSmall small" width={47} height={47} alt="Star" />
                                         </div>
                                         <div className="box"></div>
                                         <Carousel.Caption>
                                             <div className="container">
-                                                 <p className="firstText">Play, Party and Earn</p>
+                                                <p className="firstText">Play, Party and Earn</p>
                                                 <div className="sCaption secondSlide mb-0">
                                                     <div>
                                                         <p className="fw-bold">$BALR powered Web3 engagement Venture</p>
@@ -455,14 +455,14 @@ const Dashboard = () => {
                                         </div>
                                         <Carousel.Caption>
                                             <div className="container w-100">
-                                                 <p className="firstText">Win Exclusive Rewards</p>
+                                                <p className="firstText">Win Exclusive Rewards</p>
                                                 <div className="text-center thirdSlide">
                                                     <div className="sCaption text-center">
                                                         <div>
                                                             <p>Play & Earn </p>
                                                             <h1>POOL </h1>
                                                             <p className="textHeader">
-                                                            Join the ultimate Play and Earn experience and win rewards with real-world value in Ballers City. Compete for a chance to win $BALR tokens, collectible NFTs, and tickets to exclusive physical parties around the world. 
+                                                                Join the ultimate Play and Earn experience and win rewards with real-world value in Ballers City. Compete for a chance to win $BALR tokens, collectible NFTs, and tickets to exclusive physical parties around the world.
                                                             </p>
                                                             <p className="textHeader">
                                                                 <b>Start playing now and bring your rewards to life!</b>
@@ -470,10 +470,10 @@ const Dashboard = () => {
                                                         </div>
                                                         <div className="poolBtn text-center">
                                                             <div className="playBtn">
-                                                                <a  onClick={()=> handleShow('lottery')}><span></span> Lottery Pool</a>
+                                                                <a onClick={() => handleShow('lottery')}><span></span> Lottery Pool</a>
                                                             </div>
                                                             <div className="shareBtn">
-                                                                <a  onClick={()=> handleShow('reward')}><span></span> Reward Pool </a>
+                                                                <a onClick={() => handleShow('reward')}><span></span> Reward Pool </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -546,7 +546,7 @@ const Dashboard = () => {
                                     <div className="rewardImage bg-static">
                                         <div className="bg-move">
                                             <img src={reward_card} alt="reward" width="117" height="117" />
-                                            <img src={r1} alt="reward" width="182" height="182"/>
+                                            <img src={r1} alt="reward" width="182" height="182" />
                                         </div>
                                     </div>
                                 </div>
@@ -563,9 +563,9 @@ const Dashboard = () => {
 
                                     <div className="py-5">
                                         <p className="text-font">
-                                        Join the ultimate Play, Party and Earn experience in Ballers City - a web3 game that rewards you daily. Compete for exclusive collectible cards, $BALR tokens, and Party tickets in thrilling Reward pools, Lottery Pots, and Quests. No matter your skill level or collection size, there's always a chance to win big. Start playing and get ready to party with the power of $BALR token!
+                                            Join the ultimate Play, Party and Earn experience in Ballers City - a web3 game that rewards you daily. Compete for exclusive collectible cards, $BALR tokens, and Party tickets in thrilling Reward pools, Lottery Pots, and Quests. No matter your skill level or collection size, there's always a chance to win big. Start playing and get ready to party with the power of $BALR token!
                                         </p>
-                                        
+
                                         <p className="text-font"> <b>Get Ready to Play, Party and Earn in Ballers City</b> </p>
                                     </div>
                                     <div className="innerBtn">
@@ -575,7 +575,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="backCoin"> <img src={semiCoin} alt="coin image"  width="292" height="471" /></div>
+                    <div className="backCoin"> <img src={semiCoin} alt="coin image" width="292" height="471" /></div>
                 </div>
                 <div className="">
                     <div className="gradientBackgroung pb-8">
@@ -598,7 +598,7 @@ const Dashboard = () => {
                                                 <p className="text-font">  </p>
                                                 <p className="text-font">Assemble your gang and join the Baller's community where you can party like never before with Crypto OGs, gamers and other like minded people across the globe and awaken the true BALLER within you!</p>
                                                 <p className="text-font">
-                                                We are hosting exclusive private parties, E sports competitions and Cosplay events, so that every Baller can have night worth remembering
+                                                    We are hosting exclusive private parties, E sports competitions and Cosplay events, so that every Baller can have night worth remembering
                                                 </p>
                                                 <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
@@ -611,7 +611,7 @@ const Dashboard = () => {
                                     <div className="col-sm-5">
 
                                         <div className="dancingImg">
-                                            <img src={SneefDog} alt="Snoopdog" width="413" height="734" />                                      
+                                            <img src={SneefDog} alt="Snoopdog" width="413" height="734" />
 
                                         </div>
                                         <div className="partyHard">PARTY HARD</div>
@@ -620,22 +620,22 @@ const Dashboard = () => {
                             </div>
 
                         </div>
-                        <img src={ellipse2} className="bgShade2"  width="1003" height="1788" alt="Eclipse"/>
+                        <img src={ellipse2} className="bgShade2" width="1003" height="1788" alt="Eclipse" />
 
                         <div className="container">
                             <div className="news news--news_page row">
                                 <div className="news-list col-sm-6">
                                     <div className="news-list-wrap">
                                         <div className="news-list-column system">
-                                            <a  className="news-item star pink">
+                                            <a className="news-item star pink">
                                                 <img className="news-item-bg" src={image27} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
-                                            <a  className="news-item star black">
+                                            <a className="news-item star black">
                                                 <img className="news-item-bg" src={image28} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
-                                            <a  className="news-item star white">
+                                            <a className="news-item star white">
                                                 <img className="news-item-bg" src={image29} alt="NFT Avatar" width={245} height={358} />
 
                                             </a>
@@ -647,7 +647,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-sm-12 order-sm-2">
                                     <div>
-                                    <img src={arrowUp} alt="Arrow" className="arrowUp" />
+                                        <img src={arrowUp} alt="Arrow" className="arrowUp" />
                                         <div className="nftCollectionHead mt-5 headWth mx-auto">
                                             <h2 className="heading">NFT COLLECTION</h2>
                                             <h2 className="heading2">NFT COLLECTION</h2>
@@ -663,10 +663,10 @@ const Dashboard = () => {
 
                                             <div className="mb-5">
                                                 <p className="text-font">
-                                                Unlock the vibrant world of Ballers City with our limited-edition NFT characters. Choose from 17 unique and rare NFTs, each representing a different district with its own distinct personality and story. 
+                                                    Unlock the vibrant world of Ballers City with our limited-edition NFT characters. Choose from 17 unique and rare NFTs, each representing a different district with its own distinct personality and story.
                                                 </p>
                                                 <p className="text-font">
-                                                With only 588 copies of each character, this is your chance to get exclusive access to the city that never sleeps. Claim your Ballers NFT now and join the clan before it's too late
+                                                    With only 588 copies of each character, this is your chance to get exclusive access to the city that never sleeps. Claim your Ballers NFT now and join the clan before it's too late
                                                 </p>
                                                 <div className="row">
                                                     <div className="col-6 col-xl-4">
@@ -676,8 +676,8 @@ const Dashboard = () => {
                                                     <div className="col-6 col-xl-5">
                                                         <div className="countHead">Total Number of NFTs</div>
                                                         <h5 className="num">10,000</h5>
-                                                    </div> 
-                                                </div>                                                
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div className="innerBtn"  {...buttonAHoverProps2}>
                                                 <a className="btnWith"><span></span>    {buttonAIsHovering2 ? "coming soon" : "View NFT's"} </a>
@@ -685,8 +685,8 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-                               
-                                
+
+
 
                             </div>
                         </div>
@@ -719,18 +719,18 @@ const Dashboard = () => {
 
                                         <div className="innerBtn"  {...buttonAHoverProps}>
                                             <a className="purchaseWith"><span></span>    {buttonAIsHovering ? "coming soon" : "PURCHASE NOW"} </a>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
 
-                                    <div className="ballercoin text-right"> 
-                                         
-                                        <img src={ballerCoin} alt="Baller Coin" width="382" height="382"/> 
+                                    <div className="ballercoin text-right">
+
+                                        <img src={ballerCoin} alt="Baller Coin" width="382" height="382" />
                                     </div>
                                 </div>
                             </div>
-                            <img src={ellipse2} className="bgShadeBalr" alt="Eclipse"  width="673" height="1198"/>
+                            <img src={ellipse2} className="bgShadeBalr" alt="Eclipse" width="673" height="1198" />
 
                             <div>
                                 <img src={starL} id="one" width={61} height={60} className="large" alt="Star" />
@@ -742,32 +742,32 @@ const Dashboard = () => {
                     </div>
 
                     <div className="container-fluid bgColor joinCard">
-                        <div className="container positionRelative p-0"> 
-                            <div className="joinCard">  
-                            <div className="desk">
-                            <img className="image" src={ambassador} alt="Ballers AMBASSADOR program"  width="1500" height="571" />
-                            {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
-                            </div>
-                            <div className="mob">
-                            <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program"  width="404" height="595" /> 
-                            </div>
-                            <div className="contentJoin">
-                                <div className="row justify-content-center">                                    
-                                    <div className="col-sm-12 text-center my-auto">
-                                        <p className="joinUs">BECOME <br></br> Ballers AMBASSADOR </p>
-                                        <p className="joinText"> to win $BALR tokens, In-game cash, NFT’s & many more..</p>
-                                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSevvqZ__LcppAzh1pIuQZb4CXLv53-5HBDPzkxxwQ-3GXGLKQ/viewform" target="blank" rel="noopener noreferrer" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
-                                    </div>                                    
+                        <div className="container positionRelative p-0">
+                            <div className="joinCard">
+                                <div className="desk">
+                                    <img className="image" src={ambassador} alt="Ballers AMBASSADOR program" width="1500" height="571" />
+                                    {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
                                 </div>
-                            </div>
-                                
+                                <div className="mob">
+                                    <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program" width="404" height="595" />
+                                </div>
+                                <div className="contentJoin">
+                                    <div className="row justify-content-center">
+                                        <div className="col-sm-12 text-center my-auto">
+                                            <p className="joinUs">BECOME <br></br> Ballers AMBASSADOR </p>
+                                            <p className="joinText"> to win $BALR tokens, In-game cash, NFT’s & many more..</p>
+                                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSevvqZ__LcppAzh1pIuQZb4CXLv53-5HBDPzkxxwQ-3GXGLKQ/viewform" target="blank" rel="noopener noreferrer" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
 
-                       
-                        {/* <div className="container positionRelative mt-12rem">
+
+                    {/* <div className="container positionRelative mt-12rem">
                             <div className="divImage"><img src={Walter_Black} alt="card" /> </div>
                             <div className="joinCard">
                                 <div className="bg-circle"></div>
@@ -807,7 +807,7 @@ const Dashboard = () => {
 
                     <div className="gradientBackgroung secPaddingY">
                         <div className="container paddingY-5 mt-5 positionRelative">
-                            <img src={ellipse3} className="bgShade3"  width="612" height="988" alt="Eclipse" />
+                            <img src={ellipse3} className="bgShade3" width="612" height="988" alt="Eclipse" />
                             <div className="row">
                                 <div className="col-lg-5 my-auto">
                                     <div className="positionRelative mb-5">
@@ -855,25 +855,25 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-lg-7 my-auto">
                                     <div className='nice-header'>
-                                        <img src={house} alt="before" className="img-fluid" width="851" height="700"/>
+                                        <img src={house} alt="before" className="img-fluid" width="851" height="700" />
                                         <div className='header-overlay' id="scrollImg">
-                                        <img src={house1} alt="after" className="img-fluid"  width="851" height="700"/>
+                                            <img src={house1} alt="after" className="img-fluid" width="851" height="700" />
 
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div className="container mt-4 footerIcon">
                             <div className="row align-items-center">
                                 <div className="col-2 col-sm-3">
-                                    <img src={footerLogo} alt="logo"  className="mob-wth img-fluid desk imgHeight"  width="200" height="128"/>
-                                    <img src={gamelogo} alt="logo"  className="mob-wth img-fluid mob"  width="40" height="51"/>
+                                    <img src={footerLogo} alt="logo" className="mob-wth img-fluid desk imgHeight" width="200" height="128" />
+                                    <img src={gamelogo} alt="logo" className="mob-wth img-fluid mob" width="40" height="51" />
                                 </div>
                                 <div className="col-4 col-sm-3">
                                     <div className="d-flex align-items-center">
-                                        <img src={teen} alt="logo"  width="65" height="97" className="mob-wth-px img-fluid"/>
+                                        <img src={teen} alt="logo" width="65" height="97" className="mob-wth-px img-fluid" />
                                         <ul>
                                             <li>Blood </li>
                                             <li>Language</li>
@@ -885,7 +885,7 @@ const Dashboard = () => {
 
                                 </div>
                                 <div className="col-3 col-sm-3">
-                                    <img src={gamecity} alt="logo"  width="351" height="167" className="ipadWth img-fluid" />
+                                    <img src={gamecity} alt="logo" width="351" height="167" className="ipadWth img-fluid" />
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">
@@ -895,7 +895,7 @@ const Dashboard = () => {
                                     </ul>
                                 </div>
                             </div>
-                         
+
                         </div>
                     </div>
 

@@ -14,8 +14,9 @@
     font-weight: 700;
 }
 .privacy li{
-    list-style: inside;
-    font-size: 20px;
+    list-style: disc;
+    font-size: 20px;    
+    margin-left: 18px;
 }
 .privacy h3{
     margin-top: 2rem;
@@ -24,5 +25,12 @@
 @media (max-width: 480px){
     .privacy .heading {
         font-size: 34px;
+    }
+    .privacy li { 
+        font-size: 16px;
+    }
+    .privacy .text-font {
+        font-size: 18px;
+        line-height: 28px;
     }
 }
