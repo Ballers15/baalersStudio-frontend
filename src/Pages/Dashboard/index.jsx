@@ -603,7 +603,7 @@ const Dashboard = () => {
                                                 <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer">
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer" className="px-6">
                                                     <span></span>Join <img src={discord} className="discordIcon" alt="discord logo" width={27} height={20} /></a>
                                             </div>
                                         </div>

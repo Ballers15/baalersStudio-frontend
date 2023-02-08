@@ -82,6 +82,11 @@
         bottom: 0;
     }
 }
+@media (min-width:1200px) and (max-width: 1281px){
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
 @media (max-width: 1024px){
     .pool .secondText {
         left: 0rem;

@@ -7,7 +7,10 @@ body {
 a {
   cursor: pointer;
 }
-
+.px-6{
+  padding-right: 4rem !important;
+  padding-left: 4rem !important;
+}
 .small,
 small {
   font-size: 12px;
@@ -402,7 +405,7 @@ h5 {
 
 .mainSlider .carousel-indicators {
   left: inherit;
-  bottom: 9rem;
+  bottom: 4rem;
   margin-right: 10%;
 }
 
@@ -525,6 +528,7 @@ h5 {
   font-size: 20px;
   line-height: 109.84%;
   text-transform: uppercase;
+  letter-spacing: 0;
 
 }
 
@@ -582,10 +586,10 @@ h5 {
 .innerBtn a span::after {
   content: '';
   position: absolute;
-  width: 65px;
+  width: 96px;
   height: 45px;
   background: transparent;
-  transition: 1s;
+  transition: all 1s ease;
   margin: -4px;
   /* -webkit-mix-blend-mode: hue; */
 }
@@ -601,7 +605,7 @@ h5 {
 .playBtn a::after,
 .playBtn a span::before,
 .playBtn a span::after {
-  width: 96px;
+  width: 97px;
 }
 
 .thirdSlide .playBtn a::before,
@@ -610,6 +614,12 @@ h5 {
 .thirdSlide .playBtn a span::after {
   width: 114px;
 }
+.thirdSlide .playBtn a:hover::before, 
+.thirdSlide .playBtn a:hover::after, 
+.thirdSlide .playBtn a:hover span::before, 
+.thirdSlide .playBtn a:hover span::after{ 
+  width: 101px;
+}
 
 .ballerSec .innerBtn a::before,
 .ballerSec .innerBtn a::after,
@@ -617,12 +627,23 @@ h5 {
 .ballerSec .innerBtn a span::after {
   width: 135px;
 }
-
+.ballerSec .innerBtn a:hover::before, 
+.ballerSec .innerBtn a:hover::after, 
+.ballerSec .innerBtn a:hover span::before, 
+.ballerSec .innerBtn a:hover span::after{
+width: 118px;
+}
 .news-caption .innerBtn a::before,
 .news-caption .innerBtn a::after,
 .news-caption .innerBtn a span::before,
 .news-caption .innerBtn a span::after {
   width: 128px;
+}
+.news-caption .innerBtn a:hover::before, 
+.news-caption .innerBtn a:hover::after, 
+.news-caption .innerBtn a:hover span::before, 
+.news-caption .innerBtn a:hover span::after {
+  width: 112px;
 }
 
 .playBtn a span::before,
@@ -645,14 +666,24 @@ h5 {
 .playBtn a:hover::after,
 .playBtn a:hover span::before,
 .playBtn a:hover span::after,
-.innerBtn a:hover::before,
+.rewadText .innerBtn a:hover::before,
+.rewadText .innerBtn a:hover::after,
+.rewadText .innerBtn a:hover span::before,
+.rewadText .innerBtn a:hover span::after {
+  transform: scale(1.25);
+  width: 86px;
+}
+/* .innerBtn a:hover::before,
 .innerBtn a:hover::after,
 .innerBtn a:hover span::before,
 .innerBtn a:hover span::after {
-  width: calc(326px / 2) !important;
-  /* height: calc( 70px / 2); */
+  transform: scale(1.25);
+  width: 60px; 
+} */
+.innerBtn a:hover::before, .innerBtn a:hover::after, .innerBtn a:hover span::before, .innerBtn a:hover span::after {
+  transform: scale(1.25);
+  width: 83px;
 }
-
 .btnWith {
   width: 270px;
   transition: all .3s;
@@ -1251,6 +1282,7 @@ a i {
   flex-wrap: wrap;
   height: 100%;
   align-content: space-between;
+  padding-top: 2rem;
 }
 
 .poolBtn {
@@ -2025,9 +2057,9 @@ ul li {
   margin-left: 4%;
 }
 
-.sCaption {
+/* .sCaption {
   margin-bottom: 6rem;
-}
+} */
 
 .trailerStyle .modal-header {
 
@@ -2149,7 +2181,7 @@ ul li {
   width: 86%;
 } */
   .positionAbs {
-    bottom: 15.5rem;
+    /* bottom: 15.5rem; */
   }
 
   .firstText {
@@ -2281,7 +2313,7 @@ ul li {
 
   .positionAbs {
     width: 34rem;
-    bottom: 17rem;
+    /* bottom: 17rem; */
   }
 
   .playBtn a {
@@ -2470,7 +2502,7 @@ ul li {
   }
 
   .positionAbs {
-    bottom: 13rem;
+    bottom: 9rem;
   }
 
   .balrHead {
@@ -2507,6 +2539,19 @@ ul li {
 }
 
 @media (max-width: 1500px) {
+  .thirdSlide .playBtn a:hover::before, 
+  .thirdSlide .playBtn a:hover::after, 
+  .thirdSlide .playBtn a:hover span::before, 
+  .thirdSlide .playBtn a:hover span::after{ 
+    width: 82px;
+  }
+
+  .playBtn a:hover::before,
+.playBtn a:hover::after,
+.playBtn a:hover span::before,
+.playBtn a:hover span::after { 
+  width: 70px;
+}
   .news-item-bg {
     width: 90%;
   }
@@ -2595,15 +2640,15 @@ ul li {
   .thirdSlide .playBtn a::after,
   .thirdSlide .playBtn a span::before,
   .thirdSlide .playBtn a span::after {
-    width: 85px;
+    width: 95px;
   }
 
-  .rewadText .innerBtn a::before,
+  /* .rewadText .innerBtn a::before,
   .rewadText .innerBtn a::after,
   .rewadText .innerBtn a span::before,
   .rewadText .innerBtn a span::after {
     width: 84px;
-  }
+  } */
 
   .logoSlider {
     bottom: -8rem
@@ -2710,21 +2755,41 @@ ul li {
     font-size: 32px;
   }
 }
+@media (max-width: 1340px) {
+    .positionAbs {
+      bottom: 6rem;
+  }
+  .mainSlider .carousel-indicators { 
+    bottom: 1.45rem;
+  }
+}
 
 @media (max-width: 1300px) {
-
+  .playBtn a::before, .playBtn a::after, .playBtn a span::before, .playBtn a span::after {
+    width: 76px;
+}
+.playBtn a:hover::before, .playBtn a:hover::after, .playBtn a:hover span::before, .playBtn a:hover span::after {
+  width: 65px;
+}
+  .thirdSlide .playBtn a::before, .thirdSlide .playBtn a::after, .thirdSlide .playBtn a span::before, .thirdSlide .playBtn a span::after {
+    width: 90px;
+}
+.thirdSlide .playBtn a:hover::before, .thirdSlide .playBtn a:hover::after, .thirdSlide .playBtn a:hover span::before, .thirdSlide .playBtn a:hover span::after {
+  width: 80px;
+}
+  .rewadText .innerBtn a::before, .rewadText .innerBtn a::after, .rewadText .innerBtn a span::before, .rewadText .innerBtn a span::after {
+    width: 84px;
+  }
+  .rewadText .innerBtn a:hover::before, .rewadText .innerBtn a:hover::after, .rewadText .innerBtn a:hover span::before, .rewadText .innerBtn a:hover span::after {
+    width: 76px;
+}
   .logoSlider .carousel-item {
     height: 84px;
   }
 
   .logoSlider {
     bottom: -7rem;
-  }
-
-  .positionAbs {
-    bottom: 11.5rem;
-  }
-
+  } 
   .playBtn a {
     padding: 0.85rem 2rem 0.65rem;
     font-size: 16px;
@@ -2767,10 +2832,10 @@ ul li {
     margin-bottom: 1.75rem;
   }
 
-  .sCaption h5 {
+  /* .sCaption h5 {
     font-size: 17px;
     line-height: 19px;
-  }
+  } */
 
   .joinCard i.fa.fa-twitter {
     right: 17%;
@@ -2780,7 +2845,9 @@ ul li {
   .joinCard i.fa.fa-instagram {
     right: 4.25rem;
   }
-
+  .positionAbs {
+    bottom: 9.5rem;
+}
   /* .coinImage img { 
   right: 35%;
 } */
@@ -3023,7 +3090,8 @@ ul li {
   .innerBtn a:hover::after,
   .innerBtn a:hover span::before,
   .innerBtn a:hover span::after {
-    width: calc(270px / 2);
+    /* width: calc(270px / 2); */
+    /* transform: scale(1.5); */
   }
 
   .news-caption .innerBtn a::before,
@@ -3276,7 +3344,7 @@ ul li {
   .innerBtn a:hover::after,
   .innerBtn a:hover span::before,
   .innerBtn a:hover span::after {
-    width: calc(238px / 2) !important;
+    /* width: calc(238px / 2) !important; */
   }
 
   div#balrToken .positionRelative {
