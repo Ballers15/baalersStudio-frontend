@@ -746,7 +746,6 @@ const Dashboard = () => {
                             <div className="joinCard">
                                 <div className="desk">
                                     <img className="image" src={ambassador} alt="Ballers AMBASSADOR program" width="1500" height="571" />
-                                    {/* <img src={ambassadorOver} alt="" className="overlayImg" /> */}
                                 </div>
                                 <div className="mob">
                                     <img className="image" src={ambassadorMob} alt="Ballers AMBASSADOR program" width="404" height="595" />
