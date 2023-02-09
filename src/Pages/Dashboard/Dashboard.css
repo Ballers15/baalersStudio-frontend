@@ -539,6 +539,7 @@ h5 {
   padding: 1.25rem 2.25rem 1.25rem;
   color: #ECE8E1;
   font-family: "Valorant";
+  
 }
 
 .playBtn a::before,
@@ -570,8 +571,9 @@ h5 {
   width: 96px;
   height: 45px;
   background: transparent;
-  transition: all 1s ease;
+  /* transition: all 1s ease; */ 
   margin: -4px;
+  /* transition: all .25s ease-out; */
   /* -webkit-mix-blend-mode: hue; */
 }
 
@@ -2876,19 +2878,6 @@ ul li {
   .news-caption {
     top: 30%;
   }
-
-  .playBtn a:hover::before,
-  .playBtn a:hover::after,
-  .playBtn a:hover span::before,
-  .playBtn a:hover span::after,
-  .innerBtn a:hover::before,
-  .innerBtn a:hover::after,
-  .innerBtn a:hover span::before,
-  .innerBtn a:hover span::after {
-    /* width: calc(270px / 2); */
-    /* transform: scale(1.5); */
-  }
-
   .news-caption .innerBtn a::before,
   .news-caption .innerBtn a::after,
   .news-caption .innerBtn a span::before,
