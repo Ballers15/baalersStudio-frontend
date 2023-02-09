@@ -10,7 +10,8 @@ const Footer = () => {
           <div className="col-sm-8">
           <ul className="socialIcons">
             <li><a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
-            <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer"><img src={discord} alt="" /></a></li>
+            <li><a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer">
+              <img src={discord} width={27} height={20} alt="discord"  /></a></li>
             <li> <a href="https://www.linkedin.com/company/ballersstudio/about/" target="blank" rel="noopener noreferrer"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
             <li><a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
             <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a></li>

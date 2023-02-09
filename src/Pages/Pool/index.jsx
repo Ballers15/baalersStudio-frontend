@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import React, { useState} from "react";
-import './Pool.css'
-import { Carousel } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
+import React, { useState, useEffect} from "react";
+import './Pool.css' 
 import Modal from 'react-bootstrap/Modal';
 import tdefi from '../../Assest/img/logos/tdefi.png'
 import tradedog from '../../Assest/img/logos/tradedog.png'
@@ -13,6 +11,13 @@ import ith from '../../Assest/img/logos/ith.png'
 
 
 const Pool = () => { 
+    useEffect(() => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+          });
+       
+    })
 
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
@@ -53,13 +58,7 @@ const Pool = () => {
                 <p>
                 Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
                 </p>
-                </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
+                </Modal.Body> 
             </Modal>
             <Modal
                 show={rewardModalShow}
@@ -80,13 +79,7 @@ const Pool = () => {
                  <p>
                  Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
                  </p>
-                </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={()=> handleHide('lottery')}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer> */}
+                </Modal.Body> 
             </Modal>
             <div className="pool"> 
                <div className="poolScreen w-100">
