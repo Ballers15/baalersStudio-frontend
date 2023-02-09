@@ -1143,7 +1143,7 @@ a i {
 }
 
 .poolBtn {
-  width: 96%;
+  width: 86%;
   position: relative;
   height: 80px;
   margin: auto; 
@@ -2728,7 +2728,7 @@ ul li {
   .rewadText .innerBtn a span:before,
   .rewadText .innerBtn a:after,
   .rewadText .innerBtn a:before {
-    width: 80px;
+    width: 74px;
   }
 
   /* .coinImage img {
