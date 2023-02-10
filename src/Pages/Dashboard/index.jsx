@@ -12,7 +12,7 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import man from '../../Assest/img/man.gif'
+import man from '../../Assest/img/Man.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.png'
 import ambassadorMob from '../../Assest/img/ambassadorMob.png'
@@ -123,6 +123,10 @@ const Dashboard = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const setShowToaster = (param) => showToaster(param);
 
+    useEffect(()=>{
+        emailValidation()
+      },[email])
+
     const handleShow = (modalName) => {
         if (modalName === 'play') {
             setEmail('');
@@ -153,13 +157,13 @@ const Dashboard = () => {
         }
 
     }
-    const setErrorMsgFunc = () => {
-        if (!emailValidation()) {
-            setErrorMsg('Enter a Valid Email !');
-        } else {
-            setErrorMsg(null)
-        }
-    }
+    // const setErrorMsgFunc = () => {
+    //     if (!emailValidation()) {
+    //         setErrorMsg('Enter a Valid Email !');
+    //     } else {
+    //         setErrorMsg(null)
+    //     }
+    // }
 
     const handleSubmit = async (e) => {
         // console.log(email,'-----------email value');
@@ -214,10 +218,12 @@ const Dashboard = () => {
 
     const emailValidation = () => {
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
-        if (!email || regex.test(email) === false) {
-
+        const tld=email?.split('.')[1]?.length;
+        if (!email || regex.test(email) === false || tld<=1) {
+            setErrorMsg('Enter a Valid Email !');
             return false;
         }
+        setErrorMsg(null)
         return true;
     }
 
@@ -251,7 +257,7 @@ const Dashboard = () => {
                                 type="email"
                                 placeholder="Enter your email"
                                 value={email}
-                                onChange={({ target }) => { setErrorMsgFunc(); setEmail(target.value) }}
+                                onChange={({ target }) => { setEmail(target.value) }}
                             />
                             <Form.Control.Feedback type="invalid">
                                 E-mail is required !
