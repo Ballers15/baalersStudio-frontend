@@ -12,21 +12,21 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import man from '../../Assest/img/Man.gif'
+import fatMan from '../../Assest/img/fatMan.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
-import ambassador from '../../Assest/img/ambassador.png'
-import ambassadorMob from '../../Assest/img/ambassadorMob.png'
+import ambassador from '../../Assest/img/ambassador.webp'
+import ambassadorMob from '../../Assest/img/ambassadorMob.webp'
 // import ambassadorOver from '../../Assest/img/ambassadorOver.png'
-import slide2 from '../../Assest/img/slide2.png'
-import slide3 from '../../Assest/img/slide3.png'
-import reward_card from '../../Assest/img/reward_card.png'
-import r1 from '../../Assest/img/r1.png'
-import coin from '../../Assest/img/coin.png'
-import semiCoin from '../../Assest/img/semiCoin.png'
-import image27 from '../../Assest/img/image27.png'
-import image28 from '../../Assest/img/image28.png'
-import image29 from '../../Assest/img/image29.png'
-import ballerCoin from '../../Assest/img/ballerCoin.png'
+import slide2 from '../../Assest/img/slide2.webp'
+import slide3 from '../../Assest/img/slide3.webp'
+import reward_card from '../../Assest/img/reward_card.webp'
+import r1 from '../../Assest/img/r1.webp'
+import coin from '../../Assest/img/coin.webp'
+import semiCoin from '../../Assest/img/semiCoin.webp'
+import image27 from '../../Assest/img/image27.webp'
+import image28 from '../../Assest/img/image28.webp'
+import image29 from '../../Assest/img/image29.webp'
+import ballerCoin from '../../Assest/img/ballerCoin.webp'
 import star from '../../Assest/img/Star.svg'
 import discord from '../../Assest/img/discord.svg'
 // import tdefi from '../../Assest/img/logos/tdefi.png'
@@ -37,15 +37,15 @@ import discord from '../../Assest/img/discord.svg'
 import gamelogo from '../../Assest/img/gamelogo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import footerLogo from '../../Assest/img/footerLogo.png'
-import teen from '../../Assest/img/teen.png'
+import teen from '../../Assest/img/teen.webp'
 import arrowRight from '../../Assest/img/arrowRight.svg'
 import arrowUp from '../../Assest/img/arrowUp.svg'
 import arrowDown from '../../Assest/img/arrowDown.svg'
 import ellipse from '../../Assest/img/ellipse.png'
 import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
-import house from '../../Assest/img/house.png'
-import house1 from '../../Assest/img/house1.png'
+import house from '../../Assest/img/house.webp'
+import house1 from '../../Assest/img/house1.webp'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
@@ -380,7 +380,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-7 text-right mob-center">
-                                                        <img src={man} alt="Italian_Mafia_Boss" width="558" height="993" />
+                                                        <img src={fatMan} alt="Italian_Mafia_Boss" width="558" height="993" />
                                                     </div>
                                                 </div>
                                                 <p className="secondText">Awaken the Baller <br></br> within you</p>
@@ -609,7 +609,7 @@ const Dashboard = () => {
                                                 <p className="text-font">Loveland party <b> coming soon!</b> </p>
                                             </div>
                                             <div className="innerBtn">
-                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer" className="px-6">
+                                                <a href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259" target="blank" rel="noopener noreferrer" className="px-6" aria-label="discord">
                                                     <span></span>Join <img src={discord} className="discordIcon" alt="discord logo" width={27} height={20} /></a>
                                             </div>
                                         </div>
@@ -756,7 +756,7 @@ const Dashboard = () => {
                                         <div className="col-sm-12 text-center my-auto">
                                             <p className="joinUs">BECOME <br></br> Ballers AMBASSADOR </p>
                                             <p className="joinText"> to win $BALR tokens, In-game cash, NFT’s & many more..</p>
-                                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSevvqZ__LcppAzh1pIuQZb4CXLv53-5HBDPzkxxwQ-3GXGLKQ/viewform" target="blank" rel="noopener noreferrer" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
+                                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSevvqZ__LcppAzh1pIuQZb4CXLv53-5HBDPzkxxwQ-3GXGLKQ/viewform" target="blank" rel="noopener noreferrer" className="getStart">GET STARTED <img src={arrowRight} width={16} height={17} alt="arrow" /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -889,7 +889,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="col-3 col-sm-3">
                                     <ul className="policy">
-                                        <li><a href="/privacy">Privacy notice</a></li>
+                                        <li><a href="/privacy"  aria-label="privacy">Privacy notice</a></li>
                                         <li>Terms of service</li>
                                         <li>Cookie preference</li>
                                     </ul>
