@@ -249,12 +249,12 @@ const Dashboard = () => {
                             <Form.Control
                                 required
                                 type="email"
-                                placeholder="Email"
+                                placeholder="Enter your email"
                                 value={email}
                                 onChange={({ target }) => { setErrorMsgFunc(); setEmail(target.value) }}
                             />
                             <Form.Control.Feedback type="invalid">
-                                Valid E-mail is required !
+                                E-mail is required !
                             </Form.Control.Feedback>
                             <Form.Control.Feedback >
                                 <span className='custom-error-msg'> {errorMsg && 'Valid E-mail is required !'}</span>
@@ -377,7 +377,7 @@ const Dashboard = () => {
                                                         <img src={man} alt="Italian_Mafia_Boss" width="558" height="993" />
                                                     </div>
                                                 </div>
-                                                <p className="secondText">Awaken the Baller within you</p>
+                                                <p className="secondText">Awaken the Baller <br></br> within you</p>
                                             </div>
 
 
@@ -404,7 +404,7 @@ const Dashboard = () => {
                                                     </div>
 
                                                 </div>
-                                                <p className="secondText">Announcing the next project soon!</p>
+                                                <p className="secondText">Announcing the <br></br> next project soon!</p>
                                             </div>
                                         </Carousel.Caption>
                                     </Carousel.Item>
@@ -478,7 +478,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p className="secondText">NFT<small>s</small> distributed Daily</p>
+                                                <p className="secondText">NFT<small>s</small> distributed <br></br> Daily</p>
 
                                             </div>
 
@@ -641,9 +641,7 @@ const Dashboard = () => {
                                             </a>
 
                                         </div>
-
                                     </div>
-
                                 </div>
                                 <div className="col-sm-12 order-sm-2">
                                     <div>
@@ -685,12 +683,9 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-
+                         
 
                         <div className="rotateDiv secPaddingY">
                             <div className="marquee">

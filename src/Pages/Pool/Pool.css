@@ -37,7 +37,7 @@
 }
 .pool .secondText {
     left: 0;
-    width: 16%;
+    /* width: 16%; */
 }
 
 .pool .firstText {
@@ -66,13 +66,13 @@
 @media (min-width: 1750px){
     .pool .secondText {
         left: 0;
-        width: 12%;
+        /* width: 12%; */
     }
 }
 @media (max-width: 1500px){
     .pool .secondText {
         left: 2rem;
-        width: 14%;
+        /* width: 14%; */
     }
     /* .pool .thirdSlide .sCaption {
         width: 26rem;
@@ -90,7 +90,7 @@
 @media (max-width: 1024px){
     .pool .secondText {
         left: 0rem;
-        width: 17%;
+        /* width: 17%; */
     }
     .pool .poolBtn {
         width: 74%;
@@ -105,7 +105,7 @@
     }
     .pool .secondText {
         left: -3rem;
-        width: 22%;
+        /* width: 22%; */
         bottom: 10rem;
     }
     .pool .poolBtn {
@@ -116,8 +116,9 @@
     .pool .poolBtn {
         width: 100%;
     }
-    .pool .poolBtn .playBtn{
-        width: 54%;
+    
+    .pool .poolBtn .playBtn {
+        width: 47%;
     }
     .pool .thirdSlide {
         height: 65vh;
@@ -125,7 +126,7 @@
     }
     .pool .secondText {
         left: -2rem;
-        width: 42%;
+        /* width: 42%; */
         bottom: 7rem;
     }
     .pool .firstText { 

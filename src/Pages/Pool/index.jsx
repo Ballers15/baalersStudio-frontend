@@ -147,7 +147,7 @@ const Pool = () => {
                                    
                                 </div>
                             </div>
-                            <p className="secondText">NFT<small>s</small> distributed Daily</p>
+                            <p className="secondText">NFT<small>s</small> distributed <br></br> Daily</p>
                         </div>
                         
                     </div>

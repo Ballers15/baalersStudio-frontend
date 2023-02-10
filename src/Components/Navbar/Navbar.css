@@ -65,7 +65,7 @@
     .navbar-collapse { 
         margin: 25px 0;
     }
-    #responsive-navbar-nav::after {
+    #responsive-navbar-nav::before {
         content: "";
         width: 41%;
         height: 1px;
@@ -73,6 +73,7 @@
         position: absolute;
         left: 0;
         right: 0;
+        bottom: 0;
         margin: 10px auto;
     }
  }
