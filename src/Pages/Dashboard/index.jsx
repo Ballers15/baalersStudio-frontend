@@ -12,8 +12,8 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import fatMan from '../../Assest/img/fatMan.gif'
-import SneefDog from '../../Assest/img/SneefDog.gif'
+import fatMan from '../../Assest/img/fatMan.webp'
+import SneefDog from '../../Assest/img/SneefDog.webp'
 import ambassador from '../../Assest/img/ambassador.webp'
 import ambassadorMob from '../../Assest/img/ambassadorMob.webp'
 // import ambassadorOver from '../../Assest/img/ambassadorOver.png'
@@ -27,6 +27,7 @@ import image27 from '../../Assest/img/image27.webp'
 import image28 from '../../Assest/img/image28.webp'
 import image29 from '../../Assest/img/image29.webp'
 import ballerCoin from '../../Assest/img/ballerCoin.webp'
+import ballerCoinMob from '../../Assest/img/ballerCoinMob.webp'
 import star from '../../Assest/img/Star.svg'
 import discord from '../../Assest/img/discord.svg'
 // import tdefi from '../../Assest/img/logos/tdefi.png'
@@ -46,6 +47,8 @@ import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
 import house from '../../Assest/img/house.webp'
 import house1 from '../../Assest/img/house1.webp'
+import houseMob from '../../Assest/img/houseMob.webp'
+import houseMob1 from '../../Assest/img/houseMob1.webp'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
@@ -99,7 +102,7 @@ const Dashboard = () => {
                 opacity: function () {
                     var elementHeight = $(this).height();
                     let opacity = ((- (elementHeight - scrollBottom) / elementHeight));
-                    console.log('opacity', opacity)
+                    // console.log('opacity', opacity)
                     if (opacity > 0.3) {
                         opacity = 1;
                     }
@@ -1007,12 +1010,17 @@ const Dashboard = () => {
                   </div>
                   <div className="col-sm-6">
                     <div className="ballercoin text-right">
-                      <img
+                    <picture aria-hidden="true">
+                      <source media="(min-width: 900px)" srcset={ballerCoin} />
+                      <source media="(max-width: 500px)" srcset={ballerCoinMob} />
+                      <img src={ballerCoin} width="382" height="382" alt="Baller Coin" loading="lazy" />
+                    </picture>
+                      {/* <img
                         src={ballerCoin}
                         alt="Baller Coin"
                         width="382"
                         height="382"
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -1056,7 +1064,7 @@ const Dashboard = () => {
             <div className="container-fluid bgColor joinCard">
               <div className="container positionRelative p-0">
                 <div className="joinCard">
-                  <div className="desk">
+                  {/* <div className="desk">
                     <img
                       className="image"
                       src={ambassador}
@@ -1073,7 +1081,12 @@ const Dashboard = () => {
                       width="404"
                       height="595"
                     />
-                  </div>
+                  </div> */}
+                  <picture aria-hidden="true">
+                    <source media="(min-width: 900px)" srcset={ambassador} />
+                    <source media="(max-width: 500px)" srcset={ambassadorMob} />
+                    <img src={ambassador} width="1500" height="571" className="image" alt="Ballers AMBASSADOR program" loading="lazy" />
+                  </picture>
                   <div className="contentJoin">
                     <div className="row justify-content-center">
                       <div className="col-sm-12 text-center my-auto">
@@ -1209,21 +1222,31 @@ const Dashboard = () => {
                   </div>
                   <div className="col-lg-7 my-auto">
                     <div className="nice-header">
-                      <img
+                    <picture aria-hidden="true">
+                      <source media="(min-width: 900px)" srcset={house} />
+                      <source media="(max-width: 500px)" srcset={houseMob} />
+                      <img src={house} width="851" height="700" className="img-fluid" alt="before" loading="lazy" />
+                    </picture>
+                      {/* <img
                         src={house}
                         alt="before"
                         className="img-fluid"
                         width="851"
                         height="700"
-                      />
+                      /> */}
                       <div className="header-overlay" id="scrollImg">
-                        <img
+                      <picture aria-hidden="true">
+                        <source media="(min-width: 900px)" srcset={house1} />
+                        <source media="(max-width: 500px)" srcset={houseMob1} />
+                        <img src={house1} width="851" height="700" className="img-fluid" alt="after" loading="lazy" />
+                      </picture>
+                        {/* <img
                           src={house1}
                           alt="after"
                           className="img-fluid"
                           width="851"
                           height="700"
-                        />
+                        /> */}
                       </div>
                     </div>
                   </div>
