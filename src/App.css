@@ -1,21 +1,12 @@
-@font-face {
-    font-family: "Valorant";
-    src: local("Valorant"),
-     url("../public/font/valorant/Valorant-Font.ttf") format("truetype");
-    font-weight: bold;
-    }
-    .loader {
+    /* .loader {
   position: fixed;
   top: 50%;
-  left: 50%;
-  width: 160px;
-  height: 160px;
+  left: 50%; 
   margin: -80px 0px 0px -80px;
   background-color: transparent;
-  border-radius: 50%;
-  border: 2px solid #e3e4dc2e
-}
-.loader:before {
+  border-radius: 50%; 
+} */
+/* .loader:before {
   content: "";
   width: 162px;
   height: 162px;
@@ -132,9 +123,9 @@
   left: 21px;
   animation: Animasearch 3s ease-in-out infinite;
   animation-delay: 1.5s;
-}
+} */
 
-@keyframes Animasearch {
+/* @keyframes Animasearch {
   0% {
     transform: scale(1);
     opacity: 1;
@@ -182,4 +173,4 @@
   100% {
     transform: rotate(360deg);
   }
-}
+} */
