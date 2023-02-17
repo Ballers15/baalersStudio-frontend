@@ -11,7 +11,7 @@ const UsersList = () => {
   const setShowToaster = param => showToaster(param)
   const [toaster, showToaster] = useState(false)
   const [toasterMessage, setToasterMessage] = useState('')
-  const [currentpage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
   const [allUsers, setAllUsers] = useState(null)
   const [disable, disableSubmitButton] = useState(false)
 
@@ -19,12 +19,12 @@ const UsersList = () => {
     fetchApi()
     // console.log('Total users=>', allUsers?.data?.users)
     
-  }, [currentpage])
+  }, [currentPage])
 
   const fetchApi = async () => {
     // console.log('current Page before api call',currentpage)
     let dataToSend = {
-      currentpage: currentpage,
+      currentPage: currentPage,
     }
 
     try {
@@ -56,12 +56,12 @@ const UsersList = () => {
 
   const nextPage = () => {
     if (allUsers?.data?.count > 10)
-     setCurrentPage(currentpage + 1)
+     setCurrentPage(currentPage + 1)
     else disableSubmitButton(true)
   }
   const prevPage = () => {
-    if (currentpage > 0) 
-    setCurrentPage(currentpage - 1)
+    if (currentPage > 0) 
+    setCurrentPage(currentPage - 1)
     else disableSubmitButton(true)
   }
 
