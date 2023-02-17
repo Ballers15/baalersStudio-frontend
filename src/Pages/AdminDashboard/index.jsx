@@ -1,14 +1,16 @@
-import React from "react";
-import './AdminDashboard.css';
+import React, { useEffect, useState } from 'react'
+import './AdminDashboard.css'
 
-const About = () => {
-    return (
-        <React.Fragment>
-            <div className="admin-dashboard">
-                Admin Dashboard Page works !!
-            </div>
-        </React.Fragment>
-    )
+const AdminDashboard = () => {
+  const [loading, setLoading] = useState(false)
+  const [toaster, showToaster] = useState(false)
+  const [toasterMessage, setToasterMessage] = useState('')
+
+  return (
+    <React.Fragment>
+      <div className="admin-dashboard">Admin Dashboard page works!</div>
+    </React.Fragment>
+  )
 }
 
-export default About;
+export default AdminDashboard

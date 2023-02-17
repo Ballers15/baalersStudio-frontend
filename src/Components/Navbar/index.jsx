@@ -60,32 +60,30 @@ const CollapsibleExample = () => {
   let _u = JSON.parse(strAuth);
 
   return (
-    
-    <React.Fragment> 
-      <Navbar collapseOnSelect expand="lg" variant="dark">
+    <React.Fragment>
+      <Navbar collapseOnSelect expand="lg" variant="dark" >
         <Container>
-          <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={gamelogo} alt="logo" /></Navbar.Brand>
+          <Navbar.Brand onClick={() => { goToAbout('/') }} > <img src={gamelogo} alt="logo" /> </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-              {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer">About</Nav.Link>}
-            {_u?.user?.role !== 'ADMIN'&&<Nav.Link  eventKey="2" onClick={() => { goToAbout('/partyGang') }}>Party</Nav.Link>}
-            {_u?.user?.role !== 'ADMIN'&& <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer">How To Play?</Nav.Link> }
-              {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="3" onClick={() => { goToAbout('/pool') }}>Pool</Nav.Link>}
-              {_u?.user?.role !== 'ADMIN'&& <OverlayTrigger placement='bottom'  overlay={<Tooltip >Coming soon</Tooltip>}>
-                <Nav.Link href="#0">Wallet</Nav.Link></OverlayTrigger> }
-              {_u?.user?.role !== 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/balrToken') }}>$BALR TOKEN</Nav.Link>}
-              {_u?.user?.role == 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/') }}>Dashboard</Nav.Link>}
-              {_u?.user?.role == 'ADMIN' && <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }}>Pool</Nav.Link>}
-              <Nav.Link eventKey="4" onClick={() => { handleLogout()}}>Logout</Nav.Link>
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" onClick={() => { goToAbout('/partyGang') }} > {' '} Party{' '} </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" onClick={() => { goToAbout('/pool') }} > Pool </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && (  <Nav.Link href="#0">Wallet</Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/balrToken') }} > $BALR TOKEN </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/admin-dashboard') }} > Dashboard </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/user-listing') }} > Users </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }} > Pool </Nav.Link> )}
+              <Nav.Link eventKey="4" onClick={() => { handleLogout() }} > Logout </Nav.Link>
             </Nav>
-            <Nav>
-            </Nav>
+            <Nav></Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </React.Fragment>
-  );
+  )
 };
 
 export default CollapsibleExample;

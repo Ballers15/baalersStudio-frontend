@@ -19,6 +19,9 @@ import { AuthenticatorAdmin } from '../Auth/authenticatorAdmin'
 import AuthProvider from '../Auth/authProvider';
 import Metamask from '../Components/Metamask'
 import { useState } from 'react'
+import UsersListing from '../Pages/AdminDashboard/UsersList';
+import Signup from '../Pages/Signup/Signup'
+import ForgotPassword from '../Pages/ForgotPassword/forgotpassword';
 
 
 const NavigationRouter = () => {
@@ -40,17 +43,8 @@ const NavigationRouter = () => {
               <Route path="*" element={<ErrorPage />} />
             </Route>
             <Route element={<WithNav />}>
-            if(role === 'ADMIN' )
-              {
-                <Route
-                  exact
-                  path="/admin-dashboard"
-                  element={<AdminDashboard />}
-                />
-              }
+            if(role === 'ADMIN' ) { <Route exact path="/admin-dashboard" element={<AuthenticatorAdmin><AdminDashboard /></AuthenticatorAdmin>} /> }
               else {<Route exact path="/" element={<Dashboard />} />}
-              {/* {_u?.user?.role !== 'ADMIN' && <Route exact path="/" element={<Dashboard />} />}
-              {_u?.user?.role == 'ADMIN' && <Route exact path="/" element={<AdminDashboard />} />} */}
               <Route exact path="/about" element={<About />} />
               <Route path="/:id" element={<Dashboard />} />
               <Route exact path="/party" element={<Party />} />
@@ -58,8 +52,11 @@ const NavigationRouter = () => {
               <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} />
               <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
               <Route exact path="/metamask" element={<Metamask />} />
+              <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/poolListing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
+              <Route exact path="/signup" element={<Signup/>} />
+              <Route exact path='/forgotPassword' element={<ForgotPassword/>}></Route>
             </Route>
           </Routes>
         </AuthProvider>

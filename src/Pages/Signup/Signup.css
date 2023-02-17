@@ -1,0 +1,46 @@
+.signup-page-wrapper{
+    color:#FFFFFF;
+    margin-top: 150px;
+    text-align: center;
+}
+
+.signup-page-container{
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    /* display: none; */
+}
+
+
+.signup-submit-button{
+    cursor: pointer;
+    width: 30%;
+    height: 54px;
+    /* float: */
+    background: #FFFFFF;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+
+/* #partitioned {
+    padding-left: 15px;
+    letter-spacing: 42px;
+    border: 0;
+    background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 50px 1px;
+    background-repeat: repeat-x;
+    background-position-x: 35px;
+    width: 220px;
+    outline : none;
+  } */
+
+  .otp-input{
+    background-color: #FFFFFF;
+  }

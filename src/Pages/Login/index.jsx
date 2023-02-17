@@ -67,11 +67,11 @@ const Login = () => {
                         </Form.Group>
                         <div>
                             <button type="submit" className="login-submit-button" onClick={handleLogin}>OK</button>
-                            <span className="login-forget-password">Forgot password?</span>
+                          <a href='/forgotPassword'> <span className="login-forget-password">Forgot password?</span></a>
                         </div>
                     <div>
                         <span className="login-signup-tag">New to Ballers?</span>
-                        <span className="login-signup-tag-danger">Sign Up</span>
+                       <a href='/signup'> <span className="login-signup-tag-danger">Sign Up</span></a>
                     </div>
                     </Form>
                 </div>

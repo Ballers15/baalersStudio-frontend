@@ -114,78 +114,80 @@ const Dashboard = () => {
     const [errorMsg, setErrorMsg] = useState(null);
     const setShowToaster = (param) => showToaster(param);
 
-    const handleShow = (modalName)=>{
-        if(modalName === 'play'){
-            setEmail('');
-            setValidated(false);
-            setPlayModalShow(true);
-        }else if(modalName === 'lottery'){
-            setLotteryModalShow(true);
-        }
-        else if(modalName === 'reward'){
-            setRewardModalShow(true);
-        }
-        else if(modalName === 'trailer'){
-            setTrailerModalShow(true);
-        }
+    useEffect(() => {
+      emailValidation()
+    }, [email])
+
+    const handleShow = modalName => {
+      if (modalName === 'play') {
+        setEmail('')
+        setValidated(false)
+        setPlayModalShow(true)
+      } else if (modalName === 'lottery') {
+        setLotteryModalShow(true)
+      } else if (modalName === 'reward') {
+        setRewardModalShow(true)
+      } else if (modalName === 'trailer') {
+        setTrailerModalShow(true)
+      }
     }
 
-    const handleHide = (modalName)=>{
-        if(modalName === 'play'){
-            setPlayModalShow(false);
-        }else if(modalName === 'lottery'){
-            setLotteryModalShow(false);
-        }
-        else if(modalName === 'reward'){
-            setRewardModalShow(false);
-        }
-        else if(modalName === 'trailer'){
-            setTrailerModalShow(false);
-        }
-        
+    const handleHide = modalName => {
+      if (modalName === 'play') {
+        setPlayModalShow(false)
+      } else if (modalName === 'lottery') {
+        setLotteryModalShow(false)
+      } else if (modalName === 'reward') {
+        setRewardModalShow(false)
+      } else if (modalName === 'trailer') {
+        setTrailerModalShow(false)
+      }
     }
 
-    const setErrorMsgFunc=()=>{
-        if(!emailValidation()){
-            setErrorMsg('Enter a Valid Email !');
-        }else{
-            setErrorMsg(null)
-        }
-    }
+    // const setErrorMsgFunc = () => {
+    //   if (!emailValidation()) {
+    //     setErrorMsg('Enter a Valid Email !')
+    //   } else {
+    //     setErrorMsg(null)
+    //   }
+    // }
 
     const handleSubmit = async (e) => {
-        setValidated(true);
-        e.preventDefault();
-        e.stopPropagation();
-        e.preventDefault();
-       
+      setValidated(true)
+      e.preventDefault()
+      e.stopPropagation()
+      e.preventDefault()
 
-        if (email && !errorMsg) {
-            let dataToSend = {
-                email: email
-            }
-            setLoading(true);
-            try {
-              const subscribe = await subscribeMailJet(dataToSend);
-              setLoading(false);
-              if (subscribe.error) {
-                setToasterMessage(subscribe?.error?.message||'Something Went Worng');
-                setShowToaster(true);
-              } else {
-                setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
-                setShowToaster(true);
-                  setPlayModalShow(false);
-                  setErrorMsg(null);
-              }
-            } catch (error) {
-              setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-              setShowToaster(true);
-              setLoading(false);
-            }
-        } else {
-            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+      if (email && !errorMsg) {
+        let dataToSend = {
+          email: email,
         }
+        // auth.login(dataToSend)
+        setLoading(true)
+        try {
+          const subscribe = await subscribeMailJet(dataToSend)
+          setLoading(false)
+          if (subscribe.error) {
+            //   console.log(subscribe)
+
+            setToasterMessage(subscribe?.error?.message || 'Something Went Worng')
+            setShowToaster(true)
+          } else {
+            setToasterMessage(' THANK YOU FOR SUBSCRIBING!')
+            setShowToaster(true)
+            setPlayModalShow(false)
+            setErrorMsg(null)
+          }
+        } catch (error) {
+          //   console.log(error)
+          setToasterMessage(error?.response?.data?.message || 'Something Went Worng')
+          setShowToaster(true)
+          setLoading(false)
+        }
+      } else {
+        console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
       }
+    }
     
     $('#myModal').on('shown.bs.modal', function () {
     $('#video1')[0].play();
@@ -195,12 +197,14 @@ const Dashboard = () => {
     $('#video1')[0].pause();
     })
 
-    const emailValidation=()=>{
+    const emailValidation = () => {
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
-        if(!email || regex.test(email) === false){
-            
+        const tld=email?.split('.')[1]?.length;
+        if (!email || regex.test(email) === false || tld<=1) {
+            setErrorMsg('Enter a Valid Email !');
             return false;
         }
+        setErrorMsg(null)
         return true;
     }
 
@@ -225,27 +229,12 @@ const Dashboard = () => {
                     <h4>Stay tuned for our Testnet competition to win $BALR token</h4>
 
                     <Form noValidate validated={validated} onSubmit={handleSubmit} className="formFlex">
-                        <Form.Group>
-                        
-                            <Form.Control
-                                required
-                                type="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={({ target }) => { setErrorMsgFunc(); setEmail(target.value) }}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Valid E-mail is required !
-                            </Form.Control.Feedback>
-                            <Form.Control.Feedback >
-                              <span className='custom-error-msg'> { errorMsg&&'Valid E-mail is required !'}</span>
-                            </Form.Control.Feedback>
+                       <Form.Group>
+                        <Form.Control required type="email" placeholder="Email" value={email} onChange={({ target }) => { setEmail(target.value) }} />
+                        <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
+                        <Form.Control.Feedback> <span className="custom-error-msg"> {' '} {errorMsg && 'Valid E-mail is required !'} </span> </Form.Control.Feedback>
                         </Form.Group>
-                        <div>
-                            <Button className="subscribeBtn" variant="primary" onClick={handleSubmit} type="submit">
-                                Submit
-                            </Button>
-                        </div>
+                    <div> <Button className="subscribeBtn" variant="primary" onClick={handleSubmit} type="submit"> Submit </Button> </div>
                     </Form>
                 {loading ? <Loader /> : null}
                 </Modal.Body>
