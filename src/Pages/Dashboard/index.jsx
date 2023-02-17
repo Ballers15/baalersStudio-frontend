@@ -582,7 +582,9 @@ const Dashboard = () => {
                                   </b>
                                 </p>
                               </div>
-                              <div className="poolBtn text-center">
+
+                              <div className="thirdPageBtn">
+                              <div className="d-md-flex align-items-center">
                                 <div className="playBtn">
                                   <a onClick={() => handleShow('lottery')}>
                                     <span></span> Lottery Pool
@@ -594,6 +596,22 @@ const Dashboard = () => {
                                   </a>
                                 </div>
                               </div>
+
+
+                              </div>
+
+                              {/* <div className="poolBtn text-center">
+                                <div className="playBtn">
+                                  <a onClick={() => handleShow('lottery')}>
+                                    <span></span> Lottery Pool
+                                  </a>
+                                </div>
+                                <div className="shareBtn">
+                                  <a onClick={() => handleShow('reward')}>
+                                    <span></span> Reward Pool{' '}
+                                  </a>
+                                </div>
+                              </div> */}
                             </div>
                           </div>
                           <p className="secondText">

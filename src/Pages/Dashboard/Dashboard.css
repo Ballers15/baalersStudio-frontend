@@ -795,7 +795,7 @@ input#formBasicEmail {
 .bg-move img {
   position: absolute;
   left: 6%;
-  width: 31%;
+  width: 128px;
   z-index: 0;
   top: 54%;
   animation: scrollUp .25s linear infinite;
@@ -836,12 +836,18 @@ input#formBasicEmail {
 }
 
 @keyframes scrollUp {
+  from {
+    transform: translate(0, 0);
+  }
   to {
-    transform: translate(-150px, -250px);
+    transform: translate(-100px, -150px);
   }
 }
 
 @keyframes scrollUp2 {
+  from {
+    transform: translate(0, 0);
+  }
   to {
     transform: translate(-150px, -250px);
   }
@@ -1157,7 +1163,22 @@ a i {
 .poolBtn .playBtn a {
   left: 0;
 }
-
+.thirdPageBtn{
+  padding: 0 15px;
+  position: relative;
+    width: 100%;
+}
+.thirdPageBtn .playBtn{
+  margin: 0;
+  width: auto;
+  height: 50px;
+}
+.thirdPageBtn .playBtn a{
+  white-space: nowrap;
+}
+.thirdPageBtn .shareBtn{
+  padding: 0;
+}
 #one {
   position: absolute;
   left: 48rem;
@@ -2084,7 +2105,7 @@ ul li {
   }
 
   .thirdSlide .sCaption {
-    width: 48%;
+    width: 40%;
   }
 
   .firstText {
@@ -2187,7 +2208,12 @@ ul li {
   .mainSlider .carousel-caption img {
     width: 88%;
   }
-
+  .thirdSlide .sCaption {
+    width: 50%;
+  }
+  .thirdPageBtn .playBtn { 
+    height: 72px;
+}
 }
 
 @media (min-width: 2100px) {
@@ -2315,7 +2341,7 @@ ul li {
   }
 
   .thirdSlide .sCaption {
-    width: 40%;
+    width: 44%;
   }
 
   .firstText {
@@ -2425,8 +2451,8 @@ ul li {
   }
 
   .bg-move img:nth-child(2) {
-    left: 33%;
-    top: 63%;
+    left: 29%;
+    top: 56%;
   }
 
   .bg-move img {
@@ -3102,6 +3128,12 @@ ul li {
 
 
 @media (max-width: 480px) {
+  .thirdPageBtn { 
+    margin-top: 7rem;
+  }
+  .thirdSlide .sCaption{
+    height: auto;
+  }
   .modal-body p { 
     font-size: 16px;
     line-height: 20px;
@@ -3127,7 +3159,7 @@ ul li {
   padding: 1rem 0.5rem;
 }
   .valid-feedback,  .formFlex .invalid-feedback {
-    width: 95%;
+    width: 78%;
     font-size: 12px;
     line-height: 16px;
 }
@@ -3357,11 +3389,7 @@ ul li {
     font-size: 47px;
     margin-bottom: .5rem;
   }
-
-  .thirdSlide .sCaption {
-    width: 100%;
-  }
-
+ 
   .poolBtn .shareBtn {
     right: 0;
     left: 0;
@@ -3669,7 +3697,14 @@ ul li {
 }
 
 @media (max-width: 480px) {
-
+  .thirdPageBtn .shareBtn { 
+    right: 0;
+    left: 0;
+    top: 4rem;
+  }
+  .thirdPageBtn .playBtn { 
+    width: 40%;
+}
   .playBtn a span:after, .playBtn a span:before, .playBtn a:after, .playBtn a:before {
     width: 46px;
 }
@@ -3852,7 +3887,7 @@ ul li {
   }
 
   .rewardImage {
-    min-height: 67vh;
+    min-height: 63vh;
   }
 
   .shareBtn {

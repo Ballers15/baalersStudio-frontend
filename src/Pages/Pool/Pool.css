@@ -55,20 +55,26 @@
   .pool .thirdSlide {
     height: 61vh; 
 }
-@media (min-width: 1900px){
-    .pool .thirdSlide .sCaption {
-        width: 48%;
-    }
-    .pool .poolBtn {
-        width: 90%;
-    }
-}
 @media (min-width: 1750px){
     .pool .secondText {
         left: 0;
         /* width: 12%; */
     }
 }
+@media (min-width: 1900px){
+    .pool .thirdSlide .sCaption {
+        width: 40%;
+    }
+    .pool .poolBtn {
+        width: 90%;
+    }
+}
+@media (min-width: 2000px){
+    .pool .thirdSlide .sCaption {
+        width: 50%;
+    }
+}
+
 @media (max-width: 1500px){
     .pool .secondText {
         left: 2rem;
@@ -113,6 +119,9 @@
     }
 }
 @media (max-width: 480px){
+    .pool .thirdSlide .sCaption{
+        height: 100%;
+    }
     .pool .poolBtn {
         width: 100%;
     }
