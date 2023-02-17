@@ -12,8 +12,8 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import fatMan from '../../Assest/img/fatMan.webp'
-import SneefDog from '../../Assest/img/SneefDog.webp'
+import fatMan from '../../Assest/img/fatMan.gif'
+import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.webp'
 import ambassadorMob from '../../Assest/img/ambassadorMob.webp'
 // import ambassadorOver from '../../Assest/img/ambassadorOver.png'
@@ -403,7 +403,7 @@ const Dashboard = () => {
                                     gateway to play, engage and socialize with
                                     your gang at exclusive parties.
                                   </p>
-                                  <h5>Early access to the Ballers City</h5>
+                                  <div className="subT">Early access to the Ballers City</div>
                                 </div>
                                 <div className="positionAbs">
                                   <div className="playBtn">
@@ -929,13 +929,13 @@ const Dashboard = () => {
                                 {' '}
                                 Total Unique NFTs
                               </div>
-                              <h5 className="num">17</h5>
+                              <div className="num">17</div>
                             </div>
                             <div className="col-6 col-xl-5">
                               <div className="countHead">
                                 Total Number of NFTs
                               </div>
-                              <h5 className="num">10,000</h5>
+                              <div className="num">10,000</div>
                             </div>
                           </div>
                         </div>
