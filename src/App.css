@@ -4,3 +4,9 @@
    url("../public/font/valorant/Valorant-Font.ttf") format("truetype");
   font-weight: bold;
  }
+ @font-face {
+  font-family: "dodger";
+  src: local("dodger"),
+   url("../public/font/dodger/dodger3.ttf") format("truetype");
+  font-weight: bold;
+ }

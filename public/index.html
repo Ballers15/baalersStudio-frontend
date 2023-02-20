@@ -64,6 +64,12 @@
     </script>
 
   <style>
+     @font-face {
+      font-family: "dodger";
+      src: local("dodger"),
+      url("../public/font/dodger/dodger3.ttf") format("truetype");
+      font-weight: bold;
+    }
     .loader {
       position: fixed;
       top: 25%;
@@ -74,30 +80,33 @@
       margin: auto;
       width: 100%;
     }
-
     .loader img {
       width: 15%;
     }
-
     :not(:defined) {
       display: none;
+      font-family: 'dodger', sans-serif;
     }
-
     type-writer:defined::after {
       content: attr(carret);
       display: inline;
       opacity: .6;
-    }
 
+    }
     type-writer {
       color: #fff;
-      font-size: 60px;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 45px;
+      font-family: 'dodger', sans-serif;
+      letter-spacing: 6px;
+      font-weight: 300;
     }
     
 @media (max-width: 480px) {
       .loader img {
           width: 48%;
+      }
+      type-writer { 
+      font-size: 35px;
       }
     }
   </style>
@@ -124,7 +133,7 @@
 
   <!-- back-to-top -->
   <div id="back-to-top">
-    <a class="top" id="top" href="#top"><i class="fa fa-angle-double-up" aria-hidden="true"></i> </a>
+    <a class="top scroll-top" id="top" href="#top"><i class="fa fa-angle-double-up" aria-hidden="true"></i> </a>
   </div>
 
   <script type="module" src="https://cdn.jsdelivr.net/gh/darkwiiplayer/components@345d931/TypeWriter.js"></script>
@@ -132,25 +141,24 @@
   <script src="scroll.js"></script>
 
   <script>
-    /*------------------------
-   Back To Top
-   --------------------------*/
-    $('#back-to-top').fadeOut();
-    $(window).on("scroll", function () {
-      if ($(this).scrollTop() > 250) {
-        $('#back-to-top').fadeIn(1400);
-      } else {
-        $('#back-to-top').fadeOut(400);
-      }
+  // back-to-top
+
+  $(document).ready(function(){
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 200) {
+            $('.scroll-top').fadeIn();
+        } else {
+            $('.scroll-top').fadeOut();
+        }
     });
-    // scroll body to 0px on click
-    $('#top').on('click', function () {
-      $('top').tooltip('hide');
-      $('body,html').animate({
-        scrollTop: 0
-      }, 800);
-      return false;
-    });
+    // $(document).ready(function(){
+      $(".scroll-top").click(function() {
+          $("html, body").animate({ 
+              scrollTop: 0 
+          }, "slow");
+          return false;
+      });
+  });
 
   </script>
   <script>

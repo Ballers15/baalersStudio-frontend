@@ -1,4 +1,3 @@
-
 body {
   background: #09031D; 
 }
@@ -738,7 +737,7 @@ width: 118px;
   border-color: #260059;
 }
 
-.formFlex .invalid-feedback {
+/* .formFlex .invalid-feedback {
   position: absolute;
   left: 0;
   right: 0;
@@ -747,9 +746,9 @@ width: 118px;
   text-align: center;
   width: 66%;
   text-align: left;
-}
+} */
 
-.valid-feedback {
+.valid-feedback, .formFlex .invalid-feedback  {
   width: 66%;
   text-align: left;
   position: absolute;
@@ -1162,6 +1161,7 @@ a i {
 }
 
 .poolBtn .playBtn a {
+  white-space: nowrap;
   left: 0;
 }
 .thirdPageBtn{
@@ -2394,6 +2394,9 @@ ul li {
 }
 
 @media (max-width: 1500px) {
+  .thirdSlide .sCaption{
+    width: 40%;
+  }
   .positionAbs {
     bottom: 6rem;
  }
@@ -3174,9 +3177,10 @@ ul li {
   .ballerSec .innerBtn a:hover::before, .ballerSec .innerBtn a:hover::after, .ballerSec .innerBtn a:hover span::before, .ballerSec .innerBtn a:hover span::after {
     width: 78px;
   }
+  
   .news-caption .innerBtn a:hover::before, .news-caption .innerBtn a:hover::after, .news-caption .innerBtn a:hover span::before, .news-caption .innerBtn a:hover span::after {
-    width: 75px;
-  }
+    width: 66px;
+}
   .px-6 {
     padding-right: 2rem !important;
     padding-left: 2rem !important;
@@ -3329,6 +3333,7 @@ ul li {
 
   .innerBtn .btnWith {
     width: 52%;
+    white-space: nowrap;
   }
 
   .innerBtn .purchaseWith {
@@ -3781,7 +3786,7 @@ ul li {
   .news-caption .innerBtn a::after,
   .news-caption .innerBtn a span::before,
   .news-caption .innerBtn a span::after {
-    width: 86px;
+    width: 74px;
   }
 
   .col-4 .d-flex.align-items-center {
@@ -4386,7 +4391,7 @@ ul li {
   }
  
 }
-@media (min-height:731px) and (max-height: 740px) {
+@media (min-height:732px) and (max-height: 740px) {
   .news {
     height: 100vh;
 }
