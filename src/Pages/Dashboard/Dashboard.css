@@ -2922,7 +2922,8 @@ ul li {
   }
 
   .mob-wth {
-    width: 68%;
+    width: 100%;
+    height: 100%;
   }
 
   .marquee {
@@ -3664,7 +3665,8 @@ ul li {
   }
 
   .mob-wth {
-    width: 84%;
+    width: 65%;
+    height: auto;
   }
 
   .arrowUp {
