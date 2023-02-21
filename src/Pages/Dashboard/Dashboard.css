@@ -774,7 +774,7 @@ input#formBasicEmail {
 .coinImage img {
   position: absolute;
   right: 30%;
-  top: -18%;
+  top: -10%;
   width: 32.5%;
   z-index: 1;
   -webkit-animation: rotate .25s linear infinite;
@@ -3665,7 +3665,7 @@ ul li {
   }
 
   .mob-wth {
-    width: 65%;
+    width: 70%;
     height: auto;
   }
 
@@ -3938,17 +3938,12 @@ ul li {
   }
 
   .arrowDown {
-    top: 28rem;
+    top: 25rem;
   }
 
   .firstText {
     width: 36%;
   }
-
-  /* .secondText {
-    width: 50%;
-  } */
-
  
 
   .joinCard i.fa.fa-twitter {
@@ -3974,7 +3969,7 @@ ul li {
 
   .coinImage img {
     right: 29%;
-    top: -20%;
+    top: -10%;
   }
 
   .playBtn a,

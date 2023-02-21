@@ -386,7 +386,7 @@ const Dashboard = () => {
                           className="bgShade"
                           alt="Eclipse"
                           width="1459"
-                          height="1529" loading="lazy"
+                          height="1529"
                           />
                         <div className="container">
                           <p className="firstText">UNLOCK NEW CITIES</p>
@@ -404,7 +404,7 @@ const Dashboard = () => {
                                       className="starSmall small"
                                       width={47}
                                       height={47}
-                                      alt="Star" loading="lazy"
+                                      alt="Star"
                                     />
                                   </div>
                                   <p className="textHeader ">
@@ -433,7 +433,7 @@ const Dashboard = () => {
                                 src={fatMan}
                                 alt="Italian_Mafia_Boss"
                                 width="558"
-                                height="993" loading="lazy"
+                                height="993" 
                               />
                             </div>
                           </div>
@@ -447,7 +447,7 @@ const Dashboard = () => {
                       <LazyLoadImage
                         className="d-block w-100 h-100"
                         src={slide2}
-                        alt="Second slide" loading="lazy"
+                        alt="Second slide"
                       />
                       <div className="stars slideStar">
                         <LazyLoadImage
@@ -455,14 +455,14 @@ const Dashboard = () => {
                           className="starMed large"
                           width={60}
                           height={60}
-                          alt="Star" loading="lazy"
+                          alt="Star"
                         />
                         <LazyLoadImage
                           src={starS}
                           className="starSmall small"
                           width={47}
                           height={47}
-                          alt="Star" loading="lazy"
+                          alt="Star"
                         />
                       </div>
                       <div className="box"></div>
@@ -493,7 +493,7 @@ const Dashboard = () => {
                       <LazyLoadImage
                         className="d-block w-100 h-100"
                         src={slide3}
-                        alt="Second slide" loading="lazy"
+                        alt="Second slide"
                       />
                       <div>
                         <div className="slideStar">
@@ -684,7 +684,7 @@ const Dashboard = () => {
                 width={61}
                 height={60}
                 className="large"
-                alt="Star" loading="lazy"
+                alt="Star"
               />
               <LazyLoadImage
                 src={starM}
@@ -692,7 +692,7 @@ const Dashboard = () => {
                 width={60}
                 height={60}
                 className="small"
-                alt="Star" loading="lazy"
+                alt="Star"
               />
               <LazyLoadImage
                 src={starS}
@@ -700,7 +700,7 @@ const Dashboard = () => {
                 width={47}
                 height={47}
                 className="large"
-                alt="Star" loading="lazy"
+                alt="Star"
               />
             </div>
             {/* <div className="bggg"></div> */}
@@ -714,9 +714,9 @@ const Dashboard = () => {
                           src={reward_card}
                           alt="reward"
                           width="117"
-                          height="117" loading="lazy"
+                          height="117"
                         />
-                        <LazyLoadImage src={r1} alt="reward" width="182" height="182" loading="lazy" />
+                        <LazyLoadImage src={r1} alt="reward" width="182" height="182" />
                       </div>
                     </div>
                   </div>
@@ -728,7 +728,7 @@ const Dashboard = () => {
                         src={coin}
                         alt="coin image"
                         width="199"
-                        height="199" loading="lazy" PlaceholderSrc={coinPlaceholder} effect="blur"
+                        height="199" PlaceholderSrc={coinPlaceholder} effect="blur"
                       />
                     </div>
                     <div className="positionRelative mb-4 headWth">
@@ -766,7 +766,7 @@ const Dashboard = () => {
             </div>
             <div className="backCoin">
               {' '}
-              <LazyLoadImage src={semiCoin} alt="coin image" width="292" height="471" loading="lazy" />
+              <LazyLoadImage src={semiCoin} alt="coin image" width="292" height="471" />
             </div>
           </div>
           <div className="">
@@ -778,14 +778,14 @@ const Dashboard = () => {
                     className="starMed large"
                     width={60}
                     height={60}
-                    alt="Star" loading="lazy"
+                    alt="Star"
                   />
                   <LazyLoadImage
                     src={starS}
                     className="starSmall small"
                     width={47}
                     height={47}
-                    alt="Star" loading="lazy"
+                    alt="Star"
                   />
                 </div>
                 <div className="scene section" id="sticky">
@@ -834,7 +834,7 @@ const Dashboard = () => {
                               className="discordIcon"
                               alt="discord logo"
                               width={27}
-                              height={20} loading="lazy"
+                              height={20}
                             />
                           </a>
                         </div>
@@ -846,7 +846,7 @@ const Dashboard = () => {
                           src={SneefDog}
                           alt="Snoopdog"
                           width="413"
-                          height="734" loading="lazy"
+                          height="734"
                         />
                       </div>
                       <div className="partyHard">PARTY HARD</div>
@@ -859,7 +859,7 @@ const Dashboard = () => {
                 className="bgShade2"
                 width="1003"
                 height="1788"
-                alt="Eclipse" loading="lazy"
+                alt="Eclipse"
               />
 
               <div className="container">
@@ -899,7 +899,7 @@ const Dashboard = () => {
                   </div>
                   <div className="col-sm-12 order-sm-2">
                     <div>
-                      <LazyLoadImage src={arrowUp} alt="Arrow" className="arrowUp" loading="lazy" />
+                      <LazyLoadImage src={arrowUp} alt="Arrow" className="arrowUp" />
                       <div className="nftCollectionHead mt-5 headWth mx-auto">
                         <h2 className="heading">NFT COLLECTION</h2>
                         <h2 className="heading2">NFT COLLECTION</h2>
@@ -913,7 +913,7 @@ const Dashboard = () => {
                         className="starMed large"
                         width={60}
                         height={60}
-                        alt="Star" loading="lazy"
+                        alt="Star"
                       />
                     </div>
                     <div className="news-caption">
@@ -1012,7 +1012,7 @@ const Dashboard = () => {
                   <h2 className="heading">BALR TOKEN</h2>
                   <h2 className="balrHead">BALR TOKEN</h2>
                 </div>
-                <LazyLoadImage src={arrowDown} alt="Arrow" className="arrowDown" loading="lazy"/>
+                <LazyLoadImage src={arrowDown} alt="Arrow" className="arrowDown"/>
                 <div className="row">
                   <div className="col-sm-6 my-auto">
                     <div className="">
@@ -1040,7 +1040,7 @@ const Dashboard = () => {
                     <picture aria-hidden="true">
                       <source media="(min-width: 900px)" srcset={ballerCoin} />
                       <source media="(max-width: 500px)" srcset={ballerCoinMob} />
-                      <img src={ballerCoin} width="382" height="382" alt="Baller Coin" loading="lazy"/>
+                      <img src={ballerCoin} width="382" height="382" alt="Baller Coin"/>
                     </picture>
                       
                     </div>
@@ -1051,7 +1051,7 @@ const Dashboard = () => {
                   className="bgShadeBalr"
                   alt="Eclipse"
                   width="673"
-                  height="1198" loading="lazy"
+                  height="1198"
                 />
 
                 <div>
@@ -1061,7 +1061,7 @@ const Dashboard = () => {
                     width={61}
                     height={60}
                     className="large"
-                    alt="Star" loading="lazy"
+                    alt="Star"
                   />
                   <LazyLoadImage
                     src={starM}
@@ -1069,7 +1069,7 @@ const Dashboard = () => {
                     width={60}
                     height={60}
                     className="small"
-                    alt="Star" loading="lazy"
+                    alt="Star"
                   />
                   <LazyLoadImage
                     src={starS}
@@ -1077,7 +1077,7 @@ const Dashboard = () => {
                     width={47}
                     height={47}
                     className="large"
-                    alt="Star" loading="lazy"
+                    alt="Star"
                   />
                 </div>
               </div>
@@ -1107,7 +1107,7 @@ const Dashboard = () => {
                   <picture aria-hidden="true">
                     <source media="(min-width: 900px)" srcset={ambassador} />
                     <source media="(max-width: 500px)" srcset={ambassadorMob} />
-                    <LazyLoadImage src={ambassador} width="1500" height="571" className="image" PlaceholderSrc={AmbPlaceholder} effect="blur" alt="Ballers AMBASSADOR program" loading="lazy"/>
+                    <LazyLoadImage src={ambassador} width="1500" height="571" className="image"  alt="Ballers AMBASSADOR program"/>
                   </picture>
                   <div className="contentJoin">
                     <div className="row justify-content-center">
@@ -1130,7 +1130,7 @@ const Dashboard = () => {
                             src={arrowRight}
                             width={16}
                             height={17}
-                            alt="arrow" loading="lazy"
+                            alt="arrow"
                           />
                         </a>
                       </div>
@@ -1185,7 +1185,7 @@ const Dashboard = () => {
                   className="bgShade3"
                   width="612"
                   height="988"
-                  alt="Eclipse" loading="lazy"
+                  alt="Eclipse"
                 />
                 <div className="row">
                   <div className="col-lg-5 my-auto">
@@ -1247,7 +1247,7 @@ const Dashboard = () => {
                     <picture aria-hidden="true">
                       <source media="(min-width: 900px)" srcset={house} />
                       <source media="(max-width: 500px)" srcset={houseMob} />
-                      <img src={house} width="851" height="700" className="img-fluid" alt="before" loading="lazy" />
+                      <img src={house} width="851" height="700" className="img-fluid" alt="before" />
                     </picture>
                       {/* <img
                         src={house}
@@ -1260,7 +1260,7 @@ const Dashboard = () => {
                       <picture aria-hidden="true">
                         <source media="(min-width: 900px)" srcset={house1} />
                         <source media="(max-width: 500px)" srcset={houseMob1} />
-                        <img src={house1} width="851" height="700" className="img-fluid" alt="after" loading="lazy" />
+                        <img src={house1} width="851" height="700" className="img-fluid" alt="after" />
                       </picture>
                         {/* <img
                           src={house1}
@@ -1283,7 +1283,7 @@ const Dashboard = () => {
                       <LazyLoadImage src={footerLogo}  alt="logo"
                       className="mob-wth img-fluid imgHeight"
                       width={200}
-                      height={128}  loading="lazy"/>
+                      height={128} />
                     </picture>
                    
                   </div>
@@ -1294,7 +1294,7 @@ const Dashboard = () => {
                         alt="logo"
                         width="65"
                         height="97"
-                        className="mob-wth-px img-fluid" loading="lazy"
+                        className="mob-wth-px img-fluid"
                       />
                       <ul>
                         <li>Blood </li>
@@ -1311,7 +1311,7 @@ const Dashboard = () => {
                       alt="logo"
                       width="351"
                       height="167"
-                      className="ipadWth img-fluid" loading="lazy"
+                      className="ipadWth img-fluid"
                     />
                   </div>
                   <div className="col-3 col-sm-3">
