@@ -49,7 +49,7 @@ import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
 import house from '../../Assest/img/house.png'
 import house1 from '../../Assest/img/house1.webp'
-import houseMob from '../../Assest/img/houseMob.webp'
+import houseMob from '../../Assest/img/houseMob.png'
 import houseMob1 from '../../Assest/img/houseMob1.webp'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
@@ -822,20 +822,21 @@ const Dashboard = () => {
                         </div>
                         <div className="innerBtn">
                           <a
-                            href="https://discord.com/login?redirect_to=%2Flogin%3Fredirect_to%3D%252Fchannels%252F1060526333014331412%252F1060526333815431259"
+                            href="https://t.me/+HRPPZlNztto0NGI1"
                             target="blank"
                             rel="noopener noreferrer"
                             className="px-6"
                             aria-label="discord"
                           >
                             <span></span>Join{' '}
-                            <LazyLoadImage
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            {/* <LazyLoadImage
                               src={discord}
                               className="discordIcon"
                               alt="discord logo"
                               width={27}
                               height={20}
-                            />
+                            /> */}
                           </a>
                         </div>
                       </div>

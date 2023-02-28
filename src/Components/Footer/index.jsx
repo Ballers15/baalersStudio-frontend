@@ -21,6 +21,8 @@ const Footer = () => {
                 <i className="fa fa-twitter" aria-hidden="true"></i></a></li>
               <li><a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" aria-label="medium">
                 <i className="fa fa-medium" aria-hidden="true"></i></a></li>
+              <li><a href="https://t.me/+HRPPZlNztto0NGI1" target="blank" rel="noopener noreferrer" aria-label="medium">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i></a></li>
             </ul>
             <p className='footer-content'>
               © 2023 Ballers Studio, Inc. Ballers,CITY, and any associated logos are trademarks, service marks, and/or registered trademarks of Ballers Studio,Inc.
