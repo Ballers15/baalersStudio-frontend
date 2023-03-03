@@ -409,6 +409,7 @@ border: none;
 
 *::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 *::-webkit-scrollbar-track {
@@ -428,18 +429,37 @@ border: none;
   padding-right: 0;
 }
 .pool-view-table{
+  margin-bottom: 0;
   width: 100%;
   
 }
 .pool-view-table th{
-  font-size: 20px; 
-  padding: 6px;
+  font-size: 15px; 
+  padding: 6px; 
+  text-transform: capitalize;
 }
 .pool-view-table td{
-  font-size: 16px;
+  font-size: 12px;
   padding: 6px;
   border-bottom:0;
 }
 .pool-view-table .pool-listing-table-body{
-  height: auto;
+  height: 200px;
+  margin-bottom: 0;
+  /* width: 950px; */
+}
+.eyeIcon{
+  margin-left: 8px;
+  cursor: pointer;
+}
+.sNoWth{
+  width: 100px;
+}
+.searchTag{
+  width: 90%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.searchTag input{
+  background: transparent;
 }

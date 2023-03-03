@@ -7,6 +7,7 @@ import {getAllRewardPot,updateRewardPotStatus} from '../../../Services/Admin'
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
+import {Form, Button} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 const PoolListing = () => {
@@ -102,20 +103,47 @@ const PoolListing = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                 <div className="searchTag">
+                    <Form className="d-flex">
+                        <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        />
+                        <Button className="">Search</Button>
+                    </Form>
+                 </div>
                 <Table responsive className="pool-view-table">
                     <thead>
                         <tr>
-                            <th>Sr. No.</th>
+                            <th className="sNoWth">Sr. No.</th>
                             <th>name</th>
                             <th>email</th> 
                             <th>wallet address</th>
                             <th>game cash burned</th>
-                            <th>nftCount</th>
+                            <th>nft Count</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td> 1</td>
+                            <td  className="sNoWth"> 1</td>
+                            <td> mishba zuber barkati</td>           
+                            <td>misha@gmail.com</td>        
+                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>jdjdjd</td>  
+                            <td>76868</td>
+                        </tr>   
+                        <tr>
+                            <td  className="sNoWth"> 1</td>
+                            <td> mishba</td>           
+                            <td>misha@gmail.com</td>        
+                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>jdjdjd</td>  
+                            <td>76868</td>
+                        </tr>  
+                        <tr>
+                            <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
                             <td>misha@gmail.com</td>        
                             <td>ghsghjjdjduddjudjdkdmdhe</td>           
@@ -123,13 +151,22 @@ const PoolListing = () => {
                             <td>76868</td>
                         </tr>   
                         <tr>
-                            <td> 1</td>
+                            <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
                             <td>misha@gmail.com</td>        
                             <td>ghsghjjdjduddjudjdkdmdhe</td>           
                             <td>jdjdjd</td>  
                             <td>76868</td>
-                        </tr>   
+                        </tr>  
+                        <tr>
+                            <td  className="sNoWth"> 1</td>
+                            <td> mishba</td>           
+                            <td>misha@gmail.com</td>        
+                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>jdjdjd</td>  
+                            <td>76868</td>
+                        </tr>  
+                      
                     </tbody>
                 </Table>
                  
@@ -159,8 +196,7 @@ const PoolListing = () => {
                         <th>Reward Token Amount</th>
                         <th>Ticker</th>
                         <th>Users Count </th>
-                        <th>Game Cash Burned</th>
-                        <th>Pot Image</th>
+                        <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
                         <th>Assest Name</th>
                         <th>Actions</th>
@@ -183,11 +219,11 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td>
-                                <td> <span title="View User" onClick={() => viewUserShow(true)}>
+                                <td> 6<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
                                             <i className="fa fa-eye " />
                                         </span></td>
-                                <td></td>
-                                <td></td>
+                                <td>654</td>
+                               
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
                                         {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
@@ -231,7 +267,7 @@ const PoolListing = () => {
                     </table>
                 </div>
                 <div>
-                    <h2 className="tableHead">Archives PotS</h2>
+                    <h2 className="tableHead">Archives Pots</h2>
                     <table className="pool-listing-table">
                     <thead className="pool-listing-table-head">
                     <tr>
@@ -244,8 +280,7 @@ const PoolListing = () => {
                         <th>Reward Token Amount</th>
                         <th>Ticker</th>
                         <th>Users Count </th>
-                        <th>Game Cash Burned</th>
-                        <th>Pot Image</th>
+                        <th>Game Cash Burned</th>                        
                         <th>Contract Address</th>
                         <th>Assest Name</th>
                         <th>Actions</th>
@@ -268,11 +303,11 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td>
-                                <td> 7 <span title="View User" onClick={() => viewUserShow(true)}>
+                                <td> 7 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
                                             <i className="fa fa-eye " />
                                         </span></td>
-                                <td></td>
-                                <td></td>
+                                <td>543</td>
+                           
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
                                         {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
@@ -330,7 +365,7 @@ const PoolListing = () => {
                         <th>Ticker</th>
                         <th>Users Count </th>
                         <th>Game Cash Burned</th>
-                        <th>Pot Image</th>
+                       
                         <th>Contract Address</th>
                         <th>Assest Name</th>
                         <th>Actions</th>
@@ -353,11 +388,11 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td>
-                                <td> <span title="View User" onClick={() => viewUserShow(true)}>
+                                <td> 8 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
                                             <i className="fa fa-eye " />
                                         </span></td>
-                                <td></td>
-                                <td></td>
+                                <td>656</td>
+                                 
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
                                         {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
