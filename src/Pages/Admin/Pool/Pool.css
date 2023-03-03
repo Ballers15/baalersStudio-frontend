@@ -31,6 +31,7 @@
 
 .form-check-input{
     cursor: pointer;
+    margin-right: 8px;
 }
 
 .pool-listing hr {
@@ -54,13 +55,23 @@
     font-size: 18px;
     line-height: 21px;
 }
-
-.react-time-picker__wrapper{
-    margin-top: 4px;
-    border-radius: 8px;
-
+.react-time-picker{
+  width: 100%;
 }
-
+.react-time-picker__wrapper{ 
+    border-radius: 8px;
+}
+.react-time-picker__wrapper { 
+  padding: 0.58rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 530;
+  line-height: 1.5;
+  color: #093d70;
+  background-color: #d7d6e7;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  margin: 0;
+}
 :disabled{
     cursor:not-allowed;
 }
@@ -76,6 +87,12 @@
   border-width: 0;
   padding: 10px;
   text-align: center;
+}
+.tableHead{
+  color: #fff;
+  font-size: 25px;
+  margin-left: 1.75rem;
+  padding-top: 3rem;
 }
 
 .pool-listing-table{
@@ -99,7 +116,7 @@
 background: linear-gradient(315deg, #0f0825, #120a2c);
 box-shadow:  -45px -45px 42px #0a0518,
              45px 45px 42px #180d3a; */
-             border-radius: 31px;
+             border-radius: 20px;
 background: #210e58;
 box-shadow: inset 45px -45px 42px #130834,
             inset -45px 45px 42px #2f147c;
@@ -107,8 +124,9 @@ box-shadow: inset 45px -45px 42px #130834,
 
 .pool-listing-table-body {
   display: block;
-  height: 570px;
+  height: 370px;
   overflow: auto;
+  margin-bottom: 30px;
 }
 
 .pool-listing-table-head, .pool-listing-table-body tr {
@@ -126,7 +144,7 @@ pool-listing-table-head tr {
 }
 
 .pool-listing-table {
-  margin-top: 68px;
+  margin-top: 1.5rem;
   width: 95vw;
 }
 
@@ -359,7 +377,7 @@ border: none;
   position: relative;
   padding: 0 1px;
   border: 0;
-  color: #fff;
+  color: #093d70;
   background: none;
   font: inherit;
   box-sizing: content-box;
@@ -390,7 +408,7 @@ border: none;
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
 *::-webkit-scrollbar-track {
@@ -400,5 +418,28 @@ border: none;
 *::-webkit-scrollbar-thumb {
   background-color: blue;
   border-radius: 20px;
-  border: 3px solid #FEAF2E;
+  /* border: 3px solid #FEAF2E; */
+}
+.viewPopup .modal-content{
+  padding: 0;
+}
+.viewPopup .modal-content .modal-body{
+  padding-left: 0;
+  padding-right: 0;
+}
+.pool-view-table{
+  width: 100%;
+  
+}
+.pool-view-table th{
+  font-size: 20px; 
+  padding: 6px;
+}
+.pool-view-table td{
+  font-size: 16px;
+  padding: 6px;
+  border-bottom:0;
+}
+.pool-view-table .pool-listing-table-body{
+  height: auto;
 }

@@ -14,7 +14,7 @@ import $ from 'jquery';
 import Modal from 'react-bootstrap/Modal';
 import '../../font/valorant/Valorant-Font.ttf'
 import './Dashboard.css'
-import man from '../../../src/Assest/img/Man.gif'
+import man from '../../../src/Assest/img/man.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.png'
 import ambassadorMob from '../../Assest/img/ambassadorMob.png'

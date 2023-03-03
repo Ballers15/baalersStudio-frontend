@@ -215,8 +215,8 @@ const AddPot = () => {
             <div className="addPot-container">
             <Form noValidate validated={validated} onSubmit={addRewardPot}>
                             <Row className="mb-3">
-                                <Form.Group as={Col} md="2">
-                                    <Form.Label>Reward Token Amount</Form.Label>
+                                <Form.Group as={Col} md="3">
+                                    <Form.Label>Reward Token Amount/Quantity in case of NFT</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -231,54 +231,64 @@ const AddPot = () => {
                                         Token Amount is required (Min:0) !!
                                     </Form.Control.Feedback>
                                 </Form.Group>
+                            
+                                <Col lg={9}>
+                                    <Row>
+                                    <Form.Group as={Col} md="3">
+                                        <Form.Label>Start Date</Form.Label>
+                                            <Form.Control
+                                                required
+                                                type="date"
+                                                min={new Date().toISOString().split("T")[0]}
+                                                max={endDate}
+                                                value={rewadPotDetail.startDate|| ''}
+                                                onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
+                                            </Form.Control>
+                                            <Form.Control.Feedback type="invalid">
+                                                Start Date is required !!
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                
+                                        <Form.Group as={Col} md="3">
+                                            <Form.Label>Start Time</Form.Label><br/>
+                                            <TimePicker onChange={setStartDateTime}
+                                                value={startDateTime|| ''} />
+                                        </Form.Group>
+                                
+                                        <Form.Group as={Col} md="3">
+                                            <Form.Label>End Date</Form.Label>
+                                            <Form.Control
+                                            required
+                                            type="date"
+                                            min={rewadPotDetail?.startDate}
+                                            value={endDate|| ''}
+                                            onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}>
+                                            </Form.Control>
+                                            <Form.Control.Feedback type="invalid">
+                                                End Date is required !!
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                
+                                        <Form.Group as={Col} md="3">
+                                            <Form.Label>End Time</Form.Label><br/>
+                                            <TimePicker onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
+                                                value={endDateTime|| ''} />
+                                        </Form.Group>
+                                    </Row>
+
+
+                                
+                                </Col>
+                             
                         
-                                <Form.Group as={Col} md="3">
-                                    <Form.Label>Start Date</Form.Label>
-                                    <Form.Control
-                                        required
-                                        type="date"
-                                        min={new Date().toISOString().split("T")[0]}
-                                        max={endDate}
-                                        value={rewadPotDetail.startDate|| ''}
-                                        onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
-                                    </Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        Start Date is required !!
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                        
-                                <Form.Group as={Col} md="2">
-                                    <Form.Label>Start Time</Form.Label><br/>
-                                    <TimePicker onChange={setStartDateTime}
-                                        value={startDateTime|| ''} />
-                                </Form.Group>
-                        
-                                <Form.Group as={Col} md="3">
-                                    <Form.Label>End Date</Form.Label>
-                                    <Form.Control
-                                    required
-                                    type="date"
-                                    min={rewadPotDetail?.startDate}
-                                    value={endDate|| ''}
-                                    onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}>
-                                    </Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        End Date is required !!
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                        
-                                <Form.Group as={Col} md="2">
-                                    <Form.Label>End Time</Form.Label><br/>
-                                    <TimePicker onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
-                                        value={endDateTime|| ''} />
-                                </Form.Group>
+                                
                             </Row>
                     
                             <Row className="mb-3">
-                                <Form.Label>Claim Expiry</Form.Label><br />
+                                {/* <Form.Label>Claim Expiry</Form.Label><br /> */}
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small-lable'>Claim Expiry Date</Form.Label>
+                                    <Form.Label>Claim Expiry Date</Form.Label>
                                     <Form.Control
                                         type="text"
                                       value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} >
@@ -287,7 +297,7 @@ const AddPot = () => {
                         
                                 <Form.Group as={Col} md="3">
                             
-                                    <Form.Label className='small-lable'>Claim Expiry Time</Form.Label>
+                                    <Form.Label>Claim Expiry Time</Form.Label>
                                     <Form.Control
                                         type="text"
                                         value={rewadPotDetail?.claimExpiryDate?.time|| ''} disabled={true} >
@@ -336,10 +346,10 @@ const AddPot = () => {
                             </Row>
                     
                             <Row className="mb-3">
-                                <Form.Label>Asset Details</Form.Label>
+                                {/* <Form.Label>Asset Details</Form.Label> */}
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small-lable'>Ticker</Form.Label>
+                                    <Form.Label>Ticker/tokenId in case of NFT </Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
@@ -352,7 +362,7 @@ const AddPot = () => {
                                 </Form.Group>
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small-lable'>Contract Address</Form.Label>
+                                    <Form.Label>Contract Address</Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
@@ -365,7 +375,7 @@ const AddPot = () => {
                                 </Form.Group>
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label className='small-lable'>Asset Name</Form.Label>
+                                    <Form.Label>Asset Name</Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
@@ -377,10 +387,11 @@ const AddPot = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 
-                                <Form.Group as={Col} md="3">
-                                <Form.Label>Active Pot</Form.Label>
+                                <Form.Group as={Col} md="3" className='d-flex my-auto'>
+                               
                                     <Form.Check type="checkbox" checked={rewadPotDetail.isActive}
                                     onChange={() => setRewardPotDetail({ ...rewadPotDetail,isActive:!rewadPotDetail.isActive})} />
+                                     <Form.Label>Active Pot</Form.Label>
                                 </Form.Group>
                             </Row>
                     
