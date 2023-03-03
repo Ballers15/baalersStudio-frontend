@@ -26,7 +26,8 @@ const PoolListing = () => {
 
     const toTitleCase = (str) => {
         var string = str?.toLowerCase().split(" ");
-        for(var i = 0; i< string.length; i++){
+        console.log("string",string);
+        for(var i = 0; i< string?.length; i++){
            string[i] = string[i][0].toUpperCase() + string[i].slice(1);
         }
         return string;
@@ -119,8 +120,8 @@ const PoolListing = () => {
                                 <td>{pot?.rewardTokenAmount}</td>
                                 <td>
                                     <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                        {pot?.assetDetails?.ticker.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.ticker.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
+                                        {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
+                                        {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td>
                                 <td>
