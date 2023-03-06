@@ -4,12 +4,13 @@
 }
 
 .users-listing{
-    padding: 50px;
-    margin-top: 120px;
+    padding: 50px; 
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
 }
 .users-list-filters{
+    margin-top: 100px;
     color: #fff;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-evenly;
     column-gap: 100px;
@@ -20,9 +21,20 @@
     height: 50px;
     
 } */
+.users-list-filters input.form-control {
+    background: transparent;
+    color: #fff;
+}
 
 .users-lisitng-container{
-    padding: 50px;
+    color: #fff;
+  border-radius: 31px;
+  background: #110929; 
+             border-radius: 20px;
+background: #210e58;
+box-shadow: inset 45px -45px 42px #130834,
+            inset -45px 45px 42px #2f147c;
+    /* padding: 50px;
     margin: auto;
     background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
     border-radius: 31px;
@@ -30,7 +42,7 @@
     border-radius: 31px;
     background: #210e58;
     box-shadow: inset 45px -45px 42px #130834,
-              inset -45px 45px 42px #2f147c;
+              inset -45px 45px 42px #2f147c; */
 
 }
 
@@ -63,12 +75,74 @@
   
   .users-listing-table-body {
     display: block;
-    height: 570px;
+    height: 352px;
     overflow: auto;
+    margin-bottom: 30px;
+    padding: 0;
   }
-  
-  .users-listing-table-head, .users-listing-table-body tr {
+ 
+ 
+.users-listing-table-head, .users-listing-table-body tr {
     display: table;
     width: 100%;
     table-layout: fixed;/* even columns width , fix width of table too*/
+  }
+  
+  .users-listing hr {
+    margin: 0 !important;
+    color: inherit;
+    border: 0;
+    border-top: 2px solid;
+    opacity: .25;
+  }
+  .viewWallet td {
+    border-bottom: 0;
+}
+.viewWallet td, .viewWallet th{
+    font-size: 1rem;
+}
+.viewWallet .modal-content{
+    padding: 0;
+  }
+  .viewWallet .modal-content .modal-body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .viewWallet select.form-select {
+    background: transparent;
+    color: #fff;
+    border: 0;
+    text-align: center;
+    background-image: url(../../Assest/img/dropdown.png);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    box-shadow: none !important;
+}
+.viewWallet option {
+    color: #000;
+}
+input[type="date"] {
+    position: relative; 
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+  }
+  
+  input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    /* top: 12px; */
+    right: 6px;
+    color: #e5e5e5;
   }

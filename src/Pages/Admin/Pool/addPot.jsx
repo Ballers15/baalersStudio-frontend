@@ -387,7 +387,7 @@ const AddPot = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 
-                                <Form.Group as={Col} md="3" className='d-flex my-auto'>
+                                <Form.Group as={Col} md="3" className='d-flex mb-0 mt-auto'>
                                
                                     <Form.Check type="checkbox" checked={rewadPotDetail.isActive}
                                     onChange={() => setRewardPotDetail({ ...rewadPotDetail,isActive:!rewadPotDetail.isActive})} />

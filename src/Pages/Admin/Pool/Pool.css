@@ -127,6 +127,7 @@ box-shadow: inset 45px -45px 42px #130834,
   height: 370px;
   overflow: auto;
   margin-bottom: 30px;
+  padding: 0;
 }
 
 .pool-listing-table-head, .pool-listing-table-body tr {
@@ -453,10 +454,11 @@ border: none;
   cursor: pointer;
 }
 .sNoWth {
+  width: 90px;
   min-width: 90px !important;
 }
 .searchTag{
-  width: 90%;
+  width: 95%;
   margin: auto;
   margin-bottom: 1rem;
 }
@@ -494,7 +496,7 @@ a.page-link span, .page-link:hover {
 }
 
 
-.modal-body td, .modal-body th {
+.viewPopup .modal-body td, .viewPopup .modal-body th {
   border-bottom: 0;
   min-width: 176px;
   height: 25px;
@@ -504,18 +506,18 @@ a.page-link span, .page-link:hover {
   max-width: 100%;
 }
  
-.modal-body table {
+.viewPopup .modal-body table {
   border-collapse: collapse;
   overflow-x: scroll;
 }
-.modal-body thead {
+.viewPopup .modal-body thead {
   vertical-align: bottom;
   border-bottom: 1px solid #fff;
 }
-.modal-body thead, .modal-body tbody {
+.viewPopup .modal-body thead, .viewPopup .modal-body tbody {
   display: block;
 }
-.modal-body tbody {
+.viewPopup .modal-body tbody {
   overflow-y: auto;
   overflow-x: hidden;
   height: 250px;

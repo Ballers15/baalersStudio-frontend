@@ -108,7 +108,13 @@ const PoolListing = () => {
                     <Form className="d-flex">
                         <Form.Control
                         type="search"
-                        placeholder="Search"
+                        placeholder="Search with Email"
+                        className="me-2"
+                        aria-label="Search"
+                        />
+                         <Form.Control
+                        type="search"
+                        placeholder="Search with Wallet Address"
                         className="me-2"
                         aria-label="Search"
                         />
@@ -218,7 +224,7 @@ const PoolListing = () => {
                                     </span>
                                 </td> */}
                                 <td> 6<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
-                                            <i className="fa fa-eye " />
+                                            <i className="fa fa-eye" />
                                         </span></td>
                                 <td>654</td>
                                
