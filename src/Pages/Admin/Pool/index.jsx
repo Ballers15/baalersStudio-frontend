@@ -10,6 +10,7 @@ import { MDBSwitch } from 'mdb-react-ui-kit';
 import {Form, Button} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
+import Pagination from 'react-bootstrap/Pagination';
 const PoolListing = () => {
     useEffect(() => {
         onInit();
@@ -121,7 +122,7 @@ const PoolListing = () => {
                             <th>name</th>
                             <th>email</th> 
                             <th>wallet address</th>
-                            <th>game cash burned</th>
+                            {/* <th>game cash burned</th> */}
                             <th>nft Count</th>
                         </tr>
                     </thead>
@@ -129,40 +130,35 @@ const PoolListing = () => {
                         <tr>
                             <td  className="sNoWth"> 1</td>
                             <td> mishba zuber barkati</td>           
-                            <td>misha@gmail.com</td>        
-                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>misha@gmail.com</td>             
                             <td>jdjdjd</td>  
                             <td>76868</td>
                         </tr>   
                         <tr>
                             <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
-                            <td>misha@gmail.com</td>        
-                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>misha@gmail.com</td>         
                             <td>jdjdjd</td>  
                             <td>76868</td>
                         </tr>  
                         <tr>
                             <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
-                            <td>misha@gmail.com</td>        
-                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>misha@gmail.com</td>           
                             <td>jdjdjd</td>  
                             <td>76868</td>
                         </tr>   
                         <tr>
                             <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
-                            <td>misha@gmail.com</td>        
-                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>misha@gmail.com</td>               
                             <td>jdjdjd</td>  
                             <td>76868</td>
                         </tr>  
                         <tr>
                             <td  className="sNoWth"> 1</td>
                             <td> mishba</td>           
-                            <td>misha@gmail.com</td>        
-                            <td>ghsghjjdjduddjudjdkdmdhe</td>           
+                            <td>misha@gmail.com</td>              
                             <td>jdjdjd</td>  
                             <td>76868</td>
                         </tr>  
@@ -175,7 +171,7 @@ const PoolListing = () => {
                 </Modal>
             <div className="pool-listing">
                 <div className="pool-list-container">
-                <a  href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
+                <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -184,21 +180,23 @@ const PoolListing = () => {
                 </a>
                 <div>
                     <h2 className="tableHead">Active Pots </h2>
-                    <table className="pool-listing-table">
+                    <div className="pool-listing-table">
+                    <table>
                     <thead className="pool-listing-table-head">
                     <tr>
                         <th>Sr. No.</th>
                         <th>Pot Type</th>
-                        <th>Assest Type</th>
+                        {/* <th>Assest Type</th> */}
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Claim Expiry Date</th>
-                        <th>Reward Token Amount</th>
-                        <th>Ticker</th>
+                        <th>Reward Token Amount/ Quantity in case of NFT</th>
+                        {/* <th>Ticker</th> */}
                         <th>Users Count </th>
                         <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
                         <th>Assest Name</th>
+                        <th>stop claim</th>
                         <th>Actions</th>
                     </tr>
                     </thead><hr/>
@@ -208,17 +206,17 @@ const PoolListing = () => {
                                 <tr key={pot?._id}>
                                 <td>{index+1}</td>
                                 <td>{pot?.potType}</td>
-                                <td>{pot?.assetType}</td>
+                                {/* <td>{pot?.assetType}</td> */}
                                 <td>{pot?.startDate?.split('T')[0]}</td>
                                 <td>{pot?.endDate?.split('T')[0]}</td>
                                 <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                 <td>{pot?.rewardTokenAmount}</td>
-                                <td>
+                                {/* <td>
                                     <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
                                         {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
-                                </td>
+                                </td> */}
                                 <td> 6<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
                                             <i className="fa fa-eye " />
                                         </span></td>
@@ -236,89 +234,8 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                     </span>
                                 </td>
-                                <td className="action-tab-pool-list">
-                                        <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                            <i className="fa fa-edit " />
-                                        </span>
-                                        <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
-                                            {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
-                                        </span>
-                                </td>
-                                </tr>
-                            )
-                        }):null}
-                        {rewardPotDetailsArray.length===0?<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                 No Record Found
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>:null}
-                    </tbody>
-                    </table>
-                </div>
-                <div>
-                    <h2 className="tableHead">Archives Pots</h2>
-                    <table className="pool-listing-table">
-                    <thead className="pool-listing-table-head">
-                    <tr>
-                        <th>Sr. No.</th>
-                        <th>Pot Type</th>
-                        <th>Assest Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Claim Expiry Date</th>
-                        <th>Reward Token Amount</th>
-                        <th>Ticker</th>
-                        <th>Users Count </th>
-                        <th>Game Cash Burned</th>                        
-                        <th>Contract Address</th>
-                        <th>Assest Name</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead><hr/>
-                    <tbody className="pool-listing-table-body">
-                        {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
-                            return (
-                                <tr key={pot?._id}>
-                                <td>{index+1}</td>
-                                <td>{pot?.potType}</td>
-                                <td>{pot?.assetType}</td>
-                                <td>{pot?.startDate?.split('T')[0]}</td>
-                                <td>{pot?.endDate?.split('T')[0]}</td>
-                                <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
-                                <td>{pot?.rewardTokenAmount}</td>
                                 <td>
-                                    <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                        {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
-                                    </span>
-                                </td>
-                                <td> 7 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
-                                            <i className="fa fa-eye " />
-                                        </span></td>
-                                <td>543</td>
-                           
-                                <td>
-                                    <span title= {pot?.assetDetails?.contractAddress}>
-                                        {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span title= {pot?.assetDetails?.assetName}>
-                                        {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
-                                    </span>
+                                <MDBSwitch defaultChecked />
                                 </td>
                                 <td className="action-tab-pool-list">
                                         <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
@@ -349,92 +266,220 @@ const PoolListing = () => {
                         </tr>:null}
                     </tbody>
                     </table>
+                    <Pagination>
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        <Pagination.Item active>{1}</Pagination.Item>                     
+
+                        <Pagination.Ellipsis />
+                        <Pagination.Item>{20}</Pagination.Item>
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
+                        </div>
                 </div>
                 <div>
                     <h2 className="tableHead">Upcoming Pots </h2>
-                    <table className="pool-listing-table">
-                    <thead className="pool-listing-table-head">
-                    <tr>
-                        <th>Sr. No.</th>
-                        <th>Pot Type</th>
-                        <th>Assest Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Claim Expiry Date</th>
-                        <th>Reward Token Amount</th>
-                        <th>Ticker</th>
-                        <th>Users Count </th>
-                        <th>Game Cash Burned</th>
-                       
-                        <th>Contract Address</th>
-                        <th>Assest Name</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead><hr/>
-                    <tbody className="pool-listing-table-body">
-                        {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
-                            return (
-                                <tr key={pot?._id}>
-                                <td>{index+1}</td>
-                                <td>{pot?.potType}</td>
-                                <td>{pot?.assetType}</td>
-                                <td>{pot?.startDate?.split('T')[0]}</td>
-                                <td>{pot?.endDate?.split('T')[0]}</td>
-                                <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
-                                <td>{pot?.rewardTokenAmount}</td>
-                                <td>
-                                    <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                        {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
-                                    </span>
-                                </td>
-                                <td> 8 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
-                                            <i className="fa fa-eye " />
-                                        </span></td>
-                                <td>656</td>
-                                 
-                                <td>
-                                    <span title= {pot?.assetDetails?.contractAddress}>
-                                        {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span title= {pot?.assetDetails?.assetName}>
-                                        {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
-                                    </span>
-                                </td>
-                                <td className="action-tab-pool-list">
-                                        <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                            <i className="fa fa-edit " />
+                    <div className="pool-listing-table">
+                        <table>
+                        <thead className="pool-listing-table-head">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Pot Type</th>
+                            {/* <th>Assest Type</th> */}
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Claim Expiry Date</th>
+                            <th>Reward Token Amount/ Quantity in case of NFT</th>
+                            {/* <th>Ticker</th> */}
+                            <th>Users Count </th>
+                            <th>Game Cash Burned</th>
+                        
+                            <th>Contract Address</th>
+                            <th>Assest Name</th>
+                            <th>stop claim</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead><hr/>
+                        <tbody className="pool-listing-table-body">
+                            {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
+                                return (
+                                    <tr key={pot?._id}>
+                                    <td>{index+1}</td>
+                                    <td>{pot?.potType}</td>
+                                    {/* <td>{pot?.assetType}</td> */}
+                                    <td>{pot?.startDate?.split('T')[0]}</td>
+                                    <td>{pot?.endDate?.split('T')[0]}</td>
+                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                    <td>{pot?.rewardTokenAmount}</td>
+                                    {/* <td>
+                                        <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
+                                            {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                         </span>
-                                        <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
-                                            {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                                    </td> */}
+                                    <td> 8 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                                <i className="fa fa-eye " />
+                                            </span></td>
+                                    <td>656</td>
+                                    
+                                    <td>
+                                        <span title= {pot?.assetDetails?.contractAddress}>
+                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>
+                                    </td>
+                                    <td>
+                                        <span title= {pot?.assetDetails?.assetName}>
+                                            {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
+                                        </span>
+                                    </td>
+                                    <td>
+                                    <MDBSwitch defaultChecked />
+                                    </td>
+                                    <td className="action-tab-pool-list">
+                                            <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                                <i className="fa fa-edit " />
+                                            </span>
+                                            <span>
+                                                {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
+                                                {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                                            </span>
+                                    </td>
+                                    </tr>
+                                )
+                            }):null}
+                            {rewardPotDetailsArray.length===0?<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    No Record Found
                                 </td>
-                                </tr>
-                            )
-                        }):null}
-                        {rewardPotDetailsArray.length===0?<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                 No Record Found
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>:null}
-                    </tbody>
-                    </table>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>:null}
+                        </tbody>
+                        </table>
+                        <Pagination>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            <Pagination.Item active>{1}</Pagination.Item>                     
+
+                            <Pagination.Ellipsis />
+                            <Pagination.Item>{20}</Pagination.Item>
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination>
+                    </div>
                 </div>
+                <div>
+                    <h2 className="tableHead">Archives Pots</h2>
+                    <div className="pool-listing-table">
+                        <table>
+                        <thead className="pool-listing-table-head">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Pot Type</th>
+                            {/* <th>Assest Type</th> */}
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Claim Expiry Date</th>
+                            <th>Reward Token Amount/ Quantity in case of NFT</th>
+                            {/* <th>Ticker</th> */}
+                            <th>Users Count </th>
+                            <th>Game Cash Burned</th>                        
+                            <th>Contract Address</th>
+                            <th>Assest Name</th>
+                            <th>stop claim</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead><hr/>
+                        <tbody className="pool-listing-table-body">
+                            {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
+                                return (
+                                    <tr key={pot?._id}>
+                                    <td>{index+1}</td>
+                                    <td>{pot?.potType}</td>
+                                    {/* <td>{pot?.assetType}</td> */}
+                                    <td>{pot?.startDate?.split('T')[0]}</td>
+                                    <td>{pot?.endDate?.split('T')[0]}</td>
+                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                    <td>{pot?.rewardTokenAmount}</td>
+                                    {/* <td>
+                                        <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
+                                            {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
+                                        </span>
+                                    </td> */}
+                                    <td> 7 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                                <i className="fa fa-eye " />
+                                            </span></td>
+                                    <td>543</td>
+                            
+                                    <td>
+                                        <span title= {pot?.assetDetails?.contractAddress}>
+                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span title= {pot?.assetDetails?.assetName}>
+                                            {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
+                                        </span>
+                                    </td>
+                                    <td>
+                                    <MDBSwitch defaultChecked />
+                                    </td>
+                                    <td className="action-tab-pool-list">
+                                            <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                                <i className="fa fa-edit " />
+                                            </span>
+                                            <span>
+                                                {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
+                                                {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                                            </span>
+                                    </td>
+                                    </tr>
+                                )
+                            }):null}
+                            {rewardPotDetailsArray.length===0?<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    No Record Found
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>:null}
+                        </tbody>
+                        </table>
+                        <Pagination>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            <Pagination.Item active>{1}</Pagination.Item>                     
+
+                            <Pagination.Ellipsis />
+                            <Pagination.Item>{20}</Pagination.Item>
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination>
+                    </div>
+                </div>
+               
             </div>
             {loading ? <Loader /> : null}
                 {toaster && <Toaster

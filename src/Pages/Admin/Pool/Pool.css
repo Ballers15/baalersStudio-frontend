@@ -161,7 +161,7 @@ pool-listing-table-head tr {
   font-size: 13px;
 }
 
-.pool-listing a{
+.pool-listing .btnPool{
   position: relative;
   padding: 9px 10px;
   text-decoration: none;
@@ -178,11 +178,11 @@ pool-listing-table-head tr {
   margin-bottom: 26px;
 }
 
-.pool-listing a:hover{
+.pool-listing .btnPool:hover{
 border: none;
 }
 
-.pool-listing a:before{
+.pool-listing .btnPool:before{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -192,7 +192,7 @@ border: none;
 	background: rgba(255,255,255,.1);
 }
 
-.pool-listing a:after{
+.pool-listing .btnPool:after{
 	content: '';
 	position: absolute;
 	top: 0;
@@ -204,17 +204,17 @@ border: none;
 	transition-delay: 0.5s;
 }
 
-.pool-listing a:hover:after{
+.pool-listing .btnPool:hover:after{
 	left: 100%;
 }
 
-.pool-listing a span{
+.pool-listing .btnPool span{
 	position: absolute;
 	display: block;
 	transition: 0.5s ease;
 }
 
-.pool-listing a span:nth-child(1){
+.pool-listing .btnPool span:nth-child(1){
 	top: 0;
 	left: 0;
 	width: 0;
@@ -222,12 +222,12 @@ border: none;
 	background: #fff;
 }
 
-.pool-listing a:hover span:nth-child(1){
+.pool-listing .btnPool:hover span:nth-child(1){
 	width: 100%;
 	transform: translateX(100%);
 }
 
-.pool-listing a span:nth-child(3){
+.pool-listing .btnPool span:nth-child(3){
 	bottom: 0;
 	right: 0;
 	width: 0;
@@ -235,12 +235,12 @@ border: none;
 	background: #fff;
 }
 
-.pool-listing a:hover span:nth-child(3){
+.pool-listing .btnPool:hover span:nth-child(3){
 	width: 100%;
 	transform: translateX(-100%);
 }
 
-.pool-listing a span:nth-child(2){
+.pool-listing .btnPool span:nth-child(2){
 	top: 0;
 	left: 0;
 	width: 1px;
@@ -248,12 +248,12 @@ border: none;
 	background: #fff;
 }
 
-.pool-listing a:hover span:nth-child(2){
+.pool-listing .btnPool:hover span:nth-child(2){
 	height: 100%;
 	transform: translateY(100%);
 }
 
-.pool-listing a span:nth-child(4){
+.pool-listing .btnPool span:nth-child(4){
 	bottom: 0;
 	right: 0;
 	width: 1px;
@@ -261,7 +261,7 @@ border: none;
 	background: #fff;
 }
 
-.pool-listing a:hover span:nth-child(4){
+.pool-listing .btnPool:hover span:nth-child(4){
 	height: 100%;
 	transform: translateY(-100%);
 }
@@ -452,8 +452,8 @@ border: none;
   margin-left: 8px;
   cursor: pointer;
 }
-.sNoWth{
-  width: 100px;
+.sNoWth {
+  min-width: 90px !important;
 }
 .searchTag{
   width: 90%;
@@ -462,4 +462,62 @@ border: none;
 }
 .searchTag input{
   background: transparent;
+  color: #fff;
 }
+ul.pagination{
+  justify-content: flex-end;
+  padding-bottom: 2rem;
+  margin-right: 1.5rem;
+}
+a.page-link {
+  background: transparent;
+  border: 0;
+  color: #fff;
+}
+a.page-link span, .page-link:hover { 
+  background: transparent !important;
+  transition: none !important;
+  outline: none; 
+    border: 0;
+    color: #cebdff; }
+ 
+.active>.page-link, .page-link.active{
+  background: #2f147c !important;
+  border: 0;
+}
+.page-link:focus{
+  box-shadow: none;
+  background-color: transparent;
+}
+.form-switch .form-check-input{
+  margin-left: 0;
+}
+
+
+.modal-body td, .modal-body th {
+  border-bottom: 0;
+  min-width: 176px;
+  height: 25px;
+  /* border: dashed 1px lightblue; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+ 
+.modal-body table {
+  border-collapse: collapse;
+  overflow-x: scroll;
+}
+.modal-body thead {
+  vertical-align: bottom;
+  border-bottom: 1px solid #fff;
+}
+.modal-body thead, .modal-body tbody {
+  display: block;
+}
+.modal-body tbody {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 250px;
+}
+ 
