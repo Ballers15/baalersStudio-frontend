@@ -153,7 +153,7 @@ const UsersList = () => {
             </Col>
             <Col md="6">
               <Form.Group >
-              <Form.Label>Mail Id</Form.Label>
+              <Form.Label>Email</Form.Label>
             <Form.Control
                 type="search"
                 placeholder="Search"
