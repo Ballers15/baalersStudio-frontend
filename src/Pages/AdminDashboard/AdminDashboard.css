@@ -1,6 +1,8 @@
 .admin-dashboard{
     margin-top: 120px ;
     color: white;
+    padding: 50px;
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
 }
 
 .users-listing{
@@ -154,4 +156,22 @@ input[type="date"] {
     max-width: 200px;
     margin-right: 14px;
     text-align: left;
+  }
+  .admin-dashboard .card{
+    background: transparent;
+    border: .5px solid #110929;
+    padding: 1rem;
+    min-height: 130px;
+    margin: 1rem 0;
+    border-radius: 20px;    
+    box-shadow: rgb(0 0 0 / 45%) 1.95px 1.95px 2.6px;
+  }
+  .admin-dashboard .card h4{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .admin-dashboard .card .dataFont{    
+    font-size: 15px;
+    color: #d3d3d3;
+
   }

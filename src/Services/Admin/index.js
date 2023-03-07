@@ -7,7 +7,12 @@ export function AddRewardPot(data) {
 export function getAllRewardPot() {
   return (axiosInstance.get('/pot/v1/admin/getall/reward/pot').then(res => res.data));
 }
-
+export function getUpcomingRewardPot() {
+  return (axiosInstance.get('/pot/v1/admin/upcoming/reward/pot').then(res => res.data));
+}
+export function getArchivesRewardPot() {
+  return (axiosInstance.get('/pot/v1/admin/upcoming/reward/pot').then(res => res.data));
+}
 export function getRewardPotById(data) {
   return (axiosInstance.get('/pot/v1/admin/getbyid/reward/pot',{params: data}).then(res => res.data));
 }

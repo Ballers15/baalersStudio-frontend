@@ -3,7 +3,7 @@
 import React,{useEffect,useState} from "react";
 import './Pool.css';
 import { useNavigate } from 'react-router-dom'
-import {getAllRewardPot,updateRewardPotStatus} from '../../../Services/Admin'
+import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot} from '../../../Services/Admin'
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
@@ -21,10 +21,15 @@ const PoolListing = () => {
     const [toaster, showToaster] = useState(false);
     const [toasterMessage, setToasterMessage] = useState("");
     const [rewardPotDetailsArray, setRewardPotDetailsArray] = useState([]);
+    const [upcomingRewardPotArray, setUpcomingRewardPotArray] = useState([]);
+    const [archivesRewardPotArray, setArchivesRewardPotArray] = useState([]);
+
     const setShowToaster = (param) => showToaster(param);
     
     const onInit=()=>{
         getAllRewardPotDetails();
+        getUpcomingRewardPotDetails();
+        getArchivesRewardPotDetails();
     }
 
     const toTitleCase = (str) => {
@@ -45,7 +50,41 @@ const PoolListing = () => {
             setToasterMessage(getPotDetails?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
-              setRewardPotDetailsArray(getPotDetails?.data);
+              setRewardPotDetailsArray(getPotDetails?.data?.res);
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+    const getUpcomingRewardPotDetails = async () => {
+        setLoading(true);
+        try {
+          const getPotDetails = await getUpcomingRewardPot();
+          setLoading(false);
+          if (getPotDetails.error) {
+            setToasterMessage(getPotDetails?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+              setUpcomingRewardPotArray(getPotDetails?.data?.res);
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+    const getArchivesRewardPotDetails = async () => {
+        setLoading(true);
+        try {
+          const getPotDetails = await getArchivesRewardPot();
+          setLoading(false);
+          if (getPotDetails.error) {
+            setToasterMessage(getPotDetails?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+              setArchivesRewardPotArray(getPotDetails?.data?.res);
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -223,10 +262,10 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td> */}
-                                <td> 6<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
+                                <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
                                             <i className="fa fa-eye" />
                                         </span></td>
-                                <td>654</td>
+                                <td>{pot?.potAmountCollected}</td>
                                
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
@@ -299,8 +338,7 @@ const PoolListing = () => {
                             <th>Reward Amount</th>
                             {/* <th>Ticker</th> */}
                             <th>Users Count </th>
-                            <th>Game Cash Burned</th>
-                        
+                            <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
                             <th>stop claim</th>
@@ -308,7 +346,7 @@ const PoolListing = () => {
                         </tr>
                         </thead><hr/>
                         <tbody className="pool-listing-table-body">
-                            {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
+                            {upcomingRewardPotArray.length!==0?upcomingRewardPotArray.map((pot, index) => {
                                 return (
                                     <tr key={pot?._id}>
                                     <td>{index+1}</td>
@@ -324,10 +362,10 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                         </span>
                                     </td> */}
-                                    <td> 8 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
-                                    <td>656</td>
+                                    <td>{pot?.potAmountCollected}</td>
                                     
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
@@ -356,7 +394,7 @@ const PoolListing = () => {
                                     </tr>
                                 )
                             }):null}
-                            {rewardPotDetailsArray.length===0?<tr>
+                            {upcomingRewardPotArray.length===0?<tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -408,7 +446,7 @@ const PoolListing = () => {
                         </tr>
                         </thead><hr/>
                         <tbody className="pool-listing-table-body">
-                            {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
+                            {archivesRewardPotArray.length!==0?archivesRewardPotArray.map((pot, index) => {
                                 return (
                                     <tr key={pot?._id}>
                                     <td>{index+1}</td>
@@ -424,10 +462,10 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                         </span>
                                     </td> */}
-                                    <td> 7 <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
-                                    <td>543</td>
+                                    <td>{pot?.potAmountCollected}</td>
                             
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
@@ -456,7 +494,7 @@ const PoolListing = () => {
                                     </tr>
                                 )
                             }):null}
-                            {rewardPotDetailsArray.length===0?<tr>
+                            {archivesRewardPotArray.length===0?<tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
