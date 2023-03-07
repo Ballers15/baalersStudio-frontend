@@ -174,7 +174,7 @@ const PoolListing = () => {
                  
                 </Modal.Body>
                
-                </Modal>
+            </Modal>
             <div className="pool-listing">
                 <div className="pool-list-container">
                 <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
@@ -196,7 +196,7 @@ const PoolListing = () => {
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Claim Expiry Date</th>
-                        <th>Reward Token Amount/ Quantity in case of NFT</th>
+                        <th>Reward Amount</th>
                         {/* <th>Ticker</th> */}
                         <th>Users Count </th>
                         <th>Game Cash Burned</th>                     
@@ -296,7 +296,7 @@ const PoolListing = () => {
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Claim Expiry Date</th>
-                            <th>Reward Token Amount/ Quantity in case of NFT</th>
+                            <th>Reward Amount</th>
                             {/* <th>Ticker</th> */}
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>
@@ -397,7 +397,7 @@ const PoolListing = () => {
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Claim Expiry Date</th>
-                            <th>Reward Token Amount/ Quantity in case of NFT</th>
+                            <th>Reward Amount</th>
                             {/* <th>Ticker</th> */}
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>                        

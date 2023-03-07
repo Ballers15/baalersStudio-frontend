@@ -199,7 +199,7 @@ const UsersList = () => {
                         <td className='sNoWth'>{index + 1}</td>
                         <td>{user?.name}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-between'>{user?.email} <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
+                        <td className='d-flex justify-content-between'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
                           <span className="eyeIcon" title="View wallet" onClick={() => viewWalletShow(true)}> <i className="fa fa-eye " /></span>

@@ -216,7 +216,7 @@ const AddPot = () => {
             <Form noValidate validated={validated} onSubmit={addRewardPot}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>Reward Token Amount/Quantity in case of NFT</Form.Label>
+                                    <Form.Label>Reward Amount</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -349,7 +349,7 @@ const AddPot = () => {
                                 {/* <Form.Label>Asset Details</Form.Label> */}
                         
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>Ticker/tokenId in case of NFT </Form.Label>
+                                    <Form.Label>Ticker / TokenId </Form.Label>
                                     <Form.Control
                                     required
                                     type="text"
