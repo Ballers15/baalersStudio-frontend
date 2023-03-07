@@ -157,14 +157,18 @@ input[type="date"] {
     margin-right: 14px;
     text-align: left;
   }
+  /* .pieCard{
+    width: 70%;
+  } */
   .admin-dashboard .card{
-    background: transparent;
+    background: #39179e;
     border: .5px solid #110929;
     padding: 1rem;
     min-height: 130px;
     margin: 1rem 0;
     border-radius: 20px;    
     box-shadow: rgb(0 0 0 / 45%) 1.95px 1.95px 2.6px;
+
   }
   .admin-dashboard .card h4{
     font-size: 18px;

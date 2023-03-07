@@ -216,13 +216,21 @@ const PoolListing = () => {
             </Modal>
             <div className="pool-listing">
                 <div className="pool-list-container">
-                <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Add Pot
-                </a>
+                    <div className="topForm">
+                    <Form.Select aria-label="Default select example">
+                        <option>All</option>
+                        <option value="1">Lottery</option>
+                        <option value="2">Reward</option> 
+                    </Form.Select>
+                    <a className="btnPool addPoolBtn" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Add Pot
+                    </a>
+                    </div>
+              
                 <div>
                     <h2 className="tableHead">Active Pots </h2>
                     <div className="pool-listing-table">

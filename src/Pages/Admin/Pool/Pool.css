@@ -522,4 +522,29 @@ a.page-link span, .page-link:hover {
   overflow-x: hidden;
   height: 250px;
 }
+.pool-listing .btnPool.addPoolBtn{
+  float: right;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+ }
+ .topForm{
+  display: flex;
+  width: 24%;
+  align-items: center;
+  float: right;
+ }
+ .topForm select{
+  margin-right: 1rem;
+  background: transparent;
+  color: #fff;
+  background-image: url(../../../Assest/img/dropdown.png);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  box-shadow: none !important;
+ }
+ .topForm option{ 
+    background: #210e58;
+ }
  
