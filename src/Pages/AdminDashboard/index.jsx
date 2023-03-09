@@ -106,7 +106,7 @@ const AdminDashboard = () => {
             </div>
             </Col>
             <Col md={7}>
-            <div className="card">
+            <div className="card graphCard">
             <Bar data={dataBar} options={optionsBar} />
             </div>
             </Col>

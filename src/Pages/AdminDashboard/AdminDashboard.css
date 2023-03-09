@@ -157,9 +157,13 @@ input[type="date"] {
     margin-right: 14px;
     text-align: left;
   }
-  /* .pieCard{
-    width: 70%;
-  } */
+  .pieCard, .graphCard{
+    height: 400px; 
+  }
+  .pieCard canvas{
+    margin-left: auto;
+    margin-right: auto;
+  }
   .admin-dashboard .card{
     background: #2b1273;
     border: .5px solid #110929;

@@ -146,7 +146,7 @@ pool-listing-table-head tr {
 
 .pool-listing-table {
   margin-top: 1.5rem;
-  width: 95vw;
+  /* width: 95vw; */
 }
 
 .action-tab-pool-list{
