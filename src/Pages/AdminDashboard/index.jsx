@@ -66,12 +66,12 @@ const AdminDashboard = () => {
     <React.Fragment>
       <div className="admin-dashboard">
         <Container>
-          <Row>
+          <Row className='justify-content-center'>
             <Col md={3}>
             <div className="card">
               <h4>Users</h4>
               <div className='dataFont'>
-                <div>Total Signal:1627</div>
+                <div>Total Sign up:1627</div>
                 <div>Incomplete:87</div>
                 <div>Unique wallet:45</div>
               </div>

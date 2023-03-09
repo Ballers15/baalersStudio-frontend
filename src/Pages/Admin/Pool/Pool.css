@@ -93,6 +93,7 @@
   font-size: 25px;
   margin-left: 1.75rem;
   padding-top: 3rem;
+  margin-bottom: 0;
 }
 
 .pool-listing-table{
@@ -179,8 +180,8 @@ pool-listing-table-head tr {
   margin-bottom: 26px;
 }
 
-.pool-listing .btnPool:hover{
-border: none;
+.pool-listing .btnPool:hover {
+  border: 1px solid transparent;
 }
 
 .pool-listing .btnPool:before{
@@ -528,23 +529,32 @@ a.page-link span, .page-link:hover {
   text-align: center;
   margin: 0;
  }
- .topForm{
-  display: flex;
-  width: 24%;
-  align-items: center;
-  float: right;
+ .topForm{ 
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
  }
  .topForm select{
   margin-right: 1rem;
   background: transparent;
   color: #fff;
-  background-image: url(../../../Assest/img/dropdown.png);
+  background-image: url('../../../Assest/img/dropdown.png');
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
   box-shadow: none !important;
+  width: 13%;
+  height: 100%;
+  margin-bottom: 0;
  }
  .topForm option{ 
     background: #210e58;
  }
- 
+ .topForm form{
+  justify-content: flex-end;
+ }
+ .topForm input { 
+  width: 35%;
+  background: transparent;
+  color: #fff;
+}

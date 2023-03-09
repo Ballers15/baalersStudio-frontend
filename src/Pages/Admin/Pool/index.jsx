@@ -7,7 +7,7 @@ import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchives
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, Row, Col} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
@@ -216,23 +216,38 @@ const PoolListing = () => {
             </Modal>
             <div className="pool-listing">
                 <div className="pool-list-container">
-                    <div className="topForm">
-                    <Form.Select aria-label="Default select example">
-                        <option>All</option>
-                        <option value="1">Lottery</option>
-                        <option value="2">Reward</option> 
-                    </Form.Select>
-                    <a className="btnPool addPoolBtn" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
+                    <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         Add Pot
                     </a>
-                    </div>
+                    
               
                 <div>
-                    <h2 className="tableHead">Active Pots </h2>
+                    <div>  
+                      <Row className="topForm">
+                        <Col sm={4}><h2 className="tableHead">Active Pots </h2></Col>
+                        <Col sm={8}>                             
+                            <Form className="d-flex">
+                                <Form.Select aria-label="Default select example">
+                                        <option>All</option>
+                                        <option value="1">Lottery</option>
+                                        <option value="2">Reward</option> 
+                                </Form.Select>
+                                <Form.Control
+                                type="search"
+                                placeholder="Search"
+                                className="me-2"
+                                aria-label="Search"
+                                /> 
+                                <Button className="">Search</Button>
+                            </Form>                            
+                        </Col>
+                        </Row>                      
+                        
+                    </div>
                     <div className="pool-listing-table">
                     <table>
                     <thead className="pool-listing-table-head">
@@ -332,7 +347,28 @@ const PoolListing = () => {
                         </div>
                 </div>
                 <div>
-                    <h2 className="tableHead">Upcoming Pots </h2>
+                 
+                    <div>    
+                        <Row className="topForm">
+                            <Col sm={4}><h2 className="tableHead">Upcoming Pots </h2></Col>
+                            <Col sm={8}>                             
+                                <Form className="d-flex">
+                                    <Form.Select aria-label="Default select example">
+                                            <option>All</option>
+                                            <option value="1">Lottery</option>
+                                            <option value="2">Reward</option> 
+                                    </Form.Select>
+                                    <Form.Control
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    /> 
+                                    <Button className="">Search</Button>
+                                </Form>                            
+                            </Col>
+                        </Row> 
+                    </div>
                     <div className="pool-listing-table">
                         <table>
                         <thead className="pool-listing-table-head">
@@ -432,7 +468,29 @@ const PoolListing = () => {
                     </div>
                 </div>
                 <div>
-                    <h2 className="tableHead">Archives Pots</h2>
+                 
+                    <div>  
+                        <Row  className="topForm">
+                            <Col sm={4}><h2 className="tableHead">Archives Pots</h2></Col>
+                            <Col sm={8}>                             
+                                <Form className="d-flex">
+                                    <Form.Select aria-label="Default select example">
+                                            <option>All</option>
+                                            <option value="1">Lottery</option>
+                                            <option value="2">Reward</option> 
+                                    </Form.Select>
+                                    <Form.Control
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    /> 
+                                    <Button className="">Search</Button>
+                                </Form>                            
+                            </Col>
+                        </Row>               
+                        
+                    </div>
                     <div className="pool-listing-table">
                         <table>
                         <thead className="pool-listing-table-head">
