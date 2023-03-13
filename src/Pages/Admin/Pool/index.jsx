@@ -3,7 +3,7 @@
 import React,{useEffect,useState} from "react";
 import './Pool.css';
 import { useNavigate } from 'react-router-dom'
-import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot} from '../../../Services/Admin'
+import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot, getSpecificPotUsers} from '../../../Services/Admin'
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
@@ -11,6 +11,7 @@ import {Form, Button, Row, Col} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
+
 const PoolListing = () => {
     useEffect(() => {
         onInit();
@@ -23,6 +24,16 @@ const PoolListing = () => {
     const [rewardPotDetailsArray, setRewardPotDetailsArray] = useState([]);
     const [upcomingRewardPotArray, setUpcomingRewardPotArray] = useState([]);
     const [archivesRewardPotArray, setArchivesRewardPotArray] = useState([]);
+    const [currentPageAcitve, setCurrentPageActive] = useState(1)
+    const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1)
+    const [currentPageArchive, setCurrentPageArchive] = useState(1)
+    const [archivePotCount, setArchivePotCount] = useState(0)
+    const [activePotCount, setActivePotCount] = useState(0)
+    const [upcomingPotCount, setUpcomingPotCount] = useState(0)
+    const [potUsers, setPotUsers] = useState([])
+    const [activePotType, setActivePotType] = useState("");
+    const [upcomingPotType, setUpcomingPotType] = useState("");
+    const [archivePotType, setArchivePotType] = useState("");
 
     const setShowToaster = (param) => showToaster(param);
     
@@ -32,25 +43,90 @@ const PoolListing = () => {
         getArchivesRewardPotDetails();
     }
 
+    useEffect(() => {
+        getAllRewardPotDetails();
+    }, [currentPageAcitve]);
+
+    useEffect(() => {
+        getUpcomingRewardPotDetails();
+    }, [currentPageUpcoming]);
+
+    useEffect(() => {
+        getArchivesRewardPotDetails();
+    }, [currentPageArchive]);
+
+
+    const nextPageActive = () => {
+        if (activePotCount > 0)
+              setCurrentPageActive(currentPageAcitve + 1)
+        }
+
+    const nextPageArchive = () => {     
+            if (archivePotCount > 0)
+                setCurrentPageArchive(currentPageArchive + 1)
+
+            // console.log('upcoming',currentPageUpcoming)
+            }
+    const nextPageUpcoming = () => {
+            if (upcomingPotCount > 0)
+                setCurrentPageUpcoming(currentPageUpcoming + 1)
+
+                // console.log('upcoming',currentPageUpcoming)
+            }
+
+            const prevPageActive = () => {
+                if (currentPageAcitve > 1) 
+                setCurrentPageActive(currentPageAcitve - 1)
+        
+                // console.log('active',currentPageAcitve)
+        }
+
+        const prevPageArchive = () => {
+                if (currentPageArchive > 1) 
+                setCurrentPageArchive(currentPageArchive - 1)
+
+                // console.log('archive',currentPageArchive)
+        }
+      const prevPageUpcoming = () => {
+        if (currentPageUpcoming > 1) 
+        setCurrentPageUpcoming(currentPageUpcoming - 1)
+
+        // console.log('upcoming',currentPageUpcoming)
+    }
+        
+
     const toTitleCase = (str) => {
         var string = str?.toLowerCase().split(" ");
-        console.log("string",string);
+        // console.log("string",string);
         for(var i = 0; i< string?.length; i++){
-           string[i] = string[i][0].toUpperCase() + string[i].slice(1);
+           string[i] = string[i][0]?.toUpperCase() + string[i]?.slice(1);
         }
         return string;
     }
 
     const getAllRewardPotDetails = async () => {
         setLoading(true);
+        let dataToSend=''
+        if(activePotType!=='ALL' || activePotType==='') {
+        dataToSend = {
+            currentPage: currentPageAcitve,
+            potType: activePotType
+          }
+        }
+        else {
+            dataToSend = {
+                currentPage: currentPageAcitve
+            }
+        }
         try {
-          const getPotDetails = await getAllRewardPot();
+          const getPotDetails = await getAllRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
             setToasterMessage(getPotDetails?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
+              setActivePotCount(getPotDetails?.data?.count);
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -60,14 +136,27 @@ const PoolListing = () => {
     }
     const getUpcomingRewardPotDetails = async () => {
         setLoading(true);
+        let dataToSend=''
+        if(upcomingPotType!=='ALL' || upcomingPotType==='') {
+        dataToSend = {
+            currentPage: currentPageUpcoming,
+            potType: upcomingPotType
+          }
+        }
+        else {
+            dataToSend = {
+                currentPage: currentPageUpcoming
+            }
+        }
         try {
-          const getPotDetails = await getUpcomingRewardPot();
+          const getPotDetails = await getUpcomingRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
             setToasterMessage(getPotDetails?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
+              setUpcomingPotCount(getPotDetails?.data?.count);
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -77,14 +166,28 @@ const PoolListing = () => {
     }
     const getArchivesRewardPotDetails = async () => {
         setLoading(true);
+        let dataToSend=''
+        if(archivePotType!=='ALL' || archivePotType==='') {
+        dataToSend = {
+            currentPage: currentPageArchive,
+            potType: archivePotType
+          }
+        }
+        else {
+            dataToSend = {
+                currentPage: currentPageArchive
+            }
+        }
         try {
-          const getPotDetails = await getArchivesRewardPot();
+          const getPotDetails = await getArchivesRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
             setToasterMessage(getPotDetails?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
+              setArchivePotCount(getPotDetails?.data?.count);
+
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -120,6 +223,50 @@ const PoolListing = () => {
             setLoading(false);
         }
     }
+
+    const getPotUsers = async (data) =>{
+        let dataToSend = {
+            potId: data._id,
+        }
+        setLoading(true);
+        try {
+            const usersList = await getSpecificPotUsers(dataToSend);
+            setLoading(false);
+            if(usersList.error){
+                setToasterMessage(usersList?.message||'Something Went Worng');
+                setShowToaster(true);
+            } else {
+                setPotUsers(usersList?.data)
+                // setToasterMessage('Users listed Succesfully');
+                // setShowToaster(true); 
+              }
+            
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+        // console.log(potUsers)
+
+    }
+
+    const handleActivePotType = (e) =>{
+        e.preventDefault();
+       getAllRewardPotDetails();
+    }
+
+    const handleUpcomingPotType = (e) =>{
+        e.preventDefault();
+        getUpcomingRewardPotDetails();
+      
+    }
+
+    const handleArchivePotType = (e) =>{
+        e.preventDefault();
+        getArchivesRewardPotDetails();
+    }
+
+    
     const [viewUser, viewUserShow] = React.useState(false);
 
     const handleClose = () => viewUserShow(false);
@@ -163,7 +310,7 @@ const PoolListing = () => {
                 <Table responsive className="pool-view-table">
                     <thead>
                         <tr>
-                            <th className="sNoWth">Sr. No.</th>
+                            <th className="sNoWth">Sr. No..</th>
                             <th>name</th>
                             <th>email</th> 
                             <th>wallet address</th>
@@ -172,42 +319,34 @@ const PoolListing = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td  className="sNoWth"> 1</td>
-                            <td> mishba zuber barkati</td>           
-                            <td>misha@gmail.com</td>             
-                            <td>jdjdjd</td>  
-                            <td>76868</td>
-                        </tr>   
-                        <tr>
-                            <td  className="sNoWth"> 1</td>
-                            <td> mishba</td>           
-                            <td>misha@gmail.com</td>         
-                            <td>jdjdjd</td>  
-                            <td>76868</td>
+                    {potUsers?.transactions?.length!==0?potUsers?.transactions?.map((user, index) => {
+                        return(
+                        <tr key={user._id}>
+                            <td  className="sNoWth">{index+1}</td>
+                            <td> {user?.userDetails?.name}</td>           
+                            <td>{user?.userDetails?.email}</td>             
+                            <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
+                            {' '}{' '}{' '}{' '}
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>  
+                            <td>{user?.nftHolded}</td>
                         </tr>  
-                        <tr>
-                            <td  className="sNoWth"> 1</td>
-                            <td> mishba</td>           
-                            <td>misha@gmail.com</td>           
-                            <td>jdjdjd</td>  
-                            <td>76868</td>
-                        </tr>   
-                        <tr>
-                            <td  className="sNoWth"> 1</td>
-                            <td> mishba</td>           
-                            <td>misha@gmail.com</td>               
-                            <td>jdjdjd</td>  
-                            <td>76868</td>
-                        </tr>  
-                        <tr>
-                            <td  className="sNoWth"> 1</td>
-                            <td> mishba</td>           
-                            <td>misha@gmail.com</td>              
-                            <td>jdjdjd</td>  
-                            <td>76868</td>
-                        </tr>  
-                      
+                        )
+                    }):null}
+                     {potUsers?.transactions?.length===0?<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                 No Record Found
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>:null}
                     </tbody>
                 </Table>
                  
@@ -230,19 +369,19 @@ const PoolListing = () => {
                       <Row className="topForm">
                         <Col sm={4}><h2 className="tableHead">Active Pots </h2></Col>
                         <Col sm={8}>                             
-                            <Form className="d-flex">
-                                <Form.Select aria-label="Default select example">
-                                        <option>All</option>
-                                        <option value="1">Lottery</option>
-                                        <option value="2">Reward</option> 
+                            <Form className="d-flex" onSubmit={handleActivePotType}>
+                                <Form.Select aria-label="Select Pot Type"  onChange={({ target }) => setActivePotType(target.value)}>
+                                        <option value="ALL">All</option>
+                                        <option value="LOTTERYPOT">Lottery</option>
+                                        <option value="REWARDPOT">Reward</option> 
                                 </Form.Select>
-                                <Form.Control
+                                {/* <Form.Control
                                 type="search"
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
-                                /> 
-                                <Button className="">Search</Button>
+                                />  */}
+                                <Button className="" type="submit">Search</Button>
                             </Form>                            
                         </Col>
                         </Row>                      
@@ -285,16 +424,17 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                     </span>
                                 </td> */}
-                                <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => viewUserShow(true)}>
+                                <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                             <i className="fa fa-eye" />
                                         </span></td>
                                 <td>{pot?.potAmountCollected}</td>
                                
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
-                                        {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
+                                        {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                         {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                    </span>
+                                    </span>{' '}{' '}{' '}{' '}
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
                                 </td>
                                 <td>
                                     <span title= {pot?.assetDetails?.assetName}>
@@ -336,12 +476,11 @@ const PoolListing = () => {
                     </table>
                     <Pagination>
                         <Pagination.First />
-                        <Pagination.Prev />
-                        <Pagination.Item active>{1}</Pagination.Item>                     
-
+                        <Pagination.Prev onClick={prevPageActive}/>
+                        <Pagination.Item active >{currentPageAcitve}</Pagination.Item>                     
                         <Pagination.Ellipsis />
-                        <Pagination.Item>{20}</Pagination.Item>
-                        <Pagination.Next />
+                        <Pagination.Item >{20}</Pagination.Item>
+                        <Pagination.Next onClick={nextPageActive}/>
                         <Pagination.Last />
                     </Pagination>
                         </div>
@@ -352,19 +491,19 @@ const PoolListing = () => {
                         <Row className="topForm">
                             <Col sm={4}><h2 className="tableHead">Upcoming Pots </h2></Col>
                             <Col sm={8}>                             
-                                <Form className="d-flex">
-                                    <Form.Select aria-label="Default select example">
-                                            <option>All</option>
-                                            <option value="1">Lottery</option>
-                                            <option value="2">Reward</option> 
+                                <Form className="d-flex" onSubmit={handleUpcomingPotType} >
+                                    <Form.Select aria-label="Select Pot Type" onChange={({ target }) => setUpcomingPotType(target.value)}>
+                                        <option value="ALL">All</option>
+                                        <option value="LOTTERYPOT">Lottery</option>
+                                        <option value="REWARDPOT">Reward</option> 
                                     </Form.Select>
-                                    <Form.Control
+                                    {/* <Form.Control
                                     type="search"
                                     placeholder="Search"
                                     className="me-2"
                                     aria-label="Search"
-                                    /> 
-                                    <Button className="">Search</Button>
+                                    />  */}
+                                <Button className="" type="submit">Search</Button>
                                 </Form>                            
                             </Col>
                         </Row> 
@@ -406,16 +545,18 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                         </span>
                                     </td> */}
-                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
                                     <td>{pot?.potAmountCollected}</td>
                                     
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
-                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
+                                            {/* {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')} */}
+                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                        </span>
+                                        </span>{' '}{' '}{' '}{' '}
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>
@@ -457,12 +598,11 @@ const PoolListing = () => {
                         </table>
                         <Pagination>
                             <Pagination.First />
-                            <Pagination.Prev />
-                            <Pagination.Item active>{1}</Pagination.Item>                     
-
+                            <Pagination.Prev onClick={prevPageUpcoming}/>
+                            <Pagination.Item active>{currentPageUpcoming}</Pagination.Item>                     
                             <Pagination.Ellipsis />
                             <Pagination.Item>{20}</Pagination.Item>
-                            <Pagination.Next />
+                            <Pagination.Next onClick={nextPageUpcoming}/>
                             <Pagination.Last />
                         </Pagination>
                     </div>
@@ -473,19 +613,19 @@ const PoolListing = () => {
                         <Row  className="topForm">
                             <Col sm={4}><h2 className="tableHead">Archives Pots</h2></Col>
                             <Col sm={8}>                             
-                                <Form className="d-flex">
-                                    <Form.Select aria-label="Default select example">
-                                            <option>All</option>
-                                            <option value="1">Lottery</option>
-                                            <option value="2">Reward</option> 
+                                <Form className="d-flex" onSubmit={handleArchivePotType}>
+                                    <Form.Select aria-label="Select Pot Type" onChange={({ target }) => setArchivePotType(target.value)}>
+                                        <option value="ALL">All</option>
+                                        <option value="LOTTERYPOT">Lottery</option>
+                                        <option value="REWARDPOT">Reward</option> 
                                     </Form.Select>
-                                    <Form.Control
+                                    {/* <Form.Control
                                     type="search"
                                     placeholder="Search"
                                     className="me-2"
                                     aria-label="Search"
-                                    /> 
-                                    <Button className="">Search</Button>
+                                    />  */}
+                                <Button className="" type="submit">Search</Button>
                                 </Form>                            
                             </Col>
                         </Row>               
@@ -528,16 +668,18 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
                                         </span>
                                     </td> */}
-                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => viewUserShow(true)}>
+                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
                                     <td>{pot?.potAmountCollected}</td>
                             
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
-                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')}
+                                            {/* {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')} */}
+                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                        </span>
+                                        </span>{' '}{' '}{' '}{' '}
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>
@@ -579,12 +721,11 @@ const PoolListing = () => {
                         </table>
                         <Pagination>
                             <Pagination.First />
-                            <Pagination.Prev />
-                            <Pagination.Item active>{1}</Pagination.Item>                     
-
+                            <Pagination.Prev onClick={prevPageArchive}/>
+                            <Pagination.Item active>{currentPageArchive}</Pagination.Item>                     
                             <Pagination.Ellipsis />
                             <Pagination.Item>{20}</Pagination.Item>
-                            <Pagination.Next />
+                            <Pagination.Next onClick={nextPageArchive}/>
                             <Pagination.Last />
                         </Pagination>
                     </div>
