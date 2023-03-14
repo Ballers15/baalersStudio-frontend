@@ -3,16 +3,166 @@ import './AdminDashboard.css'
 import { Col, Row, Button, Container } from 'react-bootstrap';
 import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
+import { getBarChart, getPiechart, getPotClaim, getPotCounts, getUsersCount } from '../../Services/Admin';
+
+
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(false)
   const [toaster, showToaster] = useState(false)
   const [toasterMessage, setToasterMessage] = useState('')
-  const data = {
-    labels: ['Red', 'Blue'],
+  const [userCountData, setUserCountData] = useState([])
+  const [potCountData, setPotCountData] = useState([])
+  const [potClaimData, setPotClaimData] = useState([])
+  const [pieChartData, setPieChartData] = useState([])
+  const [barChartData, setBarChartData] = useState([])
+  const [xAxis,setXaxis]=useState([])
+  const [yAxisLabel,setYaxisLabel]=useState([])
+
+  useEffect(() => {
+    usersCount();
+    potCount();
+    potClaim()
+    pieCharts()
+    barChart()  
+    console.log(xAxis)
+  }, [])
+
+      const usersCount =  async () =>{
+        setLoading(true);
+        try {
+          const users =  await getUsersCount();
+          setLoading(false);
+          if (users.error) {
+            setToasterMessage(users?.message||'Something Went Worng');
+            // setShowToaster(true);
+          } else {
+             setUserCountData(users?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            setLoading(false);
+        }
+      }
+
+      const potCount =  async () =>{
+        setLoading(true);
+        try {
+          const pot =  await getPotCounts();
+          setLoading(false);
+          if (pot.error) {
+            setToasterMessage(pot?.message||'Something Went Worng');
+            // setShowToaster(true);
+          } else {
+             setPotCountData(pot?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            setLoading(false);
+        }
+      }
+
+      const potClaim =  async () =>{
+        setLoading(true);
+        try {
+          const pot =  await getPotClaim();
+          setLoading(false);
+          if (pot.error) {
+            setToasterMessage(pot?.message||'Something Went Worng');
+            // setShowToaster(true);
+          } else {
+             setPotClaimData(pot?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            setLoading(false);
+        }
+      }
+
+      const pieCharts =  async () =>{
+        setLoading(true);
+        try {
+          const pie =  await getPiechart();
+          setLoading(false);
+          if (pie.error) {
+            setToasterMessage(pie?.message||'Something Went Worng');
+            // setShowToaster(true);
+          } else {
+             setPieChartData(pie?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            setLoading(false);
+        }
+      }
+
+      const barChart =  async () =>{
+        let dataToSend={
+          potType: 'LOTTERYPOT'
+        }
+        setLoading(true);
+        try {
+          const bar =  await getBarChart(dataToSend);
+          setLoading(false);
+          if (bar.error) {
+            setToasterMessage(bar?.message||'Something Went Worng');
+            // setShowToaster(true);
+          } else {
+             setBarChartData(bar?.data)
+             console.log(bar?.data)
+             barChartData?.potDetails?.map((pot)=>{
+              setXaxis({startDate:pot.startDate},{endDate:pot.endDate})
+            })
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            setLoading(false);
+        }
+      }
+
+
+  const dataUsers = {
+    labels: ["REWARD POT", "LOTTERY POT"],
     datasets: [
       {
-        label: '# of Votes',
-        data: [19, 19],
+        label: '# of users',
+        data: [pieChartData[0]?.userCount,pieChartData[1]?.userCount],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',  
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)', 
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const optionsUsers = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'No. of Users',
+      },
+    },
+  };
+
+  const dataCash = {
+    labels: ["REWARD POT", "LOTTERY POT"],
+    datasets: [
+      {
+        label: 'Game Cash Burned',
+        data: [pieChartData[0]?.gameCashBurned,pieChartData[1]?.gameCashBurned],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',  
@@ -26,7 +176,8 @@ const AdminDashboard = () => {
     ],
   };
   
-  const options = {
+
+  const optionsCash = {
     responsive: true,
     plugins: {
       legend: {
@@ -34,31 +185,44 @@ const AdminDashboard = () => {
       },
       title: {
         display: true,
-        text: 'Pie Chart',
+        text: 'Game Cash Burned',
       },
     },
   };
-
+ 
+  
   const dataBar = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
+    labels:[1,2],
+    datasets: 
+          [
       {
         label: 'Sales',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: [barChartData.map((el)=>{
+            return el.users
+        })]
+      },
+      {
+        label: 'Sales',
+        backgroundColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 2,
+        data: [barChartData.map((el)=>{
+            return el.users
+        })]
       }
     ]
   };
   const optionsBar = {
     title: {
       display: true,
-      text: 'Sales by Month',
+      text: 'No. of users',
       fontSize: 20
     },
     legend: {
-      display: false
+      display: true
     }
   };
   
@@ -71,9 +235,9 @@ const AdminDashboard = () => {
             <div className="card">
               <h4>Users</h4>
               <div className='dataFont'>
-                <div>Total Sign up:1627</div>
-                <div>Incomplete:87</div>
-                <div>Unique wallet:45</div>
+                <div>Total Sign up:<span>{'   '}{userCountData?.totalUserCount}</span></div>
+                <div>Incomplete:<span>{'   '}{userCountData?.incompleteSignups}</span></div>
+                <div>Unique wallet:<span>{'   '}{userCountData?.uniqueWalletAddress}</span></div>
               </div>
             </div>  
             </Col>
@@ -81,9 +245,9 @@ const AdminDashboard = () => {
             <div className="card">
               <h4>Pots</h4>
               <div className='dataFont'>
-                <div>Active:464</div>
-                <div>Archive:330</div>
-                <div>Upcoming:45</div>
+                <div>Active:<span>{'   '}{potCountData?.activePots}</span></div>
+                <div>Archive:<span>{'   '}{potCountData?.archivePots}</span></div>
+                <div>Upcoming:<span>{'   '}{potCountData?.upcomingPots}</span></div>
               </div>
             </div>  
             </Col>
@@ -91,8 +255,8 @@ const AdminDashboard = () => {
             <div className="card">
               <h4>Total Amount Claimed by NFT</h4>
               <div className='dataFont'>
-                <div>Amount:1627</div>
-                <div>NFT:87</div> 
+              <div>Amount:<span>{'   '}{potClaimData?.rewardAmountClaimed}</span></div> 
+                <div>NFT:<span>{'   '}{potClaimData?.nftClaimed}</span></div>
               </div>
             </div>  
             </Col>
@@ -101,10 +265,18 @@ const AdminDashboard = () => {
           <Row>
             <Col md={5}>
             <div className="card pieCard">
-              <Pie data={data} options={options} />
+              <Pie data={dataUsers} options={optionsUsers} />
               
             </div>
             </Col>
+            <Col md={5}>
+            <div className="card pieCard">
+              <Pie data={dataCash} options={optionsCash} />
+              
+            </div>
+            </Col>
+            </Row>
+            <Row>
             <Col md={7}>
             <div className="card graphCard">
             <Bar data={dataBar} options={optionsBar} />

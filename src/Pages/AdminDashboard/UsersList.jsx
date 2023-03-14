@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Form, Button, Table } from 'react-bootstrap'
-import { getAllUsers } from '../../Services/User'
+import { getAllUsers, getUserWalletDetails, updateUserStatus } from '../../Services/User'
 import Loader from '../../Components/Loader'
 import Toaster from '../../Components/Toaster'
 import { MDBSwitch } from 'mdb-react-ui-kit'; 
@@ -16,24 +16,21 @@ const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [allUsers, setAllUsers] = useState(null)
   const [disable, disableSubmitButton] = useState(false)
+  const [walletDetails,setWalletDetails] = useState([])
+  const [confirmUser, setUser]=useState([])
 
   useEffect(() => {
     fetchApi()
-    // console.log('Total users=>', allUsers?.data?.users)
     
   }, [currentPage])
 
   const fetchApi = async () => {
-    // console.log('current Page before api call',currentpage)
     let dataToSend = {
       currentPage: currentPage,
     }
 
     try {
       const users = await getAllUsers(dataToSend)
-    // console.log('PAGE',currentpage)
-    // console.log('fetched users',users?.data?.Users)
-
       setLoading(false)
       if (users?.error == true) {
         setToasterMessage(users?.message)
@@ -51,9 +48,54 @@ const UsersList = () => {
     setLoading(false)
   }
 
+  const UserWalletdetails = async (data) => {
+    viewWalletShow(true)
+    let dataToSend = {
+      userId: data._id,
+    }
+    setLoading(true);
+    try {
+      const wallet = await getUserWalletDetails(dataToSend)
+      setLoading(false)
+      if (wallet?.error == true) {
+        setToasterMessage(wallet?.message)
+        setShowToaster(true)
+      } else {
+        setToasterMessage(wallet?.message)
+        setWalletDetails(wallet.data)
+      }
+    } catch (error) {
+      setToasterMessage('Something Went Worng')
+      setShowToaster(true)
+      setLoading(false)
+    }
+  }  
 
-  const updateActiveUser = (userInfo) =>{
-    console.log(userInfo)
+
+  const updateActiveUser = async (data) =>{
+    let dataToSend = {
+      userId: data._id,
+      isBlocked: !data.isBlocked
+    }
+    setLoading(true);
+
+    try {
+      const userStatus = await updateUserStatus(dataToSend)
+      setLoading(false)
+      if (userStatus?.error == true) {
+        setToasterMessage(userStatus?.message)
+        setShowToaster(true)
+      } else {
+        setToasterMessage(userStatus?.message)
+        // setShowToaster(true)
+        handleCloseModal()
+        fetchApi()
+      }
+    } catch (error) {
+      setToasterMessage('Something Went Worng')
+      setShowToaster(true)
+      setLoading(false)
+    }
   }
 
   const nextPage = () => {
@@ -66,9 +108,16 @@ const UsersList = () => {
     setCurrentPage(currentPage - 1)
     else disableSubmitButton(true)
   }
+  const handleConfirmModal = (userinfo) => {
+    setUser(userinfo)
+    setConfirmModal(true)
+
+  }
   const [viewWallet, viewWalletShow] = React.useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const handleClose = () => viewWalletShow(false);
+  const handleCloseModal = () => setConfirmModal(false);
   const handleShow = () => viewWalletShow(true);
 
   return (
@@ -101,14 +150,15 @@ const UsersList = () => {
                     <tr> 
                         <td> 
                         <Form.Select aria-label="Default select example">
-                          <option>wr3hjkfdhidsyfur7uhfjkfjkjkjsk3r3</option>
-                          <option value="1">wr3hjkfdhidsyfur7uhfjkfjkjkjsk3</option>
-                          <option value="2">T3r3r3rwo</option>
-                          <option value="3">r3rfe3rw3r</option>
+                          {walletDetails?.walletDetails && walletDetails?.walletDetails?.map((wallet) => (
+                            <option value={wallet|| ''} key={wallet}>
+                              {wallet?.slice(0,5)+'....'+wallet?.slice(-5)}  <span className='fa fa-copy' title='copy address' style={{cursor:"pointer"}} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span>
+                              {/* <span className='d-flex justify-content-between' ><span className='emailWth' style={{backgroundColor:'yellow'}}>{wallet} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></span> */}
+                            </option>)) }
                         </Form.Select>
                         </td>               
-                        <td>44556</td>  
-                        <td>76868</td>
+                        <td>{walletDetails?.totalSum}</td>  
+                        <td>{walletDetails?.rewardTokenAmount}</td>
                     </tr>              
                   
                 </tbody>
@@ -117,6 +167,33 @@ const UsersList = () => {
             </Modal.Body>
                
           </Modal>
+
+          
+          {/* block user modal */}
+          <Modal
+            show={confirmModal} 
+            onHide={handleCloseModal} 
+            size="lg"        
+            className='viewWallet'
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+               Confirm Your Action
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <span>
+            <div className='confirm-modal'>
+              Are you sure to block {confirmUser?.userName} ?
+              <br></br>
+              <button type='primary' onClick={()=>updateActiveUser(confirmUser)}>Yes</button>
+              </div>
+            </span>
+            </Modal.Body>
+          </Modal>
+
       <div className="users-listing">
         {/*  */}
         if(loading)
@@ -166,15 +243,10 @@ const UsersList = () => {
             <Button type="submit" className="">Search</Button>
             {/* <button type="submit" className="add-pot-submit-button" >Search</button> */}
             </Col>
-            
           </Row>
           {/* Filter by date:
           <input type='date' placeholder='DD/MM/YY'/>
           <input type='date' placeholder='DD/MM/YY'/> */}
-          
-         
-          
-      
 
         </div>
         <div className="users-lisitng"> 
@@ -188,7 +260,7 @@ const UsersList = () => {
                 <th>Email</th>
                 <th>Created At</th>
                 <th>Wallet Details</th>
-                <th className='sNoWth'>is Active ?</th>
+                <th className='sNoWth'>is Blocked ?</th>
               </tr>
             </thead> <hr/>
             <tbody className="users-listing-table-body">
@@ -202,11 +274,11 @@ const UsersList = () => {
                         <td className='d-flex justify-content-between'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
-                          <span className="eyeIcon" title="View wallet" onClick={() => viewWalletShow(true)}> <i className="fa fa-eye " /></span>
+                          <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user)}> <i className="fa fa-eye " /></span>
                         </td>
                         <td className='sNoWth'>
-                            {user?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>updateActiveUser(user)} checked={user?.isActive} title="De-Active"/>}
-                            {!user?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>updateActiveUser(user)} checked={user?.isActive}   title="Active"/>}  
+                            {user?.isBlocked && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>updateActiveUser(user)} checked={user?.isBlocked} title="Unblock"/>}
+                            {!user?.isBlocked && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>handleConfirmModal(user)} checked={user?.isBlocked}   title="Block"/>}  
                         </td>
                       </tr>
                     )
@@ -216,12 +288,11 @@ const UsersList = () => {
           </table>
           <Pagination>
               <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item active>{1}</Pagination.Item>                     
-
+              <Pagination.Prev onClick={prevPage}/>
+              <Pagination.Item active>{currentPage+1}</Pagination.Item>                     
               <Pagination.Ellipsis />
               <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
+              <Pagination.Next onClick={nextPage}/>
               <Pagination.Last />
           </Pagination>
         </div>

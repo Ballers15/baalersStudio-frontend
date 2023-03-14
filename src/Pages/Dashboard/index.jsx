@@ -232,7 +232,7 @@ const Dashboard = () => {
                        <Form.Group>
                         <Form.Control required type="email" placeholder="Email" value={email} onChange={({ target }) => { setEmail(target.value) }} />
                         <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
-                        <Form.Control.Feedback> <span className="custom-error-msg"> {' '} {errorMsg && 'Valid E-mail is required !'} </span> </Form.Control.Feedback>
+                        {/* <Form.Control.Feedback> <span className="custom-error-msg"> {' '} {errorMsg && 'Valid E-mail is required !'} </span> </Form.Control.Feedback> */}
                         </Form.Group>
                     <div> <Button className="subscribeBtn" variant="primary" onClick={handleSubmit} type="submit"> Submit </Button> </div>
                     </Form>

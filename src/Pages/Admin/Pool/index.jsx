@@ -3,7 +3,7 @@
 import React,{useEffect,useState} from "react";
 import './Pool.css';
 import { useNavigate } from 'react-router-dom'
-import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot, getSpecificPotUsers} from '../../../Services/Admin'
+import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot, getSpecificPotUsers, updateRewardClaimStatus} from '../../../Services/Admin'
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
@@ -34,6 +34,12 @@ const PoolListing = () => {
     const [activePotType, setActivePotType] = useState("");
     const [upcomingPotType, setUpcomingPotType] = useState("");
     const [archivePotType, setArchivePotType] = useState("");
+    const [numberOfActivePage, setNumberOfActivePage]=useState(1)
+    const [numberOfArchivePage, setNumberOfArchivePage]=useState(1)
+    const [numberOfUpcomingPage, setNumberOfUpcomingPage]=useState(1)
+    const [emailFilter, setEmailFilter] = useState('')
+    const [walletAddressFilter, setWalletAddressFilter] = useState('')
+    const [potIdForUser,setPotIdForUser] = useState('')
 
     const setShowToaster = (param) => showToaster(param);
     
@@ -56,19 +62,20 @@ const PoolListing = () => {
     }, [currentPageArchive]);
 
 
-    const nextPageActive = () => {
-        if (activePotCount > 0)
-              setCurrentPageActive(currentPageAcitve + 1)
+         const nextPageActive = () => {
+            console.log(activePotCount)
+            if (activePotCount >= 10)
+                setCurrentPageActive(currentPageAcitve + 1)
         }
 
-    const nextPageArchive = () => {     
-            if (archivePotCount > 0)
+        const nextPageArchive = () => {     
+            if (archivePotCount >= 10)
                 setCurrentPageArchive(currentPageArchive + 1)
 
             // console.log('upcoming',currentPageUpcoming)
             }
-    const nextPageUpcoming = () => {
-            if (upcomingPotCount > 0)
+        const nextPageUpcoming = () => {
+            if (upcomingPotCount >= 10)
                 setCurrentPageUpcoming(currentPageUpcoming + 1)
 
                 // console.log('upcoming',currentPageUpcoming)
@@ -87,12 +94,12 @@ const PoolListing = () => {
 
                 // console.log('archive',currentPageArchive)
         }
-      const prevPageUpcoming = () => {
-        if (currentPageUpcoming > 1) 
-        setCurrentPageUpcoming(currentPageUpcoming - 1)
+        const prevPageUpcoming = () => {
+            if (currentPageUpcoming > 1) 
+            setCurrentPageUpcoming(currentPageUpcoming - 1)
 
         // console.log('upcoming',currentPageUpcoming)
-    }
+        }
         
 
     const toTitleCase = (str) => {
@@ -216,6 +223,49 @@ const PoolListing = () => {
             setToasterMessage('Pot Status Updated Succesfully');
               setShowToaster(true); 
               getAllRewardPotDetails();
+              getUpcomingRewardPotDetails();
+              getArchivesRewardPotDetails();
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    
+    const handleActivePotType = (e) =>{
+        e.preventDefault();
+       getAllRewardPotDetails();
+    }
+
+    const handleUpcomingPotType = (e) =>{
+        e.preventDefault();
+        getUpcomingRewardPotDetails();
+      
+    }
+
+    const handleArchivePotType = (e) =>{
+        e.preventDefault();
+        getArchivesRewardPotDetails();
+    }
+
+    const updateClaimStatus = async (data) => {
+        let dataToSend = {
+            potId:data._id,
+            claim:!data.claimPot
+        }
+        setLoading(true);
+        try {
+          const claimStatus = await updateRewardClaimStatus(dataToSend);
+          setLoading(false);
+          if (claimStatus.error) {
+            setToasterMessage(claimStatus?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('Claim Status Updated Succesfully');
+            setShowToaster(true); 
+            getAllRewardPotDetails()
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -225,6 +275,7 @@ const PoolListing = () => {
     }
 
     const getPotUsers = async (data) =>{
+        setPotIdForUser(data._id)
         let dataToSend = {
             potId: data._id,
         }
@@ -250,21 +301,32 @@ const PoolListing = () => {
 
     }
 
-    const handleActivePotType = (e) =>{
-        e.preventDefault();
-       getAllRewardPotDetails();
+    const filterPotUser = async () => {
+        let dataToSend = {
+            potId: potIdForUser, 
+            email: emailFilter,
+            walletSearch: walletAddressFilter
+        }
+        setLoading(true);
+        try {
+          const users = await getSpecificPotUsers(dataToSend);
+          setLoading(false);
+          if (users.error) {
+            setToasterMessage(users?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            // setToasterMessage('Claim Status Updated Succesfully');
+            // setShowToaster(true); 
+            setPotUsers(users?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+        // console.log(potUsers)
     }
 
-    const handleUpcomingPotType = (e) =>{
-        e.preventDefault();
-        getUpcomingRewardPotDetails();
-      
-    }
-
-    const handleArchivePotType = (e) =>{
-        e.preventDefault();
-        getArchivesRewardPotDetails();
-    }
 
     
     const [viewUser, viewUserShow] = React.useState(false);
@@ -291,20 +353,22 @@ const PoolListing = () => {
                 </Modal.Header>
                 <Modal.Body>
                  <div className="searchTag">
-                    <Form className="d-flex">
+                    <Form className="d-flex" onSubmit={filterPotUser}>
                         <Form.Control
                         type="search"
                         placeholder="Search with Email"
                         className="me-2"
                         aria-label="Search"
+                        onChange={({ target }) => setEmailFilter(target.value)}
                         />
                          <Form.Control
                         type="search"
                         placeholder="Search with Wallet Address"
                         className="me-2"
                         aria-label="Search"
+                        onChange={({ target }) => setWalletAddressFilter(target.value)}
                         />
-                        <Button className="">Search</Button>
+                    <Button className="" type="submit">Search</Button>
                     </Form>
                  </div>
                 <Table responsive className="pool-view-table">
@@ -441,10 +505,13 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
                                         {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                     </span>
-                                </td>
-                                <td>
-                                <MDBSwitch defaultChecked />
-                                </td>
+                               </td>
+                            <td>
+                              <span>
+                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
+                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
+                              </span>
+                            </td>
                                 <td className="action-tab-pool-list">
                                         <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
                                             <i className="fa fa-edit " />
@@ -565,7 +632,11 @@ const PoolListing = () => {
                                         </span>
                                     </td>
                                     <td>
-                                    <MDBSwitch defaultChecked />
+                                    <span>
+                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
+                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
+                              </span>
+
                                     </td>
                                     <td className="action-tab-pool-list">
                                             <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
@@ -688,7 +759,11 @@ const PoolListing = () => {
                                         </span>
                                     </td>
                                     <td>
-                                    <MDBSwitch defaultChecked />
+                                    <span>
+                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
+                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
+                              </span>
+
                                     </td>
                                     <td className="action-tab-pool-list">
                                             <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>

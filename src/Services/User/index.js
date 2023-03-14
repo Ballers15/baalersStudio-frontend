@@ -45,4 +45,12 @@ export function userLogin(data) {
 
 export function getAllUsers(data) {
   return (axiosInstance.get('users/v1/all',{params: data}).then(res => res.data));
- }
+}
+
+export function getUserWalletDetails(data){
+  return (axiosInstance.get('users/v1/user/game/details',{params: data}).then(res => res.data));
+}
+
+export function updateUserStatus(data) {
+  return (axiosInstance.patch('users/v1/admin/update/users/status',data).then(res => res.data))
+}
