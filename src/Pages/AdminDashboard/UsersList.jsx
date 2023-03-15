@@ -18,6 +18,8 @@ const UsersList = () => {
   const [disable, disableSubmitButton] = useState(false)
   const [walletDetails,setWalletDetails] = useState([])
   const [confirmUser, setUser]=useState([])
+  const [rewadPotDetail,setRewardPotDetail] = useState([])
+  const [endDate,setEndDate]=useState()
 
   useEffect(() => {
     fetchApi()
@@ -44,8 +46,6 @@ const UsersList = () => {
       setShowToaster(true)
       setLoading(false)
     }
-
-    setLoading(false)
   }
 
   const UserWalletdetails = async (data) => {
@@ -120,6 +120,37 @@ const UsersList = () => {
   const handleCloseModal = () => setConfirmModal(false);
   const handleShow = () => viewWalletShow(true);
 
+
+  const getFilterUsers = async (e) => {
+    e.preventDefault();
+    let dataToSend = {
+      currentPage: currentPage,
+      startDate: rewadPotDetail.startDate,
+      endDate: rewadPotDetail.endDate,
+      email: rewadPotDetail.email
+    }
+
+    try {
+      const users = await getAllUsers(dataToSend)
+      setLoading(false)
+      if (users?.error == true) {
+        setToasterMessage(users?.message)
+        setShowToaster(true)
+      } else {
+        setToasterMessage(users?.message)
+        setAllUsers(users)
+        console.log(users)
+      }
+    } catch (error) {
+      setToasterMessage('Something Went Worng')
+      setShowToaster(true)
+      setLoading(false)
+    }
+
+  }
+
+
+
   return (
     <React.Fragment>
          <Modal
@@ -149,7 +180,8 @@ const UsersList = () => {
                 <tbody >
                     <tr> 
                         <td> 
-                        <Form.Select aria-label="Default select example">
+                        <Form.Select aria-label="Default select example" onChange={(e) => { navigator.clipboard.writeText(e.target.value); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}>
+                        <option value='select address'>Select Address</option>
                           {walletDetails?.walletDetails && walletDetails?.walletDetails?.map((wallet) => (
                             <option value={wallet|| ''} key={wallet}>
                               {wallet?.slice(0,5)+'....'+wallet?.slice(-5)}  <span className='fa fa-copy' title='copy address' style={{cursor:"pointer"}} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span>
@@ -198,17 +230,19 @@ const UsersList = () => {
         {/*  */}
         if(loading)
         <div className="users-list-filters">
+        <Form onSubmit={getFilterUsers}>
+
           <Row>
             <Col md="2">
+              
               <Form.Group  >
                 <Form.Label>Start Date</Form.Label>
                 <Form.Control
-                  required
+                  
                   type="date"
-                  // min={new Date().toISOString().split("T")[0]}
-                  // max={endDate}
-                  // value={rewadPotDetail.startDate|| ''}
-                  // onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
+                  max={rewadPotDetail?.endDate}
+                  value={rewadPotDetail.startDate|| ''}
+                  onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">Start Date is required !!</Form.Control.Feedback>
               </Form.Group>
@@ -217,13 +251,13 @@ const UsersList = () => {
               <Form.Group  >
               <Form.Label>End Date</Form.Label>
               <Form.Control
-                required
-                type="date"
-                // min={rewadPotDetail?.startDate}
-                // value={endDate|| ''}
-                // onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}
-              >
                 
+                type="date"
+                min={rewadPotDetail?.startDate}
+                max={new Date().toISOString().split("T")[0]}
+                value={rewadPotDetail?.endDate|| ''}
+                onChange={({ target }) => { setRewardPotDetail({...rewadPotDetail,endDate:target.value})  }}
+              >
               </Form.Control>
               <Form.Control.Feedback type="invalid">End Date is required !!</Form.Control.Feedback>
             </Form.Group>
@@ -236,17 +270,20 @@ const UsersList = () => {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,email:target.value})}
                 />
             </Form.Group>
             </Col>
             <Col md="2" className='mt-auto mb-0'>
             <Button type="submit" className="">Search</Button>
+          
+            <Button type="reset" className="" style={{marginLeft:'15px'}} onClick={fetchApi}>Clear</Button>
+            
             {/* <button type="submit" className="add-pot-submit-button" >Search</button> */}
             </Col>
+            
           </Row>
-          {/* Filter by date:
-          <input type='date' placeholder='DD/MM/YY'/>
-          <input type='date' placeholder='DD/MM/YY'/> */}
+          </Form>
 
         </div>
         <div className="users-lisitng"> 

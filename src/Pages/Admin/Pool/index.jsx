@@ -40,6 +40,7 @@ const PoolListing = () => {
     const [emailFilter, setEmailFilter] = useState('')
     const [walletAddressFilter, setWalletAddressFilter] = useState('')
     const [potIdForUser,setPotIdForUser] = useState('')
+    const [potDetails, setPotDetails] = useState()
 
     const setShowToaster = (param) => showToaster(param);
     
@@ -206,6 +207,9 @@ const PoolListing = () => {
     const editRewardPot = (id) => {
         navigate('/addPot',{state:{id:id}});
     }
+    const viewRewardPot = (id) => {
+        navigate('/viewPot',{state:{id:id}});
+        }
 
     const activeDeactiveRewardPot = async (data) => {
         let dataToSend = {
@@ -265,7 +269,8 @@ const PoolListing = () => {
           } else {
             setToasterMessage('Claim Status Updated Succesfully');
             setShowToaster(true); 
-            getAllRewardPotDetails()
+            onInit()      
+            handleClosecClaim()   
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -301,7 +306,8 @@ const PoolListing = () => {
 
     }
 
-    const filterPotUser = async () => {
+    const filterPotUser = async (e) => {
+        e.preventDefault();
         let dataToSend = {
             potId: potIdForUser, 
             email: emailFilter,
@@ -327,11 +333,17 @@ const PoolListing = () => {
         // console.log(potUsers)
     }
 
+    const handleClaimStatus = (pot) => {
+        setClaimModal(true);
+        setPotDetails(pot);
+
+    }
 
     
     const [viewUser, viewUserShow] = React.useState(false);
-
+    const [claimModal,setClaimModal] = useState(false)
     const handleClose = () => viewUserShow(false);
+    const handleClosecClaim = () => setClaimModal(false);
     const handleShow = () => viewUserShow(true);
   
     return (
@@ -417,6 +429,34 @@ const PoolListing = () => {
                 </Modal.Body>
                
             </Modal>
+
+              {/* stop claim modal */}
+          <Modal
+            show={claimModal} 
+            onHide={handleClosecClaim} 
+            size="lg"        
+            className='viewWallet'
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+               Confirm Your Action
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <span>
+            <div className='confirm-modal'>
+              Are you sure to stop claim for this pot ?
+              <br></br>
+              <button type='primary' onClick={()=>updateClaimStatus(potDetails)}>Yes</button>
+              </div>
+            </span>
+            </Modal.Body>
+          </Modal>
+
+
+
             <div className="pool-listing">
                 <div className="pool-list-container">
                     <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
@@ -508,13 +548,13 @@ const PoolListing = () => {
                                </td>
                             <td>
                               <span>
-                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
-                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
+                                {pot?.claimPot && <MDBSwitch onChange={()=>handleClaimStatus(pot)} checked={pot?.claimPot} title="Stop claim"/>}
+                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Start claim"/>}
                               </span>
                             </td>
                                 <td className="action-tab-pool-list">
-                                        <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                            <i className="fa fa-edit " />
+                                        <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
+                                            <i className="fa fa-eye " />
                                         </span>
                                         <span>
                                             {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
@@ -718,8 +758,7 @@ const PoolListing = () => {
                             <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
-                            <th>stop claim</th>
-                            <th>Actions</th>
+
                         </tr>
                         </thead><hr/>
                         <tbody className="pool-listing-table-body">
@@ -758,7 +797,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                         </span>
                                     </td>
-                                    <td>
+                                    {/* <td>
                                     <span>
                                 {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
                                 {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
@@ -773,7 +812,7 @@ const PoolListing = () => {
                                                 {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
                                                 {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
                                             </span>
-                                    </td>
+                                    </td> */}
                                     </tr>
                                 )
                             }):null}

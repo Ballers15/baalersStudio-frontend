@@ -22,6 +22,7 @@ import { useState } from 'react'
 import UsersListing from '../Pages/AdminDashboard/UsersList';
 import Signup from '../Pages/Signup/Signup'
 import ForgotPassword from '../Pages/ForgotPassword/forgotpassword';
+import ViewPot from '../Pages/Admin/Pool/viewPot';
 
 
 const NavigationRouter = () => {
@@ -55,6 +56,7 @@ const NavigationRouter = () => {
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/poolListing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
+              <Route exact path="/viewPot" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
               <Route exact path="/signup" element={<Signup/>} />
               <Route exact path='/forgotPassword' element={<ForgotPassword/>}></Route>
             </Route>
