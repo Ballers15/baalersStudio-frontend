@@ -9,6 +9,8 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
+import { IonDatetime } from '@ionic/react';
+
 
 const AddPot = () => {
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
@@ -146,7 +148,7 @@ const AddPot = () => {
             setToasterMessage('Pot Added Succesfully !!');
             setShowToaster(true);
             setDisableSubmitButton(false);
-            navigate('/poolListing');
+            // navigate('/poolListing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
@@ -216,7 +218,7 @@ const AddPot = () => {
             <Form noValidate validated={validated} onSubmit={addRewardPot}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>Reward Amount</Form.Label>
+                                    <Form.Label>$ / Quantity for Nft</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -224,8 +226,7 @@ const AddPot = () => {
                                         min={0}
                                         inputMode="numeric"
                                         value={rewadPotDetail.rewardTokenAmount|| ''}
-                                        onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})}
-                                       >
+                                        onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})} >
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
                                         Token Amount is required (Min:0) !!
@@ -241,7 +242,7 @@ const AddPot = () => {
                                                 type="date"
                                                 min={new Date().toISOString().split("T")[0]}
                                                 max={endDate}
-                                                value={rewadPotDetail.startDate|| ''}
+                                                value={rewadPotDetail?.isActive ? new Date().toISOString().split("T")[0] : rewadPotDetail.startDate|| ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
                                             </Form.Control>
                                             <Form.Control.Feedback type="invalid">
@@ -251,10 +252,11 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>Start Time</Form.Label><br/>
-                                            <TimePicker onChange={setStartDateTime}
+                                            <TimePicker 
+                                             onChange={setStartDateTime}
                                                 value={startDateTime|| ''} />
                                         </Form.Group>
-                                
+
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Date</Form.Label>
                                             <Form.Control
@@ -271,26 +273,19 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Time</Form.Label><br/>
-                                            <TimePicker onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
+                                            <TimePicker 
+                                                onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
                                                 value={endDateTime|| ''} />
                                         </Form.Group>
-                                    </Row>
-
-
-                                
-                                </Col>
-                             
-                        
-                                
+                                    </Row> 
+                                </Col>  
                             </Row>
                     
                             <Row className="mb-3">
-                                {/* <Form.Label>Claim Expiry</Form.Label><br /> */}
-                        
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Claim Expiry Date</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                      type="text"
                                       value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} >
                                 </Form.Control>
                                 </Form.Group>

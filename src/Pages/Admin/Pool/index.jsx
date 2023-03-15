@@ -507,7 +507,7 @@ const PoolListing = () => {
                         <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
                         <th>Assest Name</th>
-                        <th>stop claim</th>
+                        <th>Stop Claim</th>
                         <th>Actions</th>
                     </tr>
                     </thead><hr/>
@@ -553,11 +553,13 @@ const PoolListing = () => {
                               </span>
                             </td>
                                 <td className="action-tab-pool-list">
-                                        <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
+                                    {pot?.potAmountCollected === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                            <i className="fa fa-edit " />
+                                        </span> :   <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
                                             <i className="fa fa-eye " />
-                                        </span>
+                                        </span>}
                                         <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
+                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" disabled={pot?.potAmountCollected > 0 ? true:false}/>}
                                             {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
                                         </span>
                                 </td>
@@ -631,7 +633,7 @@ const PoolListing = () => {
                             <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
-                            <th>stop claim</th>
+                            <th>Stop Claim</th>
                             <th>Actions</th>
                         </tr>
                         </thead><hr/>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './AdminDashboard.css'
-import { Col, Row, Button, Container } from 'react-bootstrap';
+import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { getBarChart, getPiechart, getPotClaim, getPotCounts, getUsersCount } from '../../Services/Admin';
@@ -15,17 +15,21 @@ const AdminDashboard = () => {
   const [potClaimData, setPotClaimData] = useState([])
   const [pieChartData, setPieChartData] = useState([])
   const [barChartData, setBarChartData] = useState([])
-  const [xAxis,setXaxis]=useState([])
-  const [yAxisLabel,setYaxisLabel]=useState([])
+  const [barChartDataReward, setBarChartDataReward] = useState([])
+  const [barPotTypeUsers,setBarPotTypeUsers]=useState('LOTTERYPOT')
+  const [barPotTypeCash,setBarPotTypeCash]=useState('LOTTERYPOT')
 
   useEffect(() => {
     usersCount();
     potCount();
     potClaim()
     pieCharts()
-    barChart()  
-    console.log(xAxis)
+    barChart()
   }, [])
+
+    useEffect(()=>{
+      barChart()
+    },[barPotTypeUsers])
 
       const usersCount =  async () =>{
         setLoading(true);
@@ -101,7 +105,7 @@ const AdminDashboard = () => {
 
       const barChart =  async () =>{
         let dataToSend={
-          potType: 'LOTTERYPOT'
+          potType: barPotTypeUsers
         }
         setLoading(true);
         try {
@@ -112,10 +116,10 @@ const AdminDashboard = () => {
             // setShowToaster(true);
           } else {
              setBarChartData(bar?.data)
-             console.log(bar?.data)
-             barChartData?.potDetails?.map((pot)=>{
-              setXaxis({startDate:pot.startDate},{endDate:pot.endDate})
-            })
+             console.log('+++',bar?.data?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
+            //  console.log(barChartDataLottery?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
+             console.log('----',bar?.data?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
+           
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -123,7 +127,6 @@ const AdminDashboard = () => {
             setLoading(false);
         }
       }
-
 
   const dataUsers = {
     labels: ["REWARD POT", "LOTTERY POT"],
@@ -190,35 +193,54 @@ const AdminDashboard = () => {
     },
   };
  
-  
+  const barLabelUsers=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
+  const barDatausers=barChartData?.map((el)=>{ return el?.users})
+
   const dataBar = {
-    labels:[1,2],
+    labels:barLabelUsers,
     datasets: 
           [
       {
-        label: 'Sales',
+        label: 'No. of Users',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: [barChartData.map((el)=>{
-            return el.users
-        })]
+        data: barDatausers
       },
-      {
-        label: 'Sales',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data: [barChartData.map((el)=>{
-            return el.users
-        })]
-      }
     ]
   };
-  const optionsBar = {
+  const optionsBarUsers = {
     title: {
       display: true,
       text: 'No. of users',
+      fontSize: 20
+    },
+    legend: {
+      display: true
+    }
+  };
+
+  const barDataCash=barChartData.map((el)=>{ return el?.gameCashBurned})
+  const barLabelCash=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
+  
+  const dataBarCash = {
+    labels:barLabelCash,
+    datasets: 
+          [
+    
+      {
+        label: 'Game Cash Burned',
+        backgroundColor: 'pink',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 2,
+        data: barDataCash
+      },
+    ]
+  };
+  const optionsBarCash = {
+    title: {
+      display: true,
+      text: 'Game Cash Burned',
       fontSize: 20
     },
     legend: {
@@ -277,14 +299,19 @@ const AdminDashboard = () => {
             </Col>
             </Row>
             <Row>
+            <Form.Select aria-label="Default select example" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
+                        <option value='LOTTERYPOT' selected>Lottery Pot</option>
+                        <option value='REWARDPOT'>Reward Pot</option>
+              </Form.Select>
             <Col md={6}>
             <div className="card graphCard">
-            <Bar data={dataBar} options={optionsBar} />
+
+            <Bar data={dataBar} options={optionsBarUsers} />
             </div>
             </Col>
             <Col md={6}>
             <div className="card graphCard">
-            <Bar data={dataBar} options={optionsBar} />
+            <Bar data={dataBarCash} options={optionsBarCash} />
             </div>
             </Col>
           </Row>
