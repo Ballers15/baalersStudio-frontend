@@ -231,7 +231,7 @@ const AdminDashboard = () => {
       <div className="admin-dashboard">
         <Container>
           <Row className='justify-content-center'>
-            <Col md={3}>
+            <Col md={4}>
             <div className="card">
               <h4>Users</h4>
               <div className='dataFont'>
@@ -241,7 +241,7 @@ const AdminDashboard = () => {
               </div>
             </div>  
             </Col>
-            <Col md={3}>
+            <Col md={4}>
             <div className="card">
               <h4>Pots</h4>
               <div className='dataFont'>
@@ -251,7 +251,7 @@ const AdminDashboard = () => {
               </div>
             </div>  
             </Col>
-            <Col md={3}>
+            <Col md={4}>
             <div className="card">
               <h4>Total Amount Claimed by NFT</h4>
               <div className='dataFont'>
@@ -263,13 +263,13 @@ const AdminDashboard = () => {
           </Row>
 
           <Row>
-            <Col md={5}>
+            <Col md={6}>
             <div className="card pieCard">
               <Pie data={dataUsers} options={optionsUsers} />
               
             </div>
             </Col>
-            <Col md={5}>
+            <Col md={6}>
             <div className="card pieCard">
               <Pie data={dataCash} options={optionsCash} />
               
@@ -277,7 +277,12 @@ const AdminDashboard = () => {
             </Col>
             </Row>
             <Row>
-            <Col md={7}>
+            <Col md={6}>
+            <div className="card graphCard">
+            <Bar data={dataBar} options={optionsBar} />
+            </div>
+            </Col>
+            <Col md={6}>
             <div className="card graphCard">
             <Bar data={dataBar} options={optionsBar} />
             </div>
