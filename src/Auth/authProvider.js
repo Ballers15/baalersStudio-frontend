@@ -29,26 +29,24 @@ export default function AuthProvide({ children }) {
       setLoading(false);
       if (login.error) {
       console.log(login)
-
-        setToasterMessage(login?.message||'Something Went Worng');
-        setShowToaster(true);
-      } else {
+      setToasterMessage(login?.message||'Something Went Worng');
+      setShowToaster(true);
+    } 
+      else {
         if (login?.data?.user?.role === 'ADMIN') {
-          
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
           navigate('/admin-dashboard')
-        } else {
-        
+        } 
+        else {
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
           navigate('/metamask')
         }
-
       }
     } catch (error) {
       console.log(error)
@@ -62,7 +60,6 @@ export default function AuthProvide({ children }) {
     setUser(null);
     localStorage.clear(); 
     navigate('/login');
-
   }
 
   return (

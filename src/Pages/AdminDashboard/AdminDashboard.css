@@ -121,7 +121,7 @@ box-shadow: inset 45px -45px 42px #130834,
     background-size: 16px 12px;
     box-shadow: none !important;
 }
-.viewWallet option {
+.viewWallet option,  .admin-dashboard option {
     color: #000;
 }
 input[type="date"] {
@@ -183,4 +183,16 @@ input[type="date"] {
     font-size: 16px;
     color: #d3d3d3;
 
+  }
+  .admin-dashboard .form-select{
+    margin: auto;
+    margin-right: 0;
+    background: transparent;
+    color: #fff;
+    width:14%;
+    background-image: url(../../Assest/img/dropdown.png);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    box-shadow: none !important;
   }

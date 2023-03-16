@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import ErrorPage from '../Pages/Error404';
 import Dashboard from '../Pages/Dashboard';
 import AdminDashboard from '../Pages/AdminDashboard';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../Pages/Login';
 import WithoutNav from './WithoutNav';
 import WithNav from './WithNav';
@@ -24,6 +24,8 @@ import Signup from '../Pages/Signup/Signup'
 import ForgotPassword from '../Pages/ForgotPassword/forgotpassword';
 import ViewPot from '../Pages/Admin/Pool/viewPot';
 import Privacy from '../Pages/PrivacyPolicy';
+import { CheckUser } from '../Auth/checkUser';
+import { AuthenticatorUser } from '../Auth/authenticatorUser';
 
 
 const NavigationRouter = () => {
@@ -41,12 +43,12 @@ const NavigationRouter = () => {
         <AuthProvider>
           <Routes>
             <Route element={<WithoutNav />}>
-              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/login" element={<CheckUser><Login /></CheckUser>} />
               <Route path="*" element={<ErrorPage />} />
             </Route>
             <Route element={<WithNav />}>
-            if(role === 'ADMIN' ) { <Route exact path="/admin-dashboard" element={<AuthenticatorAdmin><AdminDashboard /></AuthenticatorAdmin>} /> }
-              else {<Route exact path="/" element={<Dashboard />} />}
+            <Route exact path="/admin-dashboard" element={<AuthenticatorAdmin><AdminDashboard /></AuthenticatorAdmin>} /> 
+              <Route exact path="/" element={<AuthenticatorUser> <Dashboard /> </AuthenticatorUser> } />
               <Route exact path="/about" element={<About />} />
               <Route path="/:id" element={<Dashboard />} />
               <Route exact path="/party" element={<Party />} />
@@ -58,8 +60,10 @@ const NavigationRouter = () => {
               <Route exact path="/poolListing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
               <Route exact path="/viewPot" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
-              <Route exact path="/signup" element={<Signup/>} />
-              <Route exact path='/forgotPassword' element={<ForgotPassword/>}></Route>
+              <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
+              <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
+              <Route  path="/privacy" element={<Privacy />} /> 
+
             </Route>
           </Routes>
         </AuthProvider>
