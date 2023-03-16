@@ -53,7 +53,8 @@ const NavigationRouter = () => {
               <Route path="/:id" element={<Dashboard />} />
               <Route exact path="/party" element={<Party />} />
               <Route exact path="/roadmap" element={<Roadmap />} />
-              <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} />
+              <Route exact path="/pool" element={<><Pool /></>} />
+              {/* <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} /> */}
               <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
               <Route exact path="/metamask" element={<Metamask />} />
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
