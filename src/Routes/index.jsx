@@ -23,6 +23,7 @@ import UsersListing from '../Pages/AdminDashboard/UsersList';
 import Signup from '../Pages/Signup/Signup'
 import ForgotPassword from '../Pages/ForgotPassword/forgotpassword';
 import ViewPot from '../Pages/Admin/Pool/viewPot';
+import Privacy from '../Pages/PrivacyPolicy';
 
 
 const NavigationRouter = () => {
@@ -65,6 +66,33 @@ const NavigationRouter = () => {
       </BrowserRouter>
     </>
   );
-};
 
-export default NavigationRouter;
+
+    // return (
+    //   <>
+    //       <BrowserRouter>
+    //         <AuthProvider>
+    //             <Routes>
+    //                 <Route element={<WithoutNav />}>
+    //                     <Route exact path="/login" element={<Login />} />
+    //                     <Route path="*" element={<ErrorPage />} />
+    //                 </Route>
+    //                 <Route element={<WithNav />}>
+    //             <Route exact path="/" element={<Dashboard/>} />
+    //                     <Route  path="/about" element={<About />} />
+    //                     <Route  path="/:id" element={<Dashboard />} />
+    //                     <Route  path="/roadmap" element={<Roadmap />} />
+    //                     <Route  path="/pool" element={<Pool />} />
+    //                    <Route  path="/wallet" element={<Wallet />} />
+    //                     <Route  path="/metamask" element={<Metamask />} />
+    //                     <Route  path="/privacy" element={<Privacy />} />
+    //                 </Route>
+    //             </Routes>
+    //       </AuthProvider>
+    //     </BrowserRouter>
+    //   </>
+    // );
+
+    }
+  export default NavigationRouter;
+ 

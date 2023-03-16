@@ -64,6 +64,7 @@ const CollapsibleExample = () => {
       <Navbar collapseOnSelect expand="lg" variant="dark" >
         <Container>
           <Navbar.Brand onClick={() => { goToAbout('/') }} > <img src={gamelogo} alt="logo" /> </Navbar.Brand>
+          {/* <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={gamelogo} width={79} height={100} alt="logo" /></Navbar.Brand> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">

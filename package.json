@@ -24,6 +24,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-datetime": "^3.2.0",
     "react-dom": "^18.2.0",
+    "react-lazy-load-image-component": "^1.5.6",
     "react-modal-video": "^2.0.0",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",

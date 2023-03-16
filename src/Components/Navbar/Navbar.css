@@ -10,7 +10,9 @@
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
 }
-
+.navbar-toggler{
+    border: 0;
+}
 .navbar-brand { 
     width: 120px;
 }
@@ -30,7 +32,12 @@
     letter-spacing: 0.25em;
     color: #ECE8E1;
 }
-
+.navbar-toggler-icon{
+    background-image:url('../../Assest/img/menuIcon.svg')
+}
+.navbar-toggler:focus{
+    box-shadow: none;
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 34px; 
@@ -43,14 +50,39 @@
       font-size: 12px;
   }
 }
+@media (max-width: 900px){
+    
+    .collapsing {
+        transition: all .13s ease;
+        /* height: 100% !important; */
+    }
+}
 @media (max-width: 480px){
+    .navbar-expand-lg .navbar-nav .nav-link {
+        margin-left: 2px;
+        font-size: 15px;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 90%;
+        padding: 15px 0; 
+    }
     .navbar-brand img {
-        width: 40%;
+        width: 41%;
+    }
+    .navbar-collapse { 
+        margin: 25px 0;
+    }
+    #responsive-navbar-nav::before {
+        content: "";
+        width: 41%;
+        height: 1px;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 10px auto;
     }
  }
- @media (max-width: 380px){
-    .navbar-brand img {
-        width: 30%;
-    }
- }
+ 
  
