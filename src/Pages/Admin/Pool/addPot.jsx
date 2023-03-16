@@ -148,7 +148,7 @@ const AddPot = () => {
             setToasterMessage('Pot Added Succesfully !!');
             setShowToaster(true);
             setDisableSubmitButton(false);
-            // navigate('/poolListing');
+            navigate('/poolListing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
