@@ -131,12 +131,12 @@ const AdminDashboard = () => {
         label: '# of users',
         data: [pieChartData[0]?.userCount,pieChartData[1]?.userCount],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',  
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)', 
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderWidth: 1,
       },
@@ -148,10 +148,18 @@ const AdminDashboard = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white'
+        }
       },
       title: {
         display: true,
         text: 'No. of Users',
+        color: 'white',
+        font: {
+          size: 17, 
+          weight: 400,
+        }
       },
     },
   };
@@ -163,12 +171,12 @@ const AdminDashboard = () => {
         label: 'Game Cash Burned',
         data: [pieChartData[0]?.gameCashBurned,pieChartData[1]?.gameCashBurned],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',  
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)', 
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderWidth: 1,
       },
@@ -181,12 +189,21 @@ const AdminDashboard = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white'
+        }
       },
       title: {
         display: true,
         text: 'Game Cash Burned',
+        color: 'white',
+        font: {
+          size: 17, 
+          weight: 400,
+        }
       },
     },
+    
   };
  
   const barLabelUsers=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
@@ -198,10 +215,10 @@ const AdminDashboard = () => {
           [
       {
         label: 'No. of Users',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        backgroundColor: 'rgb(255 159 64 / 68%)',
+        borderColor: 'rgb(255, 159, 64)',
         borderWidth: 2,
-        data: barDatausers
+        data: barDatausers,
       },
     ]
   };
@@ -211,8 +228,25 @@ const AdminDashboard = () => {
       text: 'No. of users',
       fontSize: 20
     },
-    legend: {
-      display: true
+  
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: 'white',
+          font: {
+            size: 17, 
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#fff', beginAtZero: true }
+      },
+      x: {
+        ticks: { color: '#fff', beginAtZero: true }
+      }
     }
   };
 
@@ -226,21 +260,45 @@ const AdminDashboard = () => {
     
       {
         label: 'Game Cash Burned',
-        backgroundColor: 'pink',
-        borderColor: 'rgba(0,0,0,1)',
+        fontColor: '#fff',
+        backgroundColor: 'rgb(153 102 255 / 67%)',
+        borderColor: 'rgb(153, 102, 255)',
         borderWidth: 2,
         data: barDataCash
       },
-    ]
+    ],
+    options: { 
+      legend: {
+          labels: {
+              color: "#000",
+              fontSize: 18
+          }
+      },
+  }
   };
   const optionsBarCash = {
     title: {
       display: true,
       text: 'Game Cash Burned',
-      fontSize: 20
+      fontSize: 20, 
     },
-    legend: {
-      display: true
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',
+          font: {
+            size: 17, 
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#fff', beginAtZero: true }
+      },
+      x: {
+        ticks: { color: '#fff', beginAtZero: true }
+      }
     }
   };
   
@@ -294,11 +352,11 @@ const AdminDashboard = () => {
             </div>
             </Col>
             </Row>
-            <Row>
             <Form.Select aria-label="Default select example" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
-                        <option value='LOTTERYPOT' selected>Lottery Pot</option>
-                        <option value='REWARDPOT'>Reward Pot</option>
-              </Form.Select>
+                <option value='LOTTERYPOT' selected>Lottery Pot</option>
+                <option value='REWARDPOT'>Reward Pot</option>
+            </Form.Select>
+            <Row>            
             <Col md={6}>
             <div className="card graphCard">
 
@@ -307,7 +365,7 @@ const AdminDashboard = () => {
             </Col>
             <Col md={6}>
             <div className="card graphCard">
-            <Bar data={dataBarCash} options={optionsBarCash} />
+            <Bar data={dataBarCash}  options= {optionsBarCash} />
             </div>
             </Col>
           </Row>
