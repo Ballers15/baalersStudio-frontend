@@ -28,6 +28,7 @@
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
     "react-time-picker": "^5.1.0",
+    "react-timeit": "^1.2.12",
     "react-tooltip": "^5.5.1",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.1"

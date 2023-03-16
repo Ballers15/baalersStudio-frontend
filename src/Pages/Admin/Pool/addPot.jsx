@@ -9,7 +9,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
-import { IonDatetime } from '@ionic/react';
+import { Timeit } from 'react-timeit';
 
 
 const AddPot = () => {
@@ -38,6 +38,7 @@ const AddPot = () => {
             getRewardPotDetailById(state?.id);
             return;
         }
+        console.log(rewadPotDetail) 
     }, []);
 
     const getRewardPotDetailById = async (id) => {
@@ -91,7 +92,7 @@ const AddPot = () => {
     }
     
     const getClaimExpiryTime = (e, data) => {
-        const date = new Date(e);
+        const date = new Date(e).toLocaleString;
         date.setDate(date.getDate() + 1);
         switch(data) {  
             case 'time':
@@ -118,8 +119,21 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+        const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
+        const currentTime = new Date().toLocaleTimeString();
 
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate) {
+        if(rewadPotDetail?.isActive)
+        {
+            rewadPotDetail.startDate = currentDate;
+            setStartDateTime(currentTime);
+        }
+        else
+        {
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split(' ')[0] ;
+            setStartDateTime(currentTime);
+        }
+
+        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
@@ -128,7 +142,7 @@ const AddPot = () => {
                 rewadPotDetail.endDate = endDate+' '+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate +' '+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
@@ -159,16 +173,15 @@ const AddPot = () => {
     }
 
     const updateRewardPot = async (e) => {
-        if (!state?.id) {
+        if (!state?.id || rewadPotDetail?.isActive === 'true') {
             return;
         }
-
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-   
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.startDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate) {
+  
+        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
@@ -177,7 +190,7 @@ const AddPot = () => {
                 rewadPotDetail.endDate = endDate+' '+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate +','+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
@@ -218,7 +231,7 @@ const AddPot = () => {
             <Form noValidate validated={validated} onSubmit={addRewardPot}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>$ / Quantity for Nft</Form.Label>
+                                    <Form.Label>Reward Amount $ / Quantity for Nft</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -240,11 +253,12 @@ const AddPot = () => {
                                             <Form.Control
                                                 required
                                                 type="date"
-                                                min={new Date().toISOString().split("T")[0]}
+                                                format="mm/dd/yyyy"
+                                                min={new Date().toLocaleDateString('en-CA').replace(/ /g, '-')}
                                                 max={endDate}
-                                                value={rewadPotDetail?.isActive ? new Date().toISOString().split("T")[0] : rewadPotDetail.startDate|| ''}
+                                                value={rewadPotDetail?.isActive ? new Date().toLocaleDateString('en-CA').replace(/ /g, '-') : rewadPotDetail?.startDate?.split(' ')[0] || ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
-                                            </Form.Control>
+                                                </Form.Control>
                                             <Form.Control.Feedback type="invalid">
                                                 Start Date is required !!
                                             </Form.Control.Feedback>
@@ -252,9 +266,13 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>Start Time</Form.Label><br/>
-                                            <TimePicker 
+                                            {/* <TimePicker 
                                              onChange={setStartDateTime}
-                                                value={startDateTime|| ''} />
+                                                value={startDateTime|| ''} /> */}
+                                                <Timeit 
+                                            onChange={(e) => { setStartDateTime(e);  }}
+                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString() : startDateTime|| ''}/>
+
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
@@ -273,9 +291,12 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Time</Form.Label><br/>
-                                            <TimePicker 
+                                            {/* <TimePicker 
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
-                                                value={endDateTime|| ''} />
+                                                value={endDateTime|| ''} /> */}
+
+                                            <Timeit onChange={(e) => { setEndDateTime(e);  }}
+                                                value={endDateTime|| ''}/>
                                         </Form.Group>
                                     </Row> 
                                 </Col>  
@@ -386,7 +407,7 @@ const AddPot = () => {
                                
                                     <Form.Check type="checkbox" checked={rewadPotDetail.isActive}
                                     onChange={() => setRewardPotDetail({ ...rewadPotDetail,isActive:!rewadPotDetail.isActive})} />
-                                     <Form.Label>Active Pot</Form.Label>
+                                     <Form.Label>Active Pot Now</Form.Label>
                                 </Form.Group>
                             </Row>
                     

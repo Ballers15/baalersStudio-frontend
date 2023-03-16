@@ -115,11 +115,7 @@ const AdminDashboard = () => {
             setToasterMessage(bar?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-             setBarChartData(bar?.data)
-             console.log('+++',bar?.data?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
-            //  console.log(barChartDataLottery?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
-             console.log('----',bar?.data?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] }))
-           
+             setBarChartData(bar?.data)    
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');

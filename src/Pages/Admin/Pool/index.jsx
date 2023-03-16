@@ -64,7 +64,7 @@ const PoolListing = () => {
 
 
          const nextPageActive = () => {
-            console.log(activePotCount)
+            // console.log(activePotCount)
             if (activePotCount >= 10)
                 setCurrentPageActive(currentPageAcitve + 1)
         }
@@ -280,7 +280,7 @@ const PoolListing = () => {
     }
 
     const getPotUsers = async (data) =>{
-        setPotIdForUser(data._id)
+        setPotIdForUser(data)
         let dataToSend = {
             potId: data._id,
         }
@@ -309,7 +309,7 @@ const PoolListing = () => {
     const filterPotUser = async (e) => {
         e.preventDefault();
         let dataToSend = {
-            potId: potIdForUser, 
+            potId: potIdForUser._id, 
             email: emailFilter,
             walletSearch: walletAddressFilter
         }
@@ -336,6 +336,10 @@ const PoolListing = () => {
     const handleClaimStatus = (pot) => {
         setClaimModal(true);
         setPotDetails(pot);
+    }
+
+    const resetForm = () =>{
+        console.log('reset clicked')
 
     }
 
@@ -365,7 +369,7 @@ const PoolListing = () => {
                 </Modal.Header>
                 <Modal.Body>
                  <div className="searchTag">
-                    <Form className="d-flex" onSubmit={filterPotUser}>
+                    <Form className="d-flex" onSubmit={filterPotUser} onReset={()=>{getPotUsers(potIdForUser)}}>
                         <Form.Control
                         type="search"
                         placeholder="Search with Email"
@@ -381,6 +385,7 @@ const PoolListing = () => {
                         onChange={({ target }) => setWalletAddressFilter(target.value)}
                         />
                     <Button className="" type="submit">Search</Button>
+                    <Button className="" type="reset">Reset</Button>
                     </Form>
                  </div>
                 <Table responsive className="pool-view-table">
