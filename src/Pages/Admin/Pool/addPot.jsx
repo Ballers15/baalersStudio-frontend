@@ -37,10 +37,9 @@ const AddPot = () => {
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
+    const [potStatusCheck,setPotStatusCheck] = useState(false);
 
-   useEffect(() => {
-   console.log(currentDate)
-   }, [])
+
 
     useEffect(() => {
         if (state?.id) {
@@ -62,9 +61,12 @@ const AddPot = () => {
                 setShowToaster(true);
               } else {
                   let data = getPotDetailsById?.data[0];
+
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
                   if (data) {
+                    console.log(data)
+
                       setRewardPotDetail({
                           ...rewadPotDetail,
                           rewardTokenAmount: data?.rewardTokenAmount,
@@ -78,6 +80,7 @@ const AddPot = () => {
                               contractAddress: data?.assetDetails?.contractAddress,
                           },
                           isActive: data?.isActive,
+                          potStatus: data?.potStatus,
                           claimExpiryDate: {
                               ...rewadPotDetail.claimExpiryDate,
                               time: data?.endDate?.split('T')[1]?.slice(0,5),
@@ -89,8 +92,13 @@ const AddPot = () => {
                     //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
                     //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
-                  }
-               
+                    }
+                    if(data?.potStatus === 'ONGOING'){
+                        console.log('if',data?.potStatus)
+                        setPotStatusCheck(true);
+                        console.log(potStatusCheck) 
+                        console.log(rewadPotDetail)
+                      }
               }
              
             } catch (error) {
@@ -98,6 +106,8 @@ const AddPot = () => {
                 setShowToaster(true);
                 setLoading(false);
             }
+           
+           
     }
     
     const getClaimExpiryTime = (e, data) => {
@@ -130,16 +140,19 @@ const AddPot = () => {
         e.preventDefault();
         
 
-        // if(rewadPotDetail?.isActive)
-        // {
-        //     rewadPotDetail.startDate = currentDate;
-        //     setStartDateTime(currentTime);
-        // }
-        // else
-        // {
-        //     rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
-        //     setStartDateTime(currentTime);
-        // }
+        if(potStatusCheck)
+        {
+            rewadPotDetail.startDate = currentDate;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=true;
+        }
+        else
+        {
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=false;
+
+        }
 
         if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
@@ -153,7 +166,8 @@ const AddPot = () => {
                 rewadPotDetail.startDate = rewadPotDetail?.startDate +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
             }
         }
         setDisableSubmitButton(true);
@@ -188,25 +202,43 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-  
+
+        if(potStatusCheck)
+        {
+            rewadPotDetail.startDate = currentDate;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=true;
+        }
+        else
+        {
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=false;
+
+        }
+
         if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
         } else {
             if (endDate) {
-                rewadPotDetail.endDate = endDate+' '+endDateTime;
+                rewadPotDetail.endDate = endDate+'T'+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+ startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
+
             }
             rewadPotDetail.potId = state?.id;
         }
         setDisableSubmitButton(true);
         setLoading(true);
+        console.log(rewadPotDetail)
+        // return
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
           setLoading(false);
@@ -264,7 +296,7 @@ const AddPot = () => {
                                                 format="mm/dd/yyyy"
                                                 min={currentDate}
                                                 max={endDate}
-                                                value={rewadPotDetail?.isActive ? currentDate : rewadPotDetail?.startDate?.split(' ')[0] || ''}
+                                                value={rewadPotDetail?.isActive ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
@@ -443,8 +475,8 @@ const AddPot = () => {
                                 
                                 <Form.Group as={Col} md="3" className='d-flex mb-0 mt-auto'>
                                
-                                    <Form.Check type="checkbox" checked={rewadPotDetail.isActive}
-                                    onChange={() => setRewardPotDetail({ ...rewadPotDetail,isActive:!rewadPotDetail.isActive})} />
+                                    <Form.Check type="checkbox" checked={potStatusCheck}
+                                    onChange={() => setPotStatusCheck(!potStatusCheck)} />
                                      <Form.Label>Active Pot Now</Form.Label>
                                 </Form.Group>
                             </Row>
