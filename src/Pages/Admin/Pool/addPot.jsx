@@ -9,14 +9,11 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
-import { Timeit } from 'react-timeit';
 import TimeKeeper from 'react-timekeeper';
 
 
 const AddPot = () => {
-    const [time, setTime] = useState('12:34pm')
     const [showTime, setShowTime] = useState(false)
-    const [timeEnd, setTimeEnd] = useState('12:34pm')
     const [showTimeEnd, setShowTimeEnd] = useState(false)
 
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
@@ -25,11 +22,13 @@ const AddPot = () => {
     const [rewadPotDetail, setRewardPotDetail] = useState({
         rewardTokenAmount:'', assetDetails: {
             ticker:'',contractAddress:'',assetName:''
-        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:'12:00'},isActive:false
+        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:''},isActive:false
     });
-    const [startDateTime, setStartDateTime] = useState('12:00');
+    const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
+    const currentTime =  new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'})
+    const [startDateTime, setStartDateTime] = useState(currentTime);
     const [endDate, setEndDate] = useState();
-    const [endDateTime, setEndDateTime] = useState('12:00');
+    const [endDateTime, setEndDateTime] = useState(currentTime);
     const [loading, setLoading] = useState(false);
     const [toasterMessage, setToasterMessage] = useState("");
     const [disable, disableSubmitButton] = useState(false);
@@ -39,13 +38,17 @@ const AddPot = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
 
+   
+
     useEffect(() => {
         if (state?.id) {
             getRewardPotDetailById(state?.id);
             return;
         }
-        console.log(time) 
-    }, [time]);
+        console.log(startDateTime)
+        console.log('end')
+        
+    }, [rewadPotDetail]);
 
     const getRewardPotDetailById = async (id) => {
         let dataToSend = {
@@ -84,6 +87,7 @@ const AddPot = () => {
                       })
                       setEndDate( data?.endDate?.split('T')[0])
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
                   }
@@ -98,7 +102,7 @@ const AddPot = () => {
     }
     
     const getClaimExpiryTime = (e, data) => {
-        const date = new Date(e).toLocaleString;
+        const date = new Date(e);
         date.setDate(date.getDate() + 1);
         switch(data) {  
             case 'time':
@@ -125,8 +129,7 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-        const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
-        const currentTime = new Date().toLocaleTimeString();
+        
 
         if(rewadPotDetail?.isActive)
         {
@@ -145,13 +148,13 @@ const AddPot = () => {
             return;
         } else {
             if (endDate) {
-                rewadPotDetail.endDate = endDate+' '+endDateTime;
+                rewadPotDetail.endDate = endDate+'T'+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate +' '+ startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+rewadPotDetail?.claimExpiryDate?.time;
             }
         }
         setDisableSubmitButton(true);
@@ -277,18 +280,20 @@ const AddPot = () => {
                                                 value={startDateTime|| ''} /> */}
                                                 {/* <Timeit 
                                             onChange={(e) => { setStartDateTime(e);  }}
-                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString() : startDateTime|| ''}/> */}
+                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour: '2-digit'12utetrue-digit'}) : startDateTime|| ''}/> */}
                                             <div className='pickTime'>
                                                 {showTime &&
                                                     <TimeKeeper
-                                                        time={time}
-                                                        onChange={(newTime) => setTime(newTime.formatted)}
+                                                        time={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime|| ''}
+                                                        // time={currentTime}
+                                                        onChange={(e) => setStartDateTime(e.formatted24)}
                                                         onDoneClick={() => setShowTime(false)}
                                                         switchToMinuteOnHourSelect
+                                                                                                               
                                                     />
 
                                                 }
-                                                <span>{time}</span>
+                                                <span>{rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime}</span>
                                                 {!showTime &&
                                                     <span onClick={() => setShowTime(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                                 } 
@@ -321,14 +326,14 @@ const AddPot = () => {
                                             <div className='pickTime'>
                                                 {showTimeEnd &&
                                                     <TimeKeeper
-                                                        time={timeEnd}
-                                                        onChange={(newTimeEnd) => setTimeEnd(newTimeEnd.formatted)}
+                                                        time={endDateTime}
+                                                        onChange={(e) => setEndDateTime(e.formatted)}
                                                         onDoneClick={() => setShowTimeEnd(false)}
                                                         switchToMinuteOnHourSelect
                                                     />
 
                                                 }
-                                                <span>{timeEnd}</span>
+                                                <span>{endDateTime }</span>
                                                 {!showTimeEnd &&
                                                     <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
                                                 } 
@@ -352,7 +357,7 @@ const AddPot = () => {
                                     <Form.Label>Claim Expiry Time</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={rewadPotDetail?.claimExpiryDate?.time|| ''} disabled={true} >
+                                        value={endDateTime|| ''} disabled={true} >
                                     </Form.Control>
                                 </Form.Group>
                                 

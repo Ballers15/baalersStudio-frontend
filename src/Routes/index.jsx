@@ -26,6 +26,7 @@ import ViewPot from '../Pages/Admin/Pool/viewPot';
 import Privacy from '../Pages/PrivacyPolicy';
 import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
+import PotPage from '../Pages/Pots';
 
 
 const NavigationRouter = () => {
@@ -64,6 +65,7 @@ const NavigationRouter = () => {
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
               <Route  path="/privacy" element={<Privacy />} /> 
+              <Route  path="/potPage" element={<PotPage />} /> 
 
             </Route>
           </Routes>
