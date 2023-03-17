@@ -146,7 +146,8 @@ input[type="date"] {
     position: absolute;
     /* top: 12px; */
     right: 6px;
-    color: #e5e5e5;
+    color: #093d70;
+    cursor: pointer;
   }
   .emailWth{
     white-space: nowrap;

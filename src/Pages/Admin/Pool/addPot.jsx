@@ -10,9 +10,15 @@ import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
 import { Timeit } from 'react-timeit';
+import TimeKeeper from 'react-timekeeper';
 
 
 const AddPot = () => {
+    const [time, setTime] = useState('12:34pm')
+    const [showTime, setShowTime] = useState(false)
+    const [timeEnd, setTimeEnd] = useState('12:34pm')
+    const [showTimeEnd, setShowTimeEnd] = useState(false)
+
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
@@ -38,8 +44,8 @@ const AddPot = () => {
             getRewardPotDetailById(state?.id);
             return;
         }
-        console.log(rewadPotDetail) 
-    }, []);
+        console.log(time) 
+    }, [time]);
 
     const getRewardPotDetailById = async (id) => {
         let dataToSend = {
@@ -250,7 +256,7 @@ const AddPot = () => {
                                     <Row>
                                     <Form.Group as={Col} md="3">
                                         <Form.Label>Start Date</Form.Label>
-                                            <Form.Control
+                                            <Form.Control className='dateIcon'
                                                 required
                                                 type="date"
                                                 format="mm/dd/yyyy"
@@ -269,15 +275,30 @@ const AddPot = () => {
                                             {/* <TimePicker 
                                              onChange={setStartDateTime}
                                                 value={startDateTime|| ''} /> */}
-                                                <Timeit 
+                                                {/* <Timeit 
                                             onChange={(e) => { setStartDateTime(e);  }}
-                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString() : startDateTime|| ''}/>
+                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString() : startDateTime|| ''}/> */}
+                                            <div className='pickTime'>
+                                                {showTime &&
+                                                    <TimeKeeper
+                                                        time={time}
+                                                        onChange={(newTime) => setTime(newTime.formatted)}
+                                                        onDoneClick={() => setShowTime(false)}
+                                                        switchToMinuteOnHourSelect
+                                                    />
 
+                                                }
+                                                <span>{time}</span>
+                                                {!showTime &&
+                                                    <span onClick={() => setShowTime(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                } 
+                                            </div>
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Date</Form.Label>
                                             <Form.Control
+                                            className='dateIcon'
                                             required
                                             type="date"
                                             min={rewadPotDetail?.startDate}
@@ -295,8 +316,23 @@ const AddPot = () => {
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
                                                 value={endDateTime|| ''} /> */}
 
-                                            <Timeit onChange={(e) => { setEndDateTime(e);  }}
-                                                value={endDateTime|| ''}/>
+                                            {/* <Timeit onChange={(e) => { setEndDateTime(e);  }}
+                                                value={endDateTime|| ''}/> */}
+                                            <div className='pickTime'>
+                                                {showTimeEnd &&
+                                                    <TimeKeeper
+                                                        time={timeEnd}
+                                                        onChange={(newTimeEnd) => setTimeEnd(newTimeEnd.formatted)}
+                                                        onDoneClick={() => setShowTimeEnd(false)}
+                                                        switchToMinuteOnHourSelect
+                                                    />
+
+                                                }
+                                                <span>{timeEnd}</span>
+                                                {!showTimeEnd &&
+                                                    <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                } 
+                                            </div>
                                         </Form.Group>
                                     </Row> 
                                 </Col>  

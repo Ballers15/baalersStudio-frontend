@@ -20,6 +20,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
+    "react-bootstrap-time-picker": "^2.0.1",
     "react-card-slide": "^1.0.13",
     "react-chartjs-2": "^5.2.0",
     "react-datetime": "^3.2.0",
@@ -30,6 +31,7 @@
     "react-scripts": "5.0.1",
     "react-time-picker": "^5.1.0",
     "react-timeit": "^1.2.12",
+    "react-timekeeper": "^1.0.0",
     "react-tooltip": "^5.5.1",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.1"
