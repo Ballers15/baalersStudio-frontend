@@ -55,7 +55,7 @@
     font-size: 18px;
     line-height: 21px;
 }
-/* .react-time-picker{
+.react-time-picker{
   width: 100%;
 }
 .react-time-picker__wrapper{ 
@@ -71,7 +71,7 @@
   background-clip: padding-box;
   border: 1px solid #ced4da;
   margin: 0;
-} */
+}
 :disabled{
     cursor:not-allowed;
 }
@@ -558,7 +558,7 @@ a.page-link span, .page-link:hover {
   background: transparent;
   color: #fff;
 }
-.pickTime{
+/* .pickTime{
   background-color: #d7d6e7;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -584,4 +584,4 @@ a.page-link span, .page-link:hover {
 .dateIcon.form-control.is-invalid, .was-validated .dateIcon.form-control:invalid { 
   background-position: right calc(0.735em + 0.85rem) center;
   padding: 0.675rem 0.75rem;
-}
+} */

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './Pool.css';
-import React from "react";
+import React, { Component } from "react";
 import {useState,useEffect} from 'react';
 import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
@@ -9,7 +9,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
-import TimeKeeper from 'react-timekeeper';
+// import TimeKeeper from 'react-timekeeper';
 
 
 const AddPot = () => {
@@ -25,7 +25,7 @@ const AddPot = () => {
         }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:''},isActive:false
     });
     const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
-    const currentTime =  new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'})
+    const currentTime =  new Date().toLocaleTimeString([], {hourCycle: 'h23',hour: '2-digit', minute:'2-digit'})
     const [startDateTime, setStartDateTime] = useState(currentTime);
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState(currentTime);
@@ -45,10 +45,7 @@ const AddPot = () => {
             getRewardPotDetailById(state?.id);
             return;
         }
-        console.log(startDateTime)
-        console.log('end')
-        
-    }, [rewadPotDetail]);
+    }, []);
 
     const getRewardPotDetailById = async (id) => {
         let dataToSend = {
@@ -138,7 +135,7 @@ const AddPot = () => {
         }
         else
         {
-            rewadPotDetail.startDate = rewadPotDetail.startDate.split(' ')[0] ;
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
             setStartDateTime(currentTime);
         }
 
@@ -233,11 +230,18 @@ const AddPot = () => {
         }
     }
 
+    const handleStartTime = (e) =>{
+        console.log(e.formatted)
+
+        e.preventDefault();
+        setStartDateTime(e.formatted)
+    }
+
     return (
         <React.Fragment>
             <div className="addPot">
             <div className="addPot-container">
-            <Form noValidate validated={validated} onSubmit={addRewardPot}>
+            <Form noValidate validated={validated} >
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Reward Amount $ / Quantity for Nft</Form.Label>
@@ -275,29 +279,27 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>Start Time</Form.Label><br/>
-                                            {/* <TimePicker 
-                                             onChange={setStartDateTime}
-                                                value={startDateTime|| ''} /> */}
-                                                {/* <Timeit 
-                                            onChange={(e) => { setStartDateTime(e);  }}
-                                            value={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour: '2-digit'12utetrue-digit'}) : startDateTime|| ''}/> */}
-                                            <div className='pickTime'>
+                                            <TimePicker 
+                                             value={rewadPotDetail?.isActive ? currentTime : startDateTime|| ''} 
+                                            onChange={(e) => { setStartDateTime(e);  console.log(e); console.log('current',currentTime)}} />
+                                   
+                                            {/* <div className='pickTime'>
                                                 {showTime &&
                                                     <TimeKeeper
-                                                        time={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime|| ''}
-                                                        // time={currentTime}
-                                                        onChange={(e) => setStartDateTime(e.formatted24)}
+                                                        // time={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime|| ''}
+                                                        time={startDateTime}
+                                                        onChange={(e)=> handleStartTime(e)}
                                                         onDoneClick={() => setShowTime(false)}
                                                         switchToMinuteOnHourSelect
-                                                                                                               
+                                                        hour24Mode                                                   
                                                     />
 
                                                 }
                                                 <span>{rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime}</span>
                                                 {!showTime &&
-                                                    <span onClick={() => setShowTime(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                    <span onClick={() => setShowTime(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
                                                 } 
-                                            </div>
+                                            </div> */}
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
@@ -317,13 +319,13 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Time</Form.Label><br/>
-                                            {/* <TimePicker 
+                                            <TimePicker 
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
-                                                value={endDateTime|| ''} /> */}
+                                                value={endDateTime|| ''} />
 
                                             {/* <Timeit onChange={(e) => { setEndDateTime(e);  }}
                                                 value={endDateTime|| ''}/> */}
-                                            <div className='pickTime'>
+                                            {/* <div className='pickTime'>
                                                 {showTimeEnd &&
                                                     <TimeKeeper
                                                         time={endDateTime}
@@ -335,9 +337,9 @@ const AddPot = () => {
                                                 }
                                                 <span>{endDateTime }</span>
                                                 {!showTimeEnd &&
-                                                    <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                    <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
                                                 } 
-                                            </div>
+                                            </div> */}
                                         </Form.Group>
                                     </Row> 
                                 </Col>  

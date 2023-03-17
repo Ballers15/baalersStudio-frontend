@@ -122,7 +122,7 @@
   <!-- <noscript>You need to enable JavaScript to run ballers app..</noscript>  -->
   <div id="root"></div>
   <div id="loader">
-    <div class="loader">
+    <div className="loader">
       <img src="loader.png" alt="loader-logo">
       <type-writer loop wait="1.5" carret=""
         onTyped="if (event.detail.hasAttribute('last')) document.getElementById('list').run(a=>a.resumed)">
@@ -133,7 +133,8 @@
 
   <!-- back-to-top -->
   <div id="back-to-top">
-    <a class="top scroll-top" id="top" href="#top" aria-label="backToTop"><i class="fa fa-angle-double-up" aria-hidden="true"></i> </a>
+    <a className="top scroll-top" id="top" href="#top" aria-label="backToTop"><i className="fa fa-angle-double-up"
+        aria-hidden="true"></i> </a>
   </div>
 
   <script type="module" src="https://cdn.jsdelivr.net/gh/darkwiiplayer/components@345d931/TypeWriter.js"></script>

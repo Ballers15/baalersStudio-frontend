@@ -84,9 +84,9 @@ document.onreadystatechange = function() {
     }
 };
 
-$(function () {
-    document.getElementById('hiddenButton').click();
-});
+// $(function () {
+//     document.getElementById('hiddenButton').click();
+// });
 
 function useHover() {
     const [hovering, setHovering] = useState(false)
@@ -840,7 +840,7 @@ const Dashboard = () => {
                             aria-label="discord"
                           >
                             <span></span>Join{' '}
-                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <i className="fa fa-paper-plane" aria-hidden="true"></i>
                             {/* <LazyLoadImage
                               src={discord}
                               className="discordIcon"
