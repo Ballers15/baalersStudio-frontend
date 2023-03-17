@@ -38,7 +38,9 @@ const AddPot = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
 
-   
+   useEffect(() => {
+   console.log(currentDate)
+   }, [])
 
     useEffect(() => {
         if (state?.id) {
@@ -85,7 +87,7 @@ const AddPot = () => {
                       setEndDate( data?.endDate?.split('T')[0])
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                     //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
-                      setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
                   }
                
@@ -128,16 +130,16 @@ const AddPot = () => {
         e.preventDefault();
         
 
-        if(rewadPotDetail?.isActive)
-        {
-            rewadPotDetail.startDate = currentDate;
-            setStartDateTime(currentTime);
-        }
-        else
-        {
-            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
-            setStartDateTime(currentTime);
-        }
+        // if(rewadPotDetail?.isActive)
+        // {
+        //     rewadPotDetail.startDate = currentDate;
+        //     setStartDateTime(currentTime);
+        // }
+        // else
+        // {
+        //     rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
+        //     setStartDateTime(currentTime);
+        // }
 
         if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
@@ -151,7 +153,7 @@ const AddPot = () => {
                 rewadPotDetail.startDate = rewadPotDetail?.startDate +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
             }
         }
         setDisableSubmitButton(true);
@@ -196,7 +198,7 @@ const AddPot = () => {
                 rewadPotDetail.endDate = endDate+' '+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate +','+ startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
@@ -230,13 +232,6 @@ const AddPot = () => {
         }
     }
 
-    const handleStartTime = (e) =>{
-        console.log(e.formatted)
-
-        e.preventDefault();
-        setStartDateTime(e.formatted)
-    }
-
     return (
         <React.Fragment>
             <div className="addPot">
@@ -267,9 +262,9 @@ const AddPot = () => {
                                                 required
                                                 type="date"
                                                 format="mm/dd/yyyy"
-                                                min={new Date().toLocaleDateString('en-CA').replace(/ /g, '-')}
+                                                min={currentDate}
                                                 max={endDate}
-                                                value={rewadPotDetail?.isActive ? new Date().toLocaleDateString('en-CA').replace(/ /g, '-') : rewadPotDetail?.startDate?.split(' ')[0] || ''}
+                                                value={rewadPotDetail?.isActive ? currentDate : rewadPotDetail?.startDate?.split(' ')[0] || ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
@@ -281,7 +276,7 @@ const AddPot = () => {
                                             <Form.Label>Start Time</Form.Label><br/>
                                             <TimePicker 
                                              value={rewadPotDetail?.isActive ? currentTime : startDateTime|| ''} 
-                                            onChange={(e) => { setStartDateTime(e);  console.log(e); console.log('current',currentTime)}} />
+                                            onChange={(e) => { setStartDateTime(e);}} />
                                    
                                             {/* <div className='pickTime'>
                                                 {showTime &&
