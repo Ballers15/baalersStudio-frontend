@@ -85,7 +85,8 @@ const CollapsibleExample = () => {
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/admin-dashboard') }} > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/user-listing') }} > Users </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }} > Pool </Nav.Link> )}
-              <Nav.Link eventKey="4" onClick={() => { handleLogout() }} > Logout </Nav.Link>
+              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > Logout </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > Login </Nav.Link>)}
+              
             </Nav>
             <Nav></Nav>
           </Navbar.Collapse>
