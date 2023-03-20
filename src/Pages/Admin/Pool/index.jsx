@@ -338,10 +338,14 @@ const PoolListing = () => {
         setPotDetails(pot);
     }
 
-    const resetForm = () =>{
-        console.log('reset clicked')
-
-    }
+    const formatNumberDecimal = (value) => {
+        if(value > Math.pow(10,10)){
+        const shortenedValue = parseFloat(value).toExponential(4);
+        return shortenedValue;
+        }
+        else
+        return value;
+      };
 
     
     const [viewUser, viewUserShow] = React.useState(false);
@@ -536,7 +540,7 @@ const PoolListing = () => {
                                 <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                             <i className="fa fa-eye" />
                                         </span></td>
-                                <td>{pot?.potAmountCollected}</td>
+                                <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)} </td>
                                
                                 <td>
                                     <span title= {pot?.assetDetails?.contractAddress}>
@@ -558,13 +562,13 @@ const PoolListing = () => {
                               </span>
                             </td>
                                 <td className="action-tab-pool-list">
-                                    {pot?.potAmountCollected === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                    {Number(pot?.potAmountCollected?.$numberDecimal) === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
                                             <i className="fa fa-edit " />
                                         </span> :   <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
                                             <i className="fa fa-eye " />
                                         </span>}
                                         <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" disabled={pot?.potAmountCollected > 0 ? true:false}/>}
+                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" />}
                                             {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
                                         </span>
                                 </td>
@@ -662,7 +666,7 @@ const PoolListing = () => {
                                     <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
-                                    <td>{pot?.potAmountCollected}</td>
+                                    <td>{pot?.potAmountCollected?.$numberDecimal}</td>
                                     
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
@@ -788,7 +792,7 @@ const PoolListing = () => {
                                     <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
-                                    <td>{pot?.potAmountCollected}</td>
+                                    <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)}</td>
                             
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>

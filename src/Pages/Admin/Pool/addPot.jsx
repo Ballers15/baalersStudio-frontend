@@ -296,7 +296,7 @@ const AddPot = () => {
                                                 format="mm/dd/yyyy"
                                                 min={currentDate}
                                                 max={endDate}
-                                                value={rewadPotDetail?.isActive ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
+                                                value={potStatusCheck ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
@@ -307,7 +307,7 @@ const AddPot = () => {
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>Start Time</Form.Label><br/>
                                             <TimePicker 
-                                             value={rewadPotDetail?.isActive ? currentTime : startDateTime|| ''} 
+                                             value={potStatusCheck ? currentTime : startDateTime|| ''} 
                                             onChange={(e) => { setStartDateTime(e);}} />
                                    
                                             {/* <div className='pickTime'>
