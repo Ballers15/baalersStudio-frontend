@@ -149,7 +149,14 @@ const UsersList = () => {
 
   }
 
-
+  const formatNumberDecimal = (value) => {
+    if(value > Math.pow(10,10)){
+    const shortenedValue = parseFloat(value).toExponential(4);
+    return shortenedValue;
+    }
+    else
+    return value;
+  };
 
   return (
     <React.Fragment>
@@ -189,7 +196,7 @@ const UsersList = () => {
                             </option>)) }
                         </Form.Select>
                         </td>               
-                        <td>{walletDetails?.totalSum}</td>  
+                        <td>{formatNumberDecimal(walletDetails?.totalSum?.$numberDecimal)}</td>  
                         <td>{walletDetails?.rewardTokenAmount}</td>
                     </tr>              
                   

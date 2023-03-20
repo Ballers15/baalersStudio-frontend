@@ -15,9 +15,7 @@ const AdminDashboard = () => {
   const [potClaimData, setPotClaimData] = useState([])
   const [pieChartData, setPieChartData] = useState([])
   const [barChartData, setBarChartData] = useState([])
-  const [barChartDataReward, setBarChartDataReward] = useState([])
   const [barPotTypeUsers,setBarPotTypeUsers]=useState('LOTTERYPOT')
-  const [barPotTypeCash,setBarPotTypeCash]=useState('LOTTERYPOT')
 
   useEffect(() => {
     usersCount();
@@ -169,7 +167,7 @@ const AdminDashboard = () => {
     datasets: [
       {
         label: 'Game Cash Burned',
-        data: [pieChartData[0]?.gameCashBurned,pieChartData[1]?.gameCashBurned],
+        data: [pieChartData[0]?.gameCashBurned?.$numberDecimal,pieChartData[1]?.gameCashBurned?.$numberDecimal],
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
@@ -250,7 +248,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const barDataCash=barChartData.map((el)=>{ return el?.gameCashBurned})
+  const barDataCash=barChartData.map((el)=>{ return el?.gameCashBurned?.$numberDecimal})
   const barLabelCash=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
   
   const dataBarCash = {
