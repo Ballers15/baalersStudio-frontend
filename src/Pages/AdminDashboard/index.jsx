@@ -122,6 +122,15 @@ const AdminDashboard = () => {
         }
       }
 
+      const formatNumberDecimal = (value) => {
+        if(value > Math.pow(10,10)){
+        const shortenedValue = parseFloat(value).toExponential(4);
+        return shortenedValue;
+        }
+        else
+        return value;
+      };
+
   const dataUsers = {
     labels: ["REWARD POT", "LOTTERY POT"],
     datasets: [
@@ -167,7 +176,7 @@ const AdminDashboard = () => {
     datasets: [
       {
         label: 'Game Cash Burned',
-        data: [pieChartData[0]?.gameCashBurned?.$numberDecimal,pieChartData[1]?.gameCashBurned?.$numberDecimal],
+        data: [(pieChartData[0]?.gameCashBurned?.$numberDecimal),pieChartData[1]?.gameCashBurned?.$numberDecimal],
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',

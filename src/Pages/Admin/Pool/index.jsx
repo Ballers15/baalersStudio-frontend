@@ -562,13 +562,13 @@ const PoolListing = () => {
                               </span>
                             </td>
                                 <td className="action-tab-pool-list">
-                                    {pot?.potAmountCollected?.$numberDecimal === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                    {Number(pot?.potAmountCollected?.$numberDecimal) === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
                                             <i className="fa fa-edit " />
                                         </span> :   <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
                                             <i className="fa fa-eye " />
                                         </span>}
                                         <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" disabled={pot?.potAmountCollected?.$numberDecimal > 0 ? true:false}/>}
+                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" />}
                                             {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
                                         </span>
                                 </td>
