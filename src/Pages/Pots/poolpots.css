@@ -1,6 +1,11 @@
 .lotteryPool{
-    position: relative;
+    /* position: relative; */
     overflow: hidden; 
+}
+.lotteryPool .playBtn a {
+    padding: 0.75rem 2rem 0.65rem;
+    background: transparent;
+    color: #fff !important;
 }
 p{font-family: 'Inter', sans-serif;}
 .img-responsive{width: 100%;}
@@ -68,13 +73,20 @@ p{font-family: 'Inter', sans-serif;}
     width: 66%;
     margin: auto;
 }
-.poolBtn .playBtn a{
+.lotteryPool .poolBtn .playBtn a{
     position: relative;
+}
+.howItWork{
+    background: url('../../Assest/img/Ellipse5.png') #110929; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%;
 }
 
 a.disabled{
-    pointer-events: none;
-  cursor: default;
+    pointer-events: none; 
+  cursor: no-drop;
+  opacity: .7;
 }
 .howItWork::before {
     content: "";
@@ -89,16 +101,17 @@ a.disabled{
 }
 .howItWork::after {
     content: "";
-    background: #110929;
+    background: #11092d;
     transform: rotate(46.41deg);
     position: absolute;
-    right: -5%;
-    bottom: -6%;
-    width: 205.36px;
-    height: 100.44px;
+    right: -7%;
+    bottom: -10%;
+    width: 192.36px;
+    height: 65.44px;
     z-index: 2;
 }
 .activePots{
+    padding-top: 8rem;
     background: #1f0147
 }
 .font6{
@@ -325,7 +338,11 @@ a.disabled{
     color: #000;
   }
   .finishSlider {
-    padding: 6rem 0;
+    padding: 6rem 0 4rem;
+    /* background: url('../../Assest/img/bgShade.png') #1f0147; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%; */
 }
   .finishText .fa{
     border: 2px solid #FFFFFF;
@@ -340,6 +357,7 @@ a.disabled{
   }
   p.finishText{
     display: flex;
+    justify-content: center;
     align-items: center;
     font-weight: 400;
     font-size: 23px;
@@ -347,9 +365,9 @@ a.disabled{
     font-family: "Valorant";
   }
   .finishBtn{
-    margin-top: 5rem;
-    margin-left: 10rem;
-    height: 86px;
+    /* margin-top: 5rem;
+    margin-left: 10rem; */
+    height: 125px;
   }
   .roundDiv{    
     background: #110929;
@@ -398,6 +416,9 @@ a.disabled{
     width: 100%;
     height: 4px; 
     margin-left: 12px;
+  }
+  #active-pot .innerBtn a{    
+    white-space: nowrap;
   }
 @media (min-width: 1900px){
     .lotteryPool .sCaption {

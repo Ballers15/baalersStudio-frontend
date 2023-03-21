@@ -85,10 +85,17 @@ const CollapsibleExample = () => {
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/admin-dashboard') }} > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/user-listing') }} > Users </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }} > Pool </Nav.Link> )}
-              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > Logout </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > Login </Nav.Link>)}
+              {/* <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
+              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
+
+            
               
             </Nav>
-            <Nav></Nav>
+            <Nav>
+            <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
+              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)}
+
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
