@@ -5,13 +5,14 @@ import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import star from '../../Assest/img/Star.svg'
 import img1 from '../../Assest/img/img1.png'
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
-import {Table, Button, Form} from 'react-bootstrap';
+import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, leaderBoardLottery, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
+import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
 
 const responsive = {
     superLargeDesktop: {
@@ -66,6 +67,10 @@ const PotPage = () => {
    const [toaster, showToaster] = useState(false);
    const setShowToaster = (param) => showToaster(param);
    const [loading, setLoading] = useState(false);   
+   const [leaderSearch,setLeaderSearch]  = useState('')
+   const [claimExpiryDate, setClaimExpiryDate] = useState('')
+   const [cash, setCash] = useState('')
+   const [prevRounds, setPrevRounds] = useState('')
 
    const [countdownTime, setCountdownTime]= useState(
        {
@@ -76,56 +81,44 @@ const PotPage = () => {
        }
    );
    
-let remainingDayTime=0;
-let timeInterval=null
-const countdownTimer=()=>{
-    
-        timeInterval = setInterval(() => {
-        const countdownDateTime = new Date(expiryTime).getTime(); 
-        const currentTime = new Date().getTime();
-        remainingDayTime = countdownDateTime - currentTime;
+
+
+    const countdownTimer=()=>{
+
+        if(expiryTime!==''){
+         const timeInterval = setInterval(() => {
+         const countdownDateTime = new Date(expiryTime).getTime(); 
+         const currentTime = new Date().getTime();
+          const  remainingDayTime = countdownDateTime - currentTime;
           const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
           const totalHours = Math.floor((remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           const totalMinutes = Math.floor((remainingDayTime % (1000 * 60 * 60)) / (1000 * 60));
           const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
-     
           const runningCountdownTime={
              countdownDays: totalDays,
              countdownHours: totalHours,
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
-        //   console.log(remainingDayTime)
-          console.log("my seconds are ",runningCountdownTime.countdownSeconds);
-       
           setCountdownTime(runningCountdownTime);
      
-          if (remainingDayTime < 0  || expiryTime===false) {
+          if (remainingDayTime < 0 ) {
              clearInterval(timeInterval);
-             console.log('inside if')
              setExpiryTime(false);
             }
      
-         }, 1000);
+         }, 1000); }
+        
     }
-     
-    useEffect(() => {
-        console.log('iside use effect',expiryTime)
-        if(expiryTime!== false)
-{        console.log("calling countdown")
-        countdownTimer();}
-        else
-{        console.log('inside else')
-      let a=  clearInterval(timeInterval);
-        console.log(a)}
-       
-    },[expiryTime]);
-
     useEffect(()=>{
         getActivePotDetails();
+        getPreviousRounds();
         getLotteryLeaderBoard();
     },[])
 
+    useEffect(() => {
+            countdownTimer();
+    },[expiryTime]);
 
     const getActivePotDetails = async () => {
         let dataToSend = {
@@ -142,9 +135,7 @@ const countdownTimer=()=>{
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
             setPotDetails(pot?.data[0])
-            console.log(pot?.data[0])
             setExpiryTime(pot?.data[0].endDate)
-            // setExpiryTime(false)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -155,7 +146,7 @@ const countdownTimer=()=>{
 
     const getLotteryLeaderBoard = async () => {
         let dataToSend = {
-            search: '',
+            search: leaderSearch,
         }
         setLoading(true);
         try {
@@ -185,22 +176,13 @@ const countdownTimer=()=>{
         return value;
       };
 
-      const handleRedeem = () => {
-        if(potType === 'LOTTERYPOT')
-            addCashLottery()
-        else if  (potType === 'REWARDPOT')
-            addCashReward()
-        else
-            return
-      }
-
       const addCashLottery = async () => {
         let dataToSend = 
             {
                 walletAddress: localStorage.getItem('_wallet'),
                 amount:"999",
                 potId: potDetails?._id
-        }
+            }
         setLoading(true);
         try {
           const redeem = await redeemCashLottery(dataToSend);
@@ -211,7 +193,7 @@ const countdownTimer=()=>{
           } else {
             setToasterMessage('Redeemed Successfully');
             setShowToaster(true); 
-            console.log(redeem?.data)
+            setRedeemModal(false)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -226,7 +208,7 @@ const countdownTimer=()=>{
                 walletAddress: localStorage.getItem('_wallet'),
                 amount:"999",
                 potId: potDetails?._id
-        }
+            }
         setLoading(true);
         try {
           const redeem = await redeemCashReward(dataToSend);
@@ -237,7 +219,7 @@ const countdownTimer=()=>{
           } else {
             setToasterMessage('Redeemed Successfully');
             setShowToaster(true); 
-            console.log(redeem?.data)
+            setRedeemModal(false)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -246,8 +228,106 @@ const countdownTimer=()=>{
         }
     }
 
+    const fetchGameCash = async () => {
+        let dataToSend = 
+            {
+                walletAddress: localStorage.getItem('_wallet'),
+            }
+        setLoading(true);
+        try {
+          const cash = await getGameCash(dataToSend);
+          setLoading(false);
+          if (cash.error) {
+            setToasterMessage(cash?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('cash fetched Successfully');
+            setShowToaster(true); 
+            setCash(cash?.data?.amount)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const getPreviousRounds = async () => {
+     
+        setLoading(true);
+        try {
+          const round = await getPrevRounds();
+          setLoading(false);
+          if (round.error) {
+            setToasterMessage(round?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            // setToasterMessage('round fetched Successfully');
+            // setShowToaster(true); 
+            setPrevRounds(round?.data)
+            console.log('prev',prevRounds)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const handleRedeem = () => {
+        if(potType === 'LOTTERYPOT')
+            addCashLottery()
+        else if  (potType === 'REWARDPOT')
+            addCashReward()
+        else
+            return
+      }
+
+    const handleSearchUser = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
+        getLotteryLeaderBoard();
+    }
+
+    const [redeemModal,setRedeemModal] = useState(false)
+    const handleCloseModal = () => setRedeemModal(false)
+
+    const handleRedeemModal = () => {
+        fetchGameCash()
+        setRedeemModal(true)
+    }
+    
+    
 return(
     <>
+       <Modal
+            show={redeemModal} 
+            onHide={handleCloseModal} 
+            size="lg"        
+            className='viewWallet'
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+               Confirm Your Action
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <span>
+            <div className='confirm-modal'>
+              Are you sure to add your game cash $ {cash} ?
+              <br></br>
+              <button type='primary' onClick={()=>handleRedeem()}>Yes</button>
+              <button type='primary' onClick={()=>handleCloseModal()}>No</button>
+              </div>
+            </span>
+            </Modal.Body>
+          </Modal>
+
+
+
     <div className="lotteryPool">
         <div className="text-center potsHead thirdSlide">
             <div className="sCaption text-center">
@@ -260,11 +340,8 @@ return(
                         <div className="playBtn">
                             <a href='#active-pot'><span></span> REDEEM NOW</a>
                         </div>
-                        
                     </div>
                 </div>
-              
-                
             </div>
         </div>
         <div className="gradientBackgroung pb-8 pt-5 howItWork">
@@ -281,7 +358,6 @@ return(
                     <div className="col-sm-8">
                         <div className="position-relative youtubeBox">
                             {/* <img src={youtubePopup} alt="" className="img-responsive" /> */}
-                          
                             <button className="popup-btn"> 
                             <div className="waves-block">
                                 <div className="waves wave-1"></div>
@@ -346,7 +422,7 @@ return(
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                             <div className="poolBtn pt-2">
                                 <div className="playBtn">
-                                {expiryTime!== false ? ( <a onClick={handleRedeem}><span></span> REDEEM NOW</a>) :
+                                {expiryTime!== false ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
                                     (<a className="disabled"><span></span> REDEEM NOW</a>)}
                                 </div>
                             </div>                        
@@ -362,96 +438,28 @@ return(
                             <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
                         </div>
                         <div className="col-sm-9">
-                            <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={1000000} 
+                            <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={5000} 
+
                             arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} >
                             <div className="d-flex">
+                            {/* {prevRounds?.map((round,index)=> {
+                                   return(     
+                                    <div key={round._id}>
                                 <img src={img1} alt="" />
                                 <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                    <h3>Round {index+1}</h3>
+                                    <p><span>Drawn {round?.createdAt}</span></p>
                                     <p className="winHead">Winners <span></span> </p> 
                                     <div className="row">
                                         <div className="col-sm-4">
                                         <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
+                                        <p className="address">0x0677...98e6@CelticChaos</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div></div>)
+                            })} */}
                             </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           
                             
                             </Carousel>
                              
@@ -515,12 +523,13 @@ return(
               <div className="">
                 <div className="searchBox">
                     <h4>Search Leaderboard</h4>
-                    <Form className="d-flex position-relative align-items-center">
+                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser}>
                        <Form.Control
                             type="search"
                             placeholder="Playername#Tagline"
                             className="me-2 searchBar"
                             aria-label="Search"
+                            onChange={(e)=>{setLeaderSearch(e.target.value)}}
                         />
                         <Button className="searchIcon" ><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </Form>
