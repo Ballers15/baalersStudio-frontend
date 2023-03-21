@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import rewardBox from '../../Assest/img/rewardBox.png'
+import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import star from '../../Assest/img/Star.svg'
 import img1 from '../../Assest/img/img1.png'
 import bgShade from '../../Assest/img/bgShade.png'
@@ -8,9 +9,13 @@ import Ellipse5 from '../../Assest/img/Ellipse5.png'
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
 import {Table, Button, Form} from 'react-bootstrap';
 import $ from 'jquery'; 
+import { getActivePot, leaderBoardLottery, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
+import Loader from "../../Components/Loader";
+import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -56,22 +61,32 @@ const PotPage = () => {
         });
         
       });
+    const [potType, setPotType] = useState('REWARDPOT')
+   const [expiryTime, setExpiryTime] = useState("");
+   const [potDetails,setPotDetails] = useState('')
+   const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
+   const [toasterMessage, setToasterMessage] = useState("");
+   const [toaster, showToaster] = useState(false);
+   const setShowToaster = (param) => showToaster(param);
+   const [loading, setLoading] = useState(false);   
 
-   const [expiryTime, setExpiryTime] = useState("5 May 2023 12:30");
    const [countdownTime, setCountdownTime]= useState(
        {
            countdownDays:'',
            countdownHours:'',
-           countdownlMinutes:'',
+           countdownMinutes:'',
            countdownSeconds:''
        }
    );
-    const countdownTimer=()=>{
+   
+let remainingDayTime=0;
+let timeInterval=null
+const countdownTimer=()=>{
     
-        const timeInterval= setInterval(() => {
-          const countdownDateTime = new Date(expiryTime).getTime(); 
-          const currentTime = new Date().getTime();
-          const remainingDayTime = countdownDateTime - currentTime;
+        timeInterval = setInterval(() => {
+        const countdownDateTime = new Date(expiryTime).getTime(); 
+        const currentTime = new Date().getTime();
+        remainingDayTime = countdownDateTime - currentTime;
           const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
           const totalHours = Math.floor((remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           const totalMinutes = Math.floor((remainingDayTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -83,11 +98,14 @@ const PotPage = () => {
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
+        //   console.log(remainingDayTime)
+          console.log("my seconds are ",runningCountdownTime.countdownSeconds);
        
           setCountdownTime(runningCountdownTime);
      
-          if (remainingDayTime < 0) {
+          if (remainingDayTime < 0  || expiryTime===false) {
              clearInterval(timeInterval);
+             console.log('inside if')
              setExpiryTime(false);
             }
      
@@ -95,10 +113,141 @@ const PotPage = () => {
     }
      
     useEffect(() => {
-        countdownTimer();
-    });
-    
-   
+        console.log('iside use effect',expiryTime)
+        if(expiryTime!== false)
+{        console.log("calling countdown")
+        countdownTimer();}
+        else
+{        console.log('inside else')
+      let a=  clearInterval(timeInterval);
+        console.log(a)}
+       
+    },[expiryTime]);
+
+    useEffect(()=>{
+        getActivePotDetails();
+        getLotteryLeaderBoard();
+    },[])
+
+
+    const getActivePotDetails = async () => {
+        let dataToSend = {
+            potType: 'LOTTERYPOT',
+        }
+        setLoading(true);
+        try {
+          const pot = await getActivePot(dataToSend);
+          setLoading(false);
+          if (pot.error) {
+            setToasterMessage(pot?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            // setToasterMessage('Claim Status Updated Succesfully');
+            // setShowToaster(true); 
+            setPotDetails(pot?.data[0])
+            console.log(pot?.data[0])
+            setExpiryTime(pot?.data[0].endDate)
+            // setExpiryTime(false)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const getLotteryLeaderBoard = async () => {
+        let dataToSend = {
+            search: '',
+        }
+        setLoading(true);
+        try {
+          const leader = await leaderBoardLottery(dataToSend);
+          setLoading(false);
+          if (leader.error) {
+            setToasterMessage(leader?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            // setToasterMessage('Claim Status Updated Succesfully');
+            // setShowToaster(true); 
+            setLeaderBoardLotteryDetails(leader?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const formatNumberDecimal = (value) => {
+        if(value > Math.pow(10,10)){
+        const shortenedValue = parseFloat(value).toExponential(4);
+        return shortenedValue;
+        }
+        else
+        return value;
+      };
+
+      const handleRedeem = () => {
+        if(potType === 'LOTTERYPOT')
+            addCashLottery()
+        else if  (potType === 'REWARDPOT')
+            addCashReward()
+        else
+            return
+      }
+
+      const addCashLottery = async () => {
+        let dataToSend = 
+            {
+                walletAddress: localStorage.getItem('_wallet'),
+                amount:"999",
+                potId: potDetails?._id
+        }
+        setLoading(true);
+        try {
+          const redeem = await redeemCashLottery(dataToSend);
+          setLoading(false);
+          if (redeem.error) {
+            setToasterMessage(redeem?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('Redeemed Successfully');
+            setShowToaster(true); 
+            console.log(redeem?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const addCashReward = async () => {
+        let dataToSend = 
+            {
+                walletAddress: localStorage.getItem('_wallet'),
+                amount:"999",
+                potId: potDetails?._id
+        }
+        setLoading(true);
+        try {
+          const redeem = await redeemCashReward(dataToSend);
+          setLoading(false);
+          if (redeem.error) {
+            setToasterMessage(redeem?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('Redeemed Successfully');
+            setShowToaster(true); 
+            console.log(redeem?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
 
 return(
     <>
@@ -112,7 +261,7 @@ return(
                     </p>
                     <div className="poolBtn text-center pt-4">
                         <div className="playBtn">
-                            <a><span></span> REDEEM NOW</a>
+                            <a href='#active-pot'><span></span> REDEEM NOW</a>
                         </div>
                         
                     </div>
@@ -157,7 +306,7 @@ return(
                         <span className="close-btn">&times;</span>
                         <div className="popup-bg"></div>
                         <div className="popup-content"> 
-                        <iframe className="video" src="https://www.youtube.com/embed/q_X9SWxjSss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe className="video" src="https://www.youtube.com/embed/q_X9SWxjSss" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </div>
                     </div>
                     </div>
@@ -184,17 +333,17 @@ return(
                     ACTIVE POT
                     </h2>
                 </div>
-                <div className="row">
+                <div className="row" id='active-pot'>
                     <div className="col-sm-5 my-auto">
                         <div className="text-center">
                             <div>
                                 {expiryTime!==false?
                                     <>
-                                    <span className="countFont">{countdownTime.countdownDays} <sub>d</sub></span>
+                                    <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
                                     <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownHours} <sub>h</sub></span>
+                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
                                     <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>m</sub></span>
+                                    <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
                                     {/* <button type="button" className="btn btn-success">:</button>
                                     <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
                                     </>
@@ -207,13 +356,14 @@ return(
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                             <div className="poolBtn pt-2">
                                 <div className="playBtn">
-                                    <a><span></span> REDEEM NOW</a>
+                                {expiryTime!== false ? ( <a onClick={handleRedeem}><span></span> REDEEM NOW</a>) :
+                                    (<a className="disabled"><span></span> REDEEM NOW</a>)}
                                 </div>
                             </div>                        
                         </div>
                     </div>
                     <div className="col-sm-7 text-center">
-                        <img src={rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                        <img src={expiryTime!==false ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                     </div>
                 </div>
                 </div>
@@ -416,41 +566,37 @@ return(
                     <thead>
                     <tr>
                         <th>Rank</th>
-                        <th>Points</th>
+                        {/* <th>Points</th> */}
                         <th>ID</th>
                         <th>In game cash</th>
                         <th>Collectibles</th> 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1172</td>
-                        <td>VASU D’Baller</td>
-                        <td>$ 10,000</td>
-                        <td>1</td> 
-                    </tr>
+                {leaderBoardLotteryDetails && leaderBoardLotteryDetails?.map((user,index)=>{
+                    return (
+                    <tr key={user._id} >
+                        <td>{index+1}</td>
+                        <td>{user?.userId?.name}</td>
+                        <td>$ {formatNumberDecimal(user?.amount?.$numberDecimal)}</td>
+                        <td>{user?.nftHolded}</td> 
+                    </tr>)
+                })}
+                    
                     <tr className="active">
                         <td>2</td>
-                        <td>1172</td>
                         <td>SAM Deph</td>
                         <td>$ 10,000</td>
                         <td>5</td> 
                     </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>1172</td>
-                        <td>SAM Deph</td>
-                        <td>$ 10,000</td>
-                        <td>7</td> 
-                    </tr>
-                    </tbody>
+                    
+                </tbody>
                 </Table>
 
             </div>
             </div>
         </div>
-         
+        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} /> )}
     </div>
     </>
 )

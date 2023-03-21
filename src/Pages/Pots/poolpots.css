@@ -77,6 +77,11 @@ p{font-family: 'Inter', sans-serif;}
     background-position: 100% 68%;
     background-size: 35%;
 }
+
+a.disabled{
+    pointer-events: none;
+  cursor: default;
+}
 .howItWork::before {
     content: "";
     background: #110929;

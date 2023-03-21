@@ -57,7 +57,7 @@ const NavigationRouter = () => {
               <Route exact path="/pool" element={<><Pool /></>} />
               {/* <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} /> */}
               <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
-              <Route exact path="/metamask" element={<Metamask />} />
+              <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} />
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/poolListing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
@@ -65,7 +65,7 @@ const NavigationRouter = () => {
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
               <Route  path="/privacy" element={<Privacy />} /> 
-              <Route  path="/potPage" element={<PotPage />} /> 
+              <Route  path="/pot" element={<PotPage />} /> 
 
             </Route>
           </Routes>
