@@ -84,8 +84,9 @@ p{font-family: 'Inter', sans-serif;}
 }
 
 a.disabled{
-    pointer-events: none;
-  cursor: default;
+    pointer-events: none; 
+  cursor: no-drop;
+  opacity: .7;
 }
 .howItWork::before {
     content: "";
