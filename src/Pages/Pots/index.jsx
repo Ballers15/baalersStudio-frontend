@@ -3,9 +3,7 @@ import './poolpots.css'
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import star from '../../Assest/img/Star.svg'
-import img1 from '../../Assest/img/img1.png'
-import bgShade from '../../Assest/img/bgShade.png'
-import Ellipse5 from '../../Assest/img/Ellipse5.png'
+import img1 from '../../Assest/img/img1.png' 
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
 import {Table, Button, Form} from 'react-bootstrap';
 import $ from 'jquery'; 
@@ -20,11 +18,11 @@ const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 2.5
+      items: 2
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 1.5
+      items: 1
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -369,12 +367,12 @@ return(
                 </div>
                 <div className="finishSlider">
                     <div className="row">
-                        <div className="col-sm-4 my-auto">
+                        <div className="col-sm-5 my-auto">
                             <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
                         </div>
-                        <div className="col-sm-8">
-                            <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={1000000} 
-                            arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} >
+                        <div className="col-sm-7">
+                            <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={3000} 
+                            arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} autoplayHoverPause={true} >
                            
                             <div>
                                 <div className="d-flex">
