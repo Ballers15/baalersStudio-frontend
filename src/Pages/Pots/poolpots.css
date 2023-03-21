@@ -2,6 +2,11 @@
     /* position: relative; */
     overflow: hidden; 
 }
+.lotteryPool .playBtn a {
+    padding: 0.75rem 2rem 0.65rem;
+    background: transparent;
+    color: #fff !important;
+}
 p{font-family: 'Inter', sans-serif;}
 .img-responsive{width: 100%;}
 .potsHead{ 
@@ -105,6 +110,7 @@ a.disabled{
     z-index: 2;
 }
 .activePots{
+    padding-top: 8rem;
     background: #1f0147
 }
 .font6{
@@ -331,7 +337,11 @@ a.disabled{
     color: #000;
   }
   .finishSlider {
-    padding: 6rem 0;
+    padding: 6rem 0 4rem;
+    /* background: url('../../Assest/img/bgShade.png') #1f0147; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%; */
 }
   .finishText .fa{
     border: 2px solid #FFFFFF;
@@ -346,6 +356,7 @@ a.disabled{
   }
   p.finishText{
     display: flex;
+    justify-content: center;
     align-items: center;
     font-weight: 400;
     font-size: 23px;
@@ -353,9 +364,9 @@ a.disabled{
     font-family: "Valorant";
   }
   .finishBtn{
-    margin-top: 5rem;
-    margin-left: 10rem;
-    height: 86px;
+    /* margin-top: 5rem;
+    margin-left: 10rem; */
+    height: 125px;
   }
   .roundDiv{    
     background: #110929;
@@ -404,6 +415,9 @@ a.disabled{
     width: 100%;
     height: 4px; 
     margin-left: 12px;
+  }
+  #active-pot .innerBtn a{    
+    white-space: nowrap;
   }
 @media (min-width: 1900px){
     .lotteryPool .sCaption {

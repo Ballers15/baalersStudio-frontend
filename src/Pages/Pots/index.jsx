@@ -323,9 +323,9 @@ return(
                 </div>
             </div>
         </div>
-        <div className="gradientBackgroung pb-8 pt-5 activePots">
+        <div className="gradientBackgroung pb-8 activePots" id='active-pot'>
               <div className="container">
-                <div className="positionRelative mt-5 mb-5 headWth mx-auto">
+                <div className="positionRelative mb-5 headWth mx-auto">
                     <h2 className="heading text-center">
                     ACTIVE POT
                     </h2>
@@ -333,7 +333,7 @@ return(
                     ACTIVE POT
                     </h2>
                 </div>
-                <div className="row" id='active-pot'>
+                <div className="row">
                     <div className="col-sm-5 my-auto">
                         <div className="text-center">
                             <div>
@@ -369,10 +369,10 @@ return(
                 </div>
                 <div className="finishSlider">
                     <div className="row">
-                        <div className="col-sm-3 my-auto">
+                        <div className="col-sm-4 my-auto">
                             <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
                         </div>
-                        <div className="col-sm-9">
+                        <div className="col-sm-8">
                             <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={1000000} 
                             arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} >
                            
@@ -399,11 +399,16 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                                <div className="innerBtn finishBtn ">
+                                <div className="poolBtn text-center pt-4 finishBtn">
+                                    <div className="playBtn">
+                                        <a><span></span> CLAIM NOW</a>
+                                    </div>                                    
+                                </div>
+                                {/* <div className="innerBtn finishBtn ">
                                     <a>
                                         <span></span>CLAIM NOW
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                              <div>
                                 <div className="d-flex">
@@ -428,10 +433,10 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                                <div className="innerBtn finishBtn ">
-                                    <a>
-                                        <span></span>CLAIM NOW
-                                    </a>
+                                <div className="poolBtn text-center pt-4 finishBtn">
+                                    <div className="playBtn">
+                                        <a><span></span> CLAIM NOW</a>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div>
@@ -457,10 +462,10 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                                <div className="innerBtn finishBtn ">
-                                    <a>
-                                        <span></span>CLAIM NOW
-                                    </a>
+                                <div className="poolBtn text-center pt-4 finishBtn">
+                                    <div className="playBtn">
+                                        <a><span></span> CLAIM NOW</a>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div>
@@ -486,11 +491,12 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                                <div className="innerBtn finishBtn ">
-                                    <a>
-                                        <span></span>CLAIM NOW
-                                    </a>
+                                <div className="poolBtn text-center pt-4 finishBtn">
+                                    <div className="playBtn">
+                                        <a><span></span> CLAIM NOW</a>
+                                    </div>                                    
                                 </div>
+                                
                             </div>
                             
                             
