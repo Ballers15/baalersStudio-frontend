@@ -71,6 +71,11 @@ p{font-family: 'Inter', sans-serif;}
 .poolBtn .playBtn a{
     position: relative;
 }
+
+a.disabled{
+    pointer-events: none;
+  cursor: default;
+}
 .howItWork::before {
     content: "";
     background: #110929;

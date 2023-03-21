@@ -389,7 +389,7 @@ const PoolListing = () => {
                         onChange={({ target }) => setWalletAddressFilter(target.value)}
                         />
                     <Button className="" type="submit">Search</Button>
-                    <Button className="" type="reset">Reset</Button>
+                    <Button className="" type="reset" style={{marginLeft: '10px'}}>Reset</Button>
                     </Form>
                  </div>
                 <Table responsive className="pool-view-table">

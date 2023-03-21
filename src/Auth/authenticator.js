@@ -9,8 +9,8 @@ export const Authenticator = ({ children }) => {
 
   if (auth?.user?.role!=='USER' && !wallet || auth?.user?.role === null) {
     return <Navigate to='/login' state={{ path: location.pathname }} />
-  } else if (auth?.user.role==='USER' && !wallet) {
-    return <Navigate to='/metamask' state={{ path: location.pathname }} />
+  } else if (auth?.user.role==='USER' && wallet) {
+    return <Navigate to='/pool' state={{ path: location.pathname }} />
   } else {
     console.log('passed succesfully')
   }

@@ -739,7 +739,9 @@ const Dashboard = () => {
                         src={coin}
                         alt="coin image"
                         width="199"
-                        height="199" PlaceholderSrc={coinPlaceholder} effect="blur"
+                        height="199" 
+                        // PlaceholderSrc={coinPlaceholder} 
+                        effect="blur"
                       />
                     </div>
                     <div className="positionRelative mb-4 headWth">
@@ -1050,8 +1052,8 @@ const Dashboard = () => {
                   <div className="col-sm-6">
                     <div className="ballercoin text-right">
                     <picture aria-hidden="true">
-                      <source media="(min-width: 900px)" srcset={ballerCoin} />
-                      <source media="(max-width: 500px)" srcset={ballerCoinMob} />
+                      <source media="(min-width: 900px)" srcSet={ballerCoin} />
+                      <source media="(max-width: 500px)" srcSet={ballerCoinMob} />
                       <img src={ballerCoin} width="382" height="382" alt="Baller Coin"/>
                     </picture>
                       
@@ -1117,8 +1119,8 @@ const Dashboard = () => {
                     />
                   </div> */}
                   <picture aria-hidden="true">
-                    <source media="(min-width: 900px)" srcset={ambassador} />
-                    <source media="(max-width: 500px)" srcset={ambassadorMob} />
+                    <source media="(min-width: 900px)" srcSet={ambassador} />
+                    <source media="(max-width: 500px)" srcSet={ambassadorMob} />
                     <LazyLoadImage src={ambassador} width="1500" height="571" className="image"  alt="Ballers AMBASSADOR program"/>
                   </picture>
                   <div className="contentJoin">
@@ -1257,8 +1259,8 @@ const Dashboard = () => {
                   <div className="col-lg-7 my-auto">
                     <div className="nice-header">
                     <picture aria-hidden="true">
-                      <source media="(min-width: 900px)" srcset={house} />
-                      <source media="(max-width: 500px)" srcset={houseMob} />
+                      <source media="(min-width: 900px)" srcSet={house} />
+                      <source media="(max-width: 500px)" srcSet={houseMob} />
                       <img src={house} width="851" height="700" className="img-fluid" alt="before" />
                     </picture>
                       {/* <img
@@ -1270,8 +1272,8 @@ const Dashboard = () => {
                       /> */}
                       <div className="header-overlay" id="scrollImg">
                       <picture aria-hidden="true">
-                        <source media="(min-width: 900px)" srcset={house1} />
-                        <source media="(max-width: 500px)" srcset={houseMob1} />
+                        <source media="(min-width: 900px)" srcSet={house1} />
+                        <source media="(max-width: 500px)" srcSet={houseMob1} />
                         <img src={house1} width="851" height="700" className="img-fluid" alt="after" />
                       </picture>
                         {/* <img
@@ -1290,8 +1292,8 @@ const Dashboard = () => {
                 <div className="row align-items-center">
                   <div className="col-2 col-sm-3">
                     <picture aria-hidden="true">
-                      <source media="(min-width: 900px)" srcset={footerLogo} />
-                      <source media="(max-width: 500px)" srcset={gamelogo} />
+                      <source media="(min-width: 900px)" srcSet={footerLogo} />
+                      <source media="(max-width: 500px)" srcSet={gamelogo} />
                       <LazyLoadImage src={footerLogo}  alt="logo"
                       className="mob-wth img-fluid imgHeight"
                       width={200}
