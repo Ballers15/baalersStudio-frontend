@@ -3,11 +3,14 @@ import './poolpots.css'
 import rewardBox from '../../Assest/img/rewardBox.png'
 import star from '../../Assest/img/Star.svg'
 import img1 from '../../Assest/img/img1.png'
+import bgShade from '../../Assest/img/bgShade.png'
+import Ellipse5 from '../../Assest/img/Ellipse5.png'
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
 import {Table, Button, Form} from 'react-bootstrap';
 import $ from 'jquery'; 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -118,7 +121,14 @@ return(
                 
             </div>
         </div>
-        <div className="gradientBackgroung pb-8 pt-5 howItWork">
+        <div className="gradientBackgroung pb-8 pt-5 howItWork position-relative" >
+            {/* <LazyLoadImage
+                src={Ellipse5}
+                className="bgShade2"
+                width="1003"
+                height="1788"
+                alt="Eclipse"
+              /> */}
               <div className="container">
                 <div className="positionRelative mt-5 mb-5 headWth mx-auto">
                     <h2 className="heading text-center">
@@ -206,6 +216,7 @@ return(
                         <img src={rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                     </div>
                 </div>
+                </div>
                 <div className="finishSlider">
                     <div className="row">
                         <div className="col-sm-3 my-auto">
@@ -214,102 +225,128 @@ return(
                         <div className="col-sm-9">
                             <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={1000000} 
                             arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} >
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
+                           
+                            <div>
+                                <div className="d-flex">
+                                    <img src={img1} alt="" />
+                                    <div className="roundDiv">
+                                        <h3>Round 22</h3>
+                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                        <p className="winHead">Winners <span></span> </p> 
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="innerBtn finishBtn ">
+                                    <a>
+                                        <span></span>CLAIM NOW
+                                    </a>
+                                </div>
                             </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
+                             <div>
+                                <div className="d-flex">
+                                    <img src={img1} alt="" />
+                                    <div className="roundDiv">
+                                        <h3>Round 22</h3>
+                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                        <p className="winHead">Winners <span></span> </p> 
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="innerBtn finishBtn ">
+                                    <a>
+                                        <span></span>CLAIM NOW
+                                    </a>
+                                </div>
                             </div>
-                            <div className="d-flex">
-                                <img src={img1} alt="" />
-                                <div className="roundDiv">
-                                    <h3>Round 22</h3>
-                                    <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                    <p className="winHead">Winners <span></span> </p> 
-                                    <div className="row">
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
-                                        </div>
-                                        <div className="col-sm-4">
-                                        <img src={img1} alt="" />
-                                        <p className="address">0x06...98e6@CelticChaos</p>
+                            <div>
+                                <div className="d-flex">
+                                    <img src={img1} alt="" />
+                                    <div className="roundDiv">
+                                        <h3>Round 22</h3>
+                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                        <p className="winHead">Winners <span></span> </p> 
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="innerBtn finishBtn ">
+                                    <a>
+                                        <span></span>CLAIM NOW
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="d-flex">
+                                    <img src={img1} alt="" />
+                                    <div className="roundDiv">
+                                        <h3>Round 22</h3>
+                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                        <p className="winHead">Winners <span></span> </p> 
+                                        <div className="row">
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                            <div className="col-sm-4">
+                                            <img src={img1} alt="" />
+                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="innerBtn finishBtn ">
+                                    <a>
+                                        <span></span>CLAIM NOW
+                                    </a>
                                 </div>
                             </div>
                             
+                            
                             </Carousel>
                              
-                            <div className="innerBtn finishBtn">
-                                <a>
-                                    <span></span>CLAIM NOW
-                                </a>
-                            </div>
+                           
                             {/* <div>
                                 {expiryTime!==false?
                                     <>
@@ -322,11 +359,11 @@ return(
                                     :<p>Deal has been Expired</p>}
                             </div> */}
                         </div>
-                    </div>
+                    </div>                   
                 </div>
                 
 
-                
+            <div className="container">
                 <div className="rotateDiv secPaddingY">
                 <div className="marquee">
                   <div className="marquee-item" data-dir="right">

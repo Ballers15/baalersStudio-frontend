@@ -1,5 +1,5 @@
 .lotteryPool{
-    position: relative;
+    /* position: relative; */
     overflow: hidden; 
 }
 p{font-family: 'Inter', sans-serif;}
@@ -71,6 +71,12 @@ p{font-family: 'Inter', sans-serif;}
 .poolBtn .playBtn a{
     position: relative;
 }
+.howItWork{
+    background: url('../../Assest/img/Ellipse5.png') #110929; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%;
+}
 .howItWork::before {
     content: "";
     background: #110929;
@@ -84,13 +90,13 @@ p{font-family: 'Inter', sans-serif;}
 }
 .howItWork::after {
     content: "";
-    background: #110929;
+    background: #11092d;
     transform: rotate(46.41deg);
     position: absolute;
-    right: -5%;
-    bottom: -6%;
-    width: 205.36px;
-    height: 100.44px;
+    right: -7%;
+    bottom: -10%;
+    width: 192.36px;
+    height: 65.44px;
     z-index: 2;
 }
 .activePots{
