@@ -7,6 +7,12 @@
     background: transparent;
     color: #fff !important;
 }
+.ht100{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.pt8{padding-top: 8rem;}
 p{font-family: 'Inter', sans-serif;}
 .img-responsive{width: 100%;}
 .potsHead{ 
@@ -111,7 +117,6 @@ a.disabled{
     z-index: 2;
 }
 .activePots{
-    padding-top: 8rem;
     background: #1f0147
 }
 .font6{
@@ -339,11 +344,53 @@ a.disabled{
   }
   .finishSlider {
     padding: 6rem 0 4rem;
+    /* position: relative; */
     /* background: url('../../Assest/img/bgShade.png') #1f0147; 
     background-repeat: no-repeat;
     background-position: 100% 68%;
     background-size: 35%; */
 }
+  .finishSlider .playBtn{
+    height: 50px;
+
+  }
+  .finishSlider .react-multi-carousel-list{
+    width: 68%; 
+    float: right;
+  }
+  .prevCarousel{
+    background: transparent;
+    border: 0;
+    color: #fff;
+    margin-left: 7rem;
+  }
+  .nextCarousel{
+    background: transparent;
+    border: 0; 
+    margin-right: -5rem;
+  }
+  .finishSlider .prevCarousel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  .finishSlider .nextCarousel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  /* .finishSlider .carousel-button-group.mb-4.gap-4{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  } */
   .finishText .fa{
     border: 2px solid #FFFFFF;
     border-radius: 50%;
@@ -372,9 +419,9 @@ a.disabled{
   .roundDiv{    
     background: #110929;
     border-radius: 0 8px 8px 0px;
-    padding: 20px;
-    height: 252px;
-    margin: auto;
+    padding: 20px 30px;
+    /* height: 252px; */
+    margin: auto 0;
     margin-bottom: 0;
     margin-right: 1.5rem;
   }
@@ -395,10 +442,13 @@ a.disabled{
   .roundDiv img{
     border-radius: 50%;
     width: 100%;
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
     margin-bottom: 8px;
   }
+  /* .react-multi-carousel-item{
+    width: 556px !important;
+  } */
   .roundDiv .address{
     color: #FF80FF;
     opacity: 0.8;
@@ -413,13 +463,25 @@ a.disabled{
   }
   .winHead span{
     border-bottom: 1px solid #438CE7;
-    width: 100%;
+    width: 160px;
     height: 4px; 
     margin-left: 12px;
   }
   #active-pot .innerBtn a{    
     white-space: nowrap;
   }
+  .expDate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .expDate p{
+    font-size: 12px;
+  }
+  .claimExpire span.countFont {
+    color: #FF80FF;
+    font-size: 13px;
+}
 @media (min-width: 1900px){
     .lotteryPool .sCaption {
         width: 40%;
@@ -462,6 +524,25 @@ a.disabled{
     }
 }
 @media (max-width: 480px){
+  .headWth {
+    width: 90%;
+}
+.howItWork .ps-4{
+  padding-top: 2rem;
+  padding-left: 0 !important;
+}
+  .howItWork::after { 
+    right: -9%;
+    bottom: -3%;
+    width: 80.36px;
+    height: 61.44px; 
+}
+.howItWork::before { 
+  left: -14%;
+  top: -4%;
+  width: 90.36px;
+  height: 96.44px; 
+}
     .lotteryPool .sCaption .textHeader {
         width: 95%;
     }
