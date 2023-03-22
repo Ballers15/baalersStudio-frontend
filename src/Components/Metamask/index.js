@@ -8,6 +8,7 @@ const Metamask = () => {
 	const [error, setError] = useState("No Error");
 	const [accountDetails, setAccountDetails] = useState('');
   const navigate = useNavigate();
+  const [walletAddress, setWalletaddress] =useState();
   const redirectPath = '/';
 
 	const supportedChainList = {
@@ -26,6 +27,9 @@ const Metamask = () => {
 		}
 	};
 
+  const saveNewAddress = (address) =>{
+    console.log('changedd',address)
+  }
   const getAccountDetails = async ({ networkName, setError }) => {
     if (typeof window.ethereum !== "undefined") {
       window.ethereum
@@ -38,7 +42,9 @@ const Metamask = () => {
               method: "eth_chainId",
             })
 			  .then((chainID) => {
-				  getDetailsFromChainId(chainID);
+				  getDetailsFromChainId(chainID,res);
+          saveNewAddress(res);
+          localStorage.setItem('_wallet',res)
             });
         })
 		  .catch((err) => {
@@ -105,11 +111,16 @@ const Metamask = () => {
 	}
 
   useEffect(() => {
+    const wallet=localStorage.getItem('_wallet');
+    if(wallet){
+      setWalletaddress(wallet)
+      console.log(wallet)
+    }
     try {
 		if (typeof window.ethereum == "undefined") {
 		  return alert('Please install MetaMask');
 		}
-		// window.ethereum?.on('accountsChanged', switchNetwork);
+		window.ethereum?.on('accountsChanged', saveNewAddress);
 		window.ethereum?.on('chainChanged', switchNetwork); 
 	  } catch (error) {
 		console.log(error);
@@ -121,6 +132,10 @@ const Metamask = () => {
 	  };
 	  // eslint-disable-next-line
   }, []);
+
+  useEffect(()=>{
+
+  },[walletAddress])
 
   return (
     <React.Fragment>
@@ -134,9 +149,9 @@ const Metamask = () => {
         </div>
         <div className="metamask-connect-container">
          
-          {accountDetails ? (
+          {walletAddress ? (
                         <p>
-						  Account: <code style={{ display: "inline" }}>{accountDetails}</code>
+						  Account: <code style={{ display: "inline" }}>{walletAddress}</code>
 						  <button
 						   className="meta-btn metamask-connect-container"
 						   onClick={() => redirectToAuthRute("polygon")} >

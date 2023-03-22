@@ -1,5 +1,5 @@
 .pool{ 
-    background-image: url(../../Assest/img/slide3.png);
+    background-image: url(../../Assest/img/slide3.webp);
     height: 100vh;
     bottom: 0;
     top: 0;
@@ -37,7 +37,7 @@
 }
 .pool .secondText {
     left: 0;
-    width: 16%;
+    /* width: 16%; */
 }
 
 .pool .firstText {
@@ -55,28 +55,30 @@
   .pool .thirdSlide {
     height: 61vh; 
 }
+@media (min-width: 1750px){
+    .pool .secondText {
+        left: 0;
+        /* width: 12%; */
+    }
+}
 @media (min-width: 1900px){
-    .loader { 
-        width: 185px;
-        height: 185px;
-    }    
     .pool .thirdSlide .sCaption {
-        width: 48%;
+        width: 40%;
     }
     .pool .poolBtn {
         width: 90%;
     }
 }
-@media (min-width: 1750px){
-    .pool .secondText {
-        left: 0;
-        width: 12%;
+@media (min-width: 2000px){
+    .pool .thirdSlide .sCaption {
+        width: 50%;
     }
 }
+
 @media (max-width: 1500px){
     .pool .secondText {
         left: 2rem;
-        width: 14%;
+        /* width: 14%; */
     }
     
     .pool .logoSlider {
@@ -84,10 +86,15 @@
         bottom: 0;
     }
 }
+@media (min-width:1200px) and (max-width: 1281px){
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
 @media (max-width: 1024px){
     .pool .secondText {
         left: 0rem;
-        width: 17%;
+        /* width: 17%; */
     }
     .pool .poolBtn {
         width: 74%;
@@ -102,7 +109,7 @@
     }
     .pool .secondText {
         left: -3rem;
-        width: 22%;
+        /* width: 22%; */
         bottom: 10rem;
     }
     .pool .poolBtn {
@@ -110,11 +117,15 @@
     }
 }
 @media (max-width: 480px){
+    .pool .thirdSlide .sCaption{
+        height: 100%;
+    }
     .pool .poolBtn {
         width: 100%;
     }
-    .pool .poolBtn .playBtn{
-        width: 54%;
+    
+    .pool .poolBtn .playBtn {
+        width: 47%;
     }
     .pool .thirdSlide {
         height: 65vh;
@@ -122,7 +133,7 @@
     }
     .pool .secondText {
         left: -2rem;
-        width: 42%;
+        /* width: 42%; */
         bottom: 7rem;
     }
     .pool .firstText { 

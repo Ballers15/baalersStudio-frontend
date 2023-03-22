@@ -239,6 +239,7 @@ const Signup = () => {
   return (
     <React.Fragment>
       <div className="signup-page-wrapper">
+        <div className="signup-box">
       {/* <h2>Sign Up</h2> */}
         <div className="signup-page-container">
           
@@ -246,38 +247,38 @@ const Signup = () => {
         <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <Row className="mb-3">
               <Form.Label>All fields marked with an asterisk(*) are mandatory</Form.Label>
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4'>
                 <Form.Label className="small-lable">Username</Form.Label>
                 <Form.Control required type="text" value={userDetails.userName} onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})}  ></Form.Control>
                 <Form.Control.Feedback type="invalid">username is required !!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4' >
                 <Form.Label className="small-lable">First Name</Form.Label>
                 <Form.Control required type="text" onChange={({ target }) => setUserDetails({ ...userDetails,firstName:target.value})} value={userDetails.firstName} ></Form.Control>
                 <Form.Control.Feedback type="invalid">first name is required !!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4'>
                 <Form.Label className="small-lable">Last name </Form.Label>
                 <Form.Control required type="text" onChange={({ target }) => setUserDetails({ ...userDetails,lastName:target.value})} value={userDetails.lastName} ></Form.Control>
                 <Form.Control.Feedback type="invalid">last Name is required !!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4'>
                 <Form.Label className="small-lable">email </Form.Label>
                 <Form.Control required type="email" onChange={({ target }) => setUserDetails({ ...userDetails,email:target.value})} value={userDetails.email} ></Form.Control>
                 <Form.Control.Feedback type="invalid"> <span> {userDetails.email && 'Valid E-mail is required !'} </span> <span> {!userDetails.email && 'E-mail is required'} </span> </Form.Control.Feedback>
                 <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
               </Form.Group>
            
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4'>
                 <Form.Label className="small-lable">Password</Form.Label>
                 <Form.Control required type="password" onChange={({ target }) => setUserDetails({ ...userDetails,password:target.value})} value={userDetails.password}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" className='pb-4'>
                 <Form.Label className="small-lable">Confirm Password</Form.Label>
                 <Form.Control required type="password" onChange={({ target }) => setUserDetails({ ...userDetails,repeat:target.value})} value={userDetails.repeat}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password do not match</Form.Control.Feedback>
@@ -290,7 +291,7 @@ const Signup = () => {
 
 
           {response?.status === 200 &&   
-               <Form noValidate validated={validated} onSubmit={handleSubmitOtp} >
+            <Form noValidate validated={validated} onSubmit={handleSubmitOtp} >
               <Row className="mb-3">
                 <Form.Group >
                   <Form.Label className="small-lable">Enter 6 digit OTP received on email</Form.Label>
@@ -310,6 +311,7 @@ const Signup = () => {
         </div>
         {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} /> )}
 
+      </div>
       </div>
     </React.Fragment>
   )

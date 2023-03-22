@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './Pool.css';
-import React from "react";
+import React, { Component } from "react";
 import {useState,useEffect} from 'react';
 import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
@@ -9,19 +9,26 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import Loader from "../../../Components/Loader";
 import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
+// import TimeKeeper from 'react-timekeeper';
+
 
 const AddPot = () => {
+    const [showTime, setShowTime] = useState(false)
+    const [showTimeEnd, setShowTimeEnd] = useState(false)
+
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
     const [rewadPotDetail, setRewardPotDetail] = useState({
         rewardTokenAmount:'', assetDetails: {
             ticker:'',contractAddress:'',assetName:''
-        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:'12:00'},isActive:false
+        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:''},isActive:false
     });
-    const [startDateTime, setStartDateTime] = useState('12:00');
+    const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
+    const currentTime =  new Date().toLocaleTimeString([], {hourCycle: 'h23',hour: '2-digit', minute:'2-digit'})
+    const [startDateTime, setStartDateTime] = useState(currentTime);
     const [endDate, setEndDate] = useState();
-    const [endDateTime, setEndDateTime] = useState('12:00');
+    const [endDateTime, setEndDateTime] = useState(currentTime);
     const [loading, setLoading] = useState(false);
     const [toasterMessage, setToasterMessage] = useState("");
     const [disable, disableSubmitButton] = useState(false);
@@ -30,6 +37,9 @@ const AddPot = () => {
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
+    const [potStatusCheck,setPotStatusCheck] = useState(false);
+
+
 
     useEffect(() => {
         if (state?.id) {
@@ -51,9 +61,12 @@ const AddPot = () => {
                 setShowToaster(true);
               } else {
                   let data = getPotDetailsById?.data[0];
+
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
                   if (data) {
+                    console.log(data)
+
                       setRewardPotDetail({
                           ...rewadPotDetail,
                           rewardTokenAmount: data?.rewardTokenAmount,
@@ -67,6 +80,7 @@ const AddPot = () => {
                               contractAddress: data?.assetDetails?.contractAddress,
                           },
                           isActive: data?.isActive,
+                          potStatus: data?.potStatus,
                           claimExpiryDate: {
                               ...rewadPotDetail.claimExpiryDate,
                               time: data?.endDate?.split('T')[1]?.slice(0,5),
@@ -75,10 +89,16 @@ const AddPot = () => {
                       })
                       setEndDate( data?.endDate?.split('T')[0])
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-                      setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
-                  }
-               
+                    }
+                    if(data?.potStatus === 'ONGOING'){
+                        console.log('if',data?.potStatus)
+                        setPotStatusCheck(true);
+                        console.log(potStatusCheck) 
+                        console.log(rewadPotDetail)
+                      }
               }
              
             } catch (error) {
@@ -86,6 +106,8 @@ const AddPot = () => {
                 setShowToaster(true);
                 setLoading(false);
             }
+           
+           
     }
     
     const getClaimExpiryTime = (e, data) => {
@@ -116,20 +138,36 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+        
 
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate) {
+        if(potStatusCheck)
+        {
+            rewadPotDetail.startDate = currentDate;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=true;
+        }
+        else
+        {
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=false;
+
+        }
+
+        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
         } else {
             if (endDate) {
-                rewadPotDetail.endDate = endDate+' '+endDateTime;
+                rewadPotDetail.endDate = endDate+'T'+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
             }
         }
         setDisableSubmitButton(true);
@@ -157,33 +195,50 @@ const AddPot = () => {
     }
 
     const updateRewardPot = async (e) => {
-        if (!state?.id) {
+        if (!state?.id || rewadPotDetail?.isActive === 'true') {
             return;
         }
-
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-   
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.startDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate) {
+
+        if(potStatusCheck)
+        {
+            rewadPotDetail.startDate = currentDate;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=true;
+        }
+        else
+        {
+            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
+            setStartDateTime(currentTime);
+            rewadPotDetail.isActive=false;
+
+        }
+
+        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
         } else {
             if (endDate) {
-                rewadPotDetail.endDate = endDate+' '+endDateTime;
+                rewadPotDetail.endDate = endDate+'T'+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +' '+startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
+
             }
             rewadPotDetail.potId = state?.id;
         }
         setDisableSubmitButton(true);
         setLoading(true);
+        console.log(rewadPotDetail)
+        // return
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
           setLoading(false);
@@ -213,10 +268,10 @@ const AddPot = () => {
         <React.Fragment>
             <div className="addPot">
             <div className="addPot-container">
-            <Form noValidate validated={validated} onSubmit={addRewardPot}>
+            <Form noValidate validated={validated} >
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>Reward Amount</Form.Label>
+                                    <Form.Label>Reward Amount $ / Quantity for Nft</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -224,8 +279,7 @@ const AddPot = () => {
                                         min={0}
                                         inputMode="numeric"
                                         value={rewadPotDetail.rewardTokenAmount|| ''}
-                                        onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})}
-                                       >
+                                        onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})} >
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
                                         Token Amount is required (Min:0) !!
@@ -236,14 +290,15 @@ const AddPot = () => {
                                     <Row>
                                     <Form.Group as={Col} md="3">
                                         <Form.Label>Start Date</Form.Label>
-                                            <Form.Control
+                                            <Form.Control className='dateIcon'
                                                 required
                                                 type="date"
-                                                min={new Date().toISOString().split("T")[0]}
+                                                format="mm/dd/yyyy"
+                                                min={currentDate}
                                                 max={endDate}
-                                                value={rewadPotDetail.startDate|| ''}
+                                                value={potStatusCheck ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
                                                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
-                                            </Form.Control>
+                                                </Form.Control>
                                             <Form.Control.Feedback type="invalid">
                                                 Start Date is required !!
                                             </Form.Control.Feedback>
@@ -251,13 +306,33 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>Start Time</Form.Label><br/>
-                                            <TimePicker onChange={setStartDateTime}
-                                                value={startDateTime|| ''} />
+                                            <TimePicker 
+                                             value={potStatusCheck ? currentTime : startDateTime|| ''} 
+                                            onChange={(e) => { setStartDateTime(e);}} />
+                                   
+                                            {/* <div className='pickTime'>
+                                                {showTime &&
+                                                    <TimeKeeper
+                                                        // time={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime|| ''}
+                                                        time={startDateTime}
+                                                        onChange={(e)=> handleStartTime(e)}
+                                                        onDoneClick={() => setShowTime(false)}
+                                                        switchToMinuteOnHourSelect
+                                                        hour24Mode                                                   
+                                                    />
+
+                                                }
+                                                <span>{rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime}</span>
+                                                {!showTime &&
+                                                    <span onClick={() => setShowTime(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                } 
+                                            </div> */}
                                         </Form.Group>
-                                
+
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Date</Form.Label>
                                             <Form.Control
+                                            className='dateIcon'
                                             required
                                             type="date"
                                             min={rewadPotDetail?.startDate}
@@ -271,26 +346,37 @@ const AddPot = () => {
                                 
                                         <Form.Group as={Col} md="3">
                                             <Form.Label>End Time</Form.Label><br/>
-                                            <TimePicker onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
+                                            <TimePicker 
+                                                onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
                                                 value={endDateTime|| ''} />
+
+                                            {/* <Timeit onChange={(e) => { setEndDateTime(e);  }}
+                                                value={endDateTime|| ''}/> */}
+                                            {/* <div className='pickTime'>
+                                                {showTimeEnd &&
+                                                    <TimeKeeper
+                                                        time={endDateTime}
+                                                        onChange={(e) => setEndDateTime(e.formatted)}
+                                                        onDoneClick={() => setShowTimeEnd(false)}
+                                                        switchToMinuteOnHourSelect
+                                                    />
+
+                                                }
+                                                <span>{endDateTime }</span>
+                                                {!showTimeEnd &&
+                                                    <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
+                                                } 
+                                            </div> */}
                                         </Form.Group>
-                                    </Row>
-
-
-                                
-                                </Col>
-                             
-                        
-                                
+                                    </Row> 
+                                </Col>  
                             </Row>
                     
                             <Row className="mb-3">
-                                {/* <Form.Label>Claim Expiry</Form.Label><br /> */}
-                        
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Claim Expiry Date</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                      type="text"
                                       value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} >
                                 </Form.Control>
                                 </Form.Group>
@@ -300,7 +386,7 @@ const AddPot = () => {
                                     <Form.Label>Claim Expiry Time</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={rewadPotDetail?.claimExpiryDate?.time|| ''} disabled={true} >
+                                        value={endDateTime|| ''} disabled={true} >
                                     </Form.Control>
                                 </Form.Group>
                                 
@@ -389,9 +475,9 @@ const AddPot = () => {
                                 
                                 <Form.Group as={Col} md="3" className='d-flex mb-0 mt-auto'>
                                
-                                    <Form.Check type="checkbox" checked={rewadPotDetail.isActive}
-                                    onChange={() => setRewardPotDetail({ ...rewadPotDetail,isActive:!rewadPotDetail.isActive})} />
-                                     <Form.Label>Active Pot</Form.Label>
+                                    <Form.Check type="checkbox" checked={potStatusCheck}
+                                    onChange={() => setPotStatusCheck(!potStatusCheck)} />
+                                     <Form.Label>Active Pot Now</Form.Label>
                                 </Form.Group>
                             </Row>
                     

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './AdminDashboard.css'
-import { Col, Row, Button, Container } from 'react-bootstrap';
+import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { getBarChart, getPiechart, getPotClaim, getPotCounts, getUsersCount } from '../../Services/Admin';
@@ -15,17 +15,19 @@ const AdminDashboard = () => {
   const [potClaimData, setPotClaimData] = useState([])
   const [pieChartData, setPieChartData] = useState([])
   const [barChartData, setBarChartData] = useState([])
-  const [xAxis,setXaxis]=useState([])
-  const [yAxisLabel,setYaxisLabel]=useState([])
+  const [barPotTypeUsers,setBarPotTypeUsers]=useState('LOTTERYPOT')
 
   useEffect(() => {
     usersCount();
     potCount();
     potClaim()
     pieCharts()
-    barChart()  
-    console.log(xAxis)
+    barChart()
   }, [])
+
+    useEffect(()=>{
+      barChart()
+    },[barPotTypeUsers])
 
       const usersCount =  async () =>{
         setLoading(true);
@@ -101,7 +103,7 @@ const AdminDashboard = () => {
 
       const barChart =  async () =>{
         let dataToSend={
-          potType: 'LOTTERYPOT'
+          potType: barPotTypeUsers
         }
         setLoading(true);
         try {
@@ -111,11 +113,7 @@ const AdminDashboard = () => {
             setToasterMessage(bar?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-             setBarChartData(bar?.data)
-             console.log(bar?.data)
-             barChartData?.potDetails?.map((pot)=>{
-              setXaxis({startDate:pot.startDate},{endDate:pot.endDate})
-            })
+             setBarChartData(bar?.data)    
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -124,6 +122,14 @@ const AdminDashboard = () => {
         }
       }
 
+      const formatNumberDecimal = (value) => {
+        if(value > Math.pow(10,10)){
+        const shortenedValue = parseFloat(value).toExponential(4);
+        return shortenedValue;
+        }
+        else
+        return value;
+      };
 
   const dataUsers = {
     labels: ["REWARD POT", "LOTTERY POT"],
@@ -132,12 +138,12 @@ const AdminDashboard = () => {
         label: '# of users',
         data: [pieChartData[0]?.userCount,pieChartData[1]?.userCount],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',  
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)', 
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderWidth: 1,
       },
@@ -149,10 +155,18 @@ const AdminDashboard = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white'
+        }
       },
       title: {
         display: true,
         text: 'No. of Users',
+        color: 'white',
+        font: {
+          size: 17, 
+          weight: 400,
+        }
       },
     },
   };
@@ -162,14 +176,14 @@ const AdminDashboard = () => {
     datasets: [
       {
         label: 'Game Cash Burned',
-        data: [pieChartData[0]?.gameCashBurned,pieChartData[1]?.gameCashBurned],
+        data: [(pieChartData[0]?.gameCashBurned?.$numberDecimal),pieChartData[1]?.gameCashBurned?.$numberDecimal],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',  
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)', 
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
         ],
         borderWidth: 1,
       },
@@ -182,47 +196,116 @@ const AdminDashboard = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: 'white'
+        }
       },
       title: {
         display: true,
         text: 'Game Cash Burned',
+        color: 'white',
+        font: {
+          size: 17, 
+          weight: 400,
+        }
       },
     },
+    
   };
  
-  
+  const barLabelUsers=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
+  const barDatausers=barChartData?.map((el)=>{ return el?.users})
+
   const dataBar = {
-    labels:[1,2],
+    labels:barLabelUsers,
     datasets: 
           [
       {
-        label: 'Sales',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        label: 'No. of Users',
+        backgroundColor: 'rgb(255 159 64 / 68%)',
+        borderColor: 'rgb(255, 159, 64)',
         borderWidth: 2,
-        data: [barChartData.map((el)=>{
-            return el.users
-        })]
+        data: barDatausers,
       },
-      {
-        label: 'Sales',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data: [barChartData.map((el)=>{
-            return el.users
-        })]
-      }
     ]
   };
-  const optionsBar = {
+  const optionsBarUsers = {
     title: {
       display: true,
       text: 'No. of users',
       fontSize: 20
     },
-    legend: {
-      display: true
+  
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: 'white',
+          font: {
+            size: 17, 
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#fff', beginAtZero: true }
+      },
+      x: {
+        ticks: { color: '#fff', beginAtZero: true }
+      }
+    }
+  };
+
+  const barDataCash=barChartData.map((el)=>{ return el?.gameCashBurned?.$numberDecimal})
+  const barLabelCash=barChartData?.map((el)=>{ return el?.potDetails?.startDate?.split('T')[0] })
+  
+  const dataBarCash = {
+    labels:barLabelCash,
+    datasets: 
+          [
+    
+      {
+        label: 'Game Cash Burned',
+        fontColor: '#fff',
+        backgroundColor: 'rgb(153 102 255 / 67%)',
+        borderColor: 'rgb(153, 102, 255)',
+        borderWidth: 2,
+        data: barDataCash
+      },
+    ],
+    options: { 
+      legend: {
+          labels: {
+              color: "#000",
+              fontSize: 18
+          }
+      },
+  }
+  };
+  const optionsBarCash = {
+    title: {
+      display: true,
+      text: 'Game Cash Burned',
+      fontSize: 20, 
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',
+          font: {
+            size: 17, 
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { color: '#fff', beginAtZero: true }
+      },
+      x: {
+        ticks: { color: '#fff', beginAtZero: true }
+      }
     }
   };
   
@@ -276,15 +359,20 @@ const AdminDashboard = () => {
             </div>
             </Col>
             </Row>
-            <Row>
+            <Form.Select aria-label="Default select example" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
+                <option value='LOTTERYPOT' selected>Lottery Pot</option>
+                <option value='REWARDPOT'>Reward Pot</option>
+            </Form.Select>
+            <Row>            
             <Col md={6}>
             <div className="card graphCard">
-            <Bar data={dataBar} options={optionsBar} />
+
+            <Bar data={dataBar} options={optionsBarUsers} />
             </div>
             </Col>
             <Col md={6}>
             <div className="card graphCard">
-            <Bar data={dataBar} options={optionsBar} />
+            <Bar data={dataBarCash}  options= {optionsBarCash} />
             </div>
             </Col>
           </Row>

@@ -373,7 +373,7 @@ border: none;
 	transform: translateY(-100%);
 }
 
-.addPot .react-time-picker__inputGroup__input {
+/* .addPot .react-time-picker__inputGroup__input {
   min-width: 0.54em;
   height: 100%;
   position: relative;
@@ -384,7 +384,7 @@ border: none;
   font: inherit;
   box-sizing: content-box;
   -moz-appearance: textfield;
-}
+} */
 
 .addPot .form-control {
   display: block;
@@ -558,3 +558,30 @@ a.page-link span, .page-link:hover {
   background: transparent;
   color: #fff;
 }
+/* .pickTime{
+  background-color: #d7d6e7;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.4em;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    display: block;
+    width: 100%;
+    padding: 0.675rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5; 
+    color: #093d70; 
+}
+.pickTime .react-timekeeper{
+  position: absolute !important; 
+  z-index: 9;
+}
+.pickTime span .fa-clock-o{
+  cursor: pointer;
+  font-size: 18px;
+}
+.dateIcon.form-control.is-invalid, .was-validated .dateIcon.form-control:invalid { 
+  background-position: right calc(0.735em + 0.85rem) center;
+  padding: 0.675rem 0.75rem;
+} */

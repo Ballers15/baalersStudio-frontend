@@ -1,0 +1,488 @@
+.lotteryPool{
+    /* position: relative; */
+    overflow: hidden; 
+}
+.lotteryPool .playBtn a {
+    padding: 0.75rem 2rem 0.65rem;
+    background: transparent;
+    color: #fff !important;
+}
+p{font-family: 'Inter', sans-serif;}
+.img-responsive{width: 100%;}
+.potsHead{ 
+    background-image: url(../../Assest/img/slide3.webp);
+    height: 100vh;
+    bottom: 0;
+    top: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: #ECE8E1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+} 
+/* .lotteryPool #four { 
+    transform: translate(122%, 100%);
+}
+.lotteryPool .slideStar{
+    position: absolute;
+}
+.lotteryPool .slideStar #two {
+    transform: translate(208%, 348%);
+}
+.lotteryPool .slideStar #three {
+    transform: translate(1085%, 400%);
+}
+.lotteryPool #five {
+    transform: translate(710%,286%);
+}  */
+
+.lotteryPool .thirdSlide .sCaption{
+    width: 50%;
+    height: auto;
+    position: relative;
+}
+.lotteryPool .poolBtn {
+    width: 100%;
+}
+
+
+.lotteryPool .firstText {
+    right: 5rem;
+    top: 32%;
+}
+.potsHead:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    opacity: .4;
+  }
+  /* .lotteryPool .thirdSlide {
+    height: 61vh; 
+} */
+.sCaption h1{
+    font-size: 100px;
+    line-height: 110px;
+}
+.lotteryPool .sCaption .textHeader { 
+    width: 66%;
+    margin: auto;
+}
+.lotteryPool .poolBtn .playBtn a{
+    position: relative;
+}
+.howItWork{
+    background: url('../../Assest/img/Ellipse5.png') #110929; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%;
+}
+
+a.disabled{
+    pointer-events: none; 
+  cursor: no-drop;
+  opacity: .7;
+}
+.howItWork::before {
+    content: "";
+    background: #110929;
+    transform: rotate(229deg);
+    position: absolute;
+    left: -6%;
+    top: -6%;
+    width: 205.36px;
+    height: 100.44px;
+    z-index: 0;
+}
+.howItWork::after {
+    content: "";
+    background: #11092d;
+    transform: rotate(46.41deg);
+    position: absolute;
+    right: -7%;
+    bottom: -10%;
+    width: 192.36px;
+    height: 65.44px;
+    z-index: 2;
+}
+.activePots{
+    padding-top: 8rem;
+    background: #1f0147
+}
+.font6{
+    font-weight: 600;
+}
+.rewardBox{
+    width: 76%;
+}
+.lotteryPool table th{
+    font-weight: 500;
+    border: 0;
+    font-size: 16px;
+    line-height: 20px;
+}
+.lotteryPool table td{
+    border-bottom: 0.5px solid #b0b0b059;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px; 
+    line-height: 35px;
+    font-family: "Valorant";
+    color: #fff;
+}
+.lotteryPool table .active td{
+    color: #FF80FF
+}
+.searchBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;}
+.searchBox h4{
+    font-size: 26px;
+    line-height: 30px;
+    font-family: "Valorant";
+    color: #fff;
+    margin-bottom: 0;
+    margin-right: 2rem;
+}
+.lotteryPool .searchBar, .lotteryPool .form-control:focus{
+    cursor: pointer;
+    color: #fff;
+    background: #110929;
+    border: 1px solid #FF80FF;
+    box-shadow: none !important;
+    width: 460px;
+    border-radius: 30px;
+    line-height: 40px;
+    font-size: 20px;
+}
+.searchIcon{
+    background: transparent !important;
+    border: 0;
+    position: absolute;
+    right: 10px;
+}
+.countFont{
+    font-family: 'VALORANT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 98%;
+}
+.countFont sub {
+    bottom: 0;
+    left: -6px;
+}
+.undColor{
+    text-align: center;
+    letter-spacing: 4px;
+    font-family: 'Inter', sans-serif;
+    color: #FF80FF;
+    opacity: .8;
+}
+ 
+.video {
+    width: 100%;
+    height: 500px;
+    margin: auto;
+    display: block;
+    border: none;
+  }
+  
+  .popup-btn {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 50px auto;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #fff;
+  }
+  .youtubeBox{
+    background: #0C0425;
+    border: 4px solid #472F8F;
+    height: 415px;
+  }
+  .youtubeBox:before {
+    content: "";
+    background: #110929;
+    transform: rotate(226deg);
+    position: absolute; 
+    width: 100px;
+    height: 122px;
+    z-index: 0; 
+    background: #110929;
+    border-right: 4px solid #472F8F;
+    bottom: -55px;
+    right: -42px;
+}
+  .video-popup {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    position: fixed;
+    left: 0;
+    top: 0; 
+    z-index: 999;
+  }
+  
+  .popup-bg {
+    background: rgb(0 0 0 / 63%); 
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+  }
+  
+  .popup-content {
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: auto;
+  }
+  @keyframes waves {
+    0% {
+      -webkit-transform: scale(0.2, 0.2);
+      transform: scale(0.2, 0.2);
+      opacity: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    }
+    50% {
+      opacity: 0.9;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    }
+    100% {
+      -webkit-transform: scale(0.9, 0.9);
+      transform: scale(0.9, 0.9);
+      opacity: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    }
+  }
+  
+ 
+  .waves {
+    
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgb(66 41 142 / 48%);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    border-radius: 100%;
+    right: -50px;
+    bottom: -50px;
+    z-index: 0;
+     -webkit-animation: waves 3s ease-in-out infinite;
+    animation: waves 3s ease-in-out infinite;
+  }
+          
+  .wave-1 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+  
+  .wave-2 {
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+  }
+  
+  .wave-3 {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+  }
+  
+  /* .popup-title {
+    padding: 30px;
+    margin: 0 auto;
+    color: red;
+    text-transform: uppercase;
+  } */
+  .close-btn{ 
+    text-align: center;
+    line-height: 31px;
+    cursor: pointer;
+    position: absolute;
+    color: #fff;
+    right: 4%;
+    z-index: 1;
+    font-size: 30px;
+    font-weight: 600;
+    top: 12%;
+    border: 1px solid #737373;
+    opacity: .8;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px; 
+  }
+  .close-btn:hover{
+    opacity: 1;
+    background: #fff;
+    color: #000;
+  }
+  .finishSlider {
+    padding: 6rem 0 4rem;
+    /* background: url('../../Assest/img/bgShade.png') #1f0147; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%; */
+}
+  .finishText .fa{
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    padding: 6px;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    line-height: 18px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  p.finishText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 20px;
+    font-family: "Valorant";
+  }
+  .finishBtn{
+    /* margin-top: 5rem;
+    margin-left: 10rem; */
+    height: 125px;
+  }
+  .roundDiv{    
+    background: #110929;
+    border-radius: 0 8px 8px 0px;
+    padding: 20px;
+    height: 252px;
+    margin: auto;
+    margin-bottom: 0;
+    margin-right: 1.5rem;
+  }
+  .roundDiv h3{
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  .roundDiv p span{
+    color: #ACACAC;
+    opacity: 0.8;
+    font-size: 12px;
+  }
+  .roundDiv p{
+    font-weight: 400;
+    line-height: 18px;
+    font-size: 18px;
+  }
+  .roundDiv img{
+    border-radius: 50%;
+    width: 100%;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 8px;
+  }
+  .roundDiv .address{
+    color: #FF80FF;
+    opacity: 0.8;
+    font-size: 10px;
+    word-wrap: break-word;
+    line-height: 12px;
+  }
+  .winHead{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  .winHead span{
+    border-bottom: 1px solid #438CE7;
+    width: 100%;
+    height: 4px; 
+    margin-left: 12px;
+  }
+  #active-pot .innerBtn a{    
+    white-space: nowrap;
+  }
+@media (min-width: 1900px){
+    .lotteryPool .sCaption {
+        width: 40%;
+    }
+    .lotteryPool .poolBtn {
+        width: 90%;
+    }
+}
+ 
+
+@media (max-width: 1500px){
+ 
+    .lotteryPool .logoSlider {
+         
+        bottom: 0;
+    }
+}
+@media (min-width:1200px) and (max-width: 1281px){
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 1024px){
+   
+    .lotteryPool .poolBtn {
+        width: 74%;
+    }
+    
+    
+}
+@media (min-width:768px) and (max-width: 900px){
+    .lotteryPool .firstText {
+        right: 0rem;
+        top: 21%;
+    }
+   
+    
+    .lotteryPool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 480px){
+    .lotteryPool .sCaption .textHeader {
+        width: 95%;
+    }
+    .thirdSlide .poolBtn{
+        bottom: 0;
+    }
+    .sCaption h1 {
+        font-size: 53px;
+        line-height: 98px;
+    }
+    .lotteryPool .poolBtn {
+        width: 100%;
+    }
+    
+    .lotteryPool .poolBtn .playBtn {
+        width: 47%;
+    }
+   
+    
+  
+    .lotteryPool .thirdSlide .sCaption {
+        width: 96%;
+    }
+}
