@@ -13,6 +13,7 @@ import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const responsive = {
@@ -60,7 +61,7 @@ const PotPage = () => {
         });
         
       });
-    const [potType, setPotType] = useState('REWARDPOT')
+    const [potType, setPotType] = useState('')
    const [expiryTime, setExpiryTime] = useState("");
    const [potDetails,setPotDetails] = useState('')
    const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
@@ -72,6 +73,11 @@ const PotPage = () => {
    const [claimExpiryDate, setClaimExpiryDate] = useState('')
    const [cash, setCash] = useState('')
    const [prevRounds, setPrevRounds] = useState('')
+   const user = localStorage.getItem('_u')
+   const walletAddress = localStorage.getItem('_wallet')
+   const { type } = useParams();
+   const navigate = useNavigate()
+
 
    const [countdownTime, setCountdownTime]= useState(
        {
@@ -122,10 +128,10 @@ const PotPage = () => {
 
 
     const claimCountdownTimer=()=>{
-
-        if(claimExpiryDate!=='' && expiryTime===''){
+        
+        if(claimExpiryDate!==''){
          const claimTimeInterval = setInterval(() => {
-         const countdownDateTime = new Date(expiryTime).getTime(); 
+         const countdownDateTime = new Date(claimExpiryDate).getTime(); 
          const currentTime = new Date().getTime();
           const  remainingDayTime = countdownDateTime - currentTime;
           const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
@@ -149,11 +155,22 @@ const PotPage = () => {
         
     }
     useEffect(()=>{
+    if(type === 'lottery'){
+        setPotType('LOTTERYPOT')
+        }
+        else{
+            setPotType('REWARDPOT')
+        }
+        
+    },[])
+
+    useEffect(()=>{
+        if(potType){
         getActivePotDetails();
         getPreviousRounds();
         getLotteryLeaderBoard();
-        
-    },[])
+        }
+    },[potType])
 
     useEffect(() => {
         if(expiryTime!==''){
@@ -168,8 +185,9 @@ const PotPage = () => {
     },[claimExpiryDate]);
 
     const getActivePotDetails = async () => {
+        console.log(potType)
         let dataToSend = {
-            potType: 'LOTTERYPOT',
+            potType: potType,
         }
         setLoading(true);
         try {
@@ -183,7 +201,6 @@ const PotPage = () => {
             // setShowToaster(true); 
             setPotDetails(pot?.data[0])
             setExpiryTime(pot?.data[0]?.endDate)
-            setClaimExpiryDate(pot?.data[0]?.claimExpiryDate)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -341,11 +358,18 @@ const PotPage = () => {
     const handleCloseModal = () => setRedeemModal(false)
 
     const handleRedeemModal = () => {
+        if(!user ){
+            navigate('/login')
+        }
+        else if(user &&  !walletAddress){
+            alert('please connect your metamask wallet')
+            return;
+        }
         fetchGameCash()
         setRedeemModal(true)
     }
     
-    
+// 
 return(
     <>
        <Modal
@@ -515,18 +539,16 @@ return(
                                 <div className="poolBtn text-center pt-4 finishBtn">
                                     <div className="playBtn">
                                     {claimExpiryDate!=='' ? ( <a onClick={handleRedeemModal}><span></span> CLAIM NOW</a>) :
-                                    (<a className="disabled"><span></span> CLAIM NOW</a>)}
-                                        <div>
-                                {claimExpiryDate!==''?
+                                    (<a className="disabled"><span></span> EXPIRED</a>)}
+                                  
+                                {claimExpiryDate!=='' &&
                                     <><p>Expires in</p>
-                                    <span className="countFont">{countdownTime.countdownHours} <sub>H </sub></span>
-                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>M </sub></span>
-                                    <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
-                                    {/* <button type="button" className="btn btn-success">:</button>
-                                    <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
+                                    <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
+                                    <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
+                                    <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
                                     </>
-                                    :<p>Expired</p>}
-                            </div>
+                                    }
+                          
                                     </div>                                    
                                 </div>
                             </div>)

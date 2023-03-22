@@ -45,7 +45,7 @@ export default function AuthProvide({ children }) {
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
-          navigate('/metamask')
+          // navigate('/metamask')
         }
       }
     } catch (error) {

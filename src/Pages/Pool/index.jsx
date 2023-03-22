@@ -8,6 +8,7 @@ import tradedog from '../../Assest/img/logos/tradedog.png'
 import tdmm from '../../Assest/img/logos/tdmm.png'
 import tdx from '../../Assest/img/logos/tdx.png'
 import ith from '../../Assest/img/logos/ith.png'
+import { Link } from "react-router-dom";
 
 
 const Pool = () => { 
@@ -137,10 +138,10 @@ const Pool = () => {
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">
-                                            <a  onClick={()=> handleShow('lottery')}><span></span> Lottery Pool</a>
+                                           <Link to='lottery'>Lottery Pool</Link>
                                         </div>
                                         <div className="shareBtn">
-                                            <a  onClick={()=> handleShow('reward')}><span></span> Reward Pool </a>
+                                           <Link to='reward'> Reward Pool</Link>
                                         </div>
                                     </div>
                                    

@@ -57,15 +57,15 @@ const NavigationRouter = () => {
               <Route exact path="/pool" element={<><Pool /></>} />
               {/* <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} /> */}
               <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
-              <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} />
+              {/* <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} /> */}
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/poolListing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
               <Route exact path="/viewPot" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
-              <Route  path="/privacy" element={<Privacy />} /> 
-              <Route  path="/pot" element={<PotPage />} /> 
+              <Route exact path="/privacy" element={<Privacy />} /> 
+              <Route exact path="/pool/:type" element={<PotPage />} /> 
 
             </Route>
           </Routes>
@@ -73,33 +73,6 @@ const NavigationRouter = () => {
       </BrowserRouter>
     </>
   );
-
-
-    // return (
-    //   <>
-    //       <BrowserRouter>
-    //         <AuthProvider>
-    //             <Routes>
-    //                 <Route element={<WithoutNav />}>
-    //                     <Route exact path="/login" element={<Login />} />
-    //                     <Route path="*" element={<ErrorPage />} />
-    //                 </Route>
-    //                 <Route element={<WithNav />}>
-    //             <Route exact path="/" element={<Dashboard/>} />
-    //                     <Route  path="/about" element={<About />} />
-    //                     <Route  path="/:id" element={<Dashboard />} />
-    //                     <Route  path="/roadmap" element={<Roadmap />} />
-    //                     <Route  path="/pool" element={<Pool />} />
-    //                    <Route  path="/wallet" element={<Wallet />} />
-    //                     <Route  path="/metamask" element={<Metamask />} />
-    //                     <Route  path="/privacy" element={<Privacy />} />
-    //                 </Route>
-    //             </Routes>
-    //       </AuthProvider>
-    //     </BrowserRouter>
-    //   </>
-    // );
-
-    }
+     }
   export default NavigationRouter;
  

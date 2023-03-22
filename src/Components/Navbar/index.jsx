@@ -10,12 +10,151 @@ import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import user from '../../Assest/img/user.png'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import { useNavigate  } from "react-router-dom";
+import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
-import {useParams} from "react-router-dom" 
+import {useParams,  useHistory} from "react-router-dom" 
+import { useState } from 'react';
+
+
 const CollapsibleExample = () => {
+
+//metamask starts
+const [error, setError] = useState("No Error");
+const [accountDetails, setAccountDetails] = useState('');
+const navigate = useNavigate();
+const [walletAddress, setWalletaddress] =useState();
+const redirectPath = '/';
+
+const supportedChainList = {
+  Polygon: {
+    chainId: '0x89',
+    urlName: 'polygon',
+    chainName: 'Polygon Mainnet',
+    rpcUrls: ['https://polygon-rpc.com'],
+    blockExplorerUrls: ['https://polygonscan.com/'],
+    eventKey: 'Polygon:danger',
+    variant: 'danger',
+    nativeCurrency: {
+    decimals: 18,
+    symbol: 'MATIC',
+    },
+  }
+};
+
+const saveNewAddress = (address) =>{
+  console.log("i am inside this",address);
+  let walletAddress=address[0];
+  setWalletaddress(walletAddress)
+  localStorage.setItem('_wallet',walletAddress)  
+}
+const getAccountDetails = async ({ networkName, setError }) => {
+  console.log("get account details");
+  if (typeof window.ethereum !== "undefined") {
+    window.ethereum
+      .request({
+        method: "eth_requestAccounts"
+      })
+      .then((res) => {
+        window.ethereum
+          .request({
+            method: "eth_chainId",
+          })
+      .then((chainID) => {
+        getDetailsFromChainId(chainID,res);
+        console.log("set wallet addresss",res);
+        setWalletaddress(res[0])
+        localStorage.setItem('_wallet',res[0])
+          });
+      })
+    .catch((err) => {
+    setAccountDetails('')
+        console.log(err);
+      });
+} else {
+  setAccountDetails('')
+  
+    alert("Install MetaMask First");
+  }
+};
+
+const connectWallet = async (networkName) => {
+  setError();
+  await getAccountDetails({ networkName, setError });
+};
+
+const getDetailsFromChainId = (chainId) => {
+let selectedChain = Object.keys(supportedChainList).map((e) => {
+  if (supportedChainList[e].chainId === chainId) {
+  return supportedChainList[e];
+  } else {
+    return null;
+  }
+});
+
+  let filteredSelectedChain = selectedChain.filter((e) => e);
+  setAccountDetails(JSON.stringify(filteredSelectedChain[0]))
+  console.log(filteredSelectedChain[0]	,'-------------------------chain details')
+return filteredSelectedChain[0];
+};
+
+const switchNetwork = async (chainId) => {
+  console.log({ chainId });
+  console.log("switched to chainId chain");
+  try {
+    if (!window.ethereum) throw new Error("No crypto wallet found");
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: `0x${Number(137).toString(16)}`,
+          chainName: "Polygon Mainnet",
+          nativeCurrency: {
+            name: "MATIC",
+            symbol: "MATIC",
+            decimals: 18,
+          },
+          rpcUrls: ["https://polygon-rpc.com/"],
+          blockExplorerUrls: ["https://polygonscan.com/"],
+        },
+      ],
+    });
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
+const redirectToAuthRute = () => {
+  localStorage.setItem('isConnected', true);
+      navigate(redirectPath, { replace: true })
+  
+}
+
+useEffect(() => {
+  const wallet=localStorage.getItem('_wallet');
+  if(wallet){
+    setWalletaddress(wallet)
+  }
+  try {
+  if (typeof window.ethereum == "undefined") {
+    return alert('Please install MetaMask');
+  }
+  window.ethereum?.on('accountsChanged', saveNewAddress);
+  window.ethereum?.on('chainChanged', switchNetwork); 
+  } catch (error) {
+  console.log(error);
+  throw new Error('No ethereum Object');
+  }
+  return () => {
+  // window.ethereum?.removeListener('accountsChanged', handleAccountChange);
+  window.ethereum?.removeListener('chainChanged', switchNetwork);
+  };
+  // eslint-disable-next-line
+}, []);
+//metamask end
+
   const { id } = useParams();
+
   useEffect(() => {
     // Update the document title using the browser API
     console.log("HI",id);
@@ -32,7 +171,6 @@ const CollapsibleExample = () => {
             }, 20);
       }        
   },[id]);
-  const navigate = useNavigate();
   const auth = useAuth()
   const handleLogout = (e) => {
     auth.logout()
@@ -41,24 +179,12 @@ const CollapsibleExample = () => {
     navigate(param);
    
   } 
-  // const handleScroll = () => {
-  //   console.log("JJJ",id)
-  //   if (id === 'partyGang') {
-  //     $('html, body').animate({
-  //         scrollTop: $("#partyGang")?.offset()?.top
-  //     }, 20);            
-  //   }
-  // else if (id === 'balrToken' ) {
-      
-  //     console.log("id",id);
-  //          $('html, body').animate({
-  //             scrollTop: $("#balrToken")?.offset()?.top
-  //         }, 20);
-  //   }        
-  // }
+
   let strAuth = localStorage.getItem('_u');
   let _u = JSON.parse(strAuth);
-  let walletAddress=localStorage.getItem('_wallet')
+  const location = useLocation();
+  const history = useHistory(); 
+
 
   return (
     <React.Fragment>
@@ -70,21 +196,21 @@ const CollapsibleExample = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" onClick={() => { goToAbout('/partyGang') }} > {' '} Party{' '} </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" as={Link} to='/partyGang' > {' '} Party{' '} </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" onClick={() => { goToAbout('/pool') }} > Pool </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && (  <Nav.Link href="metamask">
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && (  <Nav.Link>
               {walletAddress ? (
                         <>
 						 {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)}
 					  </>) : (
-              <>Wallet</>
+              <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span>
 						)}
                 </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/balrToken') }} > $BALR TOKEN </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/admin-dashboard') }} > Dashboard </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/user-listing') }} > Users </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" onClick={() => { goToAbout('/poolListing') }} > Pool </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
+              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> )}
               {/* <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
               {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
 
@@ -93,7 +219,7 @@ const CollapsibleExample = () => {
             </Nav>
             <Nav>
             <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
-              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)}
+              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)}
 
             </Nav>
           </Navbar.Collapse>
