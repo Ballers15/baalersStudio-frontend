@@ -102,7 +102,7 @@
 .login-forget-password{
     cursor: pointer;
     position: absolute;
-    width: 112px;
+    width: 130px;
     height: 16px;
     left: 371px;
     top: 354px; 
@@ -118,7 +118,7 @@
 
 .login-signup-tag{
     position: absolute;
-    width: 97px;
+    width: 120px;
     height: 16px;
     left: 200px;
     top: 436px; 
@@ -136,9 +136,9 @@
 .login-signup-tag-danger{
     cursor: pointer;
     position: absolute;
-    width: 49px;
+    width: 90px;
     height: 16px;
-    left: 301px;
+    left: 322px;
     top: 436px; 
     font-style: normal;
     font-weight: 700;
