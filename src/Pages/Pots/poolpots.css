@@ -504,8 +504,28 @@ a.disabled{
         width: 78%;
     }
 }
+@media (min-width:1023px) and (max-width: 1200px){
+  p.finishText{
+    font-size: 20px;
+  }
+  .lotteryPool .thirdSlide .sCaption {
+    width: 72%;
+  }
+  .wthMob{
+    width: 40%;
+  }
+  .nextCarousel { 
+    margin-right: -8rem;
+}
+.winHead span { 
+  width: 96px;
+}
+
+}
 @media (max-width: 1024px){
-   
+  .prevCarousel { 
+    margin-left: 2rem;
+}
     .lotteryPool .poolBtn {
         width: 74%;
     }
@@ -513,6 +533,36 @@ a.disabled{
     
 }
 @media (min-width:768px) and (max-width: 900px){
+  .countFont{
+    font-size: 38px;
+  }
+  .howItWork { 
+    background-size: 52%;
+}
+  p.finishText { 
+    font-size: 18px;
+  }
+  .nextCarousel{display: none;}
+  .wthMob{
+    width: 50%;
+  }
+  .winHead span { 
+    width: 106px;
+  }
+  .prevCarousel { 
+    margin-left: 1rem;
+}
+  .lotteryPool .thirdSlide .sCaption {
+    width: 90%;
+  }
+  .popup-content { 
+    width: 760px;
+  }
+  .howItWork::after { 
+    right: -7%;
+    bottom: -6%; 
+    height: 82.44px;
+  }
     .lotteryPool .firstText {
         right: 0rem;
         top: 21%;
@@ -524,6 +574,48 @@ a.disabled{
     }
 }
 @media (max-width: 480px){
+  .searchBox { 
+    display: block;
+    text-align: center;
+}
+.searchBox h4 { 
+  margin-bottom: 1rem;
+}
+  .lotteryPool table td{
+    white-space: nowrap;
+  }
+  .wthMob{
+    width: 50%;
+  }
+  .roundDiv { 
+    padding: 15px 16px;
+  }
+  .winHead span { 
+    width: 50px;
+  }
+  .roundDiv p span { 
+    font-size: 9px;
+  }
+  .roundDiv p { 
+    line-height: 16px;
+    font-size: 14px;
+}
+.roundDiv img { 
+  height: 50px;
+  width: 50px; 
+}
+  .finishSlider .react-multi-carousel-list{
+    width: 100%;
+  }
+  .carousel-button-group{
+    display: none;
+  }
+  .popup-content { 
+    width: 360px;
+  }
+  .pt8 {
+    padding-top: 3rem;
+}
   .headWth {
     width: 90%;
 }

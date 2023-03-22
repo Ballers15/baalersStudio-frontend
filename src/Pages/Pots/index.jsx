@@ -508,13 +508,13 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={3000000} 
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={10000} 
                          keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />} >
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1}>
                                 <div className="d-flex">
-                                    <img src={img1} alt="" />
+                                    <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.createdAt).toLocaleString('en-US', {
@@ -608,7 +608,7 @@ return(
                         <Button className="searchIcon" ><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </Form>
                 </div>
-                <Table responsive="md">
+                <Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
