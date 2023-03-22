@@ -81,7 +81,15 @@ const PotPage = () => {
            countdownSeconds:''
        }
    );
-   
+
+   const [claimCountdownTime, setClaimCountdownTime]= useState(
+    {
+        countdownDays:'',
+        countdownHours:'',
+        countdownMinutes:'',
+        countdownSeconds:''
+    }
+);
 
 
     const countdownTimer=()=>{
@@ -105,7 +113,36 @@ const PotPage = () => {
      
           if (remainingDayTime < 0 ) {
              clearInterval(timeInterval);
-             setExpiryTime(false);
+             setExpiryTime('');
+            }
+     
+         }, 1000); }
+        
+    }
+
+
+    const claimCountdownTimer=()=>{
+
+        if(claimExpiryDate!=='' && expiryTime===''){
+         const claimTimeInterval = setInterval(() => {
+         const countdownDateTime = new Date(expiryTime).getTime(); 
+         const currentTime = new Date().getTime();
+          const  remainingDayTime = countdownDateTime - currentTime;
+          const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
+          const totalHours = Math.floor((remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const totalMinutes = Math.floor((remainingDayTime % (1000 * 60 * 60)) / (1000 * 60));
+          const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
+          const runningCountdownTime={
+             countdownDays: totalDays,
+             countdownHours: totalHours,
+             countdownMinutes: totalMinutes,
+             countdownSeconds: totalSeconds
+          }
+          setClaimCountdownTime(runningCountdownTime);
+     
+          if (remainingDayTime < 0 ) {
+             clearInterval(claimTimeInterval);
+             setClaimExpiryDate('');
             }
      
          }, 1000); }
@@ -115,11 +152,20 @@ const PotPage = () => {
         getActivePotDetails();
         getPreviousRounds();
         getLotteryLeaderBoard();
+        
     },[])
 
     useEffect(() => {
+        if(expiryTime!==''){
             countdownTimer();
+        }
     },[expiryTime]);
+
+    useEffect(() => {
+        if(claimExpiryDate!=='' && expiryTime===''){
+            claimCountdownTimer();
+        }
+    },[claimExpiryDate]);
 
     const getActivePotDetails = async () => {
         let dataToSend = {
@@ -136,7 +182,8 @@ const PotPage = () => {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
             setPotDetails(pot?.data[0])
-            setExpiryTime(pot?.data[0].endDate)
+            setExpiryTime(pot?.data[0]?.endDate)
+            setClaimExpiryDate(pot?.data[0]?.claimExpiryDate)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -266,7 +313,6 @@ const PotPage = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
-            console.log('prev',prevRounds)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -411,15 +457,13 @@ return(
                     <div className="col-sm-5 my-auto">
                         <div className="text-center">
                             <div>
-                                {expiryTime!==false?
+                                {expiryTime!=='' ?
                                     <>
                                     <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
                                     <span className="countFont pe-2">:</span>
                                     <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
                                     <span className="countFont pe-2">:</span>
                                     <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
-                                    {/* <button type="button" className="btn btn-success">:</button>
-                                    <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
                                     </>
                                     :<p>Deal has been Expired</p>}
                             </div>
@@ -430,14 +474,14 @@ return(
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                             <div className="poolBtn pt-2">
                                 <div className="playBtn">
-                                {expiryTime!== false ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
+                                {expiryTime!=='' ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
                                     (<a className="disabled"><span></span> REDEEM NOW</a>)}
                                 </div>
                             </div>                        
                         </div>
                     </div>
                     <div className="col-sm-7 text-center">
-                        <img src={expiryTime!==false ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                        <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                     </div>
                 </div>
                 </div>
@@ -447,148 +491,47 @@ return(
                             <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
                         </div>
                         <div className="col-sm-7">
-                            <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={3000} 
+
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={3000} 
                             arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} autoplayHoverPause={true} >
-                           
-                            <div>
+                          
+                           {prevRounds?.length && prevRounds?.map((round,index)=>(
+                            <div key={index+1}>
                                 <div className="d-flex">
                                     <img src={img1} alt="" />
                                     <div className="roundDiv">
-                                        <h3>Round 22</h3>
-                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
+                                        <h3>Round {index+1} </h3>
+                                        <p><span>Drawn {new Date(round?.createdAt).toLocaleString('en-US', {
+                            month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row">
                                             <div className="col-sm-4">
                                             <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
+                                            <p className="address">{round?.potUserDetails?.walletAddress.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="poolBtn text-center pt-4 finishBtn">
                                     <div className="playBtn">
-                                        <a><span></span> CLAIM NOW</a>
+                                    {claimExpiryDate!=='' ? ( <a onClick={handleRedeemModal}><span></span> CLAIM NOW</a>) :
+                                    (<a className="disabled"><span></span> CLAIM NOW</a>)}
+                                        <div>
+                                {claimExpiryDate!==''?
+                                    <><p>Expires in</p>
+                                    <span className="countFont">{countdownTime.countdownHours} <sub>H </sub></span>
+                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>M </sub></span>
+                                    <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
+                                    {/* <button type="button" className="btn btn-success">:</button>
+                                    <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
+                                    </>
+                                    :<p>Expired</p>}
+                            </div>
                                     </div>                                    
                                 </div>
-                                {/* <div className="innerBtn finishBtn ">
-                                    <a>
-                                        <span></span>CLAIM NOW
-                                    </a>
-                                </div> */}
-                            </div>
-                             <div>
-                                <div className="d-flex">
-                                    <img src={img1} alt="" />
-                                    <div className="roundDiv">
-                                        <h3>Round 22</h3>
-                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="poolBtn text-center pt-4 finishBtn">
-                                    <div className="playBtn">
-                                        <a><span></span> CLAIM NOW</a>
-                                    </div>                                    
-                                </div>
-                            </div>
-                            <div>
-                                <div className="d-flex">
-                                    <img src={img1} alt="" />
-                                    <div className="roundDiv">
-                                        <h3>Round 22</h3>
-                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="poolBtn text-center pt-4 finishBtn">
-                                    <div className="playBtn">
-                                        <a><span></span> CLAIM NOW</a>
-                                    </div>                                    
-                                </div>
-                            </div>
-                            <div>
-                                <div className="d-flex">
-                                    <img src={img1} alt="" />
-                                    <div className="roundDiv">
-                                        <h3>Round 22</h3>
-                                        <p><span>Drawn Dec 30, 2022, 5:30pm</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                            <div className="col-sm-4">
-                                            <img src={img1} alt="" />
-                                            <p className="address">0x06...98e6@CelticChaos</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="poolBtn text-center pt-4 finishBtn">
-                                    <div className="playBtn">
-                                        <a><span></span> CLAIM NOW</a>
-                                    </div>                                    
-                                </div>
-                                
-                            </div>
-                           
-                            
-                            
-                            </Carousel>
-                             
-                           
-                            {/* <div>
-                                {expiryTime!==false?
-                                    <>
-                                    <span className="countFont">{countdownTime.countdownDays} <sub>d</sub></span>
-                                    <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownHours} <sub>h</sub></span>
-                                    <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>m</sub></span>
-                                     </>
-                                    :<p>Deal has been Expired</p>}
-                            </div> */}
+                            </div>)
+                           )}                            
+                            </Carousel>}
                         </div>
                     </div>                   
                 </div>
