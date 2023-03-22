@@ -35,6 +35,20 @@ const responsive = {
       items: 1
     }
   };
+  const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+    const { carouselState: { currentSlide } } = rest;
+    return (
+        <div className="carousel-button-group mb-4 gap-4 w-full">
+          <button className='prevCarousel block p-3 bg-slate-300' onClick={() => 
+          previous()}>   <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p> </button>
+          <button className="nextCarousel" onClick={() => next()}><span className='block p-3 bg-slate-300' > 
+          <img src={img1} alt="" />
+            </span>
+          </button>
+       </div>
+    
+     );
+   };
 const PotPage = () => {
     $(document).ready(function(){
   
@@ -415,7 +429,7 @@ return(
                 </div>
             </div>
         </div>
-        <div className="gradientBackgroung pb-8 pt-5 howItWork position-relative" >
+        <div className="gradientBackgroung pb-8 pt-5 howItWork ht100 position-relative" >
             {/* <LazyLoadImage
                 src={Ellipse5}
                 className="bgShade2"
@@ -468,94 +482,103 @@ return(
             </div>
         </div>
         <div className="gradientBackgroung pb-8 activePots" id='active-pot'>
-              <div className="container">
-                <div className="positionRelative mb-5 headWth mx-auto">
-                    <h2 className="heading text-center">
-                    ACTIVE POT
-                    </h2>
-                    <h2 className="heading2 text-center">
-                    ACTIVE POT
-                    </h2>
-                </div>
-                <div className="row">
-                    <div className="col-sm-5 my-auto">
-                        <div className="text-center">
-                            <div>
-                                {expiryTime!=='' ?
-                                    <>
-                                    <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
-                                    <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
-                                    <span className="countFont pe-2">:</span>
-                                    <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
-                                    </>
-                                    :<p>Deal has been Expired</p>}
-                            </div>
-
-                            <p className="undColor">Until next draw</p>
-                     
-                            <h4 className="font6 pt-2">Redeem In Game Cash</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
-                            <div className="poolBtn pt-2">
-                                <div className="playBtn">
-                                {expiryTime!=='' ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
-                                    (<a className="disabled"><span></span> REDEEM NOW</a>)}
-                                </div>
-                            </div>                        
-                        </div>
+            <div className="ht100 pt8">
+                <div className="container">
+                    <div className="positionRelative mb-5 headWth mx-auto">
+                        <h2 className="heading text-center">
+                        ACTIVE POT
+                        </h2>
+                        <h2 className="heading2 text-center">
+                        ACTIVE POT
+                        </h2>
                     </div>
-                    <div className="col-sm-7 text-center">
-                        <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
-                    </div>
-                </div>
-                </div>
-                <div className="finishSlider">
                     <div className="row">
                         <div className="col-sm-5 my-auto">
-                            <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
-                        </div>
-                        <div className="col-sm-7">
+                            <div className="text-center">
+                                <div>
+                                    {expiryTime!=='' ?
+                                        <>
+                                        <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
+                                        <span className="countFont pe-2">:</span>
+                                        <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
+                                        <span className="countFont pe-2">:</span>
+                                        <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
+                                        </>
+                                        :<p>Deal has been Expired</p>}
+                                </div>
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={3000} 
-                            arrows={false} swipeable={true} draggable={true}  keyBoardControl={true} autoplayHoverPause={true} >
+                                <p className="undColor">Until next draw</p>
+                        
+                                <h4 className="font6 pt-2">Redeem In Game Cash</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
+                                <div className="poolBtn pt-2">
+                                    <div className="playBtn">
+                                    {expiryTime!=='' ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
+                                        (<a className="disabled"><span></span> REDEEM NOW</a>)}
+                                    </div>
+                                </div>                        
+                            </div>
+                        </div>
+                        <div className="col-sm-7 text-center">
+                            <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                        </div>
+                    </div>
+                </div>
+             </div>
+                <div className="finishSlider">
+                    <div className="row">
+                        {/* <div className="col-sm-5 my-auto">
+                            <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
+                        </div> */}
+                        <div className="col-sm-12 position-relative">
+
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={10000} 
+                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />} >
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1}>
                                 <div className="d-flex">
-                                    <img src={img1} alt="" />
+                                    <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.createdAt).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row">
-                                            <div className="col-sm-4">
+                                            <div className="col-sm-12 text-center">
                                             <img src={img1} alt="" />
-                                            <p className="address">{round?.potUserDetails?.walletAddress.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
+                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="poolBtn text-center pt-4 finishBtn">
-                                    <div className="playBtn">
-                                    {claimExpiryDate!=='' ? ( <a onClick={handleRedeemModal}><span></span> CLAIM NOW</a>) :
-                                    (<a className="disabled"><span></span> EXPIRED</a>)}
-                                  
-                                {claimExpiryDate!=='' &&
-                                    <><p>Expires in</p>
-                                    <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
-                                    <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
-                                    <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
-                                    </>
-                                    }
-                          
-                                    </div>                                    
-                                </div>
+                               
                             </div>)
                            )}                            
                             </Carousel>}
+                           
                         </div>
-                    </div>                   
+                    </div>        
+                    <div className="poolBtn text-center pt-4 finishBtn">
+                        <div className="playBtn">
+                        {claimExpiryDate!=='' ? ( <a onClick={handleRedeemModal}><span></span> CLAIM NOW</a>) :
+                        (<a className="disabled"><span></span> CLAIM NOW</a>)}
+                        
+                        </div>    
+                        <div className="expDate">
+                            {claimExpiryDate!==''?
+                                <><p className="mb-0">Expires in </p>
+                                <div className="claimExpire ps-2">
+                                <span className="countFont">{countdownTime.countdownHours} <sub>H </sub></span>
+                                <span className="countFont">{countdownTime.countdownMinutes} <sub>M </sub></span>
+                                <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
+                                </div>
+                                {/* <button type="button" className="btn btn-success">:</button>
+                                <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
+                                </>
+                                :<p>Expired</p>}
+                        </div>                                
+                    </div>           
                 </div>
                 
 
@@ -609,7 +632,7 @@ return(
                         <Button className="searchIcon" ><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </Form>
                 </div>
-                <Table responsive="md">
+                <Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>

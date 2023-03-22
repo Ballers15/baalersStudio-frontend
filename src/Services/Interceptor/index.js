@@ -25,6 +25,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     function (res) {
+		console.log(res, "response")
         return res;
     },
     async function (error) {
@@ -32,17 +33,23 @@ axiosInstance.interceptors.response.use(
         if (error.response) {
             if (error.response.status === 403 && error.response.data) {
                 alert(error?.response?.data?.message || 'error code 403 detected!!')
-                useAuth.logout();
-                useNavigate('/login')
+				localStorage.clear(); 
+				navigate('/login');
+                // useNavigate('/login')
                 return Promise.reject(error.response.data?.message);
             }
             if (error.response.status === 401 && error.response.data) {
                 alert(error?.response?.data?.message || 'error code 401 detected!!')
-                useAuth.logout();
-                useNavigate('/login')
+				console.log("calling error 401")
+				localStorage.clear(); 
+				window.location.href = '/login';
+				// navigate('/login');
+                // useNavigate('/login')
                 return Promise.reject(error.response.data?.message);
             }
         }
+		console.log(error, "rejected")
+
         return Promise.reject(error);
     }
 );

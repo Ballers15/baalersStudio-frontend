@@ -78,3 +78,4 @@ export default function AuthProvide({ children }) {
 export const useAuth = () => {
   return useContext(AuthContext)
 }
+

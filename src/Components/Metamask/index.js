@@ -28,7 +28,8 @@ const Metamask = () => {
 	};
 
   const saveNewAddress = (address) =>{
-    console.log('changedd',address)
+    setWalletaddress(address)
+    localStorage.setItem('_wallet',address)  
   }
   const getAccountDetails = async ({ networkName, setError }) => {
     if (typeof window.ethereum !== "undefined") {
@@ -43,7 +44,7 @@ const Metamask = () => {
             })
 			  .then((chainID) => {
 				  getDetailsFromChainId(chainID,res);
-          saveNewAddress(res);
+          setWalletaddress(res)
           localStorage.setItem('_wallet',res)
             });
         })
@@ -114,7 +115,6 @@ const Metamask = () => {
     const wallet=localStorage.getItem('_wallet');
     if(wallet){
       setWalletaddress(wallet)
-      console.log(wallet)
     }
     try {
 		if (typeof window.ethereum == "undefined") {
@@ -133,49 +133,6 @@ const Metamask = () => {
 	  // eslint-disable-next-line
   }, []);
 
-  useEffect(()=>{
-
-  },[walletAddress])
-
-  return (
-    <React.Fragment>
-      <div className="metamask">
-        <div className="metamask-connect-container">
-          <h2 className="meta-h2">Connect your Wallet</h2>
-          <h4 className="meta-h4">
-            At lacus vitae nulla sagittis scelerisque nisl. Pellentesque duis
-            cursus vestibulum, facilisi ac, sed faucibus.
-          </h4>
-        </div>
-        <div className="metamask-connect-container">
-         
-          {walletAddress ? (
-                        <p>
-						  Account: <code style={{ display: "inline" }}>{walletAddress}</code>
-						  <button
-						   className="meta-btn metamask-connect-container"
-						   onClick={() => redirectToAuthRute("polygon")} >
-						   Continue
-						 </button>
-					  </p>) : (
-						   <button
-						   className="meta-btn metamask-connect-container"
-						   onClick={() => connectWallet("polygon")} >
-						   Connect Metamask Wallet
-						 </button>
-						)}
-                      
-          {/* <button className="meta-btn metamask-connect-container">Disconnect Wallet</button> */}
-        </div>
-        <div className="metamask-connect-container">
-          <ErrorMessage message={error} />
-        </div>
-        <div className="metamask-connect-container">
-          <span className="meta-logo"></span>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
+}
 
 export default Metamask;
