@@ -27,6 +27,8 @@ const CollapsibleExample = () => {
 
   let strAuth = localStorage.getItem('_u');
   let _u = JSON.parse(strAuth);
+const [walletAddress, setWalletaddress] = useState('');
+
   const location = useLocation();
 
   const disconnectWallet = () => {
@@ -45,7 +47,6 @@ const CollapsibleExample = () => {
 const [error, setError] = useState("No Error");
 const [accountDetails, setAccountDetails] = useState('');
 const navigate = useNavigate();
-const [walletAddress, setWalletaddress] = useState('');
 const redirectPath = '/';
 
 const supportedChainList = {
@@ -84,10 +85,9 @@ const getAccountDetails = async ({ networkName, setError }) => {
           })
       .then((chainID) => {
         getDetailsFromChainId(chainID,res);
-        console.log("set wallet addresss",res);
         setWalletaddress(res[0])
         localStorage.setItem('_wallet',res[0])
-          });
+        });
       })
     .catch((err) => {
     setAccountDetails('')
@@ -158,10 +158,10 @@ const redirectToAuthRute = () => {
 }
 
 useEffect(() => {
-  // const wallet=localStorage.getItem('_wallet');
-  // if(wallet){
-  //   setWalletaddress(wallet)
-  // }
+  const wallet=localStorage.getItem('_wallet');
+  if(wallet){
+    setWalletaddress(wallet)
+  }
   try {
   // if (typeof window.ethereum == "undefined") {
   //   return alert('Please install MetaMask');
@@ -216,14 +216,10 @@ useEffect(() => {
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" as={Link} to='/partyGang' > {' '} Party{' '} </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && 
-              (  <Nav.Link> {walletAddress ? ( <>
-						 {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)}
-					  </>) : (
-              <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span>
-						)}
+              {_u?.user?.role !== 'ADMIN' && (
+               <Nav.Link> {walletAddress !=='' && ( <> {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)} </>) } 
+                    {walletAddress === '' &&( <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span> )} 
                 </Nav.Link> )}
-             
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}

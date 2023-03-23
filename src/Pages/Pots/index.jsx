@@ -97,9 +97,8 @@ const PotPage = () => {
        const index = current % prevRounds.length;
        setCurrentSlide(index)
        setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
-    //    console.log(index,claimExpiryDate)
-        
-    claimReward()
+        if(user !== null && walletAddress !== null) 
+            claimReward()
      };
 
    const [countdownTime, setCountdownTime]= useState(
@@ -188,7 +187,7 @@ const PotPage = () => {
     },[])
 
     useEffect(()=>{
-        if(potType){
+        if(potType!==''){
         getActivePotDetails();
         getPreviousRounds();
         getLotteryLeaderBoard();
@@ -339,7 +338,7 @@ const PotPage = () => {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
             setLoading(false);
-        }
+       }
     }
 
     const getPreviousRounds = async () => {
@@ -584,7 +583,7 @@ return(
                                         <div className="row">
                                             <div className="col-sm-12 text-center">
                                             <img src={img1} alt="" />
-                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
+                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
                                             </div>
                                         </div>
                                     </div>
