@@ -482,6 +482,21 @@ a.disabled{
     color: #FF80FF;
     font-size: 13px;
 }
+
+.confirm-modal button {
+  border-radius: 30px;
+  padding: 0 30px;
+  background: transparent;
+  color: #fff;
+  margin: 10px;
+  border: 2px solid #FF80FF;
+  color: #FF80FF;
+}
+
+.confirm-modal button:hover{
+  background: #FF80FF;
+  color: #fff;
+}
 @media (min-width: 1900px){
     .lotteryPool .sCaption {
         width: 40%;

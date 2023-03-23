@@ -7,13 +7,15 @@ import img1 from '../../Assest/img/img1.png'
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
 import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
+import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, lotteryClaim, lotteryWithdrawl, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate, useParams } from "react-router-dom";
+import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
+
 
 const responsive = {
     superLargeDesktop: {
@@ -91,14 +93,20 @@ const PotPage = () => {
    const { type } = useParams();
    const navigate = useNavigate()
    const [userWon, setUserWon] = useState(false)
-
+   const [participated, setParticipated] = useState(false)
    const [currentSlide,setCurrentSlide] = useState(0)
+   const [potId,setPotId] = useState('')
+   const [claimedNft,setClaimedNft] = useState('')
+
    const handleSlideChange = (current) => {
        const index = current % prevRounds.length;
        setCurrentSlide(index)
+       setUserWon(false)
        setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
-        if(user !== null && walletAddress !== null) 
-            claimReward()
+    //    console.log(prevRounds[currentSlide])
+        if(user !== null && walletAddress !== null) {
+            lotteryWon(prevRounds[currentSlide]._id)
+        }
      };
 
    const [countdownTime, setCountdownTime]= useState(
@@ -363,10 +371,12 @@ const PotPage = () => {
         }
     }
 
-    const claimReward = async () => {
+    const lotteryWon = async (id) => {
+        // console.log(id)
+        setPotId(id)
         let dataToSend = {
             walletAddress: localStorage.getItem('_wallet'),
-            potId: prevRounds[currentSlide]?._id
+            potId: id
         }
         setLoading(true);
         try {
@@ -379,6 +389,8 @@ const PotPage = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setUserWon(data?.data?.lotteryWon)
+            setParticipated(data?.data?.participated)
+            setClaimedNft(data?.data?.claimed)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -418,8 +430,96 @@ const PotPage = () => {
         setRedeemModal(true)
     }
 
-    
-// 
+    const handleClaim = async () => {
+        let dataToSend = {
+            walletAddress: localStorage.getItem('_wallet'),
+            potId: potId
+        }
+        setLoading(true);
+        try {
+          const data = await lotteryClaim(dataToSend);
+          setLoading(false);
+          if (data.error) {
+            setToasterMessage(data?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('round fetched Successfully');
+            setShowToaster(true); 
+            claimTransaction(data?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const claimTransaction = async (data) => {
+        let dataToSend = {
+            tokenId:data?.potDetails?.assetDetails?.ticker,
+            quantity:data?.potDetails?.rewardTokenAmount,
+            nonce:data?.transactionDetails?.nonce,
+            signature:data?.transactionDetails.signature
+        }
+        setLoading(true);
+        try {
+          const dataNft = await claimLottery(dataToSend);
+          setLoading(false);
+          if (dataNft.error) {
+            setToasterMessage(dataNft?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('round fetched Successfully');
+            setShowToaster(true); 
+            console.log('claim lottery',dataNft)
+            console.log('====================')
+            console.log(data?.potDetails?._id)
+            console.log(localStorage.getItem('_wallet'))
+            console.log(dataNft?.transactionHash)
+            console.log(data?.transactionDetails?._id)
+            console.log('---------------')
+            let withdrawlObject = {
+                potId: data?.potDetails?._id,   
+                walletAddress: localStorage.getItem('_wallet'),
+                txnHash:dataNft?.transactionHash ,
+                withdrawlId: data?.transactionDetails?._id
+            }
+            
+            console.log('claim nft',withdrawlObject)
+
+            withdrawLottery(withdrawlObject)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+
+    const withdrawLottery = async (dataToSend) => {
+        console.log('withdrawlottery', dataToSend)
+      
+        setLoading(true);
+        try {
+          const data = await lotteryWithdrawl(dataToSend);
+          setLoading(false);
+          if (data.error) {
+            setToasterMessage(data?.message||'Something Went Worng in withdrawl');
+            setShowToaster(true);
+          } else {
+            setToasterMessage('lotery details');
+            setShowToaster(true); 
+           console.log('after withdraw',data)
+
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
 return(
     <>
        <Modal
@@ -568,8 +668,8 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={5000} 
-                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  beforeChange={(e) => handleSlideChange(e)}>
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={10000} 
+                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  afterChange={(e) => handleSlideChange(e)}>
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
@@ -597,21 +697,22 @@ return(
                     </div>        
                     <div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
-                        {userWon ===true ? ( <a ><span></span> CLAIM NOW</a>) :
-                        (<a className="disabled"><span></span> You have not won !</a>)}
+                        {userWon === true && claimExpiryDate !== '' && claimedNft !==true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
+                        {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {userWon === true && claimExpiryDate === '' && ( <a className="disabled" ><span></span> CLAIM NOW</a>) }
+                        {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
+                        {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
                         
                         </div>    
                         <div className="expDate">
-                            {userWon ===true &&
+                            {userWon ===true && claimExpiryDate!=='' && claimedNft!== true &&
                                 <><p className="mb-0">Expires in </p>
                                 <div className="claimExpire ps-2">
                                 <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
                                 <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
                                 <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
                                 </div>
-                                {/* <button type="button" className="btn btn-success">:</button>
-                                <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
-                                </>
+                            </>
                                 }
                         </div>                                
                     </div>           

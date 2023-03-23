@@ -52,19 +52,33 @@ const navigate = useNavigate();
 const redirectPath = '/';
 
 const supportedChainList = {
-  Polygon: {
-    chainId: '0x89',
-    urlName: 'polygon',
-    chainName: 'Polygon Mainnet',
-    rpcUrls: ['https://polygon-rpc.com'],
-    blockExplorerUrls: ['https://polygonscan.com/'],
-    eventKey: 'Polygon:danger',
-    variant: 'danger',
-    nativeCurrency: {
+
+Mumbai:{
+  chainId: `0x13881`,
+  chainName: "Mumbai Testnet",
+  nativeCurrency: {
+    name: "MATIC",
+    symbol: "MATIC",
     decimals: 18,
-    symbol: 'MATIC',
-    },
-  }
+  },
+  rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+  blockExplorerUrls: ["https://polygonscan.com/"],
+},
+
+
+  // Polygon: {
+  //   chainId: '0x89',
+  //   urlName: 'polygon',
+  //   chainName: 'Polygon Mainnet',
+  //   rpcUrls: ['https://polygon-rpc.com'],
+  //   blockExplorerUrls: ['https://polygonscan.com/'],
+  //   eventKey: 'Polygon:danger',
+  //   variant: 'danger',
+  //   nativeCurrency: {
+  //   decimals: 18,
+  //   symbol: 'MATIC',
+  //   },
+  // }
 };
 
 const saveNewAddress = (address) =>{
@@ -135,17 +149,31 @@ const switchNetwork = async (chainId) => {
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
       params: [
+        // {
+        //   chainId: `0x${Number(137).toString(16)}`,
+        //   chainName: "Polygon Mainnet",
+        //   nativeCurrency: {
+        //     name: "MATIC",
+        //     symbol: "MATIC",
+        //     decimals: 18,
+        //   },
+        //   rpcUrls: ["https://polygon-rpc.com/"],
+        //   blockExplorerUrls: ["https://polygonscan.com/"],
+        // },
         {
-          chainId: `0x${Number(137).toString(16)}`,
-          chainName: "Polygon Mainnet",
+          chainId: `0x${Number(8001).toString(16)}`,
+          chainName: "Mumbai Testnet",
           nativeCurrency: {
             name: "MATIC",
             symbol: "MATIC",
             decimals: 18,
           },
-          rpcUrls: ["https://polygon-rpc.com/"],
+          rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
           blockExplorerUrls: ["https://polygonscan.com/"],
         },
+
+
+
       ],
     });
   } catch (err) {

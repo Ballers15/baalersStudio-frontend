@@ -9,6 +9,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Inter', sans-serif; 
+    overflow-y: auto;
+    position: relative;
 }
 .signup-box{
     box-sizing: border-box;

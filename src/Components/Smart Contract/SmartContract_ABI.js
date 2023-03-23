@@ -814,4 +814,4 @@ const standardTokenAbi=[{
 
 // export default standardTokenAbi;
 
-export { smartContract,standardTokenAbi};
+export { claimTokenAbi,claimNftAbi,standardTokenAbi};

@@ -26,6 +26,22 @@ export function wonLottery(data) {
   return (axiosInstance.get(url + 'user/v1/check/user/won/lottery',{params: data}).then(res => res.data))
 }
 
+export function lotteryClaim(data) {
+  return (axiosInstance.post(url + 'user/v1/create/lottery/claim',data).then( res => res.data))
+}
+
+export function lotteryWithdrawl(data) {
+  console.log('api called withdraw',data)
+  return (axiosInstance.post(url + 'user/v1/update/lottery/withdrawl',  data).then( res => res.data))
+}
+
+// "potId":"64005b92cef436093454f6c8",   
+//     "walletAddress":"0xd946F28962A96C45d9Bc16F16ca50d8350296A4E",
+//     "txnHash":"0x60a53080ee77cb0fd421c355423993ef13c5017c87a041a85c061149b6002542",
+//     "withdrawlId":"6400b2d83916c0e1eebb3ca8" 
+
+
+
 export function leaderBoardLottery(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/lottery/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
 }
