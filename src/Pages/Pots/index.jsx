@@ -98,13 +98,20 @@ const PotPage = () => {
    const [potId,setPotId] = useState('')
    const [claimedNft,setClaimedNft] = useState('')
 
+   const [intervalId, setIntervalId] = useState(null);
+
+   const [currentPot,setCurrentPot]=useState('');
    const handleSlideChange = (current) => {
+    console.log("current",current);
+    // current=current-1;
        const index = current % prevRounds.length;
        setCurrentSlide(index)
-       setUserWon(false)
-       setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+    //    setUserWon(false)
+            setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+    
     //    console.log(prevRounds[currentSlide])
         if(user !== null && walletAddress !== null) {
+            console.log(prevRounds[currentSlide]);
             lotteryWon(prevRounds[currentSlide]._id)
         }
      };
@@ -145,6 +152,7 @@ const PotPage = () => {
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
+          console.log(runningCountdownTime);
           setCountdownTime(runningCountdownTime);
      
           if (remainingDayTime < 0 ) {
@@ -158,10 +166,13 @@ const PotPage = () => {
 
 
     const claimCountdownTimer=()=>{
-        
+        // console.log("claimExpiryDate::claimCountdownTimer",claimExpiryDate);
+        const countTime=claimExpiryDate;
+        // console.log("countTimeCOnst",countTime);
         if(claimExpiryDate!==''){
-         const claimTimeInterval = setInterval(() => {
-         const countdownDateTime = new Date(claimExpiryDate).getTime(); 
+            const id = setInterval(() => {
+        //  console.log("countTime",claimExpiryDate);
+         const countdownDateTime = new Date(countTime).getTime(); 
          const currentTime = new Date().getTime();
           const  remainingDayTime = countdownDateTime - currentTime;
           const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
@@ -174,14 +185,21 @@ const PotPage = () => {
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
+        //   console.log("claimExpiryDate",runningCountdownTime);
           setClaimCountdownTime(runningCountdownTime);
      
           if (remainingDayTime < 0 ) {
-             clearInterval(claimTimeInterval);
+            clearInterval(id);
+            setIntervalId(null);    
+             console.log('i am set here claimCountdownTimer')
              setClaimExpiryDate('');
             }
      
-         }, 1000); }
+         }, 1000); 
+        //  console.log("hi i am id of setinterval",id);
+         setIntervalId(id);
+
+        }
         
     }
     useEffect(()=>{
@@ -210,7 +228,12 @@ const PotPage = () => {
 
     useEffect(() => {
         if(claimExpiryDate!==''){
+            // console.log("calling again in useeffecttt======");
+            // console.log("in use effect intervalId",intervalId)
+            clearInterval(intervalId);
+            setIntervalId(null);
             claimCountdownTimer();
+    
         }
     },[claimExpiryDate]);
 
@@ -228,8 +251,8 @@ const PotPage = () => {
           } else {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
-            setPotDetails(pot?.data[0])
-            setExpiryTime(pot?.data[0]?.endDate)
+            setPotDetails(pot?.data.length?pot.data[0]:'');
+            setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -274,7 +297,7 @@ const PotPage = () => {
         let dataToSend = 
             {
                 walletAddress: localStorage.getItem('_wallet'),
-                amount:"999",
+                amount:cash,
                 potId: potDetails?._id
             }
         setLoading(true);
@@ -285,7 +308,7 @@ const PotPage = () => {
             setToasterMessage(redeem?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
-            setToasterMessage('Redeemed Successfully');
+            setToasterMessage(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
             setShowToaster(true); 
             setRedeemModal(false)
           }
@@ -300,7 +323,7 @@ const PotPage = () => {
         let dataToSend = 
             {
                 walletAddress: localStorage.getItem('_wallet'),
-                amount:"999",
+                amount:cash,
                 potId: potDetails?._id
             }
         setLoading(true);
@@ -313,7 +336,7 @@ const PotPage = () => {
             setRedeemModal(false)
             
           } else {
-            setToasterMessage('Redeemed Successfully');
+            setToasterMessage(`Your ${cash} amount of in game cash deposited Successfully`);
             setShowToaster(true); 
             setRedeemModal(false)
           }
@@ -362,6 +385,7 @@ const PotPage = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
+            console.log('i am set here getPreviousRounds ');
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
           }
         } catch (error) {
@@ -418,7 +442,7 @@ const PotPage = () => {
     const [redeemModal,setRedeemModal] = useState(false)
     const handleCloseModal = () => setRedeemModal(false)
 
-    const handleRedeemModal = () => {
+    const handleRedeemModal = async() => {
         if(!user ){
             navigate('/login')
         }
@@ -426,7 +450,7 @@ const PotPage = () => {
             alert('please connect your metamask wallet')
             return;
         }
-        fetchGameCash()
+       await fetchGameCash()
         setRedeemModal(true)
     }
 
@@ -668,8 +692,8 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={10000} 
-                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  afterChange={(e) => handleSlideChange(e)}>
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {false} autoPlaySpeed={10000} 
+                         keyBoardControl={true} autoplayHoverPause={false} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  beforeChange={(e) => handleSlideChange(e)}>
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
@@ -780,23 +804,24 @@ return(
                     </tr>
                     </thead>
                     <tbody>
-                {leaderBoardLotteryDetails && leaderBoardLotteryDetails?.map((user,index)=>{
+                        {/* user */}
+                {leaderBoardLotteryDetails && leaderBoardLotteryDetails?.map((User,index)=>{
                     return (
-                    <tr key={user._id} >
+                    <tr key={User._id} >
                         <td>{index+1}</td>
-                        <td>{user?.userId?.name}</td>
-                        <td>$ {formatNumberDecimal(user?.amount?.$numberDecimal)}</td>
-                        <td>{user?.nftHolded}</td> 
+                        <td>{User?.userId?.name}</td>
+                        <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
+                        <td>{User?.nftHolded}</td> 
                     </tr>)
                 })}
                     
-                    <tr className="active">
+                    {/* <tr className="active">
                         <td>2</td>
                         <td>SAM Deph</td>
                         <td>$ 10,000</td>
                         <td>5</td> 
                     </tr>
-                    
+                     */}
                 </tbody>
                 </Table>
 
