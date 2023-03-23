@@ -7,14 +7,13 @@ import img1 from '../../Assest/img/img1.png'
 import youtubePopup from '../../Assest/img/youtubePopup.PNG'
 import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
+import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useNavigate, useParams } from "react-router-dom";
-
 
 const responsive = {
     superLargeDesktop: {
@@ -91,7 +90,17 @@ const PotPage = () => {
    const walletAddress = localStorage.getItem('_wallet')
    const { type } = useParams();
    const navigate = useNavigate()
+   const [userWon, setUserWon] = useState(false)
 
+   const [currentSlide,setCurrentSlide] = useState(0)
+   const handleSlideChange = (current) => {
+       const index = current % prevRounds.length;
+       setCurrentSlide(index)
+       setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+    //    console.log(index,claimExpiryDate)
+        
+    claimReward()
+     };
 
    const [countdownTime, setCountdownTime]= useState(
        {
@@ -193,13 +202,12 @@ const PotPage = () => {
     },[expiryTime]);
 
     useEffect(() => {
-        if(claimExpiryDate!=='' && expiryTime===''){
+        if(claimExpiryDate!==''){
             claimCountdownTimer();
         }
     },[claimExpiryDate]);
 
     const getActivePotDetails = async () => {
-        console.log(potType)
         let dataToSend = {
             potType: potType,
         }
@@ -295,12 +303,15 @@ const PotPage = () => {
           if (redeem.error) {
             setToasterMessage(redeem?.message||'Something Went Worng');
             setShowToaster(true);
+            setRedeemModal(false)
+            
           } else {
             setToasterMessage('Redeemed Successfully');
             setShowToaster(true); 
             setRedeemModal(false)
           }
         } catch (error) {
+            setRedeemModal(false);
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
             setLoading(false);
@@ -344,6 +355,31 @@ const PotPage = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
+            setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+        }
+    }
+
+    const claimReward = async () => {
+        let dataToSend = {
+            walletAddress: localStorage.getItem('_wallet'),
+            potId: prevRounds[currentSlide]?._id
+        }
+        setLoading(true);
+        try {
+          const data = await wonLottery(dataToSend);
+          setLoading(false);
+          if (data.error) {
+            setToasterMessage(data?.message||'Something Went Worng');
+            setShowToaster(true);
+          } else {
+            // setToasterMessage('round fetched Successfully');
+            // setShowToaster(true); 
+            setUserWon(data?.data?.lotteryWon)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -382,6 +418,7 @@ const PotPage = () => {
         fetchGameCash()
         setRedeemModal(true)
     }
+
     
 // 
 return(
@@ -532,16 +569,16 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={10000} 
-                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />} >
+                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {true} autoPlaySpeed={5000} 
+                         keyBoardControl={true} autoplayHoverPause={true} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  beforeChange={(e) => handleSlideChange(e)}>
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
-                            <div key={index+1}>
+                            <div key={index+1} id={index}>
                                 <div className="d-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
-                                        <p><span>Drawn {new Date(round?.createdAt).toLocaleString('en-US', {
+                                        <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row">
@@ -561,22 +598,22 @@ return(
                     </div>        
                     <div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
-                        {claimExpiryDate!=='' ? ( <a onClick={handleRedeemModal}><span></span> CLAIM NOW</a>) :
-                        (<a className="disabled"><span></span> CLAIM NOW</a>)}
+                        {userWon ===true ? ( <a ><span></span> CLAIM NOW</a>) :
+                        (<a className="disabled"><span></span> You have not won !</a>)}
                         
                         </div>    
                         <div className="expDate">
-                            {claimExpiryDate!==''?
+                            {userWon ===true &&
                                 <><p className="mb-0">Expires in </p>
                                 <div className="claimExpire ps-2">
-                                <span className="countFont">{countdownTime.countdownHours} <sub>H </sub></span>
-                                <span className="countFont">{countdownTime.countdownMinutes} <sub>M </sub></span>
-                                <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
+                                <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
+                                <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
+                                <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
                                 </div>
                                 {/* <button type="button" className="btn btn-success">:</button>
                                 <button type="button" className="btn btn-outline-success">{countdownTime.countdownSeconds} <sub>Seconds</sub></button> */}
                                 </>
-                                :<p>Expired</p>}
+                                }
                         </div>                                
                     </div>           
                 </div>

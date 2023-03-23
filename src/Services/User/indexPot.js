@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { environment } from '../../Environments/environment';
 import { axiosInstance } from '../Interceptor';
 let url = environment.apiUrl;
@@ -21,6 +20,10 @@ export function redeemCashReward(data) {
 
 export function getPrevRounds(){
   return (axiosInstance.get(url + 'pot/v1/user/get/lottery/pot/previous/rounds').then(res => res.data)) // get previous rounds
+}
+
+export function wonLottery(data) {
+  return (axiosInstance.get(url + 'user/v1/check/user/won/lottery',{params: data}).then(res => res.data))
 }
 
 export function leaderBoardLottery(data){

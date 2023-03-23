@@ -117,9 +117,9 @@ const Metamask = () => {
       setWalletaddress(wallet)
     }
     try {
-		if (typeof window.ethereum == "undefined") {
-		  return alert('Please install MetaMask');
-		}
+		// if (typeof window.ethereum == "undefined") {
+		//   return alert('Please install MetaMask');
+		// }
 		window.ethereum?.on('accountsChanged', saveNewAddress);
 		window.ethereum?.on('chainChanged', switchNetwork); 
 	  } catch (error) {

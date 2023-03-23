@@ -15,6 +15,7 @@ import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
 import {useParams} from "react-router-dom" 
 import { useState } from 'react';
+import { NavDropdown } from 'react-bootstrap';
 
 
 const CollapsibleExample = () => {
@@ -37,9 +38,6 @@ const CollapsibleExample = () => {
   useEffect(() => {
     // Store the previous path in state or local storage
     sessionStorage.setItem('before login',location.pathname);
-
-    console.log('u',_u)
-
   }, [location.pathname]);
 
 
@@ -160,14 +158,14 @@ const redirectToAuthRute = () => {
 }
 
 useEffect(() => {
-  const wallet=localStorage.getItem('_wallet');
-  if(wallet){
-    setWalletaddress(wallet)
-  }
+  // const wallet=localStorage.getItem('_wallet');
+  // if(wallet){
+  //   setWalletaddress(wallet)
+  // }
   try {
-  if (typeof window.ethereum == "undefined") {
-    return alert('Please install MetaMask');
-  }
+  // if (typeof window.ethereum == "undefined") {
+  //   return alert('Please install MetaMask');
+  // }
   window.ethereum?.on('accountsChanged', saveNewAddress);
   window.ethereum?.on('chainChanged', switchNetwork); 
   } catch (error) {
@@ -211,7 +209,6 @@ useEffect(() => {
       <Navbar collapseOnSelect expand="lg" variant="dark" >
         <Container>
           <Navbar.Brand as={Link} to='/' > <img src={gamelogo} alt="logo" /> </Navbar.Brand>
-          {/* <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={gamelogo} width={79} height={100} alt="logo" /></Navbar.Brand> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
@@ -219,29 +216,28 @@ useEffect(() => {
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" as={Link} to='/partyGang' > {' '} Party{' '} </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && (  <Nav.Link>
-              {walletAddress ? (
-                        <>
+              {_u?.user?.role !== 'ADMIN' && 
+              (  <Nav.Link> {walletAddress ? ( <>
 						 {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)}
 					  </>) : (
               <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span>
 						)}
                 </Nav.Link> )}
-              
-              {walletAddress && ( <Nav.Link  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Nav.Link> )}
+             
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> )}
-              {/* <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
-              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4" onClick={() => { goToAbout('/login') }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
-
-            
-              
             </Nav>
             <Nav>
             <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
               {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)}
+
+              <NavDropdown title="Dropdown" id="basic-nav-dropdown" alignRight>
+                {_u === null &&   (<NavDropdown.Item as={Link} to='/login'>Login</NavDropdown.Item>)}
+                {_u !== null &&   (<NavDropdown.Item onClick={() => { handleLogout() }}>Logout</NavDropdown.Item>)}
+                {walletAddress && ( <NavDropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></NavDropdown.Item> )}
+              </NavDropdown>
 
             </Nav>
           </Navbar.Collapse>

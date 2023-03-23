@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { environment } from "../../Environments/environment";
 import {useAuth} from '../../Auth/authProvider';
+
 let baseURL = environment?.apiUrl;
 export const axiosInstance = axios.create({
     baseURL
@@ -25,7 +26,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     function (res) {
-		console.log(res, "response")
+		// console.log(res, "response")
         return res;
     },
     async function (error) {
