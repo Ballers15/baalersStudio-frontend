@@ -163,7 +163,7 @@ const switchNetwork = async (chainId) => {
         //   blockExplorerUrls: ["https://polygonscan.com/"],
         // },
         {
-          chainId: `0x${Number(8001).toString(16)}`,
+          chainId: `0x${Number(80001).toString(16)}`,
           chainName: "Mumbai Testnet",
           nativeCurrency: {
             name: "MATIC",
