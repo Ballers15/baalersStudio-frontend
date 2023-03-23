@@ -41,6 +41,13 @@
 .navbar-expand-lg .navbar-nav .nav-link .fa {    
     font-size: 20px;
 }
+button#dropdown-button-dark-example1 {
+    background: transparent;
+    border: 0;
+}
+.dropdown-menu-dark { 
+    --bs-dropdown-bg: #260059;
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 20px; 

@@ -16,6 +16,8 @@ import $ from 'jquery';
 import {useParams} from "react-router-dom" 
 import { useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 const CollapsibleExample = () => {
@@ -231,14 +233,26 @@ useEffect(() => {
             </Nav>
             <Nav>
             <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
-              {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)}
+              {/* {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
 
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown" alignRight>
+              {/* <NavDropdown title="Dropdown"  id="basic-nav-dropdown" alignRight>
                 {_u === null &&   (<NavDropdown.Item as={Link} to='/login'>Login</NavDropdown.Item>)}
                 {_u !== null &&   (<NavDropdown.Item onClick={() => { handleLogout() }}>Logout</NavDropdown.Item>)}
                 {walletAddress && ( <NavDropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></NavDropdown.Item> )}
-              </NavDropdown>
+              </NavDropdown> */}
 
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-button-dark-example1" >
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu variant="dark">
+                {_u === null &&   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>)}
+                {_u !== null &&   (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
+                {walletAddress && ( <Dropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item> )}
+    
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
