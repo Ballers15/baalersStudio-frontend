@@ -3,11 +3,13 @@ import { useState } from "react";
 import { useAuth } from '../../Auth/authProvider';
 import Form from "react-bootstrap/Form";
 import './Login.css';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validated, setValidated] = useState(false);
+    const navigate = useNavigate();
     
     const auth = useAuth()
     const handleLogin = (e) => {

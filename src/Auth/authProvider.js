@@ -12,6 +12,7 @@ export default function AuthProvide({ children }) {
   const [toaster, showToaster] = useState(false);
   const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
+  const prev = sessionStorage.getItem('before login')
 
   useEffect(() => {
     let _u = localStorage.getItem('_u');
@@ -45,7 +46,7 @@ export default function AuthProvide({ children }) {
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
-          // navigate('/metamask')
+          navigate(prev)
         }
       }
     } catch (error) {

@@ -13,17 +13,41 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
-import {useParams,  useHistory} from "react-router-dom" 
+import {useParams} from "react-router-dom" 
 import { useState } from 'react';
 
 
 const CollapsibleExample = () => {
 
+  const auth = useAuth()
+  const handleLogout = (e) => {
+    auth.logout()
+  }
+
+  let strAuth = localStorage.getItem('_u');
+  let _u = JSON.parse(strAuth);
+  const location = useLocation();
+
+  const disconnectWallet = () => {
+    localStorage.removeItem('_wallet')
+    setWalletaddress('')
+  }
+
+
+  useEffect(() => {
+    // Store the previous path in state or local storage
+    sessionStorage.setItem('before login',location.pathname);
+
+    console.log('u',_u)
+
+  }, [location.pathname]);
+
+
 //metamask starts
 const [error, setError] = useState("No Error");
 const [accountDetails, setAccountDetails] = useState('');
 const navigate = useNavigate();
-const [walletAddress, setWalletaddress] =useState();
+const [walletAddress, setWalletaddress] = useState('');
 const redirectPath = '/';
 
 const supportedChainList = {
@@ -79,8 +103,13 @@ const getAccountDetails = async ({ networkName, setError }) => {
 };
 
 const connectWallet = async (networkName) => {
+  if(_u !== null){
   setError();
   await getAccountDetails({ networkName, setError });
+  }
+  else{
+    navigate('/login');
+  }
 };
 
 const getDetailsFromChainId = (chainId) => {
@@ -171,26 +200,17 @@ useEffect(() => {
             }, 20);
       }        
   },[id]);
-  const auth = useAuth()
-  const handleLogout = (e) => {
-    auth.logout()
-  }
-  const goToAbout = (param)=>{
-    navigate(param);
-   
-  } 
 
-  let strAuth = localStorage.getItem('_u');
-  let _u = JSON.parse(strAuth);
-  const location = useLocation();
-  const history = useHistory(); 
+  
+
+
 
 
   return (
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" variant="dark" >
         <Container>
-          <Navbar.Brand onClick={() => { goToAbout('/') }} > <img src={gamelogo} alt="logo" /> </Navbar.Brand>
+          <Navbar.Brand as={Link} to='/' > <img src={gamelogo} alt="logo" /> </Navbar.Brand>
           {/* <Navbar.Brand onClick={()=>{goToAbout('/') }}><img src={gamelogo} width={79} height={100} alt="logo" /></Navbar.Brand> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -207,6 +227,8 @@ useEffect(() => {
               <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span>
 						)}
                 </Nav.Link> )}
+              
+              {walletAddress && ( <Nav.Link  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
