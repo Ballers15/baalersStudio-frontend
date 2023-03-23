@@ -152,7 +152,7 @@ const PotPage = () => {
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
-          console.log(runningCountdownTime);
+          console.log(runningCountdownTime,remainingDayTime);
           setCountdownTime(runningCountdownTime);
      
           if (remainingDayTime < 0 ) {
@@ -447,7 +447,8 @@ const PotPage = () => {
             navigate('/login')
         }
         else if(user &&  !walletAddress){
-            alert('please connect your metamask wallet')
+            setToasterMessage('Please connect your metamask wallet');
+            setShowToaster(true);
             return;
         }
        await fetchGameCash()
@@ -800,18 +801,20 @@ return(
                         {/* <th>Points</th> */}
                         <th>ID</th>
                         <th>In game cash</th>
-                        <th>Collectibles</th> 
+                        <th>Wallet Address</th> 
                     </tr>
                     </thead>
                     <tbody>
-                        {/* user */}
+                        {/* wallet?.slice(0,5)+'....'+wallet?.slice(-5) */
+                        
+                        }
                 {leaderBoardLotteryDetails && leaderBoardLotteryDetails?.map((User,index)=>{
                     return (
                     <tr key={User._id} >
                         <td>{index+1}</td>
                         <td>{User?.userId?.name}</td>
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
-                        <td>{User?.nftHolded}</td> 
+                        <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
                     </tr>)
                 })}
                     

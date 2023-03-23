@@ -117,7 +117,7 @@ const getAccountDetails = async ({ networkName, setError }) => {
   }
 };
 
-const connectWallet = async (networkName) => {
+ const connectWallet = async (networkName) => {
   if(_u !== null){
   setError();
   await getAccountDetails({ networkName, setError });
@@ -248,11 +248,12 @@ useEffect(() => {
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" as={Link} to='/partyGang' > {' '} Party{' '} </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
+
               {_u?.user?.role !== 'ADMIN' && (
                <Nav.Link> {walletAddress !=='' && ( <> {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)} </>) } 
                     {walletAddress === '' &&( <span onClick={()=>{connectWallet('polygon')}}>Connect Wallet</span> )} 
                 </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> )}
