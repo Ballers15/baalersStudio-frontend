@@ -100,6 +100,7 @@ const getAccountDetails = async ({ networkName, setError }) => {
             method: "eth_chainId",
           })
       .then((chainID) => {
+        console.log("chainID",chainID)
         getDetailsFromChainId(chainID,res);
         setWalletaddress(res[0])
         localStorage.setItem('_wallet',res[0])
@@ -126,12 +127,13 @@ const connectWallet = async (networkName) => {
   }
 };
 
-const getDetailsFromChainId = (chainId) => {
-let selectedChain = Object.keys(supportedChainList).map((e) => {
+const getDetailsFromChainId = async(chainId) => {
+let selectedChain = Object.keys(supportedChainList).map(async(e) => {
   if (supportedChainList[e].chainId === chainId) {
   return supportedChainList[e];
   } else {
-    return null;
+    await switchNetwork();
+    // return null;
   }
 });
 
