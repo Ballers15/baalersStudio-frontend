@@ -312,6 +312,7 @@ const PotPage = () => {
             setToasterMessage(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
             setShowToaster(true); 
             setRedeemModal(false)
+            getLotteryLeaderBoard()
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -337,9 +338,10 @@ const PotPage = () => {
             setRedeemModal(false)
             
           } else {
-            setToasterMessage(`Your ${cash} amount of in game cash deposited Successfully`);
+            setToasterMessage(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
             setShowToaster(true); 
             setRedeemModal(false)
+            getLotteryLeaderBoard()
           }
         } catch (error) {
             setRedeemModal(false);
@@ -536,8 +538,7 @@ const PotPage = () => {
           } else {
             setToasterMessage('lotery details');
             setShowToaster(true); 
-           console.log('after withdraw',data)
-            getLotteryLeaderBoard();
+            console.log('after withdraw',data)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');

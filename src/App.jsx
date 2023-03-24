@@ -7,6 +7,7 @@ import NavigationRouter from './Routes';
 function App() {
   return (
     <React.Fragment>
+      
      <NavigationRouter />
    </React.Fragment>
   );
