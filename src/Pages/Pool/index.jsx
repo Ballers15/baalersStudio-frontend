@@ -3,11 +3,6 @@
 import React, { useState, useEffect} from "react";
 import './Pool.css' 
 import Modal from 'react-bootstrap/Modal';
-import tdefi from '../../Assest/img/logos/tdefi.png'
-import tradedog from '../../Assest/img/logos/tradedog.png'
-import tdmm from '../../Assest/img/logos/tdmm.png'
-import tdx from '../../Assest/img/logos/tdx.png'
-import ith from '../../Assest/img/logos/ith.png'
 import { Link } from "react-router-dom";
 
 
@@ -138,10 +133,10 @@ const Pool = () => {
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">
-                                           <Link to='lottery'>Lottery Pool</Link>
+                                           <Link to='/lottery'>Lottery Pool</Link>
                                         </div>
                                         <div className="shareBtn">
-                                           <Link to='reward'> Reward Pool</Link>
+                                           <Link to='/reward'> Reward Pool</Link>
                                         </div>
                                     </div>
                                    

@@ -8,7 +8,7 @@ const Metamask = () => {
 	const [error, setError] = useState("No Error");
 	const [accountDetails, setAccountDetails] = useState('');
   const navigate = useNavigate();
-  const [walletAddress, setWalletaddress] =useState();
+  const [walletAddress, setWalletaddress] = useState();
   const redirectPath = '/';
 
 	const supportedChainList = {

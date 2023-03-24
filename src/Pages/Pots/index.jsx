@@ -50,6 +50,8 @@ const responsive = {
     
      );
    };
+
+   
 const PotPage = () => {
     $(document).ready(function(){
   
@@ -108,7 +110,7 @@ const PotPage = () => {
        const index = current % prevRounds.length;
        setCurrentSlide(index)
     //    setUserWon(false)
-            setClaimExpiryDate(prevRounds[index]?.claimExpiryDate)
+        setClaimExpiryDate(prevRounds[index]?.claimExpiryDate)
     
     //    console.log(prevRounds[index])
         if(user !== null && walletAddress !== null) {
@@ -376,10 +378,12 @@ const PotPage = () => {
     }
 
     const getPreviousRounds = async () => {
-     
+        let dataToSend = {
+            walletAddress: localStorage.getItem('_wallet'),
+        }
         setLoading(true);
         try {
-          const round = await getPrevRounds();
+          const round = await getPrevRounds(dataToSend);
           setLoading(false);
           if (round.error) {
             setToasterMessage(round?.message||'Something Went Worng');
@@ -390,6 +394,10 @@ const PotPage = () => {
             setPrevRounds(round?.data)
             // console.log('i am set here getPreviousRounds ');
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
+            console.log('prev rounds',round?.data[0])
+
+            setUserWon(round?.data[0]?.userRes?.lotteryWon)
+            setParticipated(round?.data[0]?.userRes?.participated)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -439,7 +447,7 @@ const PotPage = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-        getLotteryLeaderBoard();
+        getLotteryLeaderBoard(leaderSearch);
     }
 
     const [redeemModal,setRedeemModal] = useState(false)
@@ -723,16 +731,15 @@ return(
                            )}                            
                             </Carousel>) : <span class='no data'></span>}
                            
-                        </div>
+                        </div>    
                     </div>        
-                  {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
+                  {prevRounds?.length && user !==null && walletAddress !==null && (<div className="poolBtn text-center pt-4 finishBtn"> 
                         <div className="playBtn">
                         {userWon === true && claimExpiryDate !== '' && claimedNft !==true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
                         {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
                         {userWon === true && claimExpiryDate === '' && ( <a className="disabled" ><span></span> CLAIM NOW</a>) }
                         {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
                         {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
-                        
                         </div>    
                         <div className="expDate">
                             {userWon ===true && claimExpiryDate!=='' && claimedNft!== true &&
@@ -741,11 +748,11 @@ return(
                                 <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
                                 <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
                                 <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
-                                </div>
+                                    </div>
                             </>
                                 }
                         </div>                                
-                    </div>) :  <span class='no data'></span>}          
+                        </div>) }          
                 </div>
                 
 
@@ -794,7 +801,7 @@ return(
                             placeholder="Playername#Tagline"
                             className="me-2 searchBar"
                             aria-label="Search"
-                            onChange={(e)=>{getLotteryLeaderBoard(e.target.value)}}
+                            onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
                         {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
@@ -832,7 +839,7 @@ return(
                     </tr>
                      */}
                 </tbody>
-                </Table> ) : (<span >No Data !</span>)}
+                </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
 
             </div>
             </div>
