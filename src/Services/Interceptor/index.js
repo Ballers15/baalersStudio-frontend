@@ -35,17 +35,12 @@ axiosInstance.interceptors.response.use(
             if (error.response.status === 403 && error.response.data) {
                 alert(error?.response?.data?.message || 'error code 403 detected!!')
 				localStorage.clear(); 
-				navigate('/login');
-                // useNavigate('/login')
                 return Promise.reject(error.response.data?.message);
             }
             if (error.response.status === 401 && error.response.data) {
                 alert(error?.response?.data?.message || 'error code 401 detected!!')
-				console.log("calling error 401")
+				// console.log("calling error 401")
 				localStorage.clear(); 
-				window.location.href = '/login';
-				// navigate('/login');
-                // useNavigate('/login')
                 return Promise.reject(error.response.data?.message);
             }
         }

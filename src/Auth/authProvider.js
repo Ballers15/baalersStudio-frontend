@@ -50,10 +50,11 @@ export default function AuthProvide({ children }) {
         }
       }
     } catch (error) {
-      console.log(error)
-      setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+      console.log('err in login',error)
+      setToasterMessage(error?.response?.data?.message||'Something Went Worng during login');
       setShowToaster(true);
       setLoading(false);
+      navigate('/login')
     }
   }
 

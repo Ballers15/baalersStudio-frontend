@@ -13,7 +13,7 @@ export const CheckUser = ({ children }) => {
     return <Navigate to='/' state={{ path: location.pathname }} />
   } 
   else {
-    console.log('passed succesfully')
+    // console.log('passed succesfully')
   }
 
   return children

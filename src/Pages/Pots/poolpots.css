@@ -172,8 +172,16 @@ a.disabled{
     background: transparent !important;
     border: 0;
     position: absolute;
-    right: 10px;
+    right: 50px;
 }
+
+.resetIcon{
+  background: transparent !important;
+  border: 0;
+  position: absolute;
+  right: 10px;
+}
+
 .countFont{
     font-family: 'VALORANT';
     font-style: normal;

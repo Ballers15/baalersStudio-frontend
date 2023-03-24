@@ -13,7 +13,7 @@ import Toaster from "../../Components/Toaster";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
 
 
@@ -97,22 +97,23 @@ const PotPage = () => {
    const [currentSlide,setCurrentSlide] = useState(0)
    const [potId,setPotId] = useState('')
    const [claimedNft,setClaimedNft] = useState('')
-
    const [intervalId, setIntervalId] = useState(null);
-
    const [currentPot,setCurrentPot]=useState('');
+   const location = useLocation()
+
+
    const handleSlideChange = (current) => {
-    console.log("current",current);
+    // console.log("current",current);
     // current=current-1;
        const index = current % prevRounds.length;
        setCurrentSlide(index)
     //    setUserWon(false)
-            setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+            setClaimExpiryDate(prevRounds[index]?.claimExpiryDate)
     
-    //    console.log(prevRounds[currentSlide])
+    //    console.log(prevRounds[index])
         if(user !== null && walletAddress !== null) {
-            console.log(prevRounds[currentSlide]);
-            lotteryWon(prevRounds[currentSlide]._id)
+            // console.log(prevRounds[index]);
+            lotteryWon(prevRounds[index]._id)
         }
      };
 
@@ -152,7 +153,7 @@ const PotPage = () => {
              countdownMinutes: totalMinutes,
              countdownSeconds: totalSeconds
           }
-          console.log(runningCountdownTime,remainingDayTime);
+        //   console.log(runningCountdownTime,remainingDayTime);
           setCountdownTime(runningCountdownTime);
      
           if (remainingDayTime < 0 ) {
@@ -191,8 +192,8 @@ const PotPage = () => {
           if (remainingDayTime < 0 ) {
             clearInterval(id);
             setIntervalId(null);    
-             console.log('i am set here claimCountdownTimer')
-             setClaimExpiryDate('');
+            //  console.log('i am set here claimCountdownTimer')
+            //  setClaimExpiryDate('');     
             }
      
          }, 1000); 
@@ -210,7 +211,7 @@ const PotPage = () => {
             setPotType('REWARDPOT')
         }
         
-    },[])
+    },[location.pathname])
 
     useEffect(()=>{
         if(potType!==''){
@@ -261,9 +262,9 @@ const PotPage = () => {
         }
     }
 
-    const getLotteryLeaderBoard = async () => {
+    const getLotteryLeaderBoard = async (data) => {
         let dataToSend = {
-            search: leaderSearch,
+            search: data,
         }
         setLoading(true);
         try {
@@ -385,7 +386,7 @@ const PotPage = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
-            console.log('i am set here getPreviousRounds ');
+            // console.log('i am set here getPreviousRounds ');
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
           }
         } catch (error) {
@@ -496,13 +497,13 @@ const PotPage = () => {
           } else {
             setToasterMessage('round fetched Successfully');
             setShowToaster(true); 
-            console.log('claim lottery',dataNft)
-            console.log('====================')
-            console.log(data?.potDetails?._id)
-            console.log(localStorage.getItem('_wallet'))
-            console.log(dataNft?.transactionHash)
-            console.log(data?.transactionDetails?._id)
-            console.log('---------------')
+            // console.log('claim lottery',dataNft)
+            // console.log('====================')
+            // console.log(data?.potDetails?._id)
+            // console.log(localStorage.getItem('_wallet'))
+            // console.log(dataNft?.transactionHash)
+            // console.log(data?.transactionDetails?._id)
+            // console.log('---------------')
             let withdrawlObject = {
                 potId: data?.potDetails?._id,   
                 walletAddress: localStorage.getItem('_wallet'),
@@ -578,7 +579,8 @@ return(
         <div className="text-center potsHead thirdSlide">
             <div className="sCaption text-center">
                 <div> 
-                    <h1>LOTTERY POT </h1>
+                    {potType==='LOTTERYPOT' && <h1>LOTTERY POT </h1>}
+                    {potType==='REWARDPOT' && <h1>REWARD POT </h1>}
                     <p className="textHeader">
                     Win rewards having real-world value, ranging from $BALR tokens, and NFTs, to tickets for physical parties around the world.
                     </p>
@@ -785,18 +787,19 @@ return(
               <div className="">
                 <div className="searchBox">
                     <h4>Search Leaderboard</h4>
-                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser}>
+                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getLotteryLeaderBoard();}}>
                        <Form.Control
                             type="search"
                             placeholder="Playername#Tagline"
                             className="me-2 searchBar"
                             aria-label="Search"
-                            onChange={(e)=>{setLeaderSearch(e.target.value)}}
+                            onChange={(e)=>{getLotteryLeaderBoard(e.target.value)}}
                         />
-                        <Button className="searchIcon" ><i className="fa fa-search" aria-hidden="true"></i></Button>
+                        <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
+                        {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
                     </Form>
                 </div>
-                <Table responsive>
+                {leaderBoardLotteryDetails?.length !== 0 ? (<Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
@@ -810,7 +813,7 @@ return(
                         {/* wallet?.slice(0,5)+'....'+wallet?.slice(-5) */
                         
                         }
-                {leaderBoardLotteryDetails.length ? leaderBoardLotteryDetails?.map((User,index)=>{
+                { (leaderBoardLotteryDetails?.map((User,index)=>{
                     return (
                     <tr key={User._id} >
                         <td>{index+1}</td>
@@ -818,7 +821,7 @@ return(
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
                         <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
                     </tr>)
-                }) : (<span>No Data !</span>)}
+                })) }
                     
                     {/* <tr className="active">
                         <td>2</td>
@@ -828,7 +831,7 @@ return(
                     </tr>
                      */}
                 </tbody>
-                </Table>
+                </Table> ) : (<span >No Data !</span>)}
 
             </div>
             </div>
