@@ -536,7 +536,7 @@ const PotPage = () => {
             setToasterMessage('lotery details');
             setShowToaster(true); 
            console.log('after withdraw',data)
-
+            getLotteryLeaderBoard();
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
@@ -659,6 +659,8 @@ return(
                                 <div>
                                     {expiryTime!=='' ?
                                         <>
+                                        <span className="countFont">{countdownTime.countdownDays} <sub>D</sub></span>
+                                        <span className="countFont pe-2">:</span>
                                         <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
                                         <span className="countFont pe-2">:</span>
                                         <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
@@ -693,7 +695,7 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length && <Carousel responsive={responsive} infinite={true} autoPlay= {false} autoPlaySpeed={10000} 
+                        {prevRounds?.length ? (<Carousel responsive={responsive} infinite={true} autoPlay= {false} autoPlaySpeed={10000} 
                          keyBoardControl={true} autoplayHoverPause={false} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  beforeChange={(e) => handleSlideChange(e)}>
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
@@ -716,11 +718,11 @@ return(
                                
                             </div>)
                            )}                            
-                            </Carousel>}
+                            </Carousel>) : <span class='no data'></span>}
                            
                         </div>
                     </div>        
-                    <div className="poolBtn text-center pt-4 finishBtn">
+                  {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
                         {userWon === true && claimExpiryDate !== '' && claimedNft !==true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
                         {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
@@ -740,7 +742,7 @@ return(
                             </>
                                 }
                         </div>                                
-                    </div>           
+                    </div>) :  <span class='no data'></span>}          
                 </div>
                 
 
@@ -808,7 +810,7 @@ return(
                         {/* wallet?.slice(0,5)+'....'+wallet?.slice(-5) */
                         
                         }
-                {leaderBoardLotteryDetails && leaderBoardLotteryDetails?.map((User,index)=>{
+                {leaderBoardLotteryDetails.length ? leaderBoardLotteryDetails?.map((User,index)=>{
                     return (
                     <tr key={User._id} >
                         <td>{index+1}</td>
@@ -816,7 +818,7 @@ return(
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
                         <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
                     </tr>)
-                })}
+                }) : (<span>No Data !</span>)}
                     
                     {/* <tr className="active">
                         <td>2</td>
