@@ -6,11 +6,12 @@ export const Authenticator = ({ children }) => {
   let strAuth = localStorage.getItem('_u');
   let wallet = localStorage.getItem('isConnected');
   let auth = JSON.parse(strAuth);
+  const prev = sessionStorage.getItem('before login')
 
   if (auth?.user?.role!=='USER' && !wallet || auth?.user?.role === null) {
     return <Navigate to='/login' state={{ path: location.pathname }} />
   } else if (auth?.user.role==='USER' && wallet) {
-    return <Navigate to='/pool' state={{ path: location.pathname }} />
+    return <Navigate to={prev} state={{ path: location.pathname }} />
   } else {
     console.log('passed succesfully')
   }

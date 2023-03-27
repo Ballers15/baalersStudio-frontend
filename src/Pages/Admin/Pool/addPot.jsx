@@ -13,9 +13,6 @@ import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
 
 
 const AddPot = () => {
-    const [showTime, setShowTime] = useState(false)
-    const [showTimeEnd, setShowTimeEnd] = useState(false)
-
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
@@ -47,9 +44,6 @@ const AddPot = () => {
             getRewardPotDetailById(state?.id);
             return;
         }
-        console.log(currentDateTime)
-        console.log(currentDate)
-        console.log(currentTime)
     }, []);
 
     const getRewardPotDetailById = async (id) => {
@@ -61,7 +55,7 @@ const AddPot = () => {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               setLoading(false);
               if (getPotDetailsById.error) {
-                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong');
+                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
                 setShowToaster(true);
               } else {
                   let data = getPotDetailsById?.data[0];
@@ -69,7 +63,7 @@ const AddPot = () => {
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
                   if (data) {
-                    console.log(data)
+                    // console.log(data)
 
                       setRewardPotDetail({
                           ...rewadPotDetail,
@@ -98,15 +92,15 @@ const AddPot = () => {
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
                     }
                     if(data?.potStatus === 'ONGOING'){
-                        console.log('if',data?.potStatus)
+                        // console.log('if',data?.potStatus)
                         setPotStatusCheck(true);
-                        console.log(potStatusCheck) 
-                        console.log(rewadPotDetail)
+                        // console.log(potStatusCheck) 
+                        // console.log(rewadPotDetail)
                       }
               }
              
             } catch (error) {
-                setToasterMessage(error?.response?.data?.message||'Something Went Wrong');
+                setToasterMessage(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
                 setShowToaster(true);
                 setLoading(false);
             }
@@ -122,11 +116,11 @@ const AddPot = () => {
                 setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: {...rewadPotDetail.claimExpiryDate, time:e } })
               break;
             case 'date':
-                console.log(data)
+                // console.log(data)
                 setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: {...rewadPotDetail.claimExpiryDate, date:convert(date)} })
               break;
             default:
-                console.log('default statement run');
+                // console.log('default statement run');
           }
     }
 
@@ -180,7 +174,7 @@ const AddPot = () => {
           const addPot = await AddRewardPot(rewadPotDetail);
           setLoading(false);
           if (addPot.error) {
-            setToasterMessage(addPot?.message||'Something Went Worng');
+            setToasterMessage(addPot?.message||'Something Went Worng in adding reward pot');
             setShowToaster(true);
             setDisableSubmitButton(false);
               
@@ -192,7 +186,7 @@ const AddPot = () => {
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in adding reward pot');
             setShowToaster(true);
             setLoading(false);
         }
@@ -241,13 +235,13 @@ const AddPot = () => {
         }
         setDisableSubmitButton(true);
         setLoading(true);
-        console.log(rewadPotDetail)
+        // console.log(rewadPotDetail)
         // return
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
           setLoading(false);
           if (updatePot.error) {
-            setToasterMessage(updatePot?.message||'Something Went Worng');
+            setToasterMessage(updatePot?.message||'Something Went Worng in updating reward pot');
             setShowToaster(true);
             setDisableSubmitButton(false);
               
@@ -262,7 +256,7 @@ const AddPot = () => {
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward pot');
             setShowToaster(true);
             setLoading(false);
         }

@@ -15,9 +15,7 @@ import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
 import {useParams} from "react-router-dom" 
 import { useState } from 'react';
-import { NavDropdown } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 const CollapsibleExample = () => {
@@ -82,7 +80,7 @@ Mumbai:{
 };
 
 const saveNewAddress = (address) =>{
-  console.log("i am inside this",address);
+  // console.log("i am inside this",address);
   let walletAddress=address[0];
   setWalletaddress(walletAddress)
   localStorage.setItem('_wallet',walletAddress)  
@@ -274,9 +272,10 @@ useEffect(() => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu variant="dark">
+                {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.email}</Dropdown.Item>)}
+                {walletAddress && ( <Dropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item> )}
                 {_u === null &&   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>)}
                 {_u !== null &&   (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
-                {walletAddress && ( <Dropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item> )}
     
                 </Dropdown.Menu>
               </Dropdown>

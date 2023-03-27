@@ -45,3 +45,7 @@ export function lotteryWithdrawl(data) {
 export function leaderBoardLottery(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/lottery/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
 }
+
+export function getRewardRounds(data){
+  return (axiosInstance.get(url + 'pot/v1/user/get/reward/pot/previous/rounds',{params: data}).then(res => res.data)) // get previous rounds
+}

@@ -17,6 +17,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
 import LotteryRounds from "./lotteryRounds";
+import RewardRounds from "./rewardRounds";
 
 
 
@@ -81,37 +82,15 @@ const PotPage = () => {
     const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [leaderSearch,setLeaderSearch]  = useState('')
-    const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [cash, setCash] = useState('')
-    const [prevRounds, setPrevRounds] = useState('')
     const user = localStorage.getItem('_u')
     const walletAddress = localStorage.getItem('_wallet')
     const { type } = useParams();
     const navigate = useNavigate()
-    const [userWon, setUserWon] = useState(false)
-    const [participated, setParticipated] = useState(false)
-    const [currentSlide,setCurrentSlide] = useState(0)
-    const [potId,setPotId] = useState('')
-    const [claimedNft,setClaimedNft] = useState('')
-    const [intervalId, setIntervalId] = useState(null);
-    const [currentPot,setCurrentPot]=useState('');
     const location = useLocation()
+    const [previous, setPrevious] = useState(false);
 
 
-   const handleSlideChange = (current) => {
-    // console.log("current",current);
-    // current=current-1;
-       const index = current % prevRounds.length;
-       setCurrentSlide(index)
-    //    setUserWon(false)
-        setClaimExpiryDate(prevRounds[index]?.claimExpiryDate)
-    
-    //    console.log(prevRounds[index])
-        if(user !== null && walletAddress !== null) {
-            // console.log(prevRounds[index]);
-            lotteryWon(prevRounds[index]._id)
-        }
-     };
 
    const [countdownTime, setCountdownTime]= useState(
        {
@@ -162,43 +141,7 @@ const PotPage = () => {
     }
 
 
-    const claimCountdownTimer=()=>{
-        // console.log("claimExpiryDate::claimCountdownTimer",claimExpiryDate);
-        const countTime=claimExpiryDate;
-        // console.log("countTimeCOnst",countTime);
-        if(claimExpiryDate!==''){
-            const id = setInterval(() => {
-        //  console.log("countTime",claimExpiryDate);
-         const countdownDateTime = new Date(countTime).getTime(); 
-         const currentTime = new Date().getTime();
-          const  remainingDayTime = countdownDateTime - currentTime;
-          const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
-          const totalHours = Math.floor((remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const totalMinutes = Math.floor((remainingDayTime % (1000 * 60 * 60)) / (1000 * 60));
-          const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
-          const runningCountdownTime={
-             countdownDays: totalDays,
-             countdownHours: totalHours,
-             countdownMinutes: totalMinutes,
-             countdownSeconds: totalSeconds
-          }
-        //   console.log("claimExpiryDate",runningCountdownTime);
-          setClaimCountdownTime(runningCountdownTime);
-     
-          if (remainingDayTime < 0 ) {
-            clearInterval(id);
-            setIntervalId(null);    
-            //  console.log('i am set here claimCountdownTimer')
-            //  setClaimExpiryDate('');     
-            }
-     
-         }, 1000); 
-        //  console.log("hi i am id of setinterval",id);
-         setIntervalId(id);
-
-        }
-        
-    }
+  
     useEffect(()=>{
     if(type === 'lottery'){
         setPotType('LOTTERYPOT')
@@ -212,7 +155,6 @@ const PotPage = () => {
     useEffect(()=>{
         if(potType!==''){
         getActivePotDetails();
-        getPreviousRounds();
         getLotteryLeaderBoard();
         }
     },[potType])
@@ -222,21 +164,12 @@ const PotPage = () => {
             countdownTimer();
         }
         else{
-            getPrevRounds();
-            getLotteryLeaderBoard();
+          setPrevious(true)
+          console.log(previous)
+          console.log(expiryTime)
         }
     },[expiryTime]);
 
-    useEffect(() => {
-        if(claimExpiryDate!==''){
-            // console.log("calling again in useeffecttt======");
-            // console.log("in use effect intervalId",intervalId)
-            clearInterval(intervalId);
-            setIntervalId(null);
-            claimCountdownTimer();
-    
-        }
-    },[claimExpiryDate]);
 
     const getActivePotDetails = async () => {
         let dataToSend = {
@@ -376,63 +309,7 @@ const PotPage = () => {
        }
     }
 
-    const getPreviousRounds = async () => {
-        let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
-        }
-        setLoading(true);
-        try {
-          const round = await getPrevRounds(dataToSend);
-          setLoading(false);
-          if (round.error) {
-            setToasterMessage(round?.message||'Something Went Worng');
-            setShowToaster(true);
-          } else {
-            // setToasterMessage('round fetched Successfully');
-            // setShowToaster(true); 
-            setPrevRounds(round?.data)
-            // console.log('i am set here getPreviousRounds ');
-            setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
-            // console.log('prev rounds',round?.data[0])
-
-            setUserWon(round?.data[0]?.userRes?.lotteryWon)
-            setParticipated(round?.data[0]?.userRes?.participated)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
-
-    const lotteryWon = async (id) => {
-        // console.log(id)
-        setPotId(id)
-        let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
-            potId: id
-        }
-        setLoading(true);
-        try {
-          const data = await wonLottery(dataToSend);
-          setLoading(false);
-          if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng');
-            setShowToaster(true);
-          } else {
-            // setToasterMessage('round fetched Successfully');
-            // setShowToaster(true); 
-            setUserWon(data?.data?.lotteryWon)
-            setParticipated(data?.data?.participated)
-            setClaimedNft(data?.data?.claimed)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
-
+    
     const handleRedeem = () => {
         if(potType === 'LOTTERYPOT')
             addCashLottery()
@@ -463,95 +340,6 @@ const PotPage = () => {
         }
        await fetchGameCash()
         setRedeemModal(true)
-    }
-
-    const handleClaim = async () => {
-        let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
-            potId: potId
-        }
-        setLoading(true);
-        try {
-          const data = await lotteryClaim(dataToSend);
-          setLoading(false);
-          if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng');
-            setShowToaster(true);
-          } else {
-            setToasterMessage('round fetched Successfully');
-            setShowToaster(true); 
-            claimTransaction(data?.data)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
-
-    const claimTransaction = async (data) => {
-        let dataToSend = {
-            tokenId:data?.potDetails?.assetDetails?.ticker,
-            quantity:data?.potDetails?.rewardTokenAmount,
-            nonce:data?.transactionDetails?.nonce,
-            signature:data?.transactionDetails.signature
-        }
-        setLoading(true);
-        try {
-          const dataNft = await claimLottery(dataToSend);
-          setLoading(false);
-          if (dataNft.error) {
-            setToasterMessage(dataNft?.message||'Something Went Worng');
-            setShowToaster(true);
-          } else {
-            setToasterMessage('round fetched Successfully');
-            setShowToaster(true); 
-            // console.log('claim lottery',dataNft)
-            // console.log('====================')
-            // console.log(data?.potDetails?._id)
-            // console.log(localStorage.getItem('_wallet'))
-            // console.log(dataNft?.transactionHash)
-            // console.log(data?.transactionDetails?._id)
-            // console.log('---------------')
-            let withdrawlObject = {
-                potId: data?.potDetails?._id,   
-                walletAddress: localStorage.getItem('_wallet'),
-                txnHash:dataNft?.transactionHash ,
-                withdrawlId: data?.transactionDetails?._id
-            }
-            
-            console.log('claim nft',withdrawlObject)
-
-            withdrawLottery(withdrawlObject)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
-
-
-    const withdrawLottery = async (dataToSend) => {
-        console.log('withdrawlottery', dataToSend)
-      
-        setLoading(true);
-        try {
-          const data = await lotteryWithdrawl(dataToSend);
-          setLoading(false);
-          if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng in withdrawl');
-            setShowToaster(true);
-          } else {
-            setToasterMessage('lotery details');
-            setShowToaster(true); 
-            console.log('after withdraw',data)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
-            setShowToaster(true);
-            setLoading(false);
-        }
     }
 
 return(
@@ -698,7 +486,8 @@ return(
                     </div>
                 </div>
              </div>
-               {potType==='LOTTERYPOT' && <LotteryRounds/>}
+               {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
+               {potType==='REWARDPOT' && <RewardRounds/>}
                 
 
             <div className="container">
