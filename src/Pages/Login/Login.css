@@ -1,5 +1,5 @@
 .Login-component {
-    background-image: url(../../Assest/img/login-backgroung.png);
+    background-image: url(../../Assest/img/loginBg.png);
     height: 100vh; 
     width: 100vw; 
     background-position: center;
@@ -8,51 +8,82 @@
     font-family: 'Inter', sans-serif;
     overflow-y: auto;
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .login-box{
-    box-sizing: border-box;
-    position: absolute;
-    width: 525px;
+    box-sizing: border-box; 
+    width: 380px;
     height: 492px;
-    left: 120px;
-    top: 192px;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid #000000;
-    border-radius: 16px;
+    margin-right: 10%; 
+    height: auto;
 }
 
 .login-head{
-    position: absolute;
-    width: 100%;
-    height: 18px;
-    /* left: 171px; */
-    top: 43px; 
+    /* position: absolute; */
+    /* width: 100%;
+    height: 18px; */
+    /* left: 171px; */ 
+    /* text-align: center;  */
+    font-family: 'VALORANT';
     font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 120%;
+    color: #ECE8E1;
 }
-
-.login-email-lable{
+.form-control {    
+    color: #ECE8E1 !important;
+    border-radius: 0; 
+    box-shadow: none !important;
+    background: transparent !important;
+    border: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.25em;
+    border-bottom: 1.5px solid #FFFFFF;
+    
+}
+form{
+    position: relative;
+}
+label.form-check-label {
+    color: #ECE8E1;
+}
+.invalid-feedback{
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #FF0000;
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
+.Login-component .playBtn{
+    margin-top: 3rem;
+}
+.Login-component .playBtn a{
+    width: 100%;
+    position: relative;
+}
+/* .login-email-lable{
     position: absolute;
     width: 45px;
-    height: 21px;
-    /* left: 66px; */
+    height: 21px; 
     bottom: 54px;
-}
+} */
 
-.login-password-lable{
+/* .login-password-lable{
     position: absolute;
     width: 45px;
-    height: 21px;
-    /* left: 66px; */
+    height: 21px; 
     bottom: 52px;
-}
+} */
 
-.login-form-lable{ 
+/* .login-form-lable{ 
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -71,9 +102,9 @@
     border: 1px solid #9D9D9D;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.9);
-}
+} */
 
-.login-password-input{
+/* .login-password-input{
     box-sizing: border-box;
     position: absolute;
     width: 401px;
@@ -84,9 +115,9 @@
     border: 1px solid #9D9D9D;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.9);
-}
+} */
 
-.login-submit-button{
+/* .login-submit-button{
     cursor: pointer;
     position: absolute;
     width: 175px;
@@ -99,27 +130,24 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 21px;
-}
+} */
 
 .login-forget-password{
-    cursor: pointer;
-    position: absolute;
-    width: 130px;
-    height: 16px;
-    left: 371px;
-    top: 354px; 
-    font-style: normal;
-    font-weight: 400;
+    /* cursor: pointer;  
+    display: flex;  */
     font-size: 14px;
-    line-height: 16px;
-    display: flex;
-    align-items: center;
+    line-height: 18px; 
+    letter-spacing: 0.2em; 
     text-align: right;
-    color: #FFFFFF;
+    margin-top: 3rem;
+}
+.login-forget-password a{
+    color: #ECE8E1;
+    text-decoration: none;
 }
 
 .login-signup-tag{
-    position: absolute;
+    /* position: absolute; */
     width: 120px;
     height: 16px;
     left: 200px;
@@ -137,7 +165,7 @@
 
 .login-signup-tag-danger{
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     width: 90px;
     height: 16px;
     left: 322px;
@@ -158,3 +186,15 @@
     color: #FFFFFF !important;
     border: none !important;
 } */
+.Login-component .playBtn a::before, .Login-component .playBtn a::after, .Login-component .playBtn a span::before, .Login-component .playBtn a span::after{
+    width: 182px;
+}
+.Login-component .playBtn a:hover::before, .Login-component .playBtn a:hover::after, .Login-component .playBtn a:hover span::before, .Login-component .playBtn a:hover span::after{
+    width: 161px;
+}
+@media (max-width: 480px){
+    .login-box {  
+        margin: auto;
+        width: 86%;
+    }
+}
