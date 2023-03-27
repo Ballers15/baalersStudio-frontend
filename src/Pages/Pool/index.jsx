@@ -133,7 +133,7 @@ const Pool = () => {
                                     </div>
                                     <div className="poolBtn text-center">
                                         <div className="playBtn">
-                                           <Link to='/lottery'>Lottery Pool</Link>
+                                           <Link to='/lottery'><span></span> Lottery Pool</Link>
                                         </div>
                                         <div className="shareBtn">
                                            <Link to='/reward'> Reward Pool</Link>
