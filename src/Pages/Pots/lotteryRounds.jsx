@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import img1 from '../../Assest/img/img1.png' 
 import { getPrevRounds, lotteryClaim, lotteryWithdrawl, wonLottery } from "../../Services/User/indexPot";
-import Loader from "../../Components/Loader";
-import Toaster from "../../Components/Toaster";
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
 import { claimLottery } from "../../Components/Smart Contract/smartContractHandler";

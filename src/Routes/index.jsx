@@ -48,7 +48,6 @@ const NavigationRouter = () => {
               <Route exact path="/login" element={<CheckUser><Login /></CheckUser>} />
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route path="*" element={<ErrorPage />} />
-              {/* <Route path="/test" element={<LotteryRounds />} /> */}
             </Route>
             <Route element={<WithNav />}>
             <Route exact path="/admin-dashboard" element={<AuthenticatorAdmin><AdminDashboard /></AuthenticatorAdmin>} /> 

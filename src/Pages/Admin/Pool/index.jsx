@@ -564,7 +564,7 @@ const PoolListing = () => {
                                 <td className="action-tab-pool-list">
                                     {Number(pot?.potAmountCollected?.$numberDecimal) === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
                                             <i className="fa fa-edit " />
-                                        </span> :   <span title="Edit Pot Details" onClick={() => viewRewardPot(pot?._id)}>
+                                        </span> :   <span title="View Pot Details" onClick={() => viewRewardPot(pot?._id)}>
                                             <i className="fa fa-eye " />
                                         </span>}
                                         <span>

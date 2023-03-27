@@ -24,8 +24,9 @@ const AddPot = () => {
             ticker:'',contractAddress:'',assetName:''
         }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:''},isActive:false
     });
-    const currentDate = new Date().toLocaleDateString('en-CA').replace(/ /g, '-');
-    const currentTime =  new Date().toLocaleTimeString([], {hourCycle: 'h23',hour: '2-digit', minute:'2-digit'})
+    const currentDateTime = new Date().toISOString();
+    const currentDate = currentDateTime.split('T')[0];
+    const currentTime =  currentDateTime.split('T')[1].slice(0,5);
     const [startDateTime, setStartDateTime] = useState(currentTime);
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState(currentTime);
@@ -46,6 +47,9 @@ const AddPot = () => {
             getRewardPotDetailById(state?.id);
             return;
         }
+        console.log(currentDateTime)
+        console.log(currentDate)
+        console.log(currentTime)
     }, []);
 
     const getRewardPotDetailById = async (id) => {
@@ -160,14 +164,14 @@ const AddPot = () => {
             return;
         } else {
             if (endDate) {
-                rewadPotDetail.endDate = endDate+'T'+endDateTime;
+                rewadPotDetail.endDate = endDate+' '+endDateTime;
             }
             if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate +'T'+ startDateTime;
+                rewadPotDetail.startDate = rewadPotDetail?.startDate +' '+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
-                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
+                rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+endDateTime;
             }
         }
         setDisableSubmitButton(true);
@@ -271,7 +275,7 @@ const AddPot = () => {
             <Form noValidate validated={validated} >
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
-                                    <Form.Label>Reward Amount $ / Quantity for Nft</Form.Label>
+                                    <Form.Label>Reward Amount $ / Quantity for NFT</Form.Label>
                                     <Form.Control
                                         required
                                         type="number"
@@ -289,7 +293,7 @@ const AddPot = () => {
                                 <Col lg={9}>
                                     <Row>
                                     <Form.Group as={Col} md="3">
-                                        <Form.Label>Start Date</Form.Label>
+                                        <Form.Label>Start Date (UTC)</Form.Label>
                                             <Form.Control className='dateIcon'
                                                 required
                                                 type="date"
@@ -305,7 +309,7 @@ const AddPot = () => {
                                         </Form.Group>
                                 
                                         <Form.Group as={Col} md="3">
-                                            <Form.Label>Start Time</Form.Label><br/>
+                                            <Form.Label>Start Time (UTC)</Form.Label><br/>
                                             <TimePicker 
                                              value={potStatusCheck ? currentTime : startDateTime|| ''} 
                                             onChange={(e) => { setStartDateTime(e);}} />
@@ -330,7 +334,7 @@ const AddPot = () => {
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
-                                            <Form.Label>End Date</Form.Label>
+                                            <Form.Label>End Date (UTC)</Form.Label>
                                             <Form.Control
                                             className='dateIcon'
                                             required
@@ -345,7 +349,7 @@ const AddPot = () => {
                                         </Form.Group>
                                 
                                         <Form.Group as={Col} md="3">
-                                            <Form.Label>End Time</Form.Label><br/>
+                                            <Form.Label>End Time (UTC)</Form.Label><br/>
                                             <TimePicker 
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
                                                 value={endDateTime|| ''} />

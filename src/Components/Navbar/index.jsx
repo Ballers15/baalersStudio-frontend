@@ -245,10 +245,10 @@ useEffect(() => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" as={Link} to='/partyGang' > {' '} Party{' '} </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" href='#partyGang'> {' '} Party{' '} </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/balrToken' > $BALR TOKEN </Nav.Link> )}
+              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> )}
 
               {_u?.user?.role !== 'ADMIN' && (
                <Nav.Link> {walletAddress !=='' && ( <> {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)} </>) } 

@@ -19,7 +19,26 @@ import Slider from "react-slick";
 
 
 
-
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block" }}
+      onClick={onClick}
+    ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
+  );
+}
+var settings = {  
+  className: "slider variable-width",
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 1,
+  // centerMode: true,
+  variableWidth: true, 
+  prevArrow: <SamplePrevArrow />
+};
 
 
    
@@ -51,50 +70,31 @@ const PotPage = () => {
       });
 
 
-      function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-          <div
-            className={className}
-            style={{ ...style, display: "block" }}
-            onClick={onClick}
-          ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
-        );
-      }
-      var settings = {  
-        className: "slider variable-width",
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        // centerMode: true,
-        variableWidth: true, 
-        prevArrow: <SamplePrevArrow />
-      };
+    
     const [potType, setPotType] = useState('')
-   const [expiryTime, setExpiryTime] = useState("");
-   const [potDetails,setPotDetails] = useState('')
-   const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
-   const [toasterMessage, setToasterMessage] = useState("");
-   const [toaster, showToaster] = useState(false);
-   const setShowToaster = (param) => showToaster(param);
-   const [loading, setLoading] = useState(false);   
-   const [leaderSearch,setLeaderSearch]  = useState('')
-   const [claimExpiryDate, setClaimExpiryDate] = useState('')
-   const [cash, setCash] = useState('')
-   const [prevRounds, setPrevRounds] = useState('')
-   const user = localStorage.getItem('_u')
-   const walletAddress = localStorage.getItem('_wallet')
-   const { type } = useParams();
-   const navigate = useNavigate()
-   const [userWon, setUserWon] = useState(false)
-   const [participated, setParticipated] = useState(false)
-   const [currentSlide,setCurrentSlide] = useState(0)
-   const [potId,setPotId] = useState('')
-   const [claimedNft,setClaimedNft] = useState('')
-   const [intervalId, setIntervalId] = useState(null);
-   const [currentPot,setCurrentPot]=useState('');
-   const location = useLocation()
+    const [expiryTime, setExpiryTime] = useState("");
+    const [potDetails,setPotDetails] = useState('')
+    const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
+    const [toasterMessage, setToasterMessage] = useState("");
+    const [toaster, showToaster] = useState(false);
+    const setShowToaster = (param) => showToaster(param);
+    const [loading, setLoading] = useState(false);   
+    const [leaderSearch,setLeaderSearch]  = useState('')
+    const [claimExpiryDate, setClaimExpiryDate] = useState('')
+    const [cash, setCash] = useState('')
+    const [prevRounds, setPrevRounds] = useState('')
+    const user = localStorage.getItem('_u')
+    const walletAddress = localStorage.getItem('_wallet')
+    const { type } = useParams();
+    const navigate = useNavigate()
+    const [userWon, setUserWon] = useState(false)
+    const [participated, setParticipated] = useState(false)
+    const [currentSlide,setCurrentSlide] = useState(0)
+    const [potId,setPotId] = useState('')
+    const [claimedNft,setClaimedNft] = useState('')
+    const [intervalId, setIntervalId] = useState(null);
+    const [currentPot,setCurrentPot]=useState('');
+    const location = useLocation()
 
 
    const handleSlideChange = (current) => {
@@ -220,6 +220,10 @@ const PotPage = () => {
         if(expiryTime!==''){
             countdownTimer();
         }
+        else{
+            getPrevRounds();
+            getLotteryLeaderBoard();
+        }
     },[expiryTime]);
 
     useEffect(() => {
@@ -249,6 +253,7 @@ const PotPage = () => {
             // setShowToaster(true); 
             setPotDetails(pot?.data.length?pot.data[0]:'');
             setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
+            console.log(pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -387,7 +392,7 @@ const PotPage = () => {
             setPrevRounds(round?.data)
             // console.log('i am set here getPreviousRounds ');
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
-            console.log('prev rounds',round?.data[0])
+            // console.log('prev rounds',round?.data[0])
 
             setUserWon(round?.data[0]?.userRes?.lotteryWon)
             setParticipated(round?.data[0]?.userRes?.participated)

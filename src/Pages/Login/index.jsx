@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from '../../Auth/authProvider';
 import Form from "react-bootstrap/Form";
 import './Login.css';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -73,7 +73,7 @@ const Login = () => {
                         </div>
                     <div>
                         <span className="login-signup-tag">New to Ballers?</span>
-                       <a href='/signup'> <span className="login-signup-tag-danger">Sign Up</span></a>
+                       <Link to='/signup'> <span className="login-signup-tag-danger">Sign Up</span></Link>
                     </div>
                     </Form>
                 </div>

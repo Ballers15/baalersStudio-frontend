@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
                 return Promise.reject(error.response.data?.message);
             }
             if (error.response.status === 401 && error.response.data) {
-                alert(error?.response?.data?.message || 'error code 401 detected!!')
+                // alert(error?.response?.data?.message || 'error code 401 detected!!')
 				// console.log("calling error 401")
 				localStorage.clear(); 
                 return Promise.reject(error.response.data?.message);

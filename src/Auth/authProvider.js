@@ -35,7 +35,7 @@ export default function AuthProvide({ children }) {
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
-          setUser(login.data);
+          setUser(login.data); 
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
@@ -51,7 +51,7 @@ export default function AuthProvide({ children }) {
       }
     } catch (error) {
       console.log('err in login',error)
-      setToasterMessage(error?.response?.data?.message||'Something Went Worng during login');
+      setToasterMessage(error ||'Something Went Worng during login');
       setShowToaster(true);
       setLoading(false);
       navigate('/login')

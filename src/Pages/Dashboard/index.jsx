@@ -55,6 +55,7 @@ import { subscribeMailJet } from '../../Services/User';
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 // import ScriptTag from 'react-script-tag';
 // import gsapScript from './ballerTokenGsap';
 // const loader = document.querySelector(".loader-wrapper");
@@ -606,14 +607,10 @@ const Dashboard = () => {
                               <div className="thirdPageBtn">
                               <div className="d-md-flex align-items-center">
                                 <div className="playBtn">
-                                  <a onClick={() => handleShow('lottery')}>
-                                    <span></span> Lottery Pool
-                                  </a>
+                                <Link to='/lottery'>Lottery Pool</Link>
                                 </div>
                                 <div className="shareBtn">
-                                  <a onClick={() => handleShow('reward')}>
-                                    <span></span> Reward Pool{' '}
-                                  </a>
+                                <Link to='/reward'> Reward Pool</Link>
                                 </div>
                               </div>
 
