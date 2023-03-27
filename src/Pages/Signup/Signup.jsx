@@ -240,58 +240,77 @@ const Signup = () => {
     <React.Fragment>
       <div className="signup-page-wrapper">
         <div className="signup-box">
-      {/* <h2>Sign Up</h2> */}
+      
         <div className="signup-page-container">
           
         {response?.status !== 200 &&   
         <Form noValidate validated={validated} onSubmit={handleSubmit} >
-            <Row className="mb-3">
-              <Form.Label>All fields marked with an asterisk(*) are mandatory</Form.Label>
-              <Form.Group as={Col} md="6" className='pb-4'>
+            <h2 className="login-head">CREATE <br/>ACCOUNT</h2>
+            {/* <Row className="mb-3"> */}
+              {/* <Form.Label>All fields marked with an asterisk(*) are mandatory</Form.Label> */}
+              {/* <Form.Group  className='pb-4'>
                 <Form.Label className="small-lable">Username</Form.Label>
                 <Form.Control required type="text" value={userDetails.userName} onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})}  ></Form.Control>
                 <Form.Control.Feedback type="invalid">username is required !!</Form.Control.Feedback>
-              </Form.Group>
+              </Form.Group> */}
 
-              <Form.Group as={Col} md="6" className='pb-4' >
-                <Form.Label className="small-lable">First Name</Form.Label>
-                <Form.Control required type="text" onChange={({ target }) => setUserDetails({ ...userDetails,firstName:target.value})} value={userDetails.firstName} ></Form.Control>
+              <Form.Group className='pb-4' >
+                {/* <Form.Label className="small-lable">First Name</Form.Label> */}
+                <Form.Control required type="text"  placeholder="FULL NAME" onChange={({ target }) => setUserDetails({ ...userDetails,firstName:target.value})} value={userDetails.firstName} ></Form.Control>
                 <Form.Control.Feedback type="invalid">first name is required !!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="6" className='pb-4'>
+              {/* <Form.Group className='pb-4'>
                 <Form.Label className="small-lable">Last name </Form.Label>
                 <Form.Control required type="text" onChange={({ target }) => setUserDetails({ ...userDetails,lastName:target.value})} value={userDetails.lastName} ></Form.Control>
                 <Form.Control.Feedback type="invalid">last Name is required !!</Form.Control.Feedback>
-              </Form.Group>
+              </Form.Group> */}
 
-              <Form.Group as={Col} md="6" className='pb-4'>
-                <Form.Label className="small-lable">email </Form.Label>
-                <Form.Control required type="email" onChange={({ target }) => setUserDetails({ ...userDetails,email:target.value})} value={userDetails.email} ></Form.Control>
+              <Form.Group className='pb-4'>
+                {/* <Form.Label className="small-lable">email </Form.Label> */}
+                <Form.Control required type="email" placeholder="EMAIL" onChange={({ target }) => setUserDetails({ ...userDetails,email:target.value})} value={userDetails.email} ></Form.Control>
                 <Form.Control.Feedback type="invalid"> <span> {userDetails.email && 'Valid E-mail is required !'} </span> <span> {!userDetails.email && 'E-mail is required'} </span> </Form.Control.Feedback>
                 <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
               </Form.Group>
            
-              <Form.Group as={Col} md="6" className='pb-4'>
-                <Form.Label className="small-lable">Password</Form.Label>
-                <Form.Control required type="password" onChange={({ target }) => setUserDetails({ ...userDetails,password:target.value})} value={userDetails.password}  minLength='8' ></Form.Control>
+              <Form.Group className='pb-4'>
+                {/* <Form.Label className="small-lable">Password</Form.Label> */}
+                <Form.Control required type="password"  placeholder="PASSWORD" onChange={({ target }) => setUserDetails({ ...userDetails,password:target.value})} value={userDetails.password}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="6" className='pb-4'>
-                <Form.Label className="small-lable">Confirm Password</Form.Label>
-                <Form.Control required type="password" onChange={({ target }) => setUserDetails({ ...userDetails,repeat:target.value})} value={userDetails.repeat}  minLength='8' ></Form.Control>
+              <Form.Group className='pb-4'>
+                {/* <Form.Label className="small-lable">Confirm Password</Form.Label> */}
+                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={({ target }) => setUserDetails({ ...userDetails,repeat:target.value})} value={userDetails.repeat}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password do not match</Form.Control.Feedback>
                 <Form.Control.Feedback> <span className="custom-error-msg"> {passErrorMsg && 'Passwords do not match'}</span> </Form.Control.Feedback>
               </Form.Group>
-              </Row>
-                <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmit} > Signup </button> </div>
 
+              {['checkbox'].map((type) => (
+                            <div  className="mb-3 mt-4">
+                            <Form.Check
+                                inline
+                                label="Agree to terms & conditions."
+                                name="group1"
+                                type={type} 
+                            />
+                            </div>
+                        ))}
+              {/* </Row> */}
+              <div className="playBtn">  <a type="submit"  onClick={handleSubmit}> <span></span>SIGN Up  </a> </div>
+                {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmit} > Signup </button> </div> */}
+
+           <div className='alreadyAcc'>
+           <span>Already have an account?</span>
+            <a href='/login'> <span>Sign In</span></a> 
+           </div>
           </Form> }
 
 
           {response?.status === 200 &&   
-            <Form noValidate validated={validated} onSubmit={handleSubmitOtp} >
+            <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
+               <h2 className="login-head">Verify  <br/>code</h2>
+               <p>No worries, enter your mail ID & we will send you a reset code</p>
               <Row className="mb-3">
                 <Form.Group >
                   <Form.Label className="small-lable">Enter 6 digit OTP received on email</Form.Label>
@@ -301,7 +320,12 @@ const Signup = () => {
                 </Form.Group>
                 
               </Row>
-                <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmitOtp} > verify </button> </div>
+              <div className="playBtn">  <a type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </a> </div>
+                {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmitOtp} > verify </button> </div> */}
+                <div className='alreadyAcc'>
+                 <span>Didn’t get the code?</span>
+                  <a href='/login'> <span>Resend</span></a> 
+                </div>
           </Form> }
 
           
