@@ -16,6 +16,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
+import LotteryRounds from "./lotteryRounds";
 
 
 
@@ -697,60 +698,7 @@ return(
                     </div>
                 </div>
              </div>
-                <div className="finishSlider">
-                    <div className="row">
-                        {/* <div className="col-sm-5 my-auto">
-                            <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p>
-                        </div> */}
-                        <div className="col-sm-12 position-relative">
-
-                        {prevRounds?.length ? (<Slider {...settings}> 
-                          
-                           {prevRounds?.length && prevRounds?.map((round,index)=>(
-                            <div key={index+1} id={index}>
-                                <div className="d-flex">
-                                    <img className="wthMob" src={img1} alt="" />
-                                    <div className="roundDiv">
-                                        <h3>Round {index+1} </h3>
-                                        <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
-                            month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
-                                            <img src={img1} alt="" />
-                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                            </div>)
-                           )}                            
-                            </Slider>) : <span class='no data'></span>}
-                           
-                        </div>    
-                    </div>        
-                  {prevRounds?.length && user !==null && walletAddress !==null && (<div className="poolBtn text-center pt-4 finishBtn"> 
-                        <div className="playBtn">
-                        {userWon === true && claimExpiryDate !== '' && claimedNft !==true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
-                        {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
-                        {userWon === true && claimExpiryDate === '' && ( <a className="disabled" ><span></span> CLAIM NOW</a>) }
-                        {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
-                        {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
-                        </div>    
-                        <div className="expDate">
-                            {userWon ===true && claimExpiryDate!=='' && claimedNft!== true &&
-                                <><p className="mb-0">Expires in </p>
-                                <div className="claimExpire ps-2">
-                                <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
-                                <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
-                                <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
-                                    </div>
-                            </>
-                                }
-                        </div>                                
-                        </div>) }          
-                </div>
+                <LotteryRounds/>
                 
 
             <div className="container">

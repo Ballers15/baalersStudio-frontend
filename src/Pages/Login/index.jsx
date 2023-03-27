@@ -32,13 +32,79 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <div className="Login-component">
-                <div className="login-box">
+            <div className="Login-component">            
+            
+                   
+                    <div className="login-box">
+                        <h2 className="login-head">Welcome <br/> Back !</h2>
+                    <Form noValidate validated={validated} onSubmit={handleLogin}>
+                        <Form.Group className="mt-3" >
+                           
+                            <Form.Control
+                                required
+                                type="email"
+                                
+                                placeholder="Email"
+                                value={email}
+                                onChange={({ target }) => setEmail(target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Valid E-mail is required
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group className="mt-3" >
+                            
+                            <Form.Control
+                                required
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                minLength='8'
+                                onChange={({ target }) => setPassword(target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Password is required (8 character)
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        {['checkbox'].map((type) => (
+                            <div  className="mb-3 mt-4">
+                            <Form.Check
+                                inline
+                                label="Remember me"
+                                name="group1"
+                                type={type} 
+                            />
+                            </div>
+                        ))}
+                        <div>
+                        <div className="playBtn">
+                            <a type="submit"  onClick={handleLogin}>
+                                <span></span>SIGN IN
+                            </a>
+                        </div>
+                            {/* <button type="submit" onClick={handleLogin}>SIGN IN</button> */}
+                       
+                        </div>
+                        <div className="login-forget-password">
+                        <a href='/forgotPassword'> <span>Forgot password?</span></a>
+                        </div>
+                    <div>
+
+                   
+                        {/* <span className="login-signup-tag">New to Ballers?</span>
+                    <a href='/signup'> <span className="login-signup-tag-danger">Sign Up</span></a> */}
+                    </div>
+                    </Form>
+                    </div>
+                    
+            
+                {/* <div className="login-box">
                     <span className="login-head">
                         SIGN IN FOR UPDATES!
                     </span>
                     <Form noValidate validated={validated} onSubmit={handleLogin}>
-                          <Form.Group  className="login-email-input" >
+                        <Form.Group  className="login-email-input" >
                             <Form.Label className="login-form-lable login-email-lable">Email</Form.Label>
                             <Form.Control
                                 required
@@ -76,7 +142,7 @@ const Login = () => {
                        <Link to='/signup'> <span className="login-signup-tag-danger">Sign Up</span></Link>
                     </div>
                     </Form>
-                </div>
+                </div> */}
             </div>
                
         </React.Fragment>
