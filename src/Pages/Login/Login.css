@@ -50,8 +50,10 @@
 form{
     position: relative;
 }
-label.form-check-label {
+label.form-check-label, .alreadyAcc {
     color: #ECE8E1;
+    font-size: 14px;
+    line-height: 18px;  
 }
 .invalid-feedback{
     text-align: right;

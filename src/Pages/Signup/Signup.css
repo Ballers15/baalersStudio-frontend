@@ -1,27 +1,25 @@
 .signup-page-wrapper{
-    color:#FFFFFF;
-    /* margin-top: 150px; */
-    text-align: center;
-    background-image: url(../../Assest/img/login-backgroung.png);
+    background-image: url(../../Assest/img/loginBg.png);
     height: 100vh; 
-    /* width: 100vw;  */
+    width: 100vw; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Inter', sans-serif;
     overflow-y: auto;
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 .signup-box{
-    box-sizing: border-box;
-    position: absolute;
-    width: 50%;
-    min-height: 492px;
-    left: 120px;
-    top: 192px;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid #000000;
+   
     border-radius: 16px;
+    box-sizing: border-box; 
+    width: 380px;
+    height: 492px;
+    margin-right: 10%; 
+    height: auto;
 }
 
 .signup-page-wrapper .invalid-feedback{
@@ -30,16 +28,28 @@
 }
 .signup-page-wrapper  .small-lable.form-label{
     margin-bottom: 0.25rem;
+    color: #ECE8E1;
 }
-.signup-page-container{
+/* .signup-page-container{
     padding: 50px;
     display: flex;
     justify-content: center;
-    text-align: left;
-    /* display: none; */
+    text-align: left; 
+} */
+
+.signup-page-wrapper .playBtn{
+    margin-top: 3rem;
 }
-
-
+.signup-page-wrapper .playBtn a{
+    width: 100%;
+    position: relative;
+}
+.signup-page-wrapper .playBtn a::before, .signup-page-wrapper .playBtn a::after, .signup-page-wrapper .playBtn a span::before, .signup-page-wrapper .playBtn a span::after{
+    width: 182px;
+}
+.signup-page-wrapper .playBtn a:hover::before, .signup-page-wrapper .playBtn a:hover::after, .signup-page-wrapper .playBtn a:hover span::before, .signup-page-wrapper .playBtn a:hover span::after{
+    width: 161px;
+}
 .signup-submit-button{
     cursor: pointer;
     width: 30%;
@@ -52,8 +62,26 @@
     font-size: 18px;
     line-height: 21px;
 }
-
-
+.alreadyAcc a{
+    font-size: 16px;
+    color: #ECE8E1;
+    line-height: 20px;
+    font-weight: 700;
+    text-decoration: none
+}
+.alreadyAcc{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+.otpVerify p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%; 
+    letter-spacing: 0.2em;
+    color: #ECE8E1;
+    margin-bottom: 3rem;
+}
 /* #partitioned {
     padding-left: 15px;
     letter-spacing: 42px;
@@ -83,11 +111,9 @@
     .signup-page-wrapper{
         margin-bottom: 3rem;
     }
-    .signup-page-container {
-        padding: 35px;
-    }
+ 
     .signup-box { 
-        width: 99%; 
-        left: 0; 
+        margin: auto;
+        width: 86%;
     }
   }

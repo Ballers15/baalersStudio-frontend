@@ -152,23 +152,26 @@ const ForgotPassword = () => {
   return (
     <React.Fragment>
       <div className="forgot-page-wrapper">
-      {/* <h2>Sign Up</h2> */}
+        <div className="signup-box">
+        <h2 className="login-head">FORGOT  <br/>PASSWORD ?</h2>
         <div className="forgot-page-container">
+          <p>No worries, enter your mail ID & we will send you a reset code</p>
           
         
-        <Form noValidate validated={validated} onSubmit={handleSubmit} >
-              <Row className="mb-2">
-                <Form.Group >
-                  <Form.Label className="small-lable">Enter email </Form.Label>
-                  <Form.Control required type="email" value={email} onChange={({ target }) => setEmail(target.value)}  ></Form.Control>
-                  <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
-                  <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
-                </Form.Group>
-               </Row>
-          
-          <div> <button type="submit"  className="forgot-submit-button" onClick={handleSubmit} > Submit </button> </div>
+          <Form noValidate validated={validated} onSubmit={handleSubmit} >
+            <Row className="mb-2">
+              <Form.Group >
+                {/* <Form.Label className="small-lable">Enter email </Form.Label> */}
+                <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={({ target }) => setEmail(target.value)}  ></Form.Control>
+                <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
+                <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <div className="playBtn">  <a type="submit" onClick={handleSubmit} > <span></span>PROCEED  </a> </div>
+          {/* <div> <button type="submit"  className="forgot-submit-button" onClick={handleSubmit} > Submit </button> </div> */}
           </Form> 
 
+      </div>
       </div>
     
     { newPass && <div className='update-password'>
