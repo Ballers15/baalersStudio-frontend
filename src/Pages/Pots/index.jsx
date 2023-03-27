@@ -698,7 +698,7 @@ return(
                     </div>
                 </div>
              </div>
-                <LotteryRounds/>
+               {potType==='LOTTERYPOT' && <LotteryRounds/>}
                 
 
             <div className="container">

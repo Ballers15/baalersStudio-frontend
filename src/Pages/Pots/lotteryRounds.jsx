@@ -284,7 +284,7 @@ return(
                     <div className="row">
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length ? (<Slider {...settings}> 
+                        {prevRounds?.length ? (<Slider {...settings} beforeChange={handleSlideChange}> 
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
@@ -334,7 +334,11 @@ return(
                         </div>                                
                     </div>) :  <span class='no data'></span>}           
                 </div>
+        
+               
     </>
+
+    
 )
 }
 
