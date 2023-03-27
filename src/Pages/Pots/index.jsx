@@ -15,41 +15,12 @@ import 'react-multi-carousel/lib/styles.css';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
+import Slider from "react-slick";
 
 
-const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 2
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
-  const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
-    const { carouselState: { currentSlide } } = rest;
-    return (
-        <div className="carousel-button-group mb-4 gap-4 w-full">
-          <button className='prevCarousel block p-3 bg-slate-300' onClick={() => 
-          previous()}>   <p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p> </button>
-          <button className="nextCarousel" onClick={() => next()}><span className='block p-3 bg-slate-300' > 
-          <img src={img1} alt="" />
-            </span>
-          </button>
-       </div>
-    
-     );
-   };
+
+
+
 
    
 const PotPage = () => {
@@ -78,6 +49,28 @@ const PotPage = () => {
         });
         
       });
+
+
+      function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+          <div
+            className={className}
+            style={{ ...style, display: "block" }}
+            onClick={onClick}
+          ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
+        );
+      }
+      var settings = {  
+        className: "slider variable-width",
+        dots: false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        // centerMode: true,
+        variableWidth: true, 
+        prevArrow: <SamplePrevArrow />
+      };
     const [potType, setPotType] = useState('')
    const [expiryTime, setExpiryTime] = useState("");
    const [potDetails,setPotDetails] = useState('')
@@ -706,8 +699,7 @@ return(
                         </div> */}
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length ? (<Carousel responsive={responsive} infinite={true} autoPlay= {false} autoPlaySpeed={10000} 
-                         keyBoardControl={true} autoplayHoverPause={false} arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}  beforeChange={(e) => handleSlideChange(e)}>
+                        {prevRounds?.length ? (<Slider {...settings}> 
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
@@ -729,7 +721,7 @@ return(
                                
                             </div>)
                            )}                            
-                            </Carousel>) : <span class='no data'></span>}
+                            </Slider>) : <span class='no data'></span>}
                            
                         </div>    
                     </div>        

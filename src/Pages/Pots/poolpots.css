@@ -471,9 +471,9 @@ a.disabled{
   }
   .winHead span{
     border-bottom: 1px solid #438CE7;
-    width: 160px;
-    height: 4px; 
-    margin-left: 12px;
+    width: 190px;
+    height: 4px;
+    margin-left: 20px;
   }
   #active-pot .innerBtn a{    
     white-space: nowrap;
@@ -505,6 +505,25 @@ a.disabled{
   background: #FF80FF;
   color: #fff;
 }
+
+.slick-list {
+  width: 70%; 
+  margin: auto;
+  margin-right: 0;
+}
+
+.slick-prev:before{display: none;}
+  .slick-prev{
+    left: 4rem;
+    width: 295px;
+  }
+
+  @media (min-width: 1600px) {
+    .winHead span { 
+      width: 255px;
+    }
+  }
+
 @media (min-width: 1900px){
     .lotteryPool .sCaption {
         width: 40%;
