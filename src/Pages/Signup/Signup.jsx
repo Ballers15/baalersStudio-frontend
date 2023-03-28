@@ -324,7 +324,7 @@ const Signup = () => {
                             </div>
                         ))}
               {/* </Row> */}
-              <div className="playBtn">  <a type="submit"  onClick={handleSubmit}> <span></span>SIGN Up  </a> </div>
+              <div className="playBtn">  <button type="submit"  onClick={handleSubmit}> <span></span>SIGN Up  </button> </div>
                 {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmit} > Signup </button> </div> */}
 
            <div className='alreadyAcc'>
@@ -347,7 +347,7 @@ const Signup = () => {
                 </Form.Group>
                 
               </Row>
-              <div className="playBtn">  <a type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </a> </div>
+              <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
                 {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmitOtp} > verify </button> </div> */}
                 <div className='alreadyAcc'>
                  <span>Didn’t get the code?</span>

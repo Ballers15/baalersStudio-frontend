@@ -49,7 +49,7 @@ const LotteryRounds = (props) => {
       slidesToShow: 1,
       // centerMode: true,
       variableWidth: true, 
-      prevArrow: <SamplePrevArrow buttonStatus={buttonStatus} />
+      nextArrow: <SamplePrevArrow buttonStatus={buttonStatus} />
     };
 
    const handleSlideChange = (current) => {

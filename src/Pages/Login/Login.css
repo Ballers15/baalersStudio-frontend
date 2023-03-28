@@ -64,10 +64,26 @@ label.form-check-label, .alreadyAcc {
     font-size: 12px;
     line-height: 15px;
 }
-.Login-component .playBtn{
+form .playBtn{
     margin-top: 3rem;
 }
-.Login-component .playBtn a{
+form .playBtn button{
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+    background: #ECE8E1;
+    letter-spacing: 2px;
+    padding: 1rem 2.68rem 0.85rem;
+    color: #121B26 !important;
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109.84%;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    padding: 0.85rem 2rem 0.65rem;
+    font-size: 18px;
+    line-height: 100%;
     width: 100%;
     position: relative;
 }
@@ -188,11 +204,41 @@ label.form-check-label, .alreadyAcc {
     color: #FFFFFF !important;
     border: none !important;
 } */
-.Login-component .playBtn a::before, .Login-component .playBtn a::after, .Login-component .playBtn a span::before, .Login-component .playBtn a span::after{
+form .playBtn button::before, form .playBtn button::after, form .playBtn button span::before, form .playBtn button span::after{
     width: 182px;
+    content: '';
+    position: absolute; 
+    height: 45px;
+    background: transparent;  
+    margin: -4px;
 }
-.Login-component .playBtn a:hover::before, .Login-component .playBtn a:hover::after, .Login-component .playBtn a:hover span::before, .Login-component .playBtn a:hover span::after{
+form .playBtn button:hover::before, form .playBtn button:hover::after, form .playBtn button:hover span::before, form .playBtn button:hover span::after{
     width: 161px;
+    transform: scale(1.25);
+}
+form .playBtn button::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+form .playBtn button::before{
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+form .playBtn button span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+form .playBtn button span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
 }
 @media (max-width: 480px){
     .login-box {  

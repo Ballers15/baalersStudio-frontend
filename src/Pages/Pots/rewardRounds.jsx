@@ -26,7 +26,7 @@ var settings = {
   slidesToShow: 1,
   // centerMode: true,
   variableWidth: true, 
-  prevArrow: <SamplePrevArrow />
+  nextArrow: <SamplePrevArrow />
 };
 
 
