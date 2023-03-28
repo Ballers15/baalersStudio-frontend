@@ -49,3 +49,7 @@ export function leaderBoardLottery(data){
 export function getRewardRounds(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/reward/pot/previous/rounds',{params: data}).then(res => res.data)) // get previous rounds
 }
+
+export function leaderBoardReward(data){
+  return (axiosInstance.get(url + 'pot/v1/user/get/reward/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
+}

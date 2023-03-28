@@ -102,7 +102,7 @@ const Signup = () => {
     } else {
       console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     }
-    setToasterColor('primary')
+     
   }
 
   const checkUsername = async () => {
@@ -136,7 +136,7 @@ const Signup = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-    setToasterColor('primary')
+     
   }
 
   const handleSubmitOtp = async (e) =>{
@@ -173,7 +173,7 @@ const Signup = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-    setToasterColor('primary')
+     
   }
 
   const signup = async () => {
@@ -218,7 +218,7 @@ const Signup = () => {
       setShowToaster(true)
       setToasterColor('danger')
     }
-    setToasterColor('primary')
+     
   }
 
 
@@ -255,7 +255,7 @@ const Signup = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-    setToasterColor('primary')
+     
   }
 
   const handleResendOtp = (e) => {

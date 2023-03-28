@@ -198,7 +198,7 @@ const PotPage = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const getLotteryLeaderBoard = async (data) => {
@@ -225,7 +225,7 @@ const PotPage = () => {
             setLoading(false);
             setToasterColor('danger')
         }
-        setToasterColor('primary')
+         
     }
 
     const formatNumberDecimal = (value) => {
@@ -265,7 +265,7 @@ const PotPage = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const addCashReward = async () => {
@@ -299,7 +299,7 @@ const PotPage = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const fetchGameCash = async () => {
@@ -327,7 +327,7 @@ const PotPage = () => {
             setToasterColor('danger')
             setLoading(false);
        }
-       setToasterColor('primary')
+        
     }
 
     

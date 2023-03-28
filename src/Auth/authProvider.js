@@ -61,7 +61,6 @@ export default function AuthProvide({ children }) {
       setLoading(false);
       navigate('/login')
     }
-    setToasterColor('primary')
   }
 
   const logout =  () => {

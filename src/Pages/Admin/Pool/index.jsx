@@ -143,7 +143,7 @@ const PoolListing = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
     const getUpcomingRewardPotDetails = async () => {
         setLoading(true);
@@ -176,7 +176,7 @@ const PoolListing = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
     const getArchivesRewardPotDetails = async () => {
         setLoading(true);
@@ -210,7 +210,7 @@ const PoolListing = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const editRewardPot = (id) => {
@@ -247,7 +247,7 @@ const PoolListing = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     
@@ -293,7 +293,7 @@ const PoolListing = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const getPotUsers = async (data) =>{

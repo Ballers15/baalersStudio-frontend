@@ -136,10 +136,12 @@ const RewardRounds = () => {
     },[claimExpiryDate]);
 
     const getPreviousRounds = async () => {
-     
+      let dataToSend = {
+        walletAddress: localStorage.getItem('_wallet'),
+    }
         setLoading(true);
         try {
-          const round = await getRewardRounds();
+          const round = await getRewardRounds(dataToSend);
           setLoading(false);
           if (round.error) {
             setToasterMessage(round?.message||'Something Went Worng');
@@ -148,7 +150,7 @@ const RewardRounds = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
-            console.log('i am set here getPreviousRounds ');
+            console.log('i am set here getPreviousRounds ',round?.data[0]?.potUserDetails            );
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
           }
         } catch (error) {
@@ -295,10 +297,13 @@ return(
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row">
+                                          {round?.potUserDetails?.map((user)=>(
                                             <div className="col-sm-12 text-center">
                                             <img src={img1} alt="" />
-                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
+                                            <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.name} </p>
                                             </div>
+                                          ))}
+                                            
                                         </div>
                                     </div>
                                 </div>

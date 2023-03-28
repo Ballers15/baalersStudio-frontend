@@ -51,7 +51,7 @@ const UsersList = () => {
       setToasterColor('danger')
       setLoading(false)
     }
-    setToasterColor('primary')
+     
   }
 
   const UserWalletdetails = async (data) => {
@@ -79,7 +79,7 @@ const UsersList = () => {
       setToasterColor('danger')
       setLoading(false)
     }
-    setToasterColor('primary')
+     
   }  
 
 
@@ -110,7 +110,7 @@ const UsersList = () => {
       setToasterColor('danger')
       setLoading(false)
     }
-    setToasterColor('primary')
+     
   }
 
   const nextPage = () => {
@@ -165,7 +165,7 @@ const UsersList = () => {
       setToasterColor('danger')
       setLoading(false)
     }
-    setToasterColor('primary')
+     
   }
 
   const formatNumberDecimal = (value) => {

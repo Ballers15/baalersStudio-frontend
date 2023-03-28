@@ -88,7 +88,7 @@ const ViewPot = () => {
                 setToasterColor('danger')
                 setLoading(false);
             }
-            setToasterColor('primary')
+             
 }
     
 

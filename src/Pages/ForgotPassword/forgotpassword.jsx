@@ -77,7 +77,7 @@ const ForgotPassword = () => {
     else {
       console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     }
-    setToasterColor('primary')
+     
   }
 
   const createLink = async (data) => {
@@ -105,7 +105,7 @@ const ForgotPassword = () => {
           setLoading(false);
         }
     }
-    setToasterColor('primary')
+     
   }
 
   const updatePassword = async (e) =>{
@@ -145,7 +145,7 @@ const ForgotPassword = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-    setToasterColor('primary')
+     
   }
 
 

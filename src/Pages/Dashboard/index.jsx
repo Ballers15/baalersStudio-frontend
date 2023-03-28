@@ -220,7 +220,7 @@ const Dashboard = () => {
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
-        setToasterColor('primary')
+         
       }
 
     $('#myModal').on('shown.bs.modal', function () {

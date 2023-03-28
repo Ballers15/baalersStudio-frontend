@@ -107,7 +107,7 @@ const AddPot = () => {
                 setLoading(false);
                 setToasterColor('danger')
             }
-            setToasterColor('primary')
+             
         }
     
     const getClaimExpiryTime = (e, data) => {
@@ -194,7 +194,7 @@ const AddPot = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     const updateRewardPot = async (e) => {
@@ -266,7 +266,7 @@ const AddPot = () => {
             setToasterColor('danger')
             setLoading(false);
         }
-        setToasterColor('primary')
+         
     }
 
     return (
