@@ -5,7 +5,7 @@ import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import star from '../../Assest/img/Star.svg' 
 import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, lotteryClaim, lotteryWithdrawl, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
+import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, leaderBoardReward, lotteryClaim, lotteryWithdrawl, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster"; 
 import 'react-multi-carousel/lib/styles.css'; 
@@ -197,6 +197,34 @@ const PotPage = () => {
          
     }
 
+    const getRewardLeaderBoard = async (data) => {
+        let dataToSend = {
+            search: data,
+        }
+        setLoading(true);
+        try {
+          const leader = await leaderBoardReward(dataToSend);
+          setLoading(false);
+          if (leader.error) {
+            setToasterMessage(leader?.message||'Something Went Worng');
+            setShowToaster(true);
+            setToasterColor('danger')
+        } else {
+            // setToasterMessage('Claim Status Updated Succesfully');
+            // setShowToaster(true); 
+            // setToasterColor('success')
+            setLeaderBoardLotteryDetails(leader?.data)
+          }
+        } catch (error) {
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setShowToaster(true);
+            setLoading(false);
+            setToasterColor('danger')
+        }
+         
+    }
+
+
     const formatNumberDecimal = (value) => {
         if(value > Math.pow(10,10)){
         const shortenedValue = parseFloat(value).toExponential(4);
@@ -326,11 +354,12 @@ const PotPage = () => {
         else if(user &&  !walletAddress){
             setToasterMessage('Please connect your metamask wallet');
             setShowToaster(true);
-            setToasterColor('Warning')
-            return;
+            setToasterColor('primary')
+            return
         }
-       await fetchGameCash()
-        setRedeemModal(true)
+       else{
+        await fetchGameCash()
+        setRedeemModal(true)}
     }
 
 return(
