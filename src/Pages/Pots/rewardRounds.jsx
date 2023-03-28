@@ -42,7 +42,6 @@ const RewardRounds = () => {
     const [loading, setLoading] = useState(false);   
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
-    const [userWon, setUserWon] = useState(false)
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
@@ -177,7 +176,6 @@ const RewardRounds = () => {
           } else {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
-            setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
             setClaimedNft(data?.data?.claimed)
           }
