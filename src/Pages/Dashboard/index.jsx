@@ -130,6 +130,7 @@ const Dashboard = () => {
     const [toaster, showToaster] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
     const setShowToaster = (param) => showToaster(param);
+    const [toasterColor, setToasterColor] = useState('primary')
 
     useEffect(()=>{
         emailValidation()
@@ -199,13 +200,13 @@ const Dashboard = () => {
                 const subscribe = await subscribeMailJet(dataToSend);
                 setLoading(false);
                 if (subscribe.error) {
-                    //   console.log(subscribe)
-
                     setToasterMessage(subscribe?.error?.message || 'Something Went Worng');
                     setShowToaster(true);
-                } else {
+                    setToasterColor('danger')
+                  } else {
                     setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
                     setShowToaster(true);
+                    setToasterColor('success')
                     setPlayModalShow(false);
                     setErrorMsg(null);
                 }
@@ -213,12 +214,14 @@ const Dashboard = () => {
                 //   console.log(error)
                 setToasterMessage(error?.response?.data?.message || 'Something Went Worng');
                 setShowToaster(true);
+                setToasterColor('danger')
                 setLoading(false);
             }
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
-    }
+        setToasterColor('primary')
+      }
 
     $('#myModal').on('shown.bs.modal', function () {
         $('#video1')[0].play();
@@ -1345,6 +1348,7 @@ const Dashboard = () => {
               message={toasterMessage}
               show={toaster}
               close={() => showToaster(false)}
+              bg={toasterColor}
             />
           )}
         </div>

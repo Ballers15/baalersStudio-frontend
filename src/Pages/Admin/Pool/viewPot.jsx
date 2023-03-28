@@ -25,6 +25,7 @@ const ViewPot = () => {
     const [toasterMessage, setToasterMessage] = useState("");
     const [disable, disableSubmitButton] = useState(false);
     const [toaster, showToaster] = useState(false);
+    const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
@@ -46,9 +47,10 @@ const ViewPot = () => {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               setLoading(false);
               if (getPotDetailsById.error) {
-                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong');
+                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong in getting pot detail by ID');
                 setShowToaster(true);
-              } else {
+                setToasterColor('danger')
+                } else {
                   let data = getPotDetailsById?.data[0];
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
@@ -81,11 +83,13 @@ const ViewPot = () => {
               }
              
             } catch (error) {
-                setToasterMessage(error?.response?.data?.message||'Something Went Wrong');
+                setToasterMessage(error?.response?.data?.message||'Something Went Wrong in getting pot detail by ID');
                 setShowToaster(true);
+                setToasterColor('danger')
                 setLoading(false);
             }
-    }
+            setToasterColor('primary')
+}
     
 
     const convert=(str)=> {
@@ -292,7 +296,8 @@ const ViewPot = () => {
                 {toaster && <Toaster
                     message={toasterMessage}
                     show={toaster}
-                    close={() => showToaster(false)} />
+                    close={() => showToaster(false)} 
+                    bg={toasterColor}/>
                 }
             </div>
         </div>

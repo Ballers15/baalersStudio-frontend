@@ -15,6 +15,7 @@ const ForgotPassword = () => {
   const [toasterMessage, setToasterMessage] = useState("");
   const setShowToaster = (param) => showToaster(param);
   const [toaster, showToaster] = useState(false);
+  const [toasterColor, setToasterColor] = useState('primary')
   const [loading, setLoading] = useState(false);
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -48,61 +49,63 @@ const ForgotPassword = () => {
       let dataToSend = {
           email: email
       }
-     
-      setLoading(true);
-
+    setLoading(true);
       try {
         const response=await forgotPassword(dataToSend)
-        
-            console.log('forgot password response',response?.data?.token)
         setLoading(false);
-
-        if (response.error) {
-            // console.log('try if block response',response)
-          setToasterMessage(response?.error?.message || 'Something Went Worng forgot')
+      if (response.error) {
+          setToasterMessage(response?.error?.message || 'Something Went Worng in getting token')
           setShowToaster(true)
+          setToasterColor('danger')
         } else {
-          setToasterMessage(response?.message || 'Verified Link created')
+          setToasterMessage(response?.message || 'Verified link created')
           setShowToaster(true)
+          setToasterColor('success')
           setErrorMsg(null)
-          // console.log("link verified")
-          try {
-          // console.log("link verified inside password link", forgotPasswordLink(response?.data?.token))
-            setLoading(true);
-            const passwordLink=(await forgotPasswordLink(response?.data?.token))
-            console.log("password link resp",passwordLink)
-            setToken(response?.data?.token)
-            console.log("after set token",token,"response token",response?.data?.token)
-
-            setLoading(false);
-      
-            if (passwordLink.error) {
-                // console.log('try if block otpResponse',otpResponse)
-              setToasterMessage(passwordLink?.error?.message || 'Something Went Worng link')
-              setShowToaster(true)
-            } else {
-              setToasterMessage(passwordLink?.message || 'Link verified change your password')
-              setShowToaster(true)
-              setErrorMsg(null)
-              setNewPass(true)
-            }
-          } catch (error) {
-            setToasterMessage(error?.response?.data?.message || 'Something Went Worng link')
-            setShowToaster(true)
-            setLoading(false);
-          }
-         }
+          setToken(response?.data?.token)
+          if(response?.data?.token.length){
+            createLink(response?.data?.token)
+        }
+        }
       } catch (error) {
-          // console.log("error block",error)
-        setToasterMessage(error?.response?.data?.message || 'Something Went Worng forgot')
+        setToasterMessage(error?.response?.data?.message || 'Something Went Worng in getting token')
         setShowToaster(true)
+        setToasterColor('danger')
         setLoading(false)
       }
     } 
     else {
       console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     }
-              
+    setToasterColor('primary')
+  }
+
+  const createLink = async (data) => {
+    if(data.length){
+
+      setLoading(true);
+
+      try {
+          const passwordLink=(await forgotPasswordLink(data))
+          setLoading(false);
+          if (passwordLink.error) {
+            setToasterMessage(passwordLink?.error?.message || 'Something Went Worng in generating link')
+            setShowToaster(true)
+            setToasterColor('danger')
+          } else {
+            setToasterMessage(passwordLink?.message || 'link verified')
+            setShowToaster(true)
+            setToasterColor('success')
+            setNewPass(true)
+          }
+        } catch (error) {
+          setToasterMessage(error?.response?.data?.message || 'Something Went Worng link')
+          setShowToaster(true)
+          setToasterColor('danger')
+          setLoading(false);
+        }
+    }
+    setToasterColor('primary')
   }
 
   const updatePassword = async (e) =>{
@@ -116,35 +119,33 @@ const ForgotPassword = () => {
       repeat: repeatPassword,
       token: token
     }
-  
+    setLoading(true);
 
     try {
-      setLoading(true);
       const changePass=(await changePassword(changePassData))
       setLoading(false);
 
       if (changePass.error) {
-          // console.log('try if block changePass',changePass)
         setToasterMessage(changePass?.error?.message || 'Something Went Worng')
         setShowToaster(true)
+        setToasterColor('danger')
       } else {
-        // console.log('try else block changePass',changePass?.message)
         setToasterMessage(changePass?.message || 'Password changed successfully!')
         setShowToaster(true)
+        setToasterColor('success')
         setErrorMsg(null)
-        // navigate('/login');
         setLoading(true)
         setTimeout(() => {
           navigate('/login')
         }, 2000)
       }
     } catch (error) {
-        // console.log("error block",error?.response?.data?.status)
       setToasterMessage(error?.response?.data?.message || 'Something Went Worng')
       setShowToaster(true)
+      setToasterColor('danger')
       setLoading(false);
-
     }
+    setToasterColor('primary')
   }
 
 
@@ -152,29 +153,25 @@ const ForgotPassword = () => {
   return (
     <React.Fragment>
       <div className="forgot-page-wrapper">
-        <div className="signup-box">
+
+        {newPass === false && <div className="signup-box">
         <h2 className="login-head">FORGOT  <br/>PASSWORD ?</h2>
         <div className="forgot-page-container">
-          <p>No worries, enter your mail ID & we will send you a reset code</p>
-          
-        
+         <p>No worries, enter your mail ID & we will send you a reset code</p>
           <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <Row className="mb-2">
               <Form.Group >
-                {/* <Form.Label className="small-lable">Enter email </Form.Label> */}
                 <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={({ target }) => setEmail(target.value)}  ></Form.Control>
                 <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
                 <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
               </Form.Group>
             </Row>
             <div className="playBtn">  <a type="submit" onClick={handleSubmit} > <span></span>PROCEED  </a> </div>
-          {/* <div> <button type="submit"  className="forgot-submit-button" onClick={handleSubmit} > Submit </button> </div> */}
           </Form> 
-
-      </div>
-      </div>
+        </div>
+      </div> }
     
-    { newPass && <div className='update-password'>
+    { newPass === true && <div className='update-password'>
           <Form noValidate validated={validated} onSubmit={updatePassword} >
               <Row className="mb-3">
                 <Form.Group >
@@ -193,7 +190,7 @@ const ForgotPassword = () => {
                 <div> <button type="submit"  className="forgot-submit-button" onClick={updatePassword} > Submit </button> </div>
           </Form> 
         </div> }
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} /> )}
+        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}
       </div>
     </React.Fragment>
   )

@@ -36,6 +36,7 @@ const AddPot = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
+    const [toasterColor, setToasterColor] = useState('primary')
 
 
 
@@ -57,7 +58,8 @@ const AddPot = () => {
               if (getPotDetailsById.error) {
                 setToasterMessage(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
                 setShowToaster(true);
-              } else {
+                setToasterColor('danger')
+                } else {
                   let data = getPotDetailsById?.data[0];
 
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
@@ -103,10 +105,10 @@ const AddPot = () => {
                 setToasterMessage(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
                 setShowToaster(true);
                 setLoading(false);
+                setToasterColor('danger')
             }
-           
-           
-    }
+            setToasterColor('primary')
+        }
     
     const getClaimExpiryTime = (e, data) => {
         const date = new Date(e);
@@ -177,10 +179,11 @@ const AddPot = () => {
             setToasterMessage(addPot?.message||'Something Went Worng in adding reward pot');
             setShowToaster(true);
             setDisableSubmitButton(false);
-              
+            setToasterColor('danger')
           } else {
             setToasterMessage('Pot Added Succesfully !!');
             setShowToaster(true);
+            setToasterColor('success')
             setDisableSubmitButton(false);
             navigate('/poolListing');
           }
@@ -188,8 +191,10 @@ const AddPot = () => {
             setDisableSubmitButton(false);
             setToasterMessage(error?.response?.data?.message||'Something Went Worng in adding reward pot');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const updateRewardPot = async (e) => {
@@ -243,23 +248,25 @@ const AddPot = () => {
           if (updatePot.error) {
             setToasterMessage(updatePot?.message||'Something Went Worng in updating reward pot');
             setShowToaster(true);
+            setToasterColor('danger')
             setDisableSubmitButton(false);
               
           } else {
             setToasterMessage('Pot Updated Succesfully !!');
             setShowToaster(true);
+            setToasterColor('success')
             setDisableSubmitButton(false);
             state.id = '';
             navigate('/poolListing');
-            
-              
           }
         } catch (error) {
             setDisableSubmitButton(false);
             setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward pot');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     return (
@@ -489,7 +496,8 @@ const AddPot = () => {
                 {toaster && <Toaster
                     message={toasterMessage}
                     show={toaster}
-                    close={() => showToaster(false)} />
+                    close={() => showToaster(false)}
+                    bg={toasterColor} />
                 }
             </div>
         </div>

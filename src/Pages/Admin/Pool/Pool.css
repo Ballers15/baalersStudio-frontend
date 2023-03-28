@@ -373,6 +373,10 @@ border: none;
 	transform: translateY(-100%);
 }
 
+option {
+  background-color: #170941;
+  color: #fff;
+}
 /* .addPot .react-time-picker__inputGroup__input {
   min-width: 0.54em;
   height: 100%;

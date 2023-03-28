@@ -12,6 +12,7 @@ export default function AuthProvide({ children }) {
   const [toaster, showToaster] = useState(false);
   const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
+  const [toasterColor, setToasterColor] = useState('primary')
   const prev = sessionStorage.getItem('before login')
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function AuthProvide({ children }) {
       console.log(login)
       setToasterMessage(login?.message||'Something Went Worng');
       setShowToaster(true);
+      setToasterColor('danger')
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
@@ -39,6 +41,7 @@ export default function AuthProvide({ children }) {
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
+          setToasterColor('success')
           navigate('/admin-dashboard')
         } 
         else {
@@ -46,6 +49,7 @@ export default function AuthProvide({ children }) {
           localStorage.setItem('_u', JSON.stringify(login.data))
           setToasterMessage('Login Succesfully !!');
           setShowToaster(true);
+          setToasterColor('success')
           navigate(prev)
         }
       }
@@ -53,9 +57,11 @@ export default function AuthProvide({ children }) {
       console.log('err in login',error)
       setToasterMessage(error ||'Something Went Worng during login');
       setShowToaster(true);
+      setToasterColor('danger')
       setLoading(false);
       navigate('/login')
     }
+    setToasterColor('primary')
   }
 
   const logout =  () => {
@@ -71,7 +77,8 @@ export default function AuthProvide({ children }) {
       {toaster && <Toaster
                     message={toasterMessage}
                     show={toaster}
-                    close={() => showToaster(false)} />
+                    close={() => showToaster(false)}
+                    bg={toasterColor} />
                 }
     </AuthContext.Provider>
   )

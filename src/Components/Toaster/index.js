@@ -6,13 +6,13 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 import './Toaster.css';
 
 function Toaster(props) {
-    const { close, show, message } = props;
+    const { close, show, message, bg } = props;
   return (
     <Row>
       <Col xs={6}>
         <ToastContainer className="p-3" position={`bottom-end`}>
-          <Toast onClose={close} show={show} delay={4000} autohide >
-                      <Toast.Body >
+          <Toast onClose={close} show={show} delay={4000} bg={bg} autohide >
+                      <Toast.Body className = 'text-white'>
                             {message}
                       </Toast.Body>
           </Toast>

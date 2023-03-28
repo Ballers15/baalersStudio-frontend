@@ -16,6 +16,8 @@ const AdminDashboard = () => {
   const [pieChartData, setPieChartData] = useState([])
   const [barChartData, setBarChartData] = useState([])
   const [barPotTypeUsers,setBarPotTypeUsers]=useState('LOTTERYPOT')
+    const [toasterColor, setToasterColor] = useState('primary')
+
 
   useEffect(() => {
     usersCount();

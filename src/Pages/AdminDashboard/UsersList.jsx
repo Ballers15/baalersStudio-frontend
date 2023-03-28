@@ -13,6 +13,7 @@ const UsersList = () => {
   const setShowToaster = param => showToaster(param)
   const [toaster, showToaster] = useState(false)
   const [toasterMessage, setToasterMessage] = useState('')
+  const [toasterColor, setToasterColor] = useState('primary')
   const [currentPage, setCurrentPage] = useState(0)
   const [allUsers, setAllUsers] = useState(null)
   const [disable, disableSubmitButton] = useState(false)
@@ -37,15 +38,20 @@ const UsersList = () => {
       if (users?.error == true) {
         setToasterMessage(users?.message)
         setShowToaster(true)
+        setToasterColor('danger')
       } else {
         setToasterMessage(users?.message)
+        // setShowToaster(true)
+        // setToasterColor('success')
         setAllUsers(users)
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng')
+      setToasterMessage('Something Went Worng in getting all users')
       setShowToaster(true)
+      setToasterColor('danger')
       setLoading(false)
     }
+    setToasterColor('primary')
   }
 
   const UserWalletdetails = async (data) => {
@@ -60,15 +66,20 @@ const UsersList = () => {
       if (wallet?.error == true) {
         setToasterMessage(wallet?.message)
         setShowToaster(true)
+        setToasterColor('danger')
       } else {
         setToasterMessage(wallet?.message)
+        // setShowToaster(true)
+        // setToasterColor('success')
         setWalletDetails(wallet.data)
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng')
+      setToasterMessage('Something Went Worngin getting user wallet details')
       setShowToaster(true)
+      setToasterColor('danger')
       setLoading(false)
     }
+    setToasterColor('primary')
   }  
 
 
@@ -85,17 +96,21 @@ const UsersList = () => {
       if (userStatus?.error == true) {
         setToasterMessage(userStatus?.message)
         setShowToaster(true)
+        setToasterColor('danger')
       } else {
         setToasterMessage(userStatus?.message)
         // setShowToaster(true)
+        // setToasterColor('success')
         handleCloseModal()
         fetchApi()
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng')
+      setToasterMessage('Something Went Worng in updating active user')
       setShowToaster(true)
+      setToasterColor('danger')
       setLoading(false)
     }
+    setToasterColor('primary')
   }
 
   const nextPage = () => {
@@ -136,17 +151,21 @@ const UsersList = () => {
       if (users?.error == true) {
         setToasterMessage(users?.message)
         setShowToaster(true)
+        setToasterColor('danger')
       } else {
         setToasterMessage(users?.message)
+        // setShowToaster(true)
+        // setToasterColor('success')
         setAllUsers(users)
         console.log(users)
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng')
+      setToasterMessage('Something Went Worng in getting filtered users')
       setShowToaster(true)
+      setToasterColor('danger')
       setLoading(false)
     }
-
+    setToasterColor('primary')
   }
 
   const formatNumberDecimal = (value) => {
@@ -342,7 +361,7 @@ const UsersList = () => {
         </div>
         {/* <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={nextPage} > Next </button>
         <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={prevPage} > Prev </button> */}
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} /> )}
+        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor}/> )}
 
       </div>
       </div>

@@ -79,6 +79,7 @@ const PotPage = () => {
     const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
     const [toasterMessage, setToasterMessage] = useState("");
     const [toaster, showToaster] = useState(false);
+    const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [leaderSearch,setLeaderSearch]  = useState('')
@@ -182,18 +183,22 @@ const PotPage = () => {
           if (pot.error) {
             setToasterMessage(pot?.message||'Something Went Worng');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
+            // setToasterColor('success')
             setPotDetails(pot?.data.length?pot.data[0]:'');
             setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
-            console.log(pot?.data.length?pot.data[0]?.endDate:'');
+            // console.log(pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const getLotteryLeaderBoard = async (data) => {
@@ -207,16 +212,20 @@ const PotPage = () => {
           if (leader.error) {
             setToasterMessage(leader?.message||'Something Went Worng');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
+            // setToasterColor('success')
             setLeaderBoardLotteryDetails(leader?.data)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
             setLoading(false);
+            setToasterColor('danger')
         }
+        setToasterColor('primary')
     }
 
     const formatNumberDecimal = (value) => {
@@ -242,17 +251,21 @@ const PotPage = () => {
           if (redeem.error) {
             setToasterMessage(redeem?.message||'Something Went Worng');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             setToasterMessage(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
             setShowToaster(true); 
+            setToasterColor('success')
             setRedeemModal(false)
             getLotteryLeaderBoard()
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const addCashReward = async () => {
@@ -269,11 +282,13 @@ const PotPage = () => {
           if (redeem.error) {
             setToasterMessage(redeem?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setRedeemModal(false)
             
           } else {
             setToasterMessage(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
             setShowToaster(true); 
+            setToasterColor('success')
             setRedeemModal(false)
             getLotteryLeaderBoard()
           }
@@ -281,8 +296,10 @@ const PotPage = () => {
             setRedeemModal(false);
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const fetchGameCash = async () => {
@@ -297,16 +314,20 @@ const PotPage = () => {
           if (cash.error) {
             setToasterMessage(cash?.message||'Something Went Worng');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             setToasterMessage('cash fetched Successfully');
             setShowToaster(true); 
+            setToasterColor('success')
             setCash(cash?.data?.amount)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
        }
+       setToasterColor('primary')
     }
 
     
@@ -336,6 +357,7 @@ const PotPage = () => {
         else if(user &&  !walletAddress){
             setToasterMessage('Please connect your metamask wallet');
             setShowToaster(true);
+            setToasterColor('Warning')
             return;
         }
        await fetchGameCash()
@@ -578,7 +600,7 @@ return(
             </div>
             </div>
         </div>
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} /> )}
+        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}
     </div>
     </>
 )

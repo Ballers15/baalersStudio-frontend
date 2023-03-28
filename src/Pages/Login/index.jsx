@@ -87,7 +87,7 @@ const Login = () => {
                        
                         </div>
                         <div className="login-forget-password">
-                        <a href='/forgotPassword'> <span>Forgot password?</span></a>
+                        <Link to='/forgotPassword'> <span>Forgot password?</span></Link>
                         </div>
                     <div>
 

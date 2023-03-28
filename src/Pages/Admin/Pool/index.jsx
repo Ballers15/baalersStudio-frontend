@@ -41,7 +41,7 @@ const PoolListing = () => {
     const [walletAddressFilter, setWalletAddressFilter] = useState('')
     const [potIdForUser,setPotIdForUser] = useState('')
     const [potDetails, setPotDetails] = useState()
-
+    const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
     
     const onInit=()=>{
@@ -130,17 +130,20 @@ const PoolListing = () => {
           const getPotDetails = await getAllRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng');
+            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting pot details');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
               setActivePotCount(getPotDetails?.data?.count);
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting pot details');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
     const getUpcomingRewardPotDetails = async () => {
         setLoading(true);
@@ -160,17 +163,20 @@ const PoolListing = () => {
           const getPotDetails = await getUpcomingRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng');
+            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting upcoming pot details');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
               setUpcomingPotCount(getPotDetails?.data?.count);
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting upcoming pot details');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
     const getArchivesRewardPotDetails = async () => {
         setLoading(true);
@@ -190,18 +196,21 @@ const PoolListing = () => {
           const getPotDetails = await getArchivesRewardPot(dataToSend);
           setLoading(false);
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng');
+            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting acrchive pot details');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
               setArchivePotCount(getPotDetails?.data?.count);
 
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting acrchive pot details');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const editRewardPot = (id) => {
@@ -221,20 +230,24 @@ const PoolListing = () => {
           const potSatus = await updateRewardPotStatus(dataToSend);
           setLoading(false);
           if (potSatus.error) {
-            setToasterMessage(potSatus?.message||'Something Went Worng');
+            setToasterMessage(potSatus?.message||'Something Went Worng in updating reward pot status');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             setToasterMessage('Pot Status Updated Succesfully');
               setShowToaster(true); 
+              setToasterColor('success')
               getAllRewardPotDetails();
               getUpcomingRewardPotDetails();
               getArchivesRewardPotDetails();
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward pot status');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     
@@ -264,19 +277,23 @@ const PoolListing = () => {
           const claimStatus = await updateRewardClaimStatus(dataToSend);
           setLoading(false);
           if (claimStatus.error) {
-            setToasterMessage(claimStatus?.message||'Something Went Worng');
+            setToasterMessage(claimStatus?.message||'Something Went Worng  in updating reward claim status');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             setToasterMessage('Claim Status Updated Succesfully');
             setShowToaster(true); 
+            setToasterColor('success')
             onInit()      
             handleClosecClaim()   
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward claim status');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
+        setToasterColor('primary')
     }
 
     const getPotUsers = async (data) =>{
@@ -289,17 +306,20 @@ const PoolListing = () => {
             const usersList = await getSpecificPotUsers(dataToSend);
             setLoading(false);
             if(usersList.error){
-                setToasterMessage(usersList?.message||'Something Went Worng');
+                setToasterMessage(usersList?.message||'Something Went Worng  in getting pot users');
                 setShowToaster(true);
+                setToasterColor('danger')
             } else {
                 setPotUsers(usersList?.data)
                 // setToasterMessage('Users listed Succesfully');
                 // setShowToaster(true); 
-              }
+                // setToasterColor('success')
+            }
             
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
+            setToasterMessage(error?.response?.data?.message||'Something Went Worng  in getting pot users');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
         // console.log(potUsers)
@@ -320,14 +340,17 @@ const PoolListing = () => {
           if (users.error) {
             setToasterMessage(users?.message||'Something Went Worng');
             setShowToaster(true);
-          } else {
+            setToasterColor('danger')
+        } else {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
+            // setToasterColor('success')
             setPotUsers(users?.data)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             setShowToaster(true);
+            setToasterColor('danger')
             setLoading(false);
         }
         // console.log(potUsers)
@@ -412,7 +435,7 @@ const PoolListing = () => {
                             <td>{user?.userDetails?.email}</td>             
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>  
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); setToasterMessage( 'Copied Succesfully'); setShowToaster(true); }}></span></td>  
                             <td>{user?.nftHolded}</td>
                         </tr>  
                         )
@@ -861,7 +884,8 @@ const PoolListing = () => {
                 {toaster && <Toaster
                     message={toasterMessage}
                     show={toaster}
-                    close={() => showToaster(false)} />
+                    close={() => showToaster(false)} 
+                    bg={toasterColor}/>
                 }
              </div>
         </React.Fragment>

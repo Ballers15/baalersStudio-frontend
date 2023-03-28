@@ -20,7 +20,7 @@ export function checkUserName(data) {
 }
 
 export function userSignup(data) {
-  return (axiosInstance.post(url + 'auth/v1/user/signup', data).then(res => res.data)) // data{name,firstname,lastName,email,userName, password, repeat}
+  return (axiosInstance.post(url + 'auth/v1/user/signup', data).then(res => res.data)) // data{email,userName, password, repeat}
 }
 
 export function forgotPassword(data) {
