@@ -122,7 +122,7 @@ box-shadow: inset 45px -45px 42px #130834,
     box-shadow: none !important;
 }
 .viewWallet option,  .admin-dashboard option {
-    color: #000;
+    color: #fff;
 }
 input[type="date"] {
     position: relative; 

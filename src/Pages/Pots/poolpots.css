@@ -518,11 +518,12 @@ a.disabled{
   margin-right: 0;
 }
 
-.slick-prev:before{display: none;}
-  .slick-prev{
+.slick-next:before{display: none;}
+  .slick-next{
     left: 4rem;
     width: 295px;
   }
+  
 
   @media (min-width: 1600px) {
     .winHead span { 

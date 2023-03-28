@@ -2,47 +2,16 @@ import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
-import star from '../../Assest/img/Star.svg'
-import img1 from '../../Assest/img/img1.png' 
-import youtubePopup from '../../Assest/img/youtubePopup.PNG'
+import star from '../../Assest/img/Star.svg' 
 import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
 import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, lotteryClaim, lotteryWithdrawl, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
-import Toaster from "../../Components/Toaster";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
-import Slider from "react-slick";
+import Toaster from "../../Components/Toaster"; 
+import 'react-multi-carousel/lib/styles.css'; 
+import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
 import RewardRounds from "./rewardRounds";
-
-
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
-  );
-}
-var settings = {  
-  className: "slider variable-width",
-  dots: false,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 1,
-  // centerMode: true,
-  variableWidth: true, 
-  prevArrow: <SamplePrevArrow />
-};
-
-
    
 const PotPage = () => {
     $(document).ready(function(){

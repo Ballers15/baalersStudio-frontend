@@ -37,7 +37,7 @@
     text-align: left; 
 } */
 
-.signup-page-wrapper .playBtn{
+/* .signup-page-wrapper .playBtn{
     margin-top: 3rem;
 }
 .signup-page-wrapper .playBtn a{
@@ -49,7 +49,7 @@
 }
 .signup-page-wrapper .playBtn a:hover::before, .signup-page-wrapper .playBtn a:hover::after, .signup-page-wrapper .playBtn a:hover span::before, .signup-page-wrapper .playBtn a:hover span::after{
     width: 161px;
-}
+} */
 .signup-submit-button{
     cursor: pointer;
     width: 30%;

@@ -32,8 +32,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <div className="Login-component">            
-            
+            <div className="Login-component">     
                    
                     <div className="login-box">
                         <h2 className="login-head">Welcome <br/> Back !</h2>
@@ -67,21 +66,12 @@ const Login = () => {
                                 Password is required (8 character)
                             </Form.Control.Feedback>
                         </Form.Group>
-                        {['checkbox'].map((type) => (
-                            <div  className="mb-3 mt-4">
-                            <Form.Check
-                                inline
-                                label="Remember me"
-                                name="group1"
-                                type={type} 
-                            />
-                            </div>
-                        ))}
+                       
                         <div>
                         <div className="playBtn">
-                            <a type="submit"  onClick={handleLogin}>
+                            <button type="submit"  onClick={handleLogin}>
                                 <span></span>SIGN IN
-                            </a>
+                            </button>
                         </div>
                             {/* <button type="submit" onClick={handleLogin}>SIGN IN</button> */}
                        
@@ -90,6 +80,10 @@ const Login = () => {
                         <Link to='/forgotPassword'> <span>Forgot password?</span></Link>
                         </div>
                     <div>
+                    <div className='alreadyAcc'>
+                        <span>New to Ballers?</span>
+                        <Link to='/signup'> <span>Sign Up</span></Link> 
+                    </div>
 
                    
                         {/* <span className="login-signup-tag">New to Ballers?</span>
