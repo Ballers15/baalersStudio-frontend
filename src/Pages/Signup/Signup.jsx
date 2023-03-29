@@ -11,6 +11,7 @@ import './Signup.css'
 const Signup = () => {
   const [validated, setValidated] = useState(false)
   const [errorMsg,setErrorMsg]= useState(null)
+  const [emailErrorMsg,setEmailErrorMsg]= useState(null)
   const [passErrorMsg,setPassErrorMsg]= useState(null)
   const [toasterMessage, setToasterMessage] = useState("");
   const setShowToaster = (param) => showToaster(param);
@@ -31,32 +32,36 @@ const Signup = () => {
       repeat:''
     }
   )
-  useEffect(() => {
-  emailValidation(userDetails.email)
-  confirmPassword()
-  // console.log(userDetails)
-    }, [userDetails])
+
   
   const emailValidation = (e) => {
+    setUserDetails({ ...userDetails,email:e.target.value})
+    // console.log(userDetails.email)
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
-    const tld = e?.split('.')[1]?.length
-    if (!e || regex.test(e) === false || tld <= 1) {
-      setErrorMsg('Enter a Valid Email !')
+    const tld = e.target.value?.split('.')[1]?.length
+    
+    if (regex.test(e.target.value) === false && e.target.value.length || tld <= 1 && e.target.value.length) {
+      setEmailErrorMsg('Enter a Valid Email !')
       return false
     }
-    setErrorMsg(null)
-    return true
+    else if(e.target.value === ''){
+      setEmailErrorMsg('Email is required')
+    }
+    else{
+      setEmailErrorMsg(null)
+    }
   }
 
-  const confirmPassword = () =>{
-    if(userDetails.password.trim()===userDetails.repeat.trim())
+  const confirmPassword = (e) =>{
+    setUserDetails({ ...userDetails,repeat:e.target.value})
+    if(e.target.value===userDetails.password)
     {
       setPassErrorMsg(null)
-      return true;
+      // return true;
     }
     else{
       setPassErrorMsg('Passwords do not match')
-      return false;
+      // return false;
     }
   }
 
@@ -66,7 +71,7 @@ const Signup = () => {
     e.stopPropagation()
     e.preventDefault()
 
-    if (userDetails.email && userDetails.password && passErrorMsg===null) {
+    if (userDetails.email && userDetails.password && passErrorMsg === null && errorMsg === null) {
       let dataToSend = {
           email: userDetails.email,
           password:userDetails.password,
@@ -74,7 +79,7 @@ const Signup = () => {
       }
       setLoading(true);
       try {
-        let user=(await registerUser(dataToSend))
+        let user = await registerUser(dataToSend)
         setLoading(false);
         if (user.error) {
           setToasterMessage(user?.error?.message || 'Something Went Worng in registering user')
@@ -101,7 +106,7 @@ const Signup = () => {
         setLoading(false);
       }
     } else {
-      console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+      console.log('<<<<---Form is invalid --->>>>')
     }
      
   }
@@ -170,6 +175,7 @@ const Signup = () => {
       }
     } catch (error) {
       setToasterMessage(error?.response?.data?.message || 'Something Went Worng in OTP verify')
+      setErrorMsg('Invalid OTP')
       setShowToaster(true)
       setToasterColor('danger')
       setLoading(false);
@@ -296,9 +302,9 @@ const Signup = () => {
 
               <Form.Group className='pb-4'>
                 {/* <Form.Label className="small-lable">email </Form.Label> */}
-                <Form.Control required type="email" placeholder="EMAIL" onChange={({ target }) => setUserDetails({ ...userDetails,email:target.value})} value={userDetails.email} ></Form.Control>
-                <Form.Control.Feedback type="invalid"> <span> {userDetails.email && 'Valid E-mail is required !'} </span> <span> {!userDetails.email && 'E-mail is required'} </span> </Form.Control.Feedback>
-                <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
+                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e) } value={userDetails.email} ></Form.Control>
+                <> <span className="custom-error-msg"> {emailErrorMsg} </span></>
+                {/* <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback> */}
               </Form.Group>
            
               <Form.Group className='pb-4'>
@@ -309,9 +315,9 @@ const Signup = () => {
 
               <Form.Group className='pb-4'>
                 {/* <Form.Label className="small-lable">Confirm Password</Form.Label> */}
-                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => setUserDetails({ ...userDetails,repeat:e.target.value})} value={userDetails.repeat}  minLength='8' ></Form.Control>
+                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmPassword(e)} value={userDetails.repeat}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password do not match</Form.Control.Feedback>
-                <Form.Control.Feedback> <span className="custom-error-msg"> {passErrorMsg && 'Passwords do not match'}</span> </Form.Control.Feedback>
+                <span className="custom-error-msg"> {passErrorMsg}</span>
               </Form.Group>
 
               {['checkbox'].map((type) => (
@@ -324,9 +330,7 @@ const Signup = () => {
                             />
                             </div>
                         ))}
-              {/* </Row> */}
-              <div className="playBtn">  <button type="submit"  onClick={handleSubmit}> <span></span>SIGN Up  </button> </div>
-                {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmit} > Signup </button> </div> */}
+              <div className="playBtn">  <button type="submit"  onClick={handleSubmit} > <span></span>SIGN Up  </button> </div>
 
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
@@ -345,9 +349,9 @@ const Signup = () => {
                   onChange={setOtp}
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
-                />             
+                />      
+                <span className="custom-error-msg">{errorMsg}</span>       
               <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
-                {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmitOtp} > verify </button> </div> */}
                 <div className='alreadyAcc'>
                  <span>Didn’t get the code?</span>
                   <a onClick={(e)=>{handleResendOtp(e)}}> <span>Resend</span></a> 
