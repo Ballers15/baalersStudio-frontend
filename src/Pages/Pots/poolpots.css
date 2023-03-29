@@ -16,7 +16,7 @@
 p{font-family: 'Inter', sans-serif;}
 .img-responsive{width: 100%;}
 .potsHead{ 
-    background-image: url(../../Assest/img/slide3.webp);
+    /* background-image: url(../../Assest/img/slide3.webp); */
     height: 100vh;
     bottom: 0;
     top: 0;

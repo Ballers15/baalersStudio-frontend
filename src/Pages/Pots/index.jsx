@@ -14,6 +14,8 @@ import LotteryRounds from "./lotteryRounds";
 import RewardRounds from "./rewardRounds";
 import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
+import rewardPot from '../../Assest/img/rewardPot.png'
+import lotteryPot from '../../Assest/img/slide3.webp'
    
 const PotPage = () => {
     $(document).ready(function(){
@@ -47,13 +49,11 @@ const PotPage = () => {
     const [potType, setPotType] = useState('')
     const [expiryTime, setExpiryTime] = useState("");
     const [potDetails,setPotDetails] = useState('')
-    const [leaderBoardLotteryDetails,setLeaderBoardLotteryDetails] = useState('')
     const [toasterMessage, setToasterMessage] = useState("");
     const [toaster, showToaster] = useState(false);
     const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
-    const [leaderSearch,setLeaderSearch]  = useState('')
     const [cash, setCash] = useState('')
     const user = localStorage.getItem('_u')
     const walletAddress = localStorage.getItem('_wallet')
@@ -263,12 +263,6 @@ const PotPage = () => {
             return
       }
 
-    const handleSearchUser = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
     const [redeemModal,setRedeemModal] = useState(false)
     const handleCloseModal = () => setRedeemModal(false)
 
@@ -317,8 +311,9 @@ return(
 
 
     <div className="lotteryPool">
-        <div className="text-center potsHead thirdSlide">
-            <div className="sCaption text-center">
+        <div className="text-center potsHead thirdSlide" style={{ backgroundImage: potType === 'REWARDPOT' ? `url(${rewardPot})` : `url(${lotteryPot})`}}>
+            <div className="sCaption text-center">          
+
                 <div> 
                     {potType==='LOTTERYPOT' && <h1>LOTTERY POT </h1>}
                     {potType==='REWARDPOT' && <h1>REWARD POT </h1>}

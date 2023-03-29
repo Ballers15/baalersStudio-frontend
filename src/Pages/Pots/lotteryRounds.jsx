@@ -53,7 +53,7 @@ const LotteryRounds = (props) => {
     };
 
    const handleSlideChange = (current) => {
-    console.log("current",current);
+    // console.log("current",current);
       //  const index = current;
        setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)

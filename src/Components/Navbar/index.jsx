@@ -1,15 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect} from 'react';
-// import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'; 
-import Tooltip from 'react-bootstrap/Tooltip';
 import './Navbar.css';
 import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
-import user from '../../Assest/img/user.png'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import $ from 'jquery'; 
@@ -80,10 +76,16 @@ Mumbai:{
 };
 
 const saveNewAddress = (address) =>{
-  // console.log("i am inside this",address);
-  let walletAddress=address[0];
-  setWalletaddress(walletAddress)
-  localStorage.setItem('_wallet',walletAddress)  
+  console.log("i am inside this",address);
+  if(address.length){
+    let walletAddress=address[0];
+    setWalletaddress(walletAddress)
+    localStorage.setItem('_wallet',walletAddress)  
+  }else{
+    console.log("HI REMOVED");
+    disconnectWallet();
+  }
+  
 }
 const getAccountDetails = async ({ networkName, setError }) => {
   console.log("get account details");

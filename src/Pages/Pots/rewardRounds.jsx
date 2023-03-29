@@ -52,7 +52,7 @@ const RewardRounds = (props) => {
     };
 
    const handleSlideChange = (current) => {
-    console.log("current",current);
+    // console.log("current",current);
        setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
     
@@ -299,9 +299,9 @@ return(
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
+                                        <div className="row justify-content-center">
                                           {round?.potUserDetails?.map((user)=>(
-                                            <div className="col-sm-12 text-center" key={user?._id}>
+                                            <div className="col-sm-4 text-center" key={user?._id}>
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.name} </p>
                                             </div>
