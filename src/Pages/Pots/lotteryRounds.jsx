@@ -53,14 +53,14 @@ const LotteryRounds = (props) => {
     };
 
    const handleSlideChange = (current) => {
-    // console.log("current",current);
-       const index = current % prevRounds.length;
-       setCurrentSlide(index)
-        setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+    console.log("current",current);
+      //  const index = current;
+       setCurrentSlide(current)
+        setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
     
         if(user !== null && walletAddress !== null) {
             // console.log(prevRounds[currentSlide]);
-            lotteryWon(prevRounds[currentSlide]._id)
+            lotteryWon(prevRounds[current]._id)
         }
      };
 
@@ -295,7 +295,7 @@ return(
                     <div className="row">
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length ? (<Slider {...settings} beforeChange={handleSlideChange}> 
+                        {prevRounds?.length ? (<Slider {...settings} afterChange={handleSlideChange}> 
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>

@@ -40,8 +40,6 @@ export function lotteryWithdrawl(data) {
 //     "txnHash":"0x60a53080ee77cb0fd421c355423993ef13c5017c87a041a85c061149b6002542",
 //     "withdrawlId":"6400b2d83916c0e1eebb3ca8" 
 
-
-
 export function leaderBoardLottery(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/lottery/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
 }
@@ -52,4 +50,8 @@ export function getRewardRounds(data){
 
 export function leaderBoardReward(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/reward/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
+}
+
+export function rewardClaimed(data) {
+  return (axiosInstance.get(url + 'user/v1/check/user/claimed/reward',{params: data}).then(res => res.data))
 }

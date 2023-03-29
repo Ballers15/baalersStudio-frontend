@@ -5,13 +5,15 @@ import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import star from '../../Assest/img/Star.svg' 
 import {Table, Button, Form, Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, getGameCash, getPrevRounds, leaderBoardLottery, leaderBoardReward, lotteryClaim, lotteryWithdrawl, redeemCashLottery, redeemCashReward, wonLottery } from "../../Services/User/indexPot";
+import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
 import Toaster from "../../Components/Toaster"; 
 import 'react-multi-carousel/lib/styles.css'; 
 import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
 import RewardRounds from "./rewardRounds";
+import LeaderBoardReward from "./rewardLeaderBoard";
+import LeaderBoardLottery from "./lotteryLeaderBoard";
    
 const PotPage = () => {
     $(document).ready(function(){
@@ -59,6 +61,7 @@ const PotPage = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [previous, setPrevious] = useState(false);
+    const [reload, setReload] = useState(false);
 
 
 
@@ -70,16 +73,6 @@ const PotPage = () => {
            countdownSeconds:''
        }
    );
-
-   const [claimCountdownTime, setClaimCountdownTime]= useState(
-    {
-        countdownDays:'',
-        countdownHours:'',
-        countdownMinutes:'',
-        countdownSeconds:''
-    }
-);
-
 
     const countdownTimer=()=>{
 
@@ -125,7 +118,6 @@ const PotPage = () => {
     useEffect(()=>{
         if(potType!==''){
         getActivePotDetails();
-        getLotteryLeaderBoard();
         }
     },[potType])
 
@@ -135,8 +127,6 @@ const PotPage = () => {
         }
         else{
           setPrevious(true)
-          console.log(previous)
-          console.log(expiryTime)
         }
     },[expiryTime]);
 
@@ -170,70 +160,6 @@ const PotPage = () => {
          
     }
 
-    const getLotteryLeaderBoard = async (data) => {
-        let dataToSend = {
-            search: data,
-        }
-        setLoading(true);
-        try {
-          const leader = await leaderBoardLottery(dataToSend);
-          setLoading(false);
-          if (leader.error) {
-            setToasterMessage(leader?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
-        } else {
-            // setToasterMessage('Claim Status Updated Succesfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
-            setLeaderBoardLotteryDetails(leader?.data)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-            setToasterColor('danger')
-        }
-         
-    }
-
-    const getRewardLeaderBoard = async (data) => {
-        let dataToSend = {
-            search: data,
-        }
-        setLoading(true);
-        try {
-          const leader = await leaderBoardReward(dataToSend);
-          setLoading(false);
-          if (leader.error) {
-            setToasterMessage(leader?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
-        } else {
-            // setToasterMessage('Claim Status Updated Succesfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
-            setLeaderBoardLotteryDetails(leader?.data)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setLoading(false);
-            setToasterColor('danger')
-        }
-         
-    }
-
-
-    const formatNumberDecimal = (value) => {
-        if(value > Math.pow(10,10)){
-        const shortenedValue = parseFloat(value).toExponential(4);
-        return shortenedValue;
-        }
-        else
-        return value;
-      };
-
       const addCashLottery = async () => {
         let dataToSend = 
             {
@@ -254,7 +180,7 @@ const PotPage = () => {
             setShowToaster(true); 
             setToasterColor('success')
             setRedeemModal(false)
-            getLotteryLeaderBoard()
+            setReload(true)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -287,8 +213,8 @@ const PotPage = () => {
             setShowToaster(true); 
             setToasterColor('success')
             setRedeemModal(false)
-            getLotteryLeaderBoard()
-          }
+            setReload(true)
+        }
         } catch (error) {
             setRedeemModal(false);
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -341,7 +267,6 @@ const PotPage = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-        getLotteryLeaderBoard(leaderSearch);
     }
 
     const [redeemModal,setRedeemModal] = useState(false)
@@ -507,7 +432,7 @@ return(
                 </div>
              </div>
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
-               {potType==='REWARDPOT' && <RewardRounds/>}
+               {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
                 
 
             <div className="container">
@@ -546,56 +471,9 @@ return(
                 </div>
               </div>
 
-              <div className="">
-                <div className="searchBox">
-                    <h4>Search Leaderboard</h4>
-                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getLotteryLeaderBoard();}}>
-                       <Form.Control
-                            type="search"
-                            placeholder="Playername#Tagline"
-                            className="me-2 searchBar"
-                            aria-label="Search"
-                            onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
-                        />
-                        <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                        {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
-                    </Form>
-                </div>
-                {leaderBoardLotteryDetails?.length !== 0 ? (<Table responsive>
-                    <thead>
-                    <tr>
-                        <th>Rank</th>
-                        {/* <th>Points</th> */}
-                        <th>ID</th>
-                        <th>In game cash</th>
-                        <th>Wallet Address</th> 
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {/* wallet?.slice(0,5)+'....'+wallet?.slice(-5) */
-                        
-                        }
-                { (leaderBoardLotteryDetails?.map((User,index)=>{
-                    return (
-                    <tr key={User._id} >
-                        <td>{index+1}</td>
-                        <td>{User?.userId?.name}</td>
-                        <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
-                        <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
-                    </tr>)
-                })) }
-                    
-                    {/* <tr className="active">
-                        <td>2</td>
-                        <td>SAM Deph</td>
-                        <td>$ 10,000</td>
-                        <td>5</td> 
-                    </tr>
-                     */}
-                </tbody>
-                </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-
-            </div>
+                {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
+                {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
+               
             </div>
         </div>
         {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}

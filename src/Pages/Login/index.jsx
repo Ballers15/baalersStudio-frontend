@@ -4,6 +4,7 @@ import { useAuth } from '../../Auth/authProvider';
 import Form from "react-bootstrap/Form";
 import './Login.css';
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ const Login = () => {
         }
        
       }
+
 
     return (
         <React.Fragment>
@@ -62,9 +64,9 @@ const Login = () => {
                                 minLength='8'
                                 onChange={({ target }) => setPassword(target.value)}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Password is required (8 character)
-                            </Form.Control.Feedback>
+                            <span className="custom-error-msg">
+                                {auth.passErrorMsg}
+                            </span>
                         </Form.Group>
                        
                         <div>
@@ -84,8 +86,6 @@ const Login = () => {
                         <span>New to Ballers?</span>
                         <Link to='/signup'> <span>Sign Up</span></Link> 
                     </div>
-
-                   
                         {/* <span className="login-signup-tag">New to Ballers?</span>
                     <a href='/signup'> <span className="login-signup-tag-danger">Sign Up</span></a> */}
                     </div>

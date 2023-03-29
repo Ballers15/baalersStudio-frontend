@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import ErrorPage from '../Pages/Error404';
 import Dashboard from '../Pages/Dashboard';
 import AdminDashboard from '../Pages/AdminDashboard';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../Pages/Login';
 import WithoutNav from './WithoutNav';
 import WithNav from './WithNav';
@@ -17,7 +17,6 @@ import Party from '../Pages/Party';
 import { Authenticator } from '../Auth/authenticator'
 import { AuthenticatorAdmin } from '../Auth/authenticatorAdmin'
 import AuthProvider from '../Auth/authProvider';
-import Metamask from '../Components/Metamask'
 import { useState } from 'react'
 import UsersListing from '../Pages/AdminDashboard/UsersList';
 import Signup from '../Pages/Signup/Signup'
@@ -27,7 +26,6 @@ import Privacy from '../Pages/PrivacyPolicy';
 import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
-import LotteryRounds from '../Pages/Pots/lotteryRounds';
 
 
 const NavigationRouter = () => {

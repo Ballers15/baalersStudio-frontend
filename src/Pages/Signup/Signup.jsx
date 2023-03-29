@@ -18,7 +18,6 @@ const Signup = () => {
   const [toaster, showToaster] = useState(false);
   const [response,setResponse] = useState("");
   const [otp, setOtp]=useState("")
-  const [otpResponse,setOtpResponse]=useState("")
   const [loading, setLoading] = useState(false);
   const [resend, setResend] = useState(false);
   const [toasterColor, setToasterColor] = useState('primary')

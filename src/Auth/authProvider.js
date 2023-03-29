@@ -5,6 +5,7 @@ import Loader from "../Components/Loader";
 import Toaster from "../Components/Toaster";
 const AuthContext = createContext(null);
 
+
 export default function AuthProvide({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ export default function AuthProvide({ children }) {
   const navigate = useNavigate()
   const [toasterColor, setToasterColor] = useState('primary')
   const prev = sessionStorage.getItem('before login')
+  
 
   useEffect(() => {
     let _u = localStorage.getItem('_u');
@@ -23,6 +25,7 @@ export default function AuthProvide({ children }) {
       setUser(null);
     }
   }, []) 
+const [passErrorMsg,setPassErrorMsg]= useState(null)
   
   const login = async (data) => {
     setLoading(true);
@@ -30,7 +33,7 @@ export default function AuthProvide({ children }) {
       const login = await userLogin(data);
       setLoading(false);
       if (login.error) {
-      console.log(login)
+      console.log(login,'./././')
       setToasterMessage(login?.message||'Something Went Worng');
       setShowToaster(true);
       setToasterColor('danger')
@@ -54,11 +57,12 @@ export default function AuthProvide({ children }) {
         }
       }
     } catch (error) {
-      console.log('err in login',error)
+      // console.log('err in login',error)
       setToasterMessage(error ||'Something Went Worng during login');
       setShowToaster(true);
       setToasterColor('danger')
       setLoading(false);
+      setPassErrorMsg(error || 'Incorrect Password')
       navigate('/login')
     }
   }
@@ -70,7 +74,7 @@ export default function AuthProvide({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ passErrorMsg, login, logout }}>
       {children}
       {loading ? <Loader /> : null}
       {toaster && <Toaster

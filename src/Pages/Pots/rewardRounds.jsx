@@ -1,36 +1,17 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import img1 from '../../Assest/img/img1.png' 
-import { getRewardRounds, lotteryClaim, lotteryWithdrawl, wonLottery } from "../../Services/User/indexPot";
+import { getRewardRounds, lotteryClaim, lotteryWithdrawl, rewardClaimed, wonLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
 import { claimLottery } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
 
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
-  );
-}
-var settings = {  
-  className: "slider variable-width",
-  dots: false,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 1,
-  // centerMode: true,
-  variableWidth: true, 
-  nextArrow: <SamplePrevArrow />
-};
 
 
-const RewardRounds = () => {
+
+const RewardRounds = (props) => {
 
     const user = localStorage.getItem('_u')
     const walletAddress = localStorage.getItem('_wallet')
@@ -45,18 +26,39 @@ const RewardRounds = () => {
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
-    const [claimedNft,setClaimedNft] = useState('')
+    const [claimed,setClaimed] = useState('')
     const [intervalId, setIntervalId] = useState(null);
+    const [buttonStatus, setButtonStatus] = useState(true)
+
+    function SamplePrevArrow(props) {
+      const { className, style, onClick, buttonStatus } = props;
+      return (
+        <div
+          className={className}
+          style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
+          onClick={onClick}
+        ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
+      );
+    }
+    var settings = {  
+      className: "slider variable-width",
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      // centerMode: true,
+      variableWidth: true, 
+      nextArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>
+    };
 
    const handleSlideChange = (current) => {
     console.log("current",current);
-       const index = current % prevRounds.length;
-       setCurrentSlide(index)
-        setClaimExpiryDate(prevRounds[currentSlide]?.claimExpiryDate)
+       setCurrentSlide(current)
+        setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
     
         if(user !== null && walletAddress !== null) {
-            console.log(prevRounds[currentSlide]);
-            lotteryWon(prevRounds[currentSlide]._id)
+            // console.log(prevRounds[current]);
+            claimedReward(prevRounds[current]._id)
         }
      };
 
@@ -149,8 +151,11 @@ const RewardRounds = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
-            console.log('i am set here getPreviousRounds ',round?.data[0]?.potUserDetails            );
+            // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
+            setParticipated(round?.data[0]?.userRes?.participated)
+            setClaimed(round?.data[0]?.userRes?.claimed)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
+            // console.log(round?.data[currentSlide]?.claimExpiryDate)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -159,7 +164,7 @@ const RewardRounds = () => {
         }
     }
 
-    const lotteryWon = async (id) => {
+    const claimedReward = async (id) => {
         // console.log(id)
         setPotId(id)
         let dataToSend = {
@@ -167,8 +172,9 @@ const RewardRounds = () => {
             potId: id
         }
         setLoading(true);
+        setButtonStatus(false)
         try {
-          const data = await wonLottery(dataToSend);
+          const data = await rewardClaimed(dataToSend);
           setLoading(false);
           if (data.error) {
             setToasterMessage(data?.message||'Something Went Worng');
@@ -177,7 +183,8 @@ const RewardRounds = () => {
             // setToasterMessage('round fetched Successfully');
             // setShowToaster(true); 
             setParticipated(data?.data?.participated)
-            setClaimedNft(data?.data?.claimed)
+            setClaimed(data?.data?.claimed)
+            setButtonStatus(true)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -268,7 +275,6 @@ const RewardRounds = () => {
             setToasterMessage('lotery details');
             setShowToaster(true); 
             console.log('after withdraw',data)
-            // getLotteryLeaderBoard();
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
@@ -278,12 +284,11 @@ const RewardRounds = () => {
     }
 
 return(
-    <>
-                <div className="finishSlider">
+                  <div className="finishSlider">
                     <div className="row">
                         <div className="col-sm-12 position-relative">
 
-                        {prevRounds?.length ? (<Slider {...settings} beforeChange={handleSlideChange}> 
+                        {prevRounds?.length ? (<Slider {...settings} afterChange={handleSlideChange}> 
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
@@ -296,7 +301,7 @@ return(
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row">
                                           {round?.potUserDetails?.map((user)=>(
-                                            <div className="col-sm-12 text-center">
+                                            <div className="col-sm-12 text-center" key={user?._id}>
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.name} </p>
                                             </div>
@@ -310,9 +315,28 @@ return(
                            )}                            
                             </Slider>) : <span class='no data'></span>}
                         </div>
-                    </div>        
+                    </div>    
+                    {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
+                        <div className="playBtn">
+                        {claimExpiryDate !== '' && claimed === false && participated === true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
+                        {claimExpiryDate !== '' && claimed === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {claimExpiryDate !== '' && claimed === false && participated === false && (<></>)}
+                        </div>  
+
+                        <div className="expDate">
+                            { claimExpiryDate!=='' && participated === true && claimed === false &&
+                                <><p className="mb-0">Expires in </p>
+                                <div className="claimExpire ps-2">
+                                <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>
+                                <span className="countFont">{claimCountdownTime.countdownMinutes} <sub>M </sub></span>
+                                <span className="countFont">{claimCountdownTime.countdownSeconds} <sub>S</sub></span>
+                                </div>
+                            </>
+                                }
+                        </div>                                
+                    </div>) :  <span class='no data'></span>}          
+
                 </div>
-              </>
             )
         }
 
