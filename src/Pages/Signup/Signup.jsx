@@ -4,6 +4,7 @@ import { Col, Row, Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import Loader from '../../Components/Loader' 
 import Toaster from '../../Components/Toaster'
+import OtpInput from 'react-otp-input';
 import { checkUserName, registerUser, userLogin, userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
 
@@ -337,16 +338,14 @@ const Signup = () => {
           {response?.status === 200 &&   
             <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
                <h2 className="login-head">Verify  <br/>code</h2>
-               <p>No worries, enter your mail ID & we will send you a reset code</p>
-              <Row className="mb-3">
-                <Form.Group >
-                  <Form.Label className="small-lable">Enter 6 digit OTP received on email</Form.Label>
-                  <Form.Control className='otp-input' id='partitioned' required type="number" value={otp} onChange={({ target }) => setOtp(target.value)}  maxLength='6'></Form.Control>
-                  <Form.Control.Feedback type="invalid"> <span> Enter OTP</span> </Form.Control.Feedback>
-                  <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Incorrect OTP'}</span> </Form.Control.Feedback>
-                </Form.Group>
-                
-              </Row>
+               <p>A 6-digit code has been sent to your mail ID.
+                Kindly enter it to proceed.</p>
+               <OtpInput
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={6} 
+                  renderInput={(props) => <input {...props} />}
+                />             
               <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
                 {/* <div> <button type="submit"  className="signup-submit-button " onClick={handleSubmitOtp} > verify </button> </div> */}
                 <div className='alreadyAcc'>

@@ -73,6 +73,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
+    letter-spacing: 0.2em;
+    color: #ECE8E1;
 }
 .otpVerify p{
     font-weight: 400;
@@ -98,6 +100,19 @@
   .otp-input{
     background-color: #FFFFFF;
   }
+  .otpVerify input {
+    width: 44px !important;
+    height: 44px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 4px; 
+    color: #ECE8E1;
+    font-weight: 400;
+    font-size: 30px; 
+    font-family: "Valorant"; 
+    padding-top: 7px;
+    margin-right: 23px;
+}
   @media (max-width: 850px) {
      
     .signup-box { 
