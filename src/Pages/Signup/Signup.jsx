@@ -96,7 +96,7 @@ const Signup = () => {
   
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
-    if (form.checkValidity() === false) {
+    if (form.checkValidity() === true) {
       console.log('validity')
     
     
@@ -180,8 +180,9 @@ const Signup = () => {
     e.stopPropagation()
     e.preventDefault()
     setValidated(true);
-
-    if(!otp){
+    const form = e.currentTarget;
+    console.log('otp',otp);
+    if(otp){
     let dataToSend= {
       email: userDetails.email,
       otp:otp,
@@ -189,6 +190,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
+      console.log('HI---');
       let otp = (await verifyOtp(dataToSend))
       setLoading(false);
       if (otp.error) {
@@ -211,7 +213,8 @@ const Signup = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-}     
+  }    
+    
   }
 
   const signup = async () => {

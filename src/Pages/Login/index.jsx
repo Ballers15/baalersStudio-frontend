@@ -20,14 +20,15 @@ const Login = () => {
         e.preventDefault();
        
         const form = e.currentTarget;
-        console.log(form.checkValidity())
-        if (form.checkValidity() === false) {
+        console.log("handlee",form.checkValidity())
+        if (form.checkValidity() === true) {
             
             if (email && password && auth.passErrorMsg === null ) {
             let dataToSend = {
                 email: email,
                 password:password
             }
+            console.log("HI IAM INSIDE THIS");
             auth.login(dataToSend)
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
@@ -89,7 +90,7 @@ const Login = () => {
                                 minLength='8'
                                 onChange={(e)=>{hanldePassword(e)}}
                             />
-                <Form.Control.Feedback type="invalid">{auth.passErrorMsg ? '' : 'Password is required (8 character)'}</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{auth.passErrorMsg ? '' : 'Password is required '}</Form.Control.Feedback>
                             <span className="custom-error-msg">
                                 {auth.passErrorMsg}
                             </span>
