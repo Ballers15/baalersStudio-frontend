@@ -55,3 +55,5 @@ export function leaderBoardReward(data){
 export function rewardClaimed(data) {
   return (axiosInstance.get(url + 'user/v1/check/user/claimed/reward',{params: data}).then(res => res.data))
 }
+
+

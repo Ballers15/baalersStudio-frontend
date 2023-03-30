@@ -4,8 +4,9 @@ import img1 from '../../Assest/img/img1.png'
 import { getPrevRounds, lotteryClaim, lotteryWithdrawl, wonLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
-import { claimLottery } from "../../Components/Smart Contract/smartContractHandler";
+import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
+import { withdrawLottery } from "./withdrawlLottery";
 
 
 
@@ -205,9 +206,11 @@ const LotteryRounds = (props) => {
             walletAddress: localStorage.getItem('_wallet'),
             potId: potId
         }
+        console.log("")
         setLoading(true);
         try {
           const data = await lotteryClaim(dataToSend);
+          console.log("data got isss hash",data);
           setLoading(false);
           if (data.error) {
             setToasterMessage(data?.message||'Something Went Worng');
@@ -229,11 +232,16 @@ const LotteryRounds = (props) => {
             tokenId:data?.potDetails?.assetDetails?.ticker,
             quantity:data?.potDetails?.rewardTokenAmount,
             nonce:data?.transactionDetails?.nonce,
-            signature:data?.transactionDetails.signature
+            signature:data?.transactionDetails.signature,
+            potId: data?.potDetails?._id,   
+                walletAddress: localStorage.getItem('_wallet'),
+                withdrawlId: data?.transactionDetails?._id
         }
         setLoading(true);
         try {
+          console.log("datatosend",dataToSend);
           const dataNft = await claimLottery(dataToSend);
+
           setLoading(false);
           if (dataNft.error) {
             setToasterMessage(dataNft?.message||'Something Went Worng');
@@ -248,16 +256,16 @@ const LotteryRounds = (props) => {
             // console.log(dataNft?.transactionHash)
             // console.log(data?.transactionDetails?._id)
             // console.log('---------------')
-            let withdrawlObject = {
-                potId: data?.potDetails?._id,   
-                walletAddress: localStorage.getItem('_wallet'),
-                txnHash:dataNft?.transactionHash ,
-                withdrawlId: data?.transactionDetails?._id
-            }
+            // let withdrawlObject = {
+              // walletAddress: localStorage.getItem('_wallet'),
+              // withdrawlId: data?.transactionDetails?._id
+            //     txnHash:dataNft?.transactionHash ,
+            //     withdrawlId: data?.transactionDetails?._id
+            // }
             
-            console.log('claim nft dataTosend',withdrawlObject)
+            // console.log('claim nft dataTosend',withdrawlObject)
 
-            withdrawLottery(withdrawlObject)
+            // withdrawLottery(withdrawlObject)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -267,28 +275,28 @@ const LotteryRounds = (props) => {
     }
 
 
-    const withdrawLottery = async (dataToSend) => {
-        // console.log('withdrawlottery', dataToSend)
+    // const withdrawLottery = async (dataToSend) => {
+    //     // console.log('withdrawlottery', dataToSend)
       
-        setLoading(true);
-        try {
-          const data = await lotteryWithdrawl(dataToSend);
-          setLoading(false);
-          if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng in withdrawl');
-            setShowToaster(true);
-          } else {
-            setToasterMessage('lotery details');
-            setShowToaster(true); 
-            console.log('after withdraw response',data)
-            // getLotteryLeaderBoard();
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
+    //     setLoading(true);
+    //     try {
+    //       const data = await lotteryWithdrawl(dataToSend);
+    //       setLoading(false);
+    //       if (data.error) {
+    //         setToasterMessage(data?.message||'Something Went Worng in withdrawl');
+    //         setShowToaster(true);
+    //       } else {
+    //         setToasterMessage('lotery details');
+    //         setShowToaster(true); 
+    //         console.log('after withdraw response',data)
+    //         // getLotteryLeaderBoard();
+    //       }
+    //     } catch (error) {
+    //         setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
+    //         setShowToaster(true);
+    //         setLoading(false);
+    //     }
+    // }
 
 return(
       <>
