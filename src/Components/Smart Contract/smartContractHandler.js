@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
+import { withdrawLottery } from '../../Pages/Pots/withdrawlLottery';
 
 import {
   claimTokenAbi ,
@@ -55,11 +56,42 @@ let contractData={
   signature:data.signature,  //transactionDetails.signature
 }
 
-// console.log(contractData)
+
+let withdrawlObject = {
+  walletAddress: localStorage.getItem('_wallet'),
+  potId:data?.potId,
+  withdrawlId: data?.withdrawlId,
+}
+
+
+console.log("withdrawlObject",withdrawlObject)
 try{
-  let claim=await claimContract.methods.claimNFT(contractData.tokenId,contractData.quantity,contractData.nonce,contractData.signature).send({ from: walletAddress });
-  console.log(claim);
-  return claim;
+   claimContract.methods.claimNFT(contractData.tokenId,contractData.quantity,contractData.nonce,contractData.signature).send({ from: walletAddress })
+  .once('transactionHash',  function(hash){
+    console.log(hash);
+   let obj= {transactionHash:hash}
+    // txnHash:dataNft?.transactionHash ,
+    withdrawlObject.txnHash=hash;
+   withdrawLottery(withdrawlObject)
+   console.log(obj);
+   
+   })
+  .once('receipt', function(receipt){
+    console.log('receipt before conf')
+    withdrawLottery(withdrawlObject)
+
+   })
+  // .on('confirmation', function(confNumber, receipt, latestBlockHash){
+  //   console.log('confirmation',receipt);
+  //  })
+  // .on('error', function(error){ })
+  // .then(function(receipt){
+  //   console.log("receipt",receipt);
+  //   return receipt;
+  //     // will be fired once the receipt is mined
+  // });
+  // console.log(claim);
+  // return claim;
 }
 
 catch(err){
