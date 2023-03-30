@@ -10,7 +10,6 @@ import Slider from "react-slick";
 
 
 
-
 const LotteryRounds = (props) => {
 
     const user = localStorage.getItem('_u')
@@ -160,6 +159,8 @@ const LotteryRounds = (props) => {
             // console.log('prev rounds',round?.data[0])
             setUserWon(round?.data[0]?.userRes?.lotteryWon)
             setParticipated(round?.data[0]?.userRes?.participated)
+            setPotId(round?.data[0]?._id)
+
           }
         } catch (error) {
             setToasterMessage(error ||'Something Went Worng in preious rounds');
@@ -309,7 +310,7 @@ return(
                                         <div className="row">
                                             <div className="col-sm-12 text-center">
                                             <img src={img1} alt="" />
-                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.name} </p>
+                                            <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.userName} </p>
                                             </div>
                                         </div>
                                     </div>

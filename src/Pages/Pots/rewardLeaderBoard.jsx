@@ -3,6 +3,7 @@ import './poolpots.css'
 import { Table, Button, Form } from 'react-bootstrap';
 import {  leaderBoardReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
+import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 
    
 const LeaderBoardReward = (props) => {
@@ -62,9 +63,9 @@ const LeaderBoardReward = (props) => {
       };
 
     
-return(
+return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : '' }
               <div className="">
-                <div className="searchBox">
+            {leaderBoardDetails.length ? <>  <div className="searchBox">
                     <h4>Search Leaderboard</h4>
                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
                        <Form.Control
@@ -105,8 +106,9 @@ return(
                     
                 </tbody>
                 </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-
+                </> : '' }
             </div>
+            </>
     )
     
 }

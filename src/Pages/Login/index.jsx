@@ -3,23 +3,27 @@ import { useState } from "react";
 import { useAuth } from '../../Auth/authProvider';
 import Form from "react-bootstrap/Form";
 import './Login.css';
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validated, setValidated] = useState(false);
-    const navigate = useNavigate();
+    const [emailErrorMsg,setEmailErrorMsg]= useState(null)
     
     const auth = useAuth()
+    
     const handleLogin = (e) => {
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-
-        if (email && password) {
+       
+        const form = e.currentTarget;
+        console.log(form.checkValidity())
+        if (form.checkValidity() === false) {
+            
+            if (email && password && auth.passErrorMsg === null ) {
             let dataToSend = {
                 email: email,
                 password:password
@@ -28,9 +32,32 @@ const Login = () => {
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
+    }
        
       }
+      const emailValidation = (e) => {
+        setEmail(e.target.value)
+        // console.log(userDetails.email)
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
+        const tld = e.target.value?.split('.')[1]?.length
+        if(e.target.value !== ''){
+        if (regex.test(e.target.value) === false || tld <= 1) {
+          setEmailErrorMsg('Valid E-mail is required !')
+        }
+        else{
+          setEmailErrorMsg(null)
+        }
+      }
+      else{
+        setEmailErrorMsg('Email is  required !')
+      }
+      }
 
+      const hanldePassword = (e)  =>{
+        setPassword(e.target.value);
+        auth.setPassErrorMsg(null)
+      }
+    
 
     return (
         <React.Fragment>
@@ -47,13 +74,11 @@ const Login = () => {
                                 
                                 placeholder="Email"
                                 value={email}
-                                onChange={({ target }) => setEmail(target.value)}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Valid E-mail is required
-                            </Form.Control.Feedback>
-                        </Form.Group>
-
+                                onChange={(e)=>{emailValidation(e)}} />
+                         
+                             <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
+                                <span className="custom-error-msg"> {emailErrorMsg} </span>
+        </Form.Group>
                         <Form.Group className="mt-3" >
                             
                             <Form.Control
@@ -62,8 +87,9 @@ const Login = () => {
                                 placeholder="Password"
                                 value={password}
                                 minLength='8'
-                                onChange={({ target }) => setPassword(target.value)}
+                                onChange={(e)=>{hanldePassword(e)}}
                             />
+                <Form.Control.Feedback type="invalid">{auth.passErrorMsg ? '' : 'Password is required (8 character)'}</Form.Control.Feedback>
                             <span className="custom-error-msg">
                                 {auth.passErrorMsg}
                             </span>
@@ -71,7 +97,7 @@ const Login = () => {
                        
                         <div>
                         <div className="playBtn">
-                            <button type="submit"  onClick={handleLogin}>
+                            <button type="submit">
                                 <span></span>SIGN IN
                             </button>
                         </div>

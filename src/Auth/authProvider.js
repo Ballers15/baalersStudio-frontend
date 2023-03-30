@@ -3,8 +3,9 @@ import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
 import Loader from "../Components/Loader";
 import Toaster from "../Components/Toaster";
-const AuthContext = createContext(null);
 
+
+const AuthContext = createContext(null);
 
 export default function AuthProvide({ children }) {
   const [user, setUser] = useState(null);
@@ -74,7 +75,7 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   }
 
   return (
-    <AuthContext.Provider value={{ passErrorMsg, login, logout }}>
+    <AuthContext.Provider value={{ passErrorMsg, setPassErrorMsg, login, logout }}>
       {children}
       {loading ? <Loader /> : null}
       {toaster && <Toaster

@@ -16,6 +16,7 @@ import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
+import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
    
 const PotPage = () => {
     $(document).ready(function(){
@@ -431,7 +432,7 @@ return(
                 
 
             <div className="container">
-                <div className="rotateDiv secPaddingY">
+                {/* <div className="rotateDiv secPaddingY">
                 <div className="marquee">
                   <div className="marquee-item" data-dir="right">
                     <div className="marquee-row">
@@ -464,7 +465,7 @@ return(
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
                 {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           

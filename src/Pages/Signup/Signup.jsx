@@ -32,29 +32,32 @@ const Signup = () => {
     }
   )
 
-  
   const emailValidation = (e) => {
+    console.log("hi i am called");
     setUserDetails({ ...userDetails,email:e.target.value})
     // console.log(userDetails.email)
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
     const tld = e.target.value?.split('.')[1]?.length
-    
-    if (regex.test(e.target.value) === false && e.target.value.length || tld <= 1 && e.target.value.length) {
-      setEmailErrorMsg('Enter a Valid Email !')
-      return false
-    }
-    else if(e.target.value === ''){
-      setEmailErrorMsg('Email is required')
+    if(e.target.value !== ''){
+    if (regex.test(e.target.value) === false || tld <= 1) {
+      setEmailErrorMsg('Valid E-mail is required !')
     }
     else{
       setEmailErrorMsg(null)
     }
   }
+  else{
+    setEmailErrorMsg('Email is  required !')
+  }
+  }
 
-  const confirmPassword = (e) =>{
+  const confirmRepeatPassword = (e) =>{
     setUserDetails({ ...userDetails,repeat:e.target.value})
+    // console.log(e.target.value,'//',userDetails.password)
+    
     if(e.target.value===userDetails.password)
     {
+      // console.log('inside if detting null')
       setPassErrorMsg(null)
       // return true;
     }
@@ -62,15 +65,42 @@ const Signup = () => {
       setPassErrorMsg('Passwords do not match')
       // return false;
     }
+    // console.log('end ',passErrorMsg)
   }
+  const confirmPassword = (e) =>{
+
+    setUserDetails({ ...userDetails,password:e.target.value})
+    // console.log(e.target.value,'//',userDetails.repeat)
+    
+    if(e.target.value===userDetails.repeat)
+    {
+      // console.log('inside if detting null')
+      setPassErrorMsg(null)
+      // return true;
+    }
+    else{
+      setPassErrorMsg('Passwords do not match')
+      // return false;
+    }
+    // console.log('end ',passErrorMsg)
+  }
+
 
   const handleSubmit = async (e) => {
     setValidated(true);
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-
-    if (userDetails.email && userDetails.password && passErrorMsg === null && errorMsg === null) {
+    // emailValidation(e);
+    
+  
+   const form = e.currentTarget;
+    // console.log(form.checkValidity(),form)
+    if (form.checkValidity() === false) {
+      console.log('validity')
+    
+    
+    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat) {
       let dataToSend = {
           email: userDetails.email,
           password:userDetails.password,
@@ -107,7 +137,7 @@ const Signup = () => {
     } else {
       console.log('<<<<---Form is invalid --->>>>')
     }
-     
+  }
   }
 
   const checkUsername = async () => {
@@ -145,11 +175,13 @@ const Signup = () => {
   }
 
   const handleSubmitOtp = async (e) =>{
+    
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
     setValidated(true);
 
+    if(!otp){
     let dataToSend= {
       email: userDetails.email,
       otp:otp,
@@ -179,7 +211,7 @@ const Signup = () => {
       setToasterColor('danger')
       setLoading(false);
     }
-     
+}     
   }
 
   const signup = async () => {
@@ -279,44 +311,30 @@ const Signup = () => {
         {response?.status !== 200 &&   
         <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <h2 className="login-head">CREATE <br/>ACCOUNT</h2>
-            {/* <Row className="mb-3"> */}
-              {/* <Form.Label>All fields marked with an asterisk(*) are mandatory</Form.Label> */}
-              {/* <Form.Group  className='pb-4'>
-                <Form.Label className="small-lable">Username</Form.Label>
-                <Form.Control required type="text" value={userDetails.userName} onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})}  ></Form.Control>
-                <Form.Control.Feedback type="invalid">username is required !!</Form.Control.Feedback>
-              </Form.Group> */}
 
               <Form.Group className='pb-4' >
-                {/* <Form.Label className="small-lable">First Name</Form.Label> */}
                 <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} ></Form.Control>
-                <Form.Control.Feedback type="invalid">User name is required !!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
               </Form.Group>
 
-              {/* <Form.Group className='pb-4'>
-                <Form.Label className="small-lable">Last name </Form.Label>
-                <Form.Control required type="text" onChange={({ target }) => setUserDetails({ ...userDetails,lastName:target.value})} value={userDetails.lastName} ></Form.Control>
-                <Form.Control.Feedback type="invalid">last Name is required !!</Form.Control.Feedback>
-              </Form.Group> */}
-
               <Form.Group className='pb-4'>
-                {/* <Form.Label className="small-lable">email </Form.Label> */}
                 <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e) } value={userDetails.email} ></Form.Control>
-                <> <span className="custom-error-msg"> {emailErrorMsg} </span></>
-                {/* <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback> */}
+                <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
+                <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
            
               <Form.Group className='pb-4'>
-                {/* <Form.Label className="small-lable">Password</Form.Label> */}
-                <Form.Control required type="password"  placeholder="PASSWORD" onChange={({ target }) => setUserDetails({ ...userDetails,password:target.value})} value={userDetails.password}  minLength='8' ></Form.Control>
+                <Form.Control required type="password"  placeholder="PASSWORD" onChange={(e) => confirmPassword(e)}  value={userDetails.password}  minLength='8' ></Form.Control>
                 <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className='pb-4'>
-                {/* <Form.Label className="small-lable">Confirm Password</Form.Label> */}
-                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmPassword(e)} value={userDetails.repeat}  minLength='8' ></Form.Control>
-                <Form.Control.Feedback type="invalid">Password do not match</Form.Control.Feedback>
-                <span className="custom-error-msg"> {passErrorMsg}</span>
+                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmRepeatPassword(e)} value={userDetails.repeat} >
+
+                </Form.Control>
+                <span className="custom-error-msg">{passErrorMsg} </span>
+
+                <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Password do not match'}</Form.Control.Feedback>
               </Form.Group>
 
               {['checkbox'].map((type) => (
@@ -325,11 +343,10 @@ const Signup = () => {
                                 inline
                                 label="Agree to terms & conditions."
                                 name="group1"
-                                type={type} 
-                            />
+                                type={type} />
                             </div>
                         ))}
-              <div className="playBtn">  <button type="submit"  onClick={handleSubmit} > <span></span>SIGN Up  </button> </div>
+              <div className="playBtn">  <button type="submit"   > <span></span>SIGN Up  </button> </div>
 
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
@@ -349,7 +366,7 @@ const Signup = () => {
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
                 />      
-                <span className="custom-error-msg">{errorMsg}</span>       
+                <span className="invalid-feedback">{errorMsg}</span>       
               <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
                 <div className='alreadyAcc'>
                  <span>Didn’t get the code?</span>

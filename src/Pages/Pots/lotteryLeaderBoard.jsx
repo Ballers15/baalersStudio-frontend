@@ -3,6 +3,7 @@ import './poolpots.css'
 import { Table, Button, Form } from 'react-bootstrap';
 import { leaderBoardLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
+import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 
    
 const LeaderBoardLottery = (props) => {
@@ -65,9 +66,9 @@ const LeaderBoardLottery = (props) => {
       };
 
     
-return(
+return(  <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : '' }
               <div className="">
-                <div className="searchBox">
+              {leaderBoardDetails.length ? <> <div className="searchBox">
                     <h4>Search Leaderboard</h4>
                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getLotteryLeaderBoard();}}>
                        <Form.Control
@@ -81,7 +82,7 @@ return(
                         {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
                     </Form>
                 </div>
-                {leaderBoardDetails?.length !== 0 ? (<Table responsive>
+                <Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
@@ -97,16 +98,17 @@ return(
                     return (
                     <tr key={User._id} >
                         <td>{index+1}</td>
-                        <td>{User?.userId?.name}</td>
+                        <td>{User?.userId?.userName}</td>
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
                         <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
                     </tr>)
                 })) }
                     
                 </tbody>
-                </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-
+                </Table> 
+                </> : '' }
             </div>
+            </>
     )
     
 }
