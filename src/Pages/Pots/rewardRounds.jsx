@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import img1 from '../../Assest/img/img1.png' 
-import { getRewardRounds, lotteryClaim, lotteryWithdrawl, rewardClaimed, wonLottery } from "../../Services/User/indexPot";
+import { getRewardRounds, lotteryClaim, lotteryWithdrawl, isRewardClaimed, rewardClaim } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
-import { claimLottery } from "../../Components/Smart Contract/smartContractHandler";
+import {  claimToken } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
 
 
@@ -97,7 +97,7 @@ const RewardRounds = (props) => {
           if (remainingDayTime < 0 ) {
             clearInterval(id);
             setIntervalId(null);    
-             console.log('i am set here claimCountdownTimer')
+            //  console.log('i am set here claimCountdownTimer')
              setClaimExpiryDate('');
             }
      
@@ -136,6 +136,10 @@ const RewardRounds = (props) => {
         }
     },[claimExpiryDate]);
 
+    useEffect(() => {
+      getPreviousRounds()  
+  },[ localStorage.getItem('_wallet'),props.previous]);
+
     const getPreviousRounds = async () => {
       let dataToSend = {
         walletAddress: localStorage.getItem('_wallet'),
@@ -156,6 +160,7 @@ const RewardRounds = (props) => {
             setClaimed(round?.data[0]?.userRes?.claimed)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
+            setPotId(round?.data[0]?._id)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -174,7 +179,7 @@ const RewardRounds = (props) => {
         setLoading(true);
         setButtonStatus(false)
         try {
-          const data = await rewardClaimed(dataToSend);
+          const data = await isRewardClaimed(dataToSend);
           setLoading(false);
           if (data.error) {
             setToasterMessage(data?.message||'Something Went Worng');
@@ -201,7 +206,7 @@ const RewardRounds = (props) => {
         }
         setLoading(true);
         try {
-          const data = await lotteryClaim(dataToSend);
+          const data = await rewardClaim(dataToSend);
           setLoading(false);
           if (data.error) {
             setToasterMessage(data?.message||'Something Went Worng');
@@ -210,6 +215,7 @@ const RewardRounds = (props) => {
             setToasterMessage('round fetched Successfully');
             setShowToaster(true); 
             claimTransaction(data?.data)
+            // console.log('create calim',data?.data)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -220,38 +226,41 @@ const RewardRounds = (props) => {
 
     const claimTransaction = async (data) => {
         let dataToSend = {
-            tokenId:data?.potDetails?.assetDetails?.ticker,
-            quantity:data?.potDetails?.rewardTokenAmount,
+            contractAddress:data?.potDetails?.assetDetails?.contractAddress,
+            amount:data?.transactionDetails?.rewardedTokenAmount,
             nonce:data?.transactionDetails?.nonce,
-            signature:data?.transactionDetails.signature
+            signature:data?.transactionDetails.signature,
+            potId: data?.potDetails?._id,   
+            withdrawlId: data?.transactionDetails?._id
         }
+        console.log('calim transaction',dataToSend)
         setLoading(true);
         try {
-          const dataNft = await claimLottery(dataToSend);
+          const dataToken = await claimToken(dataToSend);
           setLoading(false);
-          if (dataNft.error) {
-            setToasterMessage(dataNft?.message||'Something Went Worng');
+          if (dataToken.error) {
+            setToasterMessage(dataToken?.message||'Something Went Worng');
             setShowToaster(true);
           } else {
             setToasterMessage('round fetched Successfully');
             setShowToaster(true); 
-            console.log('claim lottery',dataNft)
-            console.log('====================')
-            console.log(data?.potDetails?._id)
-            console.log(localStorage.getItem('_wallet'))
-            console.log(dataNft?.transactionHash)
-            console.log(data?.transactionDetails?._id)
-            console.log('---------------')
-            let withdrawlObject = {
-                potId: data?.potDetails?._id,   
-                walletAddress: localStorage.getItem('_wallet'),
-                txnHash:dataNft?.transactionHash ,
-                withdrawlId: data?.transactionDetails?._id
-            }
+            // console.log('claim token',dataToken)
+            // console.log('====================')
+            // console.log(data?.potDetails?._id)
+            // console.log(localStorage.getItem('_wallet'))
+            // console.log(dataToken?.transactionHash)
+            // console.log(data?.transactionDetails?._id)
+            // console.log('---------------')
+            // let withdrawlObject = {
+            //     potId: data?.potDetails?._id,   
+            //     walletAddress: localStorage.getItem('_wallet'),
+            //     txnHash:dataToken?.transactionHash ,
+            //     withdrawlId: data?.transactionDetails?._id
+            // }
             
-            console.log('claim nft',withdrawlObject)
+            // console.log('claim token',withdrawlObject)
 
-            withdrawLottery(withdrawlObject)
+            // withdrawLottery(withdrawlObject)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -260,28 +269,6 @@ const RewardRounds = (props) => {
         }
     }
 
-
-    const withdrawLottery = async (dataToSend) => {
-        console.log('withdrawlottery', dataToSend)
-      
-        setLoading(true);
-        try {
-          const data = await lotteryWithdrawl(dataToSend);
-          setLoading(false);
-          if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng in withdrawl');
-            setShowToaster(true);
-          } else {
-            setToasterMessage('lotery details');
-            setShowToaster(true); 
-            console.log('after withdraw',data)
-          }
-        } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
-            setShowToaster(true);
-            setLoading(false);
-        }
-    }
 
 return(
                   <div className="finishSlider">
@@ -303,7 +290,7 @@ return(
                                           {round?.potUserDetails?.map((user)=>(
                                             <div className="col-sm-4 text-center" key={user?._id}>
                                             <img src={img1} alt="" />
-                                            <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.name} </p>
+                                            <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.userName} </p>
                                             </div>
                                           ))}
                                             

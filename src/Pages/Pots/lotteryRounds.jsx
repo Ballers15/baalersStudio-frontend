@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import img1 from '../../Assest/img/img1.png' 
-import { getPrevRounds, lotteryClaim, lotteryWithdrawl, wonLottery } from "../../Services/User/indexPot";
+import { getPrevRounds, lotteryClaim, wonLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
-import { claimLottery, withdrawl } from "../../Components/Smart Contract/smartContractHandler";
+import { claimNft } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
-import { withdrawLottery } from "./withdrawlLottery";
 
 
 
@@ -234,13 +233,12 @@ const LotteryRounds = (props) => {
             nonce:data?.transactionDetails?.nonce,
             signature:data?.transactionDetails.signature,
             potId: data?.potDetails?._id,   
-                walletAddress: localStorage.getItem('_wallet'),
-                withdrawlId: data?.transactionDetails?._id
+            withdrawlId: data?.transactionDetails?._id
         }
         setLoading(true);
         try {
           console.log("datatosend",dataToSend);
-          const dataNft = await claimLottery(dataToSend);
+          const dataNft = await claimNft(dataToSend);
 
           setLoading(false);
           if (dataNft.error) {
@@ -274,29 +272,6 @@ const LotteryRounds = (props) => {
         }
     }
 
-
-    // const withdrawLottery = async (dataToSend) => {
-    //     // console.log('withdrawlottery', dataToSend)
-      
-    //     setLoading(true);
-    //     try {
-    //       const data = await lotteryWithdrawl(dataToSend);
-    //       setLoading(false);
-    //       if (data.error) {
-    //         setToasterMessage(data?.message||'Something Went Worng in withdrawl');
-    //         setShowToaster(true);
-    //       } else {
-    //         setToasterMessage('lotery details');
-    //         setShowToaster(true); 
-    //         console.log('after withdraw response',data)
-    //         // getLotteryLeaderBoard();
-    //       }
-    //     } catch (error) {
-    //         setToasterMessage(error?.response?.data?.message||'Something Went Worng in withdrawl2');
-    //         setShowToaster(true);
-    //         setLoading(false);
-    //     }
-    // }
 
 return(
       <>

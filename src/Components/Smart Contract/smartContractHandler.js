@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import { withdrawLottery } from '../../Pages/Pots/withdrawlLottery';
+import { withdrawLottery, withdrawReward } from '../../Pages/Pots/withdrawlLottery';
 
 import {
   claimTokenAbi ,
@@ -38,16 +38,18 @@ async function getTokenContract() {
   let tokenClaimContract = new web3.eth.Contract(claimTokenAbi, address);
   return tokenClaimContract;
 }
+async function getDecimals(){
+  return 18;
+}
 // export const [withdrawl,setWithdrawl] = useState('')
 export let withdrawl = ''
 
-export const claimLottery=async(data)=>{
+export const claimNft=async(data)=>{
 //  console.log(data)
   let walletAddress = localStorage.getItem('_wallet');
  // get wallet address from localstorage and pass in var
 
   const claimContract=await getNftContract();
-
 
 let contractData={
   tokenId:data.tokenId,   //claimData.potDetails.ticker
@@ -62,7 +64,6 @@ let withdrawlObject = {
   potId:data?.potId,
   withdrawlId: data?.withdrawlId,
 }
-
 
 console.log("withdrawlObject",withdrawlObject)
 try{
@@ -103,21 +104,52 @@ catch(err){
 
 
 export const claimToken=async(data)=>{
-  let walletAddress = "";
+  let walletAddress = localStorage.getItem('_wallet');
  // get wallet address from localstorage and pass in var
  
   const claimContract=await getTokenContract();
+  // const getDecimals=await getDecimals();
 
 
 let contractData={
-  token:data.token,
-  amount:data.amount,
+  token:data.contractAddress,
+  amount:((data.amount)*Math.pow(10,18)).toString(),
   nonce:data.nonce,
   signature:data.signature,
+  
 }
 
-let claim=await claimContract.methods.claimNFT(contractData.token,contractData.nonce,contractData.amount,contractData.signature).send({ from: walletAddress });
-console.log(claim);
+let withdrawlObject = {
+  walletAddress: localStorage.getItem('_wallet'),
+  potId:data?.potId,
+  withdrawlId: data?.withdrawlId,
+}
 
+
+try{
+  console.log("withdrawlObject",withdrawlObject)
+  console.log('contract data',contractData);
+  console.log('walll',walletAddress);
+
+ claimContract.methods.claimToken(contractData.token,contractData.nonce,contractData.amount,contractData.signature).send({ from: walletAddress })
+ .once('transactionHash',  function(hash){
+  console.log(hash);
+ let obj= {transactionHash:hash}
+  // txnHash:dataNft?.transactionHash ,
+  withdrawlObject.txnHash=hash;
+
+  withdrawReward(withdrawlObject)
+ console.log(obj);
+ 
+ })
+.once('receipt', function(receipt){
+  console.log('receipt before conf')
+  withdrawReward(withdrawlObject)
+
+ })
+}
+catch(err){
+  console.log(err);
+}
 /** hit api from here  */
 } 

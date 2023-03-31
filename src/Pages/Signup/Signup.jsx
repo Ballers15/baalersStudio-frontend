@@ -178,13 +178,12 @@ const registerUsers = async () => {
   }
 
   const handleSubmitOtp = async (e) =>{
-    
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
     setValidated(true);
 
-    if(otp){
+    if(otp.length === 6){
     let dataToSend= {
       email: userDetails.email,
       otp:otp,
