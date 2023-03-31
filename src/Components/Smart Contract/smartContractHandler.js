@@ -19,7 +19,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 /** move this to enviroment in future */
 let nftClaimContractAddress="0xd8E554EF17FaBfDa316B564518FBcf2071E961E3";
-let tokenClaimContractAddress="";
+let tokenClaimContractAddress="0xFc26a71b8087509BC4dB32aBcA39145BDBf9d8A1";
 
 /**
  * @returns  nft claim contract instance
