@@ -72,9 +72,7 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
     console.log("hiii logout");
     setUser(null);
     localStorage.clear(); 
-    navigate('/login')
-
-    // navigate(prev);
+    navigate('/login');
   }
 
   return (
