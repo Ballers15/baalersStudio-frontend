@@ -71,7 +71,7 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   const logout =  () => {
     setUser(null);
     localStorage.clear(); 
-    navigate('/login');
+    navigate(prev);
   }
 
   return (

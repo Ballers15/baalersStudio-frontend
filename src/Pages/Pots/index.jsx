@@ -413,8 +413,10 @@ return(
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
-                                    {expiryTime!=='' ? ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>) :
-                                        (<a className="disabled"><span></span> REDEEM NOW</a>)}
+                                    {expiryTime!=='' && user!==null && walletAddress!==null && ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>)}
+                                    {expiryTime!=='' && user!==null && walletAddress===null && ( <a onClick={handleRedeemModal}><span></span> Connect Wallet</a>)}
+                                    {expiryTime!=='' && user===null  && ( <a onClick={handleRedeemModal}><span></span> login</a>)}
+                                        {expiryTime === '' && <a className="disabled"><span></span> POT EXPIRED</a>}
                                     </div>
                                 </div>                        
                             </div>
