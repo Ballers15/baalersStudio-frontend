@@ -350,7 +350,7 @@ const registerUsers = async () => {
               </Form.Group>
 
               <Form.Group className='pb-4'>
-                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e) } value={userDetails.email} ></Form.Control>
+                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e) } value={userDetails.email} onBlur={()=>{setUserNameErr('')}} ></Form.Control>
                 <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
