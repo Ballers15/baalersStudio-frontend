@@ -113,7 +113,7 @@ export const claimToken=async(data)=>{
 
 let contractData={
   token:data.contractAddress,
-  amount:((data.amount)*Math.pow(10,18)).toString(),
+  amount:(data.amount),
   nonce:data.nonce,
   signature:data.signature,
   

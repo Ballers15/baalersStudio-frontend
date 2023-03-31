@@ -227,7 +227,7 @@ const RewardRounds = (props) => {
     const claimTransaction = async (data) => {
         let dataToSend = {
             contractAddress:data?.potDetails?.assetDetails?.contractAddress,
-            amount:data?.transactionDetails?.rewardedTokenAmount,
+            amount:data?.transactionDetails?.rewardedTokenAmountDecimals?.$numberDecimal,
             nonce:data?.transactionDetails?.nonce,
             signature:data?.transactionDetails.signature,
             potId: data?.potDetails?._id,   
