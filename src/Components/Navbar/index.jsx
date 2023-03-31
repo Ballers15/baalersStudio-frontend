@@ -259,7 +259,7 @@ useEffect(() => {
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> )}
             </Nav>
             <Nav>
-            <Nav.Link eventKey="4" > <i class="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
+            <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
               {/* {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
 
               {/* <NavDropdown title="Dropdown"  id="basic-nav-dropdown" alignRight>
@@ -270,7 +270,7 @@ useEffect(() => {
 
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
-                <i class="fa fa-user-o" aria-hidden="true"></i>
+                <i className="fa fa-user-o" aria-hidden="true"></i>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu variant="dark">

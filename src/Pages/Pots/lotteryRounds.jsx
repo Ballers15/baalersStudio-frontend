@@ -38,7 +38,7 @@ const LotteryRounds = (props) => {
           className={className}
           style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
           onClick={onClick}
-        ><p className="finishText" ><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
+        ><p className="finishText" ><i className="fa fa-arrow-left" aria-hidden="true"></i><span className="desk">Finished Rounds</span> </p></div>
       );
     }
     var settings = {  
@@ -308,15 +308,15 @@ return(
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
-                                <div className="d-flex">
+                                <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
+                                        <div className="row justify-content-center">
+                                            <div className="col-4 col-sm-4 text-center">
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.userName} </p>
                                             </div>
@@ -326,7 +326,7 @@ return(
                                
                             </div>)
                            )}                            
-                            </Slider>) : <span class='no data'></span>}
+                            </Slider>) : <span className='no data'></span>}
 
                           
                            
@@ -352,7 +352,7 @@ return(
                             </>
                                 }
                         </div>                                
-                    </div>) :  <span class='no data'></span>}           
+                    </div>) :  <span className='no data'></span>}           
                 </div>
         
                

@@ -37,7 +37,7 @@ const RewardRounds = (props) => {
           className={className}
           style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
           onClick={onClick}
-        ><p className="finishText"><i class="fa fa-arrow-left" aria-hidden="true"></i> Finished Rounds</p></div>
+        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> <span className="desk">Finished Rounds</span></p></div>
       );
     }
     var settings = {  
@@ -292,7 +292,7 @@ return(
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
-                                <div className="d-flex">
+                                <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
@@ -301,7 +301,7 @@ return(
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row justify-content-center">
                                           {round?.potUserDetails?.map((user)=>(
-                                            <div className="col-sm-4 text-center" key={user?._id}>
+                                            <div className="col-4 col-sm-4 text-center" key={user?._id}>
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{user?.walletAddress.slice(0,4)+'...'+user?.walletAddress.slice(-4)+'@'+user?.user?.name} </p>
                                             </div>
@@ -313,7 +313,7 @@ return(
                                
                             </div>)
                            )}                            
-                            </Slider>) : <span class='no data'></span>}
+                            </Slider>) : <span className='no data'></span>}
                         </div>
                     </div>    
                     {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
@@ -334,7 +334,7 @@ return(
                             </>
                                 }
                         </div>                                
-                    </div>) :  <span class='no data'></span>}          
+                    </div>) :  <span className='no data'></span>}          
 
                 </div>
             )

@@ -623,6 +623,16 @@ a.disabled{
     }
 }
 @media (max-width: 480px){
+  .slick-slide .wthMob {
+    width: 74%;
+  }
+  .slick-next { 
+    left: 0;
+    width: 120px;
+    top: 18%;
+}
+
+
   .searchBox { 
     display: block;
     text-align: center;
