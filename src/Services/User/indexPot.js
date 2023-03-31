@@ -52,8 +52,15 @@ export function leaderBoardReward(data){
   return (axiosInstance.get(url + 'pot/v1/user/get/reward/pot/leaderboard', {params: data}).then(res=>res.data)) // lottery leaderboard
 }
 
-export function rewardClaimed(data) {
+export function isRewardClaimed(data) {
   return (axiosInstance.get(url + 'user/v1/check/user/claimed/reward',{params: data}).then(res => res.data))
 }
 
+export function rewardClaim(data) {
+  return (axiosInstance.post(url + 'user/v1/create/claim/withdrawl',data).then(res => res.data))
+}
 
+export function rewardWithdrawl(data) {
+  console.log('api called withdraw',data)
+  return (axiosInstance.post(url + 'user/v1/update/withdrawl',  data).then( res => res.data))
+}
