@@ -30,6 +30,29 @@
     margin-bottom: 0.25rem;
     color: #ECE8E1;
 }
+
+.custom-error-msg{
+    width: 100%;
+    margin-top: 0.25rem;
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #FF0000;
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
+.custom-success-msg{
+    width: 100%;
+    margin-top: 0.25rem;
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #3fd68f;
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
 /* .signup-page-container{
     padding: 50px;
     display: flex;

@@ -16,11 +16,12 @@ const Signup = () => {
   const [toasterMessage, setToasterMessage] = useState("");
   const setShowToaster = (param) => showToaster(param);
   const [toaster, showToaster] = useState(false);
-  const [response,setResponse] = useState("");
+  const [response,setResponse] = useState(false);
+  const [userNameCheck, setUserNameCheck] = useState(false)
   const [otp, setOtp]=useState("")
   const [loading, setLoading] = useState(false);
-  const [resend, setResend] = useState(false);
   const [toasterColor, setToasterColor] = useState('primary')
+  const [userNameErr,setUserNameErr] = useState('')
   const navigate = useNavigate();
   
   const [userDetails, setUserDetails] = useState(
@@ -33,7 +34,7 @@ const Signup = () => {
   )
 
   const emailValidation = (e) => {
-    console.log("hi i am called");
+    // console.log("hi i am called");
     setUserDetails({ ...userDetails,email:e.target.value})
     // console.log(userDetails.email)
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
@@ -97,14 +98,22 @@ const Signup = () => {
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
     if (form.checkValidity() === true) {
-      console.log('validity')
+      // console.log('validity')
     
     
     if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat) {
-      let dataToSend = {
+        registerUsers();
+    } 
+  }
+  else {
+    console.log('<<<<---Form is invalid --->>>>')
+  }
+  }
+
+const registerUsers = async () => {
+        let dataToSend = {
           email: userDetails.email,
           password:userDetails.password,
-          resend: resend
       }
       setLoading(true);
       try {
@@ -115,53 +124,47 @@ const Signup = () => {
           setShowToaster(true)
           setToasterColor('danger')
         } else {
-          if(resend === true){
-          setToasterMessage('OTP re sent successfully!')
-          }
-          else{
-          setToasterMessage('New user created')
-          }
           setShowToaster(true)
+          setToasterMessage('New user created')
           setErrorMsg(null)
           setToasterColor('success')
-          if(user?.status === 200 && resend === false){
-          checkUsername()
-          }
-        }
-      } catch (error) {
+          setResponse(true)
+            }
+        } catch (error) {
         setToasterMessage(error?.response?.data?.message || 'Something Went Worng in registering user')
         setShowToaster(true)
         setToasterColor('danger')
         setLoading(false);
+        }
       }
-    } else {
-      console.log('<<<<---Form is invalid --->>>>')
-    }
-  }
-  }
+
+      
 
   const checkUsername = async () => {
-    let userNameCheck= {
+    let dataToSend= {
       userName: userDetails.userName,
-      email: userDetails.email
     }
     setLoading(true);
 
     try {
-      const checkUname=(await checkUserName(userNameCheck))  // check user name api call
+      const checkUname=(await checkUserName(dataToSend))  // check user name api call
       setLoading(false);
+      // console.log(checkUname)
       
       if (checkUname.error) {
       setToasterMessage(checkUname?.error?.message || 'Something Went Worng in checking username')
       setShowToaster(true)
       setToasterColor('danger')
+      setUserNameErr('Username Alredy Exists')
+
     } else {
-      setToasterMessage(checkUname?.message || 'User name valid')
+      setToasterMessage(checkUname?.message || 'Username is valid')
+      setUserNameErr('Username is valid !')
       setShowToaster(true)
       setToasterColor('success')
       setErrorMsg(null)
       if(checkUname?.status === 200){
-        setResponse(checkUname)
+        setUserNameCheck(true)
       }
     }
   } 
@@ -180,8 +183,7 @@ const Signup = () => {
     e.stopPropagation()
     e.preventDefault()
     setValidated(true);
-    const form = e.currentTarget;
-    console.log('otp',otp);
+
     if(otp){
     let dataToSend= {
       email: userDetails.email,
@@ -190,7 +192,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      console.log('HI---');
+      // console.log('HI---');
       let otp = (await verifyOtp(dataToSend))
       setLoading(false);
       if (otp.error) {
@@ -214,7 +216,34 @@ const Signup = () => {
       setLoading(false);
     }
   }    
-    
+  }
+
+  const reSendOtp = async () => {
+    let dataToSend = {
+      email: userDetails.email,
+      password:userDetails.password,
+      resend: true
+  }
+  setLoading(true);
+  try {
+    let user = await registerUser(dataToSend)
+    setLoading(false);
+    if (user.error) {
+      setToasterMessage(user?.error?.message || 'Something Went Worng in registering user')
+      setShowToaster(true)
+      setToasterColor('danger')
+    } else {
+      setShowToaster(true)
+      setToasterMessage('OTP re sent successfully!')
+      setErrorMsg(null)
+      setToasterColor('success')
+    }
+    } catch (error) {
+    setToasterMessage(error?.response?.data?.message || 'Something Went Worng in registering user')
+    setShowToaster(true)
+    setToasterColor('danger')
+    setLoading(false);
+    }
   }
 
   const signup = async () => {
@@ -265,43 +294,42 @@ const Signup = () => {
 
 
   const signupLogin = async () => {
-    let userLoginData={
-      email: userDetails.email,
-      password: userDetails.password
-    }
-    setLoading(true);
+      let userLoginData={
+        email: userDetails.email,
+        password: userDetails.password
+      }
+      setLoading(true);
 
-    try {
-      const login=(await userLogin(userLoginData));
-      setLoading(false);
+      try {
+        const login=(await userLogin(userLoginData));
+        setLoading(false);
+        
+        if (login.error) {
+          // console.log('try if block otpResponse',otpResponse)
+        setToasterMessage(login?.error?.message || 'cant login Something Went Worng in userLogin')
+        setShowToaster(true)
+        setToasterColor('danger')
+      } else {
+        localStorage.setItem('_u', JSON.stringify(login.data))
+        setToasterMessage(login?.message || 'Logged IN!!')
+        setShowToaster(true)
+        setToasterColor('success')
+        setErrorMsg(null)
+        navigate('/');
+      }
+    }
       
-      if (login.error) {
-        // console.log('try if block otpResponse',otpResponse)
-      setToasterMessage(login?.error?.message || 'cant login Something Went Worng in userLogin')
-      setShowToaster(true)
-      setToasterColor('danger')
-    } else {
-      localStorage.setItem('_u', JSON.stringify(login.data))
-      setToasterMessage(login?.message || 'Logged IN!!')
-      setShowToaster(true)
-      setToasterColor('success')
-      setErrorMsg(null)
-      navigate('/');
-    }
-  }
+      catch (error) {
+        setToasterMessage(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
+        setShowToaster(true)
+        setToasterColor('danger')
+        setLoading(false);
+      }
      
-    catch (error) {
-      setToasterMessage(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false);
     }
-     
-  }
 
-  const handleResendOtp = (e) => {
-    setResend(true);
-    handleSubmit(e)
+  const handleBlur = (e) => {
+    checkUsername();
   }
 
   return (
@@ -311,13 +339,14 @@ const Signup = () => {
       
         <div className="signup-page-container">
           
-        {response?.status !== 200 &&   
+        {response === false &&   
         <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <h2 className="login-head">CREATE <br/>ACCOUNT</h2>
 
               <Form.Group className='pb-4' >
-                <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} ></Form.Control>
+                <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} onBlur={handleBlur}></Form.Control>
                 <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
+                <span className="custom-success-msg"> {userNameErr} </span>
               </Form.Group>
 
               <Form.Group className='pb-4'>
@@ -355,11 +384,10 @@ const Signup = () => {
            <span>Already have an account?</span>
            <Link to='/login'> <span>Sign In</span></Link> 
            </div>
-          </Form> }
+          </Form> } 
 
-
-          {response?.status === 200 &&   
-            <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
+                
+            { userNameCheck === true && response === true && <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
                <h2 className="login-head">Verify  <br/>code</h2>
                <p>A 6-digit code has been sent to your mail ID.
                 Kindly enter it to proceed.</p>
@@ -373,7 +401,7 @@ const Signup = () => {
               <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
                 <div className='alreadyAcc'>
                  <span>Didn’t get the code?</span>
-                  <a onClick={(e)=>{handleResendOtp(e)}}> <span>Resend</span></a> 
+                  <a onClick={(e)=>reSendOtp(e)}> <span>Resend</span></a> 
                 </div>
           </Form> }
 

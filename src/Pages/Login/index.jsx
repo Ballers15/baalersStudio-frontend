@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
        
         const form = e.currentTarget;
-        console.log("handlee",form.checkValidity())
+        // console.log("handlee",form.checkValidity())
         if (form.checkValidity() === true) {
             
             if (email && password && auth.passErrorMsg === null ) {
@@ -28,10 +28,10 @@ const Login = () => {
                 email: email,
                 password:password
             }
-            console.log("HI IAM INSIDE THIS");
+            // console.log("HI IAM INSIDE THIS");
             auth.login(dataToSend)
         } else {
-            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+            console.log('<<<<<<<<<<<<<<<<<<<<<-------------------Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
     }
        

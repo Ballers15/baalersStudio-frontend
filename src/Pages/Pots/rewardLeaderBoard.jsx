@@ -63,7 +63,7 @@ const LeaderBoardReward = (props) => {
       };
 
     
-return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : '' }
+return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : null }
               <div className="">
             {leaderBoardDetails.length ? <>  <div className="searchBox">
                     <h4>Search Leaderboard</h4>
@@ -106,7 +106,7 @@ return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : '' }
                     
                 </tbody>
                 </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-                </> : '' }
+                </> : null }
             </div>
             </>
     )

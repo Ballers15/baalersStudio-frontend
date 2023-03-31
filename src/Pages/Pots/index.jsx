@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import './poolpots.css' 
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
-import star from '../../Assest/img/Star.svg' 
-import {Table, Button, Form, Modal} from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
 import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import Loader from "../../Components/Loader";
@@ -16,7 +15,6 @@ import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
-import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
    
 const PotPage = () => {
     $(document).ready(function(){
@@ -432,41 +430,6 @@ return(
                 
 
             <div className="container">
-                {/* <div className="rotateDiv secPaddingY">
-                <div className="marquee">
-                  <div className="marquee-item" data-dir="right">
-                    <div className="marquee-row">
-                    LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD<img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD<img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD <img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD <img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD <img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" />{' '}
-                    </div>
-                    <div className="marquee-row">
-                    LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD<img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD <img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD<img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD <img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" /> LEADERBOARD<img src={star} width={79} height={80} alt="star" />{' '}
-                      LEADERBOARD{' '}
-                      <img src={star} width={79} height={80} alt="star" />{' '}
-                    </div>
-                  </div>
-                </div>
-              </div> */}
-
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
                 {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
                
