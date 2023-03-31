@@ -270,7 +270,7 @@ useEffect(() => {
 
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
-                <i className="fa fa-user-o" aria-hidden="true"></i>
+               {_u!==null ? <i className="fa  fa-user-circle" aria-hidden="true"></i> : <i className="fa  fa-user-o" aria-hidden="true"></i>}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu variant="dark">
