@@ -5,8 +5,6 @@ import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import { Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
 import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
-import Loader from "../../Components/Loader";
-import Toaster from "../../Components/Toaster"; 
 import 'react-multi-carousel/lib/styles.css'; 
 import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
@@ -16,8 +14,10 @@ import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
-import { withdrawlMsg } from "../../Components/Smart Contract/smartContractHandler";
-   
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../Components/Loader";
+
 const PotPage = () => {
     $(document).ready(function(){
   
@@ -44,10 +44,6 @@ const PotPage = () => {
     const [potType, setPotType] = useState('')
     const [expiryTime, setExpiryTime] = useState("");
     const [potDetails,setPotDetails] = useState('')
-    const [toasterMessage, setToasterMessage] = useState("");
-    const [toaster, showToaster] = useState(false);
-    const [toasterColor, setToasterColor] = useState('primary')
-    const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [cash, setCash] = useState('')
     const user = localStorage.getItem('_u')
@@ -137,22 +133,20 @@ const PotPage = () => {
           const pot = await getActivePot(dataToSend);
           setLoading(false);
           if (pot.error) {
-            setToasterMessage(pot?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(pot?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            // setToasterMessage('Claim Status Updated Succesfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
+            // toast.success('Claim Status Updated Succesfully');
             setPotDetails(pot?.data.length?pot.data[0]:'');
             setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
             setPrevious(false);
             // console.log(pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
             setLoading(false);
         }
          
@@ -170,20 +164,20 @@ const PotPage = () => {
           const redeem = await redeemCashLottery(dataToSend);
           setLoading(false);
           if (redeem.error) {
-            setToasterMessage(redeem?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(redeem?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            setToasterMessage(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
-            setShowToaster(true); 
-            setToasterColor('success')
+            toast.success(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
+            // setShowToaster(true); 
+            // setToasterColor('success')
             setRedeemModal(false)
             setReload(true)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
             setLoading(false);
         }
          
@@ -201,23 +195,23 @@ const PotPage = () => {
           const redeem = await redeemCashReward(dataToSend);
           setLoading(false);
           if (redeem.error) {
-            setToasterMessage(redeem?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(redeem?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
             setRedeemModal(false)
             
           } else {
-            setToasterMessage(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
-            setShowToaster(true); 
-            setToasterColor('success')
+            toast.success(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
+            // setShowToaster(true); 
+            // setToasterColor('success')
             setRedeemModal(false)
             setReload(true)
         }
         } catch (error) {
             setRedeemModal(false);
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
             setLoading(false);
         }
          
@@ -233,19 +227,19 @@ const PotPage = () => {
           const cash = await getGameCash(dataToSend);
           setLoading(false);
           if (cash.error) {
-            setToasterMessage(cash?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(cash?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            setToasterMessage('cash fetched Successfully');
-            setShowToaster(true); 
-            setToasterColor('success')
+            toast.success('cash fetched Successfully');
+            // setShowToaster(true); 
+            // setToasterColor('success')
             setCash(cash?.data?.amount)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
             setLoading(false);
        }
         
@@ -269,9 +263,9 @@ const PotPage = () => {
             navigate('/login')
         }
         else if(user &&  !walletAddress){
-            setToasterMessage('Please connect your metamask wallet');
-            setShowToaster(true);
-            setToasterColor('primary')
+            toast.info('Please connect your metamask wallet');
+            // setShowToaster(true);
+            // setToasterColor('primary')
             return
         }
        else{
@@ -438,7 +432,8 @@ return(
             </div>}
 
         </div>
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}
+        {loading ? <Loader /> : null} 
+        <ToastContainer theme="colored"/>
     </div>
     </>
 )

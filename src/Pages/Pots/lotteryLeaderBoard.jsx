@@ -3,15 +3,12 @@ import './poolpots.css'
 import { Table, Button, Form } from 'react-bootstrap';
 import { leaderBoardLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
    
 const LeaderBoardLottery = (props) => {
 
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
-    const [toasterMessage, setToasterMessage] = useState("");
-    const [toaster, showToaster] = useState(false);
-    const [toasterColor, setToasterColor] = useState('primary')
-    const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [leaderSearch,setLeaderSearch]  = useState('')
 
@@ -29,9 +26,7 @@ const LeaderBoardLottery = (props) => {
           const leader = await leaderBoardLottery(dataToSend);
           setLoading(false);
           if (leader.error) {
-            setToasterMessage(leader?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(leader?.message||'Something Went Worng');
         } else {
             // setToasterMessage('Claim Status Updated Succesfully');
             // setShowToaster(true); 
@@ -39,10 +34,8 @@ const LeaderBoardLottery = (props) => {
             setLeaderBoardDetails(leader?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             setLoading(false);
-            setToasterColor('danger')
         }
          
     }

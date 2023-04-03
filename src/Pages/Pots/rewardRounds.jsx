@@ -6,7 +6,8 @@ import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
 import {  claimToken } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -17,9 +18,6 @@ const RewardRounds = (props) => {
     const walletAddress = localStorage.getItem('_wallet')
     const { type } = useParams();
     const [potType, setPotType] = useState('')
-    const [toasterMessage, setToasterMessage] = useState("");
-    const [toaster, showToaster] = useState(false);
-    const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
@@ -149,10 +147,10 @@ const RewardRounds = (props) => {
           const round = await getRewardRounds(dataToSend);
           setLoading(false);
           if (round.error) {
-            setToasterMessage(round?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(round?.message||'Something Went Worng');
+            // setShowToaster(true);
           } else {
-            // setToasterMessage('round fetched Successfully');
+            // toast.success('round fetched Successfully');
             // setShowToaster(true); 
             setPrevRounds(round?.data)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
@@ -163,8 +161,8 @@ const RewardRounds = (props) => {
             setPotId(round?.data[0]?._id)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
             setLoading(false);
         }
     }
@@ -182,18 +180,18 @@ const RewardRounds = (props) => {
           const data = await isRewardClaimed(dataToSend);
           setLoading(false);
           if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(data?.message||'Something Went Worng');
+            // setShowToaster(true);
           } else {
-            // setToasterMessage('round fetched Successfully');
+            // toast.success('Round fetched Successfully');
             // setShowToaster(true); 
             setParticipated(data?.data?.participated)
             setClaimed(data?.data?.claimed)
             setButtonStatus(true)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
             setLoading(false);
         }
     }
@@ -209,17 +207,17 @@ const RewardRounds = (props) => {
           const data = await rewardClaim(dataToSend);
           setLoading(false);
           if (data.error) {
-            setToasterMessage(data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(data?.message||'Something Went Worng');
+            // setShowToaster(true);
           } else {
-            setToasterMessage('round fetched Successfully');
-            setShowToaster(true); 
+            toast.success('Round fetched Successfully');
+            // setShowToaster(true); 
             claimTransaction(data?.data)
             // console.log('create calim',data?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
             setLoading(false);
         }
     }
@@ -239,11 +237,11 @@ const RewardRounds = (props) => {
           const dataToken = await claimToken(dataToSend);
           setLoading(false);
           if (dataToken.error) {
-            setToasterMessage(dataToken?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(dataToken?.message||'Something Went Worng');
+            // setShowToaster(true);
           } else {
-            setToasterMessage('round fetched Successfully');
-            setShowToaster(true); 
+            toast.success('Round fetched Successfully');
+            // setShowToaster(true); 
             // console.log('claim token',dataToken)
             // console.log('====================')
             // console.log(data?.potDetails?._id)
@@ -263,8 +261,8 @@ const RewardRounds = (props) => {
             // withdrawLottery(withdrawlObject)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
             setLoading(false);
         }
     }

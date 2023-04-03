@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import { withdrawLottery, withdrawReward } from '../../Pages/Pots/withdrawlLottery';
+import {  toast } from 'react-toastify';
 
 import {
   claimTokenAbi ,
@@ -44,7 +45,6 @@ export const claimNft=async(data)=>{
 //  console.log(data)
   let walletAddress = localStorage.getItem('_wallet');
  // get wallet address from localstorage and pass in var
-
   const claimContract=await getNftContract();
 
 let contractData={
@@ -63,7 +63,7 @@ let withdrawlObject = {
 
 console.log("withdrawlObject",withdrawlObject)
 try{
-   claimContract.methods.claimNFT(contractData.tokenId,contractData.quantity,contractData.nonce,contractData.signature).send({ from: walletAddress })
+  let nft = claimContract.methods.claimNFT(contractData.tokenId,contractData.quantity,contractData.nonce,contractData.signature).send({ from: walletAddress })
   .once('transactionHash',  function(hash){
     console.log(hash);
    let obj= {transactionHash:hash}
@@ -78,17 +78,11 @@ try{
     withdrawLottery(withdrawlObject)
 
    })
-  // .on('confirmation', function(confNumber, receipt, latestBlockHash){
-  //   console.log('confirmation',receipt);
-  //  })
-  // .on('error', function(error){ })
-  // .then(function(receipt){
-  //   console.log("receipt",receipt);
-  //   return receipt;
-  //     // will be fired once the receipt is mined
-  // });
-  // console.log(claim);
-  // return claim;
+ toast.promise(nft, {
+  pending: "Transaction initiated...",
+  success: "Transaction is confirmed",
+  error: "Transaction failed! "
+ })
 }
 
 catch(err){
@@ -105,7 +99,6 @@ export const claimToken=async(data)=>{
  
   const claimContract=await getTokenContract();
   // const getDecimals=await getDecimals();
-
 
 let contractData={
   token:data.contractAddress,
@@ -127,22 +120,25 @@ try{
   console.log('contract data',contractData);
   console.log('walll',walletAddress);
 
- claimContract.methods.claimToken(contractData.token,contractData.nonce,contractData.amount,contractData.signature).send({ from: walletAddress })
+ let token=claimContract.methods.claimToken(contractData.token,contractData.nonce,contractData.amount,contractData.signature).send({ from: walletAddress })
  .once('transactionHash',  function(hash){
   console.log(hash);
  let obj= {transactionHash:hash}
   // txnHash:dataNft?.transactionHash ,
   withdrawlObject.txnHash=hash;
   withdrawReward(withdrawlObject)
-  withdrawlMsg = 'Transaction Initiated'
-  console.log(obj);
+   console.log(obj);
+
  
  })
 .once('receipt', function(receipt){
   console.log('receipt before conf')
   withdrawReward(withdrawlObject)
-  withdrawlMsg = 'Transaction Successful'
-
+ })
+ toast.promise(token, {
+  pending: "Transaction initiated...",
+  success: "Transaction is confirmed",
+  error: "Transaction failed! "
  })
 }
 catch(err){
