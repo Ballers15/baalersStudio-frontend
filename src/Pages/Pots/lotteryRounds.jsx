@@ -202,11 +202,11 @@ const LotteryRounds = (props) => {
           const data = await lotteryClaim(dataToSend);
           console.log("data got isss hash",data);
           setLoading(false);
-          if (data.error) {
+          if (data?.error) {
             toast.error(data?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-            toast.success('Round fetched Successfully');
+            // toast.success('Round fetched Successfully');
             // setShowToaster(true); 
             claimTransaction(data?.data)
           }
@@ -232,11 +232,11 @@ const LotteryRounds = (props) => {
           const dataNft = await claimNft(dataToSend);
 
           setLoading(false);
-          if (dataNft.error) {
+          if (dataNft?.error) {
             toast.error(dataNft?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-            toast.success('Round fetched Successfully');
+
             // setShowToaster(true); 
             console.log('claim lottery response',dataNft)
           }

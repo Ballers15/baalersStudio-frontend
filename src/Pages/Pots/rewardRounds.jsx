@@ -206,17 +206,17 @@ const RewardRounds = (props) => {
         try {
           const data = await rewardClaim(dataToSend);
           setLoading(false);
-          if (data.error) {
+          if (data?.error) {
             toast.error(data?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-            toast.success('Round fetched Successfully');
+            // toast.success(' Successfully');
             // setShowToaster(true); 
             claimTransaction(data?.data)
             // console.log('create calim',data?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something Went WornghandleClaim 2' );
             // setShowToaster(true);
             setLoading(false);
         }
@@ -236,11 +236,12 @@ const RewardRounds = (props) => {
         try {
           const dataToken = await claimToken(dataToSend);
           setLoading(false);
-          if (dataToken.error) {
+          if (dataToken?.error) {
+            // console.log("")
             toast.error(dataToken?.message||'Something Went Worng');
             // setShowToaster(true);
           } else {
-            toast.success('Round fetched Successfully');
+            // toast.success('Round fetched Successfully 2');
             // setShowToaster(true); 
             // console.log('claim token',dataToken)
             // console.log('====================')
@@ -261,6 +262,7 @@ const RewardRounds = (props) => {
             // withdrawLottery(withdrawlObject)
           }
         } catch (error) {
+          console.log(error);
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
             setLoading(false);

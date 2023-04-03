@@ -79,9 +79,9 @@ try{
 
    })
  toast.promise(nft, {
-  pending: "Transaction initiated...",
-  success: "Transaction is confirmed",
-  error: "Transaction failed! "
+  pending: "Transaction sent successfully",
+  success: "Transaction is Confirmed",
+  error: "Transaction Rejected! "
  })
 }
 
@@ -136,9 +136,9 @@ try{
   withdrawReward(withdrawlObject)
  })
  toast.promise(token, {
-  pending: "Transaction initiated...",
-  success: "Transaction is confirmed",
-  error: "Transaction failed! "
+  pending: "Transaction sent successfully",
+  success: "Transaction is Confirmed",
+  error: "Transaction Rejected !"
  })
 }
 catch(err){
