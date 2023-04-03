@@ -3,7 +3,6 @@ import './poolpots.css'
 import { Table, Button, Form } from 'react-bootstrap';
 import {  leaderBoardReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
-import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 
    
 const LeaderBoardReward = (props) => {
@@ -63,9 +62,9 @@ const LeaderBoardReward = (props) => {
       };
 
     
-return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : null }
+return (  
               <div className="">
-            {leaderBoardDetails.length ? <>  <div className="searchBox">
+                <div className="searchBox">
                     <h4>Search Leaderboard</h4>
                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
                        <Form.Control
@@ -76,7 +75,6 @@ return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : null }
                             onChange={(e)=>{getRewardLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                        {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
                     </Form>
                 </div>
                 {leaderBoardDetails?.length !== 0 ? (<Table responsive>
@@ -92,7 +90,7 @@ return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : null }
                     </thead>
                     <tbody>
 
-                { (leaderBoardDetails?.map((User,index)=>{
+                {leaderBoardDetails.length && leaderBoardDetails?.map((User,index)=>{
                     return (
                     <tr key={User._id} >
                         <td>{index+1}</td>
@@ -102,13 +100,13 @@ return (   <> {leaderBoardDetails.length ? <LeaderBoardRibbon/> : null }
                         <td>{User?.nftHolded}</td>
                         <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 
                     </tr>)
-                })) }
+                }) }
                     
                 </tbody>
                 </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-                </> : null }
+               
             </div>
-            </>
+          
     )
     
 }

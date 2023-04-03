@@ -14,13 +14,13 @@ const UsersList = () => {
   const [toaster, showToaster] = useState(false)
   const [toasterMessage, setToasterMessage] = useState('')
   const [toasterColor, setToasterColor] = useState('primary')
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   const [allUsers, setAllUsers] = useState(null)
   const [disable, disableSubmitButton] = useState(false)
   const [walletDetails,setWalletDetails] = useState([])
   const [confirmUser, setUser]=useState([])
   const [rewadPotDetail,setRewardPotDetail] = useState([])
-  const [endDate,setEndDate]=useState()
+  const [lastPage, setLastPage] = useState(null)
 
   useEffect(() => {
     fetchApi()
@@ -44,6 +44,8 @@ const UsersList = () => {
         // setShowToaster(true)
         // setToasterColor('success')
         setAllUsers(users)
+        let pages= Math.floor( users?.data?.count / 10 ) + 1;
+        setLastPage(pages);
       }
     } catch (error) {
       setToasterMessage('Something Went Worng in getting all users')
@@ -114,12 +116,12 @@ const UsersList = () => {
   }
 
   const nextPage = () => {
-    if (allUsers?.data?.count > 10)
+    if (currentPage < lastPage)
      setCurrentPage(currentPage + 1)
     else disableSubmitButton(true)
   }
   const prevPage = () => {
-    if (currentPage > 0) 
+    if (currentPage > 1) 
     setCurrentPage(currentPage - 1)
     else disableSubmitButton(true)
   }
@@ -179,6 +181,8 @@ const UsersList = () => {
 
   return (
     <React.Fragment>
+
+      {/* wallet details modal */}
          <Modal
             show={viewWallet} 
             onHide={handleClose} 
@@ -202,12 +206,12 @@ const UsersList = () => {
                         <th>Total in game cash burned</th>  
                         <th>Total Reward earned</th>
                     </tr>
-                </thead> <hr/>
+                </thead>
                 <tbody >
                     <tr> 
                         <td> 
-                        <Form.Select aria-label="Default select example" onChange={(e) => { navigator.clipboard.writeText(e.target.value); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}>
-                        <option value='select address'>Select Address</option>
+                        <Form.Select onChange={(e) => { navigator.clipboard.writeText(e.target.value); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}>
+                        {walletDetails?.walletDetails?.length ? <option value='select address'>Select Address</option> : <option value='select address'>No Wallet found</option>}
                           {walletDetails?.walletDetails && walletDetails?.walletDetails?.map((wallet) => (
                             <option value={wallet|| ''} key={wallet}>
                               {wallet?.slice(0,5)+'....'+wallet?.slice(-5)}  <span className='fa fa-copy' title='copy address' style={{cursor:"pointer"}} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span>
@@ -215,8 +219,8 @@ const UsersList = () => {
                             </option>)) }
                         </Form.Select>
                         </td>               
-                        <td>{formatNumberDecimal(walletDetails?.totalSum?.$numberDecimal)}</td>  
-                        <td>{walletDetails?.rewardTokenAmount}</td>
+                        <td>{formatNumberDecimal(walletDetails?.totalSum?.$numberDecimal) || '0'}</td>  
+                        <td>{walletDetails?.rewardTokenAmount || '0' }</td>
                     </tr>              
                   
                 </tbody>
@@ -266,7 +270,6 @@ const UsersList = () => {
                 <Form.Control
                   
                   type="date"
-                  max={rewadPotDetail?.endDate}
                   value={rewadPotDetail.startDate|| ''}
                   onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
                 ></Form.Control>
@@ -318,23 +321,21 @@ const UsersList = () => {
             <thead className="users-listing-table-head">
               <tr>
                 <th className='sNoWth'>Sr. No.</th>
-                <th>Name</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Created At</th>
                 <th>Wallet Details</th>
                 <th className='sNoWth'>is Blocked ?</th>
               </tr>
-            </thead> <hr/>
+            </thead> 
             <tbody className="users-listing-table-body">
               {allUsers?.data?.Users.length !== 0
                 ? allUsers?.data?.Users.map((user, index) => {
                     return ( 
                       <tr key={user?._id}>
                         <td className='sNoWth'>{index + 1}</td>
-                        <td>{user?.name}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-between'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
+                        <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
                           <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user)}> <i className="fa fa-eye " /></span>
@@ -350,13 +351,13 @@ const UsersList = () => {
             </tbody>
           </table>
           <Pagination>
-              <Pagination.First />
+              <Pagination.First onClick={()=>{setCurrentPage(1)}}/>
               <Pagination.Prev onClick={prevPage}/>
-              <Pagination.Item active>{currentPage+1}</Pagination.Item>                     
+              <Pagination.Item active>{currentPage}</Pagination.Item>                     
               <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
+              <Pagination.Item  onClick={()=>{setCurrentPage(lastPage)}}>{lastPage}</Pagination.Item>
               <Pagination.Next onClick={nextPage}/>
-              <Pagination.Last />
+              <Pagination.Last onClick={()=>{setCurrentPage(lastPage)}}/>
           </Pagination>
         </div>
         {/* <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={nextPage} > Next </button>

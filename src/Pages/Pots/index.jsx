@@ -15,6 +15,8 @@ import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
+import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
+import { withdrawlMsg } from "../../Components/Smart Contract/smartContractHandler";
    
 const PotPage = () => {
     $(document).ready(function(){
@@ -30,12 +32,6 @@ const PotPage = () => {
           $('iframe').attr('src', $('iframe').attr('src'));
         });
         
-        //  $('.close-btn').on('click', function(){
-        //    $('.video-popup').fadeOut('slow');  
-        //    $('iframe')[0].pause();        
-        //     return false;
-        //  });
-
          $('.close-btn').on('click', function(){   
             $('.video-popup').fadeOut('slow');    
             $('iframe').attr('src', $('iframe').attr('src'));
@@ -61,6 +57,7 @@ const PotPage = () => {
     const location = useLocation()
     const [previous, setPrevious] = useState(false);
     const [reload, setReload] = useState(false);
+    
 
 
 
@@ -130,6 +127,7 @@ const PotPage = () => {
     },[expiryTime]);
 
 
+
     const getActivePotDetails = async () => {
         let dataToSend = {
             potType: potType,
@@ -148,6 +146,7 @@ const PotPage = () => {
             // setToasterColor('success')
             setPotDetails(pot?.data.length?pot.data[0]:'');
             setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
+            setPrevious(false);
             // console.log(pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
@@ -427,15 +426,17 @@ return(
                     </div>
                 </div>
              </div>
+
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
                {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
                 
 
-            <div className="container">
+           {previous === false && <div className="container">
+                <LeaderBoardRibbon/>
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
                 {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
-               
-            </div>
+            </div>}
+
         </div>
         {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}
     </div>

@@ -1,17 +1,14 @@
-import { useState } from "react";
 import { lotteryWithdrawl, rewardWithdrawl } from "../../Services/User/indexPot";
-
-   
 
 
 export function withdrawLottery (dataToSend) {
 
 
     console.log('withdrawlottery', dataToSend);  
-    // setLoading(true);
+    // setApiLoading(true);
     try {
       const data =  lotteryWithdrawl(dataToSend);
-      // setLoading(false);
+      // setApiLoading(false);
       if (data.error) {
         console.log(data?.message||'Something Went Worng in withdrawl');
         // setShowToaster(true);
@@ -24,7 +21,7 @@ export function withdrawLottery (dataToSend) {
     } catch (error) {
         console.log(error?.response?.data?.message||'Something Went Worng in withdrawl2');
         // setShowToaster(true);
-        // setLoading(false);
+        // setApiLoading(false);
     }
 }
 
@@ -33,10 +30,10 @@ export function withdrawReward (dataToSend) {
 
 
   console.log('withdrawlottery', dataToSend);  
-  // setLoading(true);
+  // setApiLoading(true);
   try {
     const data =  rewardWithdrawl(dataToSend);
-    // setLoading(false);
+    // setApiLoading(false);
     if (data.error) {
       console.log(data?.message||'Something Went Worng in withdrawl');
       // setShowToaster(true);
@@ -49,6 +46,6 @@ export function withdrawReward (dataToSend) {
   } catch (error) {
       console.log(error?.response?.data?.message||'Something Went Worng in withdrawl2');
       // setShowToaster(true);
-      // setLoading(false);
+      // setApiLoading(false);
   }
 }

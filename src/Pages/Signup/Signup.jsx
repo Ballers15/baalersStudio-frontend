@@ -125,7 +125,7 @@ const registerUsers = async () => {
           setToasterColor('danger')
         } else {
           setShowToaster(true)
-          setToasterMessage('New user created')
+          setToasterMessage('Success!! Please check your mail')
           setErrorMsg(null)
           setToasterColor('success')
           setResponse(true)
@@ -141,8 +141,9 @@ const registerUsers = async () => {
       
 
   const checkUsername = async () => {
+    
     let dataToSend= {
-      userName: userDetails.userName,
+      userName: userDetails.userName.trim(),
     }
     setLoading(true);
 
@@ -328,6 +329,7 @@ const registerUsers = async () => {
     }
 
   const handleBlur = (e) => {
+    if(userDetails.userName !== '' && userDetails.userName.trim()!=='')
     checkUsername();
   }
 

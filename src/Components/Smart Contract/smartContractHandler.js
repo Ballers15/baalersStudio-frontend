@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { withdrawLottery, withdrawReward } from '../../Pages/Pots/withdrawlLottery';
 
 import {
   claimTokenAbi ,
   claimNftAbi,
-  standardTokenAbi,
 } from './SmartContract_ABI';
 
 // import { TransactionActions } from 'ReduxStore/Features/Transactions/TransactionsSlice';
@@ -41,8 +39,6 @@ async function getTokenContract() {
 async function getDecimals(){
   return 18;
 }
-// export const [withdrawl,setWithdrawl] = useState('')
-export let withdrawl = ''
 
 export const claimNft=async(data)=>{
 //  console.log(data)
@@ -75,8 +71,8 @@ try{
     withdrawlObject.txnHash=hash;
    withdrawLottery(withdrawlObject)
    console.log(obj);
-   
-   })
+
+  })
   .once('receipt', function(receipt){
     console.log('receipt before conf')
     withdrawLottery(withdrawlObject)
@@ -137,14 +133,15 @@ try{
  let obj= {transactionHash:hash}
   // txnHash:dataNft?.transactionHash ,
   withdrawlObject.txnHash=hash;
-
   withdrawReward(withdrawlObject)
- console.log(obj);
+  withdrawlMsg = 'Transaction Initiated'
+  console.log(obj);
  
  })
 .once('receipt', function(receipt){
   console.log('receipt before conf')
   withdrawReward(withdrawlObject)
+  withdrawlMsg = 'Transaction Successful'
 
  })
 }

@@ -85,7 +85,6 @@ const PoolListing = () => {
             const prevPageActive = () => {
                 if (currentPageAcitve > 1) 
                 setCurrentPageActive(currentPageAcitve - 1)
-        
                 // console.log('active',currentPageAcitve)
         }
 
@@ -380,6 +379,7 @@ const PoolListing = () => {
     return (
         
         <React.Fragment>
+            {/* view pot users list */}
             <Modal
                 show={viewUser} 
                 onHide={handleClose} 
@@ -419,11 +419,10 @@ const PoolListing = () => {
                     <thead>
                         <tr>
                             <th className="sNoWth">Sr. No..</th>
-                            <th>name</th>
-                            <th>email</th> 
-                            <th>wallet address</th>
-                            {/* <th>game cash burned</th> */}
-                            <th>nft Count</th>
+                            <th>User Name</th>
+                            <th>Email</th> 
+                            <th>Wallet Address</th>
+                            <th>NFT Count</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -431,8 +430,8 @@ const PoolListing = () => {
                         return(
                         <tr key={user._id}>
                             <td  className="sNoWth">{index+1}</td>
-                            <td> {user?.userDetails?.name}</td>           
-                            <td>{user?.userDetails?.email}</td>             
+                            <td> {user?.userDetails?.userName}</td>           
+                            <td>{user?.userDetails?.email}{' '}{' '}{' '}{' '}<span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.userDetails?.email); setToasterMessage( 'Copied Succesfully'); setShowToaster(true); }}></span></td>
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
                                     <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); setToasterMessage( 'Copied Succesfully'); setShowToaster(true); }}></span></td>  

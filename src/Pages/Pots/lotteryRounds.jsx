@@ -4,7 +4,7 @@ import img1 from '../../Assest/img/img1.png'
 import { getPrevRounds, lotteryClaim, wonLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
 import {  useParams } from "react-router-dom";
-import { claimNft } from "../../Components/Smart Contract/smartContractHandler";
+import { claimNft, withdrawlMsg } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
 
 
@@ -18,6 +18,7 @@ const LotteryRounds = (props) => {
     const [potType, setPotType] = useState('')
     const [toasterMessage, setToasterMessage] = useState("");
     const [toaster, showToaster] = useState(false);
+    const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
     const [loading, setLoading] = useState(false);   
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
@@ -135,6 +136,17 @@ const LotteryRounds = (props) => {
     },[claimExpiryDate]);
 
     useEffect(() => {
+      if (withdrawlMsg !== ''){
+        setToasterMessage(withdrawlMsg);
+        setShowToaster()
+        setToasterColor('success')
+      }
+      else{
+        console.log(withdrawlMsg)
+      }
+    }, [withdrawlMsg])
+
+    useEffect(() => {
       getPreviousRounds()  
   },[ localStorage.getItem('_wallet'),props.previous]);
 
@@ -151,16 +163,12 @@ const LotteryRounds = (props) => {
             setToasterMessage(round?.message||'Something Went Worng in preious rounds');
             setShowToaster(true);
           } else {
-// setToasterMessage('round fetched Successfully');
-            // setShowToaster(true); 
             setPrevRounds(round?.data)
-            // console.log('i am set here getPreviousRounds ');
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
-            // console.log('prev rounds',round?.data[0])
             setUserWon(round?.data[0]?.userRes?.lotteryWon)
             setParticipated(round?.data[0]?.userRes?.participated)
+            setClaimedNft(round?.data[0]?.userRes?.claimed)
             setPotId(round?.data[0]?._id)
-
           }
         } catch (error) {
             setToasterMessage(error ||'Something Went Worng in preious rounds');
@@ -185,8 +193,6 @@ const LotteryRounds = (props) => {
             setToasterMessage(data?.message||'Something Went Worng in lottery won');
             setShowToaster(true);
           } else {
-            // setToasterMessage('round fetched Successfully');
-            // setShowToaster(true); 
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
             setClaimedNft(data?.data?.claimed)
@@ -248,22 +254,6 @@ const LotteryRounds = (props) => {
             setToasterMessage('round fetched Successfully');
             setShowToaster(true); 
             console.log('claim lottery response',dataNft)
-            // console.log('====================')
-            // console.log(data?.potDetails?._id)
-            // console.log(localStorage.getItem('_wallet'))
-            // console.log(dataNft?.transactionHash)
-            // console.log(data?.transactionDetails?._id)
-            // console.log('---------------')
-            // let withdrawlObject = {
-              // walletAddress: localStorage.getItem('_wallet'),
-              // withdrawlId: data?.transactionDetails?._id
-            //     txnHash:dataNft?.transactionHash ,
-            //     withdrawlId: data?.transactionDetails?._id
-            // }
-            
-            // console.log('claim nft dataTosend',withdrawlObject)
-
-            // withdrawLottery(withdrawlObject)
           }
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
@@ -274,7 +264,7 @@ const LotteryRounds = (props) => {
 
 
 return(
-      <>
+             <>
                 <div className="finishSlider">
                     <div className="row">
                         <div className="col-sm-12 position-relative">
@@ -288,7 +278,7 @@ return(
                                     <div className="roundDiv">
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
-                            month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
+                                          month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 
                                         <div className="row justify-content-center">
                                             <div className="col-4 col-sm-4 text-center">
