@@ -2,27 +2,29 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Col, Row, Form } from 'react-bootstrap'
 import {  useNavigate } from 'react-router-dom'
-import Loader from '../../Components/Loader'
-import Toaster from '../../Components/Toaster'
 import { changePassword, forgotPassword, forgotPasswordLink } from '../../Services/User'
-
 import './forgotpassword.css'
+import ApiLoader from '../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+
 // import '../Admin/Pool/Pool.css'
 
 const ForgotPassword = () => {
   const [validated, setValidated] = useState(false)
   const [errorMsg,setErrorMsg]= useState(null)
-  const [toasterMessage, setToasterMessage] = useState("");
-  const setShowToaster = (param) => showToaster(param);
-  const [toaster, showToaster] = useState(false);
-  const [toasterColor, setToasterColor] = useState('primary')
-  const [loading, setLoading] = useState(false);
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [repeatPassword,setRepeatPassword]=useState("")
   const [newPass,setNewPass]=useState(false)
   const [token,setToken]=useState("")
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.loading.isLoading)
+
+
 
   useEffect(() => {
   emailValidation(email)
@@ -44,8 +46,9 @@ const ForgotPassword = () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-
-  if (email) {
+    
+    
+  if (email && emailValidation(email) === true) {
       let dataToSend = {
           email: email
       }
@@ -54,13 +57,9 @@ const ForgotPassword = () => {
         const response=await forgotPassword(dataToSend)
         dispatch(setLoadingFalse());
       if (response.error) {
-          setToasterMessage(response?.error?.message || 'Something Went Worng in getting token')
-          setShowToaster(true)
-          setToasterColor('danger')
+          toast.error(response?.error?.message || 'Something Went Worng in getting token')
         } else {
-          setToasterMessage(response?.message || 'Verified link created')
-          setShowToaster(true)
-          setToasterColor('success')
+          toast.success(response?.message || 'Verified link created')
           setErrorMsg(null)
           setToken(response?.data?.token)
           if(response?.data?.token.length){
@@ -68,9 +67,7 @@ const ForgotPassword = () => {
         }
         }
       } catch (error) {
-        setToasterMessage(error?.response?.data?.message || 'Something Went Worng in getting token')
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(error?.response?.data?.message || 'Something Went Worng in getting token')
         dispatch(setLoadingFalse());
       }
     } 
@@ -89,19 +86,13 @@ const ForgotPassword = () => {
           const passwordLink=(await forgotPasswordLink(data))
           dispatch(setLoadingFalse());
           if (passwordLink.error) {
-            setToasterMessage(passwordLink?.error?.message || 'Something Went Worng in generating link')
-            setShowToaster(true)
-            setToasterColor('danger')
+            toast.error(passwordLink?.error?.message || 'Something Went Worng in generating link')
           } else {
-            setToasterMessage(passwordLink?.message || 'link verified')
-            setShowToaster(true)
-            setToasterColor('success')
+            toast.success(passwordLink?.message || 'link verified')
             setNewPass(true)
           }
         } catch (error) {
-          setToasterMessage(error?.response?.data?.message || 'Something Went Worng link')
-          setShowToaster(true)
-          setToasterColor('danger')
+          toast.error(error?.response?.data?.message || 'Something Went Worng link')
           dispatch(setLoadingFalse());
         }
     }
@@ -126,23 +117,16 @@ const ForgotPassword = () => {
       dispatch(setLoadingFalse());
 
       if (changePass.error) {
-        setToasterMessage(changePass?.error?.message || 'Something Went Worng')
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(changePass?.error?.message || 'Something Went Worng')
       } else {
-        setToasterMessage(changePass?.message || 'Password changed successfully!')
-        setShowToaster(true)
-        setToasterColor('success')
+        toast.success(changePass?.message || 'Password changed successfully!')
         setErrorMsg(null)
-        dispatch(setLoadingTrue());
         setTimeout(() => {
           navigate('/login')
         }, 2000)
       }
     } catch (error) {
-      setToasterMessage(error?.response?.data?.message || 'Something Went Worng')
-      setShowToaster(true)
-      setToasterColor('danger')
+      toast.error(error?.response?.data?.message || 'Something Went Worng')
       dispatch(setLoadingFalse());
     }
      
@@ -193,7 +177,8 @@ const ForgotPassword = () => {
                 {/* <div> <button type="submit"  className="forgot-submit-button" onClick={updatePassword} > Submit </button> </div> */}
           </Form> 
         </div> }
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor} /> )}
+        {isLoading ? <ApiLoader /> : null} 
+        <ToastContainer theme="colored"/>
       </div>
     </React.Fragment>
   )

@@ -52,14 +52,15 @@ import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
 import { subscribeMailJet } from '../../Services/User';
-import Loader from "../../Components/Loader";
-import Toaster from "../../Components/Toaster";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-// import ScriptTag from 'react-script-tag';
-// import gsapScript from './ballerTokenGsap';
-// const loader = document.querySelector(".loader-wrapper");
-// const hideLoader = () => loader?.classList?.add("loader--hide");
+import { ToastContainer,  } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+
+
+
+
 window.addEventListener(
     "scroll",
     () => {
@@ -99,6 +100,9 @@ function useHover() {
 }
 
 const Dashboard = () => {
+
+  const dispatch = useDispatch()
+
     useEffect(() => {
         $(window).scroll(function () {
             var scrollTop = $(this).scrollTop();
@@ -311,7 +315,6 @@ const Dashboard = () => {
                 </Button>
               </div>
             </Form>
-            {loading ? <Loader /> : null}
           </Modal.Body>
         </Modal>
 
@@ -1343,15 +1346,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          {toaster && (
-            <Toaster
-              message={toasterMessage}
-              show={toaster}
-              close={() => showToaster(false)}
-              bg={toasterColor}
-            />
-          )}
-        </div>
+<ToastContainer theme="colored"/>
+                        
+           </div>
       </React.Fragment>
     )
 }
