@@ -32,10 +32,10 @@ const AdminDashboard = () => {
     },[barPotTypeUsers])
 
       const usersCount =  async () =>{
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const users =  await getUsersCount();
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (users.error) {
             setToasterMessage(users?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -45,15 +45,15 @@ const AdminDashboard = () => {
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
       }
 
       const potCount =  async () =>{
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const pot =  await getPotCounts();
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (pot.error) {
             setToasterMessage(pot?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -63,15 +63,15 @@ const AdminDashboard = () => {
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
       }
 
       const potClaim =  async () =>{
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const pot =  await getPotClaim();
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (pot.error) {
             setToasterMessage(pot?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -81,15 +81,15 @@ const AdminDashboard = () => {
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
       }
 
       const pieCharts =  async () =>{
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const pie =  await getPiechart();
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (pie.error) {
             setToasterMessage(pie?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -99,7 +99,7 @@ const AdminDashboard = () => {
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
       }
 
@@ -107,10 +107,10 @@ const AdminDashboard = () => {
         let dataToSend={
           potType: barPotTypeUsers
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const bar =  await getBarChart(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (bar.error) {
             setToasterMessage(bar?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
         } catch (error) {
             setToasterMessage(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
       }
 

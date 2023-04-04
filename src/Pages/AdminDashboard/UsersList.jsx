@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Form, Button, Table } from 'react-bootstrap'
 import { getAllUsers, getUserWalletDetails, updateUserStatus } from '../../Services/User'
-import Loader from '../../Components/Loader'
-import Toaster from '../../Components/Toaster'
 import { MDBSwitch } from 'mdb-react-ui-kit'; 
 import Modal from 'react-bootstrap/Modal';
 import './AdminDashboard.css'
 import Pagination from 'react-bootstrap/Pagination';
+import ApiLoader from '../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const UsersList = () => {
-  const [loading, setLoading] = useState(false)
-  const setShowToaster = param => showToaster(param)
-  const [toaster, showToaster] = useState(false)
-  const [toasterMessage, setToasterMessage] = useState('')
-  const [toasterColor, setToasterColor] = useState('primary')
+  const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.loading.isLoading)
   const [currentPage, setCurrentPage] = useState(1)
   const [allUsers, setAllUsers] = useState(null)
-  const [disable, disableSubmitButton] = useState(false)
   const [walletDetails,setWalletDetails] = useState([])
   const [confirmUser, setUser]=useState([])
   const [rewadPotDetail,setRewardPotDetail] = useState([])
@@ -24,34 +24,29 @@ const UsersList = () => {
 
   useEffect(() => {
     fetchApi()
-    
   }, [currentPage])
 
-  const fetchApi = async () => {
+  const fetchApi = async (e) => {
     let dataToSend = {
       currentPage: currentPage,
+      startDate: rewadPotDetail.startDate,
+      endDate: rewadPotDetail.endDate,
+      email: rewadPotDetail.email
     }
-
     try {
       const users = await getAllUsers(dataToSend)
-      setLoading(false)
+      dispatch(setLoadingFalse());
       if (users?.error == true) {
-        setToasterMessage(users?.message)
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(users?.message)
       } else {
-        setToasterMessage(users?.message)
-        // setShowToaster(true)
-        // setToasterColor('success')
+        // toast.success(users?.message)
         setAllUsers(users)
         let pages= Math.floor( users?.data?.count / 10 ) + 1;
         setLastPage(pages);
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng in getting all users')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false)
+      toast.error('Something Went Worng in getting all users')
+      dispatch(setLoadingFalse());
     }
      
   }
@@ -61,25 +56,19 @@ const UsersList = () => {
     let dataToSend = {
       userId: data._id,
     }
-    setLoading(true);
+    dispatch(setLoadingTrue());
     try {
       const wallet = await getUserWalletDetails(dataToSend)
-      setLoading(false)
+      dispatch(setLoadingFalse());
       if (wallet?.error == true) {
-        setToasterMessage(wallet?.message)
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(wallet?.message)
       } else {
-        setToasterMessage(wallet?.message)
-        // setShowToaster(true)
-        // setToasterColor('success')
+        toast.success(wallet?.message)
         setWalletDetails(wallet.data)
       }
     } catch (error) {
-      setToasterMessage('Something Went Worngin getting user wallet details')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false)
+      toast.error('Something Went Worngin getting user wallet details')
+      dispatch(setLoadingFalse());
     }
      
   }  
@@ -90,27 +79,21 @@ const UsersList = () => {
       userId: data._id,
       isBlocked: !data.isBlocked
     }
-    setLoading(true);
+    dispatch(setLoadingTrue());
 
     try {
       const userStatus = await updateUserStatus(dataToSend)
-      setLoading(false)
+      dispatch(setLoadingFalse());
       if (userStatus?.error == true) {
-        setToasterMessage(userStatus?.message)
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(userStatus?.message)
       } else {
-        setToasterMessage(userStatus?.message)
-        // setShowToaster(true)
-        // setToasterColor('success')
+        toast.success(userStatus?.message)
         handleCloseModal()
         fetchApi()
       }
     } catch (error) {
-      setToasterMessage('Something Went Worng in updating active user')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false)
+      toast.error('Something Went Worng in updating active user')
+      dispatch(setLoadingFalse());
     }
      
   }
@@ -118,12 +101,10 @@ const UsersList = () => {
   const nextPage = () => {
     if (currentPage < lastPage)
      setCurrentPage(currentPage + 1)
-    else disableSubmitButton(true)
   }
   const prevPage = () => {
     if (currentPage > 1) 
     setCurrentPage(currentPage - 1)
-    else disableSubmitButton(true)
   }
   const handleConfirmModal = (userinfo) => {
     setUser(userinfo)
@@ -135,38 +116,11 @@ const UsersList = () => {
 
   const handleClose = () => viewWalletShow(false);
   const handleCloseModal = () => setConfirmModal(false);
-  const handleShow = () => viewWalletShow(true);
 
-
-  const getFilterUsers = async (e) => {
+  const getFilterUsers =  (e) => {
     e.preventDefault();
-    let dataToSend = {
-      currentPage: currentPage,
-      startDate: rewadPotDetail.startDate,
-      endDate: rewadPotDetail.endDate,
-      email: rewadPotDetail.email
-    }
-
-    try {
-      const users = await getAllUsers(dataToSend)
-      setLoading(false)
-      if (users?.error == true) {
-        setToasterMessage(users?.message)
-        setShowToaster(true)
-        setToasterColor('danger')
-      } else {
-        setToasterMessage(users?.message)
-        // setShowToaster(true)
-        // setToasterColor('success')
-        setAllUsers(users)
-        console.log(users)
-      }
-    } catch (error) {
-      setToasterMessage('Something Went Worng in getting filtered users')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false)
-    }
+    setCurrentPage(1)
+    fetchApi()
      
   }
 
@@ -178,6 +132,12 @@ const UsersList = () => {
     else
     return value;
   };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+      setRewardPotDetail('');
+      fetchApi();
+  }
 
   return (
     <React.Fragment>
@@ -210,12 +170,11 @@ const UsersList = () => {
                 <tbody >
                     <tr> 
                         <td> 
-                        <Form.Select onChange={(e) => { navigator.clipboard.writeText(e.target.value); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}>
-                        {walletDetails?.walletDetails?.length ? <option value='select address'>Select Address</option> : <option value='select address'>No Wallet found</option>}
+                        <Form.Select onChange={(e) => { navigator.clipboard.writeText(e.target.value); toast.info( 'Wallet Address Copied !!');}}>
+                        {walletDetails?.walletDetails?.length ? <option value='' >Select Address</option> : <option value='No Wallet found'>No Wallet found</option>}
                           {walletDetails?.walletDetails && walletDetails?.walletDetails?.map((wallet) => (
                             <option value={wallet|| ''} key={wallet}>
-                              {wallet?.slice(0,5)+'....'+wallet?.slice(-5)}  <span className='fa fa-copy' title='copy address' style={{cursor:"pointer"}} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span>
-                              {/* <span className='d-flex justify-content-between' ><span className='emailWth' style={{backgroundColor:'yellow'}}>{wallet} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(wallet); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></span> */}
+                              {wallet?.slice(0,5)+'....'+wallet?.slice(-5)}  
                             </option>)) }
                         </Form.Select>
                         </td>               
@@ -251,24 +210,20 @@ const UsersList = () => {
               Are you sure to block {confirmUser?.userName} ?
               <br></br>
               <button type='primary' onClick={()=>updateActiveUser(confirmUser)}>Yes</button>
+              <button type='primary' onClick={()=>setConfirmModal(false)}>No</button>
               </div>
             </span>
             </Modal.Body>
           </Modal>
 
       <div className="users-listing">
-        {/*  */}
-        if(loading)
         <div className="users-list-filters">
-        <Form onSubmit={getFilterUsers}>
-
+        <Form onSubmit={getFilterUsers} onReset={handleReset}>
           <Row>
             <Col md="2">
-              
               <Form.Group  >
                 <Form.Label>Start Date</Form.Label>
                 <Form.Control
-                  
                   type="date"
                   value={rewadPotDetail.startDate|| ''}
                   onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
@@ -280,12 +235,12 @@ const UsersList = () => {
               <Form.Group  >
               <Form.Label>End Date</Form.Label>
               <Form.Control
-                
                 type="date"
                 min={rewadPotDetail?.startDate}
                 max={new Date().toISOString().split("T")[0]}
                 value={rewadPotDetail?.endDate|| ''}
-                onChange={({ target }) => { setRewardPotDetail({...rewadPotDetail,endDate:target.value})  }}
+                onChange={({ target }) => { setRewardPotDetail({...rewadPotDetail,endDate:target.value})}}
+                onReset={()=>setRewardPotDetail({...rewadPotDetail,endDate:''})}
               >
               </Form.Control>
               <Form.Control.Feedback type="invalid">End Date is required !!</Form.Control.Feedback>
@@ -300,15 +255,13 @@ const UsersList = () => {
                 className="me-2"
                 aria-label="Search"
                 onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,email:target.value})}
+                value={rewadPotDetail.email || ''}
                 />
             </Form.Group>
             </Col>
             <Col md="2" className='mt-auto mb-0'>
             <Button type="submit" className="">Search</Button>
-          
-            <Button type="reset" className="" style={{marginLeft:'15px'}} onClick={fetchApi}>Clear</Button>
-            
-            {/* <button type="submit" className="add-pot-submit-button" >Search</button> */}
+            <Button type="reset" className="" style={{marginLeft:'15px'}}>Clear</Button>
             </Col>
             
           </Row>
@@ -335,7 +288,7 @@ const UsersList = () => {
                       <tr key={user?._id}>
                         <td className='sNoWth'>{index + 1}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); setToasterMessage( 'Copied Succesfully');setShowToaster(true);}}></span></td>
+                        <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
                           <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user)}> <i className="fa fa-eye " /></span>
@@ -360,9 +313,9 @@ const UsersList = () => {
               <Pagination.Last onClick={()=>{setCurrentPage(lastPage)}}/>
           </Pagination>
         </div>
-        {/* <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={nextPage} > Next </button>
-        <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={prevPage} > Prev </button> */}
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor}/> )}
+        
+        <ToastContainer theme="colored"/>
+          {isLoading ? <ApiLoader /> : null} 
 
       </div>
       </div>

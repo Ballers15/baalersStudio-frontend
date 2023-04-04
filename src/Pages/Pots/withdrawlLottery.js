@@ -1,13 +1,13 @@
 import { lotteryWithdrawl, rewardWithdrawl } from "../../Services/User/indexPot";
 
 
-export function withdrawLottery (dataToSend) {
+export async function withdrawLottery (dataToSend) {
 
 
     console.log('withdrawlottery', dataToSend);  
     // setApiLoading(true);
     try {
-      const data =  lotteryWithdrawl(dataToSend);
+      const data =  await lotteryWithdrawl(dataToSend);
       // setApiLoading(false);
       if (data.error) {
         console.log(data?.message||'Something Went Worng in withdrawl');
@@ -26,13 +26,13 @@ export function withdrawLottery (dataToSend) {
 }
 
 
-export function withdrawReward (dataToSend) {
+export async function withdrawReward (dataToSend) {
 
 
   console.log('withdrawlottery', dataToSend);  
   // setApiLoading(true);
   try {
-    const data =  rewardWithdrawl(dataToSend);
+    const data = await rewardWithdrawl(dataToSend);
     // setApiLoading(false);
     if (data.error) {
       console.log(data?.message||'Something Went Worng in withdrawl');

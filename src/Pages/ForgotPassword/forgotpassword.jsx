@@ -49,10 +49,10 @@ const ForgotPassword = () => {
       let dataToSend = {
           email: email
       }
-    setLoading(true);
+    dispatch(setLoadingTrue());
       try {
         const response=await forgotPassword(dataToSend)
-        setLoading(false);
+        dispatch(setLoadingFalse());
       if (response.error) {
           setToasterMessage(response?.error?.message || 'Something Went Worng in getting token')
           setShowToaster(true)
@@ -71,7 +71,7 @@ const ForgotPassword = () => {
         setToasterMessage(error?.response?.data?.message || 'Something Went Worng in getting token')
         setShowToaster(true)
         setToasterColor('danger')
-        setLoading(false)
+        dispatch(setLoadingFalse());
       }
     } 
     else {
@@ -83,11 +83,11 @@ const ForgotPassword = () => {
   const createLink = async (data) => {
     if(data.length){
 
-      setLoading(true);
+      dispatch(setLoadingTrue());
 
       try {
           const passwordLink=(await forgotPasswordLink(data))
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (passwordLink.error) {
             setToasterMessage(passwordLink?.error?.message || 'Something Went Worng in generating link')
             setShowToaster(true)
@@ -102,7 +102,7 @@ const ForgotPassword = () => {
           setToasterMessage(error?.response?.data?.message || 'Something Went Worng link')
           setShowToaster(true)
           setToasterColor('danger')
-          setLoading(false);
+          dispatch(setLoadingFalse());
         }
     }
      
@@ -119,11 +119,11 @@ const ForgotPassword = () => {
       repeat: repeatPassword,
       token: token
     }
-    setLoading(true);
+    dispatch(setLoadingTrue());
 
     try {
       const changePass=(await changePassword(changePassData))
-      setLoading(false);
+      dispatch(setLoadingFalse());
 
       if (changePass.error) {
         setToasterMessage(changePass?.error?.message || 'Something Went Worng')
@@ -134,7 +134,7 @@ const ForgotPassword = () => {
         setShowToaster(true)
         setToasterColor('success')
         setErrorMsg(null)
-        setLoading(true)
+        dispatch(setLoadingTrue());
         setTimeout(() => {
           navigate('/login')
         }, 2000)
@@ -143,7 +143,7 @@ const ForgotPassword = () => {
       setToasterMessage(error?.response?.data?.message || 'Something Went Worng')
       setShowToaster(true)
       setToasterColor('danger')
-      setLoading(false);
+      dispatch(setLoadingFalse());
     }
      
   }

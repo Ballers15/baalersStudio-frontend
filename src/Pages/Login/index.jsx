@@ -4,17 +4,20 @@ import { useAuth } from '../../Auth/authProvider';
 import Form from "react-bootstrap/Form";
 import './Login.css';
 import { Link } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import ApiLoader from "../../Components/apiLoader";
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validated, setValidated] = useState(false);
     const [emailErrorMsg,setEmailErrorMsg]= useState(null)
-    
+    const isLoading = useSelector(state => state.loading.isLoading)
     const auth = useAuth()
     
     const handleLogin = (e) => {
-        setValidated(true);
+          setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
@@ -29,7 +32,9 @@ const Login = () => {
                 password:password
             }
             // console.log("HI IAM INSIDE THIS");
+
             auth.login(dataToSend)
+            
         } else {
             console.log('<<<<<<<<<<<<<<<<<<<<<-------------------Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
@@ -102,7 +107,6 @@ const Login = () => {
                                 <span></span>SIGN IN
                             </button>
                         </div>
-                            {/* <button type="submit" onClick={handleLogin}>SIGN IN</button> */}
                        
                         </div>
                         <div className="login-forget-password">
@@ -113,59 +117,12 @@ const Login = () => {
                         <span>New to Ballers?</span>
                         <Link to='/signup'> <span>Sign Up</span></Link> 
                     </div>
-                        {/* <span className="login-signup-tag">New to Ballers?</span>
-                    <a href='/signup'> <span className="login-signup-tag-danger">Sign Up</span></a> */}
-                    </div>
-                    </Form>
-                    </div>
-                    
-            
-                {/* <div className="login-box">
-                    <span className="login-head">
-                        SIGN IN FOR UPDATES!
-                    </span>
-                    <Form noValidate validated={validated} onSubmit={handleLogin}>
-                        <Form.Group  className="login-email-input" >
-                            <Form.Label className="login-form-lable login-email-lable">Email</Form.Label>
-                            <Form.Control
-                                required
-                                type="email"
-                                
-                                placeholder="Email"
-                                value={email}
-                                onChange={({ target }) => setEmail(target.value)}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Valid E-mail is required
-                            </Form.Control.Feedback>
-                        </Form.Group>
 
-                        <Form.Group  className="login-password-input" >
-                            <Form.Label className="login-form-lable login-password-lable">Password</Form.Label>
-                            <Form.Control
-                                required
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                minLength='8'
-                                onChange={({ target }) => setPassword(target.value)}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                 Password is required (8 character)
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <div>
-                            <button type="submit" className="login-submit-button" onClick={handleLogin}>OK</button>
-                          <a href='/forgotPassword'> <span className="login-forget-password">Forgot password?</span></a>
-                        </div>
-                    <div>
-                        <span className="login-signup-tag">New to Ballers?</span>
-                       <Link to='/signup'> <span className="login-signup-tag-danger">Sign Up</span></Link>
                     </div>
                     </Form>
-                </div> */}
+                    </div>
             </div>
-               
+            {isLoading ? <ApiLoader /> : null} 
         </React.Fragment>
     )
 }

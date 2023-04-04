@@ -195,10 +195,10 @@ const Dashboard = () => {
                 email: email
             }
             // auth.login(dataToSend)
-            setLoading(true);
+            dispatch(setLoadingTrue());
             try {
                 const subscribe = await subscribeMailJet(dataToSend);
-                setLoading(false);
+                dispatch(setLoadingFalse());
                 if (subscribe.error) {
                     setToasterMessage(subscribe?.error?.message || 'Something Went Worng');
                     setShowToaster(true);
@@ -215,7 +215,7 @@ const Dashboard = () => {
                 setToasterMessage(error?.response?.data?.message || 'Something Went Worng');
                 setShowToaster(true);
                 setToasterColor('danger')
-                setLoading(false);
+                dispatch(setLoadingFalse());
             }
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')

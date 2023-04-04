@@ -6,13 +6,18 @@ import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
 import {AddRewardPot} from '../../../Services/Admin';
 import { useNavigate,useLocation } from 'react-router-dom';
-import Loader from "../../../Components/Loader";
-import Toaster from "../../../Components/Toaster";
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
-// import TimeKeeper from 'react-timekeeper';
+import ApiLoader from '../../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actions";
 
 
 const AddPot = () => {
+    const isLoading = useSelector(state => state.loading.isLoading)
+    const dispatch = useDispatch()
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
@@ -27,16 +32,11 @@ const AddPot = () => {
     const [startDateTime, setStartDateTime] = useState(currentTime);
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState(currentTime);
-    const [loading, setLoading] = useState(false);
-    const [toasterMessage, setToasterMessage] = useState("");
     const [disable, disableSubmitButton] = useState(false);
-    const [toaster, showToaster] = useState(false);
-    const setShowToaster = (param) => showToaster(param);
-    const setDisableSubmitButton = (param) => disableSubmitButton(param);
+       const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
-    const [toasterColor, setToasterColor] = useState('primary')
 
 
 
@@ -51,14 +51,12 @@ const AddPot = () => {
         let dataToSend = {
             potId:id
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
             try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
-              setLoading(false);
+              dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
-                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
-                setShowToaster(true);
-                setToasterColor('danger')
+                toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
                 } else {
                   let data = getPotDetailsById?.data[0];
 
@@ -102,10 +100,8 @@ const AddPot = () => {
               }
              
             } catch (error) {
-                setToasterMessage(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
-                setShowToaster(true);
-                setLoading(false);
-                setToasterColor('danger')
+                toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
+                dispatch(setLoadingFalse());
             }
              
         }
@@ -171,28 +167,22 @@ const AddPot = () => {
             }
         }
         setDisableSubmitButton(true);
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const addPot = await AddRewardPot(rewadPotDetail);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (addPot.error) {
-            setToasterMessage(addPot?.message||'Something Went Worng in adding reward pot');
-            setShowToaster(true);
+            toast.error(addPot?.message||'Something Went Worng in adding reward pot');
             setDisableSubmitButton(false);
-            setToasterColor('danger')
           } else {
-            setToasterMessage('Pot Added Succesfully !!');
-            setShowToaster(true);
-            setToasterColor('success')
+            toast.success('Pot Added Succesfully !!');
             setDisableSubmitButton(false);
             navigate('/poolListing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in adding reward pot');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in adding reward pot');
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -239,32 +229,26 @@ const AddPot = () => {
             rewadPotDetail.potId = state?.id;
         }
         setDisableSubmitButton(true);
-        setLoading(true);
+        dispatch(setLoadingTrue());
         // console.log(rewadPotDetail)
         // return
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (updatePot.error) {
-            setToasterMessage(updatePot?.message||'Something Went Worng in updating reward pot');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(updatePot?.message||'Something Went Worng in updating reward pot');
             setDisableSubmitButton(false);
               
           } else {
-            setToasterMessage('Pot Updated Succesfully !!');
-            setShowToaster(true);
-            setToasterColor('success')
+            toast.success('Pot Updated Succesfully !!');
             setDisableSubmitButton(false);
             state.id = '';
             navigate('/poolListing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward pot');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward pot');
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -314,24 +298,6 @@ const AddPot = () => {
                                             <TimePicker 
                                              value={potStatusCheck ? currentTime : startDateTime|| ''} 
                                             onChange={(e) => { setStartDateTime(e);}} />
-                                   
-                                            {/* <div className='pickTime'>
-                                                {showTime &&
-                                                    <TimeKeeper
-                                                        // time={rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime|| ''}
-                                                        time={startDateTime}
-                                                        onChange={(e)=> handleStartTime(e)}
-                                                        onDoneClick={() => setShowTime(false)}
-                                                        switchToMinuteOnHourSelect
-                                                        hour24Mode                                                   
-                                                    />
-
-                                                }
-                                                <span>{rewadPotDetail?.isActive ? new Date().toLocaleTimeString([], {hour12: 'true',hour: '2-digit', minute:'2-digit'}) : startDateTime}</span>
-                                                {!showTime &&
-                                                    <span onClick={() => setShowTime(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                } 
-                                            </div> */}
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
@@ -492,13 +458,8 @@ const AddPot = () => {
                         {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={ addRewardPot}><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
-                {loading ? <Loader /> : null}
-                {toaster && <Toaster
-                    message={toasterMessage}
-                    show={toaster}
-                    close={() => showToaster(false)}
-                    bg={toasterColor} />
-                }
+                <ToastContainer theme="colored"/>
+                {isLoading ? <ApiLoader /> : null}
             </div>
         </div>
     </React.Fragment>

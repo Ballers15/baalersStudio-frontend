@@ -47,7 +47,6 @@ const NavigationRouter = () => {
               <Route exact path="/login" element={<CheckUser><Login /></CheckUser>} />
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route path="*" element={<ErrorPage />} />
-              <Route path="/apiloader" element={<ApiLoader />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
             </Route>
             

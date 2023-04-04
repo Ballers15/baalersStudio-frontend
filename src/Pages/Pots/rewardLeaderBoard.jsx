@@ -5,12 +5,14 @@ import {  leaderBoardReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+
    
 const LeaderBoardReward = (props) => {
-
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
-     const [loading, setLoading] = useState(false);   
     const [leaderSearch,setLeaderSearch]  = useState('')
+    const dispatch = useDispatch()
 
 
     useEffect(()=>{
@@ -23,10 +25,10 @@ const LeaderBoardReward = (props) => {
         let dataToSend = {
             search: data,
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const leader = await leaderBoardReward(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (leader.error) {
             toast.error(leader?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -37,7 +39,7 @@ const LeaderBoardReward = (props) => {
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
             // setToasterColor('danger')
         }
     }

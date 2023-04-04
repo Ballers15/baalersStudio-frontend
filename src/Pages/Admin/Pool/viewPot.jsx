@@ -5,11 +5,18 @@ import {useState,useEffect} from 'react';
 import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
 import { useNavigate,useLocation } from 'react-router-dom';
-import Loader from "../../../Components/Loader";
-import Toaster from "../../../Components/Toaster";
 import {getRewardPotById} from '../../../Services/Admin'
+import ApiLoader from '../../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actions";
+
 
 const ViewPot = () => {
+    const isLoading = useSelector(state => state.loading.isLoading)
+    const dispatch = useDispatch()
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
@@ -21,13 +28,9 @@ const ViewPot = () => {
     const [startDateTime, setStartDateTime] = useState('12:00');
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState('12:00');
-    const [loading, setLoading] = useState(false);
-    const [toasterMessage, setToasterMessage] = useState("");
-    const [disable, disableSubmitButton] = useState(false);
     const [toaster, showToaster] = useState(false);
     const [toasterColor, setToasterColor] = useState('primary')
     const setShowToaster = (param) => showToaster(param);
-    const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
 
@@ -42,12 +45,12 @@ const ViewPot = () => {
         let dataToSend = {
             potId:id
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
             try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
-              setLoading(false);
+              dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
-                setToasterMessage(getPotDetailsById?.message||'Something Went Wrong in getting pot detail by ID');
+                toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot detail by ID');
                 setShowToaster(true);
                 setToasterColor('danger')
                 } else {
@@ -83,10 +86,10 @@ const ViewPot = () => {
               }
              
             } catch (error) {
-                setToasterMessage(error?.response?.data?.message||'Something Went Wrong in getting pot detail by ID');
+                toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot detail by ID');
                 setShowToaster(true);
                 setToasterColor('danger')
-                setLoading(false);
+                dispatch(setLoadingFalse());
             }
              
 }
@@ -292,13 +295,8 @@ const ViewPot = () => {
                         <button type="primary" className="add-pot-submit-button" onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
                         </div>
                 </Form>
-                {loading ? <Loader /> : null}
-                {toaster && <Toaster
-                    message={toasterMessage}
-                    show={toaster}
-                    close={() => showToaster(false)} 
-                    bg={toasterColor}/>
-                }
+                <ToastContainer theme="colored"/>
+                {isLoading ? <ApiLoader /> : null}
             </div>
         </div>
     </React.Fragment>

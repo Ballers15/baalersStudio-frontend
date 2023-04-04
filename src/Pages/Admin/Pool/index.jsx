@@ -4,13 +4,18 @@ import React,{useEffect,useState} from "react";
 import './Pool.css';
 import { useNavigate } from 'react-router-dom'
 import {getAllRewardPot,updateRewardPotStatus, getUpcomingRewardPot, getArchivesRewardPot, getSpecificPotUsers, updateRewardClaimStatus} from '../../../Services/Admin'
-import Loader from "../../../Components/Loader";
-import Toaster from "../../../Components/Toaster";
 import { MDBSwitch } from 'mdb-react-ui-kit';
 import {Form, Button, Row, Col} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
+import ApiLoader from '../../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actions";
+
 
 const PoolListing = () => {
     useEffect(() => {
@@ -18,9 +23,9 @@ const PoolListing = () => {
     }, []);
 
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
-    const [toaster, showToaster] = useState(false);
-    const [toasterMessage, setToasterMessage] = useState("");
+    const isLoading = useSelector(state => state.loading.isLoading)
+    const dispatch = useDispatch()
+
     const [rewardPotDetailsArray, setRewardPotDetailsArray] = useState([]);
     const [upcomingRewardPotArray, setUpcomingRewardPotArray] = useState([]);
     const [archivesRewardPotArray, setArchivesRewardPotArray] = useState([]);
@@ -41,8 +46,6 @@ const PoolListing = () => {
     const [walletAddressFilter, setWalletAddressFilter] = useState('')
     const [potIdForUser,setPotIdForUser] = useState('')
     const [potDetails, setPotDetails] = useState()
-    const [toasterColor, setToasterColor] = useState('primary')
-    const setShowToaster = (param) => showToaster(param);
     
     const onInit=()=>{
         getAllRewardPotDetails();
@@ -65,18 +68,18 @@ const PoolListing = () => {
 
          const nextPageActive = () => {
             // console.log(activePotCount)
-            if (activePotCount >= 10)
+            if (currentPageAcitve < numberOfActivePage)
                 setCurrentPageActive(currentPageAcitve + 1)
         }
 
         const nextPageArchive = () => {     
-            if (archivePotCount >= 10)
+            if (currentPageArchive < numberOfArchivePage)
                 setCurrentPageArchive(currentPageArchive + 1)
 
             // console.log('upcoming',currentPageUpcoming)
             }
         const nextPageUpcoming = () => {
-            if (upcomingPotCount >= 10)
+            if (currentPageUpcoming < numberOfUpcomingPage)
                 setCurrentPageUpcoming(currentPageUpcoming + 1)
 
                 // console.log('upcoming',currentPageUpcoming)
@@ -112,102 +115,118 @@ const PoolListing = () => {
     }
 
     const getAllRewardPotDetails = async () => {
-        setLoading(true);
+        dispatch(setLoadingTrue());
         let dataToSend=''
-        if(activePotType!=='ALL' || activePotType==='') {
+        if(activePotType ==='ALL' || activePotType==='') {
         dataToSend = {
             currentPage: currentPageAcitve,
-            potType: activePotType
           }
         }
         else {
             dataToSend = {
-                currentPage: currentPageAcitve
+                currentPage: currentPageAcitve,
+                potType: activePotType
             }
         }
         try {
           const getPotDetails = await getAllRewardPot(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(getPotDetails?.message||'Something Went Worng in geting pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
-              setActivePotCount(getPotDetails?.data?.count);
+              let pages = (getPotDetails?.data?.count) % 10;
+              if (pages > 0 ){
+              setNumberOfActivePage(Math.floor(getPotDetails?.data?.count / 10) + 1)
+                }
+              else {
+              setNumberOfActivePage(Math.floor(getPotDetails?.data?.count / 10))
+              }
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in geting pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
          
     }
     const getUpcomingRewardPotDetails = async () => {
-        setLoading(true);
+        dispatch(setLoadingTrue());
         let dataToSend=''
-        if(upcomingPotType!=='ALL' || upcomingPotType==='') {
-        dataToSend = {
-            currentPage: currentPageUpcoming,
-            potType: upcomingPotType
-          }
-        }
-        else {
+        if(upcomingPotType ==='ALL' || upcomingPotType==='') {
             dataToSend = {
-                currentPage: currentPageUpcoming
+                currentPage: currentPageUpcoming,
+              }
             }
+            else {
+                dataToSend = {
+                    currentPage: currentPageUpcoming,
+                    potType: upcomingPotType
+                }
         }
         try {
           const getPotDetails = await getUpcomingRewardPot(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting upcoming pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(getPotDetails?.message||'Something Went Worng in geting upcoming pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
-              setUpcomingPotCount(getPotDetails?.data?.count);
-          }
+              let pages = (getPotDetails?.data?.count) % 10;
+              if (pages > 0 ){
+                setNumberOfUpcomingPage(Math.floor(getPotDetails?.data?.count / 10) + 1)
+                }
+              else {
+                setNumberOfUpcomingPage(Math.floor(getPotDetails?.data?.count / 10))
+              }          }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting upcoming pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in geting upcoming pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
          
     }
     const getArchivesRewardPotDetails = async () => {
-        setLoading(true);
+        dispatch(setLoadingTrue());
         let dataToSend=''
-        if(archivePotType!=='ALL' || archivePotType==='') {
-        dataToSend = {
-            currentPage: currentPageArchive,
-            potType: archivePotType
-          }
-        }
-        else {
+        if(archivePotType ==='ALL' || archivePotType==='') {
             dataToSend = {
-                currentPage: currentPageArchive
+                currentPage: currentPageArchive,
+              }
             }
+            else {
+                dataToSend = {
+                    currentPage: currentPageArchive,
+                    potType: archivePotType
+                }
         }
         try {
           const getPotDetails = await getArchivesRewardPot(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            setToasterMessage(getPotDetails?.message||'Something Went Worng in geting acrchive pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(getPotDetails?.message||'Something Went Worng in geting acrchive pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
-              setArchivePotCount(getPotDetails?.data?.count);
-
+              let pages = (getPotDetails?.data?.count) % 10;
+              if (pages > 0 ){
+                setNumberOfArchivePage(Math.floor(getPotDetails?.data?.count / 10) + 1)
+                }
+              else {
+              setNumberOfActivePage(Math.floor(getPotDetails?.data?.count / 10))
+              }
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in geting acrchive pot details');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in geting acrchive pot details');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -224,27 +243,27 @@ const PoolListing = () => {
             potId:data._id,
             isActive:!data.isActive
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const potSatus = await updateRewardPotStatus(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (potSatus.error) {
-            setToasterMessage(potSatus?.message||'Something Went Worng in updating reward pot status');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(potSatus?.message||'Something Went Worng in updating reward pot status');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            setToasterMessage('Pot Status Updated Succesfully');
-              setShowToaster(true); 
-              setToasterColor('success')
+            toast.info('Pot Status Updated Succesfully');
+            //   setShowToaster(true); 
+            //   setToasterColor('success')
               getAllRewardPotDetails();
               getUpcomingRewardPotDetails();
               getArchivesRewardPotDetails();
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward pot status');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward pot status');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -271,26 +290,26 @@ const PoolListing = () => {
             potId:data._id,
             claim:!data.claimPot
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const claimStatus = await updateRewardClaimStatus(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (claimStatus.error) {
-            setToasterMessage(claimStatus?.message||'Something Went Worng  in updating reward claim status');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(claimStatus?.message||'Something Went Worng  in updating reward claim status');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            setToasterMessage('Claim Status Updated Succesfully');
-            setShowToaster(true); 
-            setToasterColor('success')
+            toast.success('Claim Status Updated Succesfully');
+            // setShowToaster(true); 
+            // setToasterColor('success')
             onInit()      
             handleClosecClaim()   
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng in updating reward claim status');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward claim status');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -300,26 +319,26 @@ const PoolListing = () => {
         let dataToSend = {
             potId: data._id,
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
             const usersList = await getSpecificPotUsers(dataToSend);
-            setLoading(false);
+            dispatch(setLoadingFalse());
             if(usersList.error){
-                setToasterMessage(usersList?.message||'Something Went Worng  in getting pot users');
-                setShowToaster(true);
-                setToasterColor('danger')
+                toast.error(usersList?.message||'Something Went Worng  in getting pot users');
+                // setShowToaster(true);
+                // setToasterColor('danger')
             } else {
                 setPotUsers(usersList?.data)
-                // setToasterMessage('Users listed Succesfully');
+                // toast.success('Users listed Succesfully');
                 // setShowToaster(true); 
                 // setToasterColor('success')
             }
             
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng  in getting pot users');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng  in getting pot users');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
 
@@ -332,25 +351,25 @@ const PoolListing = () => {
             email: emailFilter,
             walletSearch: walletAddressFilter
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const users = await getSpecificPotUsers(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (users.error) {
-            setToasterMessage(users?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
+            toast.error(users?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
         } else {
-            // setToasterMessage('Claim Status Updated Succesfully');
+            // toast.success('Claim Status Updated Succesfully');
             // setShowToaster(true); 
             // setToasterColor('success')
             setPotUsers(users?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            setShowToaster(true);
-            setToasterColor('danger')
-            setLoading(false);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
+            // setShowToaster(true);
+            // setToasterColor('danger')
+            dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
     }
@@ -431,10 +450,10 @@ const PoolListing = () => {
                         <tr key={user._id}>
                             <td  className="sNoWth">{index+1}</td>
                             <td> {user?.userDetails?.userName}</td>           
-                            <td>{user?.userDetails?.email}{' '}{' '}{' '}{' '}<span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.userDetails?.email); setToasterMessage( 'Copied Succesfully'); setShowToaster(true); }}></span></td>
+                            <td>{user?.userDetails?.email}{' '}{' '}{' '}{' '}<span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.userDetails?.email); toast.info( 'Copied Succesfully');  }}></span></td>
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); setToasterMessage( 'Copied Succesfully'); setShowToaster(true); }}></span></td>  
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.info( 'Copied Succesfully'); }}></span></td>  
                             <td>{user?.nftHolded}</td>
                         </tr>  
                         )
@@ -569,7 +588,7 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                         {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                     </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully');}}></span>
                                 </td>
                                 <td>
                                     <span title= {pot?.assetDetails?.assetName}>
@@ -615,13 +634,13 @@ const PoolListing = () => {
                     </tbody>
                     </table>
                     <Pagination>
-                        <Pagination.First />
+                        <Pagination.First onClick={()=>{setCurrentPageActive(1)}}/>
                         <Pagination.Prev onClick={prevPageActive}/>
                         <Pagination.Item active >{currentPageAcitve}</Pagination.Item>                     
                         <Pagination.Ellipsis />
-                        <Pagination.Item >{20}</Pagination.Item>
+                        <Pagination.Item disabled>{numberOfActivePage}</Pagination.Item>
                         <Pagination.Next onClick={nextPageActive}/>
-                        <Pagination.Last />
+                        <Pagination.Last onClick={()=>{setCurrentPageActive(numberOfActivePage)}}/>
                     </Pagination>
                         </div>
                 </div>
@@ -696,7 +715,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully'); }}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>
@@ -741,13 +760,13 @@ const PoolListing = () => {
                         </tbody>
                         </table>
                         <Pagination>
-                            <Pagination.First />
+                            <Pagination.First onClick={()=>{setCurrentPageUpcoming(1)}}/>
                             <Pagination.Prev onClick={prevPageUpcoming}/>
                             <Pagination.Item active>{currentPageUpcoming}</Pagination.Item>                     
                             <Pagination.Ellipsis />
-                            <Pagination.Item>{20}</Pagination.Item>
+                            <Pagination.Item disabled>{numberOfUpcomingPage}</Pagination.Item>
                             <Pagination.Next onClick={nextPageUpcoming}/>
-                            <Pagination.Last />
+                            <Pagination.Last onClick={()=>{setCurrentPageUpcoming(numberOfUpcomingPage)}}/>
                         </Pagination>
                     </div>
                 </div>
@@ -822,7 +841,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); setToasterMessage( 'Address Copied Succesfully');setShowToaster(true);}}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully');}}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>
@@ -867,25 +886,20 @@ const PoolListing = () => {
                         </tbody>
                         </table>
                         <Pagination>
-                            <Pagination.First />
+                            <Pagination.First onClick={()=>{setCurrentPageArchive(1)}}/>
                             <Pagination.Prev onClick={prevPageArchive}/>
                             <Pagination.Item active>{currentPageArchive}</Pagination.Item>                     
                             <Pagination.Ellipsis />
-                            <Pagination.Item>{20}</Pagination.Item>
+                            <Pagination.Item  disabled>{numberOfArchivePage}</Pagination.Item>
                             <Pagination.Next onClick={nextPageArchive}/>
-                            <Pagination.Last />
+                            <Pagination.Last onClick={()=>{setCurrentPageArchive(numberOfArchivePage)}}/>
                         </Pagination>
                     </div>
                 </div>
                
             </div>
-            {loading ? <Loader /> : null}
-                {toaster && <Toaster
-                    message={toasterMessage}
-                    show={toaster}
-                    close={() => showToaster(false)} 
-                    bg={toasterColor}/>
-                }
+            {isLoading ? <ApiLoader /> : null} 
+            <ToastContainer theme="colored"/>
              </div>
         </React.Fragment>
     )

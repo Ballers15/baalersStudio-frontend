@@ -1,20 +1,17 @@
 import { useState,useEffect, createContext, useContext } from 'react'
 import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
-import Loader from "../Components/Loader";
-import Toaster from "../Components/Toaster";
-
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../Components/Redux/actions";
+import {  ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext(null);
 
 export default function AuthProvide({ children }) {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [toasterMessage, setToasterMessage] = useState("");
-  const [toaster, showToaster] = useState(false);
-  const setShowToaster = (param) => showToaster(param);
   const navigate = useNavigate()
-  const [toasterColor, setToasterColor] = useState('primary')
   const prev = sessionStorage.getItem('before login')
   
 
@@ -29,40 +26,32 @@ export default function AuthProvide({ children }) {
 const [passErrorMsg,setPassErrorMsg]= useState(null)
   
   const login = async (data) => {
-    setLoading(true);
+    dispatch(setLoadingTrue());
     try {
       const login = await userLogin(data);
-      setLoading(false);
+      dispatch(setLoadingFalse());
       if (login.error) {
       console.log(login,'./././')
-      setToasterMessage(login?.message||'Something Went Worng');
-      setShowToaster(true);
-      setToasterColor('danger')
+      toast.error(login?.message||'Something Went Worng');
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
           setUser(login.data); 
           localStorage.setItem('_u', JSON.stringify(login.data))
-          setToasterMessage('Login Succesfully !!');
-          setShowToaster(true);
-          setToasterColor('success')
+          toast.success('Login Succesfully !!');
           navigate('/admin-dashboard')
         } 
         else {
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
-          setToasterMessage('Login Succesfully !!');
-          setShowToaster(true);
-          setToasterColor('success')
+          toast.success('Login Succesfully !!');
           navigate(prev)
         }
       }
     } catch (error) {
       // console.log('err in login',error)
-      setToasterMessage(error ||'Something Went Worng during login');
-      setShowToaster(true);
-      setToasterColor('danger')
-      setLoading(false);
+      toast.error(error ||'Something Went Worng during login');
+      dispatch(setLoadingFalse());
       setPassErrorMsg(error || 'Incorrect Password')
       navigate('/login')
     }
@@ -78,13 +67,7 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   return (
     <AuthContext.Provider value={{ passErrorMsg, setPassErrorMsg, login, logout }}>
       {children}
-      {loading ? <Loader /> : null}
-      {toaster && <Toaster
-                    message={toasterMessage}
-                    show={toaster}
-                    close={() => showToaster(false)}
-                    bg={toasterColor} />
-                }
+      <ToastContainer  theme="colored"/>
     </AuthContext.Provider>
   )
 }

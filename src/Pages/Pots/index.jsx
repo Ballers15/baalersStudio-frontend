@@ -16,7 +16,12 @@ import lotteryPot from '../../Assest/img/slide3.webp'
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from "../../Components/Loader";
+import ApiLoader from "../../Components/apiLoader";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue, setIsClaimedTrue } from "../../Components/Redux/actions";
+
+
 
 const PotPage = () => {
     $(document).ready(function(){
@@ -39,12 +44,11 @@ const PotPage = () => {
         
       });
 
-
-    
+    const dispatch = useDispatch()
+    const isLoading = useSelector(state => state.loading.isLoading)
     const [potType, setPotType] = useState('')
     const [expiryTime, setExpiryTime] = useState("");
     const [potDetails,setPotDetails] = useState('')
-    const [loading, setLoading] = useState(false);   
     const [cash, setCash] = useState('')
     const user = localStorage.getItem('_u')
     const walletAddress = localStorage.getItem('_wallet')
@@ -94,8 +98,6 @@ const PotPage = () => {
          }, 1000); }
         
     }
-
-
   
     useEffect(()=>{
     if(type === 'lottery'){
@@ -128,10 +130,10 @@ const PotPage = () => {
         let dataToSend = {
             potType: potType,
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const pot = await getActivePot(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (pot.error) {
             toast.error(pot?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -141,13 +143,13 @@ const PotPage = () => {
             setPotDetails(pot?.data.length?pot.data[0]:'');
             setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
             setPrevious(false);
-            // console.log(pot?.data.length?pot.data[0]?.endDate:'');
+            // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -159,16 +161,16 @@ const PotPage = () => {
                 amount:cash,
                 potId: potDetails?._id
             }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const redeem = await redeemCashLottery(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (redeem.error) {
             toast.error(redeem?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
         } else {
-            toast.success(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
+            toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
             // setShowToaster(true); 
             // setToasterColor('success')
             setRedeemModal(false)
@@ -178,7 +180,7 @@ const PotPage = () => {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -190,10 +192,10 @@ const PotPage = () => {
                 amount:cash,
                 potId: potDetails?._id
             }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const redeem = await redeemCashReward(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (redeem.error) {
             toast.error(redeem?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -201,7 +203,7 @@ const PotPage = () => {
             setRedeemModal(false)
             
           } else {
-            toast.success(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
+            toast.info(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
             // setShowToaster(true); 
             // setToasterColor('success')
             setRedeemModal(false)
@@ -212,7 +214,7 @@ const PotPage = () => {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
          
     }
@@ -222,16 +224,16 @@ const PotPage = () => {
             {
                 walletAddress: localStorage.getItem('_wallet'),
             }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const cash = await getGameCash(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (cash.error) {
             toast.error(cash?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
         } else {
-            toast.success('cash fetched Successfully');
+            toast.info('cash fetched Successfully');
             // setShowToaster(true); 
             // setToasterColor('success')
             setCash(cash?.data?.amount)
@@ -240,7 +242,7 @@ const PotPage = () => {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
             // setToasterColor('danger')
-            setLoading(false);
+            dispatch(setLoadingFalse());
        }
         
     }
@@ -321,13 +323,7 @@ return(
             </div>
         </div>
         <div className="gradientBackgroung pb-8 pt-5 howItWork ht100 position-relative" >
-            {/* <LazyLoadImage
-                src={Ellipse5}
-                className="bgShade2"
-                width="1003"
-                height="1788"
-                alt="Eclipse"
-              /> */}
+
               <div className="container">
                 <div className="positionRelative mt-5 mb-5 headWth mx-auto">
                     <h2 className="heading text-center">
@@ -340,7 +336,6 @@ return(
                 <div className="row">
                     <div className="col-sm-8">
                         <div className="position-relative youtubeBox">
-                            {/* <img src={youtubePopup} alt="" className="img-responsive" /> */}
                             <button className="popup-btn"> 
                             <div className="waves-block">
                                 <div className="waves wave-1"></div>
@@ -425,14 +420,14 @@ return(
                {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
                 
 
-           {previous === false && <div className="container">
+           {expiryTime !== '' && <div className="container">
                 <LeaderBoardRibbon/>
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
                 {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
             </div>}
 
         </div>
-        {loading ? <Loader /> : null} 
+        {isLoading ? <ApiLoader /> : null} 
         <ToastContainer theme="colored"/>
     </div>
     </>

@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect} from "react";
 import './Pool.css' 
-import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
 
 
@@ -15,67 +14,11 @@ const Pool = () => {
        
     })
 
-    const [lotteryModalShow, setLotteryModalShow] = useState(false);
-    const [rewardModalShow, setRewardModalShow] = useState(false);
-
-    const handleShow = (modalName)=>{
-       if(modalName === 'lottery'){
-            setLotteryModalShow(true);
-        }
-        else if(modalName === 'reward'){
-            setRewardModalShow(true);
-        }
-        
-    }
-
-    const handleHide = (modalName)=>{
-        if(modalName === 'lottery'){
-            setLotteryModalShow(false);
-        }
-        else if(modalName === 'reward'){
-            setRewardModalShow(false);
-        }
-    }
+ 
 
     return (
         <React.Fragment>
-                <Modal
-                show={lotteryModalShow}
-                onHide={()=> handleHide('lottery')}
-                backdrop="static"
-                keyboard={false}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Lottery Pool</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <p>
-                Participate in the Daily lottery pools by depositing your in-game cash and you might win Baller's NFTs and other rewards.
-                </p>
-                </Modal.Body> 
-            </Modal>
-            <Modal
-                show={rewardModalShow}
-                onHide={()=> handleHide('reward')}
-                backdrop="static"
-                keyboard={false}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reward Pool</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                 <p>
-                 Greater rewards await for those who participate in the Reward Pool.
-                 </p>
-                 <p>
-                 Baller NFT Holders will get a chance to win $BALR tokens daily, be on top of the community leaderboard and be a real Baller!
-                 </p>
-                </Modal.Body> 
-            </Modal>
+
             <div className="pool"> 
                <div className="poolScreen w-100">
                     <div className="container">

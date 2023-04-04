@@ -2,25 +2,27 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Col, Row, Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
-import Loader from '../../Components/Loader' 
-import Toaster from '../../Components/Toaster'
 import OtpInput from 'react-otp-input';
 import { checkUserName, registerUser, userLogin, userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
+import ApiLoader from '../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const Signup = () => {
+
+  const isLoading = useSelector(state => state.loading.isLoading)
+  const dispatch = useDispatch()
   const [validated, setValidated] = useState(false)
   const [errorMsg,setErrorMsg]= useState(null)
   const [emailErrorMsg,setEmailErrorMsg]= useState(null)
   const [passErrorMsg,setPassErrorMsg]= useState(null)
-  const [toasterMessage, setToasterMessage] = useState("");
-  const setShowToaster = (param) => showToaster(param);
-  const [toaster, showToaster] = useState(false);
   const [response,setResponse] = useState(false);
   const [userNameCheck, setUserNameCheck] = useState(false)
   const [otp, setOtp]=useState("")
-  const [loading, setLoading] = useState(false);
-  const [toasterColor, setToasterColor] = useState('primary')
   const [userNameErr,setUserNameErr] = useState('')
   const navigate = useNavigate();
   
@@ -115,26 +117,26 @@ const registerUsers = async () => {
           email: userDetails.email,
           password:userDetails.password,
       }
-      setLoading(true);
+      dispatch(setLoadingTrue());
       try {
         let user = await registerUser(dataToSend)
-        setLoading(false);
+        dispatch(setLoadingFalse());
         if (user.error) {
-          setToasterMessage(user?.error?.message || 'Something Went Worng in registering user')
-          setShowToaster(true)
-          setToasterColor('danger')
+          toast.error(user?.error?.message || 'Something Went Worng in registering user')
+          // setShowToaster(true)
+          // setToasterColor('danger')
         } else {
-          setShowToaster(true)
-          setToasterMessage('Success!! Please check your mail')
+          // setShowToaster(true)
+          toast.success('Success!! Please check your mail')
           setErrorMsg(null)
-          setToasterColor('success')
+          // setToasterColor('success')
           setResponse(true)
             }
         } catch (error) {
-        setToasterMessage(error?.response?.data?.message || 'Something Went Worng in registering user')
-        setShowToaster(true)
-        setToasterColor('danger')
-        setLoading(false);
+          toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
+        // setShowToaster(true)
+        // setToasterColor('danger')
+        dispatch(setLoadingFalse());
         }
       }
 
@@ -145,24 +147,24 @@ const registerUsers = async () => {
     let dataToSend= {
       userName: userDetails.userName.trim(),
     }
-    setLoading(true);
+    dispatch(setLoadingTrue());
 
     try {
       const checkUname=(await checkUserName(dataToSend))  // check user name api call
-      setLoading(false);
+      dispatch(setLoadingFalse());
       // console.log(checkUname)
       
       if (checkUname.error) {
-      setToasterMessage(checkUname?.error?.message || 'Something Went Worng in checking username')
-      setShowToaster(true)
-      setToasterColor('danger')
+        toast.error(checkUname?.error?.message || 'Something Went Worng in checking username')
+      // setShowToaster(true)
+      // setToasterColor('danger')
       setUserNameErr('Username Alredy Exists')
 
     } else {
-      setToasterMessage(checkUname?.message || 'Username is valid')
+      // toast.success(checkUname?.message || 'Username is valid')
       setUserNameErr('Username is valid !')
-      setShowToaster(true)
-      setToasterColor('success')
+      // setShowToaster(true)
+      // setToasterColor('success')
       setErrorMsg(null)
       if(checkUname?.status === 200){
         setUserNameCheck(true)
@@ -170,10 +172,10 @@ const registerUsers = async () => {
     }
   } 
     catch (error) {
-      setToasterMessage(error?.response?.data?.message || 'Something Went Worng in checking username')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false);
+      toast.error(error?.response?.data?.message || 'Something Went Worng in checking username')
+      // setShowToaster(true)
+      // setToasterColor('danger')
+      dispatch(setLoadingFalse());
     }
      
   }
@@ -189,31 +191,31 @@ const registerUsers = async () => {
       email: userDetails.email,
       otp:otp,
     }
-    setLoading(true);
+    dispatch(setLoadingTrue());
 
     try {
       // console.log('HI---');
       let otp = (await verifyOtp(dataToSend))
-      setLoading(false);
+      dispatch(setLoadingFalse());
       if (otp.error) {
-        setToasterMessage(otp?.error?.message || 'Something Went Worng in OTP verify')
-        setShowToaster(true)
-        setToasterColor('danger')
+        toast.error(otp?.error?.message || 'Something Went Worng in OTP verify')
+        // setShowToaster(true)
+        // setToasterColor('danger')
       } else {
-        setToasterMessage(otp?.message || 'otp verified successfully in OTP verify!')
-        setShowToaster(true)
-        setToasterColor('success')
+        toast.success(otp?.message || 'otp verified successfully in OTP verify!')
+        // setShowToaster(true)
+        // setToasterColor('success')
         setErrorMsg(null)
         if(otp?.status === 200){
           signup()
         }
       }
     } catch (error) {
-      setToasterMessage(error?.response?.data?.message || 'Something Went Worng in OTP verify')
+      toast.error(error?.response?.data?.message || 'Something Went Worng in OTP verify')
       setErrorMsg('Invalid OTP')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false);
+      // setShowToaster(true)
+      // setToasterColor('danger')
+      dispatch(setLoadingFalse());
     }
   }    
   }
@@ -224,25 +226,25 @@ const registerUsers = async () => {
       password:userDetails.password,
       resend: true
   }
-  setLoading(true);
+  dispatch(setLoadingTrue());
   try {
     let user = await registerUser(dataToSend)
-    setLoading(false);
+    dispatch(setLoadingFalse());
     if (user.error) {
-      setToasterMessage(user?.error?.message || 'Something Went Worng in registering user')
-      setShowToaster(true)
-      setToasterColor('danger')
+      toast.error(user?.error?.message || 'Something Went Worng in registering user')
+      // setShowToaster(true)
+      // setToasterColor('danger')
     } else {
-      setShowToaster(true)
-      setToasterMessage('OTP re sent successfully!')
+      // setShowToaster(true)
+      toast.success('OTP re sent successfully!')
       setErrorMsg(null)
-      setToasterColor('success')
+      // setToasterColor('success')
     }
     } catch (error) {
-    setToasterMessage(error?.response?.data?.message || 'Something Went Worng in registering user')
-    setShowToaster(true)
-    setToasterColor('danger')
-    setLoading(false);
+      toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
+    // setShowToaster(true)
+    // setToasterColor('danger')
+    dispatch(setLoadingFalse());
     }
   }
 
@@ -256,20 +258,20 @@ const registerUsers = async () => {
     }
     if(userData.userName.length && userData.email.length && userData.password.length && userData.repeat.length){
    
-    setLoading(true);
+    dispatch(setLoadingTrue());
 
     try {
       const signup=(await userSignup(userData))
-      setLoading(false);
+      dispatch(setLoadingFalse());
 
       if (signup.error) {
-      setToasterMessage(signup?.error?.message || 'Something Went Worng in signup')
-      setShowToaster(true)
-      setToasterColor('danger')
+        toast.error(signup?.error?.message || 'Something Went Worng in signup')
+      // setShowToaster(true)
+      // setToasterColor('danger')
     } else {
-      setToasterMessage(signup?.message || 'Signed up successfully!!')
-      setShowToaster(true)
-      setToasterColor('success')
+      toast.success(signup?.message || 'Signed up successfully!!')
+      // setShowToaster(true)
+      // setToasterColor('success')
       setErrorMsg(null)
       if(signup?.status === 200){
       signupLogin()
@@ -277,16 +279,16 @@ const registerUsers = async () => {
     }
   } 
     catch (error) {
-      setToasterMessage(error?.response?.data?.message || 'Something Went Worng in signup')
-      setShowToaster(true)
-      setToasterColor('danger')
-      setLoading(false);
+      toast.error(error?.response?.data?.message || 'Something Went Worng in signup')
+      // setShowToaster(true)
+      // setToasterColor('danger')
+      dispatch(setLoadingFalse());
       }
     }
     else{
-      setToasterMessage('All fields are required !!')
-      setShowToaster(true)
-      setToasterColor('danger')
+      toast.error('All fields are required !!')
+      // setShowToaster(true)
+      // setToasterColor('danger')
     }
      
   }
@@ -298,32 +300,32 @@ const registerUsers = async () => {
         email: userDetails.email,
         password: userDetails.password
       }
-      setLoading(true);
+      dispatch(setLoadingTrue());
 
       try {
         const login=(await userLogin(userLoginData));
-        setLoading(false);
+        dispatch(setLoadingFalse());
         
         if (login.error) {
           // console.log('try if block otpResponse',otpResponse)
-        setToasterMessage(login?.error?.message || 'cant login Something Went Worng in userLogin')
-        setShowToaster(true)
-        setToasterColor('danger')
+          toast.error(login?.error?.message || 'cant login Something Went Worng in userLogin')
+        // setShowToaster(true)
+        // setToasterColor('danger')
       } else {
         localStorage.setItem('_u', JSON.stringify(login.data))
-        setToasterMessage(login?.message || 'Logged IN!!')
-        setShowToaster(true)
-        setToasterColor('success')
+        toast.success(login?.message || 'Logged IN!!')
+        // setShowToaster(true)
+        // setToasterColor('success')
         setErrorMsg(null)
         navigate('/');
       }
     }
       
       catch (error) {
-        setToasterMessage(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
-        setShowToaster(true)
-        setToasterColor('danger')
-        setLoading(false);
+        toast.error(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
+        // setShowToaster(true)
+        // setToasterColor('danger')
+        dispatch(setLoadingFalse());
       }
      
     }
@@ -408,13 +410,14 @@ const registerUsers = async () => {
 
           
         </div>
-        <div className='otp-container'>
-
-        </div>
-        {loading ? <Loader /> : null} {toaster && ( <Toaster message={toasterMessage} show={toaster} close={() => showToaster(false)} bg={toasterColor}/> )}
+ 
+        
+        <ToastContainer theme="colored"/>
 
       </div>
       </div>
+      {isLoading ? <ApiLoader /> : null} 
+
     </React.Fragment>
   )
 }

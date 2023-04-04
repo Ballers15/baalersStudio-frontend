@@ -6,12 +6,15 @@ import {
   claimTokenAbi ,
   claimNftAbi,
 } from './SmartContract_ABI';
+import { setIsClaimedTrue } from '../Redux/actions';
+import { store } from '../Redux/store';
+
 
 // import { TransactionActions } from 'ReduxStore/Features/Transactions/TransactionsSlice';
 
+
+
 const { ethereum } = window;
-
-
 let web3 = new Web3(Web3.givenProvider);
 
 // const contract = new web3.eth.Contract(smartContractABI);
@@ -62,6 +65,7 @@ let withdrawlObject = {
 }
 
 console.log("withdrawlObject",withdrawlObject)
+  
 try{
   let nft = claimContract.methods.claimNFT(contractData.tokenId,contractData.quantity,contractData.nonce,contractData.signature).send({ from: walletAddress })
   .once('transactionHash',  function(hash){
@@ -73,11 +77,11 @@ try{
    console.log(obj);
 
   })
-  .once('receipt', function(receipt){
+  .once('receipt',async function(receipt){
     console.log('receipt before conf')
-    withdrawLottery(withdrawlObject)
-
-   })
+    await withdrawLottery(withdrawlObject)
+    store.dispatch(setIsClaimedTrue(true));
+  })
  toast.promise(nft, {
   pending: "Transaction sent successfully",
   success: "Transaction is Confirmed",
@@ -131,9 +135,10 @@ try{
 
  
  })
-.once('receipt', function(receipt){
+.once('receipt', async function(receipt){
   console.log('receipt before conf')
-  withdrawReward(withdrawlObject)
+ await withdrawReward(withdrawlObject)
+  store.dispatch(setIsClaimedTrue(true));
  })
  toast.promise(token, {
   pending: "Transaction sent successfully",

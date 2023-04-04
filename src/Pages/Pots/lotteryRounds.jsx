@@ -3,22 +3,21 @@ import './poolpots.css'
 import img1 from '../../Assest/img/img1.png' 
 import { getPrevRounds, lotteryClaim, wonLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css';
-import {  useParams } from "react-router-dom";
-import { claimNft, withdrawlMsg } from "../../Components/Smart Contract/smartContractHandler";
+import { claimNft } from "../../Components/Smart Contract/smartContractHandler";
 import Slider from "react-slick";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+
 
 
 
 const LotteryRounds = (props) => {
-
+    const dispatch = useDispatch()
+    const isClaimed = useSelector(state => state.claimed.isClaimed)
     const user = localStorage.getItem('_u')
     const walletAddress = localStorage.getItem('_wallet')
-    const { type } = useParams();
-    const [potType, setPotType] = useState('')
-    // const setShowToaster = (param) => showToaster(param);
-    const [loading, setLoading] = useState(false);   
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
     const [userWon, setUserWon] = useState(false)
@@ -108,22 +107,11 @@ const LotteryRounds = (props) => {
         }
         
     }
-    useEffect(()=>{
-    if(type === 'lottery'){
-        setPotType('LOTTERYPOT')
-    }
-    else{
-        setPotType('REWARDPOT')
-    }
-        
-    },[])
 
-    useEffect(()=>{
-        if(potType!==''){
-        getPreviousRounds();
-        }
-    },[potType])
 
+    useEffect(() => {
+      getPreviousRounds()  
+  },[ localStorage.getItem('_wallet'),props.previous,isClaimed ]);
 
     useEffect(() => {
         if(claimExpiryDate!==''){
@@ -133,18 +121,15 @@ const LotteryRounds = (props) => {
         }
     },[claimExpiryDate]);
 
-    useEffect(() => {
-      getPreviousRounds()  
-  },[ localStorage.getItem('_wallet'),props.previous]);
 
   const getPreviousRounds = async () => {
     let dataToSend = {
         walletAddress: localStorage.getItem('_wallet'),
     }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const round = await getPrevRounds(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (round.error) {
             console.log('Something Went Worng in preious rounds',round.error)
             toast.error(round?.message||'Something Went Worng in preious rounds');
@@ -158,7 +143,7 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
             toast.error(error ||'Something Went Worng in preious rounds');
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
     }
 
@@ -169,11 +154,11 @@ const LotteryRounds = (props) => {
             walletAddress: localStorage.getItem('_wallet'),
             potId: id
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         setButtonStatus(false)
         try {
           const data = await wonLottery(dataToSend);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (data.error) {
             toast.error(data?.message||'Something Went Worng in lottery won');
             // setShowToaster(true);
@@ -186,7 +171,7 @@ const LotteryRounds = (props) => {
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
     }
 
@@ -197,11 +182,11 @@ const LotteryRounds = (props) => {
             potId: potId
         }
         console.log("")
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           const data = await lotteryClaim(dataToSend);
           console.log("data got isss hash",data);
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (data?.error) {
             toast.error(data?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -213,7 +198,7 @@ const LotteryRounds = (props) => {
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
     }
 
@@ -226,12 +211,12 @@ const LotteryRounds = (props) => {
             potId: data?.potDetails?._id,   
             withdrawlId: data?.transactionDetails?._id
         }
-        setLoading(true);
+        dispatch(setLoadingTrue());
         try {
           console.log("datatosend",dataToSend);
           const dataNft = await claimNft(dataToSend);
 
-          setLoading(false);
+          dispatch(setLoadingFalse());
           if (dataNft?.error) {
             toast.error(dataNft?.message||'Something Went Worng');
             // setShowToaster(true);
@@ -243,10 +228,9 @@ const LotteryRounds = (props) => {
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
             // setShowToaster(true);
-            setLoading(false);
+            dispatch(setLoadingFalse());
         }
     }
-
 
 return(
              <>
