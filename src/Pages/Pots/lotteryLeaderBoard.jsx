@@ -72,7 +72,7 @@ return(
                         {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
                     </Form>
                 </div>
-                <Table responsive>
+                {leaderBoardDetails?.length !== 0 ? (<Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
@@ -94,7 +94,7 @@ return(
                 }) }
                     
                 </tbody>
-                </Table> 
+                </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
                 
             </div>
           

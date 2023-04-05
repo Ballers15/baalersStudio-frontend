@@ -54,7 +54,7 @@ import { subscribeMailJet } from '../../Services/User';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import ApiLoader from '../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -1181,7 +1181,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-              <ToastContainer theme="colored"/>
+              {/* <ToastContainer theme="colored"/> */}
               {isLoading ? <ApiLoader /> : null} 
       </div>
       </React.Fragment>
