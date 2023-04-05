@@ -6,11 +6,12 @@ import OtpInput from 'react-otp-input';
 import { checkUserName, registerUser,  userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
 import ApiLoader from '../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+
 
 
 const Signup = () => {
@@ -25,6 +26,7 @@ const Signup = () => {
   const [otp, setOtp]=useState("")
   const [userNameErr,setUserNameErr] = useState('')
   const navigate = useNavigate();
+  const [passValidation, setPassValidation] = useState(false)
   
   const [userDetails, setUserDetails] = useState(
     {
@@ -62,16 +64,15 @@ const Signup = () => {
     {
       // console.log('inside if detting null')
       setPassErrorMsg(null)
-      // return true;
+      setPassValidation (true);
     }
     else{
       setPassErrorMsg('Passwords do not match')
-      // return false;
+      setPassValidation (false);
     }
     // console.log('end ',passErrorMsg)
   }
   const confirmPassword = (e) =>{
-
     setUserDetails({ ...userDetails,password:e.target.value})
     // console.log(e.target.value,'//',userDetails.repeat)
     
@@ -79,9 +80,11 @@ const Signup = () => {
     {
       // console.log('inside if detting null')
       setPassErrorMsg(null)
+      setPassValidation (true);
     }
     else{
       setPassErrorMsg('Passwords do not match')
+      setPassValidation (false);
     }
     // console.log('end ',passErrorMsg)
   }
@@ -98,9 +101,7 @@ const Signup = () => {
     // console.log(form.checkValidity(),form)
     if (form.checkValidity() === true) {
       // console.log('validity')
-    
-    
-    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat) {
+    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation === true) {
         registerUsers();
     } 
   }
@@ -185,7 +186,7 @@ const registerUsers = async () => {
       if (otp.error) {
         toast.error(otp?.error?.message || 'Something Went Worng in OTP verify')
       } else {
-        toast.success(otp?.message || 'otp verified successfully in OTP verify!')
+        // toast.success(otp?.message || 'OTP Verified Successfully')
         setErrorMsg(null)
         if(otp?.status === 200){
           signup()
@@ -212,7 +213,7 @@ const registerUsers = async () => {
     if (user.error) {
       toast.error(user?.error?.message || 'Something Went Worng in registering user')
     } else {
-      toast.success('OTP re sent successfully!')
+      toast.success('OTP sent successfully!')
       setErrorMsg(null)
     }
     } catch (error) {
@@ -264,6 +265,15 @@ const registerUsers = async () => {
     checkUsername();
   }
 
+  const handleOtp = (e) => {
+    if (!isNaN(e)){
+    setOtp(e)
+    }
+    else{
+      setOtp('')
+    }
+  }
+
   return (
     <React.Fragment>
       <div className="signup-page-wrapper">
@@ -295,7 +305,7 @@ const registerUsers = async () => {
               <Form.Group className='pb-4'>
                 <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmRepeatPassword(e)} value={userDetails.repeat} ></Form.Control>
                 <span className="custom-error-msg">{passErrorMsg} </span>
-                <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Password do not match'}</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Passwords do not match'}</Form.Control.Feedback>
               </Form.Group>
 
              
@@ -316,13 +326,15 @@ const registerUsers = async () => {
           </Form> } 
 
                 
-            { userNameCheck === true && response === true && <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
+            { userNameCheck === true && response === true 
+            // {response === false
+            && <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
                <h2 className="login-head">Verify  <br/>code</h2>
-               <p>A 6-digit code has been sent to your mail ID.
+               <p>A 6-digit code has been sent to your mail id.
                 Kindly enter it to proceed.</p>
-               <OtpInput
+               <OtpInput 
                   value={otp}
-                  onChange={setOtp}
+                  onChange={(e)=>handleOtp(e)}
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
                 />      
@@ -338,7 +350,7 @@ const registerUsers = async () => {
         </div>
  
         
-        <ToastContainer theme="colored"/>
+        {/* <ToastContainer theme="colored"/> */}
 
       </div>
       </div>

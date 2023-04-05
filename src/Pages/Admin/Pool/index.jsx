@@ -803,7 +803,7 @@ const PoolListing = () => {
                
             </div>
             {isLoading ? <ApiLoader /> : null} 
-            <ToastContainer theme="colored"/>
+            {/* <ToastContainer theme="colored"/> */}
              </div>
         </React.Fragment>
     )

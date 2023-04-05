@@ -285,7 +285,7 @@ const ViewPot = () => {
                         <button type="primary" className="add-pot-submit-button" onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
                         </div>
                 </Form>
-                <ToastContainer theme="colored"/>
+                {/* <ToastContainer theme="colored"/> */}
                 {isLoading ? <ApiLoader /> : null}
             </div>
         </div>

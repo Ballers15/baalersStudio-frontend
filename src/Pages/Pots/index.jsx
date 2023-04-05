@@ -215,7 +215,7 @@ const PotPage = () => {
           if (cash.error) {
             toast.error(cash?.message||'Something Went Worng');
         } else {
-            toast.info('cash fetched Successfully');
+            // toast.info('cash fetched Successfully');
             setCash(cash?.data?.amount)
           }
         } catch (error) {
@@ -404,7 +404,7 @@ return(
 
         </div>
         {isLoading ? <ApiLoader /> : null} 
-        <ToastContainer theme="colored"/>
+        {/* <ToastContainer theme="colored"/> */}
     </div>
     </>
 )

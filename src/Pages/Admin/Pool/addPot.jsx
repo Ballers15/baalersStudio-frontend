@@ -458,7 +458,7 @@ const AddPot = () => {
                         {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={ addRewardPot}><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
-                <ToastContainer theme="colored"/>
+                {/* <ToastContainer theme="colored"/> */}
                 {isLoading ? <ApiLoader /> : null}
             </div>
         </div>

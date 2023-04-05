@@ -314,7 +314,7 @@ const UsersList = () => {
           </Pagination>
         </div>
         
-        <ToastContainer theme="colored"/>
+        {/* <ToastContainer theme="colored"/> */}
           {isLoading ? <ApiLoader /> : null} 
 
       </div>
