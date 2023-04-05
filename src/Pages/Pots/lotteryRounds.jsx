@@ -260,9 +260,9 @@ return(
                     </div>        
                   {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
-                        {userWon === true && claimExpiryDate !== '' && claimedNft !==true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
+                        {userWon === true && claimExpiryDate !== '' && claimedNft === false  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
                         {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
-                        {userWon === true && claimExpiryDate === '' && ( <a className="disabled" ><span></span> CLAIM NOW</a>) }
+                        {userWon === true && claimExpiryDate === '' && claimedNft === false && ( <a className="disabled" ><span></span> CLAIM EXPIRED</a>) }
                         {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
                         {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
                         </div>  

@@ -12,6 +12,8 @@ import $ from 'jquery';
 import {useParams} from "react-router-dom" 
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import {  toast } from 'react-toastify';
+
 
 
 const CollapsibleExample = () => {
@@ -30,6 +32,7 @@ const [walletAddress, setWalletaddress] = useState('');
   const disconnectWallet = () => {
     localStorage.removeItem('_wallet')
     setWalletaddress('')
+    toast.error('Wallet Disconnected')
   }
 
 
@@ -80,7 +83,7 @@ const saveNewAddress = (address) =>{
   if(address.length){
     let walletAddress=address[0];
     setWalletaddress(walletAddress)
-    localStorage.setItem('_wallet',walletAddress)  
+    localStorage.setItem('_wallet',walletAddress)
   }else{
     console.log("HI REMOVED");
     disconnectWallet();
@@ -104,6 +107,7 @@ const getAccountDetails = async ({ networkName, setError }) => {
         getDetailsFromChainId(chainID,res);
         setWalletaddress(res[0])
         localStorage.setItem('_wallet',res[0])
+        toast.info('Wallet Connected')
         });
       })
     .catch((err) => {
@@ -260,21 +264,12 @@ useEffect(() => {
             </Nav>
             <Nav>
             <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
-              {/* {_u !== null ? (<Nav.Link eventKey="4" onClick={() => { handleLogout() }} > <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>) : (<Nav.Link eventKey="4"as={Link} to='/login'> <i class="fa fa-user-o" aria-hidden="true"></i> </Nav.Link>)} */}
-
-              {/* <NavDropdown title="Dropdown"  id="basic-nav-dropdown" alignRight>
-                {_u === null &&   (<NavDropdown.Item as={Link} to='/login'>Login</NavDropdown.Item>)}
-                {_u !== null &&   (<NavDropdown.Item onClick={() => { handleLogout() }}>Logout</NavDropdown.Item>)}
-                {walletAddress && ( <NavDropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></NavDropdown.Item> )}
-              </NavDropdown> */}
-
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
-               {_u!==null ? <i className="fa  fa-user-circle" aria-hidden="true"></i> : <i className="fa  fa-user-o" aria-hidden="true"></i>}
+               {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu variant="dark">
-                {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.email}</Dropdown.Item>)}
+                {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)}
                 {walletAddress && ( <Dropdown.Item  ><span onClick={()=>{disconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item> )}
                 {_u === null &&   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>)}
                 {_u !== null &&   (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}

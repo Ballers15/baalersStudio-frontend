@@ -260,6 +260,7 @@ return(
                         <div className="playBtn">
                         {claimExpiryDate !== '' && claimed === false && participated === true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
                         {claimExpiryDate !== '' && claimed === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {claimExpiryDate === '' && claimed === false && participated === true && (<a className="disabled"><span></span>CLAIM EXPIRED</a>)}
                         {claimExpiryDate !== '' && claimed === false && participated === false && (<></>)}
                         </div>  
 

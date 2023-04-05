@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react-otp-input';
-import { checkUserName, registerUser, userLogin, userSignup, verifyOtp } from '../../Services/User'
+import { checkUserName, registerUser,  userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
 import ApiLoader from '../../Components/apiLoader'
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,8 +12,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
-const Signup = () => {
 
+const Signup = () => {
   const isLoading = useSelector(state => state.loading.isLoading)
   const dispatch = useDispatch()
   const [validated, setValidated] = useState(false)
@@ -242,11 +242,11 @@ const registerUsers = async () => {
     } else {
       toast.success(signup?.message || 'Signed up successfully!!')
       setErrorMsg(null)
-      if(signup?.status === 200){
-      signupLogin()
+      localStorage.setItem('_u',JSON.stringify(signup?.data))
+      navigate('/');
     }
     }
-  } 
+  
     catch (error) {
       toast.error(error?.response?.data?.message || 'Something Went Worng in signup')
       dispatch(setLoadingFalse());
@@ -258,36 +258,6 @@ const registerUsers = async () => {
      
   }
 
-
-
-  const signupLogin = async () => {
-      let userLoginData={
-        email: userDetails.email,
-        password: userDetails.password
-      }
-      dispatch(setLoadingTrue());
-
-      try {
-        const login=(await userLogin(userLoginData));
-        dispatch(setLoadingFalse());
-        
-        if (login.error) {
-          toast.error(login?.error?.message || 'cant login Something Went Worng in userLogin')
-
-      } else {
-        localStorage.setItem('_u', JSON.stringify(login.data))
-        toast.success(login?.message || 'Logged IN!!')
-        setErrorMsg(null)
-        navigate('/');
-      }
-    }
-      
-      catch (error) {
-        toast.error(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
-        dispatch(setLoadingFalse());
-      }
-     
-    }
 
   const handleBlur = (e) => {
     if(userDetails.userName !== '' && userDetails.userName.trim()!=='')

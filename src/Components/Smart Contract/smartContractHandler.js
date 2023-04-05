@@ -8,6 +8,7 @@ import {
 } from './SmartContract_ABI';
 import { setIsClaimedTrue } from '../Redux/actions';
 import { store } from '../Redux/store';
+import { environment } from '../../Environments/environment';
 
 
 // import { TransactionActions } from 'ReduxStore/Features/Transactions/TransactionsSlice';
@@ -20,8 +21,8 @@ let web3 = new Web3(Web3.givenProvider);
 // const contract = new web3.eth.Contract(smartContractABI);
 
 /** move this to enviroment in future */
-let nftClaimContractAddress="0xd8E554EF17FaBfDa316B564518FBcf2071E961E3";
-let tokenClaimContractAddress="0xFc26a71b8087509BC4dB32aBcA39145BDBf9d8A1";
+let nftClaimContractAddress= environment.nftClaimContractAddress;
+let tokenClaimContractAddress=environment.tokenClaimContractAddress;
 
 /**
  * @returns  nft claim contract instance
