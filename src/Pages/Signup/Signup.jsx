@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { Col, Row, Form } from 'react-bootstrap'
+import { useState } from 'react'
+import { Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react-otp-input';
 import { checkUserName, registerUser, userLogin, userSignup, verifyOtp } from '../../Services/User'
@@ -79,11 +79,9 @@ const Signup = () => {
     {
       // console.log('inside if detting null')
       setPassErrorMsg(null)
-      // return true;
     }
     else{
       setPassErrorMsg('Passwords do not match')
-      // return false;
     }
     // console.log('end ',passErrorMsg)
   }
@@ -94,7 +92,6 @@ const Signup = () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-    // emailValidation(e);
     
   
    const form = e.currentTarget;
@@ -123,19 +120,13 @@ const registerUsers = async () => {
         dispatch(setLoadingFalse());
         if (user.error) {
           toast.error(user?.error?.message || 'Something Went Worng in registering user')
-          // setShowToaster(true)
-          // setToasterColor('danger')
         } else {
-          // setShowToaster(true)
           toast.success('Success!! Please check your mail')
           setErrorMsg(null)
-          // setToasterColor('success')
           setResponse(true)
             }
         } catch (error) {
           toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
-        // setShowToaster(true)
-        // setToasterColor('danger')
         dispatch(setLoadingFalse());
         }
       }
@@ -156,15 +147,11 @@ const registerUsers = async () => {
       
       if (checkUname.error) {
         toast.error(checkUname?.error?.message || 'Something Went Worng in checking username')
-      // setShowToaster(true)
-      // setToasterColor('danger')
       setUserNameErr('Username Alredy Exists')
 
     } else {
       // toast.success(checkUname?.message || 'Username is valid')
       setUserNameErr('Username is valid !')
-      // setShowToaster(true)
-      // setToasterColor('success')
       setErrorMsg(null)
       if(checkUname?.status === 200){
         setUserNameCheck(true)
@@ -173,8 +160,6 @@ const registerUsers = async () => {
   } 
     catch (error) {
       toast.error(error?.response?.data?.message || 'Something Went Worng in checking username')
-      // setShowToaster(true)
-      // setToasterColor('danger')
       dispatch(setLoadingFalse());
     }
      
@@ -199,12 +184,8 @@ const registerUsers = async () => {
       dispatch(setLoadingFalse());
       if (otp.error) {
         toast.error(otp?.error?.message || 'Something Went Worng in OTP verify')
-        // setShowToaster(true)
-        // setToasterColor('danger')
       } else {
         toast.success(otp?.message || 'otp verified successfully in OTP verify!')
-        // setShowToaster(true)
-        // setToasterColor('success')
         setErrorMsg(null)
         if(otp?.status === 200){
           signup()
@@ -213,8 +194,6 @@ const registerUsers = async () => {
     } catch (error) {
       toast.error(error?.response?.data?.message || 'Something Went Worng in OTP verify')
       setErrorMsg('Invalid OTP')
-      // setShowToaster(true)
-      // setToasterColor('danger')
       dispatch(setLoadingFalse());
     }
   }    
@@ -232,18 +211,12 @@ const registerUsers = async () => {
     dispatch(setLoadingFalse());
     if (user.error) {
       toast.error(user?.error?.message || 'Something Went Worng in registering user')
-      // setShowToaster(true)
-      // setToasterColor('danger')
     } else {
-      // setShowToaster(true)
       toast.success('OTP re sent successfully!')
       setErrorMsg(null)
-      // setToasterColor('success')
     }
     } catch (error) {
       toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
-    // setShowToaster(true)
-    // setToasterColor('danger')
     dispatch(setLoadingFalse());
     }
   }
@@ -266,12 +239,8 @@ const registerUsers = async () => {
 
       if (signup.error) {
         toast.error(signup?.error?.message || 'Something Went Worng in signup')
-      // setShowToaster(true)
-      // setToasterColor('danger')
     } else {
       toast.success(signup?.message || 'Signed up successfully!!')
-      // setShowToaster(true)
-      // setToasterColor('success')
       setErrorMsg(null)
       if(signup?.status === 200){
       signupLogin()
@@ -280,15 +249,11 @@ const registerUsers = async () => {
   } 
     catch (error) {
       toast.error(error?.response?.data?.message || 'Something Went Worng in signup')
-      // setShowToaster(true)
-      // setToasterColor('danger')
       dispatch(setLoadingFalse());
       }
     }
     else{
       toast.error('All fields are required !!')
-      // setShowToaster(true)
-      // setToasterColor('danger')
     }
      
   }
@@ -307,15 +272,11 @@ const registerUsers = async () => {
         dispatch(setLoadingFalse());
         
         if (login.error) {
-          // console.log('try if block otpResponse',otpResponse)
           toast.error(login?.error?.message || 'cant login Something Went Worng in userLogin')
-        // setShowToaster(true)
-        // setToasterColor('danger')
+
       } else {
         localStorage.setItem('_u', JSON.stringify(login.data))
         toast.success(login?.message || 'Logged IN!!')
-        // setShowToaster(true)
-        // setToasterColor('success')
         setErrorMsg(null)
         navigate('/');
       }
@@ -323,8 +284,6 @@ const registerUsers = async () => {
       
       catch (error) {
         toast.error(error?.response?.data?.message || 'cant login Something Went Worng in userLogin')
-        // setShowToaster(true)
-        // setToasterColor('danger')
         dispatch(setLoadingFalse());
       }
      
@@ -364,23 +323,20 @@ const registerUsers = async () => {
               </Form.Group>
 
               <Form.Group className='pb-4'>
-                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmRepeatPassword(e)} value={userDetails.repeat} >
-
-                </Form.Control>
+                <Form.Control required type="password"  placeholder="CONFIRM PASSWORD" onChange={(e) => confirmRepeatPassword(e)} value={userDetails.repeat} ></Form.Control>
                 <span className="custom-error-msg">{passErrorMsg} </span>
-
                 <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Password do not match'}</Form.Control.Feedback>
               </Form.Group>
 
-              {['checkbox'].map((type) => (
+             
                             <div  className="mb-3 mt-4">
                             <Form.Check
                                 inline
                                 label="Agree to terms & conditions."
-                                name="group1"
-                                type={type} />
+                                name="agree t&c"
+                                 />
                             </div>
-                        ))}
+                 
               <div className="playBtn">  <button type="submit"   > <span></span>SIGN Up  </button> </div>
 
            <div className='alreadyAcc'>

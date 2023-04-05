@@ -14,7 +14,8 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 
 const ForgotPassword = () => {
   const [validated, setValidated] = useState(false)
-  const [errorMsg,setErrorMsg]= useState(null)
+  const [emailErrorMsg,setEmailErrorMsg]= useState(null)
+  const [passErrorMsg,setPassErrorMsg]= useState(null)
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [repeatPassword,setRepeatPassword]=useState("")
@@ -25,30 +26,88 @@ const ForgotPassword = () => {
   const isLoading = useSelector(state => state.loading.isLoading)
 
 
-
-  useEffect(() => {
-  emailValidation(email)
-  }, [email])
-  
   const emailValidation = (e) => {
+    // console.log("hi i am called");
+    setEmail(e.target.value)
+    // console.log(userDetails.email)
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
-    const tld = e?.split('.')[1]?.length
-    if (!e || regex.test(e) === false || tld <= 1) {
-      setErrorMsg('Enter a Valid Email !')
-      return false
+    const tld = e.target.value?.split('.')[1]?.length
+    if(e.target.value !== ''){
+    if (regex.test(e.target.value) === false || tld <= 1) {
+      setEmailErrorMsg('Valid E-mail is required !')
     }
-    setErrorMsg(null)
-    return true
+    else{
+      setEmailErrorMsg(null)
+    }
+  }
+  else{
+    setEmailErrorMsg('Email is  required !')
+  }
+  }
+
+  // useEffect(() => {
+  // emailValidation(email)
+  // }, [email])
+  
+  // const emailValidation = (e) => {
+  //   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
+  //   const tld = e?.split('.')[1]?.length
+  //   if (!e || regex.test(e) === false || tld <= 1) {
+  //     setErrorMsg('Enter a Valid Email !')
+  //     return false
+  //   }
+  //   setErrorMsg(null)
+  //   return true
+  // }
+
+
+  const confirmRepeatPassword = (e) =>{
+    setRepeatPassword(e.target.value)
+    // console.log(e.target.value,'//',userDetails.password)
+    
+    if(e.target.value===password)
+    {
+      // console.log('inside if detting null')
+      setPassErrorMsg(null)
+      // return true;
+    }
+    else{
+      setPassErrorMsg('Passwords do not match')
+      // return false;
+    }
+    // console.log('end ',passErrorMsg)
+  }
+  const confirmPassword = (e) =>{
+
+    setPassword(e.target.value)
+    // console.log(e.target.value,'//',userDetails.repeat)
+    
+    if(e.target.value===repeatPassword)
+    {
+      // console.log('inside if detting null')
+      setPassErrorMsg(null)
+      // return true;
+    }
+    else{
+      setPassErrorMsg('Passwords do not match')
+      // return false;
+    }
+    // console.log('end ',passErrorMsg)
   }
 
   const handleSubmit = async (e) => {
+
     setValidated(true);
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
     
+
     
-  if (email && emailValidation(email) === true) {
+   const form = e.currentTarget;
+    // console.log(form.checkValidity(),form)
+    if (form.checkValidity() === true) {
+  if (email) {
       let dataToSend = {
           email: email
       }
@@ -60,7 +119,6 @@ const ForgotPassword = () => {
           toast.error(response?.error?.message || 'Something Went Worng in getting token')
         } else {
           toast.success(response?.message || 'Verified link created')
-          setErrorMsg(null)
           setToken(response?.data?.token)
           if(response?.data?.token.length){
             createLink(response?.data?.token)
@@ -74,7 +132,7 @@ const ForgotPassword = () => {
     else {
       console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     }
-     
+  }
   }
 
   const createLink = async (data) => {
@@ -89,6 +147,7 @@ const ForgotPassword = () => {
             toast.error(passwordLink?.error?.message || 'Something Went Worng in generating link')
           } else {
             toast.success(passwordLink?.message || 'link verified')
+            setValidated(false)
             setNewPass(true)
           }
         } catch (error) {
@@ -105,6 +164,11 @@ const ForgotPassword = () => {
     e.stopPropagation()
     e.preventDefault()
 
+    
+   const form = e.currentTarget;
+   // console.log(form.checkValidity(),form)
+   if (form.checkValidity() === true) {
+
     let changePassData={
       password: password,
       repeat: repeatPassword,
@@ -120,7 +184,6 @@ const ForgotPassword = () => {
         toast.error(changePass?.error?.message || 'Something Went Worng')
       } else {
         toast.success(changePass?.message || 'Password changed successfully!')
-        setErrorMsg(null)
         setTimeout(() => {
           navigate('/login')
         }, 2000)
@@ -129,6 +192,7 @@ const ForgotPassword = () => {
       toast.error(error?.response?.data?.message || 'Something Went Worng')
       dispatch(setLoadingFalse());
     }
+  }
      
   }
 
@@ -145,12 +209,14 @@ const ForgotPassword = () => {
           <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <Row className="mb-2">
               <Form.Group >
-                <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={({ target }) => setEmail(target.value)}  ></Form.Control>
-                <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
-                <Form.Control.Feedback> <span className="custom-error-msg"> {errorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback>
+                <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
+                {/* <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
+                <Form.Control.Feedback> <span className="custom-error-msg"> {emailErrorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback> */}
+                                <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
+                <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
             </Row>
-            <div className="playBtn">  <button type="submit" onClick={handleSubmit} > <span></span>PROCEED  </button> </div>
+            <div className="playBtn">  <button type="submit" > <span></span>PROCEED  </button> </div>
           </Form> 
         </div>
       </div> }
@@ -162,19 +228,20 @@ const ForgotPassword = () => {
               <Row className="mb-3">
                 <Form.Group className='pb-4'>
                   {/* <Form.Label className="small-lable">Password</Form.Label> */}
-                  <Form.Control required type="password" placeholder="PASSWORD" value={password} onChange={({ target }) => setPassword(target.value)} minLength='8' ></Form.Control>
+                  <Form.Control required type="password" placeholder="PASSWORD" value={password} onChange={(e) => confirmPassword(e)} minLength='8' ></Form.Control>
                   <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className='pb-4'>
                   {/* <Form.Label className="small-lable">Confirm Password</Form.Label> */}
-                  <Form.Control required type="password" placeholder="CONFIRM PASSWORD" value={repeatPassword} onChange={({ target }) => setRepeatPassword(target.value)} minLength='8' ></Form.Control>
-                  <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
+                  <Form.Control required type="password" placeholder="CONFIRM PASSWORD" value={repeatPassword} onChange={(e) => confirmRepeatPassword(e)} ></Form.Control>
+                  {/* <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback> */}
+                  <span className="custom-error-msg">{passErrorMsg} </span>
+                  <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Passwords do not match'}</Form.Control.Feedback>
                 </Form.Group>
 
               </Row>
-              <div className="playBtn">  <button type="submit"  onClick={updatePassword} > <span></span>CONTINUE  </button> </div>
-                {/* <div> <button type="submit"  className="forgot-submit-button" onClick={updatePassword} > Submit </button> </div> */}
+              <div className="playBtn">  <button type="submit" > <span></span>CONTINUE  </button> </div>
           </Form> 
         </div> }
         {isLoading ? <ApiLoader /> : null} 
