@@ -19,18 +19,14 @@ const ViewPot = () => {
     const dispatch = useDispatch()
     const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
     const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
-    const [validated, setValidated] = useState(false);
     const [rewadPotDetail, setRewardPotDetail] = useState({
         rewardTokenAmount:'', assetDetails: {
             ticker:'',contractAddress:'',assetName:''
-        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:'12:00'},isActive:false
+        }, startDate:'',assetType:'',potType:'',claimExpiryDate:{date:'',time:'12:00'},isActive:false 
     });
     const [startDateTime, setStartDateTime] = useState('12:00');
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState('12:00');
-    const [toaster, showToaster] = useState(false);
-    const [toasterColor, setToasterColor] = useState('primary')
-    const setShowToaster = (param) => showToaster(param);
     const navigate = useNavigate();
     const { state } = useLocation();
 
@@ -51,8 +47,6 @@ const ViewPot = () => {
               dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
                 toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot detail by ID');
-                setShowToaster(true);
-                setToasterColor('danger')
                 } else {
                   let data = getPotDetailsById?.data[0];
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
@@ -87,8 +81,6 @@ const ViewPot = () => {
              
             } catch (error) {
                 toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot detail by ID');
-                setShowToaster(true);
-                setToasterColor('danger')
                 dispatch(setLoadingFalse());
             }
              
@@ -109,7 +101,7 @@ const ViewPot = () => {
         <React.Fragment>
             <div className="addPot">
             <div className="addPot-container">
-            <Form noValidate validated={validated}>
+            <Form >
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Reward Amount</Form.Label>
@@ -181,9 +173,7 @@ const ViewPot = () => {
                                 
                             </Row>
                     
-                            <Row className="mb-3">
-                                {/* <Form.Label>Claim Expiry</Form.Label><br /> */}
-                        
+                            <Row className="mb-3">                      
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Claim Expiry Date</Form.Label>
                                     <Form.Control

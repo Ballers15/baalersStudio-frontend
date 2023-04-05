@@ -15,9 +15,6 @@
 ## Navbar
 * `index.js`: It display a navigation bar. The bar has several links to different pages , and the links change based on the user's role (Admin or Non-Admin). The component uses useAuth and useNavigate hooks from the authProvider file to handle user logout and navigation to different pages. The component also uses local storage to retrieve the user's information to determine which links to display based on the user's role.
 
-## Toaster
-* `index.js`: Displays api responses and errors.
-
 # Pages
 
 ## Admin 

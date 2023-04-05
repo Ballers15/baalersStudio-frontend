@@ -161,7 +161,6 @@ const LotteryRounds = (props) => {
           dispatch(setLoadingFalse());
           if (data.error) {
             toast.error(data?.message||'Something Went Worng in lottery won');
-            // setShowToaster(true);
           } else {
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
@@ -170,7 +169,6 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }
@@ -189,15 +187,12 @@ const LotteryRounds = (props) => {
           dispatch(setLoadingFalse());
           if (data?.error) {
             toast.error(data?.message||'Something Went Worng');
-            // setShowToaster(true);
           } else {
             // toast.success('Round fetched Successfully');
-            // setShowToaster(true); 
             claimTransaction(data?.data)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }
@@ -219,15 +214,12 @@ const LotteryRounds = (props) => {
           dispatch(setLoadingFalse());
           if (dataNft?.error) {
             toast.error(dataNft?.message||'Something Went Worng');
-            // setShowToaster(true);
           } else {
 
-            // setShowToaster(true); 
             console.log('claim lottery response',dataNft)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }

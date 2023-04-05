@@ -19,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setLoadingFalse, setLoadingTrue, setIsClaimedTrue } from "../../Components/Redux/actions";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 
 
@@ -136,8 +136,6 @@ const PotPage = () => {
           dispatch(setLoadingFalse());
           if (pot.error) {
             toast.error(pot?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             // toast.success('Claim Status Updated Succesfully');
             setPotDetails(pot?.data.length?pot.data[0]:'');
@@ -147,8 +145,6 @@ const PotPage = () => {
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -167,19 +163,13 @@ const PotPage = () => {
           dispatch(setLoadingFalse());
           if (redeem.error) {
             toast.error(redeem?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
-            // setShowToaster(true); 
-            // setToasterColor('success')
             setRedeemModal(false)
             setReload(true)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -198,22 +188,16 @@ const PotPage = () => {
           dispatch(setLoadingFalse());
           if (redeem.error) {
             toast.error(redeem?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             setRedeemModal(false)
             
           } else {
             toast.info(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
-            // setShowToaster(true); 
-            // setToasterColor('success')
             setRedeemModal(false)
             setReload(true)
         }
         } catch (error) {
             setRedeemModal(false);
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -230,18 +214,12 @@ const PotPage = () => {
           dispatch(setLoadingFalse());
           if (cash.error) {
             toast.error(cash?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             toast.info('cash fetched Successfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
             setCash(cash?.data?.amount)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
        }
         
@@ -266,8 +244,6 @@ const PotPage = () => {
         }
         else if(user &&  !walletAddress){
             toast.info('Please connect your metamask wallet');
-            // setShowToaster(true);
-            // setToasterColor('primary')
             return
         }
        else{

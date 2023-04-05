@@ -132,10 +132,8 @@ const RewardRounds = (props) => {
           dispatch(setLoadingFalse());
           if (round.error) {
             toast.error(round?.message||'Something Went Worng');
-            // setShowToaster(true);
           } else {
             // toast.success('round fetched Successfully');
-            // setShowToaster(true); 
             setPrevRounds(round?.data)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
             setParticipated(round?.data[0]?.userRes?.participated)
@@ -146,7 +144,6 @@ const RewardRounds = (props) => {
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }
@@ -165,17 +162,14 @@ const RewardRounds = (props) => {
           dispatch(setLoadingFalse());
           if (data.error) {
             toast.error(data?.message||'Something Went Worng');
-            // setShowToaster(true);
           } else {
             // toast.success('Round fetched Successfully');
-            // setShowToaster(true); 
             setParticipated(data?.data?.participated)
             setClaimed(data?.data?.claimed)
             setButtonStatus(true)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }
@@ -192,16 +186,13 @@ const RewardRounds = (props) => {
           dispatch(setLoadingFalse());
           if (data?.error) {
             toast.error(data?.message||'Something Went Worng');
-            // setShowToaster(true);
           } else {
             // toast.success(' Successfully');
-            // setShowToaster(true); 
             claimTransaction(data?.data)
             // console.log('create calim',data?.data)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went WornghandleClaim 2' );
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }
@@ -223,32 +214,10 @@ const RewardRounds = (props) => {
           if (dataToken?.error) {
             // console.log("")
             toast.error(dataToken?.message||'Something Went Worng');
-            // setShowToaster(true);
-          } else {
-            // toast.success('Round fetched Successfully 2');
-            // setShowToaster(true); 
-            // console.log('claim token',dataToken)
-            // console.log('====================')
-            // console.log(data?.potDetails?._id)
-            // console.log(localStorage.getItem('_wallet'))
-            // console.log(dataToken?.transactionHash)
-            // console.log(data?.transactionDetails?._id)
-            // console.log('---------------')
-            // let withdrawlObject = {
-            //     potId: data?.potDetails?._id,   
-            //     walletAddress: localStorage.getItem('_wallet'),
-            //     txnHash:dataToken?.transactionHash ,
-            //     withdrawlId: data?.transactionDetails?._id
-            // }
-            
-            // console.log('claim token',withdrawlObject)
-
-            // withdrawLottery(withdrawlObject)
-          }
+          } 
         } catch (error) {
           console.log(error);
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
         }
     }

@@ -31,16 +31,12 @@ const LeaderBoardReward = (props) => {
           dispatch(setLoadingFalse());
           if (leader.error) {
             toast.error(leader?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             setLeaderBoardDetails(leader?.data)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
             dispatch(setLoadingFalse());
-            // setToasterColor('danger')
         }
     }
 

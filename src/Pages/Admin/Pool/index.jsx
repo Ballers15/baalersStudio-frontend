@@ -32,9 +32,6 @@ const PoolListing = () => {
     const [currentPageAcitve, setCurrentPageActive] = useState(1)
     const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1)
     const [currentPageArchive, setCurrentPageArchive] = useState(1)
-    const [archivePotCount, setArchivePotCount] = useState(0)
-    const [activePotCount, setActivePotCount] = useState(0)
-    const [upcomingPotCount, setUpcomingPotCount] = useState(0)
     const [potUsers, setPotUsers] = useState([])
     const [activePotType, setActivePotType] = useState("");
     const [upcomingPotType, setUpcomingPotType] = useState("");
@@ -133,8 +130,6 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
             toast.error(getPotDetails?.message||'Something Went Worng in geting pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -147,8 +142,6 @@ const PoolListing = () => {
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng in geting pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -172,8 +165,6 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
             toast.error(getPotDetails?.message||'Something Went Worng in geting upcoming pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -185,8 +176,6 @@ const PoolListing = () => {
               }          }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng in geting upcoming pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -210,8 +199,6 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
             toast.error(getPotDetails?.message||'Something Went Worng in geting acrchive pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -224,8 +211,6 @@ const PoolListing = () => {
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng in geting acrchive pot details');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -249,20 +234,14 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (potSatus.error) {
             toast.error(potSatus?.message||'Something Went Worng in updating reward pot status');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             toast.info('Pot Status Updated Succesfully');
-            //   setShowToaster(true); 
-            //   setToasterColor('success')
               getAllRewardPotDetails();
               getUpcomingRewardPotDetails();
               getArchivesRewardPotDetails();
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng in updating reward pot status');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -296,19 +275,13 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (claimStatus.error) {
             toast.error(claimStatus?.message||'Something Went Worng  in updating reward claim status');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             toast.success('Claim Status Updated Succesfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
             onInit()      
             handleClosecClaim()   
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng in updating reward claim status');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
          
@@ -325,19 +298,13 @@ const PoolListing = () => {
             dispatch(setLoadingFalse());
             if(usersList.error){
                 toast.error(usersList?.message||'Something Went Worng  in getting pot users');
-                // setShowToaster(true);
-                // setToasterColor('danger')
             } else {
                 setPotUsers(usersList?.data)
                 // toast.success('Users listed Succesfully');
-                // setShowToaster(true); 
-                // setToasterColor('success')
             }
             
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng  in getting pot users');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
@@ -357,18 +324,12 @@ const PoolListing = () => {
           dispatch(setLoadingFalse());
           if (users.error) {
             toast.error(users?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
         } else {
             // toast.success('Claim Status Updated Succesfully');
-            // setShowToaster(true); 
-            // setToasterColor('success')
             setPotUsers(users?.data)
           }
         } catch (error) {
             toast.error(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
-            // setToasterColor('danger')
             dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
@@ -529,12 +490,6 @@ const PoolListing = () => {
                                         <option value="LOTTERYPOT">Lottery</option>
                                         <option value="REWARDPOT">Reward</option> 
                                 </Form.Select>
-                                {/* <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                                />  */}
                                 <Button className="" type="submit">Search</Button>
                             </Form>                            
                         </Col>
@@ -547,12 +502,10 @@ const PoolListing = () => {
                     <tr>
                         <th>Sr. No.</th>
                         <th>Pot Type</th>
-                        {/* <th>Assest Type</th> */}
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Claim Expiry Date</th>
                         <th>Reward Amount</th>
-                        {/* <th>Ticker</th> */}
                         <th>Users Count </th>
                         <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
@@ -560,24 +513,17 @@ const PoolListing = () => {
                         <th>Stop Claim</th>
                         <th>Actions</th>
                     </tr>
-                    </thead><hr/>
+                    </thead>
                     <tbody className="pool-listing-table-body">
                         {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
                             return (
                                 <tr key={pot?._id}>
                                 <td>{index+1}</td>
                                 <td>{pot?.potType}</td>
-                                {/* <td>{pot?.assetType}</td> */}
                                 <td>{pot?.startDate?.split('T')[0]}</td>
                                 <td>{pot?.endDate?.split('T')[0]}</td>
                                 <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                 <td>{pot?.rewardTokenAmount}</td>
-                                {/* <td>
-                                    <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                        {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
-                                    </span>
-                                </td> */}
                                 <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                             <i className="fa fa-eye" />
                                         </span></td>
@@ -656,12 +602,6 @@ const PoolListing = () => {
                                         <option value="LOTTERYPOT">Lottery</option>
                                         <option value="REWARDPOT">Reward</option> 
                                     </Form.Select>
-                                    {/* <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                    />  */}
                                 <Button className="" type="submit">Search</Button>
                                 </Form>                            
                             </Col>
@@ -686,7 +626,7 @@ const PoolListing = () => {
                             <th>Stop Claim</th>
                             <th>Actions</th>
                         </tr>
-                        </thead><hr/>
+                        </thead>
                         <tbody className="pool-listing-table-body">
                             {upcomingRewardPotArray.length!==0?upcomingRewardPotArray.map((pot, index) => {
                                 return (
@@ -698,12 +638,6 @@ const PoolListing = () => {
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                     <td>{pot?.rewardTokenAmount}</td>
-                                    {/* <td>
-                                        <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                            {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                            {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
-                                        </span>
-                                    </td> */}
                                     <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
@@ -782,12 +716,6 @@ const PoolListing = () => {
                                         <option value="LOTTERYPOT">Lottery</option>
                                         <option value="REWARDPOT">Reward</option> 
                                     </Form.Select>
-                                    {/* <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                    />  */}
                                 <Button className="" type="submit">Search</Button>
                                 </Form>                            
                             </Col>
@@ -800,19 +728,17 @@ const PoolListing = () => {
                         <tr>
                             <th>Sr. No.</th>
                             <th>Pot Type</th>
-                            {/* <th>Assest Type</th> */}
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Claim Expiry Date</th>
                             <th>Reward Amount</th>
-                            {/* <th>Ticker</th> */}
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
 
                         </tr>
-                        </thead><hr/>
+                        </thead>
                         <tbody className="pool-listing-table-body">
                             {archivesRewardPotArray.length!==0?archivesRewardPotArray.map((pot, index) => {
                                 return (
@@ -824,12 +750,6 @@ const PoolListing = () => {
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                     <td>{pot?.rewardTokenAmount}</td>
-                                    {/* <td>
-                                        <span title= {toTitleCase(pot?.assetDetails?.ticker)}>
-                                            {pot?.assetDetails?.ticker?.length>12 && toTitleCase(pot?.assetDetails?.ticker.slice(0,12)+'...')}
-                                            {pot?.assetDetails?.ticker?.length<=12 && toTitleCase(pot?.assetDetails?.ticker)}
-                                        </span>
-                                    </td> */}
                                     <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye " />
                                             </span></td>
@@ -849,22 +769,6 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                         </span>
                                     </td>
-                                    {/* <td>
-                                    <span>
-                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
-                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
-                              </span>
-
-                                    </td>
-                                    <td className="action-tab-pool-list">
-                                            <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                                <i className="fa fa-edit " />
-                                            </span>
-                                            <span>
-                                                {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
-                                                {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
-                                            </span>
-                                    </td> */}
                                     </tr>
                                 )
                             }):null}

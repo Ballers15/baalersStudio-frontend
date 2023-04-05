@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './AdminDashboard.css'
-import { Col, Row, Button, Container, Form } from 'react-bootstrap';
+import { Col, Row, Container, Form } from 'react-bootstrap';
 import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { getBarChart, getPiechart, getPotClaim, getPotCounts, getUsersCount } from '../../Services/Admin';
-
+import ApiLoader from '../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const AdminDashboard = () => {
-  const [loading, setLoading] = useState(false)
-  const [toaster, showToaster] = useState(false)
-  const [toasterMessage, setToasterMessage] = useState('')
   const [userCountData, setUserCountData] = useState([])
   const [potCountData, setPotCountData] = useState([])
   const [potClaimData, setPotClaimData] = useState([])
   const [pieChartData, setPieChartData] = useState([])
   const [barChartData, setBarChartData] = useState([])
   const [barPotTypeUsers,setBarPotTypeUsers]=useState('LOTTERYPOT')
-    const [toasterColor, setToasterColor] = useState('primary')
+  const isLoading = useSelector(state => state.loading.isLoading)
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -37,14 +39,12 @@ const AdminDashboard = () => {
           const users =  await getUsersCount();
           dispatch(setLoadingFalse());
           if (users.error) {
-            setToasterMessage(users?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(users?.message||'Something Went Worng');
           } else {
              setUserCountData(users?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -55,14 +55,12 @@ const AdminDashboard = () => {
           const pot =  await getPotCounts();
           dispatch(setLoadingFalse());
           if (pot.error) {
-            setToasterMessage(pot?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(pot?.message||'Something Went Worng');
           } else {
              setPotCountData(pot?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -73,14 +71,12 @@ const AdminDashboard = () => {
           const pot =  await getPotClaim();
           dispatch(setLoadingFalse());
           if (pot.error) {
-            setToasterMessage(pot?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(pot?.message||'Something Went Worng');
           } else {
              setPotClaimData(pot?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -91,14 +87,12 @@ const AdminDashboard = () => {
           const pie =  await getPiechart();
           dispatch(setLoadingFalse());
           if (pie.error) {
-            setToasterMessage(pie?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(pie?.message||'Something Went Worng');
           } else {
              setPieChartData(pie?.data)
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -112,14 +106,12 @@ const AdminDashboard = () => {
           const bar =  await getBarChart(dataToSend);
           dispatch(setLoadingFalse());
           if (bar.error) {
-            setToasterMessage(bar?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(bar?.message||'Something Went Worng');
           } else {
              setBarChartData(bar?.data)    
           }
         } catch (error) {
-            setToasterMessage(error?.response?.data?.message||'Something Went Worng');
-            // setShowToaster(true);
+            toast.error(error?.response?.data?.message||'Something Went Worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -362,7 +354,7 @@ const AdminDashboard = () => {
             </Col>
             </Row>
             <Form.Select aria-label="Default select example" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
-                <option value='LOTTERYPOT' selected>Lottery Pot</option>
+                <option value='LOTTERYPOT'>Lottery Pot</option>
                 <option value='REWARDPOT'>Reward Pot</option>
             </Form.Select>
             <Row>            
@@ -379,6 +371,8 @@ const AdminDashboard = () => {
             </Col>
           </Row>
         </Container>
+        <ToastContainer theme="colored"/>
+        {isLoading ? <ApiLoader /> : null} 
       </div>
     </React.Fragment>
   )

@@ -19,7 +19,6 @@ import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.webp'
 import ambassadorMob from '../../Assest/img/ambassadorMob.webp'
 import AmbPlaceholder from '../../Assest/img/AmbPlaceholder.png'
-// import ambassadorOver from '../../Assest/img/ambassadorOver.png'
 import slide2 from '../../Assest/img/slide2.webp'
 import slide3 from '../../Assest/img/slide3.webp'
 import reward_card from '../../Assest/img/reward_card.webp'
@@ -54,10 +53,11 @@ import starS from '../../Assest/img/starS.svg'
 import { subscribeMailJet } from '../../Services/User';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { ToastContainer,  } from 'react-toastify';
-import { useDispatch } from "react-redux";
+import ApiLoader from '../../Components/apiLoader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-
 
 
 
@@ -102,6 +102,7 @@ function useHover() {
 const Dashboard = () => {
 
   const dispatch = useDispatch()
+  const isLoading = useSelector(state => state.loading.isLoading)
 
     useEffect(() => {
         $(window).scroll(function () {
@@ -129,12 +130,7 @@ const Dashboard = () => {
     const [lotteryModalShow, setLotteryModalShow] = useState(false);
     const [rewardModalShow, setRewardModalShow] = useState(false);
     const [trailerModalShow, setTrailerModalShow] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [toasterMessage, setToasterMessage] = useState("");
-    const [toaster, showToaster] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
-    const setShowToaster = (param) => showToaster(param);
-    const [toasterColor, setToasterColor] = useState('primary')
 
     useEffect(()=>{
         emailValidation()
@@ -170,21 +166,6 @@ const Dashboard = () => {
         }
 
     }
-    // const setErrorMsgFunc = () => {
-    //     if (!emailValidation()) {
-    //         setErrorMsg('Enter a Valid Email !');
-    //     } else {
-    //         setErrorMsg(null)
-    //     }
-    // }
-
-    // const setErrorMsgFunc = () => {
-    //   if (!emailValidation()) {
-    //     setErrorMsg('Enter a Valid Email !')
-    //   } else {
-    //     setErrorMsg(null)
-    //   }
-    // }
 
     const handleSubmit = async (e) => {
         // console.log(email,'-----------email value');
@@ -204,21 +185,15 @@ const Dashboard = () => {
                 const subscribe = await subscribeMailJet(dataToSend);
                 dispatch(setLoadingFalse());
                 if (subscribe.error) {
-                    setToasterMessage(subscribe?.error?.message || 'Something Went Worng');
-                    setShowToaster(true);
-                    setToasterColor('danger')
+                    toast.error(subscribe?.error?.message || 'Something Went Worng');
                   } else {
-                    setToasterMessage(' THANK YOU FOR SUBSCRIBING!');
-                    setShowToaster(true);
-                    setToasterColor('success')
+                    toast.success(' THANK YOU FOR SUBSCRIBING!');
                     setPlayModalShow(false);
                     setErrorMsg(null);
                 }
             } catch (error) {
                 //   console.log(error)
-                setToasterMessage(error?.response?.data?.message || 'Something Went Worng');
-                setShowToaster(true);
-                setToasterColor('danger')
+                toast.error(error?.response?.data?.message || 'Something Went Worng');
                 dispatch(setLoadingFalse());
             }
         } else {
@@ -260,7 +235,6 @@ const Dashboard = () => {
           type="submit"
           hidden={true}
         ></Button>
-        {/* <ScriptTag type="text/javascript" src={gsapScript} /> */}
 
         <Modal
           show={playModalShow}
@@ -393,13 +367,6 @@ const Dashboard = () => {
                   <Carousel interval={null} wrap={false}>
                     <Carousel.Item>
                       <Carousel.Caption>
-                        {/* <img
-                          src={ellipse}
-                          className="bgShade"
-                          alt="Eclipse"
-                          width="1459"
-                          height="1529"
-                        /> */}
                          <LazyLoadImage src={ellipse}
                           className="bgShade"
                           alt="Eclipse"
@@ -622,19 +589,6 @@ const Dashboard = () => {
 
 
                               </div>
-
-                              {/* <div className="poolBtn text-center">
-                                <div className="playBtn">
-                                  <a onClick={() => handleShow('lottery')}>
-                                    <span></span> Lottery Pool
-                                  </a>
-                                </div>
-                                <div className="shareBtn">
-                                  <a onClick={() => handleShow('reward')}>
-                                    <span></span> Reward Pool{' '}
-                                  </a>
-                                </div>
-                              </div> */}
                             </div>
                           </div>
                           <p className="secondText">
@@ -646,47 +600,6 @@ const Dashboard = () => {
                   </Carousel>
                 </div>
               </div>
-              {/* <div className="logoSlider">
-                            <Carousel>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tradedog} alt="tradedog" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdx} alt="tdx" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdefi} alt="tdefi" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={tdmm} alt="tdmm" />
-                                                </div>
-                                                <div className="col-2 col-sm-2">
-                                                    <img src={ith} alt="ith" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <Carousel.Caption>
-                                        <div className="container">
-                                            <div className="row align-items-center justify-content-center">
-                                                <div className="col-sm-12">
-                                                    <p className="fw-bold">Our Partners </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            </Carousel>
-                        </div> */}
             </div>
           </div>
 
@@ -717,7 +630,6 @@ const Dashboard = () => {
                 alt="Star"
               />
             </div>
-            {/* <div className="bggg"></div> */}
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
@@ -743,7 +655,6 @@ const Dashboard = () => {
                         alt="coin image"
                         width="199"
                         height="199" 
-                        // PlaceholderSrc={coinPlaceholder} 
                         effect="blur"
                       />
                     </div>
@@ -846,13 +757,6 @@ const Dashboard = () => {
                           >
                             <span></span>Join{' '}
                             <i className="fa fa-paper-plane" aria-hidden="true"></i>
-                            {/* <LazyLoadImage
-                              src={discord}
-                              className="discordIcon"
-                              alt="discord logo"
-                              width={27}
-                              height={20}
-                            /> */}
                           </a>
                         </div>
                       </div>
@@ -1103,24 +1007,6 @@ const Dashboard = () => {
             <div className="container-fluid bgColor joinCard">
               <div className="container positionRelative p-0">
                 <div className="joinCard">
-                  {/* <div className="desk">
-                    <img
-                      className="image"
-                      src={ambassador}
-                      alt="Ballers AMBASSADOR program"
-                      width="1500"
-                      height="571"
-                    />
-                  </div>
-                  <div className="mob">
-                    <img
-                      className="image"
-                      src={ambassadorMob}
-                      alt="Ballers AMBASSADOR program"
-                      width="404"
-                      height="595"
-                    />
-                  </div> */}
                   <picture aria-hidden="true">
                     <source media="(min-width: 900px)" srcSet={ambassador} />
                     <source media="(max-width: 500px)" srcSet={ambassadorMob} />
@@ -1156,44 +1042,6 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="container positionRelative mt-12rem">
-                            <div className="divImage"><img src={Walter_Black} alt="card" /> </div>
-                            <div className="joinCard">
-                                <div className="bg-circle"></div>
-                                <div className="row">
-                                    <div className="col-sm-3">
-                                        <div className="imgBg"></div>
-                                    </div>
-                                    <div className="col-sm-6 text-center my-auto">
-                                        <p className="joinUs">Join Our Community</p>
-                                        <div className="semiCircle">
-                                            <a href="" className="getStart">GET STARTED <img src={arrowRight} alt="arrow" /></a>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3">
-                                        <div className="">
-                                            <img className="hex1" src={bg_yellow} alt="yellow background" />
-                                            <a href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-medium" aria-hidden="true"></i></a>
-                                           
-                                            <div className="row">
-                                                <div className="col-sm-6">
-                                                    <img className="hex2" src={bg_purple} alt="purple background" />
-                                                   <a href="https://twitter.com/Ballers_Studio" target="blank" rel="noopener noreferrer"><i className="fa fa-twitter" /></a> 
-                                                </div>
-                                                <div className="col-sm-6">
-                                                    <img className="hex3" src={bg_yellow} alt="yellow background" />
-                                                    <a href="https://www.instagram.com/ballers.studio/" target="blank" rel="noopener noreferrer">
-                                                    <i className="fa fa-instagram" ></i>
-                                                    </a>
-                                                  
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
 
             <div className="gradientBackgroung secPaddingY">
               <div className="container paddingY-5 mt-5 positionRelative">
@@ -1266,26 +1114,13 @@ const Dashboard = () => {
                       <source media="(max-width: 500px)" srcSet={houseMob} />
                       <img src={house} width="851" height="700" className="img-fluid" alt="before" />
                     </picture>
-                      {/* <img
-                        src={house}
-                        alt="before"
-                        className="img-fluid"
-                        width="851"
-                        height="700"
-                      /> */}
+
                       <div className="header-overlay" id="scrollImg">
                       <picture aria-hidden="true">
                         <source media="(min-width: 900px)" srcSet={house1} />
                         <source media="(max-width: 500px)" srcSet={houseMob1} />
                         <img src={house1} width="851" height="700" className="img-fluid" alt="after" />
                       </picture>
-                        {/* <img
-                          src={house1}
-                          alt="after"
-                          className="img-fluid"
-                          width="851"
-                          height="700"
-                        /> */}
                       </div>
                     </div>
                   </div>
@@ -1346,9 +1181,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-<ToastContainer theme="colored"/>
-                        
-           </div>
+              <ToastContainer theme="colored"/>
+              {isLoading ? <ApiLoader /> : null} 
+      </div>
       </React.Fragment>
     )
 }
