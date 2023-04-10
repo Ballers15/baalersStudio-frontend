@@ -256,11 +256,21 @@ const AddPot = () => {
          
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(state?.id){
+           updateRewardPot(e);
+        }
+        else{
+            addRewardPot(e);
+        }
+    }
     return (
         <React.Fragment>
             <div className="addPot">
             <div className="addPot-container">
-            <Form noValidate validated={validated} >
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} md="3">
                                     <Form.Label>Reward Amount $ / Quantity for NFT</Form.Label>
@@ -323,24 +333,6 @@ const AddPot = () => {
                                             <TimePicker 
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
                                                 value={endDateTime|| ''} />
-
-                                            {/* <Timeit onChange={(e) => { setEndDateTime(e);  }}
-                                                value={endDateTime|| ''}/> */}
-                                            {/* <div className='pickTime'>
-                                                {showTimeEnd &&
-                                                    <TimeKeeper
-                                                        time={endDateTime}
-                                                        onChange={(e) => setEndDateTime(e.formatted)}
-                                                        onDoneClick={() => setShowTimeEnd(false)}
-                                                        switchToMinuteOnHourSelect
-                                                    />
-
-                                                }
-                                                <span>{endDateTime }</span>
-                                                {!showTimeEnd &&
-                                                    <span onClick={() => setShowTimeEnd(true)} className="pull-right"><i className="fa fa-clock-o" aria-hidden="true"></i></span>
-                                                } 
-                                            </div> */}
                                         </Form.Group>
                                     </Row> 
                                 </Col>  
@@ -457,8 +449,8 @@ const AddPot = () => {
                     
                         <div>
                         <button type="primary" className="add-pot-submit-button" style={{marginLeft:'20px'}} onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
-                        {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={updateRewardPot}><span></span><span></span><span></span>Update Pot</button>}
-                        {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button " onClick={ addRewardPot}><span></span><span></span><span></span>Add Pot</button>}
+                        {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
+                        {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
                 {/* <ToastContainer theme="colored"/> */}
