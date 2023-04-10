@@ -125,22 +125,24 @@ const registerUsers = async () => {
           password:userDetails.password,
       }
       dispatch(setLoadingTrue());
-    toast.dismiss() 
       try {
         let user = await registerUser(dataToSend)
         dispatch(setLoadingFalse());
      
         if (user.error) {
           
+          toast.dismiss();
           toast.error(user?.error?.message || 'Something went worng in registering user')
         } else {
           
+          toast.dismiss();
           toast.success('Success!! Please check your mail')
           setErrorMsg(null)
           setResponse(true)
             }
         } catch (error) {
           
+          toast.dismiss();
           toast.error(error?.response?.data?.message || 'Something went worng in registering user')
           dispatch(setLoadingFalse());
         }
@@ -154,7 +156,6 @@ const registerUsers = async () => {
       userName: userDetails.userName.trim(),
     }
     dispatch(setLoadingTrue());
-    toast.dismiss() 
 
     try {
       const checkUname=(await checkUserName(dataToSend))  // check user name api call
@@ -164,6 +165,7 @@ const registerUsers = async () => {
       
       if (checkUname.error) {
         
+        toast.dismiss();
         // toast.error(checkUname?.error?.message || 'Something went worng in checking username')
         setUserNameErr('Username Alredy Exists')
         // console.log(checkUname)
@@ -199,14 +201,12 @@ const registerUsers = async () => {
       otp:otp,
     }
     dispatch(setLoadingTrue());
-    toast.dismiss()    
-
     try {
       // console.log('HI---');
       let otp = (await verifyOtp(dataToSend))
       dispatch(setLoadingFalse());
       if (otp.error) {
-        
+        toast.dismiss();
         toast.error(otp?.error?.message || 'Something went worng in OTP verify')
       } else {
         // 
@@ -218,6 +218,7 @@ const registerUsers = async () => {
       }
     } catch (error) {
       
+      toast.dismiss();
       toast.error(error?.response?.data?.message || 'Something went worng in OTP verify')
       setErrorMsg('Invalid OTP')
       dispatch(setLoadingFalse());
@@ -232,20 +233,22 @@ const registerUsers = async () => {
       resend: true
   }
   dispatch(setLoadingTrue());
-toast.dismiss() 
   try {
     let user = await registerUser(dataToSend)
     dispatch(setLoadingFalse());
     if (user.error) {
       
+      toast.dismiss();
       toast.error(user?.error?.message || 'Something went worng in registering user')
     } else {
       
+      toast.dismiss();
       toast.success('OTP sent successfully!')
       setErrorMsg(null)
     }
     } catch (error) {
       
+      toast.dismiss();
       toast.error(error?.response?.data?.message || 'Something went worng in registering user')
       dispatch(setLoadingFalse());
     }
@@ -262,7 +265,6 @@ toast.dismiss()
     if(userData.userName.length && userData.email.length && userData.password.length && userData.repeat.length){
    
     dispatch(setLoadingTrue());
-toast.dismiss() 
 
     try {
       const signup=(await userSignup(userData))
@@ -270,7 +272,8 @@ toast.dismiss()
    
          
       if (signup.error) {
-         toast.error(signup?.error?.message || 'Something went worng in signup')
+        toast.dismiss();
+        toast.error(signup?.error?.message || 'Something went worng in signup')
     } else {
       // toast.success(signup?.message || 'Signed up successfully!!')
       setErrorMsg(null)
@@ -281,11 +284,13 @@ toast.dismiss()
   
     catch (error) {
       
+      toast.dismiss();
       toast.error(error?.response?.data?.message || 'Something went worng in signup')
       dispatch(setLoadingFalse());
       }
     }
     else{
+      toast.dismiss();
       toast.error('All fields are required !!')
     }
   }

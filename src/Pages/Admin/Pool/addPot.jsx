@@ -52,11 +52,11 @@ const AddPot = () => {
             potId:id
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
+                toast.dismiss()    
                 toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
                 } else {
                   let data = getPotDetailsById?.data[0];
@@ -101,6 +101,7 @@ const AddPot = () => {
               }
              
             } catch (error) {
+                toast.dismiss()    
                 toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
                 dispatch(setLoadingFalse());
             }
@@ -169,21 +170,23 @@ const AddPot = () => {
         }
         setDisableSubmitButton(true);
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const addPot = await AddRewardPot(rewadPotDetail);
           dispatch(setLoadingFalse());
           if (addPot.error) {
-            toast.error(addPot?.message||'Something went worng in adding reward pot');
+        toast.dismiss()    
+        toast.error(addPot?.message||'Something went worng in adding reward pot');
             setDisableSubmitButton(false);
           } else {
-            toast.success('Pot Added Succesfully !!');
+        toast.dismiss()    
+        toast.success('Pot Added Succesfully !!');
             setDisableSubmitButton(false);
             navigate('/poolListing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            toast.error(error?.response?.data?.message||'Something went worng in adding reward pot');
+        toast.dismiss()    
+        toast.error(error?.response?.data?.message||'Something went worng in adding reward pot');
             dispatch(setLoadingFalse());
         }
          
@@ -234,15 +237,16 @@ const AddPot = () => {
         dispatch(setLoadingTrue());
         // console.log(rewadPotDetail)
         // return
-        toast.dismiss()    
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
           dispatch(setLoadingFalse());
           if (updatePot.error) {
+            toast.dismiss()
             toast.error(updatePot?.message||'Something went worng in updating reward pot');
             setDisableSubmitButton(false);
               
           } else {
+            toast.dismiss()
             toast.success('Pot Updated Succesfully !!');
             setDisableSubmitButton(false);
             state.id = '';
@@ -250,6 +254,7 @@ const AddPot = () => {
           }
         } catch (error) {
             setDisableSubmitButton(false);
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in updating reward pot');
             dispatch(setLoadingFalse());
         }

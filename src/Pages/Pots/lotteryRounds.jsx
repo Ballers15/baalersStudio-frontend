@@ -127,12 +127,12 @@ const LotteryRounds = (props) => {
         walletAddress: localStorage.getItem('_wallet'),
     }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const round = await getPrevRounds(dataToSend);
           dispatch(setLoadingFalse());
           if (round.error) {
             // console.log('Something went worng in preious rounds',round.error)
+            toast.dismiss();
             toast.error(round?.message||'Something went worng in preious rounds');
           } else {
             setPrevRounds(round?.data)
@@ -143,7 +143,8 @@ const LotteryRounds = (props) => {
             setPotId(round?.data[0]?._id)
           }
         } catch (error) {
-            toast.error(error ||'Something went worng in preious rounds');
+          toast.dismiss();
+          toast.error(error ||'Something went worng in preious rounds');
             dispatch(setLoadingFalse());
         }
     }
@@ -156,13 +157,13 @@ const LotteryRounds = (props) => {
             potId: id
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         setButtonStatus(false)
         try {
           const data = await wonLottery(dataToSend);
           dispatch(setLoadingFalse());
           if (data.error) {
-            toast.error(data?.message||'Something went worng in lottery won');
+            toast.dismiss();
+toast.error(data?.message||'Something went worng in lottery won');
           } else {
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
@@ -170,7 +171,8 @@ const LotteryRounds = (props) => {
             setButtonStatus(true)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+            toast.dismiss();
+toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -183,19 +185,20 @@ const LotteryRounds = (props) => {
         }
         console.log("")
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const data = await lotteryClaim(dataToSend);
           console.log("data got isss hash",data);
           dispatch(setLoadingFalse());
           if (data?.error) {
-            toast.error(data?.message||'Something went worng');
+            toast.dismiss();
+toast.error(data?.message||'Something went worng');
           } else {
             // toast.success('Round fetched Successfully');
             claimTransaction(data?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+            toast.dismiss();
+toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -210,20 +213,21 @@ const LotteryRounds = (props) => {
             withdrawlId: data?.transactionDetails?._id
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           console.log("datatosend",dataToSend);
           const dataNft = await claimNft(dataToSend);
 
           dispatch(setLoadingFalse());
           if (dataNft?.error) {
-            toast.error(dataNft?.message||'Something went worng');
+            toast.dismiss();
+toast.error(dataNft?.message||'Something went worng');
           } else {
 
             console.log('claim lottery response',dataNft)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+            toast.dismiss();
+toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }

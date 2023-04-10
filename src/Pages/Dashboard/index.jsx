@@ -181,19 +181,21 @@ const Dashboard = () => {
             }
             // auth.login(dataToSend)
             dispatch(setLoadingTrue());
-            toast.dismiss()    
             try {
                 const subscribe = await subscribeMailJet(dataToSend);
                 dispatch(setLoadingFalse());
                 if (subscribe.error) {
-                    toast.error(subscribe?.error?.message || 'Something went worng');
+                toast.dismiss();
+                toast.error(subscribe?.error?.message || 'Something went worng');
                   } else {
-                    toast.success(' THANK YOU FOR SUBSCRIBING!');
+                toast.dismiss();
+                toast.success(' THANK YOU FOR SUBSCRIBING!');
                     setPlayModalShow(false);
                     setErrorMsg(null);
                 }
             } catch (error) {
                 //   console.log(error)
+                toast.dismiss();
                 toast.error(error?.response?.data?.message || 'Something went worng');
                 dispatch(setLoadingFalse());
             }

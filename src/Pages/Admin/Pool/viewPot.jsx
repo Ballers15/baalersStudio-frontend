@@ -42,11 +42,11 @@ const ViewPot = () => {
             potId:id
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()
             try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
+                toast.dismiss();
                 toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot detail by ID');
                 } else {
                   let data = getPotDetailsById?.data[0];
@@ -81,6 +81,7 @@ const ViewPot = () => {
               }
              
             } catch (error) {
+                toast.dismiss();
                 toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot detail by ID');
                 dispatch(setLoadingFalse());
             }

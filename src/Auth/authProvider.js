@@ -3,7 +3,7 @@ import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../Components/Redux/actions";
-import {  ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext(null);
@@ -27,33 +27,32 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   
   const login = async (data) => {
     dispatch(setLoadingTrue());
-    toast.dismiss()    
-
     try {
       const login = await userLogin(data);
       dispatch(setLoadingFalse());
       if (login.error) {
+      toast.dismiss()    
       toast.error(login?.message||'Something went worng');
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
           setUser(login.data); 
           localStorage.setItem('_u', JSON.stringify(login.data))
-        
-        toast.success('Login Succesfully !!');
+          toast.dismiss()    
+          toast.success('Login Succesfully !!');
           navigate('/admin-dashboard')
         } 
         else {
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
-          
+          toast.dismiss()    
           toast.success('Login Succesfully !!');
           navigate(prev)
         }
       }
     } catch (error) {
       // console.log('err in login',error)
-      
+      toast.dismiss()    
       toast.error(error ||'Something went worng during login');
       dispatch(setLoadingFalse());
       setPassErrorMsg(error || 'Incorrect Password')
@@ -71,7 +70,6 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   return (
     <AuthContext.Provider value={{ passErrorMsg, setPassErrorMsg, login, logout }}>
       {children}
-      <ToastContainer  theme="colored"/>
     </AuthContext.Provider>
   )
 }

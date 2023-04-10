@@ -34,20 +34,22 @@ const UsersList = () => {
       email: rewadPotDetail.email
     }
     dispatch(setLoadingTrue());
-    toast.dismiss()    
     try {
       const users = await getAllUsers(dataToSend)
       dispatch(setLoadingFalse());
       if (users?.error == true) {
-        toast.error(users?.message)
+        toast.dismiss();
+toast.error(users?.message)
       } else {
-        // toast.success(users?.message)
+        // toast.dismiss();
+// toast.success(users?.message)
         setAllUsers(users)
         let pages= Math.floor( users?.data?.count / 10 ) + 1;
         setLastPage(pages);
       }
     } catch (error) {
-      toast.error('Something went worng in getting all users')
+      toast.dismiss();
+toast.error('Something went worng in getting all users')
       dispatch(setLoadingFalse());
     }
      
@@ -58,19 +60,21 @@ const UsersList = () => {
     let dataToSend = {
       userId: data._id,
     }
-    dispatch(setLoadingTrue());
-    toast.dismiss()    
+    dispatch(setLoadingTrue());   
     try {
       const wallet = await getUserWalletDetails(dataToSend)
       dispatch(setLoadingFalse());
       if (wallet?.error == true) {
-        toast.error(wallet?.message)
+        toast.dismiss();
+toast.error(wallet?.message)
       } else {
-        toast.success(wallet?.message)
+        toast.dismiss();
+toast.success(wallet?.message)
         setWalletDetails(wallet.data)
       }
     } catch (error) {
-      toast.error('Something went worngin getting user wallet details')
+      toast.dismiss();
+toast.error('Something went worngin getting user wallet details')
       dispatch(setLoadingFalse());
     }
      
@@ -82,20 +86,22 @@ const UsersList = () => {
       userId: data._id,
       isBlocked: !data.isBlocked
     }
-    dispatch(setLoadingTrue());
-    toast.dismiss()    
+    dispatch(setLoadingTrue()); 
     try {
       const userStatus = await updateUserStatus(dataToSend)
       dispatch(setLoadingFalse());
       if (userStatus?.error == true) {
-        toast.error(userStatus?.message)
+        toast.dismiss();
+toast.error(userStatus?.message)
       } else {
-        toast.success(userStatus?.message)
+        toast.dismiss();
+toast.success(userStatus?.message)
         handleCloseModal()
         fetchApi()
       }
     } catch (error) {
-      toast.error('Something went worng in updating active user')
+      toast.dismiss();
+toast.error('Something went worng in updating active user')
       dispatch(setLoadingFalse());
     }
      
@@ -173,7 +179,7 @@ const UsersList = () => {
                 <tbody >
                     <tr> 
                         <td> 
-                        <Form.Select onChange={(e) => { navigator.clipboard.writeText(e.target.value); toast.info( 'Wallet Address Copied !!');}}>
+                        <Form.Select onChange={(e) => { navigator.clipboard.writeText(e.target.value); toast.dismiss(); toast.info( 'Wallet Address Copied !!');}}>
                         {walletDetails?.walletDetails?.length ? <option value='' >Select Address</option> : <option value='No Wallet found'>No Wallet found</option>}
                           {walletDetails?.walletDetails && walletDetails?.walletDetails?.map((wallet) => (
                             <option value={wallet|| ''} key={wallet}>
@@ -291,7 +297,7 @@ const UsersList = () => {
                       <tr key={user?._id}>
                         <td className='sNoWth'>{index + 1}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.info( 'Email Copied !!');}}></span></td>
+                        <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
                           <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user)}> <i className="fa fa-eye " /></span>

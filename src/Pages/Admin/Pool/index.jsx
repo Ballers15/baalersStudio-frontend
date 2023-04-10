@@ -125,11 +125,11 @@ const PoolListing = () => {
                 potType: activePotType
             }
         }
-        toast.dismiss()    
         try {
           const getPotDetails = await getAllRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
+            toast.dismiss()
             toast.error(getPotDetails?.message||'Something went worng in geting pot details');
         } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
@@ -142,6 +142,7 @@ const PoolListing = () => {
               }
           }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in geting pot details');
             dispatch(setLoadingFalse());
         }
@@ -161,11 +162,11 @@ const PoolListing = () => {
                     potType: upcomingPotType
                 }
         }
-        toast.dismiss()    
         try {
           const getPotDetails = await getUpcomingRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
+            toast.dismiss()
             toast.error(getPotDetails?.message||'Something went worng in geting upcoming pot details');
         } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
@@ -177,6 +178,7 @@ const PoolListing = () => {
                 setNumberOfUpcomingPage(Math.floor(getPotDetails?.data?.count / 10))
               }          }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in geting upcoming pot details');
             dispatch(setLoadingFalse());
         }
@@ -196,11 +198,11 @@ const PoolListing = () => {
                     potType: archivePotType
                 }
         }
-        toast.dismiss()    
         try {
           const getPotDetails = await getArchivesRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
+            toast.dismiss()
             toast.error(getPotDetails?.message||'Something went worng in geting acrchive pot details');
         } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
@@ -213,6 +215,7 @@ const PoolListing = () => {
               }
           }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in geting acrchive pot details');
             dispatch(setLoadingFalse());
         }
@@ -232,19 +235,21 @@ const PoolListing = () => {
             isActive:!data.isActive
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const potSatus = await updateRewardPotStatus(dataToSend);
           dispatch(setLoadingFalse());
           if (potSatus.error) {
+            toast.dismiss()
             toast.error(potSatus?.message||'Something went worng in updating reward pot status');
         } else {
+            toast.dismiss()
             toast.info('Pot Status Updated Succesfully');
               getAllRewardPotDetails();
               getUpcomingRewardPotDetails();
               getArchivesRewardPotDetails();
           }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in updating reward pot status');
             dispatch(setLoadingFalse());
         }
@@ -274,18 +279,20 @@ const PoolListing = () => {
             claim:!data.claimPot
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const claimStatus = await updateRewardClaimStatus(dataToSend);
           dispatch(setLoadingFalse());
           if (claimStatus.error) {
+            toast.dismiss()
             toast.error(claimStatus?.message||'Something went worng  in updating reward claim status');
         } else {
+            toast.dismiss()
             toast.success('Claim Status Updated Succesfully');
             onInit()      
             handleClosecClaim()   
           }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng in updating reward claim status');
             dispatch(setLoadingFalse());
         }
@@ -298,18 +305,20 @@ const PoolListing = () => {
             potId: data._id,
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
             const usersList = await getSpecificPotUsers(dataToSend);
             dispatch(setLoadingFalse());
             if(usersList.error){
-                toast.error(usersList?.message||'Something went worng  in getting pot users');
+            toast.dismiss()
+            toast.error(usersList?.message||'Something went worng  in getting pot users');
             } else {
                 setPotUsers(usersList?.data)
+                // toast.dismiss();
                 // toast.success('Users listed Succesfully');
             }
             
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng  in getting pot users');
             dispatch(setLoadingFalse());
         }
@@ -325,17 +334,18 @@ const PoolListing = () => {
             walletSearch: walletAddressFilter
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const users = await getSpecificPotUsers(dataToSend);
           dispatch(setLoadingFalse());
           if (users.error) {
+            toast.dismiss()
             toast.error(users?.message||'Something went worng');
         } else {
             // toast.success('Claim Status Updated Succesfully');
             setPotUsers(users?.data)
           }
         } catch (error) {
+            toast.dismiss()
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
@@ -371,7 +381,7 @@ const PoolListing = () => {
                 show={viewUser} 
                 onHide={handleClose} 
                 keyboard={false}             
-                size="lg"
+                size="xl"
                 className="viewPopup"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -423,7 +433,7 @@ const PoolListing = () => {
                             <td>{user?.userDetails?.email}{' '}{' '}{' '}{' '}<span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.userDetails?.email); toast.info( 'Copied Succesfully');  }}></span></td>
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.info( 'Copied Succesfully'); }}></span></td>  
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.dismiss(); toast.info( 'Copied Succesfully'); }}></span></td>  
                             <td>{user?.nftHolded}</td>
                             <td>{(user?.rewardedTokenAmount)}</td>
                             <td>{user?.status}</td>
@@ -540,7 +550,7 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                         {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                     </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully');}}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
                                 </td>
                                 <td>
                                     <span title= {pot?.assetDetails?.assetName}>
@@ -653,7 +663,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully'); }}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully'); }}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>
@@ -764,7 +774,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.info( 'Address Copied Succesfully');}}></span>
+                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
                                     </td>
                                     <td>
                                         <span title= {pot?.assetDetails?.assetName}>

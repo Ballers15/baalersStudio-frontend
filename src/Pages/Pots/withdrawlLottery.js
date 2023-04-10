@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { lotteryWithdrawl, rewardWithdrawl } from "../../Services/User/indexPot";
 
 
@@ -5,7 +6,7 @@ export async function withdrawLottery (dataToSend) {
 
 
     console.log('withdrawlottery', dataToSend);  
-    toast.dismiss()    
+    // toast.dismiss()    
     try {
       const data =  await lotteryWithdrawl(dataToSend);
       if (data.error) {
@@ -24,7 +25,7 @@ export async function withdrawReward (dataToSend) {
 
 
   console.log('withdrawlottery', dataToSend);  
-  toast.dismiss()    
+  // toast.dismiss()    
   try {
     const data = await rewardWithdrawl(dataToSend);
     if (data.error) {

@@ -48,6 +48,11 @@ button#dropdown-button-dark-example1 {
 .dropdown-menu-dark { 
     --bs-dropdown-bg: #260059;
 }
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: inherit;
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 20px; 

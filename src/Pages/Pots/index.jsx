@@ -131,11 +131,11 @@ const PotPage = () => {
             potType: potType,
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const pot = await getActivePot(dataToSend);
           dispatch(setLoadingFalse());
           if (pot.error) {
+            toast.dismiss();
             toast.error(pot?.message||'Something went worng');
         } else {
             // toast.success('Claim Status Updated Succesfully');
@@ -145,6 +145,7 @@ const PotPage = () => {
             // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
+            toast.dismiss();
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
@@ -159,17 +160,19 @@ const PotPage = () => {
                 potId: potDetails?._id
             }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const redeem = await redeemCashLottery(dataToSend);
           dispatch(setLoadingFalse());
           if (redeem.error) {
+            toast.dismiss();
             toast.error(redeem?.message||'Something went worng');
         } else {
+            toast.dismiss();
             toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
             setReload(!reload)
           }
         } catch (error) {
+            toast.dismiss();
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
@@ -184,20 +187,22 @@ const PotPage = () => {
                 potId: potDetails?._id
             }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const redeem = await redeemCashReward(dataToSend);
           dispatch(setLoadingFalse());
           if (redeem.error) {
+            toast.dismiss();
             toast.error(redeem?.message||'Something went worng');
             setRedeemModal(false)
             
           } else {
+            toast.dismiss();
             toast.info(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
             setReload(!reload)
         }
         } catch (error) {
             setRedeemModal(false);
+            toast.dismiss();
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
@@ -210,17 +215,18 @@ const PotPage = () => {
                 walletAddress: localStorage.getItem('_wallet'),
             }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const cash = await getGameCash(dataToSend);
           dispatch(setLoadingFalse());
           if (cash.error) {
+            toast.dismiss();
             toast.error(cash?.message||'Something went worng');
         } else {
             // toast.info('cash fetched Successfully');
             setCash(cash?.data?.amount)
           }
         } catch (error) {
+            toast.dismiss();
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
        }
@@ -249,6 +255,7 @@ const PotPage = () => {
             navigate('/login')
         }
         else if(user &&  !walletAddress){
+            toast.dismiss();
             toast.info('Please connect your metamask wallet');
             return
         }

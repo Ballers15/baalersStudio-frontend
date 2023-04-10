@@ -66,11 +66,17 @@
   font-size: 1rem;
   font-weight: 530;
   line-height: 1.5;
-  color: #093d70;
-  background-color: #d7d6e7;
+  color: #ffffff;
+  background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #ced4da !important;
   margin: 0;
+}
+.react-time-picker__inputGroup__input{
+  color: #fff;
+}
+.react-time-picker__button svg{
+  stroke: #fff;
 }
 :disabled{
     cursor:not-allowed;
@@ -284,6 +290,10 @@ pool-listing-table-head tr {
   margin-top: 26px !important;
   float: right;
 }
+
+/* input[type="date"].form-control:invalid{
+  color:yellow !important;
+} */
 
 .addPot .add-pot-submit-button:hover{
 border: none;

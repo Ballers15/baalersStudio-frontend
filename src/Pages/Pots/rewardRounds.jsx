@@ -127,12 +127,12 @@ const RewardRounds = (props) => {
         walletAddress: localStorage.getItem('_wallet'),
     }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const round = await getRewardRounds(dataToSend);
           dispatch(setLoadingFalse());
           if (round.error) {
-            toast.error(round?.message||'Something went worng');
+            toast.dismiss();
+toast.error(round?.message||'Something went worng');
           } else {
             // toast.success('round fetched Successfully');
             setPrevRounds(round?.data)
@@ -144,7 +144,8 @@ const RewardRounds = (props) => {
             setPotId(round?.data[0]?._id)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+            toast.dismiss();
+toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -157,12 +158,12 @@ const RewardRounds = (props) => {
             potId: id
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         setButtonStatus(false)
         try {
           const data = await isRewardClaimed(dataToSend);
           dispatch(setLoadingFalse());
           if (data.error) {
+            toast.dismiss();
             toast.error(data?.message||'Something went worng');
           } else {
             // toast.success('Round fetched Successfully');
@@ -171,7 +172,8 @@ const RewardRounds = (props) => {
             setButtonStatus(true)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -183,11 +185,11 @@ const RewardRounds = (props) => {
             potId: potId
         }
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const data = await rewardClaim(dataToSend);
           dispatch(setLoadingFalse());
           if (data?.error) {
+            toast.dismiss();
             toast.error(data?.message||'Something went worng');
           } else {
             // toast.success(' Successfully');
@@ -195,7 +197,8 @@ const RewardRounds = (props) => {
             // console.log('create calim',data?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went wornghandleClaim 2' );
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went wornghandleClaim 2' );
             dispatch(setLoadingFalse());
         }
     }
@@ -211,17 +214,18 @@ const RewardRounds = (props) => {
         }
         console.log('calim transaction',dataToSend)
         dispatch(setLoadingTrue());
-        toast.dismiss()    
         try {
           const dataToken = await claimToken(dataToSend);
           dispatch(setLoadingFalse());
           if (dataToken?.error) {
             // console.log("")
+            toast.dismiss();
             toast.error(dataToken?.message||'Something went worng');
           } 
         } catch (error) {
           console.log(error);
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }

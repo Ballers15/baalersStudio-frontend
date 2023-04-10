@@ -35,68 +35,72 @@ const AdminDashboard = () => {
 
       const usersCount =  async () =>{
         dispatch(setLoadingTrue());
-toast.dismiss()   
         try {
           const users =  await getUsersCount();
           dispatch(setLoadingFalse());
           if (users.error) {
+            toast.dismiss();
             toast.error(users?.message||'Something went worng');
           } else {
              setUserCountData(users?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
       }
 
       const potCount =  async () =>{
         dispatch(setLoadingTrue());
-toast.dismiss()   
         try {
           const pot =  await getPotCounts();
           dispatch(setLoadingFalse());
           if (pot.error) {
+            toast.dismiss();
             toast.error(pot?.message||'Something went worng');
           } else {
              setPotCountData(pot?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
       }
 
       const potClaim =  async () =>{
         dispatch(setLoadingTrue());
-toast.dismiss()   
         try {
           const pot =  await getPotClaim();
           dispatch(setLoadingFalse());
           if (pot.error) {
+            toast.dismiss();
             toast.error(pot?.message||'Something went worng');
           } else {
              setPotClaimData(pot?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
       }
 
       const pieCharts =  async () =>{
         dispatch(setLoadingTrue());
-toast.dismiss()   
         try {
           const pie =  await getPiechart();
           dispatch(setLoadingFalse());
           if (pie.error) {
+            toast.dismiss();
             toast.error(pie?.message||'Something went worng');
           } else {
              setPieChartData(pie?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
       }
@@ -106,17 +110,18 @@ toast.dismiss()
           potType: barPotTypeUsers
         }
         dispatch(setLoadingTrue());
-toast.dismiss()   
         try {
           const bar =  await getBarChart(dataToSend);
           dispatch(setLoadingFalse());
           if (bar.error) {
+            toast.dismiss();
             toast.error(bar?.message||'Something went worng');
           } else {
              setBarChartData(bar?.data)    
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something went worng');
+          toast.dismiss();
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
       }
