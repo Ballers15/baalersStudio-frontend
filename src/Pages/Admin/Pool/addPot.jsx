@@ -52,7 +52,8 @@ const AddPot = () => {
             potId:id
         }
         dispatch(setLoadingTrue());
-            try {
+        toast.dismiss()    
+        try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               dispatch(setLoadingFalse());
               if (getPotDetailsById.error) {
@@ -168,11 +169,12 @@ const AddPot = () => {
         }
         setDisableSubmitButton(true);
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const addPot = await AddRewardPot(rewadPotDetail);
           dispatch(setLoadingFalse());
           if (addPot.error) {
-            toast.error(addPot?.message||'Something Went Worng in adding reward pot');
+            toast.error(addPot?.message||'Something went worng in adding reward pot');
             setDisableSubmitButton(false);
           } else {
             toast.success('Pot Added Succesfully !!');
@@ -181,7 +183,7 @@ const AddPot = () => {
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            toast.error(error?.response?.data?.message||'Something Went Worng in adding reward pot');
+            toast.error(error?.response?.data?.message||'Something went worng in adding reward pot');
             dispatch(setLoadingFalse());
         }
          
@@ -232,11 +234,12 @@ const AddPot = () => {
         dispatch(setLoadingTrue());
         // console.log(rewadPotDetail)
         // return
+        toast.dismiss()    
         try {
           const updatePot = await updateRewardPotDetail(rewadPotDetail);
           dispatch(setLoadingFalse());
           if (updatePot.error) {
-            toast.error(updatePot?.message||'Something Went Worng in updating reward pot');
+            toast.error(updatePot?.message||'Something went worng in updating reward pot');
             setDisableSubmitButton(false);
               
           } else {
@@ -247,7 +250,7 @@ const AddPot = () => {
           }
         } catch (error) {
             setDisableSubmitButton(false);
-            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward pot');
+            toast.error(error?.response?.data?.message||'Something went worng in updating reward pot');
             dispatch(setLoadingFalse());
         }
          

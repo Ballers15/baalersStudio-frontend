@@ -27,30 +27,34 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
   
   const login = async (data) => {
     dispatch(setLoadingTrue());
+    toast.dismiss()    
+
     try {
       const login = await userLogin(data);
       dispatch(setLoadingFalse());
       if (login.error) {
-      console.log(login,'./././')
-      toast.error(login?.message||'Something Went Worng');
+      toast.error(login?.message||'Something went worng');
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
           setUser(login.data); 
           localStorage.setItem('_u', JSON.stringify(login.data))
-          toast.success('Login Succesfully !!');
+        
+        toast.success('Login Succesfully !!');
           navigate('/admin-dashboard')
         } 
         else {
           setUser(login.data);
           localStorage.setItem('_u', JSON.stringify(login.data))
+          
           toast.success('Login Succesfully !!');
           navigate(prev)
         }
       }
     } catch (error) {
       // console.log('err in login',error)
-      toast.error(error ||'Something Went Worng during login');
+      
+      toast.error(error ||'Something went worng during login');
       dispatch(setLoadingFalse());
       setPassErrorMsg(error || 'Incorrect Password')
       navigate('/login')

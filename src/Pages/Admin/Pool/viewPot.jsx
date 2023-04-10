@@ -42,6 +42,7 @@ const ViewPot = () => {
             potId:id
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()
             try {
               const getPotDetailsById = await getRewardPotById(dataToSend);
               dispatch(setLoadingFalse());

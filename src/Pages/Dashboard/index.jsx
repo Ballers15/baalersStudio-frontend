@@ -181,11 +181,12 @@ const Dashboard = () => {
             }
             // auth.login(dataToSend)
             dispatch(setLoadingTrue());
+            toast.dismiss()    
             try {
                 const subscribe = await subscribeMailJet(dataToSend);
                 dispatch(setLoadingFalse());
                 if (subscribe.error) {
-                    toast.error(subscribe?.error?.message || 'Something Went Worng');
+                    toast.error(subscribe?.error?.message || 'Something went worng');
                   } else {
                     toast.success(' THANK YOU FOR SUBSCRIBING!');
                     setPlayModalShow(false);
@@ -193,7 +194,7 @@ const Dashboard = () => {
                 }
             } catch (error) {
                 //   console.log(error)
-                toast.error(error?.response?.data?.message || 'Something Went Worng');
+                toast.error(error?.response?.data?.message || 'Something went worng');
                 dispatch(setLoadingFalse());
             }
         } else {

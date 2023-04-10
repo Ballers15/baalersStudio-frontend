@@ -30,8 +30,10 @@ const [walletAddress, setWalletaddress] = useState('');
   const location = useLocation();
 
   const disconnectWallet = () => {
-    localStorage.removeItem('_wallet')
+    toast.dismiss()
+     localStorage.removeItem('_wallet')
     setWalletaddress('')
+    
     toast.error('Wallet Disconnected')
   }
 
@@ -61,8 +63,6 @@ Mumbai:{
   rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
   blockExplorerUrls: ["https://polygonscan.com/"],
 },
-
-
   // Polygon: {
   //   chainId: '0x89',
   //   urlName: 'polygon',
@@ -79,19 +79,22 @@ Mumbai:{
 };
 
 const saveNewAddress = (address) =>{
+  toast.dismiss()
   console.log("i am inside this",address);
   if(address.length){
     let walletAddress=address[0];
+    // toast.info('Wallet Changed')
     setWalletaddress(walletAddress)
     localStorage.setItem('_wallet',walletAddress)
   }else{
     console.log("HI REMOVED");
     disconnectWallet();
   }
-  
 }
+
 const getAccountDetails = async ({ networkName, setError }) => {
-  console.log("get account details");
+    toast.dismiss()
+    console.log("get account details");
   if (typeof window.ethereum !== "undefined") {
     window.ethereum
       .request({
@@ -107,6 +110,7 @@ const getAccountDetails = async ({ networkName, setError }) => {
         getDetailsFromChainId(chainID,res);
         setWalletaddress(res[0])
         localStorage.setItem('_wallet',res[0])
+        
         toast.info('Wallet Connected')
         });
       })
@@ -115,9 +119,8 @@ const getAccountDetails = async ({ networkName, setError }) => {
         console.log(err);
       });
 } else {
-  setAccountDetails('')
-  
-    alert("Install MetaMask First");
+    setAccountDetails('')
+    toast.info("Install MetaMask First");
   }
 };
 
@@ -190,7 +193,6 @@ const switchNetwork = async (chainId) => {
 const redirectToAuthRute = () => {
   localStorage.setItem('isConnected', true);
       navigate(redirectPath, { replace: true })
-  
 }
 
 useEffect(() => {
@@ -234,11 +236,6 @@ useEffect(() => {
             }, 20);
       }        
   },[id]);
-
-  
-
-
-
 
   return (
     <React.Fragment>

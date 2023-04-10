@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { useEffect } from 'react';
 
 
 
@@ -22,11 +23,14 @@ const Signup = () => {
   const [emailErrorMsg,setEmailErrorMsg]= useState(null)
   const [passErrorMsg,setPassErrorMsg]= useState(null)
   const [response,setResponse] = useState(false);
-  const [userNameCheck, setUserNameCheck] = useState(false)
   const [otp, setOtp]=useState("")
   const [userNameErr,setUserNameErr] = useState('')
   const navigate = useNavigate();
   const [passValidation, setPassValidation] = useState(false)
+  const [isEmailValid, setIsEmailValid] = useState(false)
+  const [isUserNameValid, setIsUserNameValid] = useState(false)
+  const [signupButton,setSignupDisbale] = useState(true)
+
   
   const [userDetails, setUserDetails] = useState(
     {
@@ -38,6 +42,8 @@ const Signup = () => {
   )
 
   const emailValidation = (e) => {
+    if(isUserNameValid)
+    setUserNameErr('')
     // console.log("hi i am called");
     setUserDetails({ ...userDetails,email:e.target.value})
     // console.log(userDetails.email)
@@ -46,13 +52,16 @@ const Signup = () => {
     if(e.target.value !== ''){
     if (regex.test(e.target.value) === false || tld <= 1) {
       setEmailErrorMsg('Valid E-mail is required !')
+      setIsEmailValid(false)
     }
     else{
       setEmailErrorMsg(null)
+      setIsEmailValid(true)
     }
   }
   else{
     setEmailErrorMsg('Email is  required !')
+    setIsEmailValid(false)
   }
   }
 
@@ -95,13 +104,13 @@ const Signup = () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-    
   
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
     if (form.checkValidity() === true) {
+      
       // console.log('validity')
-    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation === true) {
+    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
         registerUsers();
     } 
   }
@@ -116,19 +125,24 @@ const registerUsers = async () => {
           password:userDetails.password,
       }
       dispatch(setLoadingTrue());
+    toast.dismiss() 
       try {
         let user = await registerUser(dataToSend)
         dispatch(setLoadingFalse());
+     
         if (user.error) {
-          toast.error(user?.error?.message || 'Something Went Worng in registering user')
+          
+          toast.error(user?.error?.message || 'Something went worng in registering user')
         } else {
+          
           toast.success('Success!! Please check your mail')
           setErrorMsg(null)
           setResponse(true)
             }
         } catch (error) {
-          toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
-        dispatch(setLoadingFalse());
+          
+          toast.error(error?.response?.data?.message || 'Something went worng in registering user')
+          dispatch(setLoadingFalse());
         }
       }
 
@@ -140,30 +154,37 @@ const registerUsers = async () => {
       userName: userDetails.userName.trim(),
     }
     dispatch(setLoadingTrue());
+    toast.dismiss() 
 
     try {
       const checkUname=(await checkUserName(dataToSend))  // check user name api call
       dispatch(setLoadingFalse());
+   
       // console.log(checkUname)
       
       if (checkUname.error) {
-        toast.error(checkUname?.error?.message || 'Something Went Worng in checking username')
-      setUserNameErr('Username Alredy Exists')
-
+        
+        // toast.error(checkUname?.error?.message || 'Something went worng in checking username')
+        setUserNameErr('Username Alredy Exists')
+        // console.log(checkUname)
+        setIsUserNameValid(false)
     } else {
+      
       // toast.success(checkUname?.message || 'Username is valid')
       setUserNameErr('Username is valid !')
       setErrorMsg(null)
       if(checkUname?.status === 200){
-        setUserNameCheck(true)
+        setIsUserNameValid(true)
       }
     }
   } 
     catch (error) {
-      toast.error(error?.response?.data?.message || 'Something Went Worng in checking username')
+      
+      // toast.error(error?.response?.data?.message || 'Something went worng in checking username')
+      setUserNameErr('Username is invalid !')
+      setIsUserNameValid(false)
       dispatch(setLoadingFalse());
     }
-     
   }
 
   const handleSubmitOtp = async (e) =>{
@@ -178,14 +199,17 @@ const registerUsers = async () => {
       otp:otp,
     }
     dispatch(setLoadingTrue());
+    toast.dismiss()    
 
     try {
       // console.log('HI---');
       let otp = (await verifyOtp(dataToSend))
       dispatch(setLoadingFalse());
       if (otp.error) {
-        toast.error(otp?.error?.message || 'Something Went Worng in OTP verify')
+        
+        toast.error(otp?.error?.message || 'Something went worng in OTP verify')
       } else {
+        // 
         // toast.success(otp?.message || 'OTP Verified Successfully')
         setErrorMsg(null)
         if(otp?.status === 200){
@@ -193,7 +217,8 @@ const registerUsers = async () => {
         }
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || 'Something Went Worng in OTP verify')
+      
+      toast.error(error?.response?.data?.message || 'Something went worng in OTP verify')
       setErrorMsg('Invalid OTP')
       dispatch(setLoadingFalse());
     }
@@ -207,18 +232,22 @@ const registerUsers = async () => {
       resend: true
   }
   dispatch(setLoadingTrue());
+toast.dismiss() 
   try {
     let user = await registerUser(dataToSend)
     dispatch(setLoadingFalse());
     if (user.error) {
-      toast.error(user?.error?.message || 'Something Went Worng in registering user')
+      
+      toast.error(user?.error?.message || 'Something went worng in registering user')
     } else {
+      
       toast.success('OTP sent successfully!')
       setErrorMsg(null)
     }
     } catch (error) {
-      toast.error(error?.response?.data?.message || 'Something Went Worng in registering user')
-    dispatch(setLoadingFalse());
+      
+      toast.error(error?.response?.data?.message || 'Something went worng in registering user')
+      dispatch(setLoadingFalse());
     }
   }
 
@@ -233,15 +262,17 @@ const registerUsers = async () => {
     if(userData.userName.length && userData.email.length && userData.password.length && userData.repeat.length){
    
     dispatch(setLoadingTrue());
+toast.dismiss() 
 
     try {
       const signup=(await userSignup(userData))
       dispatch(setLoadingFalse());
-
+   
+         
       if (signup.error) {
-        toast.error(signup?.error?.message || 'Something Went Worng in signup')
+         toast.error(signup?.error?.message || 'Something went worng in signup')
     } else {
-      toast.success(signup?.message || 'Signed up successfully!!')
+      // toast.success(signup?.message || 'Signed up successfully!!')
       setErrorMsg(null)
       localStorage.setItem('_u',JSON.stringify(signup?.data))
       navigate('/');
@@ -249,30 +280,29 @@ const registerUsers = async () => {
     }
   
     catch (error) {
-      toast.error(error?.response?.data?.message || 'Something Went Worng in signup')
+      
+      toast.error(error?.response?.data?.message || 'Something went worng in signup')
       dispatch(setLoadingFalse());
       }
     }
     else{
       toast.error('All fields are required !!')
     }
-     
   }
-
 
   const handleBlur = (e) => {
     if(userDetails.userName !== '' && userDetails.userName.trim()!=='')
     checkUsername();
   }
 
-  const handleOtp = (e) => {
-    if (!isNaN(e)){
-    setOtp(e)
-    }
-    else{
-      setOtp('')
-    }
-  }
+      useEffect(() => {
+        if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
+          setSignupDisbale(false)
+          }
+          else{
+            setSignupDisbale(true)
+          }
+      }, [userDetails])
 
   return (
     <React.Fragment>
@@ -288,11 +318,12 @@ const registerUsers = async () => {
               <Form.Group className='pb-4' >
                 <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} onBlur={handleBlur}></Form.Control>
                 <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
-                <span className="custom-success-msg"> {userNameErr} </span>
+                <span className="custom-success-msg"> {isUserNameValid && userNameErr} </span>
+                <span className="custom-error-msg"> {!isUserNameValid && userNameErr} </span>
               </Form.Group>
 
               <Form.Group className='pb-4'>
-                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e) } value={userDetails.email} onBlur={()=>{setUserNameErr('')}} ></Form.Control>
+                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e)} onBlur={()=>{setUserNameErr('')}} value={userDetails.email}  ></Form.Control>
                 <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
@@ -308,16 +339,15 @@ const registerUsers = async () => {
                 <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Passwords do not match'}</Form.Control.Feedback>
               </Form.Group>
 
-             
-                            <div  className="mb-3 mt-4">
-                            <Form.Check
-                                inline
-                                label="Agree to terms & conditions."
-                                name="agree t&c"
-                                 />
-                            </div>
+              <div  className="mb-3 mt-4">
+                 <Form.Check
+                    inline
+                    label="Agree to Terms & Conditions."
+                    name="agree T&C"
+                    />
+              </div>
                  
-              <div className="playBtn">  <button type="submit"   > <span></span>SIGN Up  </button> </div>
+              <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div>
 
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
@@ -326,20 +356,21 @@ const registerUsers = async () => {
           </Form> } 
 
                 
-            { userNameCheck === true && response === true 
+            { isUserNameValid ===  true && response === true 
             // {response === false
             && <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
                <h2 className="login-head">Verify  <br/>code</h2>
                <p>A 6-digit code has been sent to your mail id.
                 Kindly enter it to proceed.</p>
                <OtpInput 
+                  inputType='tel'
                   value={otp}
-                  onChange={(e)=>handleOtp(e)}
+                  onChange={setOtp}
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
                 />      
                 <span className="invalid-feedback">{errorMsg}</span>       
-              <div className="playBtn">  <button type="submit"  onClick={handleSubmitOtp}> <span></span> verify  </button> </div>
+              <div className="playBtn">  <button type="submit" > <span></span> verify  </button> </div>
                 <div className='alreadyAcc'>
                  <span>Didn’t get the code?</span>
                   <a onClick={(e)=>reSendOtp(e)}> <span>Resend</span></a> 
@@ -348,7 +379,6 @@ const registerUsers = async () => {
 
           
         </div>
- 
         
         {/* <ToastContainer theme="colored"/> */}
 

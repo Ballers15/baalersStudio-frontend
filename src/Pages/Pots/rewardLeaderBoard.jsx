@@ -26,16 +26,17 @@ const LeaderBoardReward = (props) => {
             search: data,
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const leader = await leaderBoardReward(dataToSend);
           dispatch(setLoadingFalse());
           if (leader.error) {
-            toast.error(leader?.message||'Something Went Worng');
+            toast.error(leader?.message||'Something went worng');
         } else {
             setLeaderBoardDetails(leader?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }

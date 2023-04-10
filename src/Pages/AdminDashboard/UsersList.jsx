@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import './AdminDashboard.css'
 import Pagination from 'react-bootstrap/Pagination';
 import ApiLoader from '../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -33,6 +33,8 @@ const UsersList = () => {
       endDate: rewadPotDetail.endDate,
       email: rewadPotDetail.email
     }
+    dispatch(setLoadingTrue());
+    toast.dismiss()    
     try {
       const users = await getAllUsers(dataToSend)
       dispatch(setLoadingFalse());
@@ -45,7 +47,7 @@ const UsersList = () => {
         setLastPage(pages);
       }
     } catch (error) {
-      toast.error('Something Went Worng in getting all users')
+      toast.error('Something went worng in getting all users')
       dispatch(setLoadingFalse());
     }
      
@@ -57,6 +59,7 @@ const UsersList = () => {
       userId: data._id,
     }
     dispatch(setLoadingTrue());
+    toast.dismiss()    
     try {
       const wallet = await getUserWalletDetails(dataToSend)
       dispatch(setLoadingFalse());
@@ -67,7 +70,7 @@ const UsersList = () => {
         setWalletDetails(wallet.data)
       }
     } catch (error) {
-      toast.error('Something Went Worngin getting user wallet details')
+      toast.error('Something went worngin getting user wallet details')
       dispatch(setLoadingFalse());
     }
      
@@ -80,7 +83,7 @@ const UsersList = () => {
       isBlocked: !data.isBlocked
     }
     dispatch(setLoadingTrue());
-
+    toast.dismiss()    
     try {
       const userStatus = await updateUserStatus(dataToSend)
       dispatch(setLoadingFalse());
@@ -92,7 +95,7 @@ const UsersList = () => {
         fetchApi()
       }
     } catch (error) {
-      toast.error('Something Went Worng in updating active user')
+      toast.error('Something went worng in updating active user')
       dispatch(setLoadingFalse());
     }
      

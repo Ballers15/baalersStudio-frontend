@@ -14,7 +14,7 @@ import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
@@ -131,11 +131,12 @@ const PotPage = () => {
             potType: potType,
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const pot = await getActivePot(dataToSend);
           dispatch(setLoadingFalse());
           if (pot.error) {
-            toast.error(pot?.message||'Something Went Worng');
+            toast.error(pot?.message||'Something went worng');
         } else {
             // toast.success('Claim Status Updated Succesfully');
             setPotDetails(pot?.data.length?pot.data[0]:'');
@@ -144,7 +145,7 @@ const PotPage = () => {
             // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
          
@@ -158,18 +159,18 @@ const PotPage = () => {
                 potId: potDetails?._id
             }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const redeem = await redeemCashLottery(dataToSend);
           dispatch(setLoadingFalse());
           if (redeem.error) {
-            toast.error(redeem?.message||'Something Went Worng');
+            toast.error(redeem?.message||'Something went worng');
         } else {
             toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
-            setRedeemModal(false)
-            setReload(true)
+            setReload(!reload)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
          
@@ -183,21 +184,21 @@ const PotPage = () => {
                 potId: potDetails?._id
             }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const redeem = await redeemCashReward(dataToSend);
           dispatch(setLoadingFalse());
           if (redeem.error) {
-            toast.error(redeem?.message||'Something Went Worng');
+            toast.error(redeem?.message||'Something went worng');
             setRedeemModal(false)
             
           } else {
             toast.info(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
-            setRedeemModal(false)
-            setReload(true)
+            setReload(!reload)
         }
         } catch (error) {
             setRedeemModal(false);
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
          
@@ -209,17 +210,18 @@ const PotPage = () => {
                 walletAddress: localStorage.getItem('_wallet'),
             }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const cash = await getGameCash(dataToSend);
           dispatch(setLoadingFalse());
           if (cash.error) {
-            toast.error(cash?.message||'Something Went Worng');
+            toast.error(cash?.message||'Something went worng');
         } else {
             // toast.info('cash fetched Successfully');
             setCash(cash?.data?.amount)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
        }
         
@@ -228,9 +230,13 @@ const PotPage = () => {
     
     const handleRedeem = () => {
         if(potType === 'LOTTERYPOT')
-            addCashLottery()
+            {addCashLottery()
+            setRedeemModal(false)
+        }
         else if  (potType === 'REWARDPOT')
-            addCashReward()
+            {addCashReward()
+            setRedeemModal(false)
+        }
         else
             return
       }

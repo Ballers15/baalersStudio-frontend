@@ -83,7 +83,8 @@ try{
     await withdrawLottery(withdrawlObject)
     store.dispatch(setIsClaimedTrue(true));
   })
- toast.promise(nft, {
+  toast.dismiss()
+  toast.promise(nft, {
   pending: "Transaction sent successfully",
   success: "Transaction is Confirmed",
   error: "Transaction Rejected! "
@@ -141,6 +142,7 @@ try{
  await withdrawReward(withdrawlObject)
   store.dispatch(setIsClaimedTrue(true));
  })
+ toast.dismiss()
  toast.promise(token, {
   pending: "Transaction sent successfully",
   success: "Transaction is Confirmed",

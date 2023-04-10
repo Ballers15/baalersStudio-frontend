@@ -112,11 +112,12 @@ const ForgotPassword = () => {
           email: email
       }
     dispatch(setLoadingTrue());
+    toast.dismiss()    
       try {
         const response=await forgotPassword(dataToSend)
         dispatch(setLoadingFalse());
       if (response.error) {
-          toast.error(response?.error?.message || 'Something Went Worng in getting token')
+          toast.error(response?.error?.message || 'Something went worng in getting token')
         } else {
           toast.success(response?.message || 'Verified link created')
           setToken(response?.data?.token)
@@ -125,7 +126,7 @@ const ForgotPassword = () => {
         }
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message || 'Something Went Worng in getting token')
+        toast.error(error?.response?.data?.message || 'Something went worng in getting token')
         dispatch(setLoadingFalse());
       }
     } 
@@ -139,19 +140,19 @@ const ForgotPassword = () => {
     if(data.length){
 
       dispatch(setLoadingTrue());
-
+      toast.dismiss()    
       try {
           const passwordLink=(await forgotPasswordLink(data))
           dispatch(setLoadingFalse());
           if (passwordLink.error) {
-            toast.error(passwordLink?.error?.message || 'Something Went Worng in generating link')
+            toast.error(passwordLink?.error?.message || 'Something went worng in generating link')
           } else {
             toast.success(passwordLink?.message || 'link verified')
             setValidated(false)
             setNewPass(true)
           }
         } catch (error) {
-          toast.error(error?.response?.data?.message || 'Something Went Worng link')
+          toast.error(error?.response?.data?.message || 'Something went worng link')
           dispatch(setLoadingFalse());
         }
     }
@@ -175,13 +176,13 @@ const ForgotPassword = () => {
       token: token
     }
     dispatch(setLoadingTrue());
-
+    toast.dismiss()    
     try {
       const changePass=(await changePassword(changePassData))
       dispatch(setLoadingFalse());
 
       if (changePass.error) {
-        toast.error(changePass?.error?.message || 'Something Went Worng')
+        toast.error(changePass?.error?.message || 'Something went worng')
       } else {
         toast.success(changePass?.message || 'Password changed successfully!')
         setTimeout(() => {
@@ -189,7 +190,7 @@ const ForgotPassword = () => {
         }, 2000)
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || 'Something Went Worng')
+      toast.error(error?.response?.data?.message || 'Something went worng')
       dispatch(setLoadingFalse());
     }
   }
@@ -210,8 +211,6 @@ const ForgotPassword = () => {
             <Row className="mb-2">
               <Form.Group >
                 <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
-                {/* <Form.Control.Feedback type="invalid"> <span> {email && 'Valid E-mail is required !'} </span> <span> {!email && 'E-mail is required'} </span> </Form.Control.Feedback>
-                <Form.Control.Feedback> <span className="custom-error-msg"> {emailErrorMsg && 'Valid E-mail is required !'}</span> </Form.Control.Feedback> */}
                                 <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
@@ -227,15 +226,12 @@ const ForgotPassword = () => {
           <Form noValidate validated={validated} onSubmit={updatePassword} >
               <Row className="mb-3">
                 <Form.Group className='pb-4'>
-                  {/* <Form.Label className="small-lable">Password</Form.Label> */}
                   <Form.Control required type="password" placeholder="PASSWORD" value={password} onChange={(e) => confirmPassword(e)} minLength='8' ></Form.Control>
                   <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className='pb-4'>
-                  {/* <Form.Label className="small-lable">Confirm Password</Form.Label> */}
                   <Form.Control required type="password" placeholder="CONFIRM PASSWORD" value={repeatPassword} onChange={(e) => confirmRepeatPassword(e)} ></Form.Control>
-                  {/* <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback> */}
                   <span className="custom-error-msg">{passErrorMsg} </span>
                   <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Passwords do not match'}</Form.Control.Feedback>
                 </Form.Group>

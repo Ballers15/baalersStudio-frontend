@@ -125,11 +125,12 @@ const PoolListing = () => {
                 potType: activePotType
             }
         }
+        toast.dismiss()    
         try {
           const getPotDetails = await getAllRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            toast.error(getPotDetails?.message||'Something Went Worng in geting pot details');
+            toast.error(getPotDetails?.message||'Something went worng in geting pot details');
         } else {
               setRewardPotDetailsArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -141,7 +142,7 @@ const PoolListing = () => {
               }
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng in geting pot details');
+            toast.error(error?.response?.data?.message||'Something went worng in geting pot details');
             dispatch(setLoadingFalse());
         }
          
@@ -160,11 +161,12 @@ const PoolListing = () => {
                     potType: upcomingPotType
                 }
         }
+        toast.dismiss()    
         try {
           const getPotDetails = await getUpcomingRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            toast.error(getPotDetails?.message||'Something Went Worng in geting upcoming pot details');
+            toast.error(getPotDetails?.message||'Something went worng in geting upcoming pot details');
         } else {
               setUpcomingRewardPotArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -175,7 +177,7 @@ const PoolListing = () => {
                 setNumberOfUpcomingPage(Math.floor(getPotDetails?.data?.count / 10))
               }          }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng in geting upcoming pot details');
+            toast.error(error?.response?.data?.message||'Something went worng in geting upcoming pot details');
             dispatch(setLoadingFalse());
         }
          
@@ -194,11 +196,12 @@ const PoolListing = () => {
                     potType: archivePotType
                 }
         }
+        toast.dismiss()    
         try {
           const getPotDetails = await getArchivesRewardPot(dataToSend);
           dispatch(setLoadingFalse());
           if (getPotDetails.error) {
-            toast.error(getPotDetails?.message||'Something Went Worng in geting acrchive pot details');
+            toast.error(getPotDetails?.message||'Something went worng in geting acrchive pot details');
         } else {
               setArchivesRewardPotArray(getPotDetails?.data?.res);
               let pages = (getPotDetails?.data?.count) % 10;
@@ -206,11 +209,11 @@ const PoolListing = () => {
                 setNumberOfArchivePage(Math.floor(getPotDetails?.data?.count / 10) + 1)
                 }
               else {
-              setNumberOfActivePage(Math.floor(getPotDetails?.data?.count / 10))
+                setNumberOfArchivePage(Math.floor(getPotDetails?.data?.count / 10))
               }
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng in geting acrchive pot details');
+            toast.error(error?.response?.data?.message||'Something went worng in geting acrchive pot details');
             dispatch(setLoadingFalse());
         }
          
@@ -229,11 +232,12 @@ const PoolListing = () => {
             isActive:!data.isActive
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const potSatus = await updateRewardPotStatus(dataToSend);
           dispatch(setLoadingFalse());
           if (potSatus.error) {
-            toast.error(potSatus?.message||'Something Went Worng in updating reward pot status');
+            toast.error(potSatus?.message||'Something went worng in updating reward pot status');
         } else {
             toast.info('Pot Status Updated Succesfully');
               getAllRewardPotDetails();
@@ -241,7 +245,7 @@ const PoolListing = () => {
               getArchivesRewardPotDetails();
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward pot status');
+            toast.error(error?.response?.data?.message||'Something went worng in updating reward pot status');
             dispatch(setLoadingFalse());
         }
          
@@ -270,18 +274,19 @@ const PoolListing = () => {
             claim:!data.claimPot
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const claimStatus = await updateRewardClaimStatus(dataToSend);
           dispatch(setLoadingFalse());
           if (claimStatus.error) {
-            toast.error(claimStatus?.message||'Something Went Worng  in updating reward claim status');
+            toast.error(claimStatus?.message||'Something went worng  in updating reward claim status');
         } else {
             toast.success('Claim Status Updated Succesfully');
             onInit()      
             handleClosecClaim()   
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng in updating reward claim status');
+            toast.error(error?.response?.data?.message||'Something went worng in updating reward claim status');
             dispatch(setLoadingFalse());
         }
          
@@ -293,18 +298,19 @@ const PoolListing = () => {
             potId: data._id,
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
             const usersList = await getSpecificPotUsers(dataToSend);
             dispatch(setLoadingFalse());
             if(usersList.error){
-                toast.error(usersList?.message||'Something Went Worng  in getting pot users');
+                toast.error(usersList?.message||'Something went worng  in getting pot users');
             } else {
                 setPotUsers(usersList?.data)
                 // toast.success('Users listed Succesfully');
             }
             
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng  in getting pot users');
+            toast.error(error?.response?.data?.message||'Something went worng  in getting pot users');
             dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
@@ -319,17 +325,18 @@ const PoolListing = () => {
             walletSearch: walletAddressFilter
         }
         dispatch(setLoadingTrue());
+        toast.dismiss()    
         try {
           const users = await getSpecificPotUsers(dataToSend);
           dispatch(setLoadingFalse());
           if (users.error) {
-            toast.error(users?.message||'Something Went Worng');
+            toast.error(users?.message||'Something went worng');
         } else {
             // toast.success('Claim Status Updated Succesfully');
             setPotUsers(users?.data)
           }
         } catch (error) {
-            toast.error(error?.response?.data?.message||'Something Went Worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
         // console.log(potUsers)
@@ -403,6 +410,8 @@ const PoolListing = () => {
                             <th>Email</th> 
                             <th>Wallet Address</th>
                             <th>NFT Count</th>
+                            <th>Token Rewarded</th>
+                            <th>Token Claim Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -416,6 +425,8 @@ const PoolListing = () => {
                             {' '}{' '}{' '}{' '}
                                     <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.info( 'Copied Succesfully'); }}></span></td>  
                             <td>{user?.nftHolded}</td>
+                            <td>{(user?.rewardedTokenAmount)}</td>
+                            <td>{user?.status}</td>
                         </tr>  
                         )
                     }):null}
@@ -423,13 +434,7 @@ const PoolListing = () => {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                 No Record Found
-                            </td>
-                            <td></td>
-                            <td></td>
+                            <td> No Record Found </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -510,6 +515,7 @@ const PoolListing = () => {
                         <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
                         <th>Assest Name</th>
+                        <th>Claim Status</th>
                         <th>Stop Claim</th>
                         <th>Actions</th>
                     </tr>
@@ -542,6 +548,7 @@ const PoolListing = () => {
                                         {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                     </span>
                                </td>
+                               <td>{pot?.potStatus}</td>
                             <td>
                               <span>
                                 {pot?.claimPot && <MDBSwitch onChange={()=>handleClaimStatus(pot)} checked={pot?.claimPot} title="Stop claim"/>}
@@ -613,16 +620,15 @@ const PoolListing = () => {
                         <tr>
                             <th>Sr. No.</th>
                             <th>Pot Type</th>
-                            {/* <th>Assest Type</th> */}
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Claim Expiry Date</th>
                             <th>Reward Amount</th>
-                            {/* <th>Ticker</th> */}
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
+                            <th>Claim Status</th>
                             <th>Stop Claim</th>
                             <th>Actions</th>
                         </tr>
@@ -633,7 +639,6 @@ const PoolListing = () => {
                                     <tr key={pot?._id}>
                                     <td>{index+1}</td>
                                     <td>{pot?.potType}</td>
-                                    {/* <td>{pot?.assetType}</td> */}
                                     <td>{pot?.startDate?.split('T')[0]}</td>
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
@@ -645,7 +650,6 @@ const PoolListing = () => {
                                     
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
-                                            {/* {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')} */}
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
@@ -657,6 +661,7 @@ const PoolListing = () => {
                                             {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
                                         </span>
                                     </td>
+                                    <td>{pot?.potStatus}</td>
                                     <td>
                                     <span>
                                 {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
@@ -745,7 +750,6 @@ const PoolListing = () => {
                                     <tr key={pot?._id}>
                                     <td>{index+1}</td>
                                     <td>{pot?.potType}</td>
-                                    {/* <td>{pot?.assetType}</td> */}
                                     <td>{pot?.startDate?.split('T')[0]}</td>
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
@@ -757,7 +761,6 @@ const PoolListing = () => {
                             
                                     <td>
                                         <span title= {pot?.assetDetails?.contractAddress}>
-                                            {/* {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,12)+'...')} */}
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
                                         </span>{' '}{' '}{' '}{' '}
