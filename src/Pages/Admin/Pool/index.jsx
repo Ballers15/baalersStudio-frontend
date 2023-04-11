@@ -525,7 +525,7 @@ const PoolListing = () => {
                         <th>Game Cash Burned</th>                     
                         <th>Contract Address</th>
                         <th>Assest Name</th>
-                        <th>Claim Status</th>
+                        <th>Pot Status</th>
                         <th>Stop Claim</th>
                         <th>Actions</th>
                     </tr>
@@ -638,7 +638,7 @@ const PoolListing = () => {
                             <th>Game Cash Burned</th>                        
                             <th>Contract Address</th>
                             <th>Assest Name</th>
-                            <th>Claim Status</th>
+                            <th>pot Status</th>
                             <th>Stop Claim</th>
                             <th>Actions</th>
                         </tr>

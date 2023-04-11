@@ -20,6 +20,7 @@ import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { connectWallet } from "../../Components/Metamask";
 
 
 
@@ -256,7 +257,7 @@ const PotPage = () => {
         }
         else if(user &&  !walletAddress){
             toast.dismiss();
-            toast.info('Please connect your metamask wallet');
+            connectWallet();
             return
         }
        else{

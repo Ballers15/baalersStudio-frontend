@@ -1,138 +1,124 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
 import "./Metamask.css";
-import ErrorMessage from "./errorMessage";
-import { useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify";
 
-const Metamask = () => {
-	const [error, setError] = useState("No Error");
-	const [accountDetails, setAccountDetails] = useState('');
-  const navigate = useNavigate();
-  const [walletAddress, setWalletaddress] = useState();
-  const redirectPath = '/';
+export const globalWalletAddress = '';
 
-	const supportedChainList = {
-		Polygon: {
-			chainId: '0x89',
-			urlName: 'polygon',
-			chainName: 'Polygon Mainnet',
-			rpcUrls: ['https://polygon-rpc.com'],
-			blockExplorerUrls: ['https://polygonscan.com/'],
-			eventKey: 'Polygon:danger',
-			variant: 'danger',
-			nativeCurrency: {
-			decimals: 18,
-			symbol: 'MATIC',
-			},
-		}
-	};
-
-  const saveNewAddress = (address) =>{
-    setWalletaddress(address)
-    localStorage.setItem('_wallet',address)  
+export const disconnectWallet = () => {
+    toast.dismiss()
+    localStorage.removeItem('_wallet')
+    toast.error('Wallet Disconnected')
   }
-  const getAccountDetails = async ({ networkName, setError }) => {
-    if (typeof window.ethereum !== "undefined") {
-      window.ethereum
-        .request({
-          method: "eth_requestAccounts"
-        })
-        .then((res) => {
-          window.ethereum
-            .request({
-              method: "eth_chainId",
-            })
-			  .then((chainID) => {
-				  getDetailsFromChainId(chainID,res);
-          setWalletaddress(res)
-          localStorage.setItem('_wallet',res)
-            });
-        })
-		  .catch((err) => {
-			setAccountDetails('')
-          console.log(err);
-        });
-	} else {
-		setAccountDetails('')
-		
-      alert("Install MetaMask First");
-    }
+
+export const supportedChainList = {
+
+  Mumbai:{
+    chainId: `0x13881`,
+    chainName: "Mumbai Testnet",
+    nativeCurrency: {
+      name: "MATIC",
+      symbol: "MATIC",
+      decimals: 18,
+    },
+    rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+    blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
+  },
+    // Polygon: {
+    //   chainId: '0x89',
+    //   urlName: 'polygon',
+    //   chainName: 'Polygon Mainnet',
+    //   rpcUrls: ['https://polygon-rpc.com'],
+    //   blockExplorerUrls: ['https://polygonscan.com/'],
+    //   eventKey: 'Polygon:danger',
+    //   variant: 'danger',
+    //   nativeCurrency: {
+    //   decimals: 18,
+    //   symbol: 'MATIC',
+    //   },
+    // }
   };
 
-  const connectWallet = async (networkName) => {
-    setError();
-    await getAccountDetails({ networkName, setError });
-  };
-	
-  const getDetailsFromChainId = (chainId) => {
-	let selectedChain = Object.keys(supportedChainList).map((e) => {
-	  if (supportedChainList[e].chainId === chainId) {
-		return supportedChainList[e];
+
+export const getAccountDetails = async () => {
+  if(ethereum.isMetaMask){
+    toast.dismiss()
+    // console.log("get account details");
+ 
+  let wallet = await window.ethereum.request({
+            method: "eth_requestAccounts"
+          })
+          let chainID = await window.ethereum .request({ method: "eth_chainId", })
+          getDetailsFromChainId(chainID,wallet);
+         localStorage.setItem('_wallet',wallet[0])
+        toast.dismiss()
+        toast.info('Wallet Connected')
+            return wallet[0];
     } else {
-      return null;
+    // setAccountDetails('')
+    toast.info("Install MetaMask First");
+  }
+};
+
+export  const connectWallet = async ( navigate) => {
+  console.log('inside connect wallet')
+  let _u = JSON.parse(localStorage.getItem('_u'));
+  if(_u !== null){
+  return await getAccountDetails();
+  }
+  else{
+    navigate('/login');
+  }
+};
+
+export const getDetailsFromChainId = async(chainId) => {
+  let selectedChain = Object.keys(supportedChainList).map(async(e) => {
+    if (supportedChainList[e].chainId === chainId) {
+    return supportedChainList[e];
+    } else {
+      await switchNetwork();
+      // return null;
     }
-	});
+  });
   
-	  let filteredSelectedChain = selectedChain.filter((e) => e);
-	  setAccountDetails(JSON.stringify(filteredSelectedChain[0]))
-	  console.log(filteredSelectedChain[0]	,'-------------------------chain details')
-	return filteredSelectedChain[0];
+    let filteredSelectedChain = selectedChain.filter((e) => e);
+    // return(JSON.stringify(filteredSelectedChain[0]))
+    console.log(filteredSelectedChain[0]	,'-------------------------chain details')
+  return filteredSelectedChain[0];
   };
 
-  const switchNetwork = async (chainId) => {
-    console.log({ chainId });
-    console.log("switched to chainId chain");
+
+  export const switchNetwork = async (chainId) => {
+    console.log(`switched to ${chainId} chain`);
     try {
       if (!window.ethereum) throw new Error("No crypto wallet found");
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [
+          // {
+          //   chainId: `0x${Number(137).toString(16)}`,
+          //   chainName: "Polygon Mainnet",
+          //   nativeCurrency: {
+          //     name: "MATIC",
+          //     symbol: "MATIC",
+          //     decimals: 18,
+          //   },
+          //   rpcUrls: ["https://polygon-rpc.com/"],
+          //   blockExplorerUrls: ["https://polygonscan.com/"],
+          // },
           {
-            chainId: `0x${Number(137).toString(16)}`,
-            chainName: "Polygon Mainnet",
+            chainId: `0x${Number(80001).toString(16)}`,
+            chainName: "Mumbai Testnet",
             nativeCurrency: {
               name: "MATIC",
               symbol: "MATIC",
               decimals: 18,
             },
-            rpcUrls: ["https://polygon-rpc.com/"],
-            blockExplorerUrls: ["https://polygonscan.com/"],
+            rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+            blockExplorerUrls: ["https://explorer-mumbai.maticvigil.com/"],
           },
         ],
       });
     } catch (err) {
-      setError(err.message);
+      console.log(err.message);
     }
   };
-	
-	const redirectToAuthRute = () => {
-		localStorage.setItem('isConnected', true);
-        navigate(redirectPath, { replace: true })
-		
-	}
-
-  useEffect(() => {
-    const wallet=localStorage.getItem('_wallet');
-    if(wallet){
-      setWalletaddress(wallet)
-    }
-    try {
-		// if (typeof window.ethereum == "undefined") {
-		//   return alert('Please install MetaMask');
-		// }
-		window.ethereum?.on('accountsChanged', saveNewAddress);
-		window.ethereum?.on('chainChanged', switchNetwork); 
-	  } catch (error) {
-		console.log(error);
-		throw new Error('No ethereum Object');
-	  }
-	  return () => {
-		// window.ethereum?.removeListener('accountsChanged', handleAccountChange);
-		window.ethereum?.removeListener('chainChanged', switchNetwork);
-	  };
-	  // eslint-disable-next-line
-  }, []);
-
-}
-
-export default Metamask;
