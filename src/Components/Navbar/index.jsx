@@ -12,7 +12,6 @@ import $ from 'jquery';
 import {useParams} from "react-router-dom" 
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {  toast } from 'react-toastify';
 import { connectWallet, disconnectWallet, switchNetwork } from '../Metamask';
 
 
@@ -38,7 +37,7 @@ const handleConnectWallet = async () => {
   }
 
   const handleDisconnectWallet = () => {
-    setWalletAddress('')
+    setWalletAddress(null)
     disconnectWallet();
   }
 
@@ -50,162 +49,15 @@ const handleConnectWallet = async () => {
   }, [location.pathname]);
 
 
-//metamask starts
-// const [error, setError] = useState("No Error");
-// const [accountDetails, setAccountDetails] = useState('');
-// const navigate = useNavigate();
-// const redirectPath = '/';
-
-// const supportedChainList = {
-
-// Mumbai:{
-//   chainId: `0x13881`,
-//   chainName: "Mumbai Testnet",
-//   nativeCurrency: {
-//     name: "MATIC",
-//     symbol: "MATIC",
-//     decimals: 18,
-//   },
-//   rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
-//   blockExplorerUrls: ["https://polygonscan.com/"],
-// },
-//   // Polygon: {
-//   //   chainId: '0x89',
-//   //   urlName: 'polygon',
-//   //   chainName: 'Polygon Mainnet',
-//   //   rpcUrls: ['https://polygon-rpc.com'],
-//   //   blockExplorerUrls: ['https://polygonscan.com/'],
-//   //   eventKey: 'Polygon:danger',
-//   //   variant: 'danger',
-//   //   nativeCurrency: {
-//   //   decimals: 18,
-//   //   symbol: 'MATIC',
-//   //   },
-//   // }
-// };
-
-// const saveNewAddress = (address) =>{
-//   toast.dismiss()
-//   console.log("i am inside this",address);
-//   if(address.length){
-//     let walletAddress=address[0];
-//     // toast.info('Wallet Changed')
-//     // setWalletAddress(walletAddress)
-//     localStorage.setItem('_wallet',walletAddress)
-//     return walletAddress;
-//   }else{
-//     // console.log("HI REMOVED");
-//     handleDisconnectWallet();
-//     return null
-//   }
-// }
-
-// const getAccountDetails = async ({ networkName, setError }) => {
-//     toast.dismiss()
-//     console.log("get account details");
-//   if (typeof window.ethereum !== "undefined") {
-//     window.ethereum
-//       .request({
-//         method: "eth_requestAccounts"
-//       })
-//       .then((res) => {
-//         window.ethereum
-//           .request({
-//             method: "eth_chainId",
-//           })
-//       .then((chainID) => {
-//         console.log("chainID",chainID)
-//         getDetailsFromChainId(chainID,res);
-//         setWalletAddress(res[0])
-//         localStorage.setItem('_wallet',res[0])
-        
-//         toast.info('Wallet Connected')
-//         });
-//       })
-//     .catch((err) => {
-//     setAccountDetails('')
-//         console.log(err);
-//       });
-// } else {
-//     setAccountDetails('')
-//     toast.info("Install MetaMask First");
-//   }
-// };
-
-//  const connectWallet = async (networkName) => {
-//   if(_u !== null){
-//   setError();
-//   await getAccountDetails({ networkName, setError });
-//   }
-//   else{
-//     navigate('/login');
-//   }
-// };
-
-// const getDetailsFromChainId = async(chainId) => {
-// let selectedChain = Object.keys(supportedChainList).map(async(e) => {
-//   if (supportedChainList[e].chainId === chainId) {
-//   return supportedChainList[e];
-//   } else {
-//     await switchNetwork();
-//     // return null;
-//   }
-// });
-
-//   let filteredSelectedChain = selectedChain.filter((e) => e);
-//   setAccountDetails(JSON.stringify(filteredSelectedChain[0]))
-//   console.log(filteredSelectedChain[0]	,'-------------------------chain details')
-// return filteredSelectedChain[0];
-// };
-
-// const switchNetwork = async (chainId) => {
-//   console.log({ chainId });
-//   console.log("switched to chainId chain");
-//   try {
-//     if (!window.ethereum) throw new Error("No crypto wallet found");
-//     await window.ethereum.request({
-//       method: "wallet_addEthereumChain",
-//       params: [
-//         // {
-//         //   chainId: `0x${Number(137).toString(16)}`,
-//         //   chainName: "Polygon Mainnet",
-//         //   nativeCurrency: {
-//         //     name: "MATIC",
-//         //     symbol: "MATIC",
-//         //     decimals: 18,
-//         //   },
-//         //   rpcUrls: ["https://polygon-rpc.com/"],
-//         //   blockExplorerUrls: ["https://polygonscan.com/"],
-//         // },
-//         {
-//           chainId: `0x${Number(80001).toString(16)}`,
-//           chainName: "Mumbai Testnet",
-//           nativeCurrency: {
-//             name: "MATIC",
-//             symbol: "MATIC",
-//             decimals: 18,
-//           },
-//           rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
-//           blockExplorerUrls: ["https://polygonscan.com/"],
-//         },
-//       ],
-//     });
-//   } catch (err) {
-//     setError(err.message);
-//   }
-// };
-
-
 const handleAccountChange = (accounts) => {
   setWalletAddress(accounts[0])
 }
 
 
 useEffect(() => {
+  console.log(walletAddress)
   const wallet=localStorage.getItem('_wallet');
-  if(wallet){
     setWalletAddress(wallet)
-  }
   try {
 
   window.ethereum?.on('accountsChanged', handleAccountChange );
@@ -258,8 +110,8 @@ useEffect(() => {
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> )}
 
               {_u?.user?.role !== 'ADMIN' && (
-               <Nav.Link> {walletAddress !=='' && ( <> {walletAddress.slice(0,4)+'..'+walletAddress.slice(-3)} </>) } 
-                    {walletAddress === '' &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} 
+               <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
+                    {walletAddress === null &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} 
                 </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
               {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
