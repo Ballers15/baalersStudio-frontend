@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { getUser } from "../../Services/User";
 
 
 
@@ -16,10 +17,11 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 const LotteryRounds = (props) => {
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
-    const user = localStorage.getItem('_u')
+    const user = getUser()
     const walletAddress = localStorage.getItem('_wallet')
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
+    const [prevRoundsLength, setPrevRoundsLength] = useState('')
     const [userWon, setUserWon] = useState(false)
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
@@ -136,6 +138,7 @@ const LotteryRounds = (props) => {
             toast.error(round?.message||'Something went worng in preious rounds');
           } else {
             setPrevRounds(round?.data)
+            setPrevRoundsLength(round?.data?.length)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
             setUserWon(round?.data[0]?.userRes?.lotteryWon)
             setParticipated(round?.data[0]?.userRes?.participated)
@@ -181,24 +184,23 @@ toast.error(error?.response?.data?.message||'Something went worng');
     const handleClaim = async () => {
         let dataToSend = {
             walletAddress: localStorage.getItem('_wallet'),
-            potId: potId
+            potId: potId+'123'
         }
-        console.log("")
         dispatch(setLoadingTrue());
         try {
           const data = await lotteryClaim(dataToSend);
-          console.log("data got isss hash",data);
+          console.log("data got iss hash",data);
           dispatch(setLoadingFalse());
           if (data?.error) {
             toast.dismiss();
-toast.error(data?.message||'Something went worng');
+            toast.error(data?.message||'Something went worng');
           } else {
             // toast.success('Round fetched Successfully');
             claimTransaction(data?.data)
           }
         } catch (error) {
             toast.dismiss();
-toast.error(error?.response?.data?.message||'Something went worng');
+          toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -245,7 +247,7 @@ return(
                                 <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
-                                        <h3>Round {index+1} </h3>
+                                        <h3>Round {prevRoundsLength-index} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                                           month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 

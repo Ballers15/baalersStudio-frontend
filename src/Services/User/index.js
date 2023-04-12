@@ -54,3 +54,16 @@ export function getUserWalletDetails(data){
 export function updateUserStatus(data) {
   return (axiosInstance.patch('users/v1/admin/update/users/status',data).then(res => res.data))
 }
+
+
+
+// get user function
+export const getUser = () => {
+  return localStorage.getItem('_u');
+}
+
+
+// get wallet function
+export const getWallet = () => {
+  return localStorage.getItem('_wallet');
+}

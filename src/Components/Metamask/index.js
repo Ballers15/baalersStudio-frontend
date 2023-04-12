@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import "./Metamask.css";
 import { toast } from "react-toastify";
+import { getUser } from '../../Services/User';
 
 export const globalWalletAddress = '';
 
@@ -61,7 +62,8 @@ export const getAccountDetails = async () => {
 
 export  const connectWallet = async ( navigate) => {
   console.log('inside connect wallet')
-  let _u = JSON.parse(localStorage.getItem('_u'));
+  let strAuth = getUser()
+  let _u = JSON.parse(strAuth)
   if(_u !== null){
   return await getAccountDetails();
   }

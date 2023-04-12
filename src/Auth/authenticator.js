@@ -1,9 +1,10 @@
 import { Navigate, useLocation } from 'react-router-dom'
+import { getUser } from '../Services/User';
 // import { useAuth } from './authProvider'
 
 export const Authenticator = ({ children }) => {
   const location = useLocation()
-  let strAuth = localStorage.getItem('_u');
+  let strAuth = getUser();
   let wallet = localStorage.getItem('isConnected');
   let auth = JSON.parse(strAuth);
   const prev = sessionStorage.getItem('before login')

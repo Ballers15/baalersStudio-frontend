@@ -26,13 +26,13 @@ import Privacy from '../Pages/PrivacyPolicy';
 import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
-import ApiLoader from '../Components/apiLoader';
+import { getUser } from '../Services/User';
 
 
 const NavigationRouter = () => {
   const [role, setRole] = useState(null)
   useEffect(() => {
-    let strAuth = localStorage.getItem('_u')
+    let strAuth = getUser()
     let _u = JSON.parse(strAuth)
     let r = _u?.user?.role
     setRole(r)

@@ -381,7 +381,7 @@ const AdminDashboard = () => {
             </Col>
           </Row>
         </Container>
-        {/* <ToastContainer theme="colored"/> */}
+        
         {isLoading ? <ApiLoader /> : null} 
       </div>
     </React.Fragment>

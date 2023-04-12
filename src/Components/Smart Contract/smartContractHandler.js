@@ -9,6 +9,7 @@ import {
 import { setIsClaimedTrue } from '../Redux/actions';
 import { store } from '../Redux/store';
 import { environment } from '../../Environments/environment';
+import { getWallet } from '../../Services/User';
 
 
 // import { TransactionActions } from 'ReduxStore/Features/Transactions/TransactionsSlice';
@@ -47,7 +48,7 @@ async function getDecimals(){
 
 export const claimNft=async(data)=>{
 //  console.log(data)
-  let walletAddress = localStorage.getItem('_wallet');
+  let walletAddress = getWallet();
  // get wallet address from localstorage and pass in var
   const claimContract=await getNftContract();
 
@@ -60,7 +61,7 @@ let contractData={
 
 
 let withdrawlObject = {
-  walletAddress: localStorage.getItem('_wallet'),
+  walletAddress: getWallet(),
   potId:data?.potId,
   withdrawlId: data?.withdrawlId,
 }
@@ -87,7 +88,7 @@ try{
   toast.promise(nft, {
   pending: "Transaction sent successfully",
   success: "Transaction is Confirmed",
-  error: "Transaction Rejected! "
+  error: "Transaction Rejected!"
  })
 }
 
@@ -100,7 +101,7 @@ catch(err){
 
 
 export const claimToken=async(data)=>{
-  let walletAddress = localStorage.getItem('_wallet');
+  let walletAddress = getWallet();
  // get wallet address from localstorage and pass in var
  
   const claimContract=await getTokenContract();
@@ -115,7 +116,7 @@ let contractData={
 }
 
 let withdrawlObject = {
-  walletAddress: localStorage.getItem('_wallet'),
+  walletAddress: walletAddress,
   potId:data?.potId,
   withdrawlId: data?.withdrawlId,
 }

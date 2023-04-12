@@ -26,12 +26,12 @@ const UsersList = () => {
     fetchApi()
   }, [currentPage])
 
-  const fetchApi = async (e) => {
+  const fetchApi = async (email) => {
     let dataToSend = {
       currentPage: currentPage,
       startDate: rewadPotDetail.startDate,
       endDate: rewadPotDetail.endDate,
-      email: rewadPotDetail.email
+      email: email
     }
     dispatch(setLoadingTrue());
     try {
@@ -129,7 +129,8 @@ toast.error('Something went worng in updating active user')
   const getFilterUsers =  (e) => {
     e.preventDefault();
     setCurrentPage(1)
-    fetchApi()
+    let email = rewadPotDetail?.email;
+    fetchApi(email)
      
   }
 
@@ -143,9 +144,10 @@ toast.error('Something went worng in updating active user')
   };
 
   const handleReset = (e) => {
-    e.preventDefault();
+      e.preventDefault();
       setRewardPotDetail('');
-      fetchApi();
+      let email = '';
+      fetchApi(email)
   }
 
   return (
@@ -323,7 +325,7 @@ toast.error('Something went worng in updating active user')
           </Pagination>
         </div>
         
-        {/* <ToastContainer theme="colored"/> */}
+        
           {isLoading ? <ApiLoader /> : null} 
 
       </div>

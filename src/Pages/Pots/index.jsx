@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { connectWallet } from "../../Components/Metamask";
+import { getUser, getWallet } from "../../Services/User";
 
 
 
@@ -51,8 +52,8 @@ const PotPage = () => {
     const [expiryTime, setExpiryTime] = useState("");
     const [potDetails,setPotDetails] = useState('')
     const [cash, setCash] = useState('')
-    const user = localStorage.getItem('_u')
-    const walletAddress = localStorage.getItem('_wallet')
+    const user = getUser();
+    const walletAddress = getWallet()
     const { type } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
@@ -154,9 +155,10 @@ const PotPage = () => {
     }
 
       const addCashLottery = async () => {
+        let wallet = getWallet()
         let dataToSend = 
             {
-                walletAddress: localStorage.getItem('_wallet'),
+                walletAddress: wallet,
                 amount:cash,
                 potId: potDetails?._id
             }
@@ -183,7 +185,7 @@ const PotPage = () => {
     const addCashReward = async () => {
         let dataToSend = 
             {
-                walletAddress: localStorage.getItem('_wallet'),
+                walletAddress: getWallet(),
                 amount:cash,
                 potId: potDetails?._id
             }
@@ -213,7 +215,7 @@ const PotPage = () => {
     const fetchGameCash = async () => {
         let dataToSend = 
             {
-                walletAddress: localStorage.getItem('_wallet'),
+                walletAddress: getWallet(),
             }
         dispatch(setLoadingTrue());
         try {
@@ -418,7 +420,7 @@ return(
 
         </div>
         {isLoading ? <ApiLoader /> : null} 
-        {/* <ToastContainer theme="colored"/> */}
+        
     </div>
     </>
 )

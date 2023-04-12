@@ -112,13 +112,14 @@ const ForgotPassword = () => {
           email: email
       }
     dispatch(setLoadingTrue());
-    toast.dismiss()    
       try {
         const response=await forgotPassword(dataToSend)
         dispatch(setLoadingFalse());
       if (response.error) {
-          toast.error(response?.error?.message || 'Something went worng in getting token')
+        toast.dismiss()    
+        toast.error(response?.error?.message || 'Something went worng in getting token')
         } else {
+          toast.dismiss()    
           toast.success(response?.message || 'Verified link created')
           setToken(response?.data?.token)
           if(response?.data?.token.length){
@@ -126,6 +127,7 @@ const ForgotPassword = () => {
         }
         }
       } catch (error) {
+        toast.dismiss()    
         toast.error(error?.response?.data?.message || 'Something went worng in getting token')
         dispatch(setLoadingFalse());
       }
@@ -140,18 +142,20 @@ const ForgotPassword = () => {
     if(data.length){
 
       dispatch(setLoadingTrue());
-      toast.dismiss()    
       try {
           const passwordLink=(await forgotPasswordLink(data))
           dispatch(setLoadingFalse());
           if (passwordLink.error) {
+            toast.dismiss()    
             toast.error(passwordLink?.error?.message || 'Something went worng in generating link')
           } else {
+            toast.dismiss()    
             toast.success(passwordLink?.message || 'link verified')
             setValidated(false)
             setNewPass(true)
           }
         } catch (error) {
+          toast.dismiss()    
           toast.error(error?.response?.data?.message || 'Something went worng link')
           dispatch(setLoadingFalse());
         }
@@ -176,20 +180,22 @@ const ForgotPassword = () => {
       token: token
     }
     dispatch(setLoadingTrue());
-    toast.dismiss()    
     try {
       const changePass=(await changePassword(changePassData))
       dispatch(setLoadingFalse());
 
       if (changePass.error) {
+        toast.dismiss()    
         toast.error(changePass?.error?.message || 'Something went worng')
       } else {
+        toast.dismiss()    
         toast.success(changePass?.message || 'Password changed successfully!')
         setTimeout(() => {
           navigate('/login')
         }, 2000)
       }
     } catch (error) {
+      toast.dismiss()    
       toast.error(error?.response?.data?.message || 'Something went worng')
       dispatch(setLoadingFalse());
     }
@@ -241,7 +247,7 @@ const ForgotPassword = () => {
           </Form> 
         </div> }
         {isLoading ? <ApiLoader /> : null} 
-        {/* <ToastContainer theme="colored"/> */}
+        
       </div>
     </React.Fragment>
   )

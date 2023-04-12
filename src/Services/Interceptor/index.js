@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { environment } from "../../Environments/environment";
 import {useAuth} from '../../Auth/authProvider';
+import { getUser } from "../User";
 
 let baseURL = environment?.apiUrl;
 export const axiosInstance = axios.create({
@@ -10,7 +11,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     function (req) {
-        let _u = localStorage.getItem('_u');
+        let _u = getUser();
         let accountId = JSON.parse(_u||'{}')?.user?.accountId;
         let accessToken = JSON.parse(_u||'{}')?.token;
         req.headers = {

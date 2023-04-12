@@ -9,6 +9,7 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { getUser } from "../../Services/User";
 
 
 
@@ -16,10 +17,11 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 const RewardRounds = (props) => {
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
-    const user = localStorage.getItem('_u')
+    const user = getUser()
     const walletAddress = localStorage.getItem('_wallet')
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
+    const [prevRoundsLength, setPrevRoundsLength] = useState('')
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
@@ -136,6 +138,7 @@ toast.error(round?.message||'Something went worng');
           } else {
             // toast.success('round fetched Successfully');
             setPrevRounds(round?.data)
+            setPrevRoundsLength(round?.data?.length)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
             setParticipated(round?.data[0]?.userRes?.participated)
             setClaimed(round?.data[0]?.userRes?.claimed)
@@ -243,7 +246,7 @@ return(
                                 <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
-                                        <h3>Round {index+1} </h3>
+                                        <h3>Round {prevRoundsLength-index} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         <p className="winHead">Winners <span></span> </p> 

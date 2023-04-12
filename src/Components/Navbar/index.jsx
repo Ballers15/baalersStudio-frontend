@@ -8,11 +8,10 @@ import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
-import $ from 'jquery'; 
-import {useParams} from "react-router-dom" 
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { connectWallet, disconnectWallet, switchNetwork } from '../Metamask';
+import { getUser, getWallet } from '../../Services/User';
 
 
 
@@ -24,15 +23,22 @@ const NavBar = () => {
     auth.logout()
   }
 
-  let strAuth = localStorage.getItem('_u');
+  let strAuth = getUser();
   let _u = JSON.parse(strAuth);
   const location = useLocation();
-const [walletAddress, setWalletAddress] = useState(localStorage.getItem('_wallet'));
+  const [walletAddress, setWalletAddress] = useState(getWallet());
   
+useEffect(() => {
+  // Store the previous path in state or local storage
+  sessionStorage.setItem('before login',location.pathname);
+}, [location.pathname]);
 
+
+
+// metamask functions
 const handleConnectWallet = async () => {
       let res = await connectWallet(navigate)
-      console.log('handle connect',res)
+      // console.log('handle connect',res)
       setWalletAddress(res)
   }
 
@@ -42,22 +48,16 @@ const handleConnectWallet = async () => {
   }
 
 
-
-  useEffect(() => {
-    // Store the previous path in state or local storage
-    sessionStorage.setItem('before login',location.pathname);
-  }, [location.pathname]);
-
-
 const handleAccountChange = (accounts) => {
   setWalletAddress(accounts[0])
 }
 
-
 useEffect(() => {
-  console.log(walletAddress)
-  const wallet=localStorage.getItem('_wallet');
-    setWalletAddress(wallet)
+  const wallet=getWallet();
+    if(wallet) {setWalletAddress(wallet)}
+    else {
+      setWalletAddress(null)
+    }
   try {
 
   window.ethereum?.on('accountsChanged', handleAccountChange );
@@ -75,25 +75,6 @@ useEffect(() => {
 }, []);
 
 //metamask end
-
-  const { id } = useParams();
-
-  useEffect(() => {
-    // Update the document title using the browser API
-    console.log("HI",id);
-    if (id === 'partyGang' ) {
-        $('html, body').animate({
-            scrollTop: $("#partyGang").offset().top
-        }, 20);            
-      }
-    else if (id === 'balrToken' ) {
-        
-        console.log("id",id);
-             $('html, body').animate({
-                scrollTop: $("#balrToken").offset().top
-            }, 20);
-      }        
-  },[id]);
 
   return (
     <React.Fragment>

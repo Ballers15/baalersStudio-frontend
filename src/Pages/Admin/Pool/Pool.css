@@ -82,6 +82,10 @@
     cursor:not-allowed;
 }
 
+.react-time-picker--disabled{
+  background-color: transparent;
+}
+
 .fa-edit{
   height: 0px;
   cursor: pointer;

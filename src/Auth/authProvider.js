@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../Components/Redux/actions";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getUser } from '../Services/User';
 
 const AuthContext = createContext(null);
 
@@ -16,13 +17,15 @@ export default function AuthProvide({ children }) {
   
 
   useEffect(() => {
-    let _u = localStorage.getItem('_u');
-    if (JSON.parse(_u)) {
-      setUser(JSON.parse(_u));
+    let strAuth = getUser()
+    let _u = JSON.parse(strAuth)
+    if (_u) {
+      setUser(_u);
     } else {
       setUser(null);
     }
   }, []) 
+
 const [passErrorMsg,setPassErrorMsg]= useState(null)
   
   const login = async (data) => {

@@ -33,10 +33,11 @@ const AddPot = () => {
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState(currentTime);
     const [disable, disableSubmitButton] = useState(false);
-       const setDisableSubmitButton = (param) => disableSubmitButton(param);
+    const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
+    const [selectedAssetType, setSelectedAssetType] = useState('');
 
 
 
@@ -368,11 +369,21 @@ const AddPot = () => {
                                     as="select"
                                     type="select"
                                     onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,assetType:target.value})}
+                                    // onChange={({ target }) => {
+                                    //     setSelectedAssetType(target.value);
+                                    //     setRewardPotDetail({ ...rewadPotDetail,assetType:target.value})
+                                    //     if (target.value === 'TOKEN') {
+                                    //       setRewardPotDetail({ ...rewadPotDetail, potType: 'REWARDPOT' });
+                                    //     } else {
+                                    //       setRewardPotDetail({ ...rewadPotDetail, potType: 'LOTTERYPOT' });
+                                    //     }
+                                    //   }}
                                     value={rewadPotDetail.assetType|| ''}>
-                                    <option value="" disabled>Select Assest Type</option>
+                                   
+                                        <option value="" disabled>Select Assest Type</option>
                                             {assestTypesArray?.map((assest) => (
-                                                <option value={assest?.value|| ''} key={assest?._id}>
-                                                    {assest.lable}
+                                                <option value={assest?.value || ''} key={assest?._id}>
+                                                {assest.lable}
                                                 </option>
                                             ))}
                                 </Form.Control>
@@ -458,7 +469,7 @@ const AddPot = () => {
                         {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
-                {/* <ToastContainer theme="colored"/> */}
+                
                 {isLoading ? <ApiLoader /> : null}
             </div>
         </div>

@@ -300,14 +300,15 @@ const registerUsers = async () => {
     checkUsername();
   }
 
-      useEffect(() => {
-        if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
-          setSignupDisbale(false)
-          }
-          else{
-            setSignupDisbale(true)
-          }
-      }, [userDetails])
+      // useEffect(() => {
+      //   console.log('in use effect')
+      //   if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
+      //     setSignupDisbale(false)
+      //     }
+      //     else{
+      //       setSignupDisbale(true)
+      //     }
+      // }, [userDetails])
 
   return (
     <React.Fragment>
@@ -352,7 +353,8 @@ const registerUsers = async () => {
                     />
               </div>
                  
-              <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div>
+              <div className="playBtn">  <button type="submit" > <span></span>SIGN Up  </button> </div>
+              {/* <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div> */}
 
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
@@ -385,7 +387,7 @@ const registerUsers = async () => {
           
         </div>
         
-        {/* <ToastContainer theme="colored"/> */}
+        
 
       </div>
       </div>

@@ -7,7 +7,7 @@ import TimePicker from 'react-time-picker';
 import { useNavigate,useLocation } from 'react-router-dom';
 import {getRewardPotById} from '../../../Services/Admin'
 import ApiLoader from '../../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -287,7 +287,7 @@ const ViewPot = () => {
                         <button type="primary" className="add-pot-submit-button" onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
                         </div>
                 </Form>
-                {/* <ToastContainer theme="colored"/> */}
+                
                 {isLoading ? <ApiLoader /> : null}
             </div>
         </div>
