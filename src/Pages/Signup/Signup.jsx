@@ -3,14 +3,14 @@ import { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react-otp-input';
-import { checkUserName, registerUser,  userSignup, verifyOtp } from '../../Services/User'
+import { checkUserName, registerUser,  setUserLocal,  userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
 import ApiLoader from '../../Components/apiLoader'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { setLoadingFalse, setLoadingTrue, setUserData } from "../../Components/Redux/actions";
 import { useEffect } from 'react';
 
 
@@ -277,7 +277,7 @@ const registerUsers = async () => {
     } else {
       // toast.success(signup?.message || 'Signed up successfully!!')
       setErrorMsg(null)
-      localStorage.setItem('_u',JSON.stringify(signup?.data))
+     dispatch(setUserData(JSON.stringify(signup?.data)))
       navigate('/');
     }
     }

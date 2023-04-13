@@ -5,12 +5,10 @@ import {  useNavigate } from 'react-router-dom'
 import { changePassword, forgotPassword, forgotPasswordLink } from '../../Services/User'
 import './forgotpassword.css'
 import ApiLoader from '../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-
-// import '../Admin/Pool/Pool.css'
 
 const ForgotPassword = () => {
   const [validated, setValidated] = useState(false)
@@ -42,24 +40,8 @@ const ForgotPassword = () => {
   }
   else{
     setEmailErrorMsg('Email is  required !')
+    }
   }
-  }
-
-  // useEffect(() => {
-  // emailValidation(email)
-  // }, [email])
-  
-  // const emailValidation = (e) => {
-  //   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
-  //   const tld = e?.split('.')[1]?.length
-  //   if (!e || regex.test(e) === false || tld <= 1) {
-  //     setErrorMsg('Enter a Valid Email !')
-  //     return false
-  //   }
-  //   setErrorMsg(null)
-  //   return true
-  // }
-
 
   const confirmRepeatPassword = (e) =>{
     setRepeatPassword(e.target.value)
@@ -77,6 +59,7 @@ const ForgotPassword = () => {
     }
     // console.log('end ',passErrorMsg)
   }
+  
   const confirmPassword = (e) =>{
 
     setPassword(e.target.value)
@@ -101,8 +84,6 @@ const ForgotPassword = () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-    
-
     
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
@@ -136,7 +117,7 @@ const ForgotPassword = () => {
       console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
     }
   }
-  }
+}
 
   const createLink = async (data) => {
     if(data.length){
@@ -159,8 +140,7 @@ const ForgotPassword = () => {
           toast.error(error?.response?.data?.message || 'Something went worng link')
           dispatch(setLoadingFalse());
         }
-    }
-     
+      }
   }
 
   const updatePassword = async (e) =>{
@@ -200,10 +180,7 @@ const ForgotPassword = () => {
       dispatch(setLoadingFalse());
     }
   }
-     
-  }
-
-
+}
 
   return (
     <React.Fragment>
@@ -247,7 +224,6 @@ const ForgotPassword = () => {
           </Form> 
         </div> }
         {isLoading ? <ApiLoader /> : null} 
-        
       </div>
     </React.Fragment>
   )

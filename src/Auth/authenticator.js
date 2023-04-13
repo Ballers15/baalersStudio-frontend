@@ -1,11 +1,11 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { getUser } from '../Services/User';
+import { useSelector } from 'react-redux';
 // import { useAuth } from './authProvider'
 
 export const Authenticator = ({ children }) => {
   const location = useLocation()
-  let strAuth = getUser();
-  let wallet = localStorage.getItem('isConnected');
+  let strAuth = useSelector(state => state.user.user);
+  let wallet = useSelector(state => state.wallet.walletAddress)
   let auth = JSON.parse(strAuth);
   const prev = sessionStorage.getItem('before login')
 

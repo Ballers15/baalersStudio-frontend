@@ -18,8 +18,6 @@ import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actio
 const AddPot = () => {
     const isLoading = useSelector(state => state.loading.isLoading)
     const dispatch = useDispatch()
-    const assestTypesArray=[{_id:1,value:'TOKEN',lable:'Token'},{_id:2,value:'NFT',lable:'Nft'}]
-    const potTypeArray=[{_id:1,value:'REWARDPOT',lable:'Reward Pot'},{_id:2,value:'LOTTERYPOT',lable:'Lottery Pot'}]
     const [validated, setValidated] = useState(false);
     const [rewadPotDetail, setRewardPotDetail] = useState({
         rewardTokenAmount:'', assetDetails: {
@@ -37,77 +35,75 @@ const AddPot = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
-    const [selectedAssetType, setSelectedAssetType] = useState('');
 
 
 
-    useEffect(() => {
-        if (state?.id) {
-            getRewardPotDetailById(state?.id);
-            return;
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (state?.id) {
+    //         getRewardPotDetailById(state?.id);
+    //     }
+    // }, []);
 
-    const getRewardPotDetailById = async (id) => {
-        let dataToSend = {
-            potId:id
-        }
-        dispatch(setLoadingTrue());
-        try {
-              const getPotDetailsById = await getRewardPotById(dataToSend);
-              dispatch(setLoadingFalse());
-              if (getPotDetailsById.error) {
-                toast.dismiss()    
-                toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
-                } else {
-                  let data = getPotDetailsById?.data[0];
+    // const getRewardPotDetailById = async (id) => {
+    //     let dataToSend = {
+    //         potId:id
+    //     }
+    //     dispatch(setLoadingTrue());
+    //     try {
+    //           const getPotDetailsById = await getRewardPotById(dataToSend);
+    //           dispatch(setLoadingFalse());
+    //           if (getPotDetailsById.error) {
+    //             toast.dismiss()    
+    //             toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
+    //             } else {
+    //               let data = getPotDetailsById?.data[0];
 
-                  const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
-                  claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
-                  if (data) {
-                    // console.log(data)
+    //               const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
+    //               claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
+    //               if (data) {
+    //                 // console.log(data)
 
-                      setRewardPotDetail({
-                          ...rewadPotDetail,
-                          rewardTokenAmount: data?.rewardTokenAmount,
-                          startDate: data?.startDate?.split('T')[0],
-                          assetType:data?.assetType,
-                          potType: data?.potType,
-                          assetDetails: {
-                              ...rewadPotDetail.assetDetails,
-                              ticker: data?.assetDetails?.ticker,
-                              assetName: data?.assetDetails?.assetName,
-                              contractAddress: data?.assetDetails?.contractAddress,
-                          },
-                          isActive: data?.isActive,
-                          potStatus: data?.potStatus,
-                          claimExpiryDate: {
-                              ...rewadPotDetail.claimExpiryDate,
-                              time: data?.endDate?.split('T')[1]?.slice(0,5),
-                              date:convert(claimExpiryDate)  ,
-                          }
-                      })
-                      setEndDate( data?.endDate?.split('T')[0])
-                      setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-                    //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
-                    //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-                      setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
-                    }
-                    if(data?.potStatus === 'ONGOING'){
-                        // console.log('if',data?.potStatus)
-                        setPotStatusCheck(true);
-                        // console.log(potStatusCheck) 
-                        // console.log(rewadPotDetail)
-                      }
-              }
+    //                   setRewardPotDetail({
+    //                       ...rewadPotDetail,
+    //                       rewardTokenAmount: data?.rewardTokenAmount,
+    //                       startDate: data?.startDate?.split('T')[0],
+    //                       assetType:data?.assetType,
+    //                       potType: data?.potType,
+    //                       assetDetails: {
+    //                           ...rewadPotDetail.assetDetails,
+    //                           ticker: data?.assetDetails?.ticker,
+    //                           assetName: data?.assetDetails?.assetName,
+    //                           contractAddress: data?.assetDetails?.contractAddress,
+    //                       },
+    //                       isActive: data?.isActive,
+    //                       potStatus: data?.potStatus,
+    //                       claimExpiryDate: {
+    //                           ...rewadPotDetail.claimExpiryDate,
+    //                           time: data?.endDate?.split('T')[1]?.slice(0,5),
+    //                           date:convert(claimExpiryDate)  ,
+    //                       }
+    //                   })
+    //                   setEndDate( data?.endDate?.split('T')[0])
+    //                   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+    //                 //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
+    //                 //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+    //                   setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
+    //                 }
+    //                 if(data?.potStatus === 'ONGOING'){
+    //                     // console.log('if',data?.potStatus)
+    //                     setPotStatusCheck(true);
+    //                     // console.log(potStatusCheck) 
+    //                     // console.log(rewadPotDetail)
+    //                   }
+    //           }
              
-            } catch (error) {
-                toast.dismiss()    
-                toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
-                dispatch(setLoadingFalse());
-            }
+    //         } catch (error) {
+    //             toast.dismiss()    
+    //             toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
+    //             dispatch(setLoadingFalse());
+    //         }
              
-        }
+    //     }
     
     const getClaimExpiryTime = (e, data) => {
         const date = new Date(e);
@@ -137,6 +133,7 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+        const form = e.currentTarget;
         
 
         if(potStatusCheck)
@@ -152,8 +149,8 @@ const AddPot = () => {
             rewadPotDetail.isActive=false;
 
         }
-
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
+        if (form.checkValidity() === false) {
+        // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
@@ -201,6 +198,7 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+        const form = e.currentTarget;
 
         if(potStatusCheck)
         {
@@ -216,7 +214,9 @@ const AddPot = () => {
 
         }
 
-        if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
+    if (form.checkValidity() === false) {
+
+        // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
             return;
@@ -368,24 +368,18 @@ const AddPot = () => {
                                     required
                                     as="select"
                                     type="select"
-                                    onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,assetType:target.value})}
-                                    // onChange={({ target }) => {
-                                    //     setSelectedAssetType(target.value);
-                                    //     setRewardPotDetail({ ...rewadPotDetail,assetType:target.value})
-                                    //     if (target.value === 'TOKEN') {
-                                    //       setRewardPotDetail({ ...rewadPotDetail, potType: 'REWARDPOT' });
-                                    //     } else {
-                                    //       setRewardPotDetail({ ...rewadPotDetail, potType: 'LOTTERYPOT' });
-                                    //     }
-                                    //   }}
-                                    value={rewadPotDetail.assetType|| ''}>
-                                   
+                                    onChange={(e) => {
+                                        let potType = 'LOTTERYPOT'
+                                        if (e.target.value === 'TOKEN') {
+                                            potType = 'REWARDPOT'
+                                        } 
+                                        setRewardPotDetail({ ...rewadPotDetail, potType: potType,assetType:e.target.value });
+                                      }}
+                                    value={rewadPotDetail.assetType}
+                                    >
                                         <option value="" disabled>Select Assest Type</option>
-                                            {assestTypesArray?.map((assest) => (
-                                                <option value={assest?.value || ''} key={assest?._id}>
-                                                {assest.lable}
-                                                </option>
-                                            ))}
+                                        <option value="NFT">NFT</option>
+                                        <option value="TOKEN">Token</option>
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
                                     Assest Type is required !!
@@ -398,14 +392,19 @@ const AddPot = () => {
                                     required
                                     as="select"
                                     type="select"
-                                    onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,potType:target.value})}
-                                    value={rewadPotDetail.potType|| ''}>
+                                    onChange={(e) => {
+                                        let assetType = 'NFT'
+                                        if (e.target.value === 'REWARDPOT') {
+                                         assetType = 'TOKEN'
+                                        }
+                                        setRewardPotDetail({ ...rewadPotDetail, assetType:assetType ,potType:e.target.value });
+                                      }}
+                                    value={rewadPotDetail.potType || ''}
+                                    >
                                     <option value="" disabled>Select Pot Type</option>
-                                            {potTypeArray?.map((pot) => (
-                                                <option  value={pot?.value|| ''} key={pot?._id}>
-                                                    {pot.lable}
-                                                </option>
-                                            ))}
+                                    <option value="LOTTERYPOT">Lottery pot</option>
+                                    <option value="REWARDPOT">Reward Pot</option>
+                                    
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
                                     Pot Type is required !!

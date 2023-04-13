@@ -17,8 +17,8 @@ import { getUser } from "../../Services/User";
 const RewardRounds = (props) => {
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
-    const user = getUser()
-    const walletAddress = localStorage.getItem('_wallet')
+    const user = useSelector(state => state.user.user)
+    const walletAddress = useSelector(state => state.wallet.walletAddress)
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
     const [prevRoundsLength, setPrevRoundsLength] = useState('')
@@ -110,7 +110,7 @@ const RewardRounds = (props) => {
    
     useEffect(() => {
       getPreviousRounds()  
-  },[ localStorage.getItem('_wallet'),props.previous,isClaimed ]);
+  },[ walletAddress,props.previous,isClaimed ]);
 
 
     useEffect(() => {
@@ -126,7 +126,7 @@ const RewardRounds = (props) => {
 
     const getPreviousRounds = async () => {
       let dataToSend = {
-        walletAddress: localStorage.getItem('_wallet'),
+        walletAddress: walletAddress,
     }
         dispatch(setLoadingTrue());
         try {
@@ -134,7 +134,7 @@ const RewardRounds = (props) => {
           dispatch(setLoadingFalse());
           if (round.error) {
             toast.dismiss();
-toast.error(round?.message||'Something went worng');
+            toast.error(round?.message||'Something went worng');
           } else {
             // toast.success('round fetched Successfully');
             setPrevRounds(round?.data)
@@ -148,7 +148,7 @@ toast.error(round?.message||'Something went worng');
           }
         } catch (error) {
             toast.dismiss();
-toast.error(error?.response?.data?.message||'Something went worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -157,7 +157,7 @@ toast.error(error?.response?.data?.message||'Something went worng');
         // console.log(id)
         setPotId(id)
         let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
+            walletAddress: walletAddress,
             potId: id
         }
         dispatch(setLoadingTrue());
@@ -184,7 +184,7 @@ toast.error(error?.response?.data?.message||'Something went worng');
 
     const handleClaim = async () => {
         let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
+            walletAddress: walletAddress,
             potId: potId
         }
         dispatch(setLoadingTrue());

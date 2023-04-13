@@ -8,17 +8,14 @@ import Slider from "react-slick";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-import { getUser } from "../../Services/User";
-
-
+import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"; 
 
 
 const LotteryRounds = (props) => {
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
-    const user = getUser()
-    const walletAddress = localStorage.getItem('_wallet')
+    const user = useSelector(state => state.user.user)
+    const walletAddress = useSelector(state => state.wallet.walletAddress)
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
     const [prevRounds, setPrevRounds] = useState('')
     const [prevRoundsLength, setPrevRoundsLength] = useState('')
@@ -26,7 +23,7 @@ const LotteryRounds = (props) => {
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
-    const [claimedNft,setClaimedNft] = useState('')
+    const [claimedNft,setClaimedNft] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
     const [buttonStatus, setButtonStatus] = useState(true)
     
@@ -113,7 +110,7 @@ const LotteryRounds = (props) => {
 
     useEffect(() => {
       getPreviousRounds()  
-  },[ localStorage.getItem('_wallet'),props.previous,isClaimed ]);
+  },[ walletAddress ,props.previous,isClaimed ]);
 
     useEffect(() => {
         if(claimExpiryDate!==''){
@@ -126,7 +123,7 @@ const LotteryRounds = (props) => {
 
   const getPreviousRounds = async () => {
     let dataToSend = {
-        walletAddress: localStorage.getItem('_wallet'),
+        walletAddress: walletAddress,
     }
         dispatch(setLoadingTrue());
         try {
@@ -147,7 +144,7 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
           toast.dismiss();
-          toast.error(error ||'Something went worng in preious rounds');
+          toast.error(error ||'Something went worng in previous rounds');
             dispatch(setLoadingFalse());
         }
     }
@@ -156,7 +153,7 @@ const LotteryRounds = (props) => {
         // console.log(id)
         setPotId(id)
         let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
+            walletAddress: walletAddress,
             potId: id
         }
         dispatch(setLoadingTrue());
@@ -166,16 +163,16 @@ const LotteryRounds = (props) => {
           dispatch(setLoadingFalse());
           if (data.error) {
             toast.dismiss();
-toast.error(data?.message||'Something went worng in lottery won');
+            toast.error(data?.message||'Something went worng in lottery won');
           } else {
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
-            setClaimedNft(data?.data?.claimed)
+            // setClaimedNft(data?.data?.claimed)
             setButtonStatus(true)
           }
         } catch (error) {
             toast.dismiss();
-toast.error(error?.response?.data?.message||'Something went worng');
+            toast.error(error?.response?.data?.message||'Something went worng in lottery won');
             dispatch(setLoadingFalse());
         }
     }
@@ -183,8 +180,8 @@ toast.error(error?.response?.data?.message||'Something went worng');
 
     const handleClaim = async () => {
         let dataToSend = {
-            walletAddress: localStorage.getItem('_wallet'),
-            potId: potId+'123'
+            walletAddress: walletAddress,
+            potId: potId
         }
         dispatch(setLoadingTrue());
         try {
@@ -193,14 +190,14 @@ toast.error(error?.response?.data?.message||'Something went worng');
           dispatch(setLoadingFalse());
           if (data?.error) {
             toast.dismiss();
-            toast.error(data?.message||'Something went worng');
+            toast.error(data?.message||'Something went worng lottery claim');
           } else {
             // toast.success('Round fetched Successfully');
             claimTransaction(data?.data)
           }
         } catch (error) {
             toast.dismiss();
-          toast.error(error?.response?.data?.message||'Something went worng');
+          toast.error(error?.response?.data?.message||'Something went worng lottery claim');
             dispatch(setLoadingFalse());
         }
     }
@@ -222,14 +219,14 @@ toast.error(error?.response?.data?.message||'Something went worng');
           dispatch(setLoadingFalse());
           if (dataNft?.error) {
             toast.dismiss();
-toast.error(dataNft?.message||'Something went worng');
+            toast.error(dataNft?.message||'Something went worng');
           } else {
 
             console.log('claim lottery response',dataNft)
           }
         } catch (error) {
             toast.dismiss();
-toast.error(error?.response?.data?.message||'Something went worng');
+            toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
     }
@@ -272,13 +269,13 @@ return(
                         <div className="playBtn">
                         {userWon === true && claimExpiryDate !== '' && claimedNft === false  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
                         {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
-                        {userWon === true && claimExpiryDate === '' && claimedNft === false && ( <a className="disabled" ><span></span> CLAIM EXPIRED</a>) }
+                        {userWon === true && claimExpiryDate === '' && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) }
                         {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
                         {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
                         </div>  
 
                         <div className="expDate">
-                            {userWon ===true && claimExpiryDate!=='' && claimedNft!== true &&
+                            {userWon === true && claimExpiryDate !=='' && claimedNft !== true &&
                                 <><p className="mb-0">Expires in </p>
                                 <div className="claimExpire ps-2">
                                 <span className="countFont">{claimCountdownTime.countdownHours} <sub>H </sub></span>

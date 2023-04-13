@@ -18,7 +18,7 @@ const UsersList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [allUsers, setAllUsers] = useState(null)
   const [walletDetails,setWalletDetails] = useState([])
-  const [confirmUser, setUser]=useState([])
+  const [confirmUser, setConfirmUser]=useState([])
   const [rewadPotDetail,setRewardPotDetail] = useState([])
   const [lastPage, setLastPage] = useState(null)
 
@@ -116,7 +116,7 @@ toast.error('Something went worng in updating active user')
     setCurrentPage(currentPage - 1)
   }
   const handleConfirmModal = (userinfo) => {
-    setUser(userinfo)
+    setConfirmUser(userinfo)
     setConfirmModal(true)
 
   }

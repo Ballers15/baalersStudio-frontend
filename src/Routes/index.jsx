@@ -27,16 +27,17 @@ import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
 import { getUser } from '../Services/User';
+import { useSelector } from 'react-redux';
 
 
 const NavigationRouter = () => {
   const [role, setRole] = useState(null)
+  let strAuth = useSelector(state => state.user.user)
+
   useEffect(() => {
-    let strAuth = getUser()
     let _u = JSON.parse(strAuth)
     let r = _u?.user?.role
     setRole(r)
-    // console.log('u', r)
   }, [role])
   return (
     <>

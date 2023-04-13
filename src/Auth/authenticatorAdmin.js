@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { getUser } from '../Services/User';
+import { useSelector } from 'react-redux';
 
 export const AuthenticatorAdmin = ({ children }) => {
   const location = useLocation()
-  let strAuth = getUser();
+  let strAuth = useSelector(state => state.user.user);
   let auth = JSON.parse(strAuth);
 
   if (auth?.user.role!=='ADMIN' ) {

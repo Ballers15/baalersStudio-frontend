@@ -1,30 +1,29 @@
 import { useState,useEffect, createContext, useContext } from 'react'
 import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux";
-import { setLoadingFalse, setLoadingTrue } from "../Components/Redux/actions";
+import { useDispatch, useSelector  } from "react-redux";
+import { setLoadingFalse, setLoadingTrue, setUserData, setUserNull, setWalletAddressNull } from "../Components/Redux/actions";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getUser } from '../Services/User';
+import { setIsClaimed, setLoading } from '../Components/Redux/reducer';
 
 const AuthContext = createContext(null);
 
 export default function AuthProvide({ children }) {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
   const navigate = useNavigate()
   const prev = sessionStorage.getItem('before login')
+  let strAuth = useSelector(state => state.user.user)
   
 
-  useEffect(() => {
-    let strAuth = getUser()
-    let _u = JSON.parse(strAuth)
-    if (_u) {
-      setUser(_u);
-    } else {
-      setUser(null);
-    }
-  }, []) 
+  // useEffect(() => {
+  //   let _u = JSON.parse(strAuth)
+  //   if (_u) {
+  //    dispatch( setUserData(_u))
+  //   } else {
+  //    dispatch( setUserNull())
+  //   }
+  // }, []) 
 
 const [passErrorMsg,setPassErrorMsg]= useState(null)
   
@@ -39,15 +38,13 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
     } 
       else {
         if (login?.data?.user?.role === 'ADMIN') {
-          setUser(login.data); 
-          localStorage.setItem('_u', JSON.stringify(login.data))
+          dispatch(setUserData(JSON.stringify(login.data)))
           toast.dismiss()    
           toast.success('Login Succesfully !!');
           navigate('/admin-dashboard')
         } 
         else {
-          setUser(login.data);
-          localStorage.setItem('_u', JSON.stringify(login.data))
+          dispatch(setUserData(JSON.stringify(login.data)))
           toast.dismiss()    
           toast.success('Login Succesfully !!');
           navigate(prev)
@@ -65,9 +62,10 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
 
   const logout =  () => {
     // console.log("hiii logout");
-    setUser(null);
-    localStorage.clear(); 
-    navigate('/login');
+    dispatch(setUserNull());
+    dispatch(setWalletAddressNull());
+    dispatch(setIsClaimed(false));
+    dispatch(setLoading(false));    navigate('/login');
   }
 
   return (

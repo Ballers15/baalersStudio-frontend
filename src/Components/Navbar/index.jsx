@@ -8,12 +8,10 @@ import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
-import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { connectWallet, disconnectWallet, switchNetwork } from '../Metamask';
-import { getUser, getWallet } from '../../Services/User';
-
-
+import { connectWallet, disconnectWallet, getAccountDetails, switchNetwork } from '../Metamask';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWalletAddressNull, setWalletAddressValue } from '../Redux/actions';
 
 
 const NavBar = () => {
@@ -23,43 +21,42 @@ const NavBar = () => {
     auth.logout()
   }
 
-  let strAuth = getUser();
+  let strAuth = useSelector(state => state.user.user);
   let _u = JSON.parse(strAuth);
   const location = useLocation();
-  const [walletAddress, setWalletAddress] = useState(getWallet());
-  
+  const dispatch = useDispatch();
+  const walletAddress = useSelector(state => state.wallet.walletAddress)
+
 useEffect(() => {
   // Store the previous path in state or local storage
   sessionStorage.setItem('before login',location.pathname);
 }, [location.pathname]);
 
-
-
 // metamask functions
-const handleConnectWallet = async () => {
-      let res = await connectWallet(navigate)
-      // console.log('handle connect',res)
-      setWalletAddress(res)
+const handleConnectWallet =  () => {
+     if(_u !== null){
+      getAccountDetails()
+     }
+     else{
+      navigate('/login')
+     }
+
   }
 
   const handleDisconnectWallet = () => {
-    setWalletAddress(null)
+    dispatch(setWalletAddressNull())
     disconnectWallet();
   }
 
 
 const handleAccountChange = (accounts) => {
-  setWalletAddress(accounts[0])
+  dispatch(setWalletAddressValue(accounts[0]))
 }
 
-useEffect(() => {
-  const wallet=getWallet();
-    if(wallet) {setWalletAddress(wallet)}
-    else {
-      setWalletAddress(null)
-    }
-  try {
 
+useEffect(() => {
+
+  try {
   window.ethereum?.on('accountsChanged', handleAccountChange );
   window.ethereum?.on('chainChanged', switchNetwork); 
   } 
@@ -71,9 +68,7 @@ useEffect(() => {
   window.ethereum?.removeListener('accountsChanged', handleAccountChange);
   window.ethereum?.removeListener('chainChanged', switchNetwork);
   };
-  // eslint-disable-next-line
 }, []);
-
 //metamask end
 
   return (
@@ -89,7 +84,6 @@ useEffect(() => {
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
               {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> )}
-
               {_u?.user?.role !== 'ADMIN' && (
                <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
                     {walletAddress === null &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} 
@@ -102,14 +96,13 @@ useEffect(() => {
             <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
-               {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
+                {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
                 {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)}
-                {walletAddress && ( <Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item> )}
+                {walletAddress && (<Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item>)}
                 {_u === null &&   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>)}
                 {_u !== null &&   (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
-    
                 </Dropdown.Menu>
               </Dropdown>
             </Nav>

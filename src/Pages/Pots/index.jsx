@@ -20,8 +20,8 @@ import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-import { connectWallet } from "../../Components/Metamask";
-import { getUser, getWallet } from "../../Services/User";
+import { getAccountDetails } from "../../Components/Metamask";
+import { getUser } from "../../Services/User";
 
 
 
@@ -52,18 +52,15 @@ const PotPage = () => {
     const [expiryTime, setExpiryTime] = useState("");
     const [potDetails,setPotDetails] = useState('')
     const [cash, setCash] = useState('')
-    const user = getUser();
-    const walletAddress = getWallet()
+    const user = useSelector(state => state.user.user)
+    const walletAddress = useSelector(state => state.wallet.walletAddress)
     const { type } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
     const [previous, setPrevious] = useState(false);
     const [reload, setReload] = useState(false);
     
-
-
-
-   const [countdownTime, setCountdownTime]= useState(
+    const [countdownTime, setCountdownTime]= useState(
        {
            countdownDays:'',
            countdownHours:'',
@@ -155,10 +152,9 @@ const PotPage = () => {
     }
 
       const addCashLottery = async () => {
-        let wallet = getWallet()
         let dataToSend = 
             {
-                walletAddress: wallet,
+                walletAddress: walletAddress,
                 amount:cash,
                 potId: potDetails?._id
             }
@@ -185,7 +181,7 @@ const PotPage = () => {
     const addCashReward = async () => {
         let dataToSend = 
             {
-                walletAddress: getWallet(),
+                walletAddress: walletAddress,
                 amount:cash,
                 potId: potDetails?._id
             }
@@ -215,7 +211,7 @@ const PotPage = () => {
     const fetchGameCash = async () => {
         let dataToSend = 
             {
-                walletAddress: getWallet(),
+                walletAddress: walletAddress,
             }
         dispatch(setLoadingTrue());
         try {
@@ -259,12 +255,12 @@ const PotPage = () => {
         }
         else if(user &&  !walletAddress){
             toast.dismiss();
-            connectWallet();
-            return
+            getAccountDetails();
         }
        else{
         await fetchGameCash()
-        setRedeemModal(true)}
+        setRedeemModal(true)
+        }
     }
 
 return(
@@ -410,7 +406,6 @@ return(
 
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
                {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
-                
 
            {expiryTime !== '' && <div className="container">
                 <LeaderBoardRibbon/>

@@ -1,15 +1,29 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import LoadingSliceReducer from './reducer';
-import isClaimedReducer from './isClaimedReducer';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { loadingReducer, walletReducer, isClaimedReducer, userReducer } from './reducer';
 
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({
+    loading: loadingReducer,
+    claimed: isClaimedReducer,
+    wallet: walletReducer,
+    user: userReducer,
+  })
+);
 
 export const store = configureStore({
-  reducer: {
-    loading: LoadingSliceReducer,
-    claimed: isClaimedReducer
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
+
+export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);

@@ -1,7 +1,6 @@
 import Web3 from 'web3';
 import { withdrawLottery, withdrawReward } from '../../Pages/Pots/withdrawlLottery';
 import {  toast } from 'react-toastify';
-
 import {
   claimTokenAbi ,
   claimNftAbi,
@@ -9,11 +8,7 @@ import {
 import { setIsClaimedTrue } from '../Redux/actions';
 import { store } from '../Redux/store';
 import { environment } from '../../Environments/environment';
-import { getWallet } from '../../Services/User';
-
-
-// import { TransactionActions } from 'ReduxStore/Features/Transactions/TransactionsSlice';
-
+import { useSelector } from 'react-redux';
 
 
 const { ethereum } = window;
@@ -47,11 +42,12 @@ async function getDecimals(){
 }
 
 export const claimNft=async(data)=>{
-//  console.log(data)
-  let walletAddress = getWallet();
- // get wallet address from localstorage and pass in var
+ console.log('calim nft',data)
+  const walletAddress = useSelector(state => state.wallet.walletAddress)
+  console.log('wlt',walletAddress)
+// get wallet address from localstorage and pass in var
   const claimContract=await getNftContract();
-
+  console.log('claim contract' ,claimContract)
 let contractData={
   tokenId:data.tokenId,   //claimData.potDetails.ticker
   quantity:data.quantity, //claimData.potDetails.rewardTokenAmount
@@ -61,7 +57,7 @@ let contractData={
 
 
 let withdrawlObject = {
-  walletAddress: getWallet(),
+  walletAddress: walletAddress,
   potId:data?.potId,
   withdrawlId: data?.withdrawlId,
 }
@@ -101,8 +97,7 @@ catch(err){
 
 
 export const claimToken=async(data)=>{
-  let walletAddress = getWallet();
- // get wallet address from localstorage and pass in var
+  const walletAddress = useSelector(state => state.wallet.walletAddress)
  
   const claimContract=await getTokenContract();
   // const getDecimals=await getDecimals();

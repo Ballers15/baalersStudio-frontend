@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import "./Metamask.css";
 import { toast } from "react-toastify";
-import { getUser } from '../../Services/User';
+import { store } from "../Redux/store";
+import { setWalletAddressNull, setWalletAddressValue } from "../Redux/actions";
+import { useSelector } from "react-redux";
 
 export const globalWalletAddress = '';
 
 export const disconnectWallet = () => {
     toast.dismiss()
-    localStorage.removeItem('_wallet')
+    store.dispatch(setWalletAddressNull());
     toast.error('Wallet Disconnected')
   }
 
@@ -50,27 +52,25 @@ export const getAccountDetails = async () => {
           })
           let chainID = await window.ethereum .request({ method: "eth_chainId", })
           getDetailsFromChainId(chainID,wallet);
-         localStorage.setItem('_wallet',wallet[0])
-        toast.dismiss()
-        toast.info('Wallet Connected')
-            return wallet[0];
+          store.dispatch(setWalletAddressValue(wallet[0]));
+          toast.dismiss()
+          toast.info('Wallet Connected')
     } else {
     // setAccountDetails('')
     toast.info("Install MetaMask First");
   }
 };
 
-export  const connectWallet = async ( navigate) => {
-  console.log('inside connect wallet')
-  let strAuth = getUser()
-  let _u = JSON.parse(strAuth)
-  if(_u !== null){
-  return await getAccountDetails();
-  }
-  else{
-    navigate('/login');
-  }
-};
+// export  const connectWallet = async ( navigate) => {
+//   let strAuth = useSelector()
+//   let _u = JSON.parse(strAuth)
+//   if(_u !== null){
+//   getAccountDetails();
+//   }
+//   else{
+//     navigate('/login');
+//   }
+// };
 
 export const getDetailsFromChainId = async(chainId) => {
   let selectedChain = Object.keys(supportedChainList).map(async(e) => {
@@ -84,7 +84,7 @@ export const getDetailsFromChainId = async(chainId) => {
   
     let filteredSelectedChain = selectedChain.filter((e) => e);
     // return(JSON.stringify(filteredSelectedChain[0]))
-    console.log(filteredSelectedChain[0]	,'-------------------------chain details')
+    // console.log(filteredSelectedChain[0]	,'-------------------------chain details')
   return filteredSelectedChain[0];
   };
 
