@@ -2,14 +2,14 @@
 import "./Metamask.css";
 import { toast } from "react-toastify";
 import { store } from "../Redux/store";
-import { setWalletAddressNull, setWalletAddressValue } from "../Redux/actions";
-import { useSelector } from "react-redux";
+import {  setWalletAddressValue } from "../Redux/actions";
+
 
 export const globalWalletAddress = '';
 
 export const disconnectWallet = () => {
     toast.dismiss()
-    store.dispatch(setWalletAddressNull());
+    store.dispatch(setWalletAddressValue(null));
     toast.error('Wallet Disconnected')
   }
 

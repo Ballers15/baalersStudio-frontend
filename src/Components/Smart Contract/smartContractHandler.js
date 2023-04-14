@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux';
 
 const { ethereum } = window;
 let web3 = new Web3(Web3.givenProvider);
+const walletAddress = store.getState().wallet.walletAddress
+
 
 // const contract = new web3.eth.Contract(smartContractABI);
 
@@ -42,9 +44,8 @@ async function getDecimals(){
 }
 
 export const claimNft=async(data)=>{
- console.log('calim nft',data)
-  const walletAddress = useSelector(state => state.wallet.walletAddress)
-  console.log('wlt',walletAddress)
+//  console.log('calim nft',data)
+  // console.log('wlt',walletAddress)
 // get wallet address from localstorage and pass in var
   const claimContract=await getNftContract();
   console.log('claim contract' ,claimContract)
@@ -97,7 +98,6 @@ catch(err){
 
 
 export const claimToken=async(data)=>{
-  const walletAddress = useSelector(state => state.wallet.walletAddress)
  
   const claimContract=await getTokenContract();
   // const getDecimals=await getDecimals();

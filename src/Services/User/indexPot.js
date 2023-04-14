@@ -64,3 +64,7 @@ export function rewardWithdrawl(data) {
   console.log('api called withdraw',data)
   return (axiosInstance.post(url + 'user/v1/update/withdrawl',  data).then( res => res.data))
 }
+
+export function checkNftClaim(data) {
+  return (axiosInstance.get(url + 'pot/v1/check/nft/claim/contract',{params: data}).then(res => res.data))
+}

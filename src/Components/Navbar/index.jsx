@@ -9,9 +9,9 @@ import gamelogo from '../../Assest/img/gamelogo.png';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { connectWallet, disconnectWallet, getAccountDetails, switchNetwork } from '../Metamask';
+import {  disconnectWallet, getAccountDetails, switchNetwork } from '../Metamask';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWalletAddressNull, setWalletAddressValue } from '../Redux/actions';
+import {  setWalletAddressValue } from '../Redux/actions';
 
 
 const NavBar = () => {
@@ -44,7 +44,7 @@ const handleConnectWallet =  () => {
   }
 
   const handleDisconnectWallet = () => {
-    dispatch(setWalletAddressNull())
+    dispatch(setWalletAddressValue(null))
     disconnectWallet();
   }
 

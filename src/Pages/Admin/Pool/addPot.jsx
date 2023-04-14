@@ -8,11 +8,12 @@ import {AddRewardPot} from '../../../Services/Admin';
 import { useNavigate,useLocation } from 'react-router-dom';
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
 import ApiLoader from '../../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actions";
+import { checkNftClaim } from '../../../Services/User/indexPot'
 
 
 const AddPot = () => {
@@ -35,75 +36,76 @@ const AddPot = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
+    const [nftExists, setNftExists] = useState(false)
 
 
 
-    // useEffect(() => {
-    //     if (state?.id) {
-    //         getRewardPotDetailById(state?.id);
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (state?.id) {
+            getRewardPotDetailById(state?.id);
+        }
+    }, []);
 
-    // const getRewardPotDetailById = async (id) => {
-    //     let dataToSend = {
-    //         potId:id
-    //     }
-    //     dispatch(setLoadingTrue());
-    //     try {
-    //           const getPotDetailsById = await getRewardPotById(dataToSend);
-    //           dispatch(setLoadingFalse());
-    //           if (getPotDetailsById.error) {
-    //             toast.dismiss()    
-    //             toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
-    //             } else {
-    //               let data = getPotDetailsById?.data[0];
+    const getRewardPotDetailById = async (id) => {
+        let dataToSend = {
+            potId:id
+        }
+        dispatch(setLoadingTrue());
+        try {
+              const getPotDetailsById = await getRewardPotById(dataToSend);
+              dispatch(setLoadingFalse());
+              if (getPotDetailsById.error) {
+                toast.dismiss()    
+                toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
+                } else {
+                  let data = getPotDetailsById?.data[0];
 
-    //               const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
-    //               claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
-    //               if (data) {
-    //                 // console.log(data)
+                  const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
+                  claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
+                  if (data) {
+                    // console.log(data)
 
-    //                   setRewardPotDetail({
-    //                       ...rewadPotDetail,
-    //                       rewardTokenAmount: data?.rewardTokenAmount,
-    //                       startDate: data?.startDate?.split('T')[0],
-    //                       assetType:data?.assetType,
-    //                       potType: data?.potType,
-    //                       assetDetails: {
-    //                           ...rewadPotDetail.assetDetails,
-    //                           ticker: data?.assetDetails?.ticker,
-    //                           assetName: data?.assetDetails?.assetName,
-    //                           contractAddress: data?.assetDetails?.contractAddress,
-    //                       },
-    //                       isActive: data?.isActive,
-    //                       potStatus: data?.potStatus,
-    //                       claimExpiryDate: {
-    //                           ...rewadPotDetail.claimExpiryDate,
-    //                           time: data?.endDate?.split('T')[1]?.slice(0,5),
-    //                           date:convert(claimExpiryDate)  ,
-    //                       }
-    //                   })
-    //                   setEndDate( data?.endDate?.split('T')[0])
-    //                   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-    //                 //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
-    //                 //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-    //                   setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
-    //                 }
-    //                 if(data?.potStatus === 'ONGOING'){
-    //                     // console.log('if',data?.potStatus)
-    //                     setPotStatusCheck(true);
-    //                     // console.log(potStatusCheck) 
-    //                     // console.log(rewadPotDetail)
-    //                   }
-    //           }
+                      setRewardPotDetail({
+                          ...rewadPotDetail,
+                          rewardTokenAmount: data?.rewardTokenAmount,
+                          startDate: data?.startDate?.split('T')[0],
+                          assetType:data?.assetType,
+                          potType: data?.potType,
+                          assetDetails: {
+                              ...rewadPotDetail.assetDetails,
+                              ticker: data?.assetDetails?.ticker,
+                              assetName: data?.assetDetails?.assetName,
+                              contractAddress: data?.assetDetails?.contractAddress,
+                          },
+                          isActive: data?.isActive,
+                          potStatus: data?.potStatus,
+                          claimExpiryDate: {
+                              ...rewadPotDetail.claimExpiryDate,
+                              time: data?.endDate?.split('T')[1]?.slice(0,5),
+                              date:convert(claimExpiryDate)  ,
+                          }
+                      })
+                      setEndDate( data?.endDate?.split('T')[0])
+                      setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
+                    //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
+                      setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
+                    }
+                    if(data?.potStatus === 'ONGOING'){
+                        // console.log('if',data?.potStatus)
+                        setPotStatusCheck(true);
+                        // console.log(potStatusCheck) 
+                        // console.log(rewadPotDetail)
+                      }
+              }
              
-    //         } catch (error) {
-    //             toast.dismiss()    
-    //             toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
-    //             dispatch(setLoadingFalse());
-    //         }
+            } catch (error) {
+                toast.dismiss()    
+                toast.error(error?.response?.data?.message||'Something Went Wrong in getting pot details by ID');
+                dispatch(setLoadingFalse());
+            }
              
-    //     }
+        }
     
     const getClaimExpiryTime = (e, data) => {
         const date = new Date(e);
@@ -149,7 +151,7 @@ const AddPot = () => {
             rewadPotDetail.isActive=false;
 
         }
-        if (form.checkValidity() === false) {
+        if (form.checkValidity() === false && nftExists === false) {
         // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
             console.log('form invalid !!')
@@ -214,7 +216,7 @@ const AddPot = () => {
 
         }
 
-    if (form.checkValidity() === false) {
+    if (form.checkValidity() === false && nftExists === false) {
 
         // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
@@ -272,6 +274,43 @@ const AddPot = () => {
             addRewardPot(e);
         }
     }
+
+    const checkNftOnContract = async(e) => {
+        setValidated(true);
+        e.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
+
+        let dataToSend = {
+            tokenId: e.target.value
+        }
+
+        dispatch(setLoadingTrue());
+        try {
+          const checkNFT = await checkNftClaim(dataToSend);
+          dispatch(setLoadingFalse());
+          if (checkNFT.error) {
+            toast.dismiss()    
+            toast.error(checkNFT?.message||'Something went worng while checking nft');
+          } else {
+            setNftExists(checkNFT?.data?.exists)    
+            if(checkNFT?.data?.exists){
+                toast.dismiss()    
+                toast.success('NFT exists');
+            }
+            else{
+                toast.dismiss()    
+                toast.error('No NFT found')
+            }            
+          }
+        } catch (error) {
+        toast.dismiss()    
+        toast.error(error?.response?.data?.message||'Something went worng while checking nft');
+        }
+        dispatch(setLoadingFalse());
+
+    }
+
     return (
         <React.Fragment>
             <div className="addPot">
@@ -421,7 +460,8 @@ const AddPot = () => {
                                     required
                                     type="text"
                                     onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail, assetDetails: {...rewadPotDetail.assetDetails, ticker: target.value } })}
-                                        value={rewadPotDetail.assetDetails["ticker"]|| ''}>
+                                    onBlur={(e)=>checkNftOnContract(e)}
+                                    value={rewadPotDetail.assetDetails["ticker"] || ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
                                         Ticker is required !!

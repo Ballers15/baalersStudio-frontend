@@ -167,7 +167,7 @@ const LotteryRounds = (props) => {
           } else {
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
-            // setClaimedNft(data?.data?.claimed)
+            setClaimedNft(data?.data?.claimed)
             setButtonStatus(true)
           }
         } catch (error) {
