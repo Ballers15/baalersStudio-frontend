@@ -4,14 +4,24 @@ import 'bootstrap/dist/js/bootstrap.js';
 import './App.css';
 import NavigationRouter from './Routes';
 import { ToastContainer } from 'react-toastify';
-
+import { useSelector } from 'react-redux';
+import { buildAbilityFor } from '../src/Components/rolesBasedAccessControl/ability';
+import { AbilityContext } from '../src/Components/rolesBasedAccessControl/Can';
 
 function App() {
-  return (
+  const user = useSelector(state => state.user.user);
+  const _u = JSON.parse(user)
+  const ability = buildAbilityFor(_u?.user?.role);
+
+return (
     <React.Fragment>
       <ToastContainer autoClose={2500} theme="colored" />
-     <NavigationRouter />
-   </React.Fragment>
+    <AbilityContext.Provider value={ability}>
+    <NavigationRouter />
+    </AbilityContext.Provider>
+
+
+ </React.Fragment>
   );
 }
 

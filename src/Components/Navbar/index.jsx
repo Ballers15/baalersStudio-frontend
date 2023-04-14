@@ -12,6 +12,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import {  disconnectWallet, getAccountDetails, switchNetwork } from '../Metamask';
 import { useDispatch, useSelector } from 'react-redux';
 import {  setWalletAddressValue } from '../Redux/actions';
+import Can from '../rolesBasedAccessControl/Can';
 
 
 const NavBar = () => {
@@ -79,19 +80,23 @@ useEffect(() => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="2" href='#partyGang'> {' '} Party{' '} </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && ( <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> )}
-              {_u?.user?.role !== 'ADMIN' && (
-               <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
+              <Can do='about' on='navbar'> <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> </Can>
+              <Can do='party' on='navbar'> <Nav.Link eventKey="2" href='#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
+              <Can do='how-to-play' on='navbar'> <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> </Can>
+              <Can do='pool' on='navbar'> <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> </Can>
+              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> </Can>
+              
+              <Can do='wallet' on='navbar'>   <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
                     {walletAddress === null &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} 
-                </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> )}
-              {_u?.user?.role == 'ADMIN' && ( <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> )}
+                </Nav.Link>  </Can>
+
+              <Can do='admin-dashboard' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>
+            
+              <Can do='users' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> </Can>
+              <Can do='pool-listing' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/poolListing'>Pool </Nav.Link> </Can>
+            
             </Nav>
+
             <Nav>
             <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
               <Dropdown>
@@ -100,9 +105,8 @@ useEffect(() => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
                 {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)}
-                {walletAddress && (<Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item>)}
-                {_u === null &&   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>)}
-                {_u !== null &&   (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
+                <Can do='wallet' on='navbar'> {walletAddress && (<Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item>)} </Can>
+                {_u === null ?   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>) : (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
                 </Dropdown.Menu>
               </Dropdown>
             </Nav>

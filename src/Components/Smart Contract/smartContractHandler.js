@@ -8,7 +8,6 @@ import {
 import { setIsClaimedTrue } from '../Redux/actions';
 import { store } from '../Redux/store';
 import { environment } from '../../Environments/environment';
-import { useSelector } from 'react-redux';
 
 
 const { ethereum } = window;
