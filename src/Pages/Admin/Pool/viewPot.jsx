@@ -37,6 +37,10 @@ const ViewPot = () => {
         }
     }, []);
 
+        /**
+     * Get pot details by pot id
+     * @param id String | Pot Id
+     */
     const getRewardPotDetailById = async (id) => {
         let dataToSend = {
             potId:id
@@ -87,9 +91,11 @@ const ViewPot = () => {
             }
              
 }
-    
-
-    const convert=(str)=> {
+   /**
+     * Coverts String to Date yyyy-mm-dd format
+     * @param str String(Date) 
+     * @returns returns date in yyy-mm-dd format
+     */const convert=(str)=> {
         var date = new Date(str),
           mnth = ("0" + (date?.getMonth() + 1))?.slice(-2),
           day = ("0" + date?.getDate())?.slice(-2);
@@ -284,7 +290,7 @@ const ViewPot = () => {
                             </Row>
                     
                         <div>
-                        <button type="primary" className="add-pot-submit-button" onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
+                        <button type="primary" className="add-pot-submit-button" onClick={()=>navigate('/pool-listing')}><span></span><span></span><span></span>Close</button>
                         </div>
                 </Form>
                 

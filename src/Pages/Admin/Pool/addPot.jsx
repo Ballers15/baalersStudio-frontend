@@ -46,6 +46,10 @@ const AddPot = () => {
         }
     }, []);
 
+    /**
+     * Get pot details by pot id
+     * @param id String | Pot Id
+     */
     const getRewardPotDetailById = async (id) => {
         let dataToSend = {
             potId:id
@@ -107,22 +111,38 @@ const AddPot = () => {
              
         }
     
+    /**
+     * Get claim expiry date and time from input and set the value in rewadPotDetails
+     * @param e String (date) | input value
+     * @param data String | date and time from respective input fields
+     */
     const getClaimExpiryTime = (e, data) => {
         const date = new Date(e);
         date.setDate(date.getDate() + 1);
+        let dataTime = {
+            ...rewadPotDetail.claimExpiryDate, time:e
+        }
+        let dataDate = {
+            ...rewadPotDetail.claimExpiryDate, date:convert(date)
+        }
         switch(data) {  
             case 'time':
-                setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: {...rewadPotDetail.claimExpiryDate, time:e } })
+                setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: dataTime })
               break;
             case 'date':
                 // console.log(data)
-                setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: {...rewadPotDetail.claimExpiryDate, date:convert(date)} })
+                setRewardPotDetail({ ...rewadPotDetail, claimExpiryDate: dataDate })
               break;
             default:
                 // console.log('default statement run');
           }
     }
 
+    /**
+     * Coverts String to Date yyyy-mm-dd format
+     * @param str String(Date) 
+     * @returns returns date in yyy-mm-dd format
+     */
     const convert=(str)=> {
         var date = new Date(str),
           mnth = ("0" + (date?.getMonth() + 1))?.slice(-2),
@@ -130,6 +150,10 @@ const AddPot = () => {
         return [date?.getFullYear(), mnth, day]?.join("-");
     }
     
+    /**
+     * if form is valid reward pot will be added by calling AddRewardPot API with pot details obejct passed as param
+     * @param e Event | event from Form  submission
+     */
     const addRewardPot =async (e) => {
         setValidated(true);
         e.preventDefault();
@@ -181,7 +205,7 @@ const AddPot = () => {
         toast.dismiss()    
         toast.success('Pot Added Succesfully !!');
             setDisableSubmitButton(false);
-            navigate('/poolListing');
+            navigate('/pool-listing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
@@ -192,6 +216,10 @@ const AddPot = () => {
          
     }
 
+    /**
+     * Update existing pot details 
+     * @param  e Event | Event from From submission
+     */
     const updateRewardPot = async (e) => {
         if (!state?.id || rewadPotDetail?.isActive === 'true') {
             return;
@@ -253,7 +281,7 @@ const AddPot = () => {
             toast.success('Pot Updated Succesfully !!');
             setDisableSubmitButton(false);
             state.id = '';
-            navigate('/poolListing');
+            navigate('/pool-listing');
           }
         } catch (error) {
             setDisableSubmitButton(false);
@@ -264,6 +292,10 @@ const AddPot = () => {
          
     }
 
+    /**
+     * Upon form submission upate or add pot function will be called according to conditions
+     * @param  e Event | Event from From submission
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -275,6 +307,10 @@ const AddPot = () => {
         }
     }
 
+    /**
+     * Check if NFt (token) is present on the contract address by passing the token ID
+     * @param  e Event | Event from From submission
+     */
     const checkNftOnContract = async(e) => {
         setValidated(true);
         e.preventDefault();
@@ -503,7 +539,7 @@ const AddPot = () => {
                             </Row>
                     
                         <div>
-                        <button type="primary" className="add-pot-submit-button" style={{marginLeft:'20px'}} onClick={()=>navigate('/poolListing')}><span></span><span></span><span></span>Close</button>
+                        <button type="primary" className="add-pot-submit-button" style={{marginLeft:'20px'}} onClick={()=>navigate('/pool-listing')}><span></span><span></span><span></span>Close</button>
                         {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
                         {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
                         </div>

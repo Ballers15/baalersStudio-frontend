@@ -21,8 +21,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { getAccountDetails } from "../../Components/Metamask";
-import { getUser } from "../../Services/User";
-
+import Can from "../../Components/rolesBasedAccessControl/Can";
 
 
 const PotPage = () => {
@@ -59,7 +58,8 @@ const PotPage = () => {
     const location = useLocation()
     const [previous, setPrevious] = useState(false);
     const [reload, setReload] = useState(false);
-    
+    const [redeemModal,setRedeemModal] = useState(false)
+
     const [countdownTime, setCountdownTime]= useState(
        {
            countdownDays:'',
@@ -100,7 +100,7 @@ const PotPage = () => {
   
     useEffect(()=>{
     if(type === 'lottery'){
-        setPotType('LOTTERYPOT')
+            setPotType('LOTTERYPOT')
         }
         else{
             setPotType('REWARDPOT')
@@ -124,7 +124,9 @@ const PotPage = () => {
     },[expiryTime]);
 
 
-
+    /**
+     * Get details of active pot (if any)
+     */
     const getActivePotDetails = async () => {
         let dataToSend = {
             potType: potType,
@@ -150,8 +152,11 @@ const PotPage = () => {
         }
          
     }
-
-      const addCashLottery = async () => {
+    
+    /**
+     * redeem cash in active lottery pot
+     */
+    const addCashLottery = async () => {
         let dataToSend = 
             {
                 walletAddress: walletAddress,
@@ -178,6 +183,9 @@ const PotPage = () => {
          
     }
 
+    /**
+     * redeem cash in active reward pot
+     */
     const addCashReward = async () => {
         let dataToSend = 
             {
@@ -208,6 +216,9 @@ const PotPage = () => {
          
     }
 
+    /**
+     * fetch cash amount of users account
+     */
     const fetchGameCash = async () => {
         let dataToSend = 
             {
@@ -232,7 +243,10 @@ const PotPage = () => {
         
     }
 
-    
+    /**
+     * 
+     * @returns handle redeem api calls according to pot type
+     */
     const handleRedeem = () => {
         if(potType === 'LOTTERYPOT')
             {addCashLottery()
@@ -246,9 +260,8 @@ const PotPage = () => {
             return
       }
 
-    const [redeemModal,setRedeemModal] = useState(false)
     const handleCloseModal = () => setRedeemModal(false)
-
+    
     const handleRedeemModal = async() => {
         if(!user ){
             navigate('/login')
@@ -389,10 +402,11 @@ return(
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
-                                    {expiryTime!=='' && user!==null && walletAddress!==null && ( <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a>)}
-                                    {expiryTime!=='' && user!==null && walletAddress===null && ( <a onClick={handleRedeemModal}><span></span> Connect Wallet</a>)}
-                                    {expiryTime!=='' && user===null  && ( <a onClick={handleRedeemModal}><span></span> login</a>)}
-                                        {expiryTime === '' && <a className="disabled"><span></span> POT EXPIRED</a>}
+                                    {expiryTime!=='' ?  
+                                    (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
+                                    {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
+                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> login</a> </Can>)}</>) :
+                                    (<a className="disabled"><span></span> POT EXPIRED</a>)}
                                     </div>
                                 </div>                        
                             </div>

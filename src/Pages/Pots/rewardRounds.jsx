@@ -49,8 +49,12 @@ const RewardRounds = (props) => {
       variableWidth: true, 
       nextArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>
     };
-
-   const handleSlideChange = (current) => {
+  
+   /**
+   * Get current slide index upon slide change
+   * @param current | active slide index
+   */
+  const handleSlideChange = (current) => {
     // console.log("current",current);
        setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
@@ -124,6 +128,9 @@ const RewardRounds = (props) => {
         }
     },[claimExpiryDate]);
 
+    /**
+    * Get array of previous rounds
+    */
     const getPreviousRounds = async () => {
       let dataToSend = {
         walletAddress: walletAddress,
@@ -152,7 +159,10 @@ const RewardRounds = (props) => {
             dispatch(setLoadingFalse());
         }
     }
-
+    /**
+     * check claim status of previous reward rounds
+     * @param id | potId
+     */
     const claimedReward = async (id) => {
         // console.log(id)
         setPotId(id)
@@ -181,7 +191,9 @@ const RewardRounds = (props) => {
         }
     }
 
-
+    /**
+     * Get details required for initiating the transaction
+     */
     const handleClaim = async () => {
         let dataToSend = {
             walletAddress: walletAddress,
@@ -201,11 +213,14 @@ const RewardRounds = (props) => {
           }
         } catch (error) {
           toast.dismiss();
-          toast.error(error?.response?.data?.message||'Something went wornghandleClaim 2' );
-            dispatch(setLoadingFalse());
+          toast.error(error?.response?.data?.message||'Something went worng handle Claim 2' );
+          dispatch(setLoadingFalse());
         }
     }
-
+    /**
+     * To inititate transaction upon claim for reward tokens
+     * @param data object | Transaction details fetched from lotteryCalim API
+     */
     const claimTransaction = async (data) => {
         let dataToSend = {
             contractAddress:data?.potDetails?.assetDetails?.contractAddress,

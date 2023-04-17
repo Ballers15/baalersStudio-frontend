@@ -20,7 +20,10 @@ const LeaderBoardReward = (props) => {
     },[props.reload])
 
 
-
+    /**
+    * Get leaderboard data of active pot
+    * @param data String | Search input (username)
+    */
     const getRewardLeaderBoard = async (data) => {
         let dataToSend = {
             search: data,
@@ -49,6 +52,11 @@ const LeaderBoardReward = (props) => {
         getRewardLeaderBoard(leaderSearch);
     }
 
+    /**
+     * Fromat large number
+     * @param value Number | large number > 10^10
+     * @returns formatted number
+     */
     const formatNumberDecimal = (value) => {
         if(value > Math.pow(10,10)){
         const shortenedValue = parseFloat(value).toExponential(4);

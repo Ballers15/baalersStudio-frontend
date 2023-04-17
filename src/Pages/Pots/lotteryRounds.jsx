@@ -48,6 +48,10 @@ const LotteryRounds = (props) => {
       nextArrow: <SamplePrevArrow buttonStatus={buttonStatus} />
     };
 
+    /**
+     * Get current slide index upon slide change
+     * @param current | active slide index
+     */
    const handleSlideChange = (current) => {
     // console.log("current",current);
       //  const index = current;
@@ -120,7 +124,9 @@ const LotteryRounds = (props) => {
         }
     },[claimExpiryDate]);
 
-
+  /**
+   * Get array of previous rounds
+   */
   const getPreviousRounds = async () => {
     let dataToSend = {
         walletAddress: walletAddress,
@@ -148,7 +154,10 @@ const LotteryRounds = (props) => {
             dispatch(setLoadingFalse());
         }
     }
-
+    /**
+     * check claim status of previous lottery rounds
+     * @param id | potId
+     */
     const lotteryWon = async (id) => {
         // console.log(id)
         setPotId(id)
@@ -176,8 +185,10 @@ const LotteryRounds = (props) => {
             dispatch(setLoadingFalse());
         }
     }
-
-
+    
+    /**
+     * Get details required for initiating the transaction
+     */
     const handleClaim = async () => {
         let dataToSend = {
             walletAddress: walletAddress,
@@ -202,6 +213,10 @@ const LotteryRounds = (props) => {
         }
     }
 
+    /**
+     * To inititate transaction upon claim for reward NFT
+     * @param data object | Transaction details fetched from lotteryCalim API
+     */
     const claimTransaction = async (data) => {
         let dataToSend = {
             tokenId:data?.potDetails?.assetDetails?.ticker,
@@ -256,7 +271,6 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>)
                            )}                            
                             </Slider>) : <span className='no data'></span>}
@@ -267,11 +281,13 @@ return(
                     </div>        
                   {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
-                        {userWon === true && claimExpiryDate !== '' && claimedNft === false  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
-                        {userWon === true && claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
-                        {userWon === true && claimExpiryDate === '' && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) }
-                        {userWon === false && participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
-                        {userWon === false && participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }
+                        {userWon === true ? 
+                        <>{claimExpiryDate !== '' && claimedNft === false  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
+                        {claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {claimExpiryDate === '' && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) } </> :
+                       <>{participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
+                        {participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }</>
+                        }
                         </div>  
 
                         <div className="expDate">

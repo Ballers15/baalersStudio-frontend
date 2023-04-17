@@ -5,7 +5,7 @@ import { Pie, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { getBarChart, getPiechart, getPotClaim, getPotCounts, getUsersCount } from '../../Services/Admin';
 import ApiLoader from '../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -33,7 +33,10 @@ const AdminDashboard = () => {
       barChart()
     },[barPotTypeUsers])
 
-      const usersCount =  async () =>{
+    /**
+     * Get all uers count
+     */
+    const usersCount =  async () =>{
         dispatch(setLoadingTrue());
         try {
           const users =  await getUsersCount();
@@ -51,6 +54,9 @@ const AdminDashboard = () => {
         }
       }
 
+      /**
+       * Get all pots count
+       */
       const potCount =  async () =>{
         dispatch(setLoadingTrue());
         try {
@@ -69,6 +75,9 @@ const AdminDashboard = () => {
         }
       }
 
+      /**
+       * Get total Amount claimed and NFT
+       */
       const potClaim =  async () =>{
         dispatch(setLoadingTrue());
         try {
@@ -87,6 +96,9 @@ const AdminDashboard = () => {
         }
       }
 
+      /**
+       * Get pie char data
+       */
       const pieCharts =  async () =>{
         dispatch(setLoadingTrue());
         try {
@@ -105,6 +117,9 @@ const AdminDashboard = () => {
         }
       }
 
+      /**
+       * Get bar chart data
+       */
       const barChart =  async () =>{
         let dataToSend={
           potType: barPotTypeUsers
@@ -126,6 +141,11 @@ const AdminDashboard = () => {
         }
       }
 
+  /**
+   * Format Large number greater than 10^10
+   * @param value Number | large number > 10^10
+   * @returns formatted number
+   */
       const formatNumberDecimal = (value) => {
         if(value > Math.pow(10,10)){
         const shortenedValue = parseFloat(value).toExponential(4);
@@ -363,7 +383,7 @@ const AdminDashboard = () => {
             </div>
             </Col>
             </Row>
-            <Form.Select aria-label="Default select example" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
+            <Form.Select aria-label="Select Pot Type" onChange={(e) => {setBarPotTypeUsers(e.target.value)}}>
                 <option value='LOTTERYPOT'>Lottery Pot</option>
                 <option value='REWARDPOT'>Reward Pot</option>
             </Form.Select>

@@ -21,11 +21,20 @@ const UsersList = () => {
   const [confirmUser, setConfirmUser]=useState([])
   const [rewadPotDetail,setRewardPotDetail] = useState([])
   const [lastPage, setLastPage] = useState(null)
+  const [viewWallet, viewWalletShow] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
 
+  const handleClose = () => viewWalletShow(false);
+  const handleCloseModal = () => setConfirmModal(false);
+  
   useEffect(() => {
     fetchApi()
   }, [currentPage])
 
+  /**
+   * Get all users data
+   * @param  email String | filter user using email
+   */
   const fetchApi = async (email) => {
     let dataToSend = {
       currentPage: currentPage,
@@ -55,10 +64,14 @@ toast.error('Something went worng in getting all users')
      
   }
 
-  const UserWalletdetails = async (data) => {
+  /**
+   * Get user walltet details (all wallet addresses of a user)
+   * @param data String | user _id
+   */
+  const UserWalletdetails = async (id) => {
     viewWalletShow(true)
     let dataToSend = {
-      userId: data._id,
+      userId: id,
     }
     dispatch(setLoadingTrue());   
     try {
@@ -80,7 +93,10 @@ toast.error('Something went worngin getting user wallet details')
      
   }  
 
-
+ /**
+ * Block / unblock user
+ * @param data Object | user details
+ */
   const updateActiveUser = async (data) =>{
     let dataToSend = {
       userId: data._id,
@@ -120,12 +136,11 @@ toast.error('Something went worng in updating active user')
     setConfirmModal(true)
 
   }
-  const [viewWallet, viewWalletShow] = React.useState(false);
-  const [confirmModal, setConfirmModal] = useState(false);
 
-  const handleClose = () => viewWalletShow(false);
-  const handleCloseModal = () => setConfirmModal(false);
-
+  /**
+   * get Filtered users
+   * @param e from event
+   */
   const getFilterUsers =  (e) => {
     e.preventDefault();
     setCurrentPage(1)
@@ -134,6 +149,11 @@ toast.error('Something went worng in updating active user')
      
   }
 
+  /**
+   * Format large number
+   * @param value Number | large number > 10^10
+   * @returns formatted number
+   */
   const formatNumberDecimal = (value) => {
     if(value > Math.pow(10,10)){
     const shortenedValue = parseFloat(value).toExponential(4);
@@ -143,6 +163,10 @@ toast.error('Something went worng in updating active user')
     return value;
   };
 
+  /**
+   * Reset search form data
+   * @param  e Event | Event from From submission
+   */
   const handleReset = (e) => {
       e.preventDefault();
       setRewardPotDetail('');
@@ -302,7 +326,7 @@ toast.error('Something went worng in updating active user')
                         <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
-                          <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user)}> <i className="fa fa-eye " /></span>
+                          <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user?._id)}> <i className="fa fa-eye " /></span>
                         </td>
                         <td className='sNoWth'>
                             {user?.isBlocked && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>updateActiveUser(user)} checked={user?.isBlocked} title="Unblock"/>}

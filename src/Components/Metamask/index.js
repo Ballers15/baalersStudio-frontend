@@ -5,8 +5,9 @@ import { store } from "../Redux/store";
 import {  setWalletAddressValue } from "../Redux/actions";
 
 
-export const globalWalletAddress = '';
-
+/**
+ * Disconnet wallet
+ */
 export const disconnectWallet = () => {
     toast.dismiss()
     store.dispatch(setWalletAddressValue(null));
@@ -41,7 +42,9 @@ export const supportedChainList = {
     // }
   };
 
-
+/**
+ * Get account details from metamask wallet and save wallet address in redux store
+ */
 export const getAccountDetails = async () => {
   if(ethereum.isMetaMask){
     toast.dismiss()
@@ -72,6 +75,11 @@ export const getAccountDetails = async () => {
 //   }
 // };
 
+/**
+ * Get chain details from chain Id
+ * @param chainId String
+ * @returns 
+ */
 export const getDetailsFromChainId = async(chainId) => {
   let selectedChain = Object.keys(supportedChainList).map(async(e) => {
     if (supportedChainList[e].chainId === chainId) {
@@ -88,7 +96,10 @@ export const getDetailsFromChainId = async(chainId) => {
   return filteredSelectedChain[0];
   };
 
-
+/**
+ * Automatically switch to configured chain if chain is switched 
+ * @param  chainId String
+ */
   export const switchNetwork = async (chainId) => {
     console.log(`switched to ${chainId} chain`);
     try {

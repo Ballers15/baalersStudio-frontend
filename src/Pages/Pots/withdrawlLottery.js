@@ -1,9 +1,10 @@
-import { toast } from "react-toastify";
 import { lotteryWithdrawl, rewardWithdrawl } from "../../Services/User/indexPot";
 
-
+/**
+ * Withdraw NFT to connected wallet
+ * @param dataToSend Object | Transaction hash, wallet address, wihdrawlId and potId for lottery pot
+ */
 export async function withdrawLottery (dataToSend) {
-
 
     console.log('withdrawlottery', dataToSend);  
     // toast.dismiss()    
@@ -20,9 +21,11 @@ export async function withdrawLottery (dataToSend) {
     }
 }
 
-
+/**
+ * Withdraw Toekn to connected wallet
+ * @param dataToSend Object | Transaction hash, wallet address, wihdrawlId and potId for reward pot
+ */
 export async function withdrawReward (dataToSend) {
-
 
   console.log('withdrawlottery', dataToSend);  
   // toast.dismiss()    
