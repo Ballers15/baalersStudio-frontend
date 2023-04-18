@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import ApiLoader from '../../../Components/apiLoader'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -62,46 +62,63 @@ const PoolListing = () => {
         getArchivesRewardPotDetails();
     }, [currentPageArchive]);
 
+    /**
+     * go to next page of active pots
+     */
+    const nextPageActive = () => {
+    // console.log(activePotCount)
+    if (currentPageAcitve < numberOfActivePage)
+        setCurrentPageActive(currentPageAcitve + 1)
+}
+     /**
+     * go to next page of archive pots
+     */
+    const nextPageArchive = () => {     
+    if (currentPageArchive < numberOfArchivePage)
+        setCurrentPageArchive(currentPageArchive + 1)
+    // console.log('upcoming',currentPageUpcoming)
+    }
 
-         const nextPageActive = () => {
-            // console.log(activePotCount)
-            if (currentPageAcitve < numberOfActivePage)
-                setCurrentPageActive(currentPageAcitve + 1)
-        }
-
-        const nextPageArchive = () => {     
-            if (currentPageArchive < numberOfArchivePage)
-                setCurrentPageArchive(currentPageArchive + 1)
-
-            // console.log('upcoming',currentPageUpcoming)
-            }
-        const nextPageUpcoming = () => {
-            if (currentPageUpcoming < numberOfUpcomingPage)
-                setCurrentPageUpcoming(currentPageUpcoming + 1)
-
-                // console.log('upcoming',currentPageUpcoming)
-            }
-
-            const prevPageActive = () => {
-                if (currentPageAcitve > 1) 
-                setCurrentPageActive(currentPageAcitve - 1)
-                // console.log('active',currentPageAcitve)
-        }
-
-        const prevPageArchive = () => {
-                if (currentPageArchive > 1) 
-                setCurrentPageArchive(currentPageArchive - 1)
-
-                // console.log('archive',currentPageArchive)
-        }
-        const prevPageUpcoming = () => {
-            if (currentPageUpcoming > 1) 
-            setCurrentPageUpcoming(currentPageUpcoming - 1)
-
+    /**
+     * go to next page of upcoming pots
+     */
+    const nextPageUpcoming = () => {
+    if (currentPageUpcoming < numberOfUpcomingPage)
+        setCurrentPageUpcoming(currentPageUpcoming + 1)
         // console.log('upcoming',currentPageUpcoming)
-        }
-        
+    }
 
+     /**
+     * go to prev page of active pots
+     */
+    const prevPageActive = () => {
+        if (currentPageAcitve > 1) 
+        setCurrentPageActive(currentPageAcitve - 1)
+        // console.log('active',currentPageAcitve)
+    }
+     /**
+     * go to prev page of archive pots
+     */
+    const prevPageArchive = () => {
+        if (currentPageArchive > 1) 
+        setCurrentPageArchive(currentPageArchive - 1)
+
+        // console.log('archive',currentPageArchive)
+    }
+     /**
+     * go to prev page of upcoming pots
+     */
+    const prevPageUpcoming = () => {
+    if (currentPageUpcoming > 1) 
+    setCurrentPageUpcoming(currentPageUpcoming - 1)
+    // console.log('upcoming',currentPageUpcoming)
+    }
+        
+    /**
+     * Convert string to Titlecase
+     * @param str  String
+     * @returns returns converted string
+     */
     const toTitleCase = (str) => {
         var string = str?.toLowerCase().split(" ");
         // console.log("string",string);
@@ -111,6 +128,9 @@ const PoolListing = () => {
         return string;
     }
 
+    /**
+     * Get all active pots (Lottery || Reward || both)
+     */
     const getAllRewardPotDetails = async () => {
         dispatch(setLoadingTrue());
         let dataToSend=''
@@ -148,6 +168,10 @@ const PoolListing = () => {
         }
          
     }
+
+    /**
+     * Get all upcoming pots (Lottery || Reward || both)
+     */
     const getUpcomingRewardPotDetails = async () => {
         dispatch(setLoadingTrue());
         let dataToSend=''
@@ -184,6 +208,10 @@ const PoolListing = () => {
         }
          
     }
+
+     /**
+     * Get all archive pots (Lottery || Reward || both)
+     */
     const getArchivesRewardPotDetails = async () => {
         dispatch(setLoadingTrue());
         let dataToSend=''
@@ -222,13 +250,26 @@ const PoolListing = () => {
          
     }
 
+    /**
+     * Edit Pot with give pot id
+     * @param id String | Pot Id
+     */
     const editRewardPot = (id) => {
         navigate('/addPot',{state:{id:id}});
     }
+
+     /**
+     * View Pot with give pot id
+     * @param id String | Pot Id
+     */
     const viewRewardPot = (id) => {
         navigate('/viewPot',{state:{id:id}});
         }
 
+    /**
+     * Toggle pot status
+     * @param data Object | Pot id and pot status
+     */
     const activeDeactiveRewardPot = async (data) => {
         let dataToSend = {
             potId:data._id,
@@ -256,23 +297,38 @@ const PoolListing = () => {
          
     }
 
-    
+    /**
+     * Change pot type of active pots list
+     * @param e Event
+     */
     const handleActivePotType = (e) =>{
         e.preventDefault();
        getAllRewardPotDetails();
     }
 
+    /**
+     * Change pot type of upcoming pots list
+     * @param e Event
+     */
     const handleUpcomingPotType = (e) =>{
         e.preventDefault();
         getUpcomingRewardPotDetails();
       
     }
 
+    /**
+     * Change pot type of archive pots list
+     * @param e Event
+     */
     const handleArchivePotType = (e) =>{
         e.preventDefault();
         getArchivesRewardPotDetails();
     }
 
+    /**
+     * Update claim status for a pot
+     * @param data Object | Pot details
+     */
     const updateClaimStatus = async (data) => {
         let dataToSend = {
             potId:data._id,
@@ -299,6 +355,10 @@ const PoolListing = () => {
          
     }
 
+    /**
+     * Get users who participated in a pot
+     * @param {*} data Object | Pot details
+     */
     const getPotUsers = async (data) =>{
         setPotIdForUser(data)
         let dataToSend = {
@@ -326,6 +386,9 @@ const PoolListing = () => {
 
     }
 
+    /**
+     * Get filtered users of a pot
+     */
     const filterPotUser = async (e) => {
         e.preventDefault();
         let dataToSend = {
@@ -352,11 +415,17 @@ const PoolListing = () => {
         // console.log(potUsers)
     }
 
+
     const handleClaimStatus = (pot) => {
         setClaimModal(true);
         setPotDetails(pot);
     }
 
+    /**
+     * Format large number
+     * @param value Number
+     * @returns 
+     */
     const formatNumberDecimal = (value) => {
         if(value > Math.pow(10,10)){
         const shortenedValue = parseFloat(value).toExponential(4);

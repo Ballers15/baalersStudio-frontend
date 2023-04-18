@@ -1,5 +1,10 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability';
 
+/**
+ * Role based ability provider
+ * @param role String | user role
+ * @returns 
+ */
 export default function defineRulesFor(role) {
   const { can, rules } = new AbilityBuilder();
 

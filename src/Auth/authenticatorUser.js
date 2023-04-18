@@ -1,6 +1,11 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
+/**
+ * Redirects to admin dashboard if user is admin
+ * @param Component
+ * @returns Navigate to admin dashboard
+ */
 export const AuthenticatorUser = ({ children }) => {
   const location = useLocation()
   let strAuth = useSelector(state => state.user.user);

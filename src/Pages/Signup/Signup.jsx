@@ -41,6 +41,10 @@ const Signup = () => {
     }
   )
 
+    /**
+    * Validates email
+    * @param e Event
+    */
   const emailValidation = (e) => {
     if(isUserNameValid)
     setUserNameErr('')
@@ -65,6 +69,11 @@ const Signup = () => {
   }
   }
 
+
+    /**
+   * Match repeat password
+   * @param e Event | Value of input
+   */
   const confirmRepeatPassword = (e) =>{
     setUserDetails({ ...userDetails,repeat:e.target.value})
     // console.log(e.target.value,'//',userDetails.password)
@@ -81,6 +90,11 @@ const Signup = () => {
     }
     // console.log('end ',passErrorMsg)
   }
+
+    /**
+   * Match password
+   * @param e Event | Value of input
+   */
   const confirmPassword = (e) =>{
     setUserDetails({ ...userDetails,password:e.target.value})
     // console.log(e.target.value,'//',userDetails.repeat)
@@ -98,7 +112,10 @@ const Signup = () => {
     // console.log('end ',passErrorMsg)
   }
 
-
+    /**
+   *Calls Registers user func. if input data is  valid
+   * @param e Event
+   */
   const handleSubmit = async (e) => {
     setValidated(true);
     e.preventDefault()
@@ -119,6 +136,9 @@ const Signup = () => {
   }
   }
 
+/**
+ * Register users
+ */
 const registerUsers = async () => {
         let dataToSend = {
           email: userDetails.email,
@@ -149,7 +169,7 @@ const registerUsers = async () => {
       }
 
       
-
+  /**checks username  */
   const checkUsername = async () => {
     
     let dataToSend= {
@@ -189,6 +209,10 @@ const registerUsers = async () => {
     }
   }
 
+  /**
+   * Verifies otp s
+   * @param e Event
+   */
   const handleSubmitOtp = async (e) =>{
     e.preventDefault()
     e.stopPropagation()
@@ -226,6 +250,9 @@ const registerUsers = async () => {
   }    
   }
 
+  /**
+   * Resend otp
+   */
   const reSendOtp = async () => {
     let dataToSend = {
       email: userDetails.email,
@@ -254,6 +281,9 @@ const registerUsers = async () => {
     }
   }
 
+  /**
+   * Signup and signin registered user
+   */
   const signup = async () => {
     
     let userData = {
@@ -295,6 +325,10 @@ const registerUsers = async () => {
     }
   }
 
+  /**
+   * Calls checkUsername() function when focus changes
+   * @param e Event
+   */
   const handleBlur = (e) => {
     if(userDetails.userName !== '' && userDetails.userName.trim()!=='')
     checkUsername();

@@ -23,7 +23,10 @@ const ForgotPassword = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.loading.isLoading)
 
-
+  /**
+   * Validates email
+   * @param e Event | value of input 
+   */
   const emailValidation = (e) => {
     // console.log("hi i am called");
     setEmail(e.target.value)
@@ -43,6 +46,10 @@ const ForgotPassword = () => {
     }
   }
 
+  /**
+   * Match repeat password
+   * @param e Event | Value of input
+   */
   const confirmRepeatPassword = (e) =>{
     setRepeatPassword(e.target.value)
     // console.log(e.target.value,'//',userDetails.password)
@@ -60,6 +67,10 @@ const ForgotPassword = () => {
     // console.log('end ',passErrorMsg)
   }
   
+  /**
+   * Match password
+   * @param e Event | Value of input
+   */
   const confirmPassword = (e) =>{
 
     setPassword(e.target.value)
@@ -78,6 +89,10 @@ const ForgotPassword = () => {
     // console.log('end ',passErrorMsg)
   }
 
+  /**
+   * Check validity of input and changes password
+   * @param  e Event
+   */
   const handleSubmit = async (e) => {
 
     setValidated(true);
@@ -119,6 +134,10 @@ const ForgotPassword = () => {
   }
 }
 
+  /**
+   * Create reset password link 
+   * @param data 
+   */
   const createLink = async (data) => {
     if(data.length){
 
@@ -143,6 +162,10 @@ const ForgotPassword = () => {
       }
   }
 
+  /**
+   * Update password
+   * @param e Event
+   */
   const updatePassword = async (e) =>{
     setValidated(true);
     e.preventDefault()

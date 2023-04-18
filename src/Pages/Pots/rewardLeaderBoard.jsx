@@ -45,6 +45,9 @@ const LeaderBoardReward = (props) => {
         }
     }
 
+    /**
+     * Search user in leader board
+     */
     const handleSearchUser = (e) => {
         e.preventDefault();
         e.stopPropagation();

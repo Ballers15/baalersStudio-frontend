@@ -1,7 +1,11 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-// import { useAuth } from './authProvider'
 
+/**
+ * This Component redirects user to previous page after login
+ * @param Component
+ * @returns navigate to /login or previous page
+ */
 export const Authenticator = ({ children }) => {
   const location = useLocation()
   let strAuth = useSelector(state => state.user.user);

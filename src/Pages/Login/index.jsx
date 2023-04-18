@@ -16,6 +16,10 @@ const Login = () => {
     const isLoading = useSelector(state => state.loading.isLoading)
     const auth = useAuth()
     
+    /**
+     * If form is valid run login API
+     * @param e Events
+     */
     const handleLogin = (e) => {
           setValidated(true);
         e.preventDefault();
@@ -38,10 +42,13 @@ const Login = () => {
         } else {
             console.log('<<<<<<<<<<<<<<<<<<<<<-------------------Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
+        }
     }
-       
-      }
-      const emailValidation = (e) => {
+    /**
+     * Validates email
+     * @param e Event
+     */
+    const emailValidation = (e) => {
         setEmail(e.target.value)
         // console.log(userDetails.email)
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/

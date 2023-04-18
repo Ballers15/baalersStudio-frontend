@@ -16,7 +16,7 @@ const UsersList = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.loading.isLoading)
   const [currentPage, setCurrentPage] = useState(1)
-  const [allUsers, setAllUsers] = useState(null)
+  const [allUsers, setAllUsers] = useState()
   const [walletDetails,setWalletDetails] = useState([])
   const [confirmUser, setConfirmUser]=useState([])
   const [rewadPotDetail,setRewardPotDetail] = useState([])
@@ -36,11 +36,12 @@ const UsersList = () => {
    * @param  email String | filter user using email
    */
   const fetchApi = async (email) => {
+    setAllUsers([])
     let dataToSend = {
       currentPage: currentPage,
-      startDate: rewadPotDetail.startDate,
-      endDate: rewadPotDetail.endDate,
-      email: email
+      startDate: rewadPotDetail?.startDate,
+      endDate: rewadPotDetail?.endDate,
+      email: email || rewadPotDetail?.email
     }
     dispatch(setLoadingTrue());
     try {

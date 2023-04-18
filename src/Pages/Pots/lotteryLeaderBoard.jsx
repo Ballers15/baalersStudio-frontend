@@ -10,8 +10,8 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 
 const LeaderBoardLottery = (props) => {
     const dispatch = useDispatch()
-    const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
-    const [leaderSearch,setLeaderSearch]  = useState('')
+    const [leaderBoardDetails,setLeaderBoardDetails] = useState({})
+    const [leaderSearch,setLeaderSearch]  = useState()
 
 
     useEffect(()=>{
@@ -23,6 +23,7 @@ const LeaderBoardLottery = (props) => {
      * @param data String | Search input (username)
      */
     const getLotteryLeaderBoard = async (data) => {
+        setLeaderBoardDetails({})
         let dataToSend = {
             search: data,
         }
@@ -44,7 +45,10 @@ const LeaderBoardLottery = (props) => {
          
     }
 
-
+    /**
+     * Search user in leaderboard
+     * @param e Event
+     */
     const handleSearchUser = (e) => {
         e.preventDefault();
         e.stopPropagation();

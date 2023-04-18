@@ -23,7 +23,6 @@ let tokenClaimContractAddress=environment.tokenClaimContractAddress;
 
 /**
  * @returns  nft claim contract instance
-
  */
 async function getNftContract() {
     let address = web3.utils.toChecksumAddress(nftClaimContractAddress);
@@ -32,6 +31,9 @@ async function getNftContract() {
     return nftClaimContract;
 }
 
+/**
+ * @returns  nft TOKEN contract instance
+ */
 async function getTokenContract() {
   let address = web3.utils.toChecksumAddress(tokenClaimContractAddress);
   console.log("farm address",tokenClaimContractAddress);
@@ -42,6 +44,10 @@ async function getDecimals(){
   return 18;
 }
 
+/**
+ * Verifies the transaction to claim NFT and gets transaction hash
+ * @param data Object | Transaction details
+ */
 export const claimNft=async(data)=>{
 //  console.log('calim nft',data)
   // console.log('wlt',walletAddress)
@@ -95,7 +101,10 @@ catch(err){
 } 
 
 
-
+/**
+ * Verifies the transaction to claim TOKEN and gets transaction hash
+ * @param data Object | Transaction details
+ */
 export const claimToken=async(data)=>{
  
   const claimContract=await getTokenContract();

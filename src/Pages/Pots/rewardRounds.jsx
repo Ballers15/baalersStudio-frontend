@@ -9,10 +9,6 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-import { getUser } from "../../Services/User";
-
-
-
 
 const RewardRounds = (props) => {
     const dispatch = useDispatch()
@@ -45,7 +41,6 @@ const RewardRounds = (props) => {
       infinite: true,
       speed: 300,
       slidesToShow: 1,
-      // centerMode: true,
       variableWidth: true, 
       nextArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>
     };
@@ -276,7 +271,6 @@ return(
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>)
                            )}                            
                             </Slider>) : <span className='no data'></span>}

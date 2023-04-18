@@ -18,13 +18,11 @@ import fatMan from '../../Assest/img/fatMan.gif'
 import SneefDog from '../../Assest/img/SneefDog.gif'
 import ambassador from '../../Assest/img/ambassador.webp'
 import ambassadorMob from '../../Assest/img/ambassadorMob.webp'
-import AmbPlaceholder from '../../Assest/img/AmbPlaceholder.png'
 import slide2 from '../../Assest/img/slide2.webp'
 import slide3 from '../../Assest/img/slide3.webp'
 import reward_card from '../../Assest/img/reward_card.webp'
 import r1 from '../../Assest/img/r1.webp'
 import coin from '../../Assest/img/coin.webp'
-import coinPlaceholder from '../../Assest/img/coinPlaceholder.png'
 import semiCoin from '../../Assest/img/semiCoin.webp'
 import image27 from '../../Assest/img/image27.webp'
 import image28 from '../../Assest/img/image28.webp'
@@ -32,7 +30,6 @@ import image29 from '../../Assest/img/image29.webp'
 import ballerCoin from '../../Assest/img/ballerCoin.webp'
 import ballerCoinMob from '../../Assest/img/ballerCoinMob.webp'
 import star from '../../Assest/img/Star.svg'
-import discord from '../../Assest/img/discord.svg'
 import gamelogo from '../../Assest/img/gamelogo.png'
 import gamecity from '../../Assest/img/gamecity.png'
 import footerLogo from '../../Assest/img/footerLogo.png'
@@ -136,6 +133,10 @@ const Dashboard = () => {
         emailValidation()
       },[email])
 
+      /**
+       * Show modals
+       * @param modalName String
+       */
     const handleShow = (modalName) => {
         if (modalName === 'play') {
             setEmail('');
@@ -152,6 +153,10 @@ const Dashboard = () => {
         }
     }
 
+    /**
+     * Hide modals
+     * @param modalName String
+     */
     const handleHide = (modalName) => {
         if (modalName === 'play') {
             setPlayModalShow(false);
@@ -167,6 +172,10 @@ const Dashboard = () => {
 
     }
 
+    /**
+     * Submits email from subricption form
+     * @param e Event
+     */
     const handleSubmit = async (e) => {
         // console.log(email,'-----------email value');
         setValidated(true);
@@ -190,8 +199,8 @@ const Dashboard = () => {
                   } else {
                 toast.dismiss();
                 toast.success(' THANK YOU FOR SUBSCRIBING!');
-                    setPlayModalShow(false);
-                    setErrorMsg(null);
+                setPlayModalShow(false);
+                setErrorMsg(null);
                 }
             } catch (error) {
                 //   console.log(error)
@@ -214,9 +223,13 @@ const Dashboard = () => {
     })
 
     const hiddenButtonClicked = () => {
-        // console.log('hidden button clicked---------------------')
+        console.log('hidden button clicked---------------------')
     }
 
+    /**
+     * Validate email address received from input
+     * @returns boolean
+     */
     const emailValidation = () => {
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
         const tld=email?.split('.')[1]?.length;

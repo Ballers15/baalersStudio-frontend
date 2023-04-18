@@ -17,8 +17,8 @@ const LotteryRounds = (props) => {
     const user = useSelector(state => state.user.user)
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const [claimExpiryDate, setClaimExpiryDate] = useState('')
-    const [prevRounds, setPrevRounds] = useState('')
-    const [prevRoundsLength, setPrevRoundsLength] = useState('')
+    const [prevRounds, setPrevRounds] = useState({})
+    const [prevRoundsLength, setPrevRoundsLength] = useState(0)
     const [userWon, setUserWon] = useState(false)
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
@@ -128,6 +128,8 @@ const LotteryRounds = (props) => {
    * Get array of previous rounds
    */
   const getPreviousRounds = async () => {
+    setPrevRounds({})
+    setPrevRoundsLength(0)
     let dataToSend = {
         walletAddress: walletAddress,
     }
@@ -282,9 +284,9 @@ return(
                   {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
                         {userWon === true ? 
-                        <>{claimExpiryDate !== '' && claimedNft === false  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
-                        {claimExpiryDate !== '' && claimedNft === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
-                        {claimExpiryDate === '' && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) } </> :
+                        <>{(claimExpiryDate !== '') && (claimedNft === false)  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
+                        {(claimExpiryDate !== '') && (claimedNft === true) && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {(claimExpiryDate === '') && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) } </> :
                        <>{participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
                         {participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }</>
                         }
