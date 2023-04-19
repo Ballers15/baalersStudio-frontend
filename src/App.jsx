@@ -15,7 +15,7 @@ function App() {
 
 return (
     <React.Fragment>
-      <ToastContainer autoClose={false} theme="colored" />
+      <ToastContainer autoClose={2500} theme="colored" />
     <AbilityContext.Provider value={ability}>
     <NavigationRouter />
     </AbilityContext.Provider>

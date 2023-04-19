@@ -26,7 +26,8 @@ li{list-style: none;}
 .loader--hide {
   display: none;
 }
-.Toastify__toast-theme--colored.Toastify__toast--success{
+.Toastify__toast-theme--colored.Toastify__toast--success,
+.Toastify__toast-theme--colored.Toastify__toast--info{
   background: transparent !important;
   padding: 24px 8px; 
 }
@@ -91,6 +92,26 @@ li{list-style: none;}
 }
 .Toastify__toast--error .Toastify__close-button{
   background: #C81912;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px; 
+  top: 15px;
+  position: absolute;
+  right: 8px; 
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Toastify__toast--info .Toastify__toast-body{
+  background: #3498db;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 60px;
+  max-height: 800px;
+}
+.Toastify__toast--info .Toastify__close-button{
+  background: #017dd0;
   border-radius: 50%;
   width: 25px;
   height: 25px; 

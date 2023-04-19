@@ -27,6 +27,7 @@ import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
 import { useSelector } from 'react-redux';
+import Popup from '../Pages/popup';
 
 
 const NavigationRouter = () => {
@@ -48,6 +49,7 @@ const NavigationRouter = () => {
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
               <Route path="*" element={<ErrorPage />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
+              <Route path="/popup" element={<Popup/>} />
             </Route>
             
             <Route element={<WithNav />}>
