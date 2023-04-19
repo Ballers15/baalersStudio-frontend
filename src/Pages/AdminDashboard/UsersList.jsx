@@ -322,7 +322,7 @@ toast.error('Something went worng in updating active user')
                 ? allUsers?.data?.Users.map((user, index) => {
                     return ( 
                       <tr key={user?._id}>
-                        <td className='sNoWth'>{index + 1}</td>
+                        <td className='sNoWth'>{((currentPage-1)*10)+index + 1}</td>
                         <td>{user?.userName}</td>
                         <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.createdAt?.split('T')[0]}</td>

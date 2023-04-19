@@ -1,8 +1,11 @@
+.modal.show{
+    backdrop-filter: blur(10px);
+}
+
 .popup{ 
-     
     height: 100vh;
-   
 }  
+
  .modal-dialog { 
     display: flex;
     align-items: center;

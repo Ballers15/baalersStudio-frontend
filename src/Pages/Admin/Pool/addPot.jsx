@@ -312,23 +312,22 @@ const AddPot = () => {
      * @param  e Event | Event from From submission
      */
     const checkNftOnContract = async(e) => {
-        setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-
+        if(rewadPotDetail?.potType === 'LOTTERYPOT' || rewadPotDetail?.assetType==='NFT'){
         let dataToSend = {
             tokenId: e.target.value
         }
 
         dispatch(setLoadingTrue());
         try {
-          const checkNFT = await checkNftClaim(dataToSend);
-          dispatch(setLoadingFalse());
-          if (checkNFT.error) {
+        const checkNFT = await checkNftClaim(dataToSend);
+        dispatch(setLoadingFalse());
+        if (checkNFT.error) {
             toast.dismiss()    
             toast.error(checkNFT?.message||'Something went worng while checking nft');
-          } else {
+        } else {
             setNftExists(checkNFT?.data?.exists)    
             if(checkNFT?.data?.exists){
                 toast.dismiss()    
@@ -338,13 +337,13 @@ const AddPot = () => {
                 toast.dismiss()    
                 toast.error('No NFT found')
             }            
-          }
+        }
         } catch (error) {
         toast.dismiss()    
         toast.error(error?.response?.data?.message||'Something went worng while checking nft');
         }
         dispatch(setLoadingFalse());
-
+}
     }
 
     return (

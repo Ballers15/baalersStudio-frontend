@@ -26,10 +26,16 @@ li{list-style: none;}
 .loader--hide {
   display: none;
 }
+
+.Toastify__progress-bar{
+  height: 0 !important;
+}
+
 .Toastify__toast-theme--colored.Toastify__toast--success,
-.Toastify__toast-theme--colored.Toastify__toast--info{
+.Toastify__toast-theme--colored.Toastify__toast--info,.Toastify__toast-theme--colored.Toastify__toast--error{
   background: transparent !important;
   padding: 24px 8px; 
+  box-shadow: none;
 }
 .Toastify__toast-body > div:last-child { 
   font-weight: 600;
@@ -73,10 +79,10 @@ li{list-style: none;}
   top: 3em;
   right: 0em;
 }
-.Toastify__toast-theme--colored.Toastify__toast--error{
+/* .Toastify__toast-theme--colored.Toastify__toast--error{
   background: transparent !important;
   padding: 24px 8px; 
-}
+} */
 .Toastify__toast--error .Toastify--animate-icon{
   background-image: url('Assest/img/toasterRed.png');
   background-size: contain;

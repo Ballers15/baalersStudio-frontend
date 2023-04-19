@@ -25,7 +25,7 @@ const Footer = () => {
               <i className="fa fa-paper-plane" aria-hidden="true"></i></a></li>
             </ul>
             <p className='footer-content'>
-              © 2023 Ballers Studio, Inc. Ballers,CITY, and any associated logos are trademarks, service marks, and/or registered trademarks of Ballers Studio,Inc.
+              © 2023 Ballers Studio, Inc. Ballers CITY and any associated logos are trademarks, service marks, and/or registered trademarks of Ballers Studio,Inc.
             </p>
           </div>
         </div>

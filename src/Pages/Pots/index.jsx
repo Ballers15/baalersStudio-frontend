@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { getAccountDetails } from "../../Components/Metamask";
 import Can from "../../Components/rolesBasedAccessControl/Can";
+import Popup from "../../Components/popup";
 
 
 const PotPage = () => {
@@ -59,6 +60,7 @@ const PotPage = () => {
     const [previous, setPrevious] = useState(false);
     const [reload, setReload] = useState(false);
     const [redeemModal,setRedeemModal] = useState(false)
+    const [showRedeemPopup , setShowRedeemPopup] = useState(false)
 
     const [countdownTime, setCountdownTime]= useState(
        {
@@ -124,6 +126,15 @@ const PotPage = () => {
     },[expiryTime]);
 
 
+    useEffect(() => {
+        const element = document.getElementById("leaderboard");
+
+        setTimeout(() => {
+        setShowRedeemPopup(false)
+        element?.scrollIntoView();
+        }, 2000);
+    }, [showRedeemPopup])
+
     /**
      * Get details of active pot (if any)
      */
@@ -172,7 +183,8 @@ const PotPage = () => {
             toast.error(redeem?.message||'Something went worng');
         } else {
             toast.dismiss();
-            toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
+            // toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
+            setShowRedeemPopup(true)
             setReload(!reload)
           }
         } catch (error) {
@@ -204,7 +216,7 @@ const PotPage = () => {
             
           } else {
             toast.dismiss();
-            toast.info(`Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!`);
+            setShowRedeemPopup(true)
             setReload(!reload)
         }
         } catch (error) {
@@ -421,7 +433,7 @@ return(
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
                {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
 
-           {expiryTime !== '' && <div className="container">
+           {expiryTime !== '' && <div className="container" id='leaderboard'>
                 <LeaderBoardRibbon/>
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
                 {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
@@ -429,14 +441,10 @@ return(
 
         </div>
         {isLoading ? <ApiLoader /> : null} 
-        
+        {showRedeemPopup ? <Popup potType={potType} cash={cash}/> : null}
     </div>
     </>
 )
-
-
-
-    
-}
+    }
 
 export default PotPage;

@@ -603,7 +603,7 @@ const PoolListing = () => {
                         {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
                             return (
                                 <tr key={pot?._id}>
-                                <td>{index+1}</td>
+                                <td>{((currentPageAcitve-1)*10)+index+1}</td>
                                 <td>{pot?.potType}</td>
                                 <td>{pot?.startDate?.split('T')[0]}</td>
                                 <td>{pot?.endDate?.split('T')[0]}</td>
@@ -716,7 +716,7 @@ const PoolListing = () => {
                             {upcomingRewardPotArray.length!==0?upcomingRewardPotArray.map((pot, index) => {
                                 return (
                                     <tr key={pot?._id}>
-                                    <td>{index+1}</td>
+                                    <td>{((currentPageUpcoming-1)*10)+index+1}</td>
                                     <td>{pot?.potType}</td>
                                     <td>{pot?.startDate?.split('T')[0]}</td>
                                     <td>{pot?.endDate?.split('T')[0]}</td>
@@ -827,7 +827,7 @@ const PoolListing = () => {
                             {archivesRewardPotArray.length!==0?archivesRewardPotArray.map((pot, index) => {
                                 return (
                                     <tr key={pot?._id}>
-                                    <td>{index+1}</td>
+                                    <td>{((currentPageArchive-1)*10)+index+1}</td>
                                     <td>{pot?.potType}</td>
                                     <td>{pot?.startDate?.split('T')[0]}</td>
                                     <td>{pot?.endDate?.split('T')[0]}</td>
