@@ -128,8 +128,6 @@ const LotteryRounds = (props) => {
    * Get array of previous rounds
    */
   const getPreviousRounds = async () => {
-    setPrevRounds({})
-    setPrevRoundsLength(0)
     let dataToSend = {
         walletAddress: walletAddress,
     }
@@ -239,7 +237,7 @@ const LotteryRounds = (props) => {
             toast.error(dataNft?.message||'Something went worng');
           } else {
 
-            console.log('claim lottery response',dataNft)
+            console.log('claim NFT response',dataNft)
           }
         } catch (error) {
             toast.dismiss();

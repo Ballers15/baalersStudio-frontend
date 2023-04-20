@@ -1,6 +1,5 @@
 import axios from "axios";
 import { environment } from "../../Environments/environment";
-import { useSelector } from "react-redux";
 import { store } from "../../Components/Redux/store";
 
 let baseURL = environment?.apiUrl;

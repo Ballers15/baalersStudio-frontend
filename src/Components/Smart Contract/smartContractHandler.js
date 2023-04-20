@@ -12,8 +12,7 @@ import { environment } from '../../Environments/environment';
 
 const { ethereum } = window;
 let web3 = new Web3(Web3.givenProvider);
-const walletAddress = store.getState().wallet.walletAddress
-
+// console.log(walletAddress,'===========================================')
 
 // const contract = new web3.eth.Contract(smartContractABI);
 
@@ -49,6 +48,8 @@ async function getDecimals(){
  * @param data Object | Transaction details
  */
 export const claimNft=async(data)=>{
+  const walletAddress = store.getState().wallet.walletAddress;
+
 //  console.log('calim nft',data)
   // console.log('wlt',walletAddress)
 // get wallet address from localstorage and pass in var
@@ -106,7 +107,8 @@ catch(err){
  * @param data Object | Transaction details
  */
 export const claimToken=async(data)=>{
- 
+  const walletAddress = store.getState().wallet.walletAddress;
+  
   const claimContract=await getTokenContract();
   // const getDecimals=await getDecimals();
 

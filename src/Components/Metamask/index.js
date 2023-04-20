@@ -53,8 +53,8 @@ export const getAccountDetails = async () => {
   let wallet = await window.ethereum.request({
             method: "eth_requestAccounts"
           })
-          let chainID = await window.ethereum .request({ method: "eth_chainId", })
-          getDetailsFromChainId(chainID,wallet);
+          // let chainID = await window.ethereum .request({ method: "eth_chainId", })
+          getDetailsFromChainId();
           store.dispatch(setWalletAddressValue(wallet[0]));
           toast.dismiss()
           toast.info('Wallet Connected')
@@ -80,7 +80,8 @@ export const getAccountDetails = async () => {
  * @param chainId String
  * @returns 
  */
-export const getDetailsFromChainId = async(chainId) => {
+export const getDetailsFromChainId = async() => {
+  let chainId = await ethereum.request({ method: 'eth_chainId' });
   let selectedChain = Object.keys(supportedChainList).map(async(e) => {
     if (supportedChainList[e].chainId === chainId) {
     return supportedChainList[e];

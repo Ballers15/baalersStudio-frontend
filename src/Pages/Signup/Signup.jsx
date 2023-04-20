@@ -25,6 +25,7 @@ const Signup = () => {
   const [response,setResponse] = useState(false);
   const [otp, setOtp]=useState("")
   const [userNameErr,setUserNameErr] = useState('')
+  const [userNameSuccess,setUserNameSuccess] = useState('')
   const navigate = useNavigate();
   const [passValidation, setPassValidation] = useState(false)
   const [isEmailValid, setIsEmailValid] = useState(false)
@@ -46,8 +47,6 @@ const Signup = () => {
     * @param e Event
     */
   const emailValidation = (e) => {
-    if(isUserNameValid)
-    setUserNameErr('')
     // console.log("hi i am called");
     setUserDetails({ ...userDetails,email:e.target.value})
     // console.log(userDetails.email)
@@ -187,13 +186,13 @@ const registerUsers = async () => {
         
         toast.dismiss();
         // toast.error(checkUname?.error?.message || 'Something went worng in checking username')
-        setUserNameErr('Username Alredy Exists')
+        setUserNameErr('Username Already Exists')
         // console.log(checkUname)
         setIsUserNameValid(false)
     } else {
       
       // toast.success(checkUname?.message || 'Username is valid')
-      setUserNameErr('Username is valid !')
+      setUserNameSuccess('Username is valid !')
       setErrorMsg(null)
       if(checkUname?.status === 200){
         setIsUserNameValid(true)
@@ -203,7 +202,7 @@ const registerUsers = async () => {
     catch (error) {
       
       // toast.error(error?.response?.data?.message || 'Something went worng in checking username')
-      setUserNameErr('Username is invalid !')
+      setUserNameErr(error?.response?.data?.message ||'Username is invalid !')
       setIsUserNameValid(false)
       dispatch(setLoadingFalse());
     }
@@ -358,12 +357,12 @@ const registerUsers = async () => {
               <Form.Group className='pb-4' >
                 <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} onBlur={handleBlur}></Form.Control>
                 <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
-                <span className="custom-success-msg"> {isUserNameValid && userNameErr} </span>
+                <span className="custom-success-msg"> {isUserNameValid && userNameSuccess} </span>
                 <span className="custom-error-msg"> {!isUserNameValid && userNameErr} </span>
               </Form.Group>
 
               <Form.Group className='pb-4'>
-                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e)} onBlur={()=>{setUserNameErr('')}} value={userDetails.email}  ></Form.Control>
+                <Form.Control required type="email" placeholder="EMAIL" onChange={(e) => emailValidation(e)} onBlur={()=>{setUserNameSuccess('')}} value={userDetails.email}  ></Form.Control>
                 <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>

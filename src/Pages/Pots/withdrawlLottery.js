@@ -13,7 +13,6 @@ export async function withdrawLottery (dataToSend) {
       if (data.error) {
         console.log(data?.message||'Something went worng in withdrawl');
       } else {
-        console.log('lotery details');
         console.log('after withdraw response',data)
       }
     } catch (error) {

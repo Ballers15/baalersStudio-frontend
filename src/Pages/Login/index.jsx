@@ -18,7 +18,7 @@ const Login = () => {
     
     /**
      * If form is valid run login API
-     * @param e Events
+     * @param e Events  
      */
     const handleLogin = (e) => {
           setValidated(true);
@@ -30,7 +30,7 @@ const Login = () => {
         // console.log("handlee",form.checkValidity())
         if (form.checkValidity() === true) {
             
-            if (email && password && auth.passErrorMsg === null ) {
+            if (email && password ) {
             let dataToSend = {
                 email: email,
                 password:password
@@ -91,7 +91,7 @@ const Login = () => {
                          
                              <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                                 <span className="custom-error-msg"> {emailErrorMsg} </span>
-        </Form.Group>
+                            </Form.Group>
                         <Form.Group className="mt-3" >
                             
                             <Form.Control

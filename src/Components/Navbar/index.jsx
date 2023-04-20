@@ -9,7 +9,7 @@ import gamelogo from '../../Assest/img/gamelogo.png';
 import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import Dropdown from 'react-bootstrap/Dropdown';
-import {  disconnectWallet, getAccountDetails, switchNetwork } from '../Metamask';
+import {  disconnectWallet, getAccountDetails, getDetailsFromChainId, switchNetwork } from '../Metamask';
 import { useDispatch, useSelector } from 'react-redux';
 import {  setWalletAddressValue } from '../Redux/actions';
 import Can from '../rolesBasedAccessControl/Can';
@@ -65,7 +65,9 @@ const handleAccountChange = (accounts) => {
 
 
 useEffect(() => {
-
+  if(walletAddress !== null){
+    getDetailsFromChainId()
+    
   try {
   window.ethereum?.on('accountsChanged', handleAccountChange );
   window.ethereum?.on('chainChanged', switchNetwork); 
@@ -78,6 +80,7 @@ useEffect(() => {
   window.ethereum?.removeListener('accountsChanged', handleAccountChange);
   window.ethereum?.removeListener('chainChanged', switchNetwork);
   };
+}
 }, []);
 //metamask end
 
@@ -90,10 +93,10 @@ useEffect(() => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               <Can do='about' on='navbar'> <Nav.Link eventKey="1" href={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> </Can>
-              <Can do='party' on='navbar'> <Nav.Link eventKey="2" href='#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
+              <Can do='party' on='navbar'> <Nav.Link eventKey="2" href='/#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
               <Can do='how-to-play' on='navbar'> <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> </Can>
               <Can do='pool' on='navbar'> <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> </Can>
-              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='#balrToken' > $BALR TOKEN </Nav.Link> </Can>
+              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
               <Can do='wallet' on='navbar'> <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
                     {walletAddress === null &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} </Nav.Link> </Can>
              
