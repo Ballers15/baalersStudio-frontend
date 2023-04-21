@@ -116,23 +116,30 @@ const Signup = () => {
    * @param e Event
    */
   const handleSubmit = async (e) => {
-    setValidated(true);
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
+    if(isUserNameValid)
+   {
+    setValidated(true);
+   
   
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
     if (form.checkValidity() === true) {
       
       // console.log('validity')
-    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
+    if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid ) {
         registerUsers();
     } 
   }
-  else {
-    console.log('<<<<---Form is invalid --->>>>')
-  }
+    else {
+      console.log('<<<<---Form is invalid --->>>>')
+      }
+    }
+    else {
+      console.log('<<<<---Username is invalid --->>>>')
+      }
   }
 
 /**
@@ -355,7 +362,12 @@ const registerUsers = async () => {
             <h2 className="login-head">CREATE <br/>ACCOUNT</h2>
 
               <Form.Group className='pb-4' >
-                <Form.Control required type="text"  placeholder="USERNAME" onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} value={userDetails.userName} onBlur={handleBlur}></Form.Control>
+                <Form.Control required type="text"  placeholder="USERNAME"
+                 onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} 
+                 value={userDetails.userName} 
+                 onBlur={handleBlur} 
+                 isValid={isUserNameValid}
+                 ></Form.Control>
                 <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
                 <span className="custom-success-msg"> {isUserNameValid && userNameSuccess} </span>
                 <span className="custom-error-msg"> {!isUserNameValid && userNameErr} </span>

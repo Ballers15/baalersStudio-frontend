@@ -6,7 +6,7 @@ import { Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
 import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
-import { useLocation, useNavigate, useParams } from "react-router-dom"; 
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
 import RewardRounds from "./rewardRounds";
 import LeaderBoardReward from "./rewardLeaderBoard";
@@ -260,16 +260,21 @@ const PotPage = () => {
      * @returns handle redeem api calls according to pot type
      */
     const handleRedeem = () => {
-        if(potType === 'LOTTERYPOT')
-            {addCashLottery()
-            setRedeemModal(false)
+        if(cash > 0) 
+        {
+            if(potType === 'LOTTERYPOT')
+            {
+                addCashLottery()
+                setRedeemModal(false)
+            }
+            else if  (potType === 'REWARDPOT')
+            {
+                addCashReward()
+                setRedeemModal(false)
+            }
+            else
+                return
         }
-        else if  (potType === 'REWARDPOT')
-            {addCashReward()
-            setRedeemModal(false)
-        }
-        else
-            return
       }
 
     const handleCloseModal = () => setRedeemModal(false)
@@ -300,16 +305,21 @@ return(
             >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-               Confirm Your Action
+               {cash > 0 ? <>Confirm Your Action</> : <>No Game Cash Found !!</>}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <span>
             <div className='confirm-modal'>
-              Are you sure to add your game cash $ {cash} ?
+              {cash > 0 ? <>Are you sure to add your game cash $ {cash} ?  
               <br></br>
               <button type='primary' onClick={()=>handleRedeem()}>Yes</button>
-              <button type='primary' onClick={()=>handleCloseModal()}>No</button>
+              <button type='primary' onClick={()=>handleCloseModal()}>No</button> </>
+              : <>Play game to earn cash !
+              <br></br>
+              <a href='https://staging.ballers.fun' target='_blank'><button type='primary'>Play Now</button> </a>
+              </>
+                }
               </div>
             </span>
             </Modal.Body>
