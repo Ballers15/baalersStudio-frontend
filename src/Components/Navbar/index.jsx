@@ -67,7 +67,7 @@ const handleAccountChange = (accounts) => {
 useEffect(() => {
   if(walletAddress !== null){
     getDetailsFromChainId()
-    
+  }
   try {
   window.ethereum?.on('accountsChanged', handleAccountChange );
   window.ethereum?.on('chainChanged', switchNetwork); 
@@ -80,7 +80,7 @@ useEffect(() => {
   window.ethereum?.removeListener('accountsChanged', handleAccountChange);
   window.ethereum?.removeListener('chainChanged', switchNetwork);
   };
-}
+
 }, []);
 //metamask end
 
