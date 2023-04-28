@@ -27,7 +27,7 @@ import { CheckUser } from '../Auth/checkUser';
 import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
 import { useSelector } from 'react-redux';
-import Popup from '../Components/popup';
+import ResetPassword from '../Pages/ResetPassword/resetpassword';
 
 
 const NavigationRouter = () => {
@@ -47,8 +47,9 @@ const NavigationRouter = () => {
             <Route element={<WithoutNav />}>
               <Route exact path="/login" element={<CheckUser><Login /></CheckUser>} />
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
-              <Route path="*" element={<ErrorPage />} />
+              <Route path="/error-page" element={<ErrorPage />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
+              <Route exact path='/auth/change-password/:token' element={<CheckUser><ResetPassword/></CheckUser>}></Route>
             </Route>
             
             <Route element={<WithNav />}>
@@ -59,9 +60,7 @@ const NavigationRouter = () => {
               <Route exact path="/party" element={<Party />} />
               <Route exact path="/roadmap" element={<Roadmap />} />
               <Route exact path="/pool" element={<AuthenticatorUser><Pool /></AuthenticatorUser>} />
-              {/* <Route exact path="/pool" element={<Authenticator><Pool /></Authenticator>} /> */}
               <Route exact path="/wallet" element={<Authenticator><Wallet /></Authenticator>} />
-              {/* <Route exact path="/metamask" element={<Authenticator><Metamask /></Authenticator>} /> */}
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/pool-listing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />

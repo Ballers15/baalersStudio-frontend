@@ -262,13 +262,13 @@ return(
                                         <h3>Round {prevRoundsLength-index} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                                           month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
+                                        {round?.potUserDetails && round?.userDetails ? <><p className="winHead">Winners <span></span> </p> 
                                         <div className="row justify-content-center">
                                             <div className="col-4 col-sm-4 text-center">
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.userName} </p>
                                             </div>
-                                        </div>
+                                        </div></> : <p className="winHead">No one participated in this round</p>}
                                     </div>
                                 </div>
                             </div>)

@@ -259,7 +259,7 @@ return(
                                         <h3>Round {prevRoundsLength-index} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
-                                        <p className="winHead">Winners <span></span> </p> 
+                                       {round?.potUserDetails?.length ? <><p className="winHead">Winners <span></span> </p> 
                                         <div className="row justify-content-center">
                                           {round?.potUserDetails?.map((user)=>(
                                             <div className="col-4 col-sm-4 text-center" key={user?._id}>
@@ -268,7 +268,7 @@ return(
                                             </div>
                                           ))}
                                             
-                                        </div>
+                                        </div></> : <p className="winHead">No one participated in this round</p>}
                                     </div>
                                 </div>
                             </div>)

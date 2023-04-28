@@ -4,5 +4,6 @@ export const environment = {
 	apiUrl:'https://dev-api.ballers.fun/',
 	// apiUrl: 'http://localhost:8004/',
 	nftClaimContractAddress:"0xd8E554EF17FaBfDa316B564518FBcf2071E961E3",
-	tokenClaimContractAddress:"0xFc26a71b8087509BC4dB32aBcA39145BDBf9d8A1"
+	tokenClaimContractAddress:"0xFc26a71b8087509BC4dB32aBcA39145BDBf9d8A1",
+	gameUrl: 'https://staging.ballers.fun'
 };

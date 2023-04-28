@@ -6,7 +6,7 @@ import { Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
 import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
-import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom"; 
+import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
 import RewardRounds from "./rewardRounds";
 import LeaderBoardReward from "./rewardLeaderBoard";
@@ -23,6 +23,8 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 import { getAccountDetails } from "../../Components/Metamask";
 import Can from "../../Components/rolesBasedAccessControl/Can";
 import Popup from "../../Components/popup";
+import { environment } from "../../Environments/environment";
+
 
 
 const PotPage = () => {
@@ -104,8 +106,12 @@ const PotPage = () => {
     if(type === 'lottery'){
             setPotType('LOTTERYPOT')
         }
-        else{
+        else if (type==='reward') {
             setPotType('REWARDPOT')
+        }
+        else{
+            navigate('/');
+            setPotType('')
         }
         
     },[location.pathname])
@@ -317,7 +323,7 @@ return(
               <button type='primary' onClick={()=>handleCloseModal()}>No</button> </>
               : <>Play game to earn cash !
               <br></br>
-              <a href='https://staging.ballers.fun' target='_blank'><button type='primary'>Play Now</button> </a>
+              <a href={environment?.gameUrl} target='_blank'><button type='primary'>Play Now</button> </a>
               </>
                 }
               </div>
