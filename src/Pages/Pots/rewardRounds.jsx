@@ -32,7 +32,7 @@ const RewardRounds = (props) => {
           className={className}
           style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
           onClick={onClick}
-        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> <span className="desk">Finished Rounds</span></p></div>
+        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i></p></div>
       );
     }
     var settings = {  
@@ -40,7 +40,7 @@ const RewardRounds = (props) => {
       dots: false,
       infinite: true,
       speed: 300,
-      slidesToShow: 1,
+      slidesToShow: 2,
       variableWidth: true, 
       nextArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>
     };

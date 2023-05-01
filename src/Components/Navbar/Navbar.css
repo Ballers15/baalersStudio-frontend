@@ -53,6 +53,21 @@ button#dropdown-button-dark-example1 {
     right: 0;
     left: inherit;
 }
+.navbar-expand-lg .navbar-nav .nav-link.connectBtn{
+    background: #110929;
+    font-weight: 400;
+    border: 1px solid #FF80FF;
+    border-radius: 31px; 
+    font-family: 'Source Sans Pro', sans-serif !important;
+    letter-spacing: 0.2em !important;
+    padding: 6px;
+}
+.connectBtn span{
+    padding: 0 10px;
+}
+.connectBtn img{    
+    margin-right: 5px;
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 20px; 
