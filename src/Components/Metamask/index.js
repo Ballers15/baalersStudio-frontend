@@ -6,12 +6,10 @@ import {  setWalletAddressValue } from "../Redux/actions";
 
 
 /**
- * Disconnet wallet
+ * Disconnect wallet
  */
 export const disconnectWallet = () => {
-    toast.dismiss()
     store.dispatch(setWalletAddressValue(null));
-    toast.error('Wallet Disconnected')
   }
 
 export const supportedChainList = {
@@ -56,8 +54,6 @@ export const getAccountDetails = async () => {
           // let chainID = await window.ethereum .request({ method: "eth_chainId", })
           getDetailsFromChainId();
           store.dispatch(setWalletAddressValue(wallet[0]));
-          toast.dismiss()
-          toast.info('Wallet Connected')
     } else {
     // setAccountDetails('')
     toast.info("Install MetaMask First");

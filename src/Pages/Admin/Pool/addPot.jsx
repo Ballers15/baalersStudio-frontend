@@ -331,11 +331,11 @@ const AddPot = () => {
             setNftExists(checkNFT?.data?.exists)    
             if(checkNFT?.data?.exists){
                 toast.dismiss()    
-                toast.success('NFT exists');
+                toast.success('NFT exists on claim contract');
             }
             else{
                 toast.dismiss()    
-                toast.error('No NFT found')
+                toast.error('No NFT found on claim contract')
             }            
         }
         } catch (error) {

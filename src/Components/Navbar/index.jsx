@@ -80,8 +80,13 @@ useEffect(() => {
   window.ethereum?.removeListener('accountsChanged', handleAccountChange);
   window.ethereum?.removeListener('chainChanged', switchNetwork);
   };
-
 }, []);
+
+
+useEffect(() => {
+  if(_u !== null)
+  getAccountDetails();
+}, [])
 //metamask end
 
   return (
@@ -97,12 +102,13 @@ useEffect(() => {
               <Can do='how-to-play' on='navbar'> <Nav.Link href="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> </Can>
               <Can do='pool' on='navbar'> <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> </Can>
               <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
-              <Can do='wallet' on='navbar'> <Nav.Link> {walletAddress !==null && ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) } 
-                    {walletAddress === null &&( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} </Nav.Link> </Can>
-             
+              <Can do='wallet' on='navbar'> <Nav.Link> {walletAddress !==null && walletAddress !==undefined ? ( <> {walletAddress?.slice(0,4)+'..'+walletAddress?.slice(-3)} </>) :
+                          ( <span onClick={()=>{handleConnectWallet()}}>Connect Wallet</span> )} </Nav.Link> </Can>
+             {/* Admin menu starts*/}
               <Can do='admin-dashboard' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>
               <Can do='users' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> </Can>
               <Can do='pool-listing' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/pool-listing'>Pool </Nav.Link> </Can>
+             {/* Admin menu ends*/}
             </Nav>
 
             <Nav>
