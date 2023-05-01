@@ -113,7 +113,8 @@ useEffect(() => {
                 {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
-                {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)}
+                {/* {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)} */}
+                <Dropdown.Item><span>View Profile</span></Dropdown.Item>
                 <Can do='wallet' on='navbar'> {walletAddress && (<Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item>)} </Can>
                 {_u === null ?   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>) : (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
                 </Dropdown.Menu>

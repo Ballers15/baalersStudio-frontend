@@ -85,7 +85,26 @@ return (
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </Form>
                 </div>
-                {leaderBoardDetails?.length !== 0 ? (<Table responsive>
+                {/* {leaderBoardDetails?.length !== 0 ? ( */}
+                <div className="container mb-3"> 
+                <div className="row">
+                    <div className="col-sm-6">
+                    <input className="searchTab"
+                        type="search"
+                        placeholder="Search by name"  />
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="d-flex justify-content-end">
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div className="borderPink">#59</div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="container"> 
+                <Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
@@ -111,7 +130,9 @@ return (
                 }) }
                     
                 </tbody>
-                </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
+                </Table> 
+                </div>
+                {/* // ) : (<div style={{textAlign: ' center'}} >No Data !</div>)} */}
                
             </div>
           

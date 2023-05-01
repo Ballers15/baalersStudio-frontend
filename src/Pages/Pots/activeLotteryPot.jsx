@@ -199,6 +199,14 @@ const ActiveLotteryPot = (props) => {
                     <div className="row">
                         <div className="col-sm-5 my-auto">
                             <div className="text-center">
+                                <div className='earnText'>
+                                    <div>Earn</div>
+                                    <div className='sniff'>
+                                        <div>SNIFFDOG</div> 
+                                        <div> CARTEL</div>  
+                                    </div>
+                                    <div> NFT</div>
+                                </div>
                                 <div>
                                     {expiryTime!=='' ?
                                         <>

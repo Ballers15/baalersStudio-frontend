@@ -25,14 +25,24 @@ const RewardRounds = (props) => {
     const [intervalId, setIntervalId] = useState(null);
     const [buttonStatus, setButtonStatus] = useState(true)
 
-    function SamplePrevArrow(props) {
+    function SampleNextArrow(props) {
       const { className, style, onClick, buttonStatus } = props;
       return (
         <div
           className={className}
           style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
           onClick={onClick}
-        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i></p></div>
+        ><p className="finishText"><i className="fa fa-arrow-right" aria-hidden="true"></i></p></div>
+      );
+    }
+    function SamplePrevArrow(props) {
+      const { className, style, onClick } = props;
+      return (
+        <div
+          className={className}
+          style={{ ...style, }}
+          onClick={onClick}
+        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p></div>
       );
     }
     var settings = {  
@@ -42,7 +52,8 @@ const RewardRounds = (props) => {
       speed: 300,
       slidesToShow: 2,
       variableWidth: true, 
-      nextArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>
+      nextArrow: <SampleNextArrow buttonStatus={buttonStatus}/>,
+      prevArrow: <SamplePrevArrow />
     };
   
    /**
@@ -268,7 +279,7 @@ return(
                                             </div>
                                           ))}
                                             
-                                        </div></> : <p className="winHead">No one participated in this round</p>}
+                                        </div></> : <p className="winHead noRoundText">No one participated in this round</p>}
                                     </div>
                                 </div>
                             </div>)
