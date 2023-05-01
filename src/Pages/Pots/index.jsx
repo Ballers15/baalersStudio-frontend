@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
-import rewardBox from '../../Assest/img/rewardBox.png'
-import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
-import { Modal} from 'react-bootstrap';
 import $ from 'jquery'; 
-import { getActivePot, getGameCash, redeemCashLottery, redeemCashReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import LotteryRounds from "./lotteryRounds";
@@ -14,16 +10,12 @@ import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
-import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
-import { getAccountDetails } from "../../Components/Metamask";
-import Can from "../../Components/rolesBasedAccessControl/Can";
-import Popup from "../../Components/popup";
-import { environment } from "../../Environments/environment";
+import ActiveLotteryPot from "./activeLotteryPot";
+import ActiveRewardPot from "./activeRewardPot";
 
 
 
@@ -52,17 +44,12 @@ const PotPage = () => {
     const isLoading = useSelector(state => state.loading.isLoading)
     const [potType, setPotType] = useState('')
     const [expiryTime, setExpiryTime] = useState("");
-    const [potDetails,setPotDetails] = useState('')
-    const [cash, setCash] = useState('')
-    const user = useSelector(state => state.user.user)
-    const walletAddress = useSelector(state => state.wallet.walletAddress)
     const { type } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
     const [previous, setPrevious] = useState(false);
     const [reload, setReload] = useState(false);
-    const [redeemModal,setRedeemModal] = useState(false)
-    const [showRedeemPopup , setShowRedeemPopup] = useState(false)
+
 
     const [countdownTime, setCountdownTime]= useState(
        {
@@ -113,15 +100,9 @@ const PotPage = () => {
             navigate('/');
             setPotType('')
         }
-        
     },[location.pathname])
 
-    useEffect(()=>{
-        if(potType!==''){
-        getActivePotDetails();
-        }
-    },[potType])
-
+    
     useEffect(() => {
         if(expiryTime!==''){
             countdownTimer();
@@ -132,206 +113,12 @@ const PotPage = () => {
     },[expiryTime]);
 
 
-    useEffect(() => {
-        const element = document.getElementById("leaderboard");
 
-        setTimeout(() => {
-        setShowRedeemPopup(false)
-        element?.scrollIntoView();
-        }, 2000);
-    }, [showRedeemPopup])
 
-    /**
-     * Get details of active pot (if any)
-     */
-    const getActivePotDetails = async () => {
-        let dataToSend = {
-            potType: potType,
-        }
-        dispatch(setLoadingTrue());
-        try {
-          const pot = await getActivePot(dataToSend);
-          dispatch(setLoadingFalse());
-          if (pot.error) {
-            toast.dismiss();
-            toast.error(pot?.message||'Something went worng');
-        } else {
-            // toast.success('Claim Status Updated Succesfully');
-            setPotDetails(pot?.data.length?pot.data[0]:'');
-            setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
-            setPrevious(false);
-            // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
-          }
-        } catch (error) {
-            toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng');
-            dispatch(setLoadingFalse());
-        }
-         
-    }
+
     
-    /**
-     * redeem cash in active lottery pot
-     */
-    const addCashLottery = async () => {
-        let dataToSend = 
-            {
-                walletAddress: walletAddress,
-                amount:cash,
-                potId: potDetails?._id
-            }
-        dispatch(setLoadingTrue());
-        try {
-          const redeem = await redeemCashLottery(dataToSend);
-          dispatch(setLoadingFalse());
-          if (redeem.error) {
-            toast.dismiss();
-            toast.error(redeem?.message||'Something went worng');
-        } else {
-            toast.dismiss();
-            // toast.info(` Kudos !! Your $ ${cash} amount of in game cash deposited Successfully See Leaderboard !!` );
-            setShowRedeemPopup(true)
-            setReload(!reload)
-          }
-        } catch (error) {
-            toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng');
-            dispatch(setLoadingFalse());
-        }
-         
-    }
-
-    /**
-     * redeem cash in active reward pot
-     */
-    const addCashReward = async () => {
-        let dataToSend = 
-            {
-                walletAddress: walletAddress,
-                amount:cash,
-                potId: potDetails?._id
-            }
-        dispatch(setLoadingTrue());
-        try {
-          const redeem = await redeemCashReward(dataToSend);
-          dispatch(setLoadingFalse());
-          if (redeem.error) {
-            toast.dismiss();
-            toast.error(redeem?.message||'Something went worng');
-            setRedeemModal(false)
-            
-          } else {
-            toast.dismiss();
-            setShowRedeemPopup(true)
-            setReload(!reload)
-        }
-        } catch (error) {
-            setRedeemModal(false);
-            toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng');
-            dispatch(setLoadingFalse());
-        }
-         
-    }
-
-    /**
-     * fetch cash amount of users account
-     */
-    const fetchGameCash = async () => {
-        let dataToSend = 
-            {
-                walletAddress: walletAddress,
-            }
-        dispatch(setLoadingTrue());
-        try {
-          const cash = await getGameCash(dataToSend);
-          dispatch(setLoadingFalse());
-          if (cash.error) {
-            toast.dismiss();
-            toast.error(cash?.message||'Something went worng');
-        } else {
-            // toast.info('cash fetched Successfully');
-            setCash(cash?.data?.amount)
-          }
-        } catch (error) {
-            toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng');
-            dispatch(setLoadingFalse());
-       }
-        
-    }
-
-    /**
-     * 
-     * @returns handle redeem api calls according to pot type
-     */
-    const handleRedeem = () => {
-        if(cash > 0) 
-        {
-            if(potType === 'LOTTERYPOT')
-            {
-                addCashLottery()
-                setRedeemModal(false)
-            }
-            else if  (potType === 'REWARDPOT')
-            {
-                addCashReward()
-                setRedeemModal(false)
-            }
-            else
-                return
-        }
-      }
-
-    const handleCloseModal = () => setRedeemModal(false)
-    
-    const handleRedeemModal = async() => {
-        if(!user ){
-            navigate('/login')
-        }
-        else if(user &&  !walletAddress){
-            toast.dismiss();
-            getAccountDetails();
-        }
-       else{
-        await fetchGameCash()
-        setRedeemModal(true)
-        }
-    }
-
 return(
     <>
-       <Modal
-            show={redeemModal} 
-            onHide={handleCloseModal} 
-            size="lg"        
-            className='viewWallet'
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-               {cash > 0 ? <>Confirm Your Action</> : <>No Game Cash Found !!</>}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-            <span>
-            <div className='confirm-modal'>
-              {cash > 0 ? <>Are you sure to add your game cash $ {cash} ?  
-              <br></br>
-              <button type='primary' onClick={()=>handleRedeem()}>Yes</button>
-              <button type='primary' onClick={()=>handleCloseModal()}>No</button> </>
-              : <>Play game to earn cash !
-              <br></br>
-              <a href={environment?.gameUrl} target='_blank'><button type='primary'>Play Now</button> </a>
-              </>
-                }
-              </div>
-            </span>
-            </Modal.Body>
-          </Modal>
-
-
 
     <div className="lotteryPool">
         <div className="text-center potsHead thirdSlide" style={{ backgroundImage: potType === 'REWARDPOT' ? `url(${rewardPot})` : `url(${lotteryPot})`}}>
@@ -397,54 +184,9 @@ return(
             </div>
         </div>
         <div className="gradientBackgroung pb-8 activePots" id='active-pot'>
-            <div className="ht100 pt8">
-                <div className="container">
-                    <div className="positionRelative mb-5 headWth mx-auto">
-                        <h2 className="heading text-center">
-                        ACTIVE POT
-                        </h2>
-                        <h2 className="heading2 text-center">
-                        ACTIVE POT
-                        </h2>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-5 my-auto">
-                            <div className="text-center">
-                                <div>
-                                    {expiryTime!=='' ?
-                                        <>
-                                        <span className="countFont">{countdownTime.countdownDays} <sub>D</sub></span>
-                                        <span className="countFont pe-2">:</span>
-                                        <span className="countFont">{countdownTime.countdownHours} <sub>H</sub></span>
-                                        <span className="countFont pe-2">:</span>
-                                        <span className="countFont">{countdownTime.countdownMinutes} <sub>M</sub></span>
-                                        <span className="countFont pe-2">:</span>
-                                        <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
-                                        </>
-                                        :<p>Deal has been Expired</p>}
-                                </div>
 
-                                <p className="undColor">Until next draw</p>
-                        
-                                <h4 className="font6 pt-2">Redeem In Game Cash</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
-                                <div className="poolBtn pt-2">
-                                    <div className="playBtn">
-                                    {expiryTime!=='' ?  
-                                    (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
-                                    {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
-                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> login</a> </Can>)}</>) :
-                                    (<a className="disabled"><span></span> POT EXPIRED</a>)}
-                                    </div>
-                                </div>                        
-                            </div>
-                        </div>
-                        <div className="col-sm-7 text-center">
-                            <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
-                        </div>
-                    </div>
-                </div>
-             </div>
+               {potType==='LOTTERYPOT' && <ActiveLotteryPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} setExpiryTime={setExpiryTime} setPrevious={setPrevious} />}
+               {potType==='REWARDPOT' && <ActiveRewardPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} setExpiryTime={setExpiryTime} setPrevious={setPrevious} />}
 
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
                {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
@@ -457,7 +199,6 @@ return(
 
         </div>
         {isLoading ? <ApiLoader /> : null} 
-        {showRedeemPopup ? <Popup potType={potType} cash={cash}/> : null}
     </div>
     </>
 )
