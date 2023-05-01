@@ -3,6 +3,7 @@ import Can from "../../Components/rolesBasedAccessControl/Can";
 import { environment } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
+import Token from '../../Assest/img/Token.png'
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -198,8 +199,20 @@ const ActiveRewardPot = (props) => {
                         </h2>
                     </div>
                     <div className="row">
-                        <div className="col-sm-5 my-auto">
+                        <div className="col-sm-5 order-last my-auto">
                             <div className="text-center">
+                                <div>
+                                <div className='earnText'>
+                                    <div>Earn</div>
+                                    <div className='sniff'>
+                                        <div>1000 BALR</div>  
+                                        <div></div>
+                                    </div>
+                                    <div> Tokens  </div>
+                                </div>
+                                <div className='earnText'>in rewards</div>
+                                </div>
+                              
                                 <div>
                                     {expiryTime!=='' ?
                                         <>
@@ -229,7 +242,8 @@ const ActiveRewardPot = (props) => {
                                 </div>                        
                             </div>
                         </div>
-                        <div className="col-sm-7 text-center">
+                        <div className="col-sm-7 order-first text-center  position-relative">
+                            <img className='activeImgReward' src={Token} />
                             <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                         </div>
                     </div>

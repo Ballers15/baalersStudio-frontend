@@ -88,7 +88,27 @@ return(
                         {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
                     </Form>
                 </div>
-                {leaderBoardDetails?.length !== 0 ? (<Table responsive>
+                <div className="container mb-3"> 
+                <div className="row">
+                    <div className="col-sm-6">
+                    <input className="searchTab"
+                        type="search"
+                        placeholder="Search by name"  />
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="d-flex justify-content-end">
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div className="borderPink">#59</div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div className="container">
+                {leaderBoardDetails?.length !== 0 ? (
+                
+                <Table responsive>
                     <thead>
                     <tr>
                         <th>Rank</th>
@@ -111,7 +131,7 @@ return(
                     
                 </tbody>
                 </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
-                
+                </div>
             </div>
           
     )

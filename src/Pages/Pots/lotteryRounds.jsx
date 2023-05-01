@@ -27,14 +27,24 @@ const LotteryRounds = (props) => {
     const [intervalId, setIntervalId] = useState(null);
     const [buttonStatus, setButtonStatus] = useState(true)
     
-    function SamplePrevArrow(props) {
+    function SampleNextArrow(props) {
       const { className, style, onClick , buttonStatus} = props;
       return (
         <div
           className={className}
           style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
           onClick={onClick}
-        ><p className="finishText" ><i className="fa fa-arrow-left" aria-hidden="true"></i><span className="desk">Finished Rounds</span> </p></div>
+        ><p className="finishText"><i className="fa fa-arrow-right" aria-hidden="true"></i> </p></div>
+      );
+    }
+    function SamplePrevArrow(props) {
+      const { className, style, onClick } = props;
+      return (
+        <div
+          className={className}
+          style={{ ...style, }}
+          onClick={onClick}
+        ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p></div>
       );
     }
     var settings = {  
@@ -42,10 +52,11 @@ const LotteryRounds = (props) => {
       dots: false,
       infinite: true,
       speed: 300,
-      slidesToShow: 1,
+      slidesToShow: 2,
       // centerMode: true,
       variableWidth: true, 
-      nextArrow: <SamplePrevArrow buttonStatus={buttonStatus} />
+      nextArrow: <SampleNextArrow buttonStatus={buttonStatus} />,
+      prevArrow: <SamplePrevArrow />
     };
 
     /**
@@ -248,6 +259,7 @@ const LotteryRounds = (props) => {
 
 return(
              <>
+            
                 <div className="finishSlider">
                     <div className="row">
                         <div className="col-sm-12 position-relative">
@@ -268,7 +280,7 @@ return(
                                             <img src={img1} alt="" />
                                             <p className="address mb-0">{round?.potUserDetails?.walletAddress?.slice(0,4)+'...'+round?.potUserDetails?.walletAddress.slice(-4)+'@'+round?.userDetails?.userName} </p>
                                             </div>
-                                        </div></> : <p className="winHead">No one participated in this round</p>}
+                                        </div></> : <p className="winHead noRoundText">No one participated in this round</p>}
                                     </div>
                                 </div>
                             </div>)
@@ -302,7 +314,8 @@ return(
                                 }
                         </div>                                
                     </div>) :  <span className='no data'></span>}           
-                </div>               
+                </div>  
+                   
     </>
 
     

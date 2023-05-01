@@ -11,13 +11,40 @@
     align-items: center;
     min-height: calc(100% - var(--bs-modal-margin)*2);
 }
-.popup .modal-content{
-    background: transparent; 
+.popup .modal-content{ 
     border: 0;    
-    color: #1914A4;
+    color: #FFFFFF;
+    background: transparent;
     z-index: 999;
+    /* background-image: url('../../Assest/img/popupBg.png');
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
-.popup .modal-content img{
+.popupContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto; 
+    padding: 5rem 0;
+}
+.popupContent img{
+    width: 60%;
+    margin: 12px 0px;
+}
+.secondBg{
+    position: absolute; 
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 78%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+/* .popup .modal-content img{
     width: 100%;
     position: absolute;
     top: -32%;
@@ -25,7 +52,7 @@
     right: 0;
     margin: auto;
     bottom: 0;
-}
+} */
 .kudos{
     text-transform: uppercase;
     font-size: 45px;
@@ -33,34 +60,35 @@
     text-align: center;
     letter-spacing: 0.07em;
     color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-    /* background: #3531BB; */
-    border: 5px solid #FFFFFF;
-    border-radius: 40px 40px 0px 0px; 
-    height: 225px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin-top: 11rem;
+    font-weight: 400; 
+    font-family: "Valorant"; 
 }
 .popup .modal-content p{
-    font-weight: 600;
-font-size: 20px;
-line-height: 30px;
-text-align: center; 
-background: #FFFFFF;
-border-radius: 0px 0px 40px 40px;
-border: 5px solid #FFFFFF;
-width: 100%;
-padding: 4px 22px;
+    font-weight: 600; 
+    text-align: center; 
+    font-size: 18px;
+    line-height: 27px; 
+    width: 100%;
+    padding: 4px 22px;
 }
 
 
 @media (max-width: 480px){
-    .popup .modal-content img { 
-        top: -29%;
-    }
-    .kudos { 
-        height: 195px; 
-    }
+   .secondBg img{
+    width: 85%;
+   }
+   .popupContent img{
+    width: 50%;
+    margin-bottom: 5px;
+   }
+   .kudos { 
+    font-size: 30px;
+   }
+   .popup .modal-content p { 
+    font-size: 13px;
+    line-height: 19px;
+   }
+   .popup .modal-content{
+    width: 95%;
+   }
 }

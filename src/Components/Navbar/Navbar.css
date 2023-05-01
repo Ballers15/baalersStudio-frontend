@@ -52,6 +52,30 @@ button#dropdown-button-dark-example1 {
     position: absolute;
     right: 0;
     left: inherit;
+    padding: 15px;
+    background: rgba(17, 9, 42, 0.65);
+    border-radius: 30px;
+}
+.navbar-expand-lg .navbar-nav .nav-link.connectBtn{
+    background: #110929;
+    font-weight: 400;
+    border: 1px solid #FF80FF;
+    border-radius: 31px; 
+    font-family: 'Source Sans Pro', sans-serif !important;
+    letter-spacing: 0.2em !important;
+    padding: 6px;
+}
+.connectBtn span{
+    padding: 0 10px;
+}
+.connectBtn img{    
+    margin-right: 5px;
+}
+.dropdown-item{
+    background: #110929;
+    border: 1px solid #FF80FF;
+    border-radius: 30px;
+    margin: 10px 0;
 }
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 

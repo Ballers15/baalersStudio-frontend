@@ -122,6 +122,7 @@ return(
 
     <div className="lotteryPool">
         <div className="text-center potsHead thirdSlide" style={{ backgroundImage: potType === 'REWARDPOT' ? `url(${rewardPot})` : `url(${lotteryPot})`}}>
+        <p className="finishText backBtn"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p>
             <div className="sCaption text-center">          
 
                 <div> 
@@ -194,8 +195,26 @@ return(
            {expiryTime !== '' && <div className="container" id='leaderboard'>
                 <LeaderBoardRibbon/>
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
-                {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
             </div>}
+            {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
+
+            {/* <div className="container"> 
+                <div className="row">
+                    <div className="col-sm-6">
+                    <input className="searchTab"
+                        type="search"
+                        placeholder="Search by name"  />
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="d-flex justify-content-end">
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div className="borderPink">#59</div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
 
         </div>
         {isLoading ? <ApiLoader /> : null} 

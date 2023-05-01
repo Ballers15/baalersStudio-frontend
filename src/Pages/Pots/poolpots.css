@@ -389,6 +389,9 @@ a.disabled{
     top: 0;
     bottom: 0;
   }
+  .finishText{
+    height: auto;
+  }
   /* .finishSlider .carousel-button-group.mb-4.gap-4{
     display: flex;
     align-items: center;
@@ -513,18 +516,119 @@ a.disabled{
 }
 
 .slick-list {
-  width: 70%; 
+  width: 90%; 
   margin: auto;
-  margin-right: 0;
+  /* margin-right: 0; */
 }
+.slick-arrow{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
 
-.slick-next:before{display: none;}
+}
+ 
+.slick-next:before, .slick-prev:before{display: none;}
   .slick-next{
-    left: 4rem;
-    width: 295px;
+    right: 1rem;
+    width: 50px;
   }
-  
+  .slick-prev{
+    left: 1rem;
+    width: 50px;
+  }
+.activeImg{
+  position: absolute; 
+  left: 0;
+  right: 3rem;
+  margin: auto;
+  top: -52px;
+}
+.activeImg img{
+  width: 42%;
+}
+.activeImgReward{
+  position: absolute;
+  left: 0;
+  right: -5rem;
+  margin: auto;
+  top: 15px; 
+  width: 27%;
 
+}
+.finishSlider .slick-list{
+  height: 300px;
+}
+p.noRoundText {
+  font-size: 15px;
+}
+.backBtn{
+  position: absolute;
+  top: 9rem;
+  left: 9rem;
+  cursor: pointer;
+}
+.earnText{
+  display: flex; 
+    justify-content: center;
+    color: #D168D9; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    font-family: "Valorant";
+}
+.earnText .sniff{
+  font-weight: 400;
+font-size: 32px;
+line-height: 22px;
+margin-top: 9.5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-shadow: .5px .5px #fff;
+}
+.earnText .sniff div:last-child{
+  font-size: 15px;
+} 
+.borderPink {
+  padding-top: 5px;
+  border-radius: 30px;
+  background: #110929;
+  border: 1px solid #FF80FF; 
+  font-family: "Valorant";
+  text-align: center;
+  color: #fff;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 29px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.searchTab{
+  border-radius: 30px;
+  background: #110929;
+  border: 1px solid #FF80FF; 
+  text-align: center;
+  color: #fff;
+  height: 52px;
+  outline: none !important;
+  font-size: 26px;
+line-height: 29px;
+font-family: "Valorant";
+font-weight: 400;
+text-align: left;
+padding: 5px 22px 0;
+font-weight: 400px;
+}
+.angleIcon {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
   @media (min-width: 1600px) {
     .winHead span { 
       width: 255px;
@@ -549,6 +653,9 @@ a.disabled{
     }
 }
 @media (min-width:1200px) and (max-width: 1281px){
+  .backBtn { 
+    left: 6rem;
+  }
     .pool .poolBtn {
         width: 78%;
     }
@@ -582,6 +689,10 @@ a.disabled{
     
 }
 @media (min-width:768px) and (max-width: 900px){
+    .backBtn {  
+      left: 5rem;
+    }
+
   .countFont{
     font-size: 38px;
   }
@@ -623,6 +734,10 @@ a.disabled{
     }
 }
 @media (max-width: 480px){
+  .backBtn { 
+    top: 7rem;
+    left: 1rem;
+  }
   .slick-slide .wthMob {
     width: 74%;
   }

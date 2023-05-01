@@ -3,6 +3,7 @@ import Can from "../../Components/rolesBasedAccessControl/Can";
 import { environment } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
+import activeOverlay from '../../Assest/img/activeOverlay.png'
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -198,6 +199,14 @@ const ActiveLotteryPot = (props) => {
                     <div className="row">
                         <div className="col-sm-5 my-auto">
                             <div className="text-center">
+                                <div className='earnText'>
+                                    <div>Earn</div>
+                                    <div className='sniff'>
+                                        <div>SNIFFDOG</div> 
+                                        <div> CARTEL</div>  
+                                    </div>
+                                    <div> NFT</div>
+                                </div>
                                 <div>
                                     {expiryTime!=='' ?
                                         <>
@@ -227,13 +236,15 @@ const ActiveLotteryPot = (props) => {
                                 </div>                        
                             </div>
                         </div>
-                        <div className="col-sm-7 text-center">
+                        <div className="col-sm-7 text-center position-relative">
+                            <div className='activeImg'><img src={activeOverlay} /> </div>
                             <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                         </div>
                     </div>
                 </div>
              </div>
         {showRedeemPopup ? <Popup potType='LOTTERYPOT' cash={cash}/> : null}
+        {/* <Popup potType='LOTTERYPOT' cash="100"/> */}
      </>
     )
 
