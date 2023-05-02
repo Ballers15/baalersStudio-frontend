@@ -16,7 +16,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveLotteryPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setLotteryCurrentRoundDetails, setLotteryRoundIndex } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -31,14 +31,18 @@ const ActiveLotteryPot = (props) => {
     }, [])
 
     useEffect(() => {
+        if(showRedeemPopup === true){
         const element = document.getElementById("leaderboard");
         setTimeout(() => {
         setShowRedeemPopup(false)
+        setLotteryRoundIndex();
+        setLotteryCurrentRoundDetails({})
         element?.scrollIntoView();
         }, 2000);
+        }
     }, [showRedeemPopup])
 
-        /**
+    /**
      * Get details of active pot (if any)
      */
         const getActivePotDetails = async () => {
@@ -190,10 +194,10 @@ const ActiveLotteryPot = (props) => {
                 <div className="container">
                     <div className="positionRelative mb-5 headWth mx-auto">
                         <h2 className="heading text-center">
-                        ACTIVE POT
+                        ACTIVE LOTTERY POT
                         </h2>
                         <h2 className="heading2 text-center">
-                        ACTIVE POT
+                        ACTIVE LOTTERY POT
                         </h2>
                     </div>
                     <div className="row">
@@ -207,6 +211,7 @@ const ActiveLotteryPot = (props) => {
                                     </div>
                                     <div> NFT</div>
                                 </div>
+                                <br></br>
                                 <div>
                                     {expiryTime!=='' ?
                                         <>
@@ -218,13 +223,11 @@ const ActiveLotteryPot = (props) => {
                                         <span className="countFont pe-2">:</span>
                                         <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
                                         </>
-                                        :<p>Deal has been Expired</p>}
+                                        :<p>Deal Expired</p>}
                                 </div>
 
-                                <p className="undColor">Until next draw</p>
-                        
-                                <h4 className="font6 pt-2">Redeem In Game Cash</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
+                                <p className="undColor">Remaining</p>
+
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
                                     {expiryTime!=='' ?  
@@ -237,8 +240,8 @@ const ActiveLotteryPot = (props) => {
                             </div>
                         </div>
                         <div className="col-sm-7 text-center position-relative">
-                            <div className='activeImg'><img src={activeOverlay} /> </div>
-                            <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                            {expiryTime !=='' && <img className='activeImg' src={activeOverlay} />}
+                            <img src={expiryTime!=='' ? rewardBoxOpen : rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                         </div>
                     </div>
                 </div>

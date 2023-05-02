@@ -13,7 +13,6 @@ import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 import ApiLoader from "../../Components/apiLoader";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import ActiveLotteryPot from "./activeLotteryPot";
 import ActiveRewardPot from "./activeRewardPot";
 
@@ -40,16 +39,20 @@ const PotPage = () => {
         
       });
 
-    const dispatch = useDispatch()
     const isLoading = useSelector(state => state.loading.isLoading)
     const [potType, setPotType] = useState('')
     const [expiryTime, setExpiryTime] = useState("");
     const { type } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
-    const [previous, setPrevious] = useState(false);
+    const [previous, setPrevious] = useState(false);    
     const [reload, setReload] = useState(false);
-
+    const [lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails] = useState({})
+    const [lotteryPrevRoundsLength, setLotteryPrevRoundsLength] = useState(0)
+    const [lotteryRoundIndex, setLotteryRoundIndex] = useState(null)
+    const [rewardCurrentRoundDetails, setRewardCurrentRoundDetails] = useState({})
+    const [rewardPrevRoundsLength, setRewardPrevRoundsLength] = useState(0)
+    const [rewardRoundIndex, setRewardRoundIndex] = useState(null)
 
     const [countdownTime, setCountdownTime]= useState(
        {
@@ -122,7 +125,7 @@ return(
 
     <div className="lotteryPool">
         <div className="text-center potsHead thirdSlide" style={{ backgroundImage: potType === 'REWARDPOT' ? `url(${rewardPot})` : `url(${lotteryPot})`}}>
-        <p className="finishText backBtn"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p>
+        <p className="finishText backBtn"><i className="fa fa-arrow-left" aria-hidden="true" onClick={()=>{navigate(-1)}}></i> </p>
             <div className="sCaption text-center">          
 
                 <div> 
@@ -186,17 +189,32 @@ return(
         </div>
         <div className="gradientBackgroung pb-8 activePots" id='active-pot'>
 
-               {potType==='LOTTERYPOT' && <ActiveLotteryPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} setExpiryTime={setExpiryTime} setPrevious={setPrevious} />}
-               {potType==='REWARDPOT' && <ActiveRewardPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} setExpiryTime={setExpiryTime} setPrevious={setPrevious} />}
+               {potType==='LOTTERYPOT' && <ActiveLotteryPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} 
+               setExpiryTime={setExpiryTime} setPrevious={setPrevious} setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} 
+               setLotteryRoundIndex={setLotteryRoundIndex}/>}
 
-               {potType==='LOTTERYPOT' && <LotteryRounds previous={previous}/>}
-               {potType==='REWARDPOT' && <RewardRounds previous={previous}/>}
+               {potType==='REWARDPOT' && <ActiveRewardPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} 
+               setExpiryTime={setExpiryTime} setPrevious={setPrevious} setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} 
+               setRewardRoundIndex={setRewardRoundIndex} />}
 
-           {expiryTime !== '' && <div className="container" id='leaderboard'>
+               {potType==='LOTTERYPOT' && <LotteryRounds previous={previous} lotteryCurrentRoundDetails={lotteryCurrentRoundDetails} 
+               setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} lotteryPrevRoundsLength={lotteryPrevRoundsLength} 
+               setLotteryPrevRoundsLength={setLotteryPrevRoundsLength} lotteryRoundIndex={lotteryRoundIndex} setLotteryRoundIndex={setLotteryRoundIndex} />}
+
+               {potType==='REWARDPOT' && <RewardRounds previous={previous} rewardCurrentRoundDetails={rewardCurrentRoundDetails} 
+               setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} rewardPrevRoundsLength={rewardPrevRoundsLength} 
+               setRewardPrevRoundsLength={setRewardPrevRoundsLength} rewardRoundIndex={rewardRoundIndex} setRewardRoundIndex={setRewardRoundIndex} />}
+
+       <div className="container" id='leaderboard'>
                 <LeaderBoardRibbon/>
-                {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload}/>}
-            </div>}
-            {potType==='REWARDPOT' && <LeaderBoardReward reload={reload}/>}           
+                {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload} lotteryCurrentRoundDetails={lotteryCurrentRoundDetails} 
+                setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} lotteryPrevRoundsLength={lotteryPrevRoundsLength} 
+                setLotteryPrevRoundsLength={setLotteryPrevRoundsLength} lotteryRoundIndex={lotteryRoundIndex} setLotteryRoundIndex={setLotteryRoundIndex} />}
+
+               {potType==='REWARDPOT' && <LeaderBoardReward reload={reload} rewardCurrentRoundDetails={rewardCurrentRoundDetails} 
+               setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} rewardPrevRoundsLength={rewardPrevRoundsLength} 
+               setRewardPrevRoundsLength={setRewardPrevRoundsLength} rewardRoundIndex={rewardRoundIndex} setRewardRoundIndex={setRewardRoundIndex} />}
+        </div>
 
             {/* <div className="container"> 
                 <div className="row">

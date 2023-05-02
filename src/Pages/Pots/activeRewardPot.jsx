@@ -16,7 +16,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveRewardPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setRewardRoundIndex, setRewardCurrentRoundDetails } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -32,10 +32,14 @@ const ActiveRewardPot = (props) => {
 
     useEffect(() => {
         const element = document.getElementById("leaderboard");
+        if(showRedeemPopup === true){
         setTimeout(() => {
         setShowRedeemPopup(false)
+        setRewardCurrentRoundDetails({})
+        setRewardRoundIndex()
         element?.scrollIntoView();
         }, 2000);
+        }
     }, [showRedeemPopup])
 
         /**
@@ -192,10 +196,10 @@ const ActiveRewardPot = (props) => {
                 <div className="container">
                     <div className="positionRelative mb-5 headWth mx-auto">
                         <h2 className="heading text-center">
-                        ACTIVE POT
+                        ACTIVE REWARD POT
                         </h2>
                         <h2 className="heading2 text-center">
-                        ACTIVE POT
+                        ACTIVE REWARD POT
                         </h2>
                     </div>
                     <div className="row">
@@ -224,13 +228,11 @@ const ActiveRewardPot = (props) => {
                                         <span className="countFont pe-2">:</span>
                                         <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
                                         </>
-                                        :<p>Deal has been Expired</p>}
+                                        :<p>Deal Expired</p>}
                                 </div>
 
-                                <p className="undColor">Until next draw</p>
+                                <p className="undColor">Remaining</p>
                         
-                                <h4 className="font6 pt-2">Redeem In Game Cash</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit.</p>
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
                                     {expiryTime!=='' ?  
@@ -243,8 +245,8 @@ const ActiveRewardPot = (props) => {
                             </div>
                         </div>
                         <div className="col-sm-7 order-first text-center  position-relative">
-                            <img className='activeImgReward' src={Token} />
-                            <img src={expiryTime!=='' ? rewardBox : rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                            {expiryTime !== '' && <img className='activeImgReward' src={Token} />}
+                            <img src={expiryTime!=='' ? rewardBoxOpen : rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 
 
 const LotteryRounds = (props) => {
+    const {previous, setLotteryPrevRoundsLength, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex} = props;
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
     const user = useSelector(state => state.user.user)
@@ -66,9 +67,11 @@ const LotteryRounds = (props) => {
    const handleSlideChange = (current) => {
     // console.log("current",current);
       //  const index = current;
-       setCurrentSlide(current)
+        setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
-    
+        setLotteryRoundIndex(current)
+        setLotteryCurrentRoundDetails(prevRounds[current])
+
         if(user !== null && walletAddress !== null) {
             // console.log(prevRounds[currentSlide]);
             lotteryWon(prevRounds[current]._id)
@@ -125,7 +128,7 @@ const LotteryRounds = (props) => {
 
     useEffect(() => {
       getPreviousRounds()  
-  },[ walletAddress ,props.previous,isClaimed ]);
+  },[ walletAddress ,previous, isClaimed ]);
 
     useEffect(() => {
         if(claimExpiryDate!==''){
@@ -134,6 +137,13 @@ const LotteryRounds = (props) => {
             claimCountdownTimer();
         }
     },[claimExpiryDate]);
+
+    useEffect(()=>{
+      console.log('index',lotteryRoundIndex)
+      if(prevRounds.length >= lotteryRoundIndex){
+        setLotteryCurrentRoundDetails(prevRounds[lotteryRoundIndex])
+      }
+    },[lotteryRoundIndex])
 
   /**
    * Get array of previous rounds
@@ -153,6 +163,7 @@ const LotteryRounds = (props) => {
           } else {
             setPrevRounds(round?.data)
             setPrevRoundsLength(round?.data?.length)
+            setLotteryPrevRoundsLength(round?.data?.length)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
             setUserWon(round?.data[0]?.userRes?.lotteryWon)
             setParticipated(round?.data[0]?.userRes?.participated)

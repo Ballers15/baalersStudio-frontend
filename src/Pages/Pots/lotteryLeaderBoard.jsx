@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
-import { Table, Button, Form } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { leaderBoardLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import {  toast } from 'react-toastify';
@@ -9,14 +9,24 @@ import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const LeaderBoardLottery = (props) => {
+    const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex} = props;
     const dispatch = useDispatch()
     const [leaderBoardDetails,setLeaderBoardDetails] = useState({})
-    const [leaderSearch,setLeaderSearch]  = useState()
+    const [leaderSearch,setLeaderSearch]  = useState('')
 
+
+    useEffect(() => {
+    // console.log('index 2 de', lotteryRoundIndex, 'id',lotteryCurrentRoundDetails._id)
+    getLotteryLeaderBoard()
+    }, [lotteryCurrentRoundDetails])
+
+    // useEffect(() => {
+    //     console.log('index 2 in', lotteryRoundIndex, 'id',lotteryCurrentRoundDetails._id,'len',hash+lotteryPrevRoundsLength)
+    //     }, [lotteryRoundIndex])
 
     useEffect(()=>{
-        getLotteryLeaderBoard();
-    },[props.reload])
+        getLotteryLeaderBoard(leaderSearch);
+    },[reload])
 
     /**
      * Get leaderboard data of active pot
@@ -24,8 +34,18 @@ const LeaderBoardLottery = (props) => {
      */
     const getLotteryLeaderBoard = async (data) => {
         setLeaderBoardDetails({})
-        let dataToSend = {
+        let dataToSend = {};
+        if(lotteryCurrentRoundDetails){
+        dataToSend = {
             search: data,
+            potId: lotteryCurrentRoundDetails._id
+            }
+        }
+        else{
+            dataToSend = {
+                search: data,
+                potId: ''
+            }
         }
         dispatch(setLoadingTrue());
         try {
@@ -42,21 +62,34 @@ const LeaderBoardLottery = (props) => {
             toast.error(error?.response?.data?.message||'Something went worng');
             dispatch(setLoadingFalse());
         }
-         
-    }
-
-    /**
-     * Search user in leaderboard
-     * @param e Event
-     */
-    const handleSearchUser = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.preventDefault();
-        getLotteryLeaderBoard(leaderSearch);
     }
 
     
+    const handleIndexChange = (e) => {
+        if(e.target.value > 0 ){
+        if(e.target.value <= lotteryPrevRoundsLength)
+            setLotteryRoundIndex(e.target.value-1)
+        else
+            setLotteryRoundIndex(lotteryPrevRoundsLength-1)
+        }
+    }
+
+    /**
+     * Get next index of leaderboard round
+     */
+    const handleNextIndex = () => {
+        if(lotteryRoundIndex >= 0 && lotteryRoundIndex+1 < lotteryPrevRoundsLength)
+            setLotteryRoundIndex(lotteryRoundIndex+1)
+    }
+
+     /**
+     * Get previous index of leaderboard round
+     */
+    const handlePrevIndex = () => {
+        if(lotteryRoundIndex > 0 && lotteryRoundIndex <= lotteryPrevRoundsLength)
+            setLotteryRoundIndex(lotteryRoundIndex-1)
+    }
+
     /**
     * Format large number
     * @param value Number | large number > 10^10
@@ -75,7 +108,7 @@ const LeaderBoardLottery = (props) => {
 return(  
               <div className="">
              <div className="searchBox">
-                    <h4>Search Leaderboard</h4>
+                    {/* <h4>Search Leaderboard</h4>
                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getLotteryLeaderBoard();}}>
                        <Form.Control
                             type="search"
@@ -85,22 +118,31 @@ return(
                             onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                        {/* <Button className="resetIcon" type = 'reset' ><i className="fa fa-times" aria-hidden="true"></i></Button> */}
-                    </Form>
+                    </Form> */}
                 </div>
                 <div className="container mb-3"> 
                 <div className="row">
                     <div className="col-sm-6">
                     <input className="searchTab"
                         type="search"
-                        placeholder="Search by name"  />
+                        placeholder="Search by name" 
+                        onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
+                        />
                     </div>
                     <div className="col-sm-6">
                         <div className="d-flex justify-content-end">
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                        <div className="borderPink">#59</div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                          <div className="borderPink">#
+                            <input
+                            type='number'
+                            onChange={(e)=>{handleIndexChange(e)}}
+                            min='1'
+                            max={lotteryPrevRoundsLength}
+                            value={lotteryRoundIndex === null ? ('') : (lotteryPrevRoundsLength - lotteryRoundIndex)}
+                            />
+                            </div>
+                        <div className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon" onClick={()=>{setLotteryCurrentRoundDetails({}); setLotteryRoundIndex(null); }}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>

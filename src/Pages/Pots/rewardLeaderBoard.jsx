@@ -10,23 +10,43 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 
    
 const LeaderBoardReward = (props) => {
+    const {reload, rewardCurrentRoundDetails, setRewardCurrentRoundDetails, rewardPrevRoundsLength, setRewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex} = props;
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
     const [leaderSearch,setLeaderSearch]  = useState('')
     const dispatch = useDispatch()
 
 
-    useEffect(()=>{
-      getRewardLeaderBoard();
-    },[props.reload])
+    useEffect(() => {
+        getRewardLeaderBoard()
+    }, [rewardCurrentRoundDetails])
 
+    
+    // useEffect(() => {
+    //     console.log('index 2 in', rewardRoundIndex, 'id',rewardCurrentRoundDetails._id,'len',rewardPrevRoundsLength)
+    // }, [rewardRoundIndex])
+
+    useEffect(()=>{
+      getRewardLeaderBoard(leaderSearch);
+    },[reload])
 
     /**
     * Get leaderboard data of active pot
     * @param data String | Search input (username)
     */
     const getRewardLeaderBoard = async (data) => {
-        let dataToSend = {
-            search: data,
+        setLeaderBoardDetails({})
+        let dataToSend = {};
+        if(rewardCurrentRoundDetails){
+            dataToSend = {
+                search: data,
+                potId: rewardCurrentRoundDetails._id
+            }
+        }
+        else{
+            dataToSend = {
+                search: data,
+                potId: ''
+            }
         }
         dispatch(setLoadingTrue());
         try {
@@ -45,15 +65,31 @@ const LeaderBoardReward = (props) => {
         }
     }
 
-    /**
-     * Search user in leader board
-     */
-    const handleSearchUser = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.preventDefault();
-        getRewardLeaderBoard(leaderSearch);
+    const handleIndexChange = (e) => {
+        if(e.target.value > 0 ){
+        if(e.target.value <= rewardPrevRoundsLength)
+            setRewardRoundIndex(e.target.value-1)
+        else
+            setRewardRoundIndex(rewardPrevRoundsLength-1)
+        }
     }
+
+    /**
+     * Get next index of leaderboard round
+     */
+        const handleNextIndex = () => {
+            if(rewardRoundIndex >= 0 && rewardRoundIndex+1 < rewardPrevRoundsLength)
+                setRewardRoundIndex(rewardRoundIndex+1)
+        }
+    
+         /**
+         * Get previous index of leaderboard round
+         */
+        const handlePrevIndex = () => {
+            if(rewardRoundIndex > 0 && rewardRoundIndex <= rewardPrevRoundsLength)
+            setRewardRoundIndex(rewardRoundIndex-1)
+        }
+    
 
     /**
      * Fromat large number
@@ -73,8 +109,8 @@ const LeaderBoardReward = (props) => {
 return (  
               <div className="">
                 <div className="searchBox">
-                    <h4>Search Leaderboard</h4>
-                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
+                    {/*<h4>Search Leaderboard</h4>
+                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
                        <Form.Control
                             type="search"
                             placeholder="Playername#Tagline"
@@ -83,27 +119,38 @@ return (
                             onChange={(e)=>{getRewardLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                    </Form>
+                    </Form> */}
                 </div>
-                {/* {leaderBoardDetails?.length !== 0 ? ( */}
+                    
                 <div className="container mb-3"> 
                 <div className="row">
                     <div className="col-sm-6">
                     <input className="searchTab"
                         type="search"
-                        placeholder="Search by name"  />
+                        placeholder="Search by name"  
+                        onChange={(e)=>{getRewardLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
+                        />
                     </div>
                     <div className="col-sm-6">
                         <div className="d-flex justify-content-end">
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                        <div className="borderPink">#59</div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div className="borderPink">#
+                            <input
+                            type='number'
+                            onChange={(e)=>{handleIndexChange(e)}}
+                            min='1'
+                            max={rewardPrevRoundsLength}
+                            value={rewardRoundIndex === null ? ('') : (rewardPrevRoundsLength - rewardRoundIndex)}
+                            />
+                            </div>
+                        <div className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div className="borderPink angleIcon" onClick={()=>{setRewardCurrentRoundDetails({}); setRewardRoundIndex(null); }}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="container"> 
+            {leaderBoardDetails?.length !== 0 ? (
                 <Table responsive>
                     <thead>
                     <tr>
@@ -131,9 +178,10 @@ return (
                     
                 </tbody>
                 </Table> 
+                
+                ) : (<div style={{textAlign: ' center'}} >No Data !</div>)} 
                 </div>
-                {/* // ) : (<div style={{textAlign: ' center'}} >No Data !</div>)} */}
-               
+
             </div>
           
     )

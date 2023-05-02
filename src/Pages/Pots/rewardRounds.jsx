@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const RewardRounds = (props) => {
+  const {previous, setRewardCurrentRoundDetails,  setRewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex} = props;
     const dispatch = useDispatch()
     const isClaimed = useSelector(state => state.claimed.isClaimed)
     const user = useSelector(state => state.user.user)
@@ -62,9 +63,11 @@ const RewardRounds = (props) => {
    */
   const handleSlideChange = (current) => {
     // console.log("current",current);
-       setCurrentSlide(current)
-        setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
-    
+      setCurrentSlide(current)
+      setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
+      setRewardRoundIndex(current)
+      setRewardCurrentRoundDetails(prevRounds[current])
+
         if(user !== null && walletAddress !== null) {
             // console.log(prevRounds[current]);
             claimedReward(prevRounds[current]._id)
@@ -120,7 +123,7 @@ const RewardRounds = (props) => {
    
     useEffect(() => {
       getPreviousRounds()  
-  },[ walletAddress,props.previous,isClaimed ]);
+  },[ walletAddress,previous,isClaimed ]);
 
 
     useEffect(() => {
@@ -133,6 +136,13 @@ const RewardRounds = (props) => {
     
         }
     },[claimExpiryDate]);
+
+    useEffect(()=>{
+      console.log('index',rewardRoundIndex)
+      if(prevRounds.length >= rewardRoundIndex){
+        setRewardCurrentRoundDetails(prevRounds[rewardRoundIndex])
+      }
+    },[rewardRoundIndex])
 
     /**
     * Get array of previous rounds
@@ -152,6 +162,7 @@ const RewardRounds = (props) => {
             // toast.success('round fetched Successfully');
             setPrevRounds(round?.data)
             setPrevRoundsLength(round?.data?.length)
+            setRewardPrevRoundsLength(round?.data?.length)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
             setParticipated(round?.data[0]?.userRes?.participated)
             setClaimed(round?.data[0]?.userRes?.claimed)
