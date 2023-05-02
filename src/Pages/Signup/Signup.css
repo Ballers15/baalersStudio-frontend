@@ -242,21 +242,29 @@ form .signUp-google button:hover::before, form .signUp-google button:hover::afte
     background: #fff;
     margin-left: 8px;
 }
-@media (min-width: 1300) {
+@media (min-width: 1300px) {
     .signup-box { 
         width: 455px;
     }    
 }
   @media (max-width: 850px) {
+  
      
     .signup-box { 
-        width: 90%;
+        width: 50%;
         left: 0;
         right: 0;
         margin: auto;
     }
   }
   @media (max-width: 480px) {
+    .signup-page-container { 
+        display: block;
+    }
+    .signup-page-container .signUpbackBtn { 
+        margin-top: 0;
+        margin-bottom: 2rem;
+    }
     .signup-page-wrapper{
         margin-bottom: 3rem;
     }
