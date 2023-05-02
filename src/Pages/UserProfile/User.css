@@ -1,0 +1,114 @@
+.mt-9{
+    margin-top: 9rem !important;
+}
+.profileWth{
+    width: 88%;
+    margin: auto;
+}
+.profileText{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.profileText h1{
+font-weight: 400;
+font-size: 40px;
+line-height: 100%;
+font-family: "Valorant";
+color: #FFFFFF;
+margin-top: 16px;
+margin-bottom: 0;
+
+}
+
+.profileText p{
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+    line-height: 22px;
+}
+.profileCard h3{
+    font-weight: 400;
+font-size: 20px;
+line-height: 22px; 
+color: #FFFFFF;
+text-align: left;
+}
+.profileCard{
+    font-family: "Valorant";
+    background: #22024F;
+    border-radius: 20px;
+    color: #fff;
+    padding: 20px;
+    margin: 1.5rem 0px;
+}
+.profileCard img{
+    width: 30%;
+}
+p.amount{
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 89%;
+    margin-bottom: 0;
+    color: #fff;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+.participateName{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: left;
+}
+.participateNum{
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 89%;
+}
+.profileCard .react-multi-carousel-list .active img{
+    filter: blur(0);
+}
+.profileCard .react-multi-carousel-list img{
+    width: 100%;
+    padding: 10px;
+    filter: blur(5px);
+}
+.profileImage{    
+    border: 3px solid #FFFFFF; 
+    border-radius: 50%;
+    padding: 8px;
+    height: 95px;
+    width: 95px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+@media (max-width: 1500px) {
+    .participateName{ 
+        font-size: 16px; 
+    }
+    .participateNum { 
+        font-size: 38px;
+    }
+    .profileCard h3 {  
+        font-size: 18px;
+}
+}
+@media (max-width: 1400px) {
+    .profileCard h3 {  
+        font-size: 15px;
+}
+.participateName { 
+    font-size: 14px; 
+}
+.participateNum { 
+    font-size: 35px;
+}
+p.amount { 
+    font-size: 52px;
+}
+}
