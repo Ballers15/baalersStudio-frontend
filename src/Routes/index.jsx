@@ -28,6 +28,7 @@ import { AuthenticatorUser } from '../Auth/authenticatorUser';
 import PotPage from '../Pages/Pots';
 import { useSelector } from 'react-redux';
 import ResetPassword from '../Pages/ResetPassword/resetpassword';
+import UserProfile from '../Pages/UserProfile/User';
 
 
 const NavigationRouter = () => {
@@ -66,6 +67,7 @@ const NavigationRouter = () => {
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
               <Route exact path="/viewPot" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
               <Route exact path="/privacy" element={<Privacy />} /> 
+              <Route exact path="/user-profile" element={<UserProfile/>}/>
               <Route exact path="/:type" element={<PotPage />} /> 
             </Route>
         

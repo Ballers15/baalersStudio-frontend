@@ -53,8 +53,8 @@ const LotteryRounds = (props) => {
       dots: false,
       infinite: true,
       speed: 300,
-      slidesToShow: 2,
-      // centerMode: true,
+      slidesToShow: 1,
+      centerMode: true,
       variableWidth: true, 
       nextArrow: <SampleNextArrow buttonStatus={buttonStatus} />,
       prevArrow: <SamplePrevArrow />

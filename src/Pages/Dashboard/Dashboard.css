@@ -476,6 +476,8 @@ h5 {
   line-height: 18px;
   letter-spacing: 0.25em;
   margin-bottom: 3rem;
+  font-family: 'Source Sans Pro';  
+  color: #ECE8E1;
 }
 
 .sCaption .subT {

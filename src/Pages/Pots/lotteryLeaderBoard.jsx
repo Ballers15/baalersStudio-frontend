@@ -129,7 +129,7 @@ return(
                         onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
                         <div className="d-flex justify-content-end">
                         <div className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                           <div className="borderPink">#

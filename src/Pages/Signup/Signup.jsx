@@ -12,7 +12,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue, setUserData } from "../../Components/Redux/actions";
 import { useEffect } from 'react';
-
+import backBtn from '../../Assest/img/backBtn.svg';
+import google from '../../Assest/img/google.png';
 
 
 const Signup = () => {
@@ -356,9 +357,11 @@ const registerUsers = async () => {
         <div className="signup-box">
       
         <div className="signup-page-container">
+        <img className='signUpbackBtn' src={backBtn} alt="back" />
           
         {response === false &&   
-        <Form noValidate validated={validated} onSubmit={handleSubmit} >
+        <Form noValidate validated={validated} onSubmit={handleSubmit} className='w-100'>
+        
             <h2 className="login-head">CREATE <br/>ACCOUNT</h2>
 
               <Form.Group className='pb-4' >
@@ -390,7 +393,7 @@ const registerUsers = async () => {
                 <Form.Control.Feedback type="invalid">{passErrorMsg ||  'Passwords do not match'}</Form.Control.Feedback>
               </Form.Group>
 
-              <div  className="mb-3 mt-4">
+              <div  className="mb-2">
                  <Form.Check
                     inline
                     label="Agree to Terms & Conditions."
@@ -400,7 +403,9 @@ const registerUsers = async () => {
                  
               <div className="playBtn">  <button type="submit" > <span></span>SIGN Up  </button> </div>
               {/* <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div> */}
-
+                 <div className='divider'>
+                  <span className='line-left'></span> or  <span className='line-right'></span></div>
+              <div className="signUp-google">  <button type="submit" > <span></span> <img className='gIcon' src={google} alt="google" /> SIGN Up with google  </button> </div>
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
            <Link to='/login'> <span>Sign In</span></Link> 
