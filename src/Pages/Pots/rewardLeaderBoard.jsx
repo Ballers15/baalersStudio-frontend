@@ -72,7 +72,7 @@ const LeaderBoardReward = (props) => {
     
 return (  
               <div className="">
-                <div className="searchBox">
+                {/* <div className="searchBox">
                     <h4>Search Leaderboard</h4>
                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
                        <Form.Control
@@ -84,16 +84,22 @@ return (
                         />
                         <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
                     </Form>
-                </div>
+                </div> */}
                 {/* {leaderBoardDetails?.length !== 0 ? ( */}
                 <div className="container mb-3"> 
                 <div className="row">
-                    <div className="col-sm-6">
-                    <input className="searchTab"
-                        type="search"
-                        placeholder="Search by name"  />
+                    <div className="col-sm-4">
+                    <Form className="d-flex position-relative align-items-center" >
+                       <Form.Control
+                            type="search"
+                            placeholder="Search by name"
+                            className="me-2 searchBar"
+                            aria-label="Search"                            
+                        />
+                        <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
+                    </Form> 
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
                         <div className="d-flex justify-content-end">
                         <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                         <div className="borderPink">#59</div>
