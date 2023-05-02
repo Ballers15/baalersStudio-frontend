@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import {  useSelector } from "react-redux";
 import ApiLoader from "../../Components/apiLoader";
 import viewProfileBg from "../../Assest/img/viewProfileBg.png"
+import viewProfileBgMob from "../../Assest/img/viewProfileBgMob.png"
 import mafiaBoss from "../../Assest/img/mafiaBoss.png"
 import ballerCoin from "../../Assest/img/ballerCoin.webp" 
 import sliderImg from "../../Assest/img/sliderImg.png" 
@@ -39,7 +40,12 @@ const UserProfile = () => {
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="position-relative">
-                            <img src={viewProfileBg} alt="" className="w-100" />
+                            <picture aria-hidden="true">
+                            <source media="(min-width: 900px)" srcSet={viewProfileBg} />
+                            <source media="(max-width: 500px)" srcSet={viewProfileBgMob} />
+                            <img src={viewProfileBg} width="382" height="382" alt="background image" className="imgRadius w-100"/>
+                            </picture>
+                            {/* <img src={viewProfileBg} alt="" className="w-100" /> */}
                                 <div className="profileText">
                                 <div className="container">
                                     <div className="row">
@@ -62,9 +68,9 @@ const UserProfile = () => {
                     </div>
                 </div>
                <div className="row">
-                <div className="col-sm-9">
+                <div className="col-sm-8 col-xl-9">
                     <div className="profileCard"> 
-                    <h3>NFT’S HELD IN THE WALLET : <span>02</span> </h3>
+                    <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>02</span> </h3>
                     <div className="mt-4">
                     <Carousel  responsive={responsive}>
                     <div className="active">
@@ -95,7 +101,7 @@ const UserProfile = () => {
                      </div>
                     </div>
                 </div>
-                <div className="col-sm-3">
+                <div className="col-sm-4 col-xl-3">
                     <div className="profileCard"> 
                     <h3>TOTAL REWARDS ACHEIVED </h3>
                     <div className="d-flex align-items-center mt-3">

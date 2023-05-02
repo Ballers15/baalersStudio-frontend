@@ -112,3 +112,42 @@ p.amount {
     font-size: 52px;
 }
 }
+@media (max-width: 1200px){
+    .profileText img{
+     width: 46%;
+    }
+    .profileText h1 { 
+        font-size: 33px;
+    }
+    .profileText img.profileImage { 
+        height: 70px;
+        width: 70px;
+    }
+}
+@media (max-width: 500px){
+    .profileCard h3 {
+        font-size: 20px;
+    }
+    .participateName {
+        font-size: 16px;
+    }
+    .imgRadius{
+        border-radius: 40px;
+    }
+    .profileText h1 {
+        font-weight: 400;
+        font-size: 23px;
+    }
+    .profileImage { 
+        height: 70px;
+        width: 70px;    
+    }
+}
+@media (max-width: 400px){
+    .profileCard h3 {
+        font-size: 16px;
+    }
+    .participateName {
+        font-size: 14px;
+    }
+}
