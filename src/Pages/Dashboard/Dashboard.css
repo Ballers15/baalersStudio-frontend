@@ -528,7 +528,7 @@ h5 {
   font-size: 20px;
   line-height: 109.84%;
 }
-
+.thirdSlide .poolBtn{width: 100%;}
 .innerBtn a {
   position: absolute;
   text-decoration: none;
@@ -3160,6 +3160,9 @@ ul li {
 
 
 @media (max-width: 480px) {
+  .carousel-caption .shareBtn.newBtn {
+    width: 47%;
+}
   .thirdPageBtn { 
     margin-top: 7rem;
   }
@@ -3907,6 +3910,10 @@ ul li {
 }
 
 @media (max-width: 400px) {
+  
+.carousel-caption .shareBtn.newBtn {
+    width: 38%;
+}
   .thirdPageBtn .playBtn { 
     width: 44%;
   }

@@ -11,29 +11,25 @@ import viewProfileBg from "../../Assest/img/viewProfileBg.png"
 import viewProfileBgMob from "../../Assest/img/viewProfileBgMob.png"
 import mafiaBoss from "../../Assest/img/mafiaBoss.png"
 import ballerCoin from "../../Assest/img/ballerCoin.webp" 
-import sliderImg from "../../Assest/img/sliderImg.png" 
-import userProfile from "../../Assest/img/userProfile.png" 
-import Carousel from "react-multi-carousel";
+import userProfile from "../../Assest/img/userProfile.png"  
+import Aaron_Grossbaum from "../../Assest/img/nftImages/Aaron_Grossbaum.png" 
+import Dennis_Deep from "../../Assest/img/nftImages/Dennis_Deep.png" 
+import Estella_Queen from "../../Assest/img/nftImages/Estella_Queen.png" 
+import FredericCrenium from "../../Assest/img/nftImages/FredericCrenium.png" 
+import Grigory_Chekhov from "../../Assest/img/nftImages/Grigory_Chekhov.png" 
+import Hao_Niubi from "../../Assest/img/nftImages/Hao_Niubi.png" 
+import Harry_Varan from "../../Assest/img/nftImages/Harry_Varan.png" 
+import IeronimMask from "../../Assest/img/nftImages/IeronimMask.png" 
+import Jesus_Escobar from "../../Assest/img/nftImages/Jesus_Escobar.png" 
+import Joe_Zealot from "../../Assest/img/nftImages/Joe_Zealot.png" 
+import Pepe_Chester from "../../Assest/img/nftImages/Pepe_Chester.png" 
+import Rocinha from "../../Assest/img/nftImages/Rocinha.png" 
+import Steven_Void from "../../Assest/img/nftImages/Steven_Void.png" 
+import sinoda_cloud from "../../Assest/img/nftImages/sinoda_cloud.png" 
+import Vito_kasso from "../../Assest/img/nftImages/Vito_kasso.png" 
+import Vanilla from "../../Assest/img/nftImages/Vanilla.png" 
 const UserProfile = () => {
-    const responsive = {
-        superLargeDesktop: {
-          // the naming can be any, depends on you.
-          breakpoint: { max: 4000, min: 3000 },
-          items: 5
-        },
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 5
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 3
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1
-        }
-      };
+     
     return(
         <>
             <div className="text-center mt-9 profileWth">
@@ -72,32 +68,26 @@ const UserProfile = () => {
                     <div className="profileCard"> 
                     <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>02</span> </h3>
                     <div className="mt-4">
-                    <Carousel  responsive={responsive}>
-                    <div className="active">
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                    <div>
-                        <img src={sliderImg} />
-                    </div>
-                     </Carousel>
+                        <div className="nftSlider">
+                            <img className="active" src={Jesus_Escobar} alt="" />
+                            <img className="active" src={Aaron_Grossbaum} alt="" />
+                            <img src={Dennis_Deep} alt="" />
+                            <img src={Estella_Queen} alt="" />
+                            <img src={FredericCrenium} alt="" />
+                            <img src={Grigory_Chekhov} alt="" />
+                            <img src={Hao_Niubi} alt="" />
+                            <img src={Harry_Varan} alt="" />
+                            <img src={IeronimMask} alt="" />
+                            <img src={Joe_Zealot} alt="" />
+                            <img src={Pepe_Chester} alt="" />
+                            <img src={Rocinha} alt="" />
+                            <img src={Steven_Void} alt="" />
+                            <img src={sinoda_cloud} alt="" />
+                            <img src={Vito_kasso} alt="" />
+                            <img src={Vanilla} alt="" />
+
+                        </div>
+                    
                      </div>
                     </div>
                 </div>

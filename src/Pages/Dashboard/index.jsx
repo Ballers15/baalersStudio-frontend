@@ -592,19 +592,26 @@ const Dashboard = () => {
                                   </b>
                                 </p>
                               </div>
-
-                              <div className="thirdPageBtn">
+                              <div className="poolBtn text-center">
+                                        <div className="playBtn">
+                                           <Link to='/lottery'><span></span> Lottery Pool</Link>
+                                        </div>
+                                        <div className="shareBtn newBtn">
+                                           <Link to='/reward'> <span></span> Reward Pool</Link>
+                                        </div>
+                                    </div>
+                              {/* <div className="thirdPageBtn">
                               <div className="d-md-flex align-items-center">
                                 <div className="playBtn">
                                 <Link to='/lottery'><span></span> Lottery Pool</Link>
                                 </div>
-                                <div className="shareBtn">
-                                <Link to='/reward'> Reward Pool</Link>
+                                <div className="shareBtn newBtn">
+                                <Link to='/reward'> <span></span>  Reward Pool</Link>
                                 </div>
                               </div>
 
 
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                           <p className="secondText">

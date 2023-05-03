@@ -1,6 +1,22 @@
 .mt-9{
     margin-top: 9rem !important;
 }
+
+.nftSlider::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+  }
+  
+  .nftSlider::-webkit-scrollbar-track {
+    background: #170137;
+    border-radius: 5px;
+  }
+  
+  .nftSlider::-webkit-scrollbar-thumb {
+    background-color: #7A65A0;
+    border-radius: 5px;
+    /* border: 3px solid #FEAF2E; */
+  }
 .profileWth{
     width: 88%;
     margin: auto;
@@ -69,15 +85,7 @@ p.amount{
     font-weight: 400;
     font-size: 42px;
     line-height: 89%;
-}
-.profileCard .react-multi-carousel-list .active img{
-    filter: blur(0);
-}
-.profileCard .react-multi-carousel-list img{
-    width: 100%;
-    padding: 10px;
-    filter: blur(5px);
-}
+} 
 .profileImage{    
     border: 3px solid #FFFFFF; 
     border-radius: 50%;
@@ -86,6 +94,21 @@ p.amount{
     width: 95px;
     object-fit: contain;
     margin-right: 15px;
+}
+.nftSlider{
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1.5rem;
+}
+.nftSlider img.active{
+    filter: blur(0);
+}
+ 
+.nftSlider img{    
+    filter: blur(5px);
+    width: 17%;
+    margin-right: 25px;
+    margin-left: 5px;
 }
 @media (max-width: 1500px) {
     .participateName{ 

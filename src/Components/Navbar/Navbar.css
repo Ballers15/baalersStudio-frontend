@@ -77,6 +77,9 @@ button#dropdown-button-dark-example1 {
     border-radius: 30px;
     margin: 10px 0;
 }
+.dropdown-item:focus, .dropdown-item:hover { 
+    background-color: rgb(0 0 0 / 76%);
+}
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 20px; 
@@ -103,6 +106,13 @@ button#dropdown-button-dark-example1 {
     }
 }
 @media (max-width: 480px){
+    .navbar-expand-lg .navbar-nav .nav-link.connectBtn { 
+        padding: 14px 30px;
+        width: 55%;
+    }
+    .navbar-expand-lg .navbar-nav .dropdown-menu{
+        right: inherit;
+    }
     .navbar-expand-lg .navbar-nav .nav-link {
         margin-left: 2px;
         font-size: 15px;
