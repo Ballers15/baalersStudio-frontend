@@ -14,7 +14,7 @@ export default function defineRulesFor(role) {
       break;
 
     case 'USER':
-      can(['about', 'party', 'how-to-play', 'pool', 'balr-token', 'wallet'], 'navbar');
+      can(['about', 'party', 'how-to-play', 'pool', 'balr-token', 'wallet', 'user-profile'], 'navbar');
       can(['redeem now','connect wallet'], 'redeem-btn');
       break;
     

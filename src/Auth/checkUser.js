@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 
@@ -11,6 +11,7 @@ export const CheckUser = ({ children }) => {
   const location = useLocation()
   let strAuth = useSelector(state => state.user.user);
   let auth = JSON.parse(strAuth);
+  const navigate = useNavigate()
 
   if (auth?.user?.role === 'ADMIN') {
     return <Navigate to='/admin-dashboard' state={{ path: location.pathname }} />
@@ -19,7 +20,7 @@ export const CheckUser = ({ children }) => {
     return <Navigate to='/' state={{ path: location.pathname }} />
   } 
   else {
-    // console.log('passed succesfully')
+    // navigate('/login')
   }
 
   return children

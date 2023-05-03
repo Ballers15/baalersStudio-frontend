@@ -121,7 +121,7 @@ useEffect(() => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
                 {/* {_u !== null &&   (<Dropdown.Item disabled>{_u?.user?.userName}{'    '}({_u?.user?.email})</Dropdown.Item>)} */}
-                <Dropdown.Item as={Link} to='/user-profile'><span>View Profile</span></Dropdown.Item>
+                <Can do='user-profile' on='navbar'> <Dropdown.Item as={Link} to='/user-profile'><span>View Profile</span></Dropdown.Item> </Can>
                 <Can do='wallet' on='navbar'> {walletAddress && (<Dropdown.Item  ><span onClick={()=>{handleDisconnectWallet()}}>Disconnect Wallet</span></Dropdown.Item>)} </Can>
                 {_u === null ?   (<Dropdown.Item as={Link} to='/login'>Login</Dropdown.Item>) : (<Dropdown.Item onClick={() => { handleLogout() }}>Logout</Dropdown.Item>)}
                 </Dropdown.Menu>

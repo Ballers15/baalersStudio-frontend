@@ -97,3 +97,30 @@ export function getUserWalletDetails(data){
 export function updateUserStatus(data) {
   return (axiosInstance.patch('users/v1/admin/update/users/status',data).then(res => res.data))
 }
+
+/**
+ * 
+ * @param data Object | wallet address 
+ * @returns pools count for wallet address
+ */
+export function getPoolsParticipated(data) {
+  return (axiosInstance.get('user/v1/count/pool/participated',{params: data}).then(res => res.data))
+}
+
+/**
+ * 
+ * @param data Object | wallet address 
+ * @returns 17 Nft array with exists attribute 
+ */
+export function getUserNft(data) {
+  return (axiosInstance.get('users/v1/check/nfts',{params: data}).then(res => res.data))
+}
+
+/**
+ * 
+ * @param data Object | wallet address 
+ * @returns 
+ */
+export function getTokenBalance(data) {
+  return (axiosInstance.get('users/v1/token/balance',{params: data}).then(res => res.data))
+}
