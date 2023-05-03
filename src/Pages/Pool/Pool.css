@@ -55,6 +55,72 @@
   .pool .thirdSlide {
     height: 61vh; 
 }
+ 
+.shareBtn.newBtn {
+    position: relative;
+    margin-top: 2rem;
+    padding: 0;
+    margin-left: 8rem;
+}
+.shareBtn.newBtn a{
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+    background: #ECE8E1;
+    letter-spacing: 2px;
+    padding: 1rem 2.68rem 0.85rem;
+    color: #121B26 !important;
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109.84%;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    white-space: nowrap;     
+}
+.shareBtn.newBtn a::before, .shareBtn.newBtn a::after, .shareBtn.newBtn a span::before,
+ .shareBtn.newBtn a span::after{
+    content: '';
+    position: absolute;
+    width: 96px;
+    height: 45px;
+    background: transparent;
+    /* transition: all 1s ease; */
+    margin: -4px;
+    /* transition: all .25s ease-out; */
+    /* -webkit-mix-blend-mode: hue; */
+}
+
+.shareBtn.newBtn a::before{
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a:hover::before, .shareBtn.newBtn a:hover::after, .shareBtn.newBtn a:hover span::before, 
+.shareBtn.newBtn a:hover span::after {
+    width: 82px;
+    transform: scale(1.25);
+}
+
 @media (min-width: 1750px){
     .pool .secondText {
         left: 0;
@@ -70,12 +136,23 @@
     }
 }
 @media (min-width: 2000px){
+    .shareBtn.newBtn a {
+        padding: 1.5rem 3.68rem 1.25rem;
+        font-size: 26px;
+    }
     .pool .thirdSlide .sCaption {
         width: 50%;
     }
 }
 
 @media (max-width: 1500px){
+    .shareBtn.newBtn {
+        margin-left: 0;
+    }
+    .shareBtn.newBtn a{     
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 18px;
+        line-height: 100%;}
     .pool .secondText {
         left: 2rem;
         /* width: 14%; */
@@ -86,9 +163,25 @@
         bottom: 0;
     }
 }
+
+@media (max-width: 1300px){
+    .shareBtn.newBtn { 
+        right: -39px;
+    }
+    .shareBtn.newBtn a {
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 16px;
+    }
+}
 @media (min-width:1200px) and (max-width: 1281px){
     .pool .poolBtn {
         width: 78%;
+    }
+}
+@media (max-width: 1182px){
+    .playBtn a { 
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 16px;
     }
 }
 @media (max-width: 1024px){
@@ -117,6 +210,10 @@
     }
 }
 @media (max-width: 480px){
+    .shareBtn.newBtn a::before, .shareBtn.newBtn a::after, .shareBtn.newBtn a span::before, 
+    .shareBtn.newBtn a span::after {
+        width: 60px;
+    }
     .pool .thirdSlide .sCaption{
         height: 100%;
     }
@@ -130,6 +227,9 @@
     .pool .thirdSlide {
         height: 65vh;
         width: 84%;
+    }
+    .shareBtn.newBtn { 
+        width: 54%;
     }
     .pool .secondText {
         left: -2rem;

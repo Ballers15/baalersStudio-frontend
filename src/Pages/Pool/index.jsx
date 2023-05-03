@@ -78,8 +78,8 @@ const Pool = () => {
                                         <div className="playBtn">
                                            <Link to='/lottery'><span></span> Lottery Pool</Link>
                                         </div>
-                                        <div className="shareBtn">
-                                           <Link to='/reward'> Reward Pool</Link>
+                                        <div className="shareBtn newBtn">
+                                           <Link to='/reward'> <span></span> Reward Pool</Link>
                                         </div>
                                     </div>
                                    
