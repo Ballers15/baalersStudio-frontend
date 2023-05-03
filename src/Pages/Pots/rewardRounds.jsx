@@ -55,7 +55,9 @@ const RewardRounds = (props) => {
       centerMode: true,
       variableWidth: true, 
       nextArrow: <SampleNextArrow buttonStatus={buttonStatus}/>,
-      prevArrow: <SamplePrevArrow />
+      prevArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>,
+      rtl: true,
+      initialSlide: prevRoundsLength-1
     };
   
    /**
@@ -63,7 +65,7 @@ const RewardRounds = (props) => {
    * @param current | active slide index
    */
   const handleSlideChange = (current) => {
-    // console.log("current",current);
+      current=prevRoundsLength-current-1
       setCurrentSlide(current)
       setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
       setRewardRoundIndex(current)
@@ -149,6 +151,8 @@ const RewardRounds = (props) => {
     * Get array of previous rounds
     */
     const getPreviousRounds = async () => {
+      setPrevRounds({})
+      setPrevRoundsLength(0)
       let dataToSend = {
         walletAddress: walletAddress,
     }
@@ -164,9 +168,10 @@ const RewardRounds = (props) => {
             setPrevRounds(round?.data)
             setPrevRoundsLength(round?.data?.length)
             setRewardPrevRoundsLength(round?.data?.length)
+            let lastIndex = round?.data?.length-1
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
-            setParticipated(round?.data[0]?.userRes?.participated)
-            setClaimed(round?.data[0]?.userRes?.claimed)
+            setParticipated(round?.data[lastIndex]?.userRes?.participated)
+            setClaimed(round?.data[lastIndex]?.userRes?.claimed)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
             setPotId(round?.data[0]?._id)
@@ -279,7 +284,7 @@ return(
                                 <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
-                                        <h3>Round {prevRoundsLength-index} </h3>
+                                        <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                        {round?.potUserDetails?.length ? <><p className="winHead">Winners <span></span> </p> 

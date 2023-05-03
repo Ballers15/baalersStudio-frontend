@@ -49,10 +49,10 @@ const PotPage = () => {
     const [reload, setReload] = useState(false);
     const [lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails] = useState({})
     const [lotteryPrevRoundsLength, setLotteryPrevRoundsLength] = useState(0)
-    const [lotteryRoundIndex, setLotteryRoundIndex] = useState(null)
+    const [lotteryRoundIndex, setLotteryRoundIndex] = useState(0)
     const [rewardCurrentRoundDetails, setRewardCurrentRoundDetails] = useState({})
     const [rewardPrevRoundsLength, setRewardPrevRoundsLength] = useState(0)
-    const [rewardRoundIndex, setRewardRoundIndex] = useState(null)
+    const [rewardRoundIndex, setRewardRoundIndex] = useState(0)
 
     const [countdownTime, setCountdownTime]= useState(
        {
@@ -115,11 +115,17 @@ const PotPage = () => {
         }
     },[expiryTime]);
 
+    useEffect(()=> {
+        if(expiryTime === '' && lotteryPrevRoundsLength){
+            setLotteryRoundIndex(lotteryPrevRoundsLength-1)
+        }
+        if(expiryTime === '' && rewardPrevRoundsLength){
+            setRewardRoundIndex(rewardPrevRoundsLength-1)
+        }
+    },[rewardPrevRoundsLength,lotteryPrevRoundsLength,expiryTime])
 
 
-
-
-    
+   
 return(
     <>
 
@@ -209,30 +215,14 @@ return(
                 <LeaderBoardRibbon/>
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload} lotteryCurrentRoundDetails={lotteryCurrentRoundDetails} 
                 setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} lotteryPrevRoundsLength={lotteryPrevRoundsLength} 
-                setLotteryPrevRoundsLength={setLotteryPrevRoundsLength} lotteryRoundIndex={lotteryRoundIndex} setLotteryRoundIndex={setLotteryRoundIndex} />}
+                setLotteryPrevRoundsLength={setLotteryPrevRoundsLength} lotteryRoundIndex={lotteryRoundIndex} setLotteryRoundIndex={setLotteryRoundIndex} 
+                expiryTime={expiryTime} />}
 
                {potType==='REWARDPOT' && <LeaderBoardReward reload={reload} rewardCurrentRoundDetails={rewardCurrentRoundDetails} 
                setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} rewardPrevRoundsLength={rewardPrevRoundsLength} 
-               setRewardPrevRoundsLength={setRewardPrevRoundsLength} rewardRoundIndex={rewardRoundIndex} setRewardRoundIndex={setRewardRoundIndex} />}
+               setRewardPrevRoundsLength={setRewardPrevRoundsLength} rewardRoundIndex={rewardRoundIndex} setRewardRoundIndex={setRewardRoundIndex} 
+               expiryTime={expiryTime}/>}
         </div>
-
-            {/* <div className="container"> 
-                <div className="row">
-                    <div className="col-sm-6">
-                    <input className="searchTab"
-                        type="search"
-                        placeholder="Search by name"  />
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="d-flex justify-content-end">
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                        <div className="borderPink">#59</div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                        <div className="borderPink angleIcon"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
 
         </div>
         {isLoading ? <ApiLoader /> : null} 

@@ -33,11 +33,10 @@ const ActiveRewardPot = (props) => {
     useEffect(() => {
         const element = document.getElementById("leaderboard");
         if(showRedeemPopup === true){
-        setTimeout(() => {
-        setShowRedeemPopup(false)
-        setRewardCurrentRoundDetails({})
-        setRewardRoundIndex()
-        element?.scrollIntoView();
+            setRewardCurrentRoundDetails({})
+            setTimeout(() => {
+                setShowRedeemPopup(false)
+                element?.scrollIntoView();
         }, 2000);
         }
     }, [showRedeemPopup])
@@ -231,7 +230,7 @@ const ActiveRewardPot = (props) => {
                                         :<p>Deal Expired</p>}
                                 </div>
 
-                                <p className="undColor">Remaining</p>
+                                {expiryTime !=='' && <p className="undColor">Remaining</p>}
                         
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">

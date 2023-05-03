@@ -9,15 +9,16 @@ import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const LeaderBoardLottery = (props) => {
-    const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex} = props;
+    const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex, expiryTime} = props;
     const dispatch = useDispatch()
     const [leaderBoardDetails,setLeaderBoardDetails] = useState({})
     const [leaderSearch,setLeaderSearch]  = useState('')
-
-
+    let prevBtn = document.getElementById('LeaderPrevBtn')
+    let nextBtn = document.getElementById('LeaderNextBtn')
+    let activePotBtn = document.getElementById('LeaderActivePotBtn')
+ 
     useEffect(() => {
-    // console.log('index 2 de', lotteryRoundIndex, 'id',lotteryCurrentRoundDetails._id)
-    getLotteryLeaderBoard()
+        getLotteryLeaderBoard()
     }, [lotteryCurrentRoundDetails])
 
     // useEffect(() => {
@@ -28,6 +29,26 @@ const LeaderBoardLottery = (props) => {
         getLotteryLeaderBoard(leaderSearch);
     },[reload])
 
+    useEffect(() => {
+    if(lotteryRoundIndex) {
+        // previous button
+      if(lotteryRoundIndex === 0){
+        prevBtn.classList.add('disabled')
+      }
+      else{
+        prevBtn.classList.remove('disabled')
+      }
+      //next button
+      if(lotteryRoundIndex === lotteryPrevRoundsLength-1){
+        nextBtn.classList.add('disabled')
+      }
+      else{
+        nextBtn.classList.remove('disabled')
+      }
+    //   if(expiryTime !)
+    }
+    }, [lotteryRoundIndex])
+    
     /**
      * Get leaderboard data of active pot
      * @param data String | Search input (username)
@@ -91,6 +112,20 @@ const LeaderBoardLottery = (props) => {
     }
 
     /**
+         * Handle go to active pot button
+         */
+    const handleActiveIndex = () => {
+        if(expiryTime !==''){
+            setLotteryCurrentRoundDetails({})
+            setLotteryRoundIndex()
+        }
+        else{
+            if(lotteryRoundIndex !== lotteryPrevRoundsLength-1)
+               setLotteryRoundIndex(lotteryPrevRoundsLength-1)
+        }
+    }
+
+    /**
     * Format large number
     * @param value Number | large number > 10^10
     * @returns formatted number
@@ -131,18 +166,18 @@ return(
                     </div>
                     <div className="col-sm-8">
                         <div className="d-flex justify-content-end">
-                        <div className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div id='LeaderPrevBtn' className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                           <div className="borderPink">#
                             <input
                             type='number'
                             onChange={(e)=>{handleIndexChange(e)}}
-                            min='1'
+                            min='0'
                             max={lotteryPrevRoundsLength}
-                            value={lotteryRoundIndex === null ? ('') : (lotteryPrevRoundsLength - lotteryRoundIndex)}
+                            value={lotteryRoundIndex && (lotteryRoundIndex)}
                             />
                             </div>
-                        <div className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                        <div className="borderPink angleIcon" onClick={()=>{setLotteryCurrentRoundDetails({}); setLotteryRoundIndex(null); }}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        <div id='LeaderNextBtn'  className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div id='LeaderActivePotBtn' className="borderPink angleIcon"  onClick={()=>{handleActiveIndex()}}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>

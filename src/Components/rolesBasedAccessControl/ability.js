@@ -19,7 +19,7 @@ export default function defineRulesFor(role) {
       break;
     
      default:
-      can(['about', 'party', 'how-to-play', 'pool', 'balr-token'], 'navbar');
+      can(['about', 'party', 'how-to-play', 'pool', 'balr-token', 'wallet'], 'navbar');
       can(['login'], 'redeem-btn');
       break;
   }

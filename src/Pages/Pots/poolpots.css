@@ -100,6 +100,10 @@ p{font-family: 'Inter', sans-serif;}
     background-size: 35%;
 }
 
+.disabled{
+  cursor: no-drop !important; 
+}
+
 a.disabled{
     pointer-events: none; 
   cursor: no-drop;

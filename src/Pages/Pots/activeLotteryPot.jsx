@@ -31,13 +31,12 @@ const ActiveLotteryPot = (props) => {
     }, [])
 
     useEffect(() => {
-        if(showRedeemPopup === true){
         const element = document.getElementById("leaderboard");
-        setTimeout(() => {
-        setShowRedeemPopup(false)
-        setLotteryRoundIndex();
-        setLotteryCurrentRoundDetails({})
-        element?.scrollIntoView();
+        if(showRedeemPopup === true){
+            setLotteryCurrentRoundDetails({})
+            setTimeout(() => {
+                setShowRedeemPopup(false)
+                element?.scrollIntoView();
         }, 2000);
         }
     }, [showRedeemPopup])
@@ -226,7 +225,7 @@ const ActiveLotteryPot = (props) => {
                                         :<p>Deal Expired</p>}
                                 </div>
 
-                                <p className="undColor">Remaining</p>
+                                {expiryTime !== '' && <p className="undColor">Remaining</p>}
 
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">

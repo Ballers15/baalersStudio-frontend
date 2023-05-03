@@ -10,17 +10,18 @@ import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions"
 
    
 const LeaderBoardReward = (props) => {
-    const {reload, rewardCurrentRoundDetails, setRewardCurrentRoundDetails, rewardPrevRoundsLength, setRewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex} = props;
+    const {reload, rewardCurrentRoundDetails, setRewardCurrentRoundDetails, rewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex, expiryTime} = props;
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
     const [leaderSearch,setLeaderSearch]  = useState('')
     const dispatch = useDispatch()
-
+    let prevBtn = document.getElementById('LeaderPrevBtn')
+    let nextBtn = document.getElementById('LeaderNextBtn')
+    let activePotBtn = document.getElementById('LeaderActivePotBtn')
 
     useEffect(() => {
         getRewardLeaderBoard()
     }, [rewardCurrentRoundDetails])
 
-    
     // useEffect(() => {
     //     console.log('index 2 in', rewardRoundIndex, 'id',rewardCurrentRoundDetails._id,'len',rewardPrevRoundsLength)
     // }, [rewardRoundIndex])
@@ -28,6 +29,26 @@ const LeaderBoardReward = (props) => {
     useEffect(()=>{
       getRewardLeaderBoard(leaderSearch);
     },[reload])
+
+    useEffect(() => {
+        if(rewardRoundIndex) {
+            // previous button
+          if(rewardRoundIndex === 0){
+            prevBtn.classList.add('disabled')
+          }
+          else{
+            prevBtn.classList.remove('disabled')
+          }
+          //next button
+          if(rewardRoundIndex === rewardPrevRoundsLength-1){
+            nextBtn.classList.add('disabled')
+          }
+          else{
+            nextBtn.classList.remove('disabled')
+          }
+        //   if(expiryTime !)
+        }
+        }, [rewardRoundIndex])
 
     /**
     * Get leaderboard data of active pot
@@ -89,7 +110,19 @@ const LeaderBoardReward = (props) => {
             if(rewardRoundIndex > 0 && rewardRoundIndex <= rewardPrevRoundsLength)
             setRewardRoundIndex(rewardRoundIndex-1)
         }
-    
+        
+        /**
+         * Handle go to active pot button
+         */
+        const handleActiveIndex = () => {
+            if(expiryTime !==''){
+                setRewardCurrentRoundDetails({})
+            }
+            else{
+                if(rewardRoundIndex !== rewardPrevRoundsLength-1)
+                   setRewardRoundIndex(rewardPrevRoundsLength-1)
+            }
+        }
 
     /**
      * Fromat large number
@@ -133,18 +166,18 @@ return (
                     </div>
                     <div className="col-sm-8">
                         <div className="d-flex justify-content-end">
-                        <div className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                        <div id='LeaderPrevBtn' className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                         <div className="borderPink">#
                             <input
                             type='number'
                             onChange={(e)=>{handleIndexChange(e)}}
-                            min='1'
+                            min='0'
                             max={rewardPrevRoundsLength}
-                            value={rewardRoundIndex === null ? ('') : (rewardPrevRoundsLength - rewardRoundIndex)}
+                            value={rewardRoundIndex}
                             />
                             </div>
-                        <div className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                        <div className="borderPink angleIcon" onClick={()=>{setRewardCurrentRoundDetails({}); setRewardRoundIndex(null); }}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                        <div id='LeaderNextBtn'  className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        <div id='LeaderActivePotBtn' className="borderPink angleIcon" onClick={()=>{handleActiveIndex()}}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>

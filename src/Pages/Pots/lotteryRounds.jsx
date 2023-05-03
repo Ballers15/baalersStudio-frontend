@@ -43,7 +43,7 @@ const LotteryRounds = (props) => {
       return (
         <div
           className={className}
-          style={{ ...style, }}
+          style={{ ...style }}
           onClick={onClick}
         ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p></div>
       );
@@ -57,7 +57,9 @@ const LotteryRounds = (props) => {
       centerMode: true,
       variableWidth: true, 
       nextArrow: <SampleNextArrow buttonStatus={buttonStatus} />,
-      prevArrow: <SamplePrevArrow />
+      prevArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>,
+      rtl: true,
+      initialSlide: prevRoundsLength-1
     };
 
     /**
@@ -65,8 +67,7 @@ const LotteryRounds = (props) => {
      * @param current | active slide index
      */
    const handleSlideChange = (current) => {
-    // console.log("current",current);
-      //  const index = current;
+        current=prevRoundsLength-current-1
         setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
         setLotteryRoundIndex(current)
@@ -139,7 +140,7 @@ const LotteryRounds = (props) => {
     },[claimExpiryDate]);
 
     useEffect(()=>{
-      console.log('index',lotteryRoundIndex)
+      // console.log('index',lotteryRoundIndex)
       if(prevRounds.length >= lotteryRoundIndex){
         setLotteryCurrentRoundDetails(prevRounds[lotteryRoundIndex])
       }
@@ -149,6 +150,8 @@ const LotteryRounds = (props) => {
    * Get array of previous rounds
    */
   const getPreviousRounds = async () => {
+    setPrevRounds({})
+    setPrevRoundsLength(0)
     let dataToSend = {
         walletAddress: walletAddress,
     }
@@ -165,10 +168,11 @@ const LotteryRounds = (props) => {
             setPrevRoundsLength(round?.data?.length)
             setLotteryPrevRoundsLength(round?.data?.length)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
-            setUserWon(round?.data[0]?.userRes?.lotteryWon)
-            setParticipated(round?.data[0]?.userRes?.participated)
-            setClaimedNft(round?.data[0]?.userRes?.claimed)
-            setPotId(round?.data[0]?._id)
+            let lastIndex = round?.data?.length-1
+            setUserWon(round?.data[lastIndex]?.userRes?.lotteryWon)
+            setParticipated(round?.data[lastIndex]?.userRes?.participated)
+            setClaimedNft(round?.data[lastIndex]?.userRes?.claimed)
+            setPotId(round?.data[lastIndex]?._id)
           }
         } catch (error) {
           toast.dismiss();
@@ -282,7 +286,7 @@ return(
                                 <div className="d-md-flex">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
-                                        <h3>Round {prevRoundsLength-index} </h3>
+                                        <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                                           month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
                                         {round?.potUserDetails && round?.userDetails ? <><p className="winHead">Winners <span></span> </p> 
@@ -306,7 +310,7 @@ return(
                         <div className="playBtn">
                         {userWon === true ? 
                         <>{(claimExpiryDate !== '') && (claimedNft === false)  && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
-                        {(claimExpiryDate !== '') && (claimedNft === true) && (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {(claimedNft === true) && (<a className="disabled"><span></span>Already CLAIMED</a>)}
                         {(claimExpiryDate === '') && claimedNft === false && (<a className="disabled" ><span></span> CLAIM EXPIRED</a>) } </> :
                        <>{participated === true && (<a className="disabled"><span></span> You have not won !</a>) }
                         {participated === false && (<a className="disabled"><span></span> You have not participated !</a>) }</>
