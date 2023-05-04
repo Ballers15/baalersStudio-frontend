@@ -58,6 +58,7 @@ const UserProfile = () => {
     },[nftData])
 
     useEffect(()=>{
+        /** Sort new array on basis of nft exists or not */
         nftExist.sort((a, b) => {
             if (a.exists && !b.exists) {
               return -1; // a comes before b
@@ -120,7 +121,9 @@ const UserProfile = () => {
         }
     }
 
-
+    /**
+     * get token amount from wallet address
+     */
     const tokenBalance = async () => {
         let dataToSend = {
             walletAddress: walletAddress
@@ -143,7 +146,10 @@ const UserProfile = () => {
         }
     }
 
-
+    /**
+     * format token balance in K for 1000 and M for million
+     * @param num Number | token balance
+     */
     const formatNumber = (num) => {
         let newNum = 0;
 
@@ -159,6 +165,9 @@ const UserProfile = () => {
         setTokenBal(newNum)
     }
 
+    /**
+     * check which nft exists and store it in a new array with exists attirbute for sorting
+     */
     const activeNft = () => {
         let count = 0;
         setNftCount(0);
