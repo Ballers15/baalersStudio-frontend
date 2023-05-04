@@ -1,53 +1,43 @@
 import React, { useEffect } from "react";
 import './User.css' 
 import { useState } from "react";
-import { useAuth } from '../../Auth/authProvider';
-import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
 import ApiLoader from "../../Components/apiLoader";
 import viewProfileBg from "../../Assest/img/viewProfileBg.png"
 import viewProfileBgMob from "../../Assest/img/viewProfileBgMob.png"
 import mafiaBoss from "../../Assest/img/mafiaBoss.png"
 import ballerCoin from "../../Assest/img/ballerCoin.webp" 
-import userProfile from "../../Assest/img/userProfile.png"  
-import Aaron_Grossbaum from "../../Assest/img/nftImages/Aaron_Grossbaum.png" 
-import Dennis_Deep from "../../Assest/img/nftImages/Dennis_Deep.png" 
-import Estella_Queen from "../../Assest/img/nftImages/Estella_Queen.png" 
-import Frederic_Crenium from "../../Assest/img/nftImages/Frederic_Crenium.png" 
-import Grigory_Chekhov from "../../Assest/img/nftImages/Grigory_Chekhov.png" 
-import Hao_Niubi from "../../Assest/img/nftImages/Hao_Niubi.png" 
-import Harry_Varan from "../../Assest/img/nftImages/Harry_Varan.png" 
-import IeronimMask from "../../Assest/img/nftImages/Ieronim_Mask.png" 
-import Jesus_Escobar from "../../Assest/img/nftImages/Jesus_Escobar.png" 
-import Joe_Zealot from "../../Assest/img/nftImages/Joe_Zealot.png" 
-import Pepe_Chester from "../../Assest/img/nftImages/Pepe_Chester.png" 
-import Rocinha from "../../Assest/img/nftImages/Rocinha.png" 
-import Steven_Void from "../../Assest/img/nftImages/Steven_Void.png" 
-import sinoda_cloud from "../../Assest/img/nftImages/sinoda_cloud.png" 
-import Vito_kasso from "../../Assest/img/nftImages/Vito_kasso.png" 
-import Vanilla from "../../Assest/img/nftImages/Vanilla.png" 
+import userProfile from "../../Assest/img/userProfile.png"   
 import { getPoolsParticipated, getTokenBalance, getUserNft } from "../../Services/User";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { toast } from "react-toastify";
+import { nftArray } from "../../Environments/environment";
 
 
 const UserProfile = () => {
 
     const walletAddress = useSelector(state => state.wallet.walletAddress)
+    const isLoading = useSelector(state => state.loading.isLoading)
     let strAuth = useSelector(state => state.user.user);
     let _u = JSON.parse(strAuth);
     const dispatch = useDispatch();
-    const [poolsCount, setPoolsCount] = useState({})
-    const [nftCount, setNftCount] = useState({})
+    const [rewardPoolCount, setRewardPoolCount] = useState(0)
+    const [lotteryPoolCount, setLotteryPoolCount] = useState(0)
+    const [nftData, setNftData] = useState(0)
     const [tokenBal, setTokenBal] = useState(0)
+    const [nftCount, setNftCount] = useState(0)
+    const [nftExist, setNftExist] = useState([])
 
     useEffect(() => {
-        console.log(_u?.user)
         if(walletAddress){
       poolCount()
-      UserNftCount()
+      UserNft()
       tokenBalance()
+    }
+    else{
+        setTokenBal(0)
+        setLotteryPoolCount(0)
+        setRewardPoolCount(0)
     }
     }, [walletAddress])
 
@@ -56,6 +46,29 @@ const UserProfile = () => {
             formatNumber(tokenBal)
         }
     },[tokenBal])
+
+    useEffect(()=>{
+        if(nftData.length){
+            activeNft();
+        }
+        else{
+            setNftCount(0);
+            setNftExist([])
+        }
+    },[nftData])
+
+    useEffect(()=>{
+        nftExist.sort((a, b) => {
+            if (a.exists && !b.exists) {
+              return -1; // a comes before b
+            } else if (!a.exists && b.exists) {
+              return 1; // b comes before a
+            } else {
+              return 0; // no change in order
+            }
+          });
+    },[nftExist])
+
 
     /**
      * Get reward and lottery pool counts
@@ -72,7 +85,8 @@ const UserProfile = () => {
             toast.dismiss();
             toast.error(pools?.message||'Something went worng');
         } else {
-            setPoolsCount(pools?.data)
+            setRewardPoolCount(pools?.data?.rewardPools)
+            setLotteryPoolCount(pools?.data?.lotteryPools)
           }
         } catch (error) {
             toast.dismiss();
@@ -84,7 +98,7 @@ const UserProfile = () => {
     /**
      * Get nft's that exists in users wallet address
      */
-    const UserNftCount = async () => {
+    const UserNft = async () => {
         let dataToSend = {
             walletAddress: walletAddress
         };
@@ -97,7 +111,7 @@ const UserProfile = () => {
             toast.dismiss();
             toast.error(nft?.message||'Something went worng');
         } else {
-            setNftCount(nft?.data?.data)
+            setNftData(nft?.data?.data)
           }
         } catch (error) {
             toast.dismiss();
@@ -144,9 +158,35 @@ const UserProfile = () => {
         }
         setTokenBal(newNum)
     }
-     
+
+    const activeNft = () => {
+        let count = 0;
+        setNftCount(0);
+        nftExist.splice(0,nftExist.length)
+        dispatch(setLoadingTrue());
+        for(let i=0;i<17;i++){
+           let checkNFT = nftArray[i];
+           let exist = false;
+
+        for(let j=0;j<17;j++){
+           let ifExist = nftData[j];
+           if( checkNFT.tokenId === ifExist.tokenId && ifExist.exists === true){
+                exist = true;   
+                count++;
+                }
+            }
+            checkNFT.exists = exist;
+            setNftExist(nftExist => [...nftExist, checkNFT])
+
+        }
+        setNftCount(count);
+        dispatch(setLoadingFalse());
+    }
+
+    
+      
     return(
-        <>
+        
             <div className="text-center mt-9 profileWth">
                 <div className="row">
                     <div className="col-sm-12">
@@ -156,7 +196,6 @@ const UserProfile = () => {
                             <source media="(max-width: 500px)" srcSet={viewProfileBgMob} />
                             <img src={viewProfileBg} width="382" height="382" alt="background image" className="imgRadius w-100"/>
                             </picture>
-                            {/* <img src={viewProfileBg} alt="" className="w-100" /> */}
                                 <div className="profileText">
                                 <div className="container">
                                     <div className="row">
@@ -177,30 +216,16 @@ const UserProfile = () => {
                                 </div>
                         </div>
                     </div>
-                </div>
+                </div>  
                <div className="row">
                 <div className="col-sm-8 col-xl-9">
                     <div className="profileCard"> 
-                    <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>02</span> </h3>
+                    <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>{nftCount}</span> </h3>
                     <div className="mt-4">
                         <div className="nftSlider">
-                            <img className="active" src={Jesus_Escobar} alt="" />
-                            <img className="active" src={Aaron_Grossbaum} alt="" />
-                            <img src={Dennis_Deep} alt="" />
-                            <img src={Estella_Queen} alt="" />
-                            <img src={Frederic_Crenium} alt="" />
-                            <img src={Grigory_Chekhov} alt="" />
-                            <img src={Hao_Niubi} alt="" />
-                            <img src={Harry_Varan} alt="" />
-                            <img src={IeronimMask} alt="" />
-                            <img src={Joe_Zealot} alt="" />
-                            <img src={Pepe_Chester} alt="" />
-                            <img src={Rocinha} alt="" />
-                            <img src={Steven_Void} alt="" />
-                            <img src={sinoda_cloud} alt="" />
-                            <img src={Vito_kasso} alt="" />
-                            <img src={Vanilla} alt="" />
-
+                            {nftExist.length && nftExist.map((nft)=>(
+                                <img key={nft?.tokenId} className={nft?.exists ? "active" : ''}  src={require(`../../Assest/img/nftImages/${nft.imageName}`)} alt={nft?.nftName} />
+                            ))}
                         </div>
                     
                      </div>
@@ -221,7 +246,7 @@ const UserProfile = () => {
                             <div className="participateName">REWARD POOLS :</div>
                         </div>
                         <div className="col-4 col-sm-4">
-                            <div className="participateNum">{poolsCount?.rewardPools}</div>
+                            <div className="participateNum">{rewardPoolCount}</div>
                         </div>
                     </div>
                     <div className="row align-items-center mt-3">
@@ -229,15 +254,14 @@ const UserProfile = () => {
                             <div className="participateName">LOTTERY POOLS :</div>
                         </div>
                         <div className="col-4 col-sm-4">
-                            <div  className="participateNum">{poolsCount?.lotteryPools}</div>
+                            <div  className="participateNum">{lotteryPoolCount}</div>
                         </div>
                     </div>
                     </div>
                 </div>
                </div>
-
+               {isLoading ? <ApiLoader /> : null} 
             </div>
-            </>
         )
 }
 

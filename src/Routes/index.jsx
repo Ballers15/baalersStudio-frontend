@@ -40,7 +40,8 @@ const NavigationRouter = () => {
     let _u = JSON.parse(strAuth)
     let r = _u?.user?.role
     setRole(r)
-  }, [role])
+  }, [role,strAuth])
+
   return (
     <>
       <BrowserRouter>
