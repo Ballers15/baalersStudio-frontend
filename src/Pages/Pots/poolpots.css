@@ -140,6 +140,10 @@ a.disabled{
 .rewardBox{
     width: 76%;
 }
+.table-responsive {
+  height: 59vh;
+}
+
 .lotteryPool table th{
     font-weight: 500;
     border: 0;
@@ -159,9 +163,6 @@ a.disabled{
     color: #FF80FF
 }
 .searchBox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 4rem;
     margin-bottom: 3rem;}
 .searchBox h4{
@@ -554,11 +555,11 @@ a.disabled{
     width: 50px;
   }
 .activeImg{
-  position: absolute; 
-  left: 0;
-  right: 3rem;
-  margin: auto;
-  top: -52px;
+    position: absolute;
+    left: 0;
+    right: 0.25rem;
+    margin: auto;
+    top: 15px;
 }
 .activeImg img{
   width: 42%;
@@ -595,15 +596,16 @@ p.noRoundText {
 }
 .earnText .sniff{
   font-weight: 400;
-font-size: 32px;
-line-height: 22px;
-margin-top: 9.5px;
+  font-size: 32px;
+  line-height: 22px;
+  margin-top: 9.5px;
   margin-left: 1rem;
   margin-right: 1rem;
   text-shadow: .5px .5px #fff;
 }
 .earnText .sniff div:last-child{
-  font-size: 15px;
+  font-size: 18px;
+  margin-top: 10px;
 } 
 .borderPink {
   padding-top: 5px;
@@ -656,6 +658,11 @@ text-align: left;
 padding: 5px 22px 0;
 font-weight: 400px;
 }
+
+span.leaderboardInput {
+  font-size: 18px;
+}
+
 .angleIcon {
   width: 52px;
   height: 52px;
@@ -766,6 +773,9 @@ font-weight: 400px;
     }
 }
 @media (max-width: 480px){
+  .table-responsive {
+    height: 69vh;
+}
   .backBtn { 
     top: 7rem;
     left: 1rem;

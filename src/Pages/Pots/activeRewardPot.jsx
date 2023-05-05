@@ -16,7 +16,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveRewardPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setRewardRoundIndex, setRewardCurrentRoundDetails } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious,  setRewardCurrentRoundDetails } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -25,6 +25,7 @@ const ActiveRewardPot = (props) => {
     const [showRedeemPopup , setShowRedeemPopup] = useState(false)
     const navigate = useNavigate()
     const [potDetails,setPotDetails] = useState({})
+    const [rewardAmount, setRewardAmount] = useState(0)
 
     useEffect(() => {
         getActivePotDetails();
@@ -59,6 +60,8 @@ const ActiveRewardPot = (props) => {
                 // toast.success('Claim Status Updated Succesfully');
                 setPotDetails(pot?.data.length?pot.data[0]:'');
                 setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
+                let amount = pot?.data[0]?.rewardTokenQuantity;
+                setRewardAmount(amount)
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
@@ -161,7 +164,7 @@ const ActiveRewardPot = (props) => {
 
     return(
         <>
-               <Modal
+            <Modal
             show={redeemModal} 
             onHide={handleCloseModal} 
             size="lg"        
@@ -208,7 +211,7 @@ const ActiveRewardPot = (props) => {
                                 <div className='earnText'>
                                     <div>Earn</div>
                                     <div className='sniff'>
-                                        <div>1000 BALR</div>  
+                                        <div>{rewardAmount} BALR</div>  
                                         <div></div>
                                     </div>
                                     <div> Tokens  </div>

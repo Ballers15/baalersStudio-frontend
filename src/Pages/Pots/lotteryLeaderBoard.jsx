@@ -5,17 +5,19 @@ import { leaderBoardLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
 const LeaderBoardLottery = (props) => {
+    const walletAddress = useSelector(state => state.wallet.walletAddress)
+    const user = useSelector(state => state.user.user)
+    const _u = JSON.parse(user)
     const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex, expiryTime} = props;
     const dispatch = useDispatch()
     const [leaderBoardDetails,setLeaderBoardDetails] = useState({})
     const [leaderSearch,setLeaderSearch]  = useState('')
     let prevBtn = document.getElementById('LeaderPrevBtn')
     let nextBtn = document.getElementById('LeaderNextBtn')
-    let activePotBtn = document.getElementById('LeaderActivePotBtn')
  
     useEffect(() => {
         getLotteryLeaderBoard()
@@ -45,6 +47,7 @@ const LeaderBoardLottery = (props) => {
       else{
         nextBtn.classList.remove('disabled')
       }
+      
     //   if(expiryTime !)
     }
     }, [lotteryRoundIndex])
@@ -59,13 +62,17 @@ const LeaderBoardLottery = (props) => {
         if(lotteryCurrentRoundDetails){
         dataToSend = {
             search: data,
-            potId: lotteryCurrentRoundDetails._id
+            potId: lotteryCurrentRoundDetails._id,
+            walletAddress: walletAddress,
+            userId: _u?.user?.userId
             }
         }
         else{
             dataToSend = {
                 search: data,
-                potId: ''
+                potId: '',
+                walletAddress: walletAddress,
+                userId: _u?.user?.userId
             }
         }
         dispatch(setLoadingTrue());
@@ -86,14 +93,14 @@ const LeaderBoardLottery = (props) => {
     }
 
     
-    const handleIndexChange = (e) => {
-        if(e.target.value > 0 ){
-        if(e.target.value <= lotteryPrevRoundsLength)
-            setLotteryRoundIndex(e.target.value-1)
-        else
-            setLotteryRoundIndex(lotteryPrevRoundsLength-1)
-        }
-    }
+    // const handleIndexChange = (e) => {
+    //     if(e.target.value > 0 ){
+    //     if(e.target.value <= lotteryPrevRoundsLength)
+    //         setLotteryRoundIndex(e.target.value-1)
+    //     else
+    //         setLotteryRoundIndex(lotteryPrevRoundsLength-1)
+    //     }
+    // }
 
     /**
      * Get next index of leaderboard round
@@ -101,6 +108,9 @@ const LeaderBoardLottery = (props) => {
     const handleNextIndex = () => {
         if(lotteryRoundIndex >= 0 && lotteryRoundIndex+1 < lotteryPrevRoundsLength)
             setLotteryRoundIndex(lotteryRoundIndex+1)
+        else{
+            setLotteryRoundIndex(1)
+        }
     }
 
      /**
@@ -117,7 +127,7 @@ const LeaderBoardLottery = (props) => {
     const handleActiveIndex = () => {
         if(expiryTime !==''){
             setLotteryCurrentRoundDetails({})
-            setLotteryRoundIndex()
+            setLotteryRoundIndex(0)
         }
         else{
             if(lotteryRoundIndex !== lotteryPrevRoundsLength-1)
@@ -142,20 +152,7 @@ const LeaderBoardLottery = (props) => {
     
 return(  
               <div className="">
-             <div className="searchBox">
-                    {/* <h4>Search Leaderboard</h4>
-                    <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getLotteryLeaderBoard();}}>
-                       <Form.Control
-                            type="search"
-                            placeholder="Playername#Tagline"
-                            className="me-2 searchBar"
-                            aria-label="Search"
-                            onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
-                        />
-                        <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                    </Form> */}
-                </div>
-                <div className="container mb-3"> 
+                <div className="searchBox container mb-3"> 
                 <div className="row">
                     <div className="col-sm-6">
                     <input className="searchTab"
@@ -167,14 +164,15 @@ return(
                     <div className="col-sm-6">
                         <div className="d-flex justify-content-end">
                         <div id='LeaderPrevBtn' className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                          <div className="borderPink">#
+                          <div className="borderPink">
                             <input
                             type='number'
-                            onChange={(e)=>{handleIndexChange(e)}}
                             min='0'
                             max={lotteryPrevRoundsLength}
-                            value={lotteryRoundIndex && (lotteryRoundIndex)}
+                            // value={lotteryRoundIndex!==0 && lotteryRoundIndex!=='' && lotteryRoundIndex!==undefined ? (lotteryRoundIndex) : 'Active'}
+                            disabled
                             />
+                            <span className="leaderboardInput">#{lotteryRoundIndex!==0 ? lotteryRoundIndex : 'active'}</span>
                             </div>
                         <div id='LeaderNextBtn'  className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                         <div id='LeaderActivePotBtn' className="borderPink angleIcon"  onClick={()=>{handleActiveIndex()}}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
@@ -198,8 +196,8 @@ return(
 
                 {leaderBoardDetails.length && leaderBoardDetails?.map((User,index)=>{
                     return (
-                    <tr key={User._id} >
-                        <td>{index+1}</td>
+                        <tr key={User._id} className={User?.rank ? "active" : ""}>
+                        <td>{User?.rank ? (User?.rank) : (index+1)}</td>
                         <td>{User?.userId?.userName}</td>
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
                         <td>{User?.walletAddress?.slice(0,5)+'..'+User?.walletAddress?.slice(-5)}</td> 

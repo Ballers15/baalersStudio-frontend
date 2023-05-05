@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Can from "../../Components/rolesBasedAccessControl/Can";
-import { environment } from "../../Environments/environment";
+import { environment, nftArray } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
-import activeOverlay from '../../Assest/img/activeOverlay.png'
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -25,6 +24,7 @@ const ActiveLotteryPot = (props) => {
     const [showRedeemPopup , setShowRedeemPopup] = useState(false)
     const navigate = useNavigate()
     const [potDetails,setPotDetails] = useState({})
+    const [nftDetails, setNftDetails] = useState('')
 
     useEffect(() => {
         getActivePotDetails();
@@ -58,6 +58,9 @@ const ActiveLotteryPot = (props) => {
             } else {
                 // toast.success('Claim Status Updated Succesfully');
                 setPotDetails(pot?.data.length?pot.data[0]:'');
+                let tokenId = (pot.data[0]?.assetDetails?.ticker);
+                let nft = nftArray.find(nft => nft.tokenId === tokenId);
+                setNftDetails(nft)
                 setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
@@ -67,7 +70,6 @@ const ActiveLotteryPot = (props) => {
                 toast.error(error?.response?.data?.message||'Something went worng');
                 dispatch(setLoadingFalse());
             }
-             
         }
 
     /**
@@ -205,8 +207,8 @@ const ActiveLotteryPot = (props) => {
                                 <div className='earnText'>
                                     <div>Earn</div>
                                     <div className='sniff'>
-                                        <div>SNIFFDOG</div> 
-                                        <div> CARTEL</div>  
+                                        <div>{nftDetails?.nftName}</div> 
+                                        <div> {nftDetails?.cityName}</div>  
                                     </div>
                                     <div> NFT</div>
                                 </div>
@@ -239,7 +241,7 @@ const ActiveLotteryPot = (props) => {
                             </div>
                         </div>
                         <div className="col-sm-7 text-center position-relative">
-                            {expiryTime !=='' && <img className='activeImg' src={activeOverlay} />}
+                            {expiryTime !=='' && <img className='activeImg' src={require(`../../Assest/img/curved-nft/curved_${nftDetails.imageName}`)} />}
                             <img src={expiryTime!=='' ? rewardBoxOpen : rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
                         </div>
                     </div>

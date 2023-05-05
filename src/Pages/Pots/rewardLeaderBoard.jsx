@@ -5,11 +5,14 @@ import {  leaderBoardReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 
    
 const LeaderBoardReward = (props) => {
+    const walletAddress = useSelector(state => state.wallet.walletAddress)
+    const user = useSelector(state => state.user.user)
+    const _u = JSON.parse(user)
     const {reload, rewardCurrentRoundDetails, setRewardCurrentRoundDetails, rewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex, expiryTime} = props;
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
     const [leaderSearch,setLeaderSearch]  = useState('')
@@ -31,7 +34,7 @@ const LeaderBoardReward = (props) => {
     },[reload])
 
     useEffect(() => {
-        if(rewardRoundIndex) {
+        if(rewardRoundIndex >= 0 && prevBtn && nextBtn) {
             // previous button
           if(rewardRoundIndex === 0){
             prevBtn.classList.add('disabled')
@@ -60,13 +63,17 @@ const LeaderBoardReward = (props) => {
         if(rewardCurrentRoundDetails){
             dataToSend = {
                 search: data,
-                potId: rewardCurrentRoundDetails._id
+                potId: rewardCurrentRoundDetails._id,
+                walletAddress: walletAddress,
+                userId: _u?.user?.userId
             }
         }
         else{
             dataToSend = {
                 search: data,
-                potId: ''
+                potId: '',
+                walletAddress: walletAddress,
+                userId: _u?.user?.userId
             }
         }
         dispatch(setLoadingTrue());
@@ -140,22 +147,8 @@ const LeaderBoardReward = (props) => {
 
     
 return (  
-              <div className="">
-                <div className="searchBox">
-                    {/*<h4>Search Leaderboard</h4>
-                     <Form className="d-flex position-relative align-items-center" onSubmit={handleSearchUser} onReset={()=>{ getRewardLeaderBoard();}}>
-                       <Form.Control
-                            type="search"
-                            placeholder="Playername#Tagline"
-                            className="me-2 searchBar"
-                            aria-label="Search"
-                            onChange={(e)=>{getRewardLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
-                        />
-                        <Button className="searchIcon" type='submit' ><i className="fa fa-search" aria-hidden="true"></i></Button>
-                    </Form> */}
-                </div>
-                    
-                <div className="container mb-3"> 
+              <div className="">                    
+                <div className="searchBox container mb-3"> 
                 <div className="row">
                     <div className="col-sm-6">
                     <input className="searchTab"
@@ -167,14 +160,14 @@ return (
                     <div className="col-sm-6">
                         <div className="d-flex justify-content-end">
                         <div id='LeaderPrevBtn' className="borderPink angleIcon" onClick={()=>{handlePrevIndex()}}><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                        <div className="borderPink">#
+                        <div className="borderPink">
                             <input
                             type='number'
-                            onChange={(e)=>{handleIndexChange(e)}}
                             min='0'
                             max={rewardPrevRoundsLength}
-                            value={rewardRoundIndex}
+                            disabled
                             />
+                            <span className="leaderboardInput">#{rewardRoundIndex!==0 ? rewardRoundIndex : 'active'}</span>
                             </div>
                         <div id='LeaderNextBtn'  className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                         <div id='LeaderActivePotBtn' className="borderPink angleIcon" onClick={()=>{handleActiveIndex()}}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
@@ -199,8 +192,8 @@ return (
 
                 {leaderBoardDetails.length && leaderBoardDetails?.map((User,index)=>{
                     return (
-                    <tr key={User._id} >
-                        <td>{index+1}</td>
+                    <tr key={User._id} className={User?.rank ? "active" : ""}>
+                        <td>{User?.rank ? (User?.rank) : (index+1)}</td>
                         <td>{(User?.rewardPointsPercentage*10000).toFixed(2)}</td>
                         <td>{User?.userId?.userName}</td>
                         <td>$ {formatNumberDecimal(User?.amount?.$numberDecimal)}</td>
