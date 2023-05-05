@@ -360,7 +360,7 @@ const AdminDashboard = () => {
             </Col>
             <Col md={4}>
             <div className="card">
-              <h4>Total Amount Claimed by NFT</h4>
+              <h4>Total Amount Claimed</h4>
               <div className='dataFont'>
               <div>Amount:<span>{'   '}{potClaimData?.rewardAmountClaimed}</span></div> 
                 <div>NFT:<span>{'   '}{potClaimData?.nftClaimed}</span></div>

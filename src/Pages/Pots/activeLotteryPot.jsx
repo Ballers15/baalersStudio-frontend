@@ -3,6 +3,7 @@ import Can from "../../Components/rolesBasedAccessControl/Can";
 import { environment, nftArray } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
+import rewardBoxExp from '../../Assest/img/rewardBox1.png'
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
@@ -25,10 +26,13 @@ const ActiveLotteryPot = (props) => {
     const navigate = useNavigate()
     const [potDetails,setPotDetails] = useState({})
     const [nftDetails, setNftDetails] = useState('')
+    const currentDateTime = new Date().toISOString()
+    const [potStatus, setPotStatus] = useState('')
+    const [showPotStatus, setShowPotStatus] = useState('')
 
     useEffect(() => {
         getActivePotDetails();
-    }, [])
+    }, [expiryTime])
 
     useEffect(() => {
         const element = document.getElementById("leaderboard");
@@ -41,10 +45,22 @@ const ActiveLotteryPot = (props) => {
         }
     }, [showRedeemPopup])
 
+    useEffect(()=>{
+        setValues()
+
+    },[potStatus])
+
+    
+
     /**
      * Get details of active pot (if any)
      */
         const getActivePotDetails = async () => {
+            let tokenId='';
+            let nft=''
+            let startDateTime=''
+            let dateTime=''
+
             let dataToSend = {
                 potType: 'LOTTERYPOT',
             }
@@ -57,11 +73,21 @@ const ActiveLotteryPot = (props) => {
                 toast.error(pot?.message||'Something went worng');
             } else {
                 // toast.success('Claim Status Updated Succesfully');
-                setPotDetails(pot?.data.length?pot.data[0]:'');
-                let tokenId = (pot.data[0]?.assetDetails?.ticker);
-                let nft = nftArray.find(nft => nft.tokenId === tokenId);
+                setPotDetails(pot?.data[0]!==null ? pot.data[0]:'');
+                tokenId = (pot?.data[0]!==null ? pot.data[0]?.assetDetails?.ticker : '');
+                if(tokenId!=='')
+                nft = nftArray.find(nft => nft.tokenId === tokenId);
                 setNftDetails(nft)
-                setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
+                dateTime = pot?.data[0]!==null?pot.data[0]?.endDate:'';
+                startDateTime = pot?.data[0]!==null?pot.data[0]?.startDate:'';
+                console.log('current',currentDateTime,'satrt ',startDateTime, 'end',dateTime)
+                if(startDateTime!=='' && currentDateTime < startDateTime){
+                    dateTime=startDateTime;
+                    console.log('if')
+                }
+                console.log('expiry',dateTime)
+                setPotStatus(pot?.data[0]!==null ? pot?.data[0].potStatus : '')
+                setExpiryTime(dateTime);
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
@@ -70,6 +96,19 @@ const ActiveLotteryPot = (props) => {
                 toast.error(error?.response?.data?.message||'Something went worng');
                 dispatch(setLoadingFalse());
             }
+        }
+
+        const setValues = () => {
+            console.log(potStatus)
+            if(potStatus!==''){
+                if(potStatus==='ONGOING')
+                    setShowPotStatus('ACTIVE LOTTERY POT')
+                else if (potStatus === 'UPCOMING')
+                    setShowPotStatus('UPCOMING LOTTERY POT')
+                else
+                    setShowPotStatus('LOTTERY POT EXPIRED')
+         }
+            console.log(showPotStatus)
         }
 
     /**
@@ -195,23 +234,23 @@ const ActiveLotteryPot = (props) => {
                 <div className="container">
                     <div className="positionRelative mb-5 headWth mx-auto">
                         <h2 className="heading text-center">
-                        ACTIVE LOTTERY POT
+                        {showPotStatus}
                         </h2>
                         <h2 className="heading2 text-center">
-                        ACTIVE LOTTERY POT
+                        {showPotStatus}
                         </h2>
                     </div>
                     <div className="row">
                         <div className="col-sm-5 my-auto">
                             <div className="text-center">
-                                <div className='earnText'>
+                               {(potStatus === 'ONGOING' || potStatus === 'UPCOMING') && <div className='earnText'>
                                     <div>Earn</div>
                                     <div className='sniff'>
                                         <div>{nftDetails?.nftName}</div> 
                                         <div> {nftDetails?.cityName}</div>  
                                     </div>
-                                    <div> NFT</div>
-                                </div>
+                                    <div>NFT</div>
+                                </div>}
                                 <br></br>
                                 <div>
                                     {expiryTime!=='' ?
@@ -227,22 +266,30 @@ const ActiveLotteryPot = (props) => {
                                         :<p>Deal Expired</p>}
                                 </div>
 
-                                {expiryTime !== '' && <p className="undColor">Remaining</p>}
+                                {potStatus === 'ONGOING' && <p className="undColor">Remaining</p>}
+                                {potStatus === 'UPCOMING' && <p className="undColor">Until Next Draw</p>}
+                                {potStatus !== 'UPCOMING' && potStatus!== 'ONGOING' && <p className="undColor">Wait Until Next Draw</p>}
 
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
-                                    {expiryTime!=='' ?  
+                                    {potStatus === 'ONGOING'  ?  
                                     (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
                                     {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
-                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> login</a> </Can>)}</>) :
-                                    (<a className="disabled"><span></span> POT EXPIRED</a>)}
+                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Register Now</a> </Can>)}</>) :
+                                    (<a ><span></span> NOTIFY ME</a>)}
                                     </div>
                                 </div>                        
                             </div>
                         </div>
                         <div className="col-sm-7 text-center position-relative">
-                            {expiryTime !=='' && <img className='activeImg' src={require(`../../Assest/img/curved-nft/curved_${nftDetails.imageName}`)} />}
-                            <img src={expiryTime!=='' ? rewardBoxOpen : rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                            {/* {expiryTime !=='' && <img className='activeImg' src={require(`../../Assest/img/curved-nft/curved_${nftDetails.imageName}`)} />} */}
+                            {potStatus === 'ONGOING' && 
+                         <> <img className='activeImg' src={require(`../../Assest/img/curved-nft/curved_${nftDetails.imageName}`)} />
+                            <img src={rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" /></>}
+                            {potStatus === 'UPCOMING' && <img src={rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />}
+                            {potStatus !== 'UPCOMING' && potStatus!== 'ONGOING' && <img src={rewardBoxExp} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />}
+
+                                                    
                         </div>
                     </div>
                 </div>

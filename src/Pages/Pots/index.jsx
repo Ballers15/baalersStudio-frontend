@@ -49,10 +49,10 @@ const PotPage = () => {
     const [reload, setReload] = useState(false);
     const [lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails] = useState({})
     const [lotteryPrevRoundsLength, setLotteryPrevRoundsLength] = useState(0)
-    const [lotteryRoundIndex, setLotteryRoundIndex] = useState(0)
+    const [lotteryRoundIndex, setLotteryRoundIndex] = useState(-1)
     const [rewardCurrentRoundDetails, setRewardCurrentRoundDetails] = useState({})
     const [rewardPrevRoundsLength, setRewardPrevRoundsLength] = useState(0)
-    const [rewardRoundIndex, setRewardRoundIndex] = useState(0)
+    const [rewardRoundIndex, setRewardRoundIndex] = useState(-1)
 
     const [countdownTime, setCountdownTime]= useState(
        {

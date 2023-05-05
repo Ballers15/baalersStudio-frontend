@@ -18,6 +18,7 @@ const LeaderBoardLottery = (props) => {
     const [leaderSearch,setLeaderSearch]  = useState('')
     let prevBtn = document.getElementById('LeaderPrevBtn')
     let nextBtn = document.getElementById('LeaderNextBtn')
+    let activeBtn = document.getElementById('LeaderActivePotBtn')
  
     useEffect(() => {
         getLotteryLeaderBoard()
@@ -32,7 +33,14 @@ const LeaderBoardLottery = (props) => {
     },[reload])
 
     useEffect(() => {
-    if(lotteryRoundIndex) {
+
+        if(lotteryRoundIndex === -1 && activeBtn && prevBtn){
+            activeBtn.classList.add('disabled')
+            prevBtn.classList.add('disabled')
+        }
+
+    if(lotteryRoundIndex >= 0 && prevBtn && nextBtn && activeBtn) {
+        activeBtn.classList.remove('disabled')
         // previous button
       if(lotteryRoundIndex === 0){
         prevBtn.classList.add('disabled')
@@ -92,39 +100,27 @@ const LeaderBoardLottery = (props) => {
         }
     }
 
-    
-    // const handleIndexChange = (e) => {
-    //     if(e.target.value > 0 ){
-    //     if(e.target.value <= lotteryPrevRoundsLength)
-    //         setLotteryRoundIndex(e.target.value-1)
-    //     else
-    //         setLotteryRoundIndex(lotteryPrevRoundsLength-1)
-    //     }
-    // }
-
     /**
      * Get next index of leaderboard round
      */
     const handleNextIndex = () => {
-        if(lotteryRoundIndex >= 0 && lotteryRoundIndex+1 < lotteryPrevRoundsLength)
+        if(lotteryRoundIndex >= -1 && lotteryRoundIndex+1 < lotteryPrevRoundsLength)
             setLotteryRoundIndex(lotteryRoundIndex+1)
-        else{
-            setLotteryRoundIndex(1)
-        }
     }
 
      /**
      * Get previous index of leaderboard round
      */
     const handlePrevIndex = () => {
-        if(lotteryRoundIndex > 0 && lotteryRoundIndex <= lotteryPrevRoundsLength)
+        if(lotteryRoundIndex > 0)
             setLotteryRoundIndex(lotteryRoundIndex-1)
     }
 
     /**
-         * Handle go to active pot button
-         */
+    * Handle go to active pot button
+    */
     const handleActiveIndex = () => {
+    if(lotteryRoundIndex !==-1){
         if(expiryTime !==''){
             setLotteryCurrentRoundDetails({})
             setLotteryRoundIndex(0)
@@ -134,6 +130,7 @@ const LeaderBoardLottery = (props) => {
                setLotteryRoundIndex(lotteryPrevRoundsLength-1)
         }
     }
+}
 
     /**
     * Format large number
@@ -169,10 +166,9 @@ return(
                             type='number'
                             min='0'
                             max={lotteryPrevRoundsLength}
-                            // value={lotteryRoundIndex!==0 && lotteryRoundIndex!=='' && lotteryRoundIndex!==undefined ? (lotteryRoundIndex) : 'Active'}
                             disabled
                             />
-                            <span className="leaderboardInput">#{lotteryRoundIndex!==0 ? lotteryRoundIndex : 'active'}</span>
+                            <span className="leaderboardInput">#{lotteryRoundIndex!==-1 ? lotteryRoundIndex+1 : 'active'}</span>
                             </div>
                         <div id='LeaderNextBtn'  className="borderPink angleIcon" onClick={()=>{handleNextIndex()}}><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                         <div id='LeaderActivePotBtn' className="borderPink angleIcon"  onClick={()=>{handleActiveIndex()}}><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
@@ -182,7 +178,6 @@ return(
                 </div>
                 <div className="container">
                 {leaderBoardDetails?.length !== 0 ? (
-                
                 <Table responsive>
                     <thead>
                     <tr>
