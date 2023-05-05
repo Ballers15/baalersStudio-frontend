@@ -119,8 +119,34 @@ const handleAccountChange = (accounts) => {
             <Nav>
             <Can do='wallet' on='navbar'> <Nav.Link className='connectBtn'> {walletAddress !==null && walletAddress !==undefined ? ( <> {walletAddress?.slice(0,5)+'..'+walletAddress?.slice(-5)} </>) :
                           ( <span onClick={()=>{handleConnectWallet()}}> <img src={wallet} /> Connect Wallet</span> )} </Nav.Link> </Can>
-            <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link>
-              <Dropdown>
+            {/* <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link> */}
+            <Dropdown className='notification'>
+                <Dropdown.Toggle id="dropdown-button-dark-example1" >
+                {_u===null ? <i className="fa fa-bell-o" aria-hidden="true"></i> : <i className="fa fa-bell-o" aria-hidden="true"></i>}
+                </Dropdown.Toggle>
+                <Dropdown.Menu variant="dark">    
+                 <Dropdown.Header><span>Mark all as read</span> <span><i class="fa fa-check" aria-hidden="true"></i></span> </Dropdown.Header>           
+                 <div className='ht'>
+                 <Dropdown.Item><span>Notification 1 </span> <span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item>  
+                <Dropdown.Item className='read'><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item>
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item className='read'><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 1</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                <Dropdown.Item><span>Notification 2</span><span><i class="fa fa-circle" aria-hidden="true"></i></span></Dropdown.Item> 
+                 </div>
+                </Dropdown.Menu>
+              </Dropdown>
+              <Dropdown  className="profile">
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
                 {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
                 </Dropdown.Toggle>
