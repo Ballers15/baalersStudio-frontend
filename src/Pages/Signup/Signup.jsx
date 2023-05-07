@@ -357,7 +357,7 @@ const registerUsers = async () => {
         <div className="signup-box">
       
         <div className="signup-page-container">
-        <img className='signUpbackBtn' src={backBtn} alt="back" />
+        <img className='signUpbackBtn' src={backBtn} alt="back" onClick={()=>{navigate(-1)}}/>
           
         {response === false &&   
         <Form noValidate validated={validated} onSubmit={handleSubmit} className='w-100'>

@@ -3,6 +3,7 @@ import Can from "../../Components/rolesBasedAccessControl/Can";
 import { environment } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
+import rewardBoxExp from '../../Assest/img/rewardBox1.png'
 import Token from '../../Assest/img/Token.png'
 import { Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,10 +27,13 @@ const ActiveRewardPot = (props) => {
     const navigate = useNavigate()
     const [potDetails,setPotDetails] = useState({})
     const [rewardAmount, setRewardAmount] = useState(0)
+    const currentDateTime = new Date().toISOString()
+    const [potStatus, setPotStatus] = useState('')
+    const [showPotStatus, setShowPotStatus] = useState('')
 
     useEffect(() => {
         getActivePotDetails();
-    }, [])
+    }, [expiryTime])
 
     useEffect(() => {
         const element = document.getElementById("leaderboard");
@@ -42,10 +46,20 @@ const ActiveRewardPot = (props) => {
         }
     }, [showRedeemPopup])
 
+    useEffect(()=>{
+        setValues()
+
+    },[potStatus])
+
         /**
      * Get details of active pot (if any)
      */
         const getActivePotDetails = async () => {
+            let tokenId='';
+            let nft=''
+            let startDateTime=''
+            let dateTime=''
+
             let dataToSend = {
                 potType: 'REWARDPOT',
             }
@@ -58,10 +72,21 @@ const ActiveRewardPot = (props) => {
                 toast.error(pot?.message||'Something went worng');
             } else {
                 // toast.success('Claim Status Updated Succesfully');
-                setPotDetails(pot?.data.length?pot.data[0]:'');
-                setExpiryTime(pot?.data.length?pot.data[0]?.endDate:'');
+
+                setPotDetails((pot?.data.length || pot?.data[0]!==null) ?pot.data[0]:'');
                 let amount = pot?.data[0]?.rewardTokenQuantity;
                 setRewardAmount(amount)
+                dateTime = (pot.data[0]?.endDate!==undefined)?pot.data[0]?.endDate:'';
+                startDateTime = (pot.data[0]?.startDate!==undefined)?pot.data[0]?.startDate:'';
+                console.log('current',currentDateTime,'satrt ',startDateTime, 'end',dateTime)
+                if(startDateTime!=='' && currentDateTime < startDateTime){
+                    dateTime=startDateTime;
+                    console.log('if')
+                }
+                console.log('expiry',dateTime)
+                setPotStatus(pot?.data[0]?.potStatus!==undefined ? pot?.data[0]?.potStatus : '')
+                console.log(potStatus,'pot status')
+                setExpiryTime(dateTime);
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
@@ -71,6 +96,17 @@ const ActiveRewardPot = (props) => {
                 dispatch(setLoadingFalse());
             }
              
+        }
+
+        const setValues = () => {
+            console.log(potStatus)
+                if(potStatus==='ONGOING')
+                    setShowPotStatus('ACTIVE REWARD POT')
+                else if (potStatus === 'UPCOMING')
+                    setShowPotStatus('UPCOMING REWARD POT')
+                else
+                    setShowPotStatus('REWARD POT EXPIRED')
+            console.log(showPotStatus)
         }
 
     /**
@@ -198,17 +234,17 @@ const ActiveRewardPot = (props) => {
                 <div className="container">
                     <div className="positionRelative mb-5 headWth mx-auto">
                         <h2 className="heading text-center">
-                        ACTIVE REWARD POT
+                        {showPotStatus}
                         </h2>
                         <h2 className="heading2 text-center">
-                        ACTIVE REWARD POT
+                        {showPotStatus}
                         </h2>
                     </div>
                     <div className="row">
                         <div className="col-sm-5 order-last my-auto">
                             <div className="text-center">
                                 <div>
-                                <div className='earnText'>
+                              { (potStatus === 'ONGOING' || potStatus === 'UPCOMING') && <> <div className='earnText'>
                                     <div>Earn</div>
                                     <div className='sniff'>
                                         <div>{rewardAmount} BALR</div>  
@@ -216,7 +252,7 @@ const ActiveRewardPot = (props) => {
                                     </div>
                                     <div> Tokens  </div>
                                 </div>
-                                <div className='earnText'>in rewards</div>
+                                <div className='earnText'>in rewards</div> </> }
                                 </div>
                               
                                 <div>
@@ -233,22 +269,28 @@ const ActiveRewardPot = (props) => {
                                         :<p>Deal Expired</p>}
                                 </div>
 
-                                {expiryTime !=='' && <p className="undColor">Remaining</p>}
-                        
+                                {potStatus === 'ONGOING' && <p className="undColor">Remaining</p>}
+                                {potStatus === 'UPCOMING' && <p className="undColor">Until Next Draw</p>}
+                                {potStatus !== 'UPCOMING' && potStatus!== 'ONGOING' && <p className="undColor">Wait Until Next Draw</p>}
+
+
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
                                     {expiryTime!=='' ?  
                                     (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
                                     {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
-                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> login</a> </Can>)}</>) :
-                                    (<a className="disabled"><span></span> POT EXPIRED</a>)}
+                                    {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Register Now</a> </Can>)}</>) :
+                                    (<a ><span></span> NOTIFY ME</a>)}
                                     </div>
                                 </div>                        
                             </div>
                         </div>
                         <div className="col-sm-7 order-first text-center  position-relative">
-                            {expiryTime !== '' && <img className='activeImgReward' src={Token} />}
-                            <img src={expiryTime!=='' ? rewardBoxOpen : rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />                        
+                        {potStatus === 'ONGOING' && 
+                         <> <img className='activeImgReward' src={Token} />
+                            <img src={rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" /></>}
+                            {potStatus === 'UPCOMING' && <img src={rewardBox} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />}
+                            {potStatus !== 'UPCOMING' && potStatus!== 'ONGOING' && <img src={rewardBoxExp} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" />}
                         </div>
                     </div>
                 </div>
