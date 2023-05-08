@@ -23,7 +23,7 @@ const LeaderBoardReward = (props) => {
 
     useEffect(() => {
          getRewardLeaderBoard()
-    }, [rewardCurrentRoundDetails])
+    }, [rewardCurrentRoundDetails,walletAddress])
 
     
     // useEffect(() => {

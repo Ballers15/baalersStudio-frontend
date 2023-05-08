@@ -55,6 +55,8 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { environment } from "../../Environments/environment";
+
 
 
 
@@ -132,7 +134,7 @@ const Dashboard = () => {
     useEffect(()=>{
         emailValidation()
       },[email])
-
+      
       /**
        * Show modals
        * @param modalName String
@@ -211,7 +213,7 @@ const Dashboard = () => {
         } else {
             console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         }
-         
+        dispatch(setLoadingFalse());
       }
 
     $('#myModal').on('shown.bs.modal', function () {
@@ -417,7 +419,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="positionAbs">
                                   <div className="playBtn">
-                                    <a onClick={() => handleShow('play')}>
+                                    <a href={environment?.gameUrl} target='_blank'>
                                       <span></span>Play now
                                     </a>
                                   </div>

@@ -20,7 +20,6 @@ const RewardRounds = (props) => {
     const [prevRounds, setPrevRounds] = useState('')
     const [prevRoundsLength, setPrevRoundsLength] = useState('')
     const [participated, setParticipated] = useState(false)
-    const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
     const [claimed,setClaimed] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
@@ -66,7 +65,6 @@ const RewardRounds = (props) => {
    */
   const handleSlideChange = (current) => {
       current=prevRoundsLength-current-1
-      setCurrentSlide(current)
       setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
       setRewardRoundIndex(current)
       setRewardCurrentRoundDetails(prevRounds[current])
@@ -126,7 +124,7 @@ const RewardRounds = (props) => {
    
     useEffect(() => {
       getPreviousRounds()  
-  },[ walletAddress,previous,isClaimed ]);
+  },[ walletAddress,previous,isClaimed]);
 
 
     useEffect(() => {
@@ -171,16 +169,11 @@ const RewardRounds = (props) => {
             let lastIndex = round?.data?.length-1
             console.log(round?.data?.length)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
-            let partcicipate = (round?.data[lastIndex]?.userRes?.participated)
-            setParticipated(partcicipate)
-            let claim = (round?.data[lastIndex]?.userRes?.claimed)
-            setClaimed(claim)
-            setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
+            setParticipated(round?.data[lastIndex]?.userRes?.participated)
+            setClaimed(round?.data[lastIndex]?.userRes?.claimed)
+            setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
             setPotId(round?.data[0]?._id)
-            console.log(partcicipate,'..',participated)
-            console.log(claim,'..',claimed)
-
           }
         } catch (error) {
             toast.dismiss();
@@ -213,8 +206,8 @@ const RewardRounds = (props) => {
             setParticipated(partcicipate)
             let claim = (data?.data?.claimed)
             setClaimed(claim)
-            console.log(partcicipate,';;',participated)
-            console.log(claim,';;',claimed)
+            console.log(partcicipate,'isclaimed.participated',participated)
+            console.log(claim,'isclaimed.claimed',claimed)
             setButtonStatus(true)
           }
         } catch (error) {

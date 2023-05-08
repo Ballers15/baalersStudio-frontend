@@ -22,7 +22,6 @@ const LotteryRounds = (props) => {
     const [prevRoundsLength, setPrevRoundsLength] = useState(0)
     const [userWon, setUserWon] = useState(false)
     const [participated, setParticipated] = useState(false)
-    const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
     const [claimedNft,setClaimedNft] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
@@ -68,7 +67,6 @@ const LotteryRounds = (props) => {
      */
    const handleSlideChange = (current) => {
         current=prevRoundsLength-current-1
-        setCurrentSlide(current)
         setClaimExpiryDate(prevRounds[current]?.claimExpiryDate)
         setLotteryRoundIndex(current)
         setLotteryCurrentRoundDetails(prevRounds[current])
@@ -164,11 +162,11 @@ const LotteryRounds = (props) => {
             toast.dismiss();
             toast.error(round?.message||'Something went worng in preious rounds');
           } else {
+            let lastIndex = round?.data?.length-1
             setPrevRounds(round?.data)
             setPrevRoundsLength(round?.data?.length)
             setLotteryPrevRoundsLength(round?.data?.length)
-            setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
-            let lastIndex = round?.data?.length-1
+            setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
             setUserWon(round?.data[lastIndex]?.userRes?.lotteryWon)
             setParticipated(round?.data[lastIndex]?.userRes?.participated)
             setClaimedNft(round?.data[lastIndex]?.userRes?.claimed)

@@ -30,6 +30,7 @@ import { useSelector } from 'react-redux';
 import ResetPassword from '../Pages/ResetPassword/resetpassword';
 import UserProfile from '../Pages/UserProfile/User';
 import { CheckUserLogin } from '../Auth/checkUserLogin';
+import GoogleSignup from '../Pages/Signup/googleSignup';
 
 
 const NavigationRouter = () => {
@@ -53,6 +54,7 @@ const NavigationRouter = () => {
               <Route path="/error-page" element={<ErrorPage />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
               <Route exact path='/auth/change-password/:token' element={<CheckUser><ResetPassword/></CheckUser>}></Route>
+              <Route exact path="auth/social/:user" element={<GoogleSignup />} /> 
             </Route>
             
             <Route element={<WithNav />}>

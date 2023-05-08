@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react-otp-input';
-import { checkUserName, registerUser,  setUserLocal,  userSignup, verifyOtp } from '../../Services/User'
+import { checkUserName, registerUser,  userSignup, verifyOtp } from '../../Services/User'
 import './Signup.css'
 import ApiLoader from '../../Components/apiLoader'
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ import { setLoadingFalse, setLoadingTrue, setUserData } from "../../Components/R
 import { useEffect } from 'react';
 import backBtn from '../../Assest/img/backBtn.svg';
 import google from '../../Assest/img/google.png';
+import { environment } from '../../Environments/environment';
 
 
 const Signup = () => {
@@ -314,7 +315,7 @@ const registerUsers = async () => {
     } else {
       // toast.success(signup?.message || 'Signed up successfully!!')
       setErrorMsg(null)
-     dispatch(setUserData(JSON.stringify(signup?.data)))
+      dispatch(setUserData(JSON.stringify(signup?.data)))
       navigate('/');
     }
     }
@@ -330,6 +331,11 @@ const registerUsers = async () => {
       toast.dismiss();
       toast.error('All fields are required !!')
     }
+  }
+
+  const gSignup = async() => {
+    let google =environment.apiUrl+'auth/v1/google'
+    window.location.href=google
   }
 
   /**
@@ -405,7 +411,7 @@ const registerUsers = async () => {
               {/* <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div> */}
                  <div className='divider'>
                   <span className='line-left'></span> or  <span className='line-right'></span></div>
-              <div className="signUp-google">  <button type="submit" > <span></span> <img className='gIcon' src={google} alt="google" /> SIGN Up with google  </button> </div>
+              <div className="signUp-google">  <a onClick={()=> {gSignup()}}> <span></span> <img className='gIcon' src={google} alt="google" /> SIGN Up with google  </a> </div>
            <div className='alreadyAcc'>
            <span>Already have an account?</span>
            <Link to='/login'> <span>Sign In</span></Link> 
