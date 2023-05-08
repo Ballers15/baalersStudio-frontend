@@ -173,7 +173,7 @@ const RewardRounds = (props) => {
             setClaimed(round?.data[lastIndex]?.userRes?.claimed)
             setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
-            setPotId(round?.data[0]?._id)
+            setPotId(round?.data[lastIndex]?._id)
           }
         } catch (error) {
             toast.dismiss();
