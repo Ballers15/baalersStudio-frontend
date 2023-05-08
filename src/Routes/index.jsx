@@ -54,7 +54,7 @@ const NavigationRouter = () => {
               <Route path="/error-page" element={<ErrorPage />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
               <Route exact path='/auth/change-password/:token' element={<CheckUser><ResetPassword/></CheckUser>}></Route>
-              <Route exact path="auth/social/:user" element={<GoogleSignup />} /> 
+              <Route exact path="auth/social/:token" element={<GoogleSignup />} /> 
             </Route>
             
             <Route element={<WithNav />}>

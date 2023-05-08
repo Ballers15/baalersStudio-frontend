@@ -347,15 +347,6 @@ const registerUsers = async () => {
     checkUsername();
   }
 
-      // useEffect(() => {
-      //   console.log('in use effect')
-      //   if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid && isUserNameValid) {
-      //     setSignupDisbale(false)
-      //     }
-      //     else{
-      //       setSignupDisbale(true)
-      //     }
-      // }, [userDetails])
 
   return (
     <React.Fragment>
@@ -408,7 +399,6 @@ const registerUsers = async () => {
               </div>
                  
               <div className="playBtn">  <button type="submit" > <span></span>SIGN Up  </button> </div>
-              {/* <div className="playBtn">  <button type="submit"  disabled={signupButton} > <span></span>SIGN Up  </button> </div> */}
                  <div className='divider'>
                   <span className='line-left'></span> or  <span className='line-right'></span></div>
               <div className="signUp-google">  <a onClick={()=> {gSignup()}}> <span></span> <img className='gIcon' src={google} alt="google" /> SIGN Up with google  </a> </div>
@@ -416,7 +406,8 @@ const registerUsers = async () => {
            <span>Already have an account?</span>
            <Link to='/login'> <span>Sign In</span></Link> 
            </div>
-          </Form> } 
+          </Form>
+           } 
 
                 
             { isUserNameValid ===  true && response === true 

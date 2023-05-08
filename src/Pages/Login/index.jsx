@@ -6,7 +6,8 @@ import './Login.css';
 import { Link } from "react-router-dom";
 import {  useSelector } from "react-redux";
 import ApiLoader from "../../Components/apiLoader";
-
+import google from '../../Assest/img/google.png';
+import { environment } from "../../Environments/environment";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -71,6 +72,10 @@ const Login = () => {
         auth.setPassErrorMsg(null)
       }
     
+      const gSignup = async() => {
+        let google =environment.apiUrl+'auth/v1/google'
+        window.location.href=google
+      }
 
     return (
         <React.Fragment>
@@ -114,7 +119,9 @@ const Login = () => {
                                 <span></span>SIGN IN
                             </button>
                         </div>
-                       
+                        <div className='divider'>
+                  <span className='line-left'></span> or  <span className='line-right'></span></div>
+              <div className="signUp-google">  <a onClick={()=> {gSignup()}}> <span></span> <img className='gIcon' src={google} alt="google" /> SIGN IN with google  </a> </div>
                         </div>
                         <div className="login-forget-password">
                         <Link to='/forgotPassword'> <span>Forgot password?</span></Link>

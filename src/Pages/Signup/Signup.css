@@ -150,7 +150,7 @@ form .playBtn button::before, form .playBtn button::after, form .playBtn button 
 form .playBtn button:hover::before, form .playBtn button:hover::after, form .playBtn button:hover span::before, form .playBtn button:hover span::after {
     width: 124px;
 }
-form .signUp-google button {
+form .signUp-google a {
     position: absolute;
     text-decoration: none;
     text-align: center;
@@ -173,25 +173,29 @@ form .signUp-google button {
 }
 .signUp-google{
     position: relative; 
+    text-align: center;
 }
-.signUp-google button::before {
+.signUp-google a{
+    display: block;
+}
+.signUp-google a::before {
     top: -2px;
     left: -2px;
     border-top: 2px solid #ECE8E1;
     border-left: 2px solid #ECE8E1;
 }
-.signUp-google button::after {
+.signUp-google a::after {
     top: -2px;
     right: -2px;
     border-top: 2px solid #ECE8E1;
     border-right: 2px solid #ECE8E1;
 }
-.signUp-google button::before, .signUp-google button::after,
- .signUp-google button span::before, .signUp-google button span::after {
+.signUp-google a::before, .signUp-google a::after,
+ .signUp-google a span::before, .signUp-google a span::after {
     width: 96px;
 }
 
-.signUp-google button::before, .signUp-google button::after, .signUp-google button span::before, .signUp-google button span::after {
+.signUp-google a::before, .signUp-google a::after, .signUp-google a span::before, .signUp-google a span::after {
     content: '';
     position: absolute;
     width: 134px;
@@ -200,20 +204,20 @@ form .signUp-google button {
     /* transition: all 1s ease; */
     margin: -4px;
 }
-.signUp-google button span::after {
+.signUp-google a span::after {
     bottom: -2px;
     right: -2px;
     border-bottom: 2px solid #ECE8E1;
     border-right: 2px solid #ECE8E1;
 }
-.signUp-google button span::before {
+.signUp-google a span::before {
     bottom: -2px;
     left: -2px;
     border-bottom: 2px solid #ECE8E1;
     border-left: 2px solid #ECE8E1;
 }
-form .signUp-google button:hover::before, form .signUp-google button:hover::after,
- form .signUp-google button:hover span::before, form .signUp-google button:hover span::after{
+form .signUp-google a:hover::before, form .signUp-google a:hover::after,
+ form .signUp-google a:hover span::before, form .signUp-google a:hover span::after{
     width: 120px;
     transform: scale(1.25);
 }
