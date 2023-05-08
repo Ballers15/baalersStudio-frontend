@@ -22,7 +22,7 @@ const RewardRounds = (props) => {
     const [participated, setParticipated] = useState(false)
     const [currentSlide,setCurrentSlide] = useState(0)
     const [potId,setPotId] = useState('')
-    const [claimed,setClaimed] = useState('')
+    const [claimed,setClaimed] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
     const [buttonStatus, setButtonStatus] = useState(true)
 
@@ -169,12 +169,18 @@ const RewardRounds = (props) => {
             setPrevRoundsLength(round?.data?.length)
             setRewardPrevRoundsLength(round?.data?.length)
             let lastIndex = round?.data?.length-1
+            console.log(round?.data?.length)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
-            setParticipated(round?.data[lastIndex]?.userRes?.participated)
-            setClaimed(round?.data[lastIndex]?.userRes?.claimed)
+            let partcicipate = (round?.data[lastIndex]?.userRes?.participated)
+            setParticipated(partcicipate)
+            let claim = (round?.data[lastIndex]?.userRes?.claimed)
+            setClaimed(claim)
             setClaimExpiryDate(round?.data[currentSlide]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
             setPotId(round?.data[0]?._id)
+            console.log(partcicipate,'..',participated)
+            console.log(claim,'..',claimed)
+
           }
         } catch (error) {
             toast.dismiss();
@@ -203,8 +209,12 @@ const RewardRounds = (props) => {
             toast.error(data?.message||'Something went worng');
           } else {
             // toast.success('Round fetched Successfully');
-            setParticipated(data?.data?.participated)
-            setClaimed(data?.data?.claimed)
+            let partcicipate = (data?.data?.participated)
+            setParticipated(partcicipate)
+            let claim = (data?.data?.claimed)
+            setClaimed(claim)
+            console.log(partcicipate,';;',participated)
+            console.log(claim,';;',claimed)
             setButtonStatus(true)
           }
         } catch (error) {

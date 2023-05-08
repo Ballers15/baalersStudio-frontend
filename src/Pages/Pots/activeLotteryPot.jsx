@@ -38,6 +38,7 @@ const ActiveLotteryPot = (props) => {
         const element = document.getElementById("leaderboard");
         if(showRedeemPopup === true){
             setLotteryCurrentRoundDetails({})
+            setLotteryRoundIndex(-1)
             setTimeout(() => {
                 setShowRedeemPopup(false)
                 element?.scrollIntoView();
@@ -47,7 +48,6 @@ const ActiveLotteryPot = (props) => {
 
     useEffect(()=>{
         setValues()
-
     },[potStatus])
 
     
@@ -70,30 +70,31 @@ const ActiveLotteryPot = (props) => {
               dispatch(setLoadingFalse());
               if (pot.error) {
                 toast.dismiss();
-                toast.error(pot?.message||'Something went worng');
+                toast.error(pot?.message||'Something went worng in getting active pot');
             } else {
                 // toast.success('Claim Status Updated Succesfully');
-                setPotDetails(pot?.data[0]!==null ? pot.data[0]:'');
-                tokenId = (pot?.data[0]!==null ? pot.data[0]?.assetDetails?.ticker : '');
+                setPotDetails((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]:'');
+                tokenId = ((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]?.assetDetails?.ticker : '');
                 if(tokenId!=='')
                 nft = nftArray.find(nft => nft.tokenId === tokenId);
                 setNftDetails(nft)
-                dateTime = pot?.data[0]!==null?pot.data[0]?.endDate:'';
-                startDateTime = pot?.data[0]!==null?pot.data[0]?.startDate:'';
-                console.log('current',currentDateTime,'satrt ',startDateTime, 'end',dateTime)
+                dateTime = ((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]?.endDate:'');
+                startDateTime = (pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]?.startDate:'';
+                console.log('current',currentDateTime,'start ',startDateTime, 'end',dateTime)
                 if(startDateTime!=='' && currentDateTime < startDateTime){
                     dateTime=startDateTime;
                     console.log('if')
                 }
                 console.log('expiry',dateTime)
-                setPotStatus(pot?.data[0]!==null ? pot?.data[0].potStatus : '')
+                let status = ((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?.potStatus : '');
+                setPotStatus(status)
                 setExpiryTime(dateTime);
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
             } catch (error) {
                 toast.dismiss();
-                toast.error(error?.response?.data?.message||'Something went worng');
+                toast.error(error?.response?.data?.message||'Error in getting active pot');
                 dispatch(setLoadingFalse());
             }
         }

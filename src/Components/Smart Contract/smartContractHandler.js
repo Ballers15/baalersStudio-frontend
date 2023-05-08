@@ -18,7 +18,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 /** move this to enviroment in future */
 let nftClaimContractAddress= environment.nftClaimContractAddress;
-let tokenClaimContractAddress=environment.tokenClaimContractAddress;
+let tokenClaimContractAddress=environment.tokenIdClaimContractAddress;
 
 /**
  * @returns  nft claim contract instance

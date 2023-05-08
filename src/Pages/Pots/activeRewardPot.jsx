@@ -17,7 +17,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveRewardPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious,  setRewardCurrentRoundDetails } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious,  setRewardCurrentRoundDetails, setRewardRoundIndex } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -39,6 +39,7 @@ const ActiveRewardPot = (props) => {
         const element = document.getElementById("leaderboard");
         if(showRedeemPopup === true){
             setRewardCurrentRoundDetails({})
+            setRewardRoundIndex(-1)
             setTimeout(() => {
                 setShowRedeemPopup(false)
                 element?.scrollIntoView();
@@ -73,19 +74,18 @@ const ActiveRewardPot = (props) => {
             } else {
                 // toast.success('Claim Status Updated Succesfully');
 
-                setPotDetails((pot?.data.length || pot?.data[0]!==null) ?pot.data[0]:'');
-                let amount = pot?.data[0]?.rewardTokenQuantity;
+                setPotDetails((pot?.data[0]!==undefined && pot?.data[0]!==null) ?pot.data[0]:'');
+                let amount = (pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?.rewardTokenQuantity : '';
                 setRewardAmount(amount)
-                dateTime = (pot.data[0]?.endDate!==undefined)?pot.data[0]?.endDate:'';
-                startDateTime = (pot.data[0]?.startDate!==undefined)?pot.data[0]?.startDate:'';
+                dateTime = (pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]?.endDate:'';
+                startDateTime = (pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot.data[0]?.startDate:'';
                 console.log('current',currentDateTime,'satrt ',startDateTime, 'end',dateTime)
                 if(startDateTime!=='' && currentDateTime < startDateTime){
                     dateTime=startDateTime;
                     console.log('if')
                 }
                 console.log('expiry',dateTime)
-                setPotStatus(pot?.data[0]?.potStatus!==undefined ? pot?.data[0]?.potStatus : '')
-                console.log(potStatus,'pot status')
+                setPotStatus((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?.potStatus : '')
                 setExpiryTime(dateTime);
                 setPrevious(false);
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
@@ -276,7 +276,7 @@ const ActiveRewardPot = (props) => {
 
                                 <div className="poolBtn pt-2">
                                     <div className="playBtn">
-                                    {expiryTime!=='' ?  
+                                    {potStatus === 'ONGOING'  ?  
                                     (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
                                     {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
                                     {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Register Now</a> </Can>)}</>) :

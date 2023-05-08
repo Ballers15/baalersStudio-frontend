@@ -22,7 +22,7 @@ const LeaderBoardLottery = (props) => {
  
     useEffect(() => {
         getLotteryLeaderBoard()
-    }, [lotteryCurrentRoundDetails])
+    }, [lotteryCurrentRoundDetails,walletAddress])
 
     // useEffect(() => {
     //     console.log('index 2 in', lotteryRoundIndex, 'id',lotteryCurrentRoundDetails._id,'len',hash+lotteryPrevRoundsLength)
@@ -33,7 +33,7 @@ const LeaderBoardLottery = (props) => {
     },[reload])
 
     useEffect(() => {
-
+        console.log(lotteryRoundIndex,'index')
         if(lotteryRoundIndex === -1 && activeBtn && prevBtn){
             activeBtn.classList.add('disabled')
             prevBtn.classList.add('disabled')
@@ -123,7 +123,8 @@ const LeaderBoardLottery = (props) => {
     if(lotteryRoundIndex !==-1){
         if(expiryTime !==''){
             setLotteryCurrentRoundDetails({})
-            setLotteryRoundIndex(0)
+            setLeaderBoardDetails({})
+            setLotteryRoundIndex(-1)
         }
         else{
             if(lotteryRoundIndex !== lotteryPrevRoundsLength-1)
