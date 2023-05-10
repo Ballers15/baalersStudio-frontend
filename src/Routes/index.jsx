@@ -69,7 +69,8 @@ const NavigationRouter = () => {
               <Route exact path="/user-listing" element={<AuthenticatorAdmin><UsersListing /></AuthenticatorAdmin>} />
               <Route exact path="/pool-listing" element={<AuthenticatorAdmin><PoolListing /></AuthenticatorAdmin>} />
               <Route exact path="/addPot" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
-              <Route exact path="/viewPot" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
+              <Route exact path="/editpot/:id" element={<AuthenticatorAdmin><AddPot /></AuthenticatorAdmin>} />
+              <Route exact path="/viewPot/:id" element={<AuthenticatorAdmin><ViewPot /></AuthenticatorAdmin>} />
               <Route exact path="/privacy" element={<Privacy />} /> 
               <Route exact path="/user-profile" element={<CheckUserLogin><UserProfile/></CheckUserLogin>}/>
               <Route exact path="/:type" element={<PotPage />} /> 

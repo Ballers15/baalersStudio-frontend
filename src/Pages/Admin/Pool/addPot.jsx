@@ -5,7 +5,7 @@ import {useState,useEffect} from 'react';
 import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
 import {AddRewardPot} from '../../../Services/Admin';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {getRewardPotById,updateRewardPotDetail} from '../../../Services/Admin'
 import ApiLoader from '../../../Components/apiLoader'
 import { toast } from 'react-toastify';
@@ -17,6 +17,8 @@ import { checkNftClaim } from '../../../Services/User/indexPot'
 
 
 const AddPot = () => {
+    const params = useParams()
+    const {id} = params;
     const isLoading = useSelector(state => state.loading.isLoading)
     const dispatch = useDispatch()
     const [validated, setValidated] = useState(false);
@@ -34,17 +36,16 @@ const AddPot = () => {
     const [disable, disableSubmitButton] = useState(false);
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
-    const { state } = useLocation();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
     const [nftExists, setNftExists] = useState(false)
 
 
 
     useEffect(() => {
-        if (state?.id) {
-            getRewardPotDetailById(state?.id);
+        if (id) {
+            getRewardPotDetailById(id);
         }
-    }, []);
+    }, [id]);
 
     /**
      * Get pot details by pot id
@@ -61,13 +62,12 @@ const AddPot = () => {
               if (getPotDetailsById.error) {
                 toast.dismiss()    
                 toast.error(getPotDetailsById?.message||'Something Went Wrong in getting pot details by ID');
-                } else {
+                } 
+              else {
                   let data = getPotDetailsById?.data[0];
-
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
-                  if (data) {
-                    // console.log(data)
+               if (data) {
 
                       setRewardPotDetail({
                           ...rewadPotDetail,
@@ -221,7 +221,7 @@ const AddPot = () => {
      * @param  e Event | Event from From submission
      */
     const updateRewardPot = async (e) => {
-        if (!state?.id || rewadPotDetail?.isActive === 'true') {
+        if (!id || rewadPotDetail?.isActive === 'true') {
             return;
         }
         setValidated(true);
@@ -262,7 +262,7 @@ const AddPot = () => {
                 rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
 
             }
-            rewadPotDetail.potId = state?.id;
+            rewadPotDetail.potId = id;
         }
         setDisableSubmitButton(true);
         dispatch(setLoadingTrue());
@@ -280,7 +280,6 @@ const AddPot = () => {
             toast.dismiss()
             toast.success('Pot Updated Succesfully !!');
             setDisableSubmitButton(false);
-            state.id = '';
             navigate('/pool-listing');
           }
         } catch (error) {
@@ -299,7 +298,7 @@ const AddPot = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(state?.id){
+        if(id){
            updateRewardPot(e);
         }
         else{
@@ -379,18 +378,21 @@ const AddPot = () => {
                                                 min={currentDate}
                                                 max={endDate}
                                                 value={potStatusCheck ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
-                                                onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}>
+                                                onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
+                                                disabled={id && rewadPotDetail?.isActive}
+                                                >
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
                                                 Start Date is required !!
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                 
-                                        <Form.Group as={Col} md="3">
+                                        <Form.Group as={Col} md="3" >
                                             <Form.Label>Start Time (UTC)</Form.Label><br/>
                                             <TimePicker 
                                              value={potStatusCheck ? currentTime : startDateTime|| ''} 
-                                            onChange={(e) => { setStartDateTime(e);}} />
+                                            onChange={(e) => { setStartDateTime(e);}} 
+                                            disabled={id && rewadPotDetail?.isActive}/>
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
@@ -509,7 +511,7 @@ const AddPot = () => {
                                     required
                                     type="text"
                                     onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail, assetDetails: {...rewadPotDetail.assetDetails, contractAddress: target.value } })}
-                                        value={rewadPotDetail.assetDetails["contractAddress"]|| ''}>
+                                    value={rewadPotDetail.assetDetails["contractAddress"]|| ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
                                         Contract Address is required !!
@@ -539,8 +541,8 @@ const AddPot = () => {
                     
                         <div>
                         <button type="primary" className="add-pot-submit-button" style={{marginLeft:'20px'}} onClick={()=>navigate('/pool-listing')}><span></span><span></span><span></span>Close</button>
-                        {state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
-                        {!state?.id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
+                        {id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
+                        {!id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>
                 

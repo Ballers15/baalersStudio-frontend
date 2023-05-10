@@ -4,7 +4,7 @@ import React from "react";
 import {useState,useEffect} from 'react';
 import {Col, Row, Form } from 'react-bootstrap';
 import TimePicker from 'react-time-picker';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {getRewardPotById} from '../../../Services/Admin'
 import ApiLoader from '../../../Components/apiLoader'
 import {  toast } from 'react-toastify';
@@ -28,11 +28,12 @@ const ViewPot = () => {
     const [endDate, setEndDate] = useState();
     const [endDateTime, setEndDateTime] = useState('12:00');
     const navigate = useNavigate();
-    const { state } = useLocation();
+    const params = useParams()
+    const {id} = params;
 
     useEffect(() => {
-        if (state?.id) {
-            getRewardPotDetailById(state?.id);
+        if (id) {
+            getRewardPotDetailById(id);
             return;
         }
     }, []);

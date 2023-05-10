@@ -23,26 +23,34 @@ const UsersList = () => {
   const [lastPage, setLastPage] = useState(null)
   const [viewWallet, viewWalletShow] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
-
+  let resetFlag = false;
   const handleClose = () => viewWalletShow(false);
   const handleCloseModal = () => setConfirmModal(false);
   
   useEffect(() => {
-    fetchApi()
+    getUsers()
   }, [currentPage])
 
   /**
    * Get all users data
    * @param  email String | filter user using email
    */
-  const fetchApi = async (email) => {
-    setAllUsers([])
-    let dataToSend = {
+  const getUsers = async () => {
+    setAllUsers([]);
+    let dataToSend = ''
+    if (!resetFlag){
+    dataToSend = {
       currentPage: currentPage,
       startDate: rewadPotDetail?.startDate,
       endDate: rewadPotDetail?.endDate,
-      email: email || rewadPotDetail?.email
+      email: rewadPotDetail?.email
     }
+  }
+  else{
+    dataToSend = {
+      currentPage: currentPage
+    }
+  }
     dispatch(setLoadingTrue());
     try {
       const users = await getAllUsers(dataToSend)
@@ -62,7 +70,6 @@ const UsersList = () => {
       toast.error('Something went worng in getting all users')
       dispatch(setLoadingFalse());
     }
-     
   }
 
   /**
@@ -114,14 +121,13 @@ const UsersList = () => {
         toast.dismiss();
         toast.success(userStatus?.message)
         handleCloseModal()
-        fetchApi()
+        getUsers()
       }
     } catch (error) {
       toast.dismiss();
       toast.error('Something went worng in updating active user')
       dispatch(setLoadingFalse());
     }
-     
   }
 
   const nextPage = () => {
@@ -135,7 +141,6 @@ const UsersList = () => {
   const handleConfirmModal = (userinfo) => {
     setConfirmUser(userinfo)
     setConfirmModal(true)
-
   }
 
   /**
@@ -145,9 +150,9 @@ const UsersList = () => {
   const getFilterUsers =  (e) => {
     e.preventDefault();
     setCurrentPage(1)
-    let email = rewadPotDetail?.email;
-    fetchApi(email)
-     
+    getUsers()
+    console.log('filter',rewadPotDetail)
+
   }
 
   /**
@@ -157,11 +162,11 @@ const UsersList = () => {
    */
   const formatNumberDecimal = (value) => {
     if(value > Math.pow(10,10)){
-    const shortenedValue = parseFloat(value).toExponential(4);
-    return shortenedValue;
+      const shortenedValue = parseFloat(value).toExponential(4);
+      return shortenedValue;
     }
     else
-    return value;
+      return value;
   };
 
   /**
@@ -170,9 +175,10 @@ const UsersList = () => {
    */
   const handleReset = (e) => {
       e.preventDefault();
-      setRewardPotDetail('');
-      let email = '';
-      fetchApi(email)
+      resetFlag = true;
+      setRewardPotDetail({...rewadPotDetail,startDate:'',endDate:'',email:''})
+      getUsers()
+      console.log('resett',rewadPotDetail)
   }
 
   return (
@@ -254,7 +260,7 @@ const UsersList = () => {
 
       <div className="users-listing">
         <div className="users-list-filters">
-        <Form onSubmit={getFilterUsers} onReset={handleReset}>
+        <Form onSubmit={getFilterUsers} onReset={(e)=>{handleReset(e)}}>
           <Row>
             <Col md="2">
               <Form.Group  >

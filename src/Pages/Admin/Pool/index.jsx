@@ -21,7 +21,7 @@ const PoolListing = () => {
     useEffect(() => {
         onInit();
     }, []);
-
+    
     const navigate = useNavigate();
     const isLoading = useSelector(state => state.loading.isLoading)
     const dispatch = useDispatch()
@@ -206,7 +206,6 @@ const PoolListing = () => {
             toast.error(error?.response?.data?.message||'Something went worng in geting upcoming pot details');
             dispatch(setLoadingFalse());
         }
-         
     }
 
      /**
@@ -255,7 +254,7 @@ const PoolListing = () => {
      * @param id String | Pot Id
      */
     const editRewardPot = (id) => {
-        navigate('/addPot',{state:{id:id}});
+        navigate(`/editpot/${id}`);
     }
 
      /**
@@ -263,7 +262,7 @@ const PoolListing = () => {
      * @param id String | Pot Id
      */
     const viewRewardPot = (id) => {
-        navigate('/viewPot',{state:{id:id}});
+        navigate(`/viewPot/${id}`);
         }
 
     /**
