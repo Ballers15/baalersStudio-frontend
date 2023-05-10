@@ -49,17 +49,17 @@ const UsersList = () => {
       dispatch(setLoadingFalse());
       if (users?.error == true) {
         toast.dismiss();
-toast.error(users?.message)
+        toast.error(users?.message)
       } else {
         // toast.dismiss();
-// toast.success(users?.message)
+        // toast.success(users?.message)
         setAllUsers(users)
         let pages= Math.floor( users?.data?.count / 10 ) + 1;
         setLastPage(pages);
       }
     } catch (error) {
       toast.dismiss();
-toast.error('Something went worng in getting all users')
+      toast.error('Something went worng in getting all users')
       dispatch(setLoadingFalse());
     }
      
@@ -80,15 +80,15 @@ toast.error('Something went worng in getting all users')
       dispatch(setLoadingFalse());
       if (wallet?.error == true) {
         toast.dismiss();
-toast.error(wallet?.message)
+        toast.error(wallet?.message)
       } else {
         toast.dismiss();
-toast.success(wallet?.message)
+        toast.success(wallet?.message)
         setWalletDetails(wallet.data)
       }
     } catch (error) {
       toast.dismiss();
-toast.error('Something went worngin getting user wallet details')
+      toast.error('Something went worngin getting user wallet details')
       dispatch(setLoadingFalse());
     }
      
@@ -109,16 +109,16 @@ toast.error('Something went worngin getting user wallet details')
       dispatch(setLoadingFalse());
       if (userStatus?.error == true) {
         toast.dismiss();
-toast.error(userStatus?.message)
+        toast.error(userStatus?.message)
       } else {
         toast.dismiss();
-toast.success(userStatus?.message)
+        toast.success(userStatus?.message)
         handleCloseModal()
         fetchApi()
       }
     } catch (error) {
       toast.dismiss();
-toast.error('Something went worng in updating active user')
+      toast.error('Something went worng in updating active user')
       dispatch(setLoadingFalse());
     }
      
@@ -312,6 +312,7 @@ toast.error('Something went worng in updating active user')
                 <th className='sNoWth'>Sr. No.</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Provider</th>
                 <th>Created At</th>
                 <th>Wallet Details</th>
                 <th className='sNoWth'>is Blocked ?</th>
@@ -325,6 +326,7 @@ toast.error('Something went worng in updating active user')
                         <td className='sNoWth'>{((currentPage-1)*10)+index + 1}</td>
                         <td>{user?.userName}</td>
                         <td className='d-flex justify-content-evenly'><span className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
+                        <td>{user?.provider}</td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
                           <span className="eyeIcon" title="View wallet" onClick={() => UserWalletdetails(user?._id)}> <i className="fa fa-eye " /></span>

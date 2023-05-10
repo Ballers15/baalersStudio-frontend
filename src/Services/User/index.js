@@ -124,3 +124,26 @@ export function getUserNft(data) {
 export function getTokenBalance(data) {
   return (axiosInstance.get('users/v1/token/balance',{params: data}).then(res => res.data))
 }
+
+/**
+ * 
+ * @returns User notifications
+ */
+export function userNotifications(){
+  return (axiosInstance.get('notifications/v1/user/get/notifications').then(res => res.data))
+}
+
+/**
+ * Mark particular notification as read
+ * @param data Object | notificationId
+ */
+export function readSingleNotification(data){
+  return (axiosInstance.post('notifications/v1/user/read/particular/notifications',data).then(res => res.data))
+}
+
+/**
+ * Post request to read all notifications
+ */
+export function readAllNotifications(){
+  return (axiosInstance.post('notifications/v1/user/read/all/notifications').then(res => res.data))
+}
