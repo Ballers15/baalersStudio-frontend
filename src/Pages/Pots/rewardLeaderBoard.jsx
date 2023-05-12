@@ -22,13 +22,10 @@ const LeaderBoardReward = (props) => {
     let activeBtn = document.getElementById('LeaderActivePotBtn')
 
     useEffect(() => {
-         getRewardLeaderBoard()
+        console.log(rewardCurrentRoundDetails === {})
+        if(rewardCurrentRoundDetails !== undefined && rewardCurrentRoundDetails !== {} && rewardCurrentRoundDetails !=='' )
+          getRewardLeaderBoard()
     }, [rewardCurrentRoundDetails,walletAddress])
-
-    
-    // useEffect(() => {
-    //     console.log('index 2 in', rewardRoundIndex, 'id',rewardCurrentRoundDetails._id,'len',rewardPrevRoundsLength)
-    // }, [rewardRoundIndex])
 
     useEffect(()=>{
       getRewardLeaderBoard(leaderSearch);
@@ -91,6 +88,7 @@ const LeaderBoardReward = (props) => {
             toast.dismiss();
             toast.error(leader?.message||'Something went worng');
         } else {
+            console.log(leader)
             setLeaderBoardDetails(leader?.data)
           }
         } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
-import { Table, Form } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { leaderBoardLottery } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import {  toast } from 'react-toastify';
@@ -21,12 +21,9 @@ const LeaderBoardLottery = (props) => {
     let activeBtn = document.getElementById('LeaderActivePotBtn')
  
     useEffect(() => {
-        getLotteryLeaderBoard()
+        if(lotteryCurrentRoundDetails?._id !==undefined)
+            getLotteryLeaderBoard()
     }, [lotteryCurrentRoundDetails,walletAddress])
-
-    // useEffect(() => {
-    //     console.log('index 2 in', lotteryRoundIndex, 'id',lotteryCurrentRoundDetails._id,'len',hash+lotteryPrevRoundsLength)
-    //     }, [lotteryRoundIndex])
 
     useEffect(()=>{
         getLotteryLeaderBoard(leaderSearch);
@@ -204,7 +201,6 @@ return(
                 </Table> ) : (<div style={{textAlign: ' center'}} >No Data !</div>)}
                 </div>
             </div>
-          
     )
     
 }

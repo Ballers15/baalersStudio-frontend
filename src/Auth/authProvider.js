@@ -13,18 +13,6 @@ export default function AuthProvide({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const prev = sessionStorage.getItem('before login')
-  // let strAuth = useSelector(state => state.user.user)
-  
-
-  // useEffect(() => {
-  //   let _u = JSON.parse(strAuth)
-  //   if (_u) {
-  //    dispatch( setUserData(_u))
-  //   } else {
-  //    dispatch( setUserNull())
-  //   }
-  // }, []) 
-
 const [passErrorMsg,setPassErrorMsg]= useState(null)
   
 
@@ -75,6 +63,7 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
     dispatch(setIsClaimed(false));
     dispatch(setLoading(false));    
     navigate('/login');
+    sessionStorage.removeItem('before login');
   }
 
   return (

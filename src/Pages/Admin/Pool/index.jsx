@@ -483,7 +483,7 @@ const PoolListing = () => {
                 <Table responsive className="pool-view-table">
                     <thead>
                         <tr>
-                            <th className="sNoWth">Sr. No..</th>
+                            <th className="sNoWth">Sr. No.</th>
                             <th>User Name</th>
                             <th>Email</th> 
                             <th>Wallet Address</th>

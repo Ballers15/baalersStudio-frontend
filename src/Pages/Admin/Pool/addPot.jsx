@@ -363,7 +363,7 @@ const AddPot = () => {
                                         onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})} >
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Token Amount is required (Min:0) !!
+                                        Token Amount is required (Min:0) !
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             
@@ -383,7 +383,7 @@ const AddPot = () => {
                                                 >
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
-                                                Start Date is required !!
+                                                Start Date is required !
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                 
@@ -406,7 +406,7 @@ const AddPot = () => {
                                             onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}>
                                             </Form.Control>
                                             <Form.Control.Feedback type="invalid">
-                                                End Date is required !!
+                                                End Date is required !
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                 
@@ -458,7 +458,7 @@ const AddPot = () => {
                                         <option value="TOKEN">Token</option>
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
-                                    Assest Type is required !!
+                                    Assest Type is required !
                                 </Form.Control.Feedback>
                                 </Form.Group>
                     
@@ -483,7 +483,7 @@ const AddPot = () => {
                                     
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
-                                    Pot Type is required !!
+                                    Pot Type is required !
                                 </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -501,7 +501,7 @@ const AddPot = () => {
                                     value={rewadPotDetail.assetDetails["ticker"] || ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Ticker is required !!
+                                        Ticker is required !
                                     </Form.Control.Feedback>
                                 </Form.Group>
                         
@@ -514,7 +514,7 @@ const AddPot = () => {
                                     value={rewadPotDetail.assetDetails["contractAddress"]|| ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Contract Address is required !!
+                                        Contract Address is required !
                                     </Form.Control.Feedback>
                                 </Form.Group>
                         
@@ -527,7 +527,7 @@ const AddPot = () => {
                                         value={rewadPotDetail.assetDetails["assetName"]|| ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Assest Name is required !!
+                                        Assest Name is required !
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 

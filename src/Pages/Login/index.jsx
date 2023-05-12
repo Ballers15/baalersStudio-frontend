@@ -22,7 +22,7 @@ const Login = () => {
      * @param e Events  
      */
     const handleLogin = (e) => {
-          setValidated(true);
+        setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
@@ -56,14 +56,14 @@ const Login = () => {
         const tld = e.target.value?.split('.')[1]?.length
         if(e.target.value !== ''){
         if (regex.test(e.target.value) === false || tld <= 1) {
-          setEmailErrorMsg('Valid E-mail is required !')
+          setEmailErrorMsg('Valid E-mail is required!')
         }
         else{
           setEmailErrorMsg(null)
         }
       }
       else{
-        setEmailErrorMsg('Email is  required !')
+        setEmailErrorMsg('Email is  required!')
       }
       }
 
@@ -89,12 +89,11 @@ const Login = () => {
                             <Form.Control
                                 required
                                 type="email"
-                                
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e)=>{emailValidation(e)}} />
                          
-                             <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
+                             <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is required!'}</Form.Control.Feedback>
                                 <span className="custom-error-msg"> {emailErrorMsg} </span>
                             </Form.Group>
                         <Form.Group className="mt-3" >
@@ -107,7 +106,7 @@ const Login = () => {
                                 minLength='8'
                                 onChange={(e)=>{hanldePassword(e)}}
                             />
-                <Form.Control.Feedback type="invalid">{auth.passErrorMsg ? '' : 'Password is required '}</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{auth.passErrorMsg ? '' : 'Password is required!'}</Form.Control.Feedback>
                             <span className="custom-error-msg">
                                 {auth.passErrorMsg}
                             </span>

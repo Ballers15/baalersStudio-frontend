@@ -104,10 +104,10 @@ const handleAccountChange = (accounts) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               <Can do='about' on='navbar'> <Nav.Link eventKey="1" as={Link} to={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> </Can>
-              <Can do='party' on='navbar'> <Nav.Link eventKey="2" as={Link} to='/#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
+              <Can do='party' on='navbar'> <Nav.Link eventKey="2" href='/#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
               <Can do='how-to-play' on='navbar'> <Nav.Link as={Link} to="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> </Can>
               <Can do='pool' on='navbar'> <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> </Can>
-              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
+              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
               
              {/* Admin menu starts*/}
               <Can do='admin-dashboard' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>

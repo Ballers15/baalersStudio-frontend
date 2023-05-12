@@ -181,13 +181,13 @@ const ForgotPassword = () => {
       <div className="forgot-page-wrapper">
 
         {newPass === false && <div className="signup-box">
-        <h2 className="login-head">FORGOT  <br/>PASSWORD ?</h2>
+        <h2 className="login-head">Forgot  <br/>Password ?</h2>
         <div className="forgot-page-container">
          <p>No worries, enter your mail ID & we will send you a reset code</p>
           <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <Row className="mb-2">
               <Form.Group >
-                <Form.Control required type="email"  placeholder="EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
+                <Form.Control required type="email"  placeholder="ENTER YOUR EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
                                 <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>

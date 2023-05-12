@@ -11,7 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue, setUserData } from "../../Components/Redux/actions";
-import { useEffect } from 'react';
 import backBtn from '../../Assest/img/backBtn.svg';
 import google from '../../Assest/img/google.png';
 import { environment } from '../../Environments/environment';
@@ -395,7 +394,7 @@ const registerUsers = async () => {
                     inline
                     label="Agree to Terms & Conditions."
                     name="agree T&C"
-                    />
+                    required/>
               </div>
                  
               <div className="playBtn">  <button type="submit" > <span></span>SIGN Up  </button> </div>
