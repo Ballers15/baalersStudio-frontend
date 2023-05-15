@@ -1,6 +1,15 @@
 import axios from "axios";
 import { environment } from "../../Environments/environment";
 import { store } from "../../Components/Redux/store";
+import { setIsClaimedFalse, setLoadingFalse, setUserData, setWalletAddressValue } from "../../Components/Redux/actions";
+
+const logout = () => {
+    store.dispatch(setUserData(null))
+    store.dispatch(setWalletAddressValue(null));
+    store.dispatch(setIsClaimedFalse());
+    store.dispatch(setLoadingFalse());
+    window.location.href = "/"; // Redirect to the homepage
+  };
 
 let baseURL = environment?.apiUrl;
 export const axiosInstance = axios.create({
@@ -34,12 +43,13 @@ axiosInstance.interceptors.response.use(
             if (error.response.status === 403 && error.response.data) {
                 // alert(error?.response?.data?.message || 'error code 403 detected!!')
 				// localStorage.clear(); 
+                logout()
                 return Promise.reject(error.response.data?.message);
             }
             if (error.response.status === 401 && error.response.data) {
                 // alert(error?.response?.data?.message || 'error code 401 detected!!')
 				// console.log("calling error 401")
-				// localStorage.clear(); 
+                logout()
                 return Promise.reject(error.response.data?.message);
             }
         }

@@ -171,10 +171,11 @@ const LotteryRounds = (props) => {
             setParticipated(round?.data[lastIndex]?.userRes?.participated)
             setClaimedNft(round?.data[lastIndex]?.userRes?.claimed)
             setPotId(round?.data[lastIndex]?._id)
+            setLotteryCurrentRoundDetails(round?.data[lastIndex])
           }
         } catch (error) {
           toast.dismiss();
-          toast.error(error ||'Something went worng in previous rounds');
+          toast.error(error ||'Error caused in previous rounds');
             dispatch(setLoadingFalse());
         }
     }
@@ -205,7 +206,7 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
             toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng in lottery won');
+            toast.error(error ||'Something went worng in lottery won');
             dispatch(setLoadingFalse());
         }
     }
@@ -232,7 +233,7 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
             toast.dismiss();
-          toast.error(error?.response?.data?.message||'Something went worng lottery claim');
+          toast.error(error?.response?.data?.message||'Error caused in lottery claim');
             dispatch(setLoadingFalse());
         }
     }
@@ -265,7 +266,7 @@ const LotteryRounds = (props) => {
           }
         } catch (error) {
             toast.dismiss();
-            toast.error(error?.response?.data?.message||'Something went worng');
+            toast.error(error?.response?.data?.message||'Error caused in claim transaction');
             dispatch(setLoadingFalse());
         }
     }

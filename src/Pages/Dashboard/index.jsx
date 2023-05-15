@@ -133,6 +133,7 @@ const Dashboard = () => {
 
     useEffect(()=>{
         emailValidation()
+        dispatch(setLoadingFalse()); 
       },[email])
       
       /**
@@ -596,10 +597,10 @@ const Dashboard = () => {
                               </div>
                               <div className="poolBtn text-center">
                                         <div className="playBtn">
-                                           <Link to='/lottery'><span></span> Lottery Pool</Link>
+                                           <Link to='/pool/lottery'><span></span> Lottery Pool</Link>
                                         </div>
                                         <div className="shareBtn newBtn">
-                                           <Link to='/reward'> <span></span> Reward Pool</Link>
+                                           <Link to='/pool/reward'> <span></span> Reward Pool</Link>
                                         </div>
                                     </div>
                               {/* <div className="thirdPageBtn">

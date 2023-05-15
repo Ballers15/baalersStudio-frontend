@@ -106,7 +106,6 @@ const ActiveRewardPot = (props) => {
                     setShowPotStatus('UPCOMING REWARD POT')
                 else
                     setShowPotStatus('REWARD POT EXPIRED')
-            console.log(showPotStatus)
         }
 
     /**

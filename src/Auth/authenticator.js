@@ -11,12 +11,11 @@ export const Authenticator = ({ children }) => {
   let strAuth = useSelector(state => state.user.user);
   let wallet = useSelector(state => state.wallet.walletAddress)
   let auth = JSON.parse(strAuth);
-  const prev = sessionStorage.getItem('before login')
 
   if (auth?.user?.role!=='USER' && !wallet || auth?.user?.role === null) {
     return <Navigate to='/login' state={{ path: location.pathname }} />
-  } else if (auth?.user.role==='USER' && wallet) {
-    return <Navigate to={prev} state={{ path: location.pathname }} />
+  } else if (auth?.user.role==='USER') {
+    return <Navigate to='/' state={{ path: location.pathname }} />
   } else {
     console.log('passed succesfully')
   }

@@ -188,7 +188,7 @@ const ForgotPassword = () => {
             <Row className="mb-2">
               <Form.Group >
                 <Form.Control required type="email"  placeholder="ENTER YOUR EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
-                                <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is Required!'}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is required!'}</Form.Control.Feedback>
                 <span className="custom-error-msg"> {emailErrorMsg} </span>
               </Form.Group>
             </Row>

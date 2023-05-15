@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from 'react'
 import {userLogin} from '../Services/Auth'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch  } from "react-redux";
-import { setLoadingFalse, setLoadingTrue, setUserData,   setWalletAddressValue } from "../Components/Redux/actions";
+import { setIsClaimedFalse, setLoadingFalse, setLoadingTrue, setUserData,   setWalletAddressValue } from "../Components/Redux/actions";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setIsClaimed, setLoading } from '../Components/Redux/reducer';
@@ -12,8 +12,7 @@ const AuthContext = createContext(null);
 export default function AuthProvide({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const prev = sessionStorage.getItem('before login')
-const [passErrorMsg,setPassErrorMsg]= useState(null)
+  const [passErrorMsg,setPassErrorMsg]= useState(null)
   
 
   /**
@@ -40,7 +39,6 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
           dispatch(setUserData(JSON.stringify(login.data)))
           toast.dismiss()    
           toast.success('Login Succesfully !!');
-          navigate(-1)
         }
       }
     } catch (error) {
@@ -57,13 +55,11 @@ const [passErrorMsg,setPassErrorMsg]= useState(null)
    * Logout function resets values to default in redux store
    */
   const logout =  () => {
-    // console.log("hiii logout");
     dispatch(setUserData(null));
     dispatch(setWalletAddressValue(null));
-    dispatch(setIsClaimed(false));
-    dispatch(setLoading(false));    
+    dispatch(setIsClaimedFalse());
+    dispatch(setLoadingFalse());    
     navigate('/login');
-    sessionStorage.removeItem('before login');
   }
 
   return (

@@ -21,13 +21,11 @@ const LeaderBoardLottery = (props) => {
     let activeBtn = document.getElementById('LeaderActivePotBtn')
  
     useEffect(() => {
-        if(lotteryCurrentRoundDetails?._id !==undefined)
-            getLotteryLeaderBoard()
-    }, [lotteryCurrentRoundDetails,walletAddress])
+        if(lotteryCurrentRoundDetails?._id !== undefined)
+            getLotteryLeaderBoard(leaderSearch)
+    }, [lotteryCurrentRoundDetails,walletAddress,reload])
 
-    useEffect(()=>{
-        getLotteryLeaderBoard(leaderSearch);
-    },[reload])
+
 
     useEffect(() => {
         console.log(lotteryRoundIndex,'index')
@@ -64,7 +62,7 @@ const LeaderBoardLottery = (props) => {
     const getLotteryLeaderBoard = async (data) => {
         setLeaderBoardDetails({})
         let dataToSend = {};
-        if(lotteryCurrentRoundDetails){
+        if(data!=''){
         dataToSend = {
             search: data,
             potId: lotteryCurrentRoundDetails._id,
@@ -74,8 +72,7 @@ const LeaderBoardLottery = (props) => {
         }
         else{
             dataToSend = {
-                search: data,
-                potId: '',
+                potId: lotteryCurrentRoundDetails._id,
                 walletAddress: walletAddress,
                 userId: _u?.user?.userId
             }

@@ -123,7 +123,7 @@ const Login = () => {
               <div className="signUp-google">  <a onClick={()=> {gSignup()}}> <span></span> <img className='gIcon' src={google} alt="google" /> SIGN IN with google  </a> </div>
                         </div>
                         <div className="login-forget-password">
-                        <Link to='/forgotPassword'> <span>Forgot password?</span></Link>
+                        <Link to='/forgotPassword'> <span>Forgot Password?</span></Link>
                         </div>
                     <div>
                     <div className='alreadyAcc'>

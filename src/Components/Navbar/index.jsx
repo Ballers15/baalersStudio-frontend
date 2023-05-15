@@ -31,10 +31,10 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const walletAddress = useSelector(state => state.wallet.walletAddress)
 
-useEffect(() => {
-  // Store the previous path in state or local storage
-  sessionStorage.setItem('before login',location.pathname);
-}, [location.pathname]);
+// useEffect(() => {
+//   // Store the previous path in state or local storage
+//   sessionStorage.setItem('before login',location.pathname);
+// }, [location.pathname]);
 
 useEffect(() => {
   if(walletAddress !== null && _u?.user?.role === 'USER'){

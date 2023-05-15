@@ -13,9 +13,9 @@ export default function NotificationToggle() {
   const dispatch = useDispatch();
   const [arr,setArr] = useState('');
   
-  useEffect(()=>{
-    getNotificaions()
-  },[])
+  // useEffect(()=>{
+  //   getNotificaions()
+  // },[])
 
   // useEffect(() => {
   //   if(arr!='')

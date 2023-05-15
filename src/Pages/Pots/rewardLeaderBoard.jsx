@@ -22,14 +22,9 @@ const LeaderBoardReward = (props) => {
     let activeBtn = document.getElementById('LeaderActivePotBtn')
 
     useEffect(() => {
-        console.log(rewardCurrentRoundDetails === {})
-        if(rewardCurrentRoundDetails !== undefined && rewardCurrentRoundDetails !== {} && rewardCurrentRoundDetails !=='' )
-          getRewardLeaderBoard()
-    }, [rewardCurrentRoundDetails,walletAddress])
-
-    useEffect(()=>{
-      getRewardLeaderBoard(leaderSearch);
-    },[reload])
+        if(rewardCurrentRoundDetails?._id !== undefined)
+          getRewardLeaderBoard(leaderSearch)
+    }, [rewardCurrentRoundDetails,walletAddress,reload])
 
     useEffect(() => {
 
@@ -64,7 +59,7 @@ const LeaderBoardReward = (props) => {
     const getRewardLeaderBoard = async (data) => {
         setLeaderBoardDetails({})
         let dataToSend = {};
-        if(rewardCurrentRoundDetails){
+        if(data!==''){
             dataToSend = {
                 search: data,
                 potId: rewardCurrentRoundDetails._id,
@@ -74,8 +69,7 @@ const LeaderBoardReward = (props) => {
         }
         else{
             dataToSend = {
-                search: data,
-                potId: '',
+                potId: rewardCurrentRoundDetails._id,
                 walletAddress: walletAddress,
                 userId: _u?.user?.userId
             }
@@ -88,7 +82,6 @@ const LeaderBoardReward = (props) => {
             toast.dismiss();
             toast.error(leader?.message||'Something went worng');
         } else {
-            console.log(leader)
             setLeaderBoardDetails(leader?.data)
           }
         } catch (error) {

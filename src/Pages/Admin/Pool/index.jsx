@@ -43,6 +43,7 @@ const PoolListing = () => {
     const [walletAddressFilter, setWalletAddressFilter] = useState('')
     const [potIdForUser,setPotIdForUser] = useState('')
     const [potDetails, setPotDetails] = useState()
+    const [potType, setPotType] = useState('REWARDPOT')
     
     const onInit=()=>{
         getAllRewardPotDetails();
@@ -359,6 +360,9 @@ const PoolListing = () => {
      * @param {*} data Object | Pot details
      */
     const getPotUsers = async (data) =>{
+        setPotType(data?.potType)
+        setWalletAddressFilter('')
+        setEmailFilter('')
         setPotIdForUser(data)
         let dataToSend = {
             potId: data._id,
@@ -487,8 +491,8 @@ const PoolListing = () => {
                             <th>User Name</th>
                             <th>Email</th> 
                             <th>Wallet Address</th>
-                            <th>NFT Count</th>
-                            <th>Token Rewarded</th>
+                           {potType === 'REWARDPOT' ? <th>NFT Count</th> : <th>Lottery Won</th>}
+                            {potType === 'REWARDPOT' && <th>Token Rewarded</th>}
                             <th>Token Claim Status</th>
                         </tr>
                     </thead>
@@ -502,8 +506,8 @@ const PoolListing = () => {
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
                                     <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.dismiss(); toast.info( 'Copied Succesfully'); }}></span></td>  
-                            <td>{user?.nftHolded}</td>
-                            <td>{(user?.rewardedTokenAmount)}</td>
+                            {potType === 'REWARDPOT' ? <td>{user?.nftHolded}</td> : <td>{(user.lotteryWon).toString()}</td>}
+                           {potType === 'REWARDPOT' && <td>{(user?.rewardedTokenAmount)}</td>}
                             <td>{user?.status}</td>
                         </tr>  
                         )

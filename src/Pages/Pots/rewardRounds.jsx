@@ -167,13 +167,13 @@ const RewardRounds = (props) => {
             setPrevRoundsLength(round?.data?.length)
             setRewardPrevRoundsLength(round?.data?.length)
             let lastIndex = round?.data?.length-1
-            console.log(round?.data?.length)
             // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
             setParticipated(round?.data[lastIndex]?.userRes?.participated)
             setClaimed(round?.data[lastIndex]?.userRes?.claimed)
             setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
             // console.log(round?.data[currentSlide]?.claimExpiryDate)
             setPotId(round?.data[lastIndex]?._id)
+            setRewardCurrentRoundDetails(round?.data[lastIndex])
           }
         } catch (error) {
             toast.dismiss();
@@ -206,8 +206,6 @@ const RewardRounds = (props) => {
             setParticipated(partcicipate)
             let claim = (data?.data?.claimed)
             setClaimed(claim)
-            console.log(partcicipate,'isclaimed.participated',participated)
-            console.log(claim,'isclaimed.claimed',claimed)
             setButtonStatus(true)
           }
         } catch (error) {

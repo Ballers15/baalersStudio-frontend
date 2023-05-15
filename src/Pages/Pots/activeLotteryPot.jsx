@@ -107,7 +107,6 @@ const ActiveLotteryPot = (props) => {
                     setShowPotStatus('UPCOMING LOTTERY POT')
                 else
                     setShowPotStatus('LOTTERY POT EXPIRED')
-            console.log(showPotStatus)
         }
 
     /**
