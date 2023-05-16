@@ -8,6 +8,7 @@ import {
 import { setIsClaimedTrue } from '../Redux/actions';
 import { store } from '../Redux/store';
 import { environment } from '../../Environments/environment';
+import { BigNumber } from "bignumber.js";
 
 
 const { ethereum } = window;
@@ -112,9 +113,13 @@ export const claimToken=async(data)=>{
   const claimContract=await getTokenContract();
   // const getDecimals=await getDecimals();
 
+  let value = new BigNumber(data.amount);
+  const finalDeposit = "0x" + value.toString(16);
+
+
 let contractData={
   token:data.contractAddress,
-  amount:(data.amount),
+  amount:finalDeposit,
   nonce:data.nonce,
   signature:data.signature,
   
