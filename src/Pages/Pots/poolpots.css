@@ -82,7 +82,7 @@ p{font-family: 'Inter', sans-serif;}
   /* .lotteryPool .thirdSlide {
     height: 61vh; 
 } */
-.sCaption h1{
+.lotteryPool .sCaption h1{
     font-size: 100px;
     line-height: 110px;
 }
@@ -215,8 +215,16 @@ a.disabled{
     font-family: 'Inter', sans-serif;
     color: #FF80FF;
     opacity: .8;
+    font-size: 18px;
+    font-weight: 700;
 }
- 
+ .expDeal{
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 98%;
+    font-family: "Valorant";
+    margin-bottom: 0;
+ }
 .video {
     width: 100%;
     height: 500px;
@@ -560,6 +568,8 @@ a.disabled{
     right: 0.25rem;
     margin: auto;
     top: 15px;
+    top: 44px;
+    width: 24%;
 }
 .activeImg img{
   width: 42%;
@@ -668,6 +678,11 @@ span.leaderboardInput {
   height: 52px;
   padding: 0;
 }
+.workArrowDown {
+  position: absolute;
+  right: 16%;
+  top: 66px;
+}
   @media (min-width: 1600px) {
     .winHead span { 
       width: 255px;
@@ -690,6 +705,11 @@ span.leaderboardInput {
          
         bottom: 0;
     }
+}
+@media (max-width: 1300px){
+  .lotteryPool .sCaption h1 {
+    font-size: 89px;
+  }
 }
 @media (min-width:1200px) and (max-width: 1281px){
   .backBtn { 
@@ -773,6 +793,24 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
+  .lotteryPool .heading {
+    font-size: 28px;
+}
+.headWth {
+  width: 100%;
+}
+  .lotteryPool .heading2 {
+    font-size: 35px;
+    left: 0;
+    top: -36%;
+  }
+ .lotteryPool .activeImg { 
+    top: 33px;
+    width: 30%;
+}
+  .rewardBox {
+    width: 98%;
+}
   .table-responsive {
     height: 69vh;
 }
@@ -831,10 +869,7 @@ span.leaderboardInput {
   }
   .pt8 {
     padding-top: 3rem;
-}
-  .headWth {
-    width: 90%;
-}
+} 
 .howItWork .ps-4{
   padding-top: 2rem;
   padding-left: 0 !important;
@@ -857,7 +892,7 @@ span.leaderboardInput {
     .thirdSlide .poolBtn{
         bottom: 0;
     }
-    .sCaption h1 {
+    .lotteryPool .sCaption h1 {
         font-size: 53px;
         line-height: 98px;
     }
