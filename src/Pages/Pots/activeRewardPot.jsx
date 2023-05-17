@@ -265,7 +265,7 @@ const ActiveRewardPot = (props) => {
                                         <span className="countFont pe-2">:</span>
                                         <span className="countFont">{countdownTime.countdownSeconds} <sub>S</sub></span>
                                         </>
-                                        :<p>Deal Expired</p>}
+                                        :<p className='expDeal'>Deal Expired</p>}
                                 </div>
 
                                 {potStatus === 'ONGOING' && <p className="undColor">Remaining</p>}

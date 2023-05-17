@@ -9,6 +9,7 @@ import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
 import lotteryPot from '../../Assest/img/slide3.webp'
+import howItWork from '../../Assest/img/hoeItWork.png' 
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 import ApiLoader from "../../Components/apiLoader";
@@ -150,7 +151,7 @@ return(
         </div>
         <div className="gradientBackgroung pb-8 pt-5 howItWork ht100 position-relative" >
 
-              <div className="container">
+              <div className="container positionRelative ">
                 <div className="positionRelative mt-5 mb-5 headWth mx-auto">
                     <h2 className="heading text-center">
                     HOW IT WORKS
@@ -159,6 +160,7 @@ return(
                     HOW IT WORKS
                     </h2>
                 </div>
+                <img src={howItWork} alt="Arrow" class="workArrowDown"></img>
                 <div className="row">
                     <div className="col-sm-8">
                         <div className="position-relative youtubeBox">

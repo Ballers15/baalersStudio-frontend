@@ -227,9 +227,10 @@ h5 {
 .heading2 {
   font-family: "Valorant";
   font-weight: 800;
-  font-size: 64px;
+  font-size: 80px;
   position: absolute;
   left: -40px;
+  left: 0;
   right: 0;
   margin: auto;
   top: -30%;
@@ -453,7 +454,7 @@ h5 {
   z-index: 99;
 }
 
-.sCaption h1 {
+.sCaption h1, .bgShade .sCaption h1 {
   font-family: "Valorant";
   font-weight: 400;
   font-size: 120px;
@@ -2148,7 +2149,7 @@ ul li {
     width: 90%;
   }
 
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 160px;
     line-height: 90%;
   }
@@ -2389,7 +2390,7 @@ ul li {
     line-height: 24px;
   }
 
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 110px;
   }
 }
@@ -2673,7 +2674,7 @@ ul li {
     top: 98%;
   }
 
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 90px;
   }
 
@@ -2713,7 +2714,7 @@ ul li {
 } */
 }
 
-@media (min-width:1200px) and (max-width: 1281px) {
+@media (min-width:1200px) and (max-width: 1279px) {
   .positionAbs {
     bottom: 5.95rem; 
     width: 21rem;
@@ -3055,7 +3056,7 @@ ul li {
     margin-bottom: 0rem;
   }
 
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 68px;
   }
 
@@ -3398,7 +3399,7 @@ ul li {
   }
 
   .shareBtn {
-    right: 2rem;
+    right: 1rem;
     padding-top: 6px;
 }
 
@@ -3422,7 +3423,7 @@ ul li {
     width: 80%;
   }
 
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 47px;
     margin-bottom: .5rem;
   }
@@ -4059,7 +4060,7 @@ ul li {
     margin-bottom: -3rem;
   }
  
-  .sCaption h1 {
+  .sCaption h1, .bgShade .sCaption h1 {
     font-size: 42px;
   }
 
