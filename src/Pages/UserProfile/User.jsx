@@ -160,7 +160,7 @@ const UserProfile = () => {
           newNum =  (num / 1000000).toFixed(1) + 'M'
         }
         else{
-            newNum = ((num*100)/100).toFixed(3)
+            newNum = ((num*100)/100).toFixed(2)
         }
         setTokenBal(newNum)
     }
@@ -228,15 +228,14 @@ const UserProfile = () => {
                 </div>  
                <div className="row">
                 <div className="col-sm-8 col-xl-9">
-                    <div className="profileCard"> 
+                    <div className="profileCard cardHt"> 
                     <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>{nftCount}</span> </h3>
-                    <div className="mt-4">
+                     <div className="mt-4">
                         <div className="nftSlider">
-                            {nftExist.length && nftExist.map((nft)=>(
-                                <img key={nft?.tokenId} className={nft?.exists ? "active" : ''}  src={require(`../../Assest/img/nftImages/${nft.imageName}`)} alt={nft?.nftName} />
-                            ))}
-                        </div>
-                    
+                            {nftExist.length ? <>{nftExist.map((nft)=>(
+                                    <img key={nft?.tokenId} className={nft?.exists ? "active" : ''}  src={require(`../../Assest/img/nftImages/${nft.imageName}`)} alt={nft?.nftName} />
+                            ))}</> : <>Connect your wallet !</>}
+                        </div>                    
                      </div>
                     </div>
                 </div>
