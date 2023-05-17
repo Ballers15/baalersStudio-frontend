@@ -548,6 +548,7 @@ const PoolListing = () => {
               Are you sure to stop claim for this pot ?
               <br></br>
               <button type='primary' onClick={()=>updateClaimStatus(potDetails)}>Yes</button>
+              <button type='secondary' onClick={()=>handleClosecClaim()}>No</button>
               </div>
             </span>
             </Modal.Body>
