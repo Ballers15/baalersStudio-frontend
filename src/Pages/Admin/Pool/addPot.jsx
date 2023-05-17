@@ -30,15 +30,17 @@ const AddPot = () => {
     const currentDateTime = new Date().toISOString();
     const currentDate = currentDateTime.split('T')[0];
     const currentTime =  currentDateTime.split('T')[1].slice(0,5);
+    const [startDate, setStartDate] = useState('');
     const [startDateTime, setStartDateTime] = useState(currentTime);
-    const [endDate, setEndDate] = useState();
+    const [endDate, setEndDate] = useState('');
     const [endDateTime, setEndDateTime] = useState(currentTime);
     const [disable, disableSubmitButton] = useState(false);
     const setDisableSubmitButton = (param) => disableSubmitButton(param);
     const navigate = useNavigate();
     const [potStatusCheck,setPotStatusCheck] = useState(false);
     const [nftExists, setNftExists] = useState(false)
-
+    const [endDateError, setEndDateError] = useState('')
+    const [endTimeError, setEndTimeError] = useState('')
 
 
     useEffect(() => {
@@ -46,6 +48,17 @@ const AddPot = () => {
             getRewardPotDetailById(id);
         }
     }, [id]);
+
+    useEffect(()=>{
+        if(endDate === startDate && endDateTime <= startDateTime){
+            setEndTimeError('End time must be greater than start time!')
+       }
+       else{
+           setEndDateError('')
+           setEndTimeError('')
+       }
+
+    },[startDate,endDate,startDateTime,endDateTime])
 
     /**
      * Get pot details by pot id
@@ -89,10 +102,9 @@ const AddPot = () => {
                               date:convert(claimExpiryDate)  ,
                           }
                       })
-                      setEndDate( data?.endDate?.split('T')[0])
+                      setEndDate(data?.endDate?.split('T')[0])
+                      setStartDate(data?.startDate?.split('T')[0])
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
-                    //   console.log("start date",data?.startDate?.split('T')[1]?.slice(0,5))
-                    //   setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
                       setEndDateTime(data?.endDate?.split('T')[1]?.slice(0,5))
                     }
                     if(data?.potStatus === 'ONGOING'){
@@ -160,32 +172,31 @@ const AddPot = () => {
         e.stopPropagation();
         e.preventDefault();
         const form = e.currentTarget;
-        
 
+            
         if(potStatusCheck)
         {
-            rewadPotDetail.startDate = currentDate;
+            setStartDate(currentDate);
             setStartDateTime(currentTime);
             rewadPotDetail.isActive=true;
         }
         else
         {
-            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
-            setStartDateTime(currentTime);
             rewadPotDetail.isActive=false;
-
         }
-        if (form.checkValidity() === false && nftExists === false) {
-        // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
+
+    
+        if (form.checkValidity() === false || ((nftExists === false) && (rewadPotDetail?.potType === 'LOTTERYPOT')) || (endDateError!=='') || (endTimeError!=='')) {
             console.log(rewadPotDetail)
-            console.log('form invalid !!')
+            console.log('form invalid!')
             return;
-        } else {
+        } 
+        else {
             if (endDate) {
                 rewadPotDetail.endDate = endDate+' '+endDateTime;
             }
-            if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate +' '+ startDateTime;
+            if (startDate) {
+                rewadPotDetail.startDate = startDate +' '+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
@@ -203,7 +214,7 @@ const AddPot = () => {
             setDisableSubmitButton(false);
           } else {
         toast.dismiss()    
-        toast.success('Pot Added Succesfully !!');
+        toast.success('Pot Added Succesfully!');
             setDisableSubmitButton(false);
             navigate('/pool-listing');
           }
@@ -224,43 +235,47 @@ const AddPot = () => {
         if (!id || rewadPotDetail?.isActive === 'true') {
             return;
         }
-        setValidated(true);
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
         const form = e.currentTarget;
 
+        if(endDate === startDate && endDateTime <= startDateTime){
+            setEndTimeError('End time must be greater than start time!')
+       }
+       else{
+           setEndDateError('')
+           setEndTimeError('')
+       }
+
+       setValidated(true);
+
         if(potStatusCheck)
         {
-            rewadPotDetail.startDate = currentDate;
+            setStartDate(currentDate);
             setStartDateTime(currentTime);
             rewadPotDetail.isActive=true;
         }
         else
         {
-            rewadPotDetail.startDate = rewadPotDetail.startDate.split('T')[0] ;
-            setStartDateTime(currentTime);
             rewadPotDetail.isActive=false;
-
         }
 
-    if (form.checkValidity() === false && nftExists === false) {
+    if (form.checkValidity() === false || ((nftExists === false) && (rewadPotDetail?.potType === 'LOTTERYPOT')) || (endDateError!=='') || (endTimeError!=='')) {
 
-        // if (!rewadPotDetail?.rewardTokenAmount || !rewadPotDetail?.assetDetails?.contractAddress || !rewadPotDetail?.assetDetails?.assetName || !rewadPotDetail?.assetDetails?.ticker || !rewadPotDetail?.startDate || !endDate || !rewadPotDetail?.assetType || !rewadPotDetail?.potType || !rewadPotDetail?.claimExpiryDate || !rewadPotDetail?.startDate) {
             console.log(rewadPotDetail)
-            console.log('form invalid !!')
+            console.log('form invalid!')
             return;
         } else {
             if (endDate) {
                 rewadPotDetail.endDate = endDate+'T'+endDateTime;
             }
-            if (rewadPotDetail?.startDate) {
-                rewadPotDetail.startDate = rewadPotDetail?.startDate?.split(' ')[0] +'T'+ startDateTime;
+            if (startDate) {
+                rewadPotDetail.startDate = startDate+'T'+ startDateTime;
             }
             if (rewadPotDetail?.claimExpiryDate?.date) {
                 // rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +' '+rewadPotDetail?.claimExpiryDate?.time;
                 rewadPotDetail.claimExpiryDate = rewadPotDetail?.claimExpiryDate?.date +'T'+endDateTime;
-
             }
             rewadPotDetail.potId = id;
         }
@@ -278,7 +293,7 @@ const AddPot = () => {
               
           } else {
             toast.dismiss()
-            toast.success('Pot Updated Succesfully !!');
+            toast.success('Pot Updated Succesfully!!');
             setDisableSubmitButton(false);
             navigate('/pool-listing');
           }
@@ -316,7 +331,8 @@ const AddPot = () => {
         e.preventDefault();
         if(rewadPotDetail?.potType === 'LOTTERYPOT' || rewadPotDetail?.assetType==='NFT'){
         let dataToSend = {
-            tokenId: e.target.value
+            tokenId: e.target.value,
+            quantity: rewadPotDetail?.rewardTokenAmount
         }
 
         dispatch(setLoadingTrue());
@@ -363,7 +379,7 @@ const AddPot = () => {
                                         onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})} >
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Token Amount is required (Min:0) !
+                                        Token Amount is required (Min:0)!
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             
@@ -376,23 +392,23 @@ const AddPot = () => {
                                                 type="date"
                                                 format="mm/dd/yyyy"
                                                 min={currentDate}
-                                                max={endDate}
-                                                value={potStatusCheck ? currentDate : rewadPotDetail?.startDate?.split('T')[0] || ''}
-                                                onChange={({ target }) => setRewardPotDetail({...rewadPotDetail,startDate:target.value})}
+                                                value={potStatusCheck ? currentDate : startDate || ''}
+                                                onChange={({ target }) => setStartDate(target.value)}
                                                 disabled={id && rewadPotDetail?.isActive}
                                                 >
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
-                                                Start Date is required !
+                                                Start Date is required!
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                 
                                         <Form.Group as={Col} md="3" >
                                             <Form.Label>Start Time (UTC)</Form.Label><br/>
                                             <TimePicker 
-                                             value={potStatusCheck ? currentTime : startDateTime|| ''} 
-                                            onChange={(e) => { setStartDateTime(e);}} 
-                                            disabled={id && rewadPotDetail?.isActive}/>
+                                            value={potStatusCheck ? currentTime : startDateTime|| ''} 
+                                            onChange={(e) => { setStartDateTime(e);console.log(e)}} 
+                                            disabled={id && rewadPotDetail?.isActive}
+                                            />
                                         </Form.Group>
 
                                         <Form.Group as={Col} md="3">
@@ -401,12 +417,14 @@ const AddPot = () => {
                                             className='dateIcon'
                                             required
                                             type="date"
-                                            min={rewadPotDetail?.startDate}
+                                            min={startDate}
                                             value={endDate|| ''}
-                                            onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}>
+                                            onChange={({ target }) => { setEndDate(target.value); getClaimExpiryTime(target.value, 'date');  }}
+                                            isInvalid={endDateError!=='' ? true : false}
+                                            >
                                             </Form.Control>
                                             <Form.Control.Feedback type="invalid">
-                                                End Date is required !
+                                                {endDateError!=='' ? endDateError :<> End Date is required!</>}
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                 
@@ -414,7 +432,15 @@ const AddPot = () => {
                                             <Form.Label>End Time (UTC)</Form.Label><br/>
                                             <TimePicker 
                                                 onChange={(e) => { setEndDateTime(e); getClaimExpiryTime(e,'time'); }}
-                                                value={endDateTime|| ''} />
+                                                value={endDateTime|| ''} 
+                                            />
+                                            <Form.Control
+                                             type='hidden'
+                                             isInvalid = {(endTimeError!=='') || (endDateTime!=='') ? true: false}
+                                             />
+                                             <Form.Control.Feedback type="invalid">
+                                                {endTimeError!=='' && endDate && endTimeError}
+                                            </Form.Control.Feedback>
                                         </Form.Group>
                                     </Row> 
                                 </Col>  
@@ -425,7 +451,8 @@ const AddPot = () => {
                                     <Form.Label>Claim Expiry Date</Form.Label>
                                     <Form.Control
                                       type="text"
-                                      value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} >
+                                      value={rewadPotDetail?.claimExpiryDate?.date|| ''} disabled={true} 
+                                      required>
                                 </Form.Control>
                                 </Form.Group>
                         
@@ -434,7 +461,8 @@ const AddPot = () => {
                                     <Form.Label>Claim Expiry Time</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={endDateTime|| ''} disabled={true} >
+                                        value={endDateTime|| ''} disabled={true} 
+                                        required>
                                     </Form.Control>
                                 </Form.Group>
                                 
@@ -458,7 +486,7 @@ const AddPot = () => {
                                         <option value="TOKEN">Token</option>
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
-                                    Assest Type is required !
+                                    Assest Type is required!
                                 </Form.Control.Feedback>
                                 </Form.Group>
                     
@@ -483,7 +511,7 @@ const AddPot = () => {
                                     
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
-                                    Pot Type is required !
+                                    Pot Type is required!
                                 </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -501,7 +529,7 @@ const AddPot = () => {
                                     value={rewadPotDetail.assetDetails["ticker"] || ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Ticker is required !
+                                        Ticker is required!
                                     </Form.Control.Feedback>
                                 </Form.Group>
                         
@@ -514,7 +542,7 @@ const AddPot = () => {
                                     value={rewadPotDetail.assetDetails["contractAddress"]|| ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Contract Address is required !
+                                        Contract Address is required!
                                     </Form.Control.Feedback>
                                 </Form.Group>
                         
@@ -527,7 +555,7 @@ const AddPot = () => {
                                         value={rewadPotDetail.assetDetails["assetName"]|| ''}>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Assest Name is required !
+                                        Assest Name is required!
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 

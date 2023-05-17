@@ -31,7 +31,6 @@ const Signup = () => {
   const [passValidation, setPassValidation] = useState(false)
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [isUserNameValid, setIsUserNameValid] = useState(false)
-  const [signupButton,setSignupDisbale] = useState(true)
 
   
   const [userDetails, setUserDetails] = useState(
@@ -53,9 +52,9 @@ const Signup = () => {
     // console.log(userDetails.email)
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,4})+$/
     const tld = e.target.value?.split('.')[1]?.length
-    if(e.target.value !== ''){
+    if(e.target.value!== ''){
     if (regex.test(e.target.value) === false || tld <= 1) {
-      setEmailErrorMsg('Valid E-mail is required !')
+      setEmailErrorMsg('Valid E-mail is required!')
       setIsEmailValid(false)
     }
     else{
@@ -64,7 +63,7 @@ const Signup = () => {
     }
   }
   else{
-    setEmailErrorMsg('Email is  required !')
+    setEmailErrorMsg('Email is  required!')
     setIsEmailValid(false)
   }
   }
@@ -120,14 +119,12 @@ const Signup = () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-    if(isUserNameValid)
-   {
     setValidated(true);
    
   
    const form = e.currentTarget;
     // console.log(form.checkValidity(),form)
-    if (form.checkValidity() === true) {
+    if (form.checkValidity() === true && isUserNameValid === true) {
       
       // console.log('validity')
     if (userDetails.email && userDetails.password && userDetails.userName && userDetails.repeat && passValidation && isEmailValid ) {
@@ -136,10 +133,6 @@ const Signup = () => {
   }
     else {
       console.log('<<<<---Form is invalid --->>>>')
-      }
-    }
-    else {
-      console.log('<<<<---Username is invalid --->>>>')
       }
   }
 
@@ -195,22 +188,22 @@ const registerUsers = async () => {
         toast.dismiss();
         // toast.error(checkUname?.error?.message || 'Something went worng in checking username')
         setUserNameErr('Username Already Exists')
+        setUserNameSuccess('')
         // console.log(checkUname)
         setIsUserNameValid(false)
     } else {
       
       // toast.success(checkUname?.message || 'Username is valid')
-      setUserNameSuccess('Username is valid !')
-      setErrorMsg(null)
+      setUserNameSuccess('Username is valid!')
+      setUserNameErr('')
       if(checkUname?.status === 200){
         setIsUserNameValid(true)
       }
     }
   } 
     catch (error) {
-      
-      // toast.error(error?.response?.data?.message || 'Something went worng in checking username')
-      setUserNameErr(error?.response?.data?.message ||'Username is invalid !')
+      setUserNameErr(error?.response?.data?.message ||'Username is invalid!')
+      setUserNameSuccess('')
       setIsUserNameValid(false)
       dispatch(setLoadingFalse());
     }
@@ -328,7 +321,7 @@ const registerUsers = async () => {
     }
     else{
       toast.dismiss();
-      toast.error('All fields are required !!')
+      toast.error('All fields are required!!')
     }
   }
 
@@ -342,7 +335,7 @@ const registerUsers = async () => {
    * @param e Event
    */
   const handleBlur = (e) => {
-    if(userDetails.userName !== '' && userDetails.userName.trim()!=='')
+    if(userDetails.userName!== '' && userDetails.userName.trim()!=='')
     checkUsername();
   }
 
@@ -362,13 +355,13 @@ const registerUsers = async () => {
 
               <Form.Group className='pb-4' >
                 <Form.Control required type="text"  placeholder="USERNAME"
-                 onChange={({ target }) => setUserDetails({ ...userDetails,userName:target.value})} 
+                 onChange={({ target }) => {setUserDetails({ ...userDetails,userName:target.value}); setUserNameSuccess('')}} 
                  value={userDetails.userName} 
                  onBlur={handleBlur} 
                  isValid={isUserNameValid}
                  ></Form.Control>
-                <Form.Control.Feedback type="invalid">User name is required !</Form.Control.Feedback>
-                <span className="custom-success-msg"> {isUserNameValid && userNameSuccess} </span>
+                <Form.Control.Feedback type="invalid">Username is required!</Form.Control.Feedback>
+                <span className="custom-success-msg"> {isUserNameValid && !userNameErr && userNameSuccess} </span>
                 <span className="custom-error-msg"> {!isUserNameValid && userNameErr} </span>
               </Form.Group>
 
