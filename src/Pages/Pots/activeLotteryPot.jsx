@@ -4,7 +4,7 @@ import { environment, nftArray } from "../../Environments/environment";
 import rewardBox from '../../Assest/img/rewardBox.png'
 import rewardBoxOpen from '../../Assest/img/rewardBox4.png'
 import rewardBoxExp from '../../Assest/img/rewardBox1.png'
-import { Modal} from 'react-bootstrap';
+import { Button, Form, Modal} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { getActivePot, getGameCash, redeemCashLottery } from '../../Services/User/indexPot';
@@ -12,11 +12,11 @@ import {  toast } from 'react-toastify';
 import Popup from '../../Components/popup';
 import { useNavigate } from 'react-router-dom';
 import { getAccountDetails } from '../../Components/Metamask';
-
+import { subscribeMailJet } from '../../Services/User';
 
 
 const ActiveLotteryPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setLotteryCurrentRoundDetails, setLotteryRoundIndex,setActiveLotteryId } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setLotteryRoundIndex,setActiveLotteryId } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -29,6 +29,10 @@ const ActiveLotteryPot = (props) => {
     const currentDateTime = new Date().toISOString()
     const [potStatus, setPotStatus] = useState('')
     const [showPotStatus, setShowPotStatus] = useState('')
+    const [email, setEmail] = useState("");
+    const [playModalShow, setPlayModalShow] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [validated, setValidated] = useState(false);
 
     useEffect(() => {
         getActivePotDetails();
@@ -49,6 +53,10 @@ const ActiveLotteryPot = (props) => {
         setValues()
     },[potStatus])
 
+    useEffect(()=>{
+        emailValidation()
+        dispatch(setLoadingFalse()); 
+      },[email])
     
 
     /**
@@ -193,7 +201,74 @@ const ActiveLotteryPot = (props) => {
         setRedeemModal(true)
         }
     }
-    
+
+        /**
+     * Validate email address received from input
+     * @returns boolean
+     */
+        const emailValidation = () => {
+            const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+            const tld=email?.split('.')[1]?.length;
+            if (!email || regex.test(email) === false || tld<=1) {
+                setErrorMsg('Enter a Valid Email !');
+                return false;
+            }
+            setErrorMsg(null)
+            return true;
+        }
+
+
+    /**
+     * Submits email from subricption form
+     * @param e Event
+     */
+    const handleSubmit = async (e) => {
+        // console.log(email,'-----------email value');
+        setValidated(true);
+        e.preventDefault();
+        e.stopPropagation();
+        e.preventDefault();
+
+
+        if (email && !errorMsg) {
+            let dataToSend = {
+                email: email
+            }
+            // auth.login(dataToSend)
+            dispatch(setLoadingTrue());
+            try {
+                const subscribe = await subscribeMailJet(dataToSend);
+                dispatch(setLoadingFalse());
+                if (subscribe.error) {
+                toast.dismiss();
+                toast.error(subscribe?.error?.message || 'Something went worng');
+                  } else {
+                toast.dismiss();
+                toast.success(' THANK YOU FOR SUBSCRIBING!');
+                setPlayModalShow(false);
+                setErrorMsg(null);
+                }
+            } catch (error) {
+                //   console.log(error)
+                toast.dismiss();
+                toast.error(error?.response?.data?.message || 'Something went worng');
+                dispatch(setLoadingFalse());
+            }
+        } else {
+            console.log('Form is invalid ------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+        }
+        dispatch(setLoadingFalse());
+      }
+
+      const showModal = () => {
+        setEmail('')
+        setValidated(false)
+        setPlayModalShow(true);
+      }
+
+      const hideModal = () => { 
+        setPlayModalShow(false) 
+    }
 
     return(
         <>
@@ -226,6 +301,55 @@ const ActiveLotteryPot = (props) => {
             </span>
             </Modal.Body>
           </Modal>
+
+          <Modal
+          show={playModalShow}
+          onHide={hideModal}
+          backdrop="static"
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>stay tuned</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>Stay tuned for our Testnet competition to win $BALR token</h4>
+
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={handleSubmit}
+              className="formFlex"
+            >
+              <Form.Group>
+                <Form.Control
+                  required
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={({ target }) => {
+                    setEmail(target.value)
+                  }}
+                />
+                <Form.Control.Feedback type="invalid">
+                  <span> {email && errorMsg && 'Valid E-mail is required!'} </span>
+                  <span> {!email && 'E-mail is required!'} </span>
+                </Form.Control.Feedback>
+              </Form.Group>
+              <div>
+                <Button
+                  className="subscribeBtn"
+                  variant="primary"
+                  onClick={handleSubmit}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
           
         <div className="ht100 pt8">
                 <div className="container">
@@ -273,7 +397,7 @@ const ActiveLotteryPot = (props) => {
                                     (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
                                     {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}
                                     {(<Can do='login' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Register Now</a> </Can>)}</>) :
-                                    (<a ><span></span> NOTIFY ME</a>)}
+                                    (<a onClick={()=>{showModal();}}><span></span> NOTIFY ME</a>)}
                                     </div>
                                 </div>                        
                             </div>

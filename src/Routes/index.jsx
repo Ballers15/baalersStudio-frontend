@@ -59,7 +59,6 @@ const NavigationRouter = () => {
             
             <Route element={<WithNav />}>
             <Route exact path="/admin-dashboard" element={<AuthenticatorAdmin><AdminDashboard /></AuthenticatorAdmin>} /> 
-              {/* <Route exact path="/:id" element={<AuthenticatorUser> <Dashboard /> </AuthenticatorUser> } /> */}
               <Route exact path="/" element={<AuthenticatorUser> <Dashboard /> </AuthenticatorUser> } />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/party" element={<Party />} />

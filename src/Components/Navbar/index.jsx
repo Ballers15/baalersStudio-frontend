@@ -7,7 +7,7 @@ import './Navbar.css';
 import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import wallet from '../../Assest/img/wallet.svg';
-import { Link, useLocation, useNavigate  } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import Dropdown from 'react-bootstrap/Dropdown';
 import {  disconnectWallet, getAccountDetails, getDetailsFromChainId, switchNetwork } from '../Metamask';
@@ -27,14 +27,8 @@ const NavBar = () => {
 
   let strAuth = useSelector(state => state.user.user);
   let _u = JSON.parse(strAuth);
-  const location = useLocation();
   const dispatch = useDispatch();
   const walletAddress = useSelector(state => state.wallet.walletAddress)
-
-// useEffect(() => {
-//   // Store the previous path in state or local storage
-//   sessionStorage.setItem('before login',location.pathname);
-// }, [location.pathname]);
 
 useEffect(() => {
   if(walletAddress !== null && _u?.user?.role === 'USER'){
@@ -104,10 +98,10 @@ const handleAccountChange = (accounts) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
               <Can do='about' on='navbar'> <Nav.Link eventKey="1" as={Link} to={deck_compressed} target="blank" rel="noopener noreferrer" > {' '} About{' '} </Nav.Link> </Can>
-              <Can do='party' on='navbar'> <Nav.Link eventKey="2" href='/#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
+              <Can do='party' on='navbar'> <Nav.Link eventKey="2" as={Link} to='/#partyGang'> {' '} Party{' '} </Nav.Link> </Can>
               <Can do='how-to-play' on='navbar'> <Nav.Link as={Link} to="https://medium.com/@Ballers_Studio" target="blank" rel="noopener noreferrer" > How To Play? </Nav.Link> </Can>
               <Can do='pool' on='navbar'> <Nav.Link eventKey="3" as={Link} to='/pool' > Pool </Nav.Link> </Can>
-              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" href='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
+              <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
               
              {/* Admin menu starts*/}
               <Can do='admin-dashboard' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>
@@ -118,7 +112,7 @@ const handleAccountChange = (accounts) => {
 
             <Nav>
             <Can do='wallet' on='navbar'> <Nav.Link className='connectBtn'> {walletAddress !==null && walletAddress !==undefined ? ( <> {walletAddress?.slice(0,5)+'..'+walletAddress?.slice(-5)} </>) :
-                          ( <span onClick={()=>{handleConnectWallet()}}> <img src={wallet} /> Connect Wallet</span> )} </Nav.Link> </Can>
+                          ( <span onClick={()=>{handleConnectWallet()}}> <img src={wallet} alt='' /> Connect Wallet</span> )} </Nav.Link> </Can>
             {/* <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link> */}
           {<Can do='notification' on='navbar'>
             <NotificationToggle/>

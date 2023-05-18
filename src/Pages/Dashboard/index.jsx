@@ -49,15 +49,13 @@ import starM from '../../Assest/img/starM.svg'
 import starS from '../../Assest/img/starS.svg'
 import { subscribeMailJet } from '../../Services/User';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ApiLoader from '../../Components/apiLoader'
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
 import { environment } from "../../Environments/environment";
-
-
 
 
 window.addEventListener(
@@ -70,10 +68,6 @@ window.addEventListener(
     },
     false
 );
-
-
- 
-
 
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
@@ -102,6 +96,7 @@ const Dashboard = () => {
 
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.loading.isLoading)
+  const location  = useLocation();
 
     useEffect(() => {
         $(window).scroll(function () {
@@ -120,6 +115,18 @@ const Dashboard = () => {
             });
         });
     })
+
+    useEffect(() => {
+      let id = location.hash;
+      id = id.substring(id.indexOf("#") + 1);
+      // Scroll to element with ID 'partyGang' or 'balrToken'
+      if (id === 'partyGang' || id === 'balrToken') {
+        const targetElement = document.getElementById(id);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }, [location.hash]);
 
     const [buttonAIsHovering, buttonAHoverProps] = useHover()
     const [buttonAIsHovering2, buttonAHoverProps2] = useHover()
