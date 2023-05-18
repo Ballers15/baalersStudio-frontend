@@ -331,7 +331,7 @@ const UsersList = () => {
                       <tr key={user?._id}>
                         <td className='sNoWth'>{((currentPage-1)*10)+index + 1}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-between'><span title={user?.email} className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
+                        <td className='d-flex justify-content-between'><span title={user?.email} className='emailWth'>{user?.email } </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.provider}</td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
