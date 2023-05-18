@@ -98,6 +98,7 @@ p.amount{
 .nftSlider{
     display: flex;
     overflow-x: auto;
+    justify-content: center;
     padding-bottom: 1.5rem;
 }
 .nftSlider img.active{
@@ -109,6 +110,9 @@ p.amount{
     width: 17%;
     margin-right: 25px;
     margin-left: 5px;
+}
+.cardHt{
+    min-height: 342px;
 }
 @media (max-width: 1500px) {
     .participateName{ 
@@ -134,6 +138,14 @@ p.amount{
 p.amount { 
     font-size: 52px;
 }
+}
+@media (max-width: 1300px){
+    .cardHt{
+        min-height: 342px;
+    }
+    p.amount {
+        font-size: 40px;
+    }
 }
 @media (max-width: 1200px){
     .profileText img{

@@ -585,99 +585,101 @@ const PoolListing = () => {
                         
                     </div>
                     <div className="pool-listing-table">
-                    <table>
-                    <thead className="pool-listing-table-head">
-                    <tr>
-                        <th>Sr. No.</th>
-                        <th>Pot Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Claim Expiry Date</th>
-                        <th>Reward Amount</th>
-                        <th>Users Count </th>
-                        <th>Game Cash Burned</th>                     
-                        <th>Contract Address</th>
-                        <th>Assest Name</th>
-                        <th>Pot Status</th>
-                        <th>Stop Claim</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody className="pool-listing-table-body">
-                        {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
-                            return (
-                                <tr key={pot?._id}>
-                                <td>{((currentPageAcitve-1)*10)+index+1}</td>
-                                <td>{pot?.potType}</td>
-                                <td>{pot?.startDate?.split('T')[0]}</td>
-                                <td>{pot?.endDate?.split('T')[0]}</td>
-                                <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
-                                <td>{pot?.rewardTokenAmount}</td>
-                                <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
-                                            <i className="fa fa-eye" />
-                                        </span></td>
-                                <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)} </td>
-                               
-                                <td>
-                                    <span title= {pot?.assetDetails?.contractAddress}>
-                                        {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
-                                        {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                    </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
-                                </td>
-                                <td>
-                                    <span title= {pot?.assetDetails?.assetName}>
-                                        {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
-                                        {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
-                                    </span>
-                               </td>
-                               <td>{pot?.potStatus}</td>
-                            <td>
-                              <span>
-                                {pot?.claimPot && <MDBSwitch onChange={()=>handleClaimStatus(pot)} checked={pot?.claimPot} title="Stop claim"/>}
-                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Start claim"/>}
-                              </span>
-                            </td>
-                                <td className="action-tab-pool-list">
-                                    {Number(pot?.potAmountCollected?.$numberDecimal) === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                            <i className="fa fa-edit " />
-                                        </span> :   <span title="View Pot Details" onClick={() => viewRewardPot(pot?._id)}>
-                                            <i className="fa fa-eye " />
-                                        </span>}
-                                        <span>
-                                            {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" />}
-                                            {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                      <div>
+                      <table>
+                        <thead className="pool-listing-table-head">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Pot Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Claim Expiry Date</th>
+                            <th>Reward Amount</th>
+                            <th>Users Count </th>
+                            <th>Game Cash Burned</th>                     
+                            <th>Contract Address</th>
+                            <th>Assest Name</th>
+                            <th>Pot Status</th>
+                            <th>Stop Claim</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody className="pool-listing-table-body">
+                            {rewardPotDetailsArray.length!==0?rewardPotDetailsArray.map((pot, index) => {
+                                return (
+                                    <tr key={pot?._id}>
+                                    <td>{((currentPageAcitve-1)*10)+index+1}</td>
+                                    <td>{pot?.potType}</td>
+                                    <td>{pot?.startDate?.split('T')[0]}</td>
+                                    <td>{pot?.endDate?.split('T')[0]}</td>
+                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                    <td>{pot?.rewardTokenAmount}</td>
+                                    <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                                <i className="fa fa-eye" />
+                                            </span></td>
+                                    <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)} </td>
+                                
+                                    <td className="d-flex align-items-center justify-content-center">
+                                        <span title= {pot?.assetDetails?.contractAddress}>
+                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
+                                            {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
+                                        </span>{' '}{' '}{' '}{' '}
+                                        <span className='fa fa-copy ms-2' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
+                                    </td>
+                                    <td>
+                                        <span title= {pot?.assetDetails?.assetName}>
+                                            {pot?.assetDetails?.assetName.length>12 &&  (pot?.assetDetails?.assetName.slice(0,12)+'...')}
+                                            {pot?.assetDetails?.assetName.length<=12 &&  (pot?.assetDetails?.assetName)}
                                         </span>
                                 </td>
-                                </tr>
-                            )
-                        }):null}
-                        {rewardPotDetailsArray.length===0?<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                 No Record Found
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>:null}
-                    </tbody>
-                    </table>
-                    <Pagination>
-                        <Pagination.First onClick={()=>{setCurrentPageActive(1)}}/>
-                        <Pagination.Prev onClick={prevPageActive}/>
-                        <Pagination.Item active >{currentPageAcitve}</Pagination.Item>                     
-                        <Pagination.Ellipsis />
-                        <Pagination.Item disabled>{numberOfActivePage}</Pagination.Item>
-                        <Pagination.Next onClick={nextPageActive}/>
-                        <Pagination.Last onClick={()=>{setCurrentPageActive(numberOfActivePage)}}/>
-                    </Pagination>
+                                <td>{pot?.potStatus}</td>
+                                <td>
+                                <span>
+                                    {pot?.claimPot && <MDBSwitch onChange={()=>handleClaimStatus(pot)} checked={pot?.claimPot} title="Stop claim"/>}
+                                    {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Start claim"/>}
+                                </span>
+                                </td>
+                                    <td className="action-tab-pool-list">
+                                        {Number(pot?.potAmountCollected?.$numberDecimal) === 0 ? <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                                <i className="fa fa-edit " />
+                                            </span> :   <span title="View Pot Details" onClick={() => viewRewardPot(pot?._id)}>
+                                                <i className="fa fa-eye " />
+                                            </span>}
+                                            <span>
+                                                {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active" />}
+                                                {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                                            </span>
+                                    </td>
+                                    </tr>
+                                )
+                            }):null}
+                            {rewardPotDetailsArray.length===0?<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    No Record Found
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>:null}
+                        </tbody>
+                        </table>
+                      </div>
+                        <Pagination>
+                            <Pagination.First onClick={()=>{setCurrentPageActive(1)}}/>
+                            <Pagination.Prev onClick={prevPageActive}/>
+                            <Pagination.Item active >{currentPageAcitve}</Pagination.Item>                     
+                            <Pagination.Ellipsis />
+                            <Pagination.Item disabled>{numberOfActivePage}</Pagination.Item>
+                            <Pagination.Next onClick={nextPageActive}/>
+                            <Pagination.Last onClick={()=>{setCurrentPageActive(numberOfActivePage)}}/>
+                        </Pagination>
                         </div>
                 </div>
                 <div>
@@ -698,89 +700,91 @@ const PoolListing = () => {
                         </Row> 
                     </div>
                     <div className="pool-listing-table">
-                        <table>
-                        <thead className="pool-listing-table-head">
-                        <tr>
-                            <th>Sr. No.</th>
-                            <th>Pot Type</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Claim Expiry Date</th>
-                            <th>Reward Amount</th>
-                            <th>Users Count </th>
-                            <th>Game Cash Burned</th>                        
-                            <th>Contract Address</th>
-                            <th>Assest Name</th>
-                            <th>pot Status</th>
-                            <th>Stop Claim</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody className="pool-listing-table-body">
-                            {upcomingRewardPotArray.length!==0?upcomingRewardPotArray.map((pot, index) => {
-                                return (
-                                    <tr key={pot?._id}>
-                                    <td>{((currentPageUpcoming-1)*10)+index+1}</td>
-                                    <td>{pot?.potType}</td>
-                                    <td>{pot?.startDate?.split('T')[0]}</td>
-                                    <td>{pot?.endDate?.split('T')[0]}</td>
-                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
-                                    <td>{pot?.rewardTokenAmount}</td>
-                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
-                                                <i className="fa fa-eye " />
-                                            </span></td>
-                                    <td>{pot?.potAmountCollected?.$numberDecimal}</td>
-                                    
-                                    <td>
-                                        <span title= {pot?.assetDetails?.contractAddress}>
-                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
-                                            {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                        </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully'); }}></span>
-                                    </td>
-                                    <td>
-                                        <span title= {pot?.assetDetails?.assetName}>
-                                            {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
-                                            {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
-                                        </span>
-                                    </td>
-                                    <td>{pot?.potStatus}</td>
-                                    <td>
-                                    <span>
-                                {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
-                                {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
-                              </span>
+                        <div>
+                            <table>
+                            <thead className="pool-listing-table-head">
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Pot Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Claim Expiry Date</th>
+                                <th>Reward Amount</th>
+                                <th>Users Count </th>
+                                <th>Game Cash Burned</th>                        
+                                <th>Contract Address</th>
+                                <th>Assest Name</th>
+                                <th>pot Status</th>
+                                <th>Stop Claim</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody className="pool-listing-table-body">
+                                {upcomingRewardPotArray.length!==0?upcomingRewardPotArray.map((pot, index) => {
+                                    return (
+                                        <tr key={pot?._id}>
+                                        <td>{((currentPageUpcoming-1)*10)+index+1}</td>
+                                        <td>{pot?.potType}</td>
+                                        <td>{pot?.startDate?.split('T')[0]}</td>
+                                        <td>{pot?.endDate?.split('T')[0]}</td>
+                                        <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                        <td>{pot?.rewardTokenAmount}</td>
+                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                                    <i className="fa fa-eye " />
+                                                </span></td>
+                                        <td>{pot?.potAmountCollected?.$numberDecimal}</td>
+                                        
+                                        <td>
+                                            <span title= {pot?.assetDetails?.contractAddress}>
+                                                {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
+                                                {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
+                                            </span>{' '}{' '}{' '}{' '}
+                                        <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully'); }}></span>
+                                        </td>
+                                        <td>
+                                            <span title= {pot?.assetDetails?.assetName}>
+                                                {pot?.assetDetails?.assetName.length>12 &&  (pot?.assetDetails?.assetName.slice(0,12)+'...')}
+                                                {pot?.assetDetails?.assetName.length<=12 &&  (pot?.assetDetails?.assetName)}
+                                            </span>
+                                        </td>
+                                        <td>{pot?.potStatus}</td>
+                                        <td>
+                                        <span>
+                                    {pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot} title="De-Active"/>}
+                                    {!pot?.claimPot && <MDBSwitch onChange={()=>updateClaimStatus(pot)} checked={pot?.claimPot}   title="Active"/>}
+                                </span>
 
+                                        </td>
+                                        <td className="action-tab-pool-list">
+                                                <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
+                                                    <i className="fa fa-edit " />
+                                                </span>
+                                                <span>
+                                                    {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
+                                                    {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
+                                                </span>
+                                        </td>
+                                        </tr>
+                                    )
+                                }):null}
+                                {upcomingRewardPotArray.length===0?<tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        No Record Found
                                     </td>
-                                    <td className="action-tab-pool-list">
-                                            <span title="Edit Pot Details" onClick={() => editRewardPot(pot?._id)}>
-                                                <i className="fa fa-edit " />
-                                            </span>
-                                            <span>
-                                                {pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive} title="De-Active"/>}
-                                                {!pot?.isActive && <MDBSwitch style={{ marginLeft: '5px' }} onChange={()=>activeDeactiveRewardPot(pot)} checked={pot?.isActive}   title="Active"/>}
-                                            </span>
-                                    </td>
-                                    </tr>
-                                )
-                            }):null}
-                            {upcomingRewardPotArray.length===0?<tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    No Record Found
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>:null}
-                        </tbody>
-                        </table>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>:null}
+                            </tbody>
+                            </table>
+                        </div>
                         <Pagination>
                             <Pagination.First onClick={()=>{setCurrentPageUpcoming(1)}}/>
                             <Pagination.Prev onClick={prevPageUpcoming}/>
@@ -811,70 +815,72 @@ const PoolListing = () => {
                         
                     </div>
                     <div className="pool-listing-table">
-                        <table>
-                        <thead className="pool-listing-table-head">
-                        <tr>
-                            <th>Sr. No.</th>
-                            <th>Pot Type</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Claim Expiry Date</th>
-                            <th>Reward Amount</th>
-                            <th>Users Count </th>
-                            <th>Game Cash Burned</th>                        
-                            <th>Contract Address</th>
-                            <th>Assest Name</th>
+                        <div>
+                            <table>
+                            <thead className="pool-listing-table-head">
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Pot Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Claim Expiry Date</th>
+                                <th>Reward Amount</th>
+                                <th>Users Count </th>
+                                <th>Game Cash Burned</th>                        
+                                <th>Contract Address</th>
+                                <th>Assest Name</th>
 
-                        </tr>
-                        </thead>
-                        <tbody className="pool-listing-table-body">
-                            {archivesRewardPotArray.length!==0?archivesRewardPotArray.map((pot, index) => {
-                                return (
-                                    <tr key={pot?._id}>
-                                    <td>{((currentPageArchive-1)*10)+index+1}</td>
-                                    <td>{pot?.potType}</td>
-                                    <td>{pot?.startDate?.split('T')[0]}</td>
-                                    <td>{pot?.endDate?.split('T')[0]}</td>
-                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
-                                    <td>{pot?.rewardTokenAmount}</td>
-                                    <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
-                                                <i className="fa fa-eye " />
-                                            </span></td>
-                                    <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)}</td>
-                            
+                            </tr>
+                            </thead>
+                            <tbody className="pool-listing-table-body">
+                                {archivesRewardPotArray.length!==0?archivesRewardPotArray.map((pot, index) => {
+                                    return (
+                                        <tr key={pot?._id}>
+                                        <td>{((currentPageArchive-1)*10)+index+1}</td>
+                                        <td>{pot?.potType}</td>
+                                        <td>{pot?.startDate?.split('T')[0]}</td>
+                                        <td>{pot?.endDate?.split('T')[0]}</td>
+                                        <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                        <td>{pot?.rewardTokenAmount}</td>
+                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                                    <i className="fa fa-eye " />
+                                                </span></td>
+                                        <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)}</td>
+                                
+                                        <td>
+                                            <span title= {pot?.assetDetails?.contractAddress}>
+                                                {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
+                                                {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
+                                            </span>{' '}{' '}{' '}{' '}
+                                        <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
+                                        </td>
+                                        <td>
+                                            <span title= {pot?.assetDetails?.assetName}>
+                                                {pot?.assetDetails?.assetName.length>12 &&  (pot?.assetDetails?.assetName.slice(0,12)+'...')}
+                                                {pot?.assetDetails?.assetName.length<=12 && (pot?.assetDetails?.assetName)}
+                                            </span>
+                                        </td>
+                                        </tr>
+                                    )
+                                }):null}
+                                {archivesRewardPotArray.length===0?<tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
-                                        <span title= {pot?.assetDetails?.contractAddress}>
-                                            {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
-                                            {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
-                                        </span>{' '}{' '}{' '}{' '}
-                                    <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(pot?.assetDetails?.contractAddress); toast.dismiss(); toast.info( 'Address Copied Succesfully');}}></span>
+                                        No Record Found
                                     </td>
-                                    <td>
-                                        <span title= {pot?.assetDetails?.assetName}>
-                                            {pot?.assetDetails?.assetName.length>12 && toTitleCase(pot?.assetDetails?.assetName.slice(0,12)+'...')}
-                                            {pot?.assetDetails?.assetName.length<=12 && toTitleCase(pot?.assetDetails?.assetName)}
-                                        </span>
-                                    </td>
-                                    </tr>
-                                )
-                            }):null}
-                            {archivesRewardPotArray.length===0?<tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    No Record Found
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>:null}
-                        </tbody>
-                        </table>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>:null}
+                            </tbody>
+                            </table>
+                        </div>
                         <Pagination>
                             <Pagination.First onClick={()=>{setCurrentPageArchive(1)}}/>
                             <Pagination.Prev onClick={prevPageArchive}/>
