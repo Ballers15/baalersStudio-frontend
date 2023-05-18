@@ -12,7 +12,7 @@ const LeaderBoardLottery = (props) => {
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
     const _u = JSON.parse(user)
-    const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, setLotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex, expiryTime} = props;
+    const {reload, lotteryPrevRoundsLength, lotteryCurrentRoundDetails, lotteryRoundIndex, setLotteryRoundIndex, expiryTime,activeLotteryId} = props;
     const dispatch = useDispatch()
     const [leaderBoardDetails,setLeaderBoardDetails] = useState({})
     const [leaderSearch,setLeaderSearch]  = useState('')
@@ -23,7 +23,7 @@ const LeaderBoardLottery = (props) => {
     useEffect(() => {
         if(lotteryCurrentRoundDetails?._id !== undefined)
             getLotteryLeaderBoard(leaderSearch)
-    }, [lotteryCurrentRoundDetails,walletAddress,reload])
+    }, [lotteryCurrentRoundDetails,reload,lotteryRoundIndex])
 
 
 
@@ -62,7 +62,7 @@ const LeaderBoardLottery = (props) => {
     const getLotteryLeaderBoard = async (data) => {
         setLeaderBoardDetails({})
         let dataToSend = {};
-        if(data!=''){
+            if(lotteryRoundIndex !==-1){
         dataToSend = {
             search: data,
             potId: lotteryCurrentRoundDetails._id,
@@ -72,11 +72,12 @@ const LeaderBoardLottery = (props) => {
         }
         else{
             dataToSend = {
-                potId: lotteryCurrentRoundDetails._id,
+                search: data,
+                potId: activeLotteryId,
                 walletAddress: walletAddress,
                 userId: _u?.user?.userId
             }
-        }
+    }
         dispatch(setLoadingTrue());
         try {
           const leader = await leaderBoardLottery(dataToSend);
@@ -116,7 +117,6 @@ const LeaderBoardLottery = (props) => {
     const handleActiveIndex = () => {
     if(lotteryRoundIndex !==-1){
         if(expiryTime !==''){
-            setLotteryCurrentRoundDetails({})
             setLeaderBoardDetails({})
             setLotteryRoundIndex(-1)
         }

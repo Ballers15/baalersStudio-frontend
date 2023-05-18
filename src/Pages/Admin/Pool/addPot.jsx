@@ -407,7 +407,7 @@ const AddPot = () => {
                                             <TimePicker 
                                             value={potStatusCheck ? currentTime : startDateTime|| ''} 
                                             onChange={(e) => { setStartDateTime(e);console.log(e)}} 
-                                            disabled={id && rewadPotDetail?.isActive}
+                                            disabled={rewadPotDetail?.isActive || (potStatusCheck && !id)}
                                             />
                                         </Form.Group>
 

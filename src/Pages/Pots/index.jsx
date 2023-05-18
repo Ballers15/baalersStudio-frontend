@@ -54,6 +54,8 @@ const PotPage = () => {
     const [rewardCurrentRoundDetails, setRewardCurrentRoundDetails] = useState({})
     const [rewardPrevRoundsLength, setRewardPrevRoundsLength] = useState(0)
     const [rewardRoundIndex, setRewardRoundIndex] = useState(-1)
+    const [activeLotteryId, setActiveLotteryId] = useState('')
+    const [activeRewardId, setActiveRewardId] = useState('')
 
     const [countdownTime, setCountdownTime]= useState(
        {
@@ -132,7 +134,7 @@ return(
 
     <div className="lotteryPool">
         <div className="text-center potsHead thirdSlide" style={{ backgroundImage: potType === 'REWARDPOT' ? `url(${rewardPot})` : `url(${lotteryPot})`}}>
-        <p className="finishText backBtn"><i className="fa fa-arrow-left" aria-hidden="true" onClick={()=>{navigate(-1)}}></i> </p>
+        <p className="finishText backBtn"><i className="fa fa-arrow-left" aria-hidden="true" onClick={()=>{navigate('/pool')}}></i> </p>
             <div className="sCaption text-center">          
 
                 <div> 
@@ -199,11 +201,11 @@ return(
 
                {potType==='LOTTERYPOT' && <ActiveLotteryPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} 
                setExpiryTime={setExpiryTime} setPrevious={setPrevious} setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} 
-               setLotteryRoundIndex={setLotteryRoundIndex}/>}
+               setLotteryRoundIndex={setLotteryRoundIndex} setActiveLotteryId={setActiveLotteryId} />}
 
                {potType==='REWARDPOT' && <ActiveRewardPot countdownTime={countdownTime} reload={reload} setReload={setReload} expiryTime={expiryTime} 
                setExpiryTime={setExpiryTime} setPrevious={setPrevious} setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} 
-               setRewardRoundIndex={setRewardRoundIndex} />}
+               setRewardRoundIndex={setRewardRoundIndex} setActiveRewardId={setActiveRewardId} />}
 
                {potType==='LOTTERYPOT' && <LotteryRounds previous={previous} lotteryCurrentRoundDetails={lotteryCurrentRoundDetails} 
                setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} lotteryPrevRoundsLength={lotteryPrevRoundsLength} 
@@ -218,12 +220,12 @@ return(
                 {potType==='LOTTERYPOT' && <LeaderBoardLottery reload={reload} lotteryCurrentRoundDetails={lotteryCurrentRoundDetails} 
                 setLotteryCurrentRoundDetails={setLotteryCurrentRoundDetails} lotteryPrevRoundsLength={lotteryPrevRoundsLength} 
                 setLotteryPrevRoundsLength={setLotteryPrevRoundsLength} lotteryRoundIndex={lotteryRoundIndex} setLotteryRoundIndex={setLotteryRoundIndex} 
-                expiryTime={expiryTime} />}
+                expiryTime={expiryTime} activeLotteryId={activeLotteryId} />}
 
                {potType==='REWARDPOT' && <LeaderBoardReward reload={reload} rewardCurrentRoundDetails={rewardCurrentRoundDetails} 
                setRewardCurrentRoundDetails={setRewardCurrentRoundDetails} rewardPrevRoundsLength={rewardPrevRoundsLength} 
                setRewardPrevRoundsLength={setRewardPrevRoundsLength} rewardRoundIndex={rewardRoundIndex} setRewardRoundIndex={setRewardRoundIndex} 
-               expiryTime={expiryTime}/>}
+               expiryTime={expiryTime} activeRewardId={activeRewardId} />}
         </div>
 
         </div>

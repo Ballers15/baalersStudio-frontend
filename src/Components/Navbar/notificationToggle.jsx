@@ -14,7 +14,8 @@ export default function NotificationToggle() {
   const [arr,setArr] = useState('');
   
   useEffect(()=>{
-    getNotificaions()
+    if(_u!==null)
+       getNotificaions()
   },[])
 
   // useEffect(() => {
@@ -41,7 +42,7 @@ export default function NotificationToggle() {
       }
     } catch (error) {
       toast.dismiss();
-      toast.error('Something went worng in fetching user notification')
+      toast.error(error)
       dispatch(setLoadingFalse());
     }
      
@@ -69,7 +70,7 @@ export default function NotificationToggle() {
       }
     } catch (error) {
       toast.dismiss();
-      toast.error('Something went worng in mark read single notification')
+      toast.error(error)
       dispatch(setLoadingFalse());
     }  
   }
@@ -90,7 +91,7 @@ export default function NotificationToggle() {
       }
     } catch (error) {
       toast.dismiss();
-      toast.error('Something went worng in mark read single notification')
+      toast.error(error)
       dispatch(setLoadingFalse());
     }  
   }
