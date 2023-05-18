@@ -585,19 +585,19 @@ const PoolListing = () => {
                         
                     </div>
                     <div className="pool-listing-table">
-                      <div className="table-responsive">
+                      <div>
                       <table>
                         <thead className="pool-listing-table-head">
                         <tr>
                             <th>Sr. No.</th>
-                            <th className="wth-10">Pot Type</th>
-                            <th className="wth-10">Start Date</th>
-                            <th className="wth-10">End Date</th>
-                            <th className="wth-10">Claim Expiry Date</th>
+                            <th>Pot Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Claim Expiry Date</th>
                             <th>Reward Amount</th>
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>                     
-                            <th className="wth-10">Contract Address</th>
+                            <th>Contract Address</th>
                             <th>Assest Name</th>
                             <th>Pot Status</th>
                             <th>Stop Claim</th>
@@ -609,17 +609,17 @@ const PoolListing = () => {
                                 return (
                                     <tr key={pot?._id}>
                                     <td>{((currentPageAcitve-1)*10)+index+1}</td>
-                                    <td className="wth-10">{pot?.potType}</td>
-                                    <td className="wth-10">{pot?.startDate?.split('T')[0]}</td>
-                                    <td className="wth-10">{pot?.endDate?.split('T')[0]}</td>
-                                    <td className="wth-10">{pot?.claimExpiryDate?.split('T')[0]}</td>
+                                    <td>{pot?.potType}</td>
+                                    <td>{pot?.startDate?.split('T')[0]}</td>
+                                    <td>{pot?.endDate?.split('T')[0]}</td>
+                                    <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                     <td>{pot?.rewardTokenAmount}</td>
                                     <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
                                                 <i className="fa fa-eye" />
                                             </span></td>
                                     <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)} </td>
                                 
-                                    <td className="d-flex align-items-center justify-content-center wth-10">
+                                    <td className="d-flex align-items-center justify-content-center">
                                         <span title= {pot?.assetDetails?.contractAddress}>
                                             {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                             {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
@@ -700,7 +700,7 @@ const PoolListing = () => {
                         </Row> 
                     </div>
                     <div className="pool-listing-table">
-                        <div className="table-responsive">
+                        <div>
                             <table>
                             <thead className="pool-listing-table-head">
                             <tr>
@@ -815,7 +815,7 @@ const PoolListing = () => {
                         
                     </div>
                     <div className="pool-listing-table">
-                        <div className="table-responsive">
+                        <div>
                             <table>
                             <thead className="pool-listing-table-head">
                             <tr>
