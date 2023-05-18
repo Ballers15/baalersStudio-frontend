@@ -513,13 +513,9 @@ const PoolListing = () => {
                         )
                     }):null}
                      {potUsers?.transactions?.length===0?<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> No Record Found </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            
+                            <td colSpan={7}> No Record Found </td>
+                             
                         </tr>:null}
                     </tbody>
                 </Table>
@@ -654,19 +650,10 @@ const PoolListing = () => {
                                 )
                             }):null}
                             {rewardPotDetailsArray.length===0?<tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
+                                 
+                                <td colSpan={10}>
                                     No Record Found
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                </td> 
                             </tr>:null}
                         </tbody>
                         </table>
@@ -768,19 +755,10 @@ const PoolListing = () => {
                                     )
                                 }):null}
                                 {upcomingRewardPotArray.length===0?<tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
+                                     
+                                    <td colSpan={10}>
                                         No Record Found
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    </td> 
                                 </tr>:null}
                             </tbody>
                             </table>
@@ -864,19 +842,10 @@ const PoolListing = () => {
                                     )
                                 }):null}
                                 {archivesRewardPotArray.length===0?<tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
+                                     
+                                    <td colSpan={10}>
                                         No Record Found
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    </td> 
                                 </tr>:null}
                             </tbody>
                             </table>

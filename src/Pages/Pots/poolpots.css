@@ -579,10 +579,10 @@ a.disabled{
   left: 0;
   right: -5rem;
   margin: auto;
-  top: 15px; 
-  width: 27%;
-
+  top: 36px;
+  width: 23%;
 }
+
 .finishSlider .slick-list{
   height: 300px;
 }
@@ -793,6 +793,19 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
+  .lotteryPool .poolBtn .playBtn {
+    width: 85%;
+  }
+  .countFont{
+    font-size: 30px;
+  }
+  .undColor{
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .earnText .sniff{ 
+    line-height: 25px; 
+  }
   .lotteryPool .heading {
     font-size: 28px;
 }
@@ -898,15 +911,22 @@ span.leaderboardInput {
     }
     .lotteryPool .poolBtn {
         width: 100%;
-    }
-    
-    .lotteryPool .poolBtn .playBtn {
-        width: 47%;
-    }
-   
-    
-  
+    }  
     .lotteryPool .thirdSlide .sCaption {
         width: 96%;
     }
+}
+@media (max-width: 380px){
+  .lotteryPool .poolBtn .playBtn {
+    width: 85%;
+  }
+  .lotteryPool .heading2 {
+    font-size: 31px;
+    top: -27%;
+  }
+  .earnText .sniff{
+    margin-left: .65rem;
+    margin-right: .65rem;
+
+  }
 }

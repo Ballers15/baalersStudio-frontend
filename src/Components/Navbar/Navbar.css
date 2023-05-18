@@ -133,8 +133,8 @@ button#dropdown-button-dark-example1 {
     backdrop-filter: blur(5px);
 }
 .navbar-expand-lg .navbar-nav .notification .dropdown-menu .ht {
-    height: auto;
-    overflow: auto; 
+    height: 78vh;
+    overflow: auto;
 }
 .notification .dropdown-item:focus, .notification .dropdown-item:hover, 
 .notification .dropdown-menu.dropdown-menu-dark .dropdown-item:focus {
@@ -182,9 +182,15 @@ button#dropdown-button-dark-example1 {
     }
 }
 @media (max-width: 480px){
+    .navbar-expand-lg .navbar-nav .notification .dropdown-menu .ht {
+        height: 44vh;
+    }
+    .navbar-expand-lg .navbar-nav .notification .dropdown-menu{
+        right: initial;
+    }
     .navbar-expand-lg .navbar-nav .nav-link.connectBtn { 
         padding: 14px 30px;
-        width: 55%;
+        width: 97%;
     }
     .navbar-expand-lg .navbar-nav .dropdown-menu{
         right: inherit;
