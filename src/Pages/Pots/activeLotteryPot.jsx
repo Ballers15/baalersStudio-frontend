@@ -16,7 +16,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveLotteryPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setLotteryCurrentRoundDetails, setLotteryRoundIndex } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setLotteryCurrentRoundDetails, setLotteryRoundIndex,setActiveLotteryId } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -37,7 +37,6 @@ const ActiveLotteryPot = (props) => {
     useEffect(() => {
         const element = document.getElementById("leaderboard");
         if(showRedeemPopup === true){
-            setLotteryCurrentRoundDetails({})
             setLotteryRoundIndex(-1)
             setTimeout(() => {
                 setShowRedeemPopup(false)
@@ -90,6 +89,7 @@ const ActiveLotteryPot = (props) => {
                 setPotStatus(status)
                 setExpiryTime(dateTime);
                 setPrevious(false);
+                setActiveLotteryId((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?._id : '')
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
             } catch (error) {
@@ -100,7 +100,6 @@ const ActiveLotteryPot = (props) => {
         }
 
         const setValues = () => {
-            console.log(potStatus)
                 if(potStatus==='ONGOING')
                     setShowPotStatus('ACTIVE LOTTERY POT')
                 else if (potStatus === 'UPCOMING')

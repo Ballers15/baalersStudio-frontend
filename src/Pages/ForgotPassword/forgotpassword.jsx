@@ -183,7 +183,7 @@ const ForgotPassword = () => {
         {newPass === false && <div className="signup-box">
         <h2 className="login-head">Forgot  <br/>Password ?</h2>
         <div className="forgot-page-container">
-         <p>No worries, enter your mail ID & we will send you a reset code</p>
+         <p>No worries, enter your mail ID & we will send you a reset code.</p>
           <Form noValidate validated={validated} onSubmit={handleSubmit} >
             <Row className="mb-2">
               <Form.Group >

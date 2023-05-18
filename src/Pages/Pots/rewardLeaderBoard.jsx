@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './poolpots.css' 
-import { Table, Button, Form } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import {  leaderBoardReward } from "../../Services/User/indexPot";
 import 'react-multi-carousel/lib/styles.css'; 
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ const LeaderBoardReward = (props) => {
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
     const _u = JSON.parse(user)
-    const {reload, rewardCurrentRoundDetails, setRewardCurrentRoundDetails, rewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex, expiryTime} = props;
+    const {reload, rewardCurrentRoundDetails, rewardPrevRoundsLength, rewardRoundIndex, setRewardRoundIndex, expiryTime,activeRewardId} = props;
     const [leaderBoardDetails,setLeaderBoardDetails] = useState('')
     const [leaderSearch,setLeaderSearch]  = useState('')
     const dispatch = useDispatch()
@@ -22,12 +22,13 @@ const LeaderBoardReward = (props) => {
     let activeBtn = document.getElementById('LeaderActivePotBtn')
 
     useEffect(() => {
+
         if(rewardCurrentRoundDetails?._id !== undefined)
-          getRewardLeaderBoard(leaderSearch)
-    }, [rewardCurrentRoundDetails,walletAddress,reload])
+              getRewardLeaderBoard(leaderSearch)
+    }, [rewardCurrentRoundDetails,reload,rewardRoundIndex])
 
     useEffect(() => {
-
+        console.log(rewardRoundIndex,'index')
         if(rewardRoundIndex === -1 && activeBtn && prevBtn){
             activeBtn.classList.add('disabled')
             prevBtn.classList.add('disabled')
@@ -59,7 +60,7 @@ const LeaderBoardReward = (props) => {
     const getRewardLeaderBoard = async (data) => {
         setLeaderBoardDetails({})
         let dataToSend = {};
-        if(data!==''){
+        if(rewardRoundIndex !== -1){
             dataToSend = {
                 search: data,
                 potId: rewardCurrentRoundDetails._id,
@@ -69,7 +70,8 @@ const LeaderBoardReward = (props) => {
         }
         else{
             dataToSend = {
-                potId: rewardCurrentRoundDetails._id,
+                search: data,
+                potId: activeRewardId,
                 walletAddress: walletAddress,
                 userId: _u?.user?.userId
             }
@@ -113,7 +115,6 @@ const LeaderBoardReward = (props) => {
         const handleActiveIndex = () => {
         if(rewardRoundIndex !==-1){
             if(expiryTime !==''){
-                setRewardCurrentRoundDetails({})
                 setLeaderBoardDetails({})
                 setRewardRoundIndex(-1)
             }
@@ -121,7 +122,7 @@ const LeaderBoardReward = (props) => {
                 if(rewardRoundIndex !== rewardPrevRoundsLength-1)
                    setRewardRoundIndex(rewardPrevRoundsLength-1)
             }
-            }
+         }
         }
 
     /**

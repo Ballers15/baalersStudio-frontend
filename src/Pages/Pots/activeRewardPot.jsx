@@ -17,7 +17,7 @@ import { getAccountDetails } from '../../Components/Metamask';
 
 
 const ActiveRewardPot = (props) => {
-    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious,  setRewardCurrentRoundDetails, setRewardRoundIndex } = props
+    const { countdownTime, reload, setReload, expiryTime, setExpiryTime, setPrevious, setRewardRoundIndex,setActiveRewardId } = props
     const [cash, setCash] = useState('')
     const walletAddress = useSelector(state => state.wallet.walletAddress)
     const user = useSelector(state => state.user.user)
@@ -38,7 +38,6 @@ const ActiveRewardPot = (props) => {
     useEffect(() => {
         const element = document.getElementById("leaderboard");
         if(showRedeemPopup === true){
-            setRewardCurrentRoundDetails({})
             setRewardRoundIndex(-1)
             setTimeout(() => {
                 setShowRedeemPopup(false)
@@ -56,8 +55,6 @@ const ActiveRewardPot = (props) => {
      * Get details of active pot (if any)
      */
         const getActivePotDetails = async () => {
-            let tokenId='';
-            let nft=''
             let startDateTime=''
             let dateTime=''
 
@@ -88,6 +85,7 @@ const ActiveRewardPot = (props) => {
                 setPotStatus((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?.potStatus : '')
                 setExpiryTime(dateTime);
                 setPrevious(false);
+                setActiveRewardId((pot?.data[0]!==undefined && pot?.data[0]!==null) ? pot?.data[0]?._id : '')
                 // console.log('exp',pot?.data.length?pot.data[0]?.endDate:'');
               }
             } catch (error) {
