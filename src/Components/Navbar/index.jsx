@@ -12,7 +12,7 @@ import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import Dropdown from 'react-bootstrap/Dropdown';
 import {  disconnectWallet, getAccountDetails, getDetailsFromChainId, switchNetwork } from '../Metamask';
 import { useDispatch, useSelector } from 'react-redux';
-import {  setWalletAddressValue } from '../Redux/actions';
+import {  setIsClaimedFalse, setWalletAddressValue } from '../Redux/actions';
 import Can from '../rolesBasedAccessControl/Can';
 import NotificationToggle from './notificationToggle';
 
@@ -86,6 +86,7 @@ const handleConnectWallet =  () => {
  */
 const handleAccountChange = (accounts) => {
   dispatch(setWalletAddressValue(accounts[0]))
+  dispatch(setIsClaimedFalse());
 }
 //metamask end
 

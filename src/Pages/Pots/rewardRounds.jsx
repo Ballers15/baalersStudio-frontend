@@ -308,7 +308,7 @@ return(
                     {prevRounds?.length ?  (<div className="poolBtn text-center pt-4 finishBtn">
                         <div className="playBtn">
                         {claimExpiryDate !== '' && claimed === false && participated === true && (<a onClick={()=>{handleClaim()}}><span></span> CLAIM NOW</a>)}
-                        {claimExpiryDate !== '' && claimed === true && participated === true (<a className="disabled"><span></span>Already CLAIMED</a>)}
+                        {claimExpiryDate !== '' && claimed === true && participated === true && (<a className="disabled"><span></span>Already CLAIMED</a>)}
                         {claimExpiryDate === '' && claimed === false && participated === true && (<a className="disabled"><span></span>CLAIM EXPIRED</a>)}
                         {claimExpiryDate !== '' && claimed === false && participated === false && (<></>)}
                         </div>  
