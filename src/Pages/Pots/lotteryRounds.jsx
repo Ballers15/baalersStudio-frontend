@@ -162,16 +162,17 @@ const LotteryRounds = (props) => {
             toast.dismiss();
             toast.error(round?.message||'Something went worng in preious rounds');
           } else {
-            let lastIndex = round?.data?.length-1
-            setPrevRounds(round?.data)
-            setPrevRoundsLength(round?.data?.length)
-            setLotteryPrevRoundsLength(round?.data?.length)
-            setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
-            setUserWon(round?.data[lastIndex]?.userRes?.lotteryWon)
-            setParticipated(round?.data[lastIndex]?.userRes?.participated)
-            setClaimedNft(round?.data[lastIndex]?.userRes?.claimed)
-            setPotId(round?.data[lastIndex]?._id)
-            setLotteryCurrentRoundDetails(round?.data[lastIndex])
+            let filterRound = round?.data.filter((item) => item.potUserDetails && item.userDetails);
+            let lastIndex = filterRound?.length-1
+            setPrevRounds(filterRound)
+            setPrevRoundsLength(filterRound?.length)
+            setLotteryPrevRoundsLength(filterRound?.length)
+            setClaimExpiryDate(filterRound[lastIndex]?.claimExpiryDate)
+            setUserWon(filterRound[lastIndex]?.userRes?.lotteryWon)
+            setParticipated(filterRound[lastIndex]?.userRes?.participated)
+            setClaimedNft(filterRound[lastIndex]?.userRes?.claimed)
+            setPotId(filterRound[lastIndex]?._id)
+            setLotteryCurrentRoundDetails(filterRound[lastIndex])
           }
         } catch (error) {
           toast.dismiss();

@@ -329,12 +329,24 @@ const AddPot = () => {
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
+        let quantity = rewadPotDetail?.rewardTokenAmount;
+        let dataToSend = {};
         if(rewadPotDetail?.potType === 'LOTTERYPOT' || rewadPotDetail?.assetType==='NFT'){
-        let dataToSend = {
-            tokenId: e.target.value,
-            quantity: rewadPotDetail?.rewardTokenAmount
+            if(quantity > 0) {
+                dataToSend = {
+                tokenId: e.target.value,
+                quantity: quantity
+                }
+            }
+            else{
+                toast.dismiss();
+                toast.error('Please enter nft quantity')
+                return;
+            }
         }
-
+        else{
+            return;
+        }
         dispatch(setLoadingTrue());
         try {
         const checkNFT = await checkNftClaim(dataToSend);
@@ -346,11 +358,11 @@ const AddPot = () => {
             setNftExists(checkNFT?.data?.exists)    
             if(checkNFT?.data?.exists){
                 toast.dismiss()    
-                toast.success('NFT exists on claim contract');
+                toast.success(checkNFT?.message);
             }
             else{
                 toast.dismiss()    
-                toast.error('No NFT found on claim contract')
+                toast.error(checkNFT?.message)
             }            
         }
         } catch (error) {
@@ -358,7 +370,7 @@ const AddPot = () => {
         toast.error(error?.response?.data?.message||'Something went worng while checking nft');
         }
         dispatch(setLoadingFalse());
-}
+
     }
 
     return (
