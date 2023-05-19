@@ -371,7 +371,7 @@ const ActiveRewardPot = (props) => {
                         </h2>
                     </div>
                     <div className="row">
-                        <div className="col-sm-5 order-last my-auto">
+                        <div className="col-sm-5 order-sm-last my-auto">
                             <div className="text-center">
                                 <div>
                               { (potStatus === 'ONGOING' || potStatus === 'UPCOMING') && <> <div className='earnText'>
@@ -415,7 +415,7 @@ const ActiveRewardPot = (props) => {
                                 </div>                        
                             </div>
                         </div>
-                        <div className="col-sm-7 order-first text-center  position-relative">
+                        <div className="col-sm-7 order-sm-first text-center  position-relative">
                         {potStatus === 'ONGOING' && 
                          <> <img className='activeImgReward' src={Token} />
                             <img src={rewardBoxOpen} alt="rewardBox" className="rewardBox" id="rewardBoxOpen" /></>}
