@@ -796,7 +796,11 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
-
+  .activeImgReward { 
+    right: -4rem; 
+    width: 25%;
+}
+  .workArrowDown{display: none;}
   .d-flex.justify-content-end{
     justify-content: center !important;
   }
@@ -824,7 +828,12 @@ span.leaderboardInput {
     margin-bottom: 1.5rem;
   }
   .earnText .sniff{ 
-    line-height: 25px; 
+    line-height: 20px; 
+    font-size: 21px;
+    margin-top: 2.5px;
+  }
+  .earnText { 
+    font-size: 18px;
   }
   .lotteryPool .heading {
     font-size: 28px;
@@ -833,7 +842,7 @@ span.leaderboardInput {
   width: 100%;
 }
   .lotteryPool .heading2 {
-    font-size: 35px;
+    font-size: 32px;
     left: 0;
     top: -36%;
   }
