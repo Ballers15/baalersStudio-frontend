@@ -937,6 +937,18 @@ span.leaderboardInput {
         width: 96%;
     }
 }
+@media (max-width: 400px){
+  .thirdSlide .poolBtn {
+    right: 1.5rem;
+}
+  .pool .secondText {
+    left: -4rem;
+  }
+
+  .lotteryPool .thirdSlide .poolBtn { 
+    right: 0;
+} 
+}
 @media (max-width: 380px){
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
@@ -944,6 +956,10 @@ span.leaderboardInput {
   .lotteryPool .heading2 {
     font-size: 31px;
     top: -27%;
+  }
+  .lotteryPool .sCaption h1{
+    font-size: 48px;
+    line-height: 85px;
   }
   .earnText .sniff{
     margin-left: .65rem;

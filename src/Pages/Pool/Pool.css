@@ -210,6 +210,9 @@
     }
 }
 @media (max-width: 480px){
+    .poolScreen  .thirdSlide .poolBtn{
+        bottom: 5rem;
+    }
     .shareBtn.newBtn a::before, .shareBtn.newBtn a::after, .shareBtn.newBtn a span::before, 
     .shareBtn.newBtn a span::after {
         width: 60px;

@@ -2713,6 +2713,12 @@ ul li {
   right: 35%;
 } */
 }
+@media (min-width:1280px) and (max-width: 1300px) {
+  .positionAbs{
+    bottom: 5.95rem;
+    width: 21rem;
+  }
+}
 
 @media (min-width:1200px) and (max-width: 1279px) {
   .positionAbs {
@@ -3868,7 +3874,7 @@ ul li {
     line-height: 16px;
   }
 }
-
+ 
 @media (min-width:413px) and (max-width: 430px) {
   .pool .poolBtn .playBtn {
     width: 47%;
@@ -3911,7 +3917,9 @@ ul li {
 }
 
 @media (max-width: 400px) {
-  
+  .shareBtn {
+    right: .5rem;
+  }
 .carousel-caption .shareBtn.newBtn {
     width: 38%;
 }
@@ -4014,6 +4022,9 @@ ul li {
 
 
 @media (max-width: 380px) {
+  .shareBtn {
+    right: -0.5rem;
+}
   .thirdPageBtn .playBtn { 
     width: 40%;
   }
@@ -4254,9 +4265,12 @@ ul li {
 }
 
 @media (min-width:359px) and (max-width: 366px) {
-  .shareBtn {
-    right: 4rem;
-  }
+  .secondText {
+    left: -3.3rem !important;
+}
+ .shareBtn {
+    right: 1.5rem;
+ } 
 
   .coinImage img {
     right: 29%;
@@ -4297,6 +4311,9 @@ ul li {
   }
 }
 @media (min-height:660px) and (max-height: 690px) {
+  .secondText {
+    left: -5.3rem;
+  }
   .news {
     height: 116vh;
 }
@@ -4319,10 +4336,7 @@ ul li {
   }
   .mainSlider .carousel-item {
     height: 116vh;
-  }
-  .secondText {
-    left: -3.3rem;
-  }
+  } 
   .mainSlider .carousel-caption img {
     width: 90%;
   }
