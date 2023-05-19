@@ -793,6 +793,21 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
+  .searchTab{
+    width: 100%;
+  }
+  .d-flex.justify-content-end{
+    justify-content: center !important;
+  }
+  .borderPink{
+    margin: 15px 9px 0;
+  }
+  .borderPink input{
+    margin: 0;
+  }
+  span.leaderboardInput {
+    font-size: 15px;
+}
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
   }
