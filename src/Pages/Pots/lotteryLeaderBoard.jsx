@@ -7,6 +7,7 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { formatNumberDecimal } from "../../Components/functions";
 
 const LeaderBoardLottery = (props) => {
     const walletAddress = useSelector(state => state.wallet.walletAddress)
@@ -126,20 +127,6 @@ const LeaderBoardLottery = (props) => {
         }
     }
 }
-
-    /**
-    * Format large number
-    * @param value Number | large number > 10^10
-    * @returns formatted number
-    */
-    const formatNumberDecimal = (value) => {
-        if(value > Math.pow(10,10)){
-        const shortenedValue = parseFloat(value).toExponential(4);
-        return shortenedValue;
-        }
-        else
-        return value;
-      };
 
     
 return(  

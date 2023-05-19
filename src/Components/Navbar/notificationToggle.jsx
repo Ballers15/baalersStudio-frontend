@@ -124,7 +124,7 @@ const markAllRead = () =>{
   return (
     <Dropdown className='notification' id='notification-dropdown'>
     <Dropdown.Toggle id="dropdown-button-dark-example1" >
-    {_u===null ? <i className="fa fa-bell-o" aria-hidden="true"></i> : <i className="fa fa-bell-o" aria-hidden="true"></i>}
+    {arr.length===0 ? <i className="fa fa-bell-o" aria-hidden="true"></i> : <><i className="fa fa-bell" aria-hidden="true"></i><sup className='notification-count'>{arr.length}</sup></>}
     </Dropdown.Toggle>
     <Dropdown.Menu variant="dark">    
      <Dropdown.Header id='mark-all-read'><span>Notifications</span> {arr.length !==0 ? <span title='Mark all as read' onClick={(e)=>{markAllRead(e)}}><i className="fa fa-check-circle" aria-hidden="true"></i></span> : <span title='Nothing to read'><i className="fa fa-check-circle-o" aria-hidden="true"></i></span>} </Dropdown.Header>           

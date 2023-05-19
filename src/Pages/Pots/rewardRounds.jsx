@@ -162,18 +162,18 @@ const RewardRounds = (props) => {
             toast.dismiss();
             toast.error(round?.message||'Something went worng');
           } else {
-            // toast.success('round fetched Successfully');
-            setPrevRounds(round?.data)
-            setPrevRoundsLength(round?.data?.length)
-            setRewardPrevRoundsLength(round?.data?.length)
-            let lastIndex = round?.data?.length-1
-            // console.log('i am set here getPreviousRounds ',round?.data[0]?.userRes);
-            setParticipated(round?.data[lastIndex]?.userRes?.participated)
-            setClaimed(round?.data[lastIndex]?.userRes?.claimed)
-            setClaimExpiryDate(round?.data[lastIndex]?.claimExpiryDate)
-            // console.log(round?.data[currentSlide]?.claimExpiryDate)
-            setPotId(round?.data[lastIndex]?._id)
-            setRewardCurrentRoundDetails(round?.data[lastIndex])
+            let filterRound = round?.data.filter((item) => item.potUserDetails.length);
+            setPrevRounds(filterRound)
+            setPrevRoundsLength(filterRound?.length) 
+            setRewardPrevRoundsLength(filterRound?.length)
+            let lastIndex = filterRound?.length-1
+            // console.log('i am set here getPreviousRounds ',filterRound[0]?.userRes);
+            setParticipated(filterRound[lastIndex]?.userRes?.participated)
+            setClaimed(filterRound[lastIndex]?.userRes?.claimed)
+            setClaimExpiryDate(filterRound[lastIndex]?.claimExpiryDate)
+            // console.log(filterRound[currentSlide]?.claimExpiryDate)
+            setPotId(filterRound[lastIndex]?._id)
+            setRewardCurrentRoundDetails(filterRound[lastIndex])
           }
         } catch (error) {
             toast.dismiss();

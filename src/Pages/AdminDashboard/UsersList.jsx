@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import { formatNumberDecimal } from '../../Components/functions';
 
 const UsersList = () => {
   const dispatch = useDispatch()
@@ -154,20 +155,6 @@ const UsersList = () => {
     console.log('filter',rewadPotDetail)
 
   }
-
-  /**
-   * Format large number
-   * @param value Number | large number > 10^10
-   * @returns formatted number
-   */
-  const formatNumberDecimal = (value) => {
-    if(value > Math.pow(10,10)){
-      const shortenedValue = parseFloat(value).toExponential(4);
-      return shortenedValue;
-    }
-    else
-      return value;
-  };
 
   /**
    * Reset search form data

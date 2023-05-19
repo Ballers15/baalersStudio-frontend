@@ -141,20 +141,6 @@ const AdminDashboard = () => {
         }
       }
 
-  /**
-   * Format Large number greater than 10^10
-   * @param value Number | large number > 10^10
-   * @returns formatted number
-   */
-      const formatNumberDecimal = (value) => {
-        if(value > Math.pow(10,10)){
-        const shortenedValue = parseFloat(value).toExponential(4);
-        return shortenedValue;
-        }
-        else
-        return value;
-      };
-
   const dataUsers = {
     labels: ["REWARD POT", "LOTTERY POT"],
     datasets: [

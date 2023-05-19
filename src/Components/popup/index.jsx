@@ -5,6 +5,7 @@ import './Popup.css'
 import hooray from '../../Assest/img/hooray.png'
 import popupBg2 from '../../Assest/img/popupBg2.png'
 import popupBg from '../../Assest/img/popupBg.png'
+import { formatNumberDecimal } from "../functions";
 
 const Popup = (props) => { 
 
@@ -33,7 +34,7 @@ const Popup = (props) => {
           <div className="popupContent">
           <img src={hooray} alt="" />
           <div className="kudos">HOORAY !!</div>
-          <p>Your in game deposit of  ${props.cash}<br></br>has been made !!</p>
+          <p>Your in game deposit of  ${formatNumberDecimal(props.cash)}<br></br>has been made !!</p>
           {/* <p>Your in game deposit of ${props.cash}<br></br>has been made !!</p> */}
           </div>
        

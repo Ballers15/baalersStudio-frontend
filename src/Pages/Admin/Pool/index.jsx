@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../../Components/Redux/actions";
+import { formatNumberDecimal } from "../../../Components/functions";
 
 
 const PoolListing = () => {
@@ -424,21 +425,7 @@ const PoolListing = () => {
         setPotDetails(pot);
     }
 
-    /**
-     * Format large number
-     * @param value Number
-     * @returns 
-     */
-    const formatNumberDecimal = (value) => {
-        if(value > Math.pow(10,10)){
-        const shortenedValue = parseFloat(value).toExponential(4);
-        return shortenedValue;
-        }
-        else
-        return value;
-      };
-
-    
+     
     const [viewUser, viewUserShow] = React.useState(false);
     const [claimModal,setClaimModal] = useState(false)
     const handleClose = () => viewUserShow(false);

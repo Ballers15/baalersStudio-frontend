@@ -156,6 +156,15 @@ button#dropdown-button-dark-example1 {
     /* border: 3px solid #FEAF2E; */
   }
   
+  .notification-count{
+    background: #FF80FF;
+    border-radius: 50%;
+    padding: 2px 5px; 
+    color: #110929;
+    font-weight: 800;
+  }
+
+
 @media (max-width: 1500px){
 .navbar-expand-lg .navbar-nav .nav-link { 
     margin-left: 20px; 

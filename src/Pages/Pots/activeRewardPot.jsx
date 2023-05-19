@@ -14,6 +14,7 @@ import Popup from '../../Components/popup';
 import { useNavigate } from 'react-router-dom';
 import { getAccountDetails } from '../../Components/Metamask';
 import { subscribeMailJet } from '../../Services/User';
+import { formatNumberDecimal } from '../../Components/functions';
 
 
 const ActiveRewardPot = (props) => {
@@ -295,7 +296,7 @@ const ActiveRewardPot = (props) => {
             <Modal.Body>
             <span>
             <div className='confirm-modal'>
-              {cash > 0 ? <>Are you sure to add your game cash $ {cash} ?  
+              {cash > 0 ? <>Are you sure to add your game cash $ {formatNumberDecimal(cash)} ?  
               <br></br>
               <button type='primary' onClick={()=>handleRedeem()}>Yes</button>
               <button type='primary' onClick={()=>handleCloseModal()}>No</button> </>
