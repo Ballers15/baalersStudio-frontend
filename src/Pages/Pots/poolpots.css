@@ -738,6 +738,9 @@ span.leaderboardInput {
 
 }
 @media (max-width: 1024px){
+  .searchTab{
+    width: 100%;
+  }
   .prevCarousel { 
     margin-left: 2rem;
 }
@@ -793,6 +796,23 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
+
+  .d-flex.justify-content-end{
+    justify-content: center !important;
+  }
+  .borderPink{
+    margin: 15px 9px 0;
+  }
+  .borderPink input{
+    margin: 0;
+  }
+  span.leaderboardInput {
+    font-size: 15px;
+}
+.lotteryPool table td { 
+  font-size: 15px; 
+  padding: 0.5rem 0.75rem;
+}
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
   }
@@ -911,10 +931,23 @@ span.leaderboardInput {
     }
     .lotteryPool .poolBtn {
         width: 100%;
+        margin-top: 35px;
     }  
     .lotteryPool .thirdSlide .sCaption {
         width: 96%;
     }
+}
+@media (max-width: 400px){
+  .thirdSlide .poolBtn {
+    right: 1.5rem;
+}
+  .pool .secondText {
+    left: -4rem;
+  }
+
+  .lotteryPool .thirdSlide .poolBtn { 
+    right: 0;
+} 
 }
 @media (max-width: 380px){
   .lotteryPool .poolBtn .playBtn {
@@ -923,6 +956,10 @@ span.leaderboardInput {
   .lotteryPool .heading2 {
     font-size: 31px;
     top: -27%;
+  }
+  .lotteryPool .sCaption h1{
+    font-size: 48px;
+    line-height: 85px;
   }
   .earnText .sniff{
     margin-left: .65rem;

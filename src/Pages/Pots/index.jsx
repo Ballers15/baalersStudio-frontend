@@ -8,7 +8,7 @@ import RewardRounds from "./rewardRounds";
 import LeaderBoardReward from "./rewardLeaderBoard";
 import LeaderBoardLottery from "./lotteryLeaderBoard";
 import rewardPot from '../../Assest/img/rewardPot.png'
-import lotteryPot from '../../Assest/img/slide3.webp'
+import lotteryPot from '../../Assest/img/Lottery_potBanner.png'
 import howItWork from '../../Assest/img/hoeItWork.png' 
 import LeaderBoardRibbon from "./leaderboardRibbon.jsx";
 import 'react-toastify/dist/ReactToastify.css';
