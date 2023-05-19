@@ -738,6 +738,9 @@ span.leaderboardInput {
 
 }
 @media (max-width: 1024px){
+  .searchTab{
+    width: 100%;
+  }
   .prevCarousel { 
     margin-left: 2rem;
 }
@@ -793,9 +796,7 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
-  .searchTab{
-    width: 100%;
-  }
+
   .d-flex.justify-content-end{
     justify-content: center !important;
   }
@@ -807,6 +808,10 @@ span.leaderboardInput {
   }
   span.leaderboardInput {
     font-size: 15px;
+}
+.lotteryPool table td { 
+  font-size: 15px; 
+  padding: 0.5rem 0.75rem;
 }
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
@@ -926,6 +931,7 @@ span.leaderboardInput {
     }
     .lotteryPool .poolBtn {
         width: 100%;
+        margin-top: 35px;
     }  
     .lotteryPool .thirdSlide .sCaption {
         width: 96%;
