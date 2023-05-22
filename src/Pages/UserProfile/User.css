@@ -98,7 +98,6 @@ p.amount{
 .nftSlider{
     display: flex;
     overflow-x: auto;
-    justify-content: center;
     padding-bottom: 1.5rem;
 }
 .nftSlider img.active{

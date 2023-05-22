@@ -229,7 +229,7 @@ const UserProfile = () => {
                <div className="row">
                 <div className="col-sm-8 col-xl-9">
                     <div className="profileCard cardHt"> 
-                    <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>{nftCount}</span> </h3>
+                    <h3 className="px-3">NFT’S HELD IN THE WALLET : <span>0{nftCount}</span> </h3>
                      <div className="mt-4">
                         <div className="nftSlider">
                             {nftExist.length ? <>{nftExist.map((nft)=>(

@@ -7,7 +7,7 @@ import './Navbar.css';
 import { useAuth } from '../../Auth/authProvider';
 import gamelogo from '../../Assest/img/gamelogo.png';
 import wallet from '../../Assest/img/wallet.svg';
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useLocation, useNavigate  } from "react-router-dom";
 import deck_compressed from "../../Assest/pdf/deck_compressed.pdf";
 import Dropdown from 'react-bootstrap/Dropdown';
 import {  disconnectWallet, getAccountDetails, getDetailsFromChainId, switchNetwork } from '../Metamask';
@@ -29,6 +29,7 @@ const NavBar = () => {
   let _u = JSON.parse(strAuth);
   const dispatch = useDispatch();
   const walletAddress = useSelector(state => state.wallet.walletAddress)
+  const location = useLocation();
 
 useEffect(() => {
   if(walletAddress !== null && _u?.user?.role === 'USER'){
@@ -56,6 +57,17 @@ useEffect(() => {
     disconnectWallet();
    }
 }, [])
+
+
+useEffect(() => {
+  // Scroll to the top of the page on route change
+  window.scrollTo(0, 0);
+}, [location]);
+
+useEffect(() => {
+  window.history.scrollRestoration = 'manual'
+}, []);
+
 
 
 // metamask functions
