@@ -196,3 +196,20 @@ input[type="date"] {
     background-size: 16px 12px;
     box-shadow: none !important;
   }
+   .form-control::placeholder {
+        
+        /* Firefox, Chrome, Opera */
+        color: #fffefd ;
+    }
+      
+    .form-control:-ms-input-placeholder {
+        
+        /* Internet Explorer 10-11 */
+        color: #fffefd ;
+    }
+      
+    .form-control::-ms-input-placeholder {
+        
+        /* Microsoft Edge */
+        color: #fffefd ;
+    }

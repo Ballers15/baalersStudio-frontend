@@ -786,7 +786,17 @@ span.leaderboardInput {
     
 }
 @media (min-width:768px) and (max-width: 900px){
- 
+  .cardwidth {
+    width: 86%;
+}
+  .earnText .sniff { 
+    font-size: 21px;    
+    margin-top: 4.5px;
+
+  }
+  .earnText { 
+    font-size: 18px;
+  }
   .heading2{
     font-size: 60px;
   }
@@ -814,7 +824,7 @@ span.leaderboardInput {
       margin-left: 1rem;
   }
   .countFont{
-    font-size: 38px;
+    font-size: 28px;
   }
   .howItWork { 
     background-size: 42%;
@@ -971,7 +981,7 @@ span.leaderboardInput {
   }
   .roundDiv { 
     padding: 15px 16px;
-    width: 65%;
+    width: 280px;
   }
   .winHead span { 
     width: 50px;
