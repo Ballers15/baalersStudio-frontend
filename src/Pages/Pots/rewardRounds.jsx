@@ -56,7 +56,18 @@ const RewardRounds = (props) => {
       nextArrow: <SampleNextArrow buttonStatus={buttonStatus}/>,
       prevArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>,
       rtl: true,
-      initialSlide: prevRoundsLength-1
+      initialSlide: prevRoundsLength-1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: false,
+          }
+        }
+      ]
+
     };
   
    /**
@@ -282,9 +293,10 @@ return(
                           
                            {prevRounds?.length && prevRounds?.map((round,index)=>(
                             <div key={index+1} id={index}>
-                                <div className="d-md-flex">
+                                <div className="d-md-flex cardwidth">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
+                                    <div class="ribbon"> Latest</div>
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>

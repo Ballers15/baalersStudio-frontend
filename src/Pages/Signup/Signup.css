@@ -279,3 +279,11 @@ form .signUp-google a:hover::before, form .signUp-google a:hover::after,
         width: 86%;
     }
   }
+  @media (max-width: 380px){
+    .alreadyAcc{
+        letter-spacing: 0.16em; 
+    }
+    .alreadyAcc a {
+        font-size: 15px;
+    }
+  }

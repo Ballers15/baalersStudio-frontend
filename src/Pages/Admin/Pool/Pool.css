@@ -19,11 +19,24 @@
     padding: 50px;
     background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
 }
-
-.pool-list-container{
-    margin-top: 78px ;
+.mt-8{
+  margin-top: 8rem;
 }
-
+/* .pool-list-container{
+    margin-top: 78px ;
+} */
+.fixBtn{
+  position: fixed;
+  width: 100%;
+  right: 0;
+  margin: auto;
+  left: 0;
+  background: #2d1377;
+  padding-top: 124px;
+  z-index: 99;
+  top: 0;
+  padding-right: 4rem;
+}
 .rewardpot-btn{
     float: right;
     margin: 50px;
@@ -84,6 +97,9 @@
 
 .react-time-picker--disabled{
   background-color: transparent;
+}
+.react-time-picker--disabled .react-time-picker__inputGroup__input {
+  color: #1b0b48;
 }
 
 .fa-edit{
@@ -172,7 +188,9 @@ pool-listing-table-head tr {
 .small-lable{
   font-size: 13px;
 }
-
+.noRecordHt{
+  padding-top: 12rem;
+}
 .pool-listing .btnPool{
   position: relative;
   padding: 9px 10px;

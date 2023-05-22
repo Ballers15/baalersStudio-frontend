@@ -114,6 +114,23 @@ p.amount{
 .cardHt{
     min-height: 342px;
 }
+
+@media (min-width: 1900px) {
+    .cardHt {
+        min-height: 380px;
+    }
+}
+
+@media (min-width: 2300px) {
+    .cardHt {
+        min-height: 405px;
+    }
+}
+@media (min-width: 2500px) {
+    .cardHt {
+        min-height: 418px;
+    }
+}
 @media (max-width: 1500px) {
     .participateName{ 
         font-size: 16px; 
@@ -126,6 +143,9 @@ p.amount{
 }
 }
 @media (max-width: 1400px) {
+    .cardHt {
+        min-height: 330px;
+    }
     .profileCard h3 {  
         font-size: 15px;
 }

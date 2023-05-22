@@ -393,7 +393,7 @@ const ActiveLotteryPot = (props) => {
                                 {potStatus !== 'UPCOMING' && potStatus!== 'ONGOING' && <p className="undColor">Wait Until Next Draw</p>}
 
                                 <div className="poolBtn pt-2">
-                                    <div className="playBtn">
+                                    <div className="playBtn mob-none">
                                     {potStatus === 'ONGOING'  ?  
                                     (<>{walletAddress!==null && (<Can do='redeem now' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> REDEEM NOW</a> </Can>)}
                                     {walletAddress===null && (<Can do='connect wallet' on='redeem-btn'> <a onClick={handleRedeemModal}><span></span> Connect Wallet</a> </Can>)}

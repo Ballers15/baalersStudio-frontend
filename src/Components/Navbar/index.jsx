@@ -105,10 +105,16 @@ const handleAccountChange = (accounts) => {
               <Can do='balr-token' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/#balrToken' > $BALR TOKEN </Nav.Link> </Can>
               
              {/* Admin menu starts*/}
-              <Can do='admin-dashboard' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>
-              <Can do='users' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/user-listing'> Users </Nav.Link> </Can>
-              <Can do='pool-listing' on='navbar'> <Nav.Link eventKey="4" as={Link} to='/pool-listing'>Pool </Nav.Link> </Can>
+              <Can do='admin-dashboard' on='navbar'> <Nav.Link className='adminNav' eventKey="4" as={Link} to='/admin-dashboard' > Dashboard </Nav.Link></Can>
+              <Can do='users' on='navbar'> <Nav.Link className='adminNav' eventKey="5" as={Link} to='/user-listing'> Users </Nav.Link> </Can>
+              <Can do='pool-listing' on='navbar'> <Nav.Link className='adminNav'  eventKey="6" as={Link} to='/pool-listing'>Pool </Nav.Link> </Can>
              {/* Admin menu ends*/}
+            </Nav>
+            <Nav className="mx-auto desk-none">      
+            {_u === null ?   (<Nav.Link as={Link} to='/login'>Login</Nav.Link>) : (<Nav.Link onClick={() => { handleLogout() }}>Logout</Nav.Link>)}
+            {<Can do='notification' on='navbar'>
+            <NotificationToggle/>
+            </Can>}
             </Nav>
 
             <Nav>
@@ -116,10 +122,10 @@ const handleAccountChange = (accounts) => {
                           ( <span onClick={()=>{handleConnectWallet()}}> <img src={wallet}/> Connect Wallet</span> )} </Nav.Link> </Can>
             {/* <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link> */}
           {<Can do='notification' on='navbar'>
-            <NotificationToggle/>
+            <span className="mob-none"> <NotificationToggle/></span>
           </Can>}
 
-              <Dropdown  className="profile">
+              <Dropdown  className="profile mob-none">
                 <Dropdown.Toggle id="dropdown-button-dark-example1" >
                 {_u===null ? <i className="fa  fa-user-o" aria-hidden="true"></i> : <i className="fa  fa-user" aria-hidden="true"></i>}
                 </Dropdown.Toggle>

@@ -164,7 +164,7 @@ return(
                 </div>
                 <img src={howItWork} alt="Arrow" class="workArrowDown"></img>
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-lg-8">
                         <div className="position-relative youtubeBox">
                             <button className="popup-btn"> 
                             <div className="waves-block">
@@ -184,7 +184,7 @@ return(
                         </div>
                     </div>
                     </div>
-                    <div className="col-sm-4 my-auto">
+                    <div className="col-lg-4 my-auto">
                         <div className="ps-4">
                             <p>
                             Become a Baller and get a chance to win rewards. Play, Party, Earn and win $BALR Token and NFTs along with access to exclusive parties 

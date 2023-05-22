@@ -141,7 +141,8 @@ a.disabled{
     width: 76%;
 }
 .table-responsive {
-  height: 59vh;
+  max-height: 59vh;
+  height: fit-content;
 }
 
 .lotteryPool table th{
@@ -149,6 +150,7 @@ a.disabled{
     border: 0;
     font-size: 16px;
     line-height: 20px;
+    white-space: nowrap;
 }
 .lotteryPool table td{
     border-bottom: 0.5px solid #b0b0b059;
@@ -454,7 +456,26 @@ a.disabled{
     height: 125px;
   }
  
+.ribbon {
+  position: absolute; 
+  line-height: 1.5;
+  padding: 0 1rem;
+  width: 135px;
+  top: 25px;
+  right: -30px;
+  text-align: center;
+  transform-origin: 50% 50%;
+  transform: rotateZ(45deg); 
+  background: linear-gradient(118.89deg, #9522EF 14.97%, #FF80FF 91.81%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #6200A3;
+  font-size: 16px;
+  font-weight: 600;
+}
+
   .roundDiv{    
+    position: relative;
+    overflow: hidden;
     background: #110929;
     border-radius: 0 8px 8px 0px;
     padding: 20px 30px;
@@ -706,6 +727,11 @@ span.leaderboardInput {
         bottom: 0;
     }
 }
+@media (max-width: 1380px){
+  .lotteryPool .sCaption h1 {
+    font-size: 96px;
+  }
+}
 @media (max-width: 1300px){
   .lotteryPool .sCaption h1 {
     font-size: 89px;
@@ -720,6 +746,12 @@ span.leaderboardInput {
     }
 }
 @media (min-width:1023px) and (max-width: 1200px){
+  .howItWork::after {  
+    bottom: -4%;
+  }
+  .roundDiv { 
+    margin-right: 2.75rem; 
+}
   p.finishText{
     font-size: 20px;
   }
@@ -738,6 +770,9 @@ span.leaderboardInput {
 
 }
 @media (max-width: 1024px){
+  .slick-list{
+    width: 84%;
+  }
   .searchTab{
     width: 100%;
   }
@@ -751,15 +786,43 @@ span.leaderboardInput {
     
 }
 @media (min-width:768px) and (max-width: 900px){
+ 
+  .heading2{
+    font-size: 60px;
+  }
+  .youtubeBox { 
+    margin: 4rem 0 3rem;
+}
     .backBtn {  
       left: 5rem;
     }
-
+    .undColor {
+      font-size: 16px;
+    }
+    .expDeal { 
+      font-size: 38px;
+    }
+    .ht100{min-height: 100%;}
+    .slick-slide .d-md-flex{
+      justify-content: center;
+    }
+    .roundDiv { 
+      margin-right: 2.75rem;
+      /* width: 275px; */
+  }
+  .wthMob { 
+      margin-left: 1rem;
+  }
   .countFont{
     font-size: 38px;
   }
   .howItWork { 
-    background-size: 52%;
+    background-size: 42%;
+    background-position: 100% -45%;
+}
+.workArrowDown { 
+  right: 7%;
+  top: 67px;
 }
   p.finishText { 
     font-size: 18px;
@@ -796,6 +859,19 @@ span.leaderboardInput {
     }
 }
 @media (max-width: 480px){
+  .finishText .fa { 
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 15px; 
+  }
+  .cardwidth{
+    /* width: 75%;  */
+    margin: 0 1rem;
+  }
+  .finishSlider .slick-list{
+    height: 500px;
+  }
   .activeImgReward { 
     right: -4rem; 
     width: 25%;
@@ -835,17 +911,22 @@ span.leaderboardInput {
   .earnText { 
     font-size: 18px;
   }
-  .lotteryPool .heading {
-    font-size: 28px;
+ 
+.lotteryPool .heading {
+  font-size: 35px;
+  line-height: 130%;
+  width: 76%;
+  margin: auto;
 }
 .headWth {
   width: 100%;
-}
+} 
   .lotteryPool .heading2 {
-    font-size: 32px;
+    font-size: 46px;
     left: 0;
-    top: -36%;
-  }
+    top: -28%;
+    line-height: 130%;
+}
  .lotteryPool .activeImg { 
     top: 33px;
     width: 30%;
@@ -854,21 +935,26 @@ span.leaderboardInput {
     width: 98%;
 }
   .table-responsive {
-    height: 69vh;
+    max-height: 69vh;
+    height: fit-content;
 }
   .backBtn { 
     top: 7rem;
     left: 1rem;
   }
   .slick-slide .wthMob {
-    width: 74%;
+    width: 62%;
   }
-  .slick-next { 
-    left: 0;
-    width: 120px;
-    top: 18%;
+ 
+.slick-next{
+  right: 0; 
 }
-
+.slick-prev{
+  left: .25em; 
+}
+.slick-list{
+  width: 80%;
+}
 
   .searchBox { 
     display: block;
@@ -885,6 +971,7 @@ span.leaderboardInput {
   }
   .roundDiv { 
     padding: 15px 16px;
+    width: 65%;
   }
   .winHead span { 
     width: 50px;
@@ -962,10 +1049,7 @@ span.leaderboardInput {
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
   }
-  .lotteryPool .heading2 {
-    font-size: 31px;
-    top: -27%;
-  }
+  
   .lotteryPool .sCaption h1{
     font-size: 48px;
     line-height: 85px;

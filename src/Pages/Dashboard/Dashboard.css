@@ -2860,7 +2860,9 @@ ul li {
     bottom: 11rem;
     width: 17rem;
   }
-
+  .shareBtn { 
+    right: -1.5rem;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -3167,6 +3169,10 @@ ul li {
 
 
 @media (max-width: 480px) {
+  .btn-close{    right: 0.51rem;}
+  .modal-title { 
+    font-size: 19px;
+}
   .carousel-caption .shareBtn.newBtn {
     width: 47%;
 }
@@ -3375,11 +3381,11 @@ ul li {
     margin-top: 10rem;
 }
 
-  .firstText {
+  /* .firstText {
     right: -2rem;
     top: 17%;
     width: 32%;
-  }
+  } */
 
   .secondText {
     left: -4.3rem;
@@ -3437,7 +3443,7 @@ ul li {
   .poolBtn .shareBtn {
     right: 0;
     left: 0;
-    top: 4rem;
+    top: 3rem;
   }
 
   .poolBtn .playBtn {
@@ -3558,9 +3564,9 @@ ul li {
   }
 
   .heading2 {
-    font-size: 37px;
-    left: -19px;
-    top: -19%;
+    font-size: 41px;
+    left: 0;
+    top: -15px;
   }
   .faqHead,
   .balrHead {
@@ -3840,7 +3846,8 @@ ul li {
 
   .firstText {
     top: 20%;
-    width: 35%;
+    width: 39%;
+    right: -3rem;
   }
   .carousel-control-next-icon, .carousel-control-prev-icon {
     width: 2rem;
@@ -3873,6 +3880,12 @@ ul li {
     font-size: 14px;
     line-height: 16px;
   }
+  .homeBg .thirdSlide .poolBtn {
+    bottom: -2rem;
+}
+.homeBg .shareBtn.newBtn { 
+  margin-top: 1rem;
+}
 }
  
 @media (min-width:413px) and (max-width: 430px) {
@@ -3917,8 +3930,9 @@ ul li {
 }
 
 @media (max-width: 400px) {
+ 
   .shareBtn {
-    right: .5rem;
+    right: 0rem;
   }
 .carousel-caption .shareBtn.newBtn {
     width: 38%;
@@ -3945,9 +3959,9 @@ ul li {
     min-height: 63vh;
   }
 
-  .shareBtn {
+  /* .shareBtn {
     right: 2rem;
-  }
+  } */
 
   .playBtn a,
   .shareBtn a {
@@ -3959,7 +3973,8 @@ ul li {
   }
 
   .firstText {
-    width: 36%;
+    width: 50%;
+    right: -4rem;
   }
  
 
@@ -3974,10 +3989,14 @@ ul li {
     bottom: 7.8rem;
   }
 
-  .heading2,
+  .heading2{
+ font-size: 37px;
+  }
   .faqHead,
   .balrHead {
-    font-size: 35px;
+    font-size: 41px;
+    left: 0;
+    right: 0;
   }
 
   .heading {
@@ -4003,7 +4022,9 @@ ul li {
   .news {
     margin-bottom: 11rem;
   }
-
+ .poolBtn .shareBtn { 
+    top: 4rem;
+  }
   .news--news_page .news-list {
     height: 373px;
     top: 8.5rem;
@@ -4020,8 +4041,10 @@ ul li {
   }
 }
 
-
 @media (max-width: 380px) {
+  .mainSlider .carousel-item {
+    height: 119vh;
+  }
   .shareBtn {
     right: -0.5rem;
 }
@@ -4093,6 +4116,13 @@ ul li {
   .secondText {
     font-size: 12px;
   }
+  .firstText {
+    top: 30%;
+  }
+  .secondText {
+    left: -3.85rem; 
+    bottom: 8rem;
+}
 
   .thirdSlide .poolBtn {
     bottom: 6rem;
@@ -4115,7 +4145,7 @@ ul li {
   }
 
   .news-caption {
-    top: -3rem;
+    top: -2rem;
   }
 
   .news--news_page .news-list {
@@ -4312,7 +4342,7 @@ ul li {
 }
 @media (min-height:660px) and (max-height: 690px) {
   .secondText {
-    left: -5.3rem;
+    left: -4.3rem;
   }
   .news {
     height: 116vh;
@@ -4442,6 +4472,11 @@ ul li {
  
 }
 
+@media (min-width:393px) and (max-width: 431px){
+ .slideTwo .secondText {
+    left: -5.3rem;
+}
+}
 @media (max-width: 320px) {
   .logoSlider {
     bottom: -.5rem;

@@ -399,7 +399,7 @@ const Dashboard = () => {
                           width="1459"
                           height="1529"
                           />
-                        <div className="container">
+                        <div className="container slideTwo">
                           <p className="firstText">UNLOCK NEW CITIES</p>
                           <div className="row">
                             <div className="col-sm-5 my-auto">
@@ -478,7 +478,7 @@ const Dashboard = () => {
                       </div>
                       <div className="box"></div>
                       <Carousel.Caption>
-                        <div className="container">
+                        <div className="container slideTwo">
                           <p className="firstText">Play, Party and Earn</p>
                           <div className="sCaption secondSlide mb-0">
                             <div>

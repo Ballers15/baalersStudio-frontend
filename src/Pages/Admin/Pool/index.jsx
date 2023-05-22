@@ -501,7 +501,7 @@ const PoolListing = () => {
                     }):null}
                      {potUsers?.transactions?.length===0?<tr>
                             
-                            <td colSpan={7}> No Record Found </td>
+                            <td colSpan={7} className="noRecordHt"> No Record Found </td>
                              
                         </tr>:null}
                     </tbody>
@@ -541,16 +541,18 @@ const PoolListing = () => {
 
             <div className="pool-listing">
                 <div className="pool-list-container">
-                    <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
+                  <div className="fixBtn">
+                  <a className="btnPool" href="#" style={{ float: 'right' }} onClick={() => navigate('/addPot')}>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
                         Add Pot
                     </a>
+                  </div>
                     
               
-                <div>
+                <div className="mt-8">
                     <div>  
                       <Row className="topForm">
                         <Col sm={4}><h2 className="tableHead">Active Pots </h2></Col>
@@ -638,7 +640,7 @@ const PoolListing = () => {
                             }):null}
                             {rewardPotDetailsArray.length===0?<tr>
                                  
-                                <td colSpan={10}>
+                                <td colSpan={10} className="noRecordHt">
                                     No Record Found
                                 </td> 
                             </tr>:null}
@@ -743,7 +745,7 @@ const PoolListing = () => {
                                 }):null}
                                 {upcomingRewardPotArray.length===0?<tr>
                                      
-                                    <td colSpan={10}>
+                                    <td colSpan={10} className="noRecordHt">
                                         No Record Found
                                     </td> 
                                 </tr>:null}
@@ -830,7 +832,7 @@ const PoolListing = () => {
                                 }):null}
                                 {archivesRewardPotArray.length===0?<tr>
                                      
-                                    <td colSpan={10}>
+                                    <td colSpan={10} className="noRecordHt">
                                         No Record Found
                                     </td> 
                                 </tr>:null}
