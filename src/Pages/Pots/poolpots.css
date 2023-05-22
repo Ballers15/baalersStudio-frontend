@@ -141,7 +141,8 @@ a.disabled{
     width: 76%;
 }
 .table-responsive {
-  height: 59vh;
+  max-height: 59vh;
+  height: fit-content;
 }
 
 .lotteryPool table th{

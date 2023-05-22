@@ -51,7 +51,7 @@ const NavigationRouter = () => {
             <Route element={<WithoutNav />}>
               <Route exact path="/login" element={<CheckUser><Login /></CheckUser>} />
               <Route exact path="/signup" element={<CheckUser><Signup/></CheckUser>} />
-              <Route path="/error-page" element={<ErrorPage />} />
+              <Route path="*" element={<ErrorPage />} />
               <Route exact path='/forgotPassword' element={<CheckUser><ForgotPassword/></CheckUser>}></Route>
               <Route exact path='/auth/change-password/:token' element={<CheckUser><ResetPassword/></CheckUser>}></Route>
               <Route exact path="auth/social/:token" element={<GoogleSignup />} /> 
