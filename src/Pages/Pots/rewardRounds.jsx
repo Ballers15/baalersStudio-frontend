@@ -296,7 +296,7 @@ return(
                                 <div className="d-md-flex cardwidth">
                                     <img className="wthMob" src={img1} alt="" />
                                     <div className="roundDiv">
-                                    <div class="ribbon"> Latest</div>
+                                    {(prevRounds?.length-1) === index && <div class="ribbon"> Latest</div>}
                                         <h3>Round {index+1} </h3>
                                         <p><span>Drawn {new Date(round?.endDate).toLocaleString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, })}</span></p>
