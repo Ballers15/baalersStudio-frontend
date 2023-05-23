@@ -198,19 +198,68 @@ button#dropdown-button-dark-example1 {
         font-size: 10px;
     }
 }
-@media (max-width: 900px){
+
+@media (min-width:768px) and (max-width: 900px){
+    .mob-none{
+        display: none;
+    }
+    .desk-none{
+        display: block;
+    }
+    .fa-bell:before { 
+        content: "notifiation" !important;
+        margin-left: 2px; 
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 90%;
+        padding: 15px 0;
+        letter-spacing: 0.25em;
+        color: #ECE8E1;
+        font-family: "Valorant";
+        font-style: normal;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link { 
+        font-size: 16px;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link.connectBtn { 
+        width: 28%;
+        margin: 16px 0;
+    }
     
+}
+@media (max-width: 900px){
+    .fa-bell:before { 
+        content: "notifiation" !important;
+        margin-left: 2px; 
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 90%;
+        padding: 15px 0;
+        letter-spacing: 0.25em;
+        color: #ECE8E1;
+        font-family: "Valorant";
+        font-style: normal;
+    }
+    .mob-none{
+        display: none;
+    }
+    .desk-none{
+        display: block;
+    }
     .collapsing {
         transition: all .13s ease;
         /* height: 100% !important; */
     }
-}
-@media (max-width: 480px){
-    .desk-none{
-        display: block;
+    .navbar-expand-lg .navbar-nav .notification .dropdown-menu .ht {
+        height: 44vh;
     }
-    .mob-none{
-        display: none;
+    .navbar-expand-lg .navbar-nav .notification .dropdown-menu{
+        right: initial;
+    }
+}
+@media (max-width: 480px){   
+    .fa-bell:before {  
+        font-size: 19px; 
     }
     .navbar-expand-lg .navbar-nav .notification .dropdown-menu .ht {
         height: 44vh;
@@ -254,29 +303,18 @@ button#dropdown-button-dark-example1 {
     button#dropdown-button-dark-example1 { 
         padding-left: 0;
     }
-    .fa-bell:before { 
-        content: "notifiation" !important;
-        margin-left: 2px; 
-        font-weight: 400;
-        font-size: 19px;
-        line-height: 90%;
-        padding: 15px 0;
-        letter-spacing: 0.25em;
-        color: #ECE8E1;
-        font-family: "Valorant";
-        font-style: normal;
-    }
- }
- @media (max-width: 378px){
-    .navbar-expand-lg .navbar-nav .notification .dropdown-menu { 
-        bottom: 100%;
-        top: auto;
-        width: 100%;
-    }
- }
- @media (max-width: 350px){
-    .navbar-expand-lg .navbar-nav .nav-link {  
-        font-size: 15px; 
-        padding: 12px 0;
-    }
- }
+  
+}
+@media (max-width: 378px){
+.navbar-expand-lg .navbar-nav .notification .dropdown-menu { 
+    bottom: 100%;
+    top: auto;
+    width: 100%;
+}
+}
+@media (max-width: 350px){
+.navbar-expand-lg .navbar-nav .nav-link {  
+    font-size: 15px; 
+    padding: 12px 0;
+}
+}

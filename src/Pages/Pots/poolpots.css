@@ -786,6 +786,9 @@ span.leaderboardInput {
     
 }
 @media (min-width:768px) and (max-width: 900px){
+  .howItWork::before{
+    left: -11%;
+  }
   .cardwidth {
     width: 86%;
 }
@@ -818,7 +821,7 @@ span.leaderboardInput {
     }
     .roundDiv { 
       margin-right: 2.75rem;
-      /* width: 275px; */
+      min-width: 310px;
   }
   .wthMob { 
       margin-left: 1rem;
