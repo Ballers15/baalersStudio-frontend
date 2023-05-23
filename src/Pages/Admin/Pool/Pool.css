@@ -466,6 +466,11 @@ option {
   padding-left: 0;
   padding-right: 0;
 }
+
+.viewPopup .modal-content tr{
+  width: 100%;
+  display: table;
+}
 .pool-view-table{
   margin-bottom: 0;
   width: 100%;

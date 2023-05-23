@@ -483,7 +483,7 @@ const PoolListing = () => {
                             <th>Token Claim Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                     {potUsers?.transactions?.length!==0?potUsers?.transactions?.map((user, index) => {
                         return(
                         <tr key={user._id}>
@@ -501,7 +501,7 @@ const PoolListing = () => {
                     }):null}
                      {potUsers?.transactions?.length===0?<tr>
                             
-                            <td colSpan={7} className="noRecordHt"> No Record Found </td>
+                            <td colSpan={6} className="noRecordHt"> No Record Found </td>
                              
                         </tr>:null}
                     </tbody>

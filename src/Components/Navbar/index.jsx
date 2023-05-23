@@ -130,7 +130,7 @@ const handleAccountChange = (accounts) => {
             </Nav>
 
             <Nav>
-            <Can do='wallet' on='navbar'> <Nav.Link className='connectBtn'> {walletAddress !==null && walletAddress !==undefined ? ( <> {walletAddress?.slice(0,5)+'..'+walletAddress?.slice(-5)} </>) :
+            <Can do='wallet' on='navbar'> <Nav.Link className='connectBtn mob-none'> {walletAddress !==null && walletAddress !==undefined ? ( <> {walletAddress?.slice(0,5)+'..'+walletAddress?.slice(-5)} </>) :
                           ( <span onClick={()=>{handleConnectWallet()}}> <img src={wallet}/> Connect Wallet</span> )} </Nav.Link> </Can>
             {/* <Nav.Link eventKey="4" > <i className="fa fa-bell-o" aria-hidden="true"></i> </Nav.Link> */}
           {<Can do='notification' on='navbar'>
