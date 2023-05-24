@@ -237,7 +237,7 @@ const UserProfile = () => {
                         <div className="nftSlider">
                             {nftExist.length ? <>{nftExist.map((nft)=>(
                                     <img key={nft?.tokenId} className={nft?.exists ? "active" : ''}  src={require(`../../Assest/img/nftImages/${nft.imageName}`)} alt={nft?.nftName} />
-                            ))}</> : <>Connect your wallet !</>}
+                            ))}</> : <span className="mx-auto">Connect your wallet !</span>}
                         </div>                    
                      </div>
                     </div>

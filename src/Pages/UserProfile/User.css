@@ -96,7 +96,7 @@ p.amount{
     margin-right: 15px;
 }
 .nftSlider{
-    display: flex;
+    display: flex; 
     overflow-x: auto;
     padding-bottom: 1.5rem;
 }
@@ -159,8 +159,8 @@ p.amount {
 }
 }
 @media (max-width: 1300px){
-    .cardHt{
-        min-height: 342px;
+    .cardHt {
+        min-height: 326px;
     }
     p.amount {
         font-size: 40px;
