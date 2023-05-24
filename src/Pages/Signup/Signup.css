@@ -255,12 +255,11 @@ form .signUp-google a:hover::before, form .signUp-google a:hover::after,
   
      
     .signup-box { 
-        width: 50%;
-        left: 0;
-        right: 0;
-        margin: auto;
+        width: 50%; 
+        right: 0; 
     }
   }
+   
   @media (max-width: 480px) {
     .signup-page-container { 
         display: block;
@@ -273,8 +272,9 @@ form .signUp-google a:hover::before, form .signUp-google a:hover::after,
         margin-bottom: 3rem; 
         height: 100%;
     }
- 
-    .signup-box { 
+    .signup-box {  
+        left: 0;
+        right: 0; 
         margin: auto;
         width: 86%;
     }
