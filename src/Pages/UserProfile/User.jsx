@@ -38,6 +38,9 @@ const UserProfile = () => {
         setTokenBal(0)
         setLotteryPoolCount(0)
         setRewardPoolCount(0)
+        setNftData(0)
+        setNftCount(0)
+        setNftExist([])
     }
     }, [walletAddress])
 
