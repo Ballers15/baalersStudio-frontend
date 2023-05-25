@@ -41,6 +41,7 @@ const AddPot = () => {
     const [nftExists, setNftExists] = useState(false)
     const [endDateError, setEndDateError] = useState('')
     const [endTimeError, setEndTimeError] = useState('')
+    const decimalPattern = /^[-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)$/;
 
 
     useEffect(() => {
@@ -366,9 +367,9 @@ const AddPot = () => {
             }            
         }
         } catch (error) {
-        toast.dismiss()    
-        toast.error(error?.response?.data?.message||'Something went worng while checking nft');
-        }
+                toast.dismiss()    
+                toast.error(error?.response?.data?.message||'Something went worng while checking nft');
+            }
         dispatch(setLoadingFalse());
 
     }
@@ -391,7 +392,7 @@ const AddPot = () => {
                                         onChange={({ target }) => setRewardPotDetail({ ...rewadPotDetail,rewardTokenAmount:target.value})} >
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
-                                        Token Amount is required (Min:0)!
+                                        {decimalPattern.test(rewadPotDetail.rewardTokenAmount) ? <>Decimal value is not allowed!</> : <>Token Amount is required (Min:0)!</> }
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             
