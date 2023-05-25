@@ -254,6 +254,9 @@
     }
 }
 @media (max-width: 380px){
+    .pool .firstText { 
+        top: 27%;    
+    }
     .poolScreen .secondText {
         left: -3rem !important;
     }

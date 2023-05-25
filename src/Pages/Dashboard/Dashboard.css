@@ -3864,7 +3864,7 @@ ul li {
  
 
   .mainSlider .carousel-caption img {
-    width: 96%;
+    width: 84%;
     margin-bottom: -4rem;
     padding-top: 4rem;
   }
@@ -3889,6 +3889,12 @@ ul li {
 }
  
 @media (min-width:413px) and (max-width: 430px) {
+  .heading2 {
+    font-size: 40px;
+  }
+  .mainSlider .carousel-item {
+    height: 108vh;
+  }
   .pool .poolBtn .playBtn {
     width: 47%;
 }
@@ -3929,6 +3935,17 @@ ul li {
   }
 }
 
+@media (min-width:410px) and (max-width: 412px) {
+  .mainSlider .carousel-item {
+    height: 130vh;
+}
+.heading2 {
+  font-size: 40px;
+}
+.carousel-caption .shareBtn.newBtn {
+  width: 38%;
+}
+}
 @media (max-width: 400px) {
  
   .shareBtn {
@@ -4042,6 +4059,9 @@ ul li {
 }
 
 @media (max-width: 380px) {
+  .heading2 {
+    font-size: 36px;
+}
   .mainSlider .carousel-item {
     height: 119vh;
   }
@@ -4117,8 +4137,10 @@ ul li {
     font-size: 12px;
   }
   .firstText {
-    top: 30%;
+    top: 29%;
+    width: 43%;
   }
+  
   .secondText {
     left: -3.85rem; 
     bottom: 8rem;
@@ -4442,6 +4464,7 @@ ul li {
   }
  
 }
+ 
 @media (min-height:732px) and (max-height: 740px) {
   .news {
     height: 100vh;
@@ -4475,6 +4498,15 @@ ul li {
 @media (min-width:393px) and (max-width: 431px){
  .slideTwo .secondText {
     left: -5.3rem;
+}
+}
+
+@media (max-width: 360px){
+  .carousel-caption .shareBtn.newBtn {
+    width: 34%;
+}
+.heading2 {
+  font-size: 34px;
 }
 }
 @media (max-width: 320px) {

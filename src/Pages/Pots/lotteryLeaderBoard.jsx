@@ -139,6 +139,7 @@ return(
                         placeholder="Search by name" 
                         onChange={(e)=>{getLotteryLeaderBoard(e.target.value); setLeaderSearch(e.target.value);}}
                         />
+                          <button className="searchIcon" type="submit">Search</button>
                     </div>
                     <div className="col-sm-6">
                         <div className="d-flex justify-content-end">

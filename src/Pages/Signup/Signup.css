@@ -251,6 +251,31 @@ form .signUp-google a:hover::before, form .signUp-google a:hover::after,
         width: 455px;
     }    
 }
+
+@media (max-width: 1300px) {
+    .signup-box .form-control {
+        font-size: 14px; 
+        line-height: 16px;
+    }
+    
+    .login-head { 
+        font-size: 34px;
+        line-height: 110%;
+    }
+    
+    form .playBtn {
+        margin-top: 2rem;
+    }
+    
+    .alreadyAcc { 
+        margin-top: 2rem;
+    }
+    
+    .invalid-feedback {
+        color: red;
+        font-size: 10px;
+    }
+}
   @media (max-width: 850px) {
   
      

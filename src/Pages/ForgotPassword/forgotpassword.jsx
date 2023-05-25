@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingFalse, setLoadingTrue } from "../../Components/Redux/actions";
+import backBtn from '../../Assest/img/backBtn.svg';
 
 const ForgotPassword = () => {
   const [validated, setValidated] = useState(false)
@@ -178,22 +179,26 @@ const ForgotPassword = () => {
 
   return (
     <React.Fragment>
-      <div className="forgot-page-wrapper">
-
+      <div className="forgot-page-wrapper"> 
         {newPass === false && <div className="signup-box">
-        <h2 className="login-head">Forgot  <br/>Password ?</h2>
-        <div className="forgot-page-container">
-         <p>No worries, enter your mail ID & we will send you a reset code.</p>
-          <Form noValidate validated={validated} onSubmit={handleSubmit} >
-            <Row className="mb-2">
-              <Form.Group >
-                <Form.Control required type="email"  placeholder="ENTER YOUR EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
-                                <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is required!'}</Form.Control.Feedback>
-                <span className="custom-error-msg"> {emailErrorMsg} </span>
-              </Form.Group>
-            </Row>
-            <div className="playBtn">  <button type="submit" > <span></span>PROCEED  </button> </div>
-          </Form> 
+        <div className="signup-page-container">
+          <img className='signUpbackBtn' src={backBtn} alt="back" onClick={()=>{navigate(-1)}}/>
+          <div>
+            <h2 className="login-head">Forgot  <br/>Password ?</h2>
+            <div className="forgot-page-container">
+            <p>No worries, enter your mail ID & we will send you a reset code.</p>
+              <Form noValidate validated={validated} onSubmit={handleSubmit} >
+                <Row className="mb-2">
+                  <Form.Group >
+                    <Form.Control required type="email"  placeholder="ENTER YOUR EMAIL" value={email} onChange={(e) => emailValidation(e) }  ></Form.Control>
+                                    <Form.Control.Feedback type="invalid">{emailErrorMsg  ? '':'Email is required!'}</Form.Control.Feedback>
+                    <span className="custom-error-msg"> {emailErrorMsg} </span>
+                  </Form.Group>
+                </Row>
+                <div className="playBtn">  <button type="submit" > <span></span>PROCEED  </button> </div>
+              </Form> 
+            </div>
+          </div>
         </div>
       </div> }
     

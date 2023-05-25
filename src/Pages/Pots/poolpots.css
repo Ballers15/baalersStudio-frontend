@@ -579,6 +579,10 @@ a.disabled{
     right: 1rem;
     width: 50px;
   }
+  .slick-next .finishText .fa{
+    margin-left: 10px;
+    margin-right: 0;
+  }
   .slick-prev{
     left: 1rem;
     width: 50px;
@@ -681,19 +685,43 @@ p.noRoundText {
   color: #fff;
   height: 52px;
   outline: none !important;
-  font-size: 26px;
+  font-size: 24px;
 line-height: 29px;
 font-family: "Valorant";
 font-weight: 400;
 text-align: left;
-padding: 5px 22px 0;
+padding: 5px 50px 0 22px;
 font-weight: 400px;
+}
+.searchTab::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 span.leaderboardInput {
   font-size: 18px;
+  position: absolute;
 }
 
+
+ button[type="submit"].searchIcon {
+  text-indent: -999px;
+  overflow: hidden;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: inherit; 
+  background: transparent url("../../Assest/img/search.png") no-repeat 9px center !important; 
+  cursor: pointer;
+  opacity: 0.7;
+  position: relative;
+}
+
+ /* input.searchTab {
+   border: 1px solid #555;
+   width: 100%;
+   padding: 9px 4px 9px 40px;
+ } */
 .angleIcon {
   width: 52px;
   height: 52px;
