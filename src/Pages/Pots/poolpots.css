@@ -733,6 +733,9 @@ span.leaderboardInput {
   }
 }
 @media (max-width: 1300px){
+  .workArrowDown { 
+    right: 14%; 
+}
   .lotteryPool .sCaption h1 {
     font-size: 89px;
   }
@@ -881,6 +884,8 @@ span.leaderboardInput {
   .cardwidth{
     /* width: 75%;  */
     margin: 0 1rem;
+    width: 90%;
+    margin: auto;
   }
   .finishSlider .slick-list{
     height: 500px;
@@ -956,7 +961,7 @@ span.leaderboardInput {
     left: 1rem;
   }
   .slick-slide .wthMob {
-    width: 62%;
+    width: 80%;
   }
  
 .slick-next{
@@ -1059,6 +1064,7 @@ span.leaderboardInput {
 } 
 }
 @media (max-width: 380px){
+  
   .lotteryPool .poolBtn .playBtn {
     width: 85%;
   }

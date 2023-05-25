@@ -690,7 +690,7 @@ const PoolListing = () => {
                                 <th>Game Cash Burned</th>                        
                                 <th>Contract Address</th>
                                 <th>Assest Name</th>
-                                <th>pot Status</th>
+                                <th>Pot Status</th>
                                 <th>Stop Claim</th>
                                 <th>Actions</th>
                             </tr>
@@ -710,7 +710,7 @@ const PoolListing = () => {
                                                 </span></td>
                                         <td>{pot?.potAmountCollected?.$numberDecimal}</td>
                                         
-                                        <td>
+                                        <td className="d-flex align-items-center justify-content-center">
                                             <span title= {pot?.assetDetails?.contractAddress}>
                                                 {pot?.assetDetails?.contractAddress.length>12 && toTitleCase(pot?.assetDetails?.contractAddress.slice(0,5)+'...'+pot?.assetDetails?.contractAddress.slice(-5))}
                                                 {pot?.assetDetails?.contractAddress.length<=12 && toTitleCase(pot?.assetDetails?.contractAddress)}
