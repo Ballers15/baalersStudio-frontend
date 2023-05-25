@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, FormGroup } from 'react-bootstrap'
 import {  Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react-otp-input';
 import { checkUserName, registerUser,  userSignup, verifyOtp } from '../../Services/User'
@@ -24,15 +24,15 @@ const Signup = () => {
   const [emailErrorMsg,setEmailErrorMsg]= useState(null)
   const [passErrorMsg,setPassErrorMsg]= useState(null)
   const [response,setResponse] = useState(false);
-  const [otp, setOtp]=useState("")
+  const [otp, setOtp]=useState('')
   const [userNameErr,setUserNameErr] = useState('')
   const [userNameSuccess,setUserNameSuccess] = useState('')
   const navigate = useNavigate();
   const [passValidation, setPassValidation] = useState(false)
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [isUserNameValid, setIsUserNameValid] = useState(false)
+  const [isOtpinvalid, setIsOtpInvalid] = useState(false)
 
-  
   const [userDetails, setUserDetails] = useState(
     {
       userName: '',
@@ -84,7 +84,7 @@ const Signup = () => {
       setPassValidation (true);
     }
     else{
-      setPassErrorMsg('Passwords do not match')
+      setPassErrorMsg('Passwords do not match!')
       setPassValidation (false);
     }
     // console.log('end ',passErrorMsg)
@@ -105,7 +105,7 @@ const Signup = () => {
       setPassValidation (true);
     }
     else{
-      setPassErrorMsg('Passwords do not match')
+      setPassErrorMsg('Passwords do not match!')
       setPassValidation (false);
     }
     // console.log('end ',passErrorMsg)
@@ -217,8 +217,8 @@ const registerUsers = async () => {
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
-    setValidated(true);
-
+    if(otp === '' || otp.length !== 6)  
+      setIsOtpInvalid(true)
     if(otp.length === 6){
     let dataToSend= {
       email: userDetails.email,
@@ -309,7 +309,7 @@ const registerUsers = async () => {
       setErrorMsg(null)
       dispatch(setUserData(JSON.stringify(signup?.data)))
       navigate('/');
-    }
+      }
     }
   
     catch (error) {
@@ -373,7 +373,7 @@ const registerUsers = async () => {
            
               <Form.Group className='pb-4'>
                 <Form.Control required type="password"  placeholder="PASSWORD" onChange={(e) => confirmPassword(e)}  value={userDetails.password}  minLength='8' ></Form.Control>
-                <Form.Control.Feedback type="invalid">Password is required (8 character)</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">Password is required (8 character)!</Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className='pb-4'>
@@ -408,13 +408,22 @@ const registerUsers = async () => {
                <h2 className="login-head">Verify  <br/>code</h2>
                <p>A 6-digit code has been sent to your mail id.
                 Kindly enter it to proceed.</p>
+            <FormGroup>
                <OtpInput 
                   inputType='tel'
                   value={otp}
-                  onChange={setOtp}
+                  onChange={(e)=>{setOtp(e);setIsOtpInvalid(false)}}
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
-                />      
+                />     
+                   <Form.Control
+                      type='hidden'
+                      isInvalid = {isOtpinvalid}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                          OTP is required!
+                    </Form.Control.Feedback> 
+              </FormGroup>
                 <span className="invalid-feedback">{errorMsg}</span>       
               <div className="playBtn">  <button type="submit" > <span></span> verify  </button> </div>
                 <div className='alreadyAcc'>
