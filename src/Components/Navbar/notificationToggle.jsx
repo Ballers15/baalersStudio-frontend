@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from '../Redux/actions';
 import { toast } from 'react-toastify';
 import { readAllNotifications, readSingleNotification, userNotifications } from '../../Services/User';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotificationToggle() {
 
@@ -12,6 +13,7 @@ export default function NotificationToggle() {
   let _u = JSON.parse(strAuth);
   const dispatch = useDispatch();
   const [arr,setArr] = useState('');
+  const navigate = useNavigate();
   
   useEffect(()=>{
     if(_u!==null)
@@ -100,15 +102,19 @@ export default function NotificationToggle() {
 /**
  * Slide out animation when clicked on a single notification
  * @param event Event | to prevent dropdown from closing
- * @param index number | index of clicked notification or notification to be marked as read
+ * @param data object | details of clicked notification
  */
-const markAsRead = (event,data,index) => {
+const markAsRead = (event,data) => {
   event.stopPropagation();
 
+  if(data?.message?.includes('Lottery Pot'))
+    navigate('/pool/lottery')
+  if(data?.message?.includes('Reward Pot'))
+    navigate('/pool/reward')
+  
   const element = document.getElementById(data?._id);
   element.classList.add('slide-out');
   markSignleAsRead(data?._id)
-
 }
 
 /**

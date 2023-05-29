@@ -142,6 +142,7 @@ const Signup = () => {
 const registerUsers = async () => {
         let dataToSend = {
           email: userDetails.email,
+          userName: userDetails.userName.trim(),
           password:userDetails.password,
       }
       dispatch(setLoadingTrue());
@@ -256,6 +257,7 @@ const registerUsers = async () => {
   const reSendOtp = async () => {
     let dataToSend = {
       email: userDetails.email,
+      userName: userDetails.userName.trim(),
       password:userDetails.password,
       resend: true
   }

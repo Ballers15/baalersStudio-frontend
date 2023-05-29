@@ -82,7 +82,6 @@ const AddPot = () => {
                   const claimExpiryDate=new Date(data?.endDate?.split('T')[0]);
                   claimExpiryDate.setDate(claimExpiryDate.getDate() + 1);
                if (data) {
-
                       setRewardPotDetail({
                           ...rewadPotDetail,
                           rewardTokenAmount: data?.rewardTokenAmount,
@@ -103,6 +102,8 @@ const AddPot = () => {
                               date:convert(claimExpiryDate)  ,
                           }
                       })
+                      if(data?.potType === 'REWARDPOT')
+                        setNftExists(true)
                       setEndDate(data?.endDate?.split('T')[0])
                       setStartDate(data?.startDate?.split('T')[0])
                       setStartDateTime(data?.startDate?.split('T')[1]?.slice(0,5))
@@ -233,7 +234,7 @@ const AddPot = () => {
      * @param  e Event | Event from From submission
      */
     const updateRewardPot = async (e) => {
-        if (!id || rewadPotDetail?.isActive === 'true') {
+        if (!id) {
             return;
         }
         e.preventDefault();
@@ -262,7 +263,11 @@ const AddPot = () => {
             rewadPotDetail.isActive=false;
         }
 
-    if (form.checkValidity() === false || ((nftExists === false) && (rewadPotDetail?.potType === 'LOTTERYPOT')) || (endDateError!=='') || (endTimeError!=='')) {
+    if (
+        form.checkValidity() === false || 
+        ((nftExists === false) && (rewadPotDetail?.potType === 'LOTTERYPOT')) || 
+        (endDateError!=='') || (endTimeError!=='')
+        ) {
 
             console.log(rewadPotDetail)
             console.log('form invalid!')
@@ -315,7 +320,10 @@ const AddPot = () => {
         e.preventDefault();
 
         if(id){
-           updateRewardPot(e);
+            if(nftExists)
+               updateRewardPot(e);
+            else
+                checkNftOnContract(rewadPotDetail?.assetDetails?.ticker)
         }
         else{
             addRewardPot(e);
@@ -327,15 +335,22 @@ const AddPot = () => {
      * @param  e Event | Event from From submission
      */
     const checkNftOnContract = async(e) => {
+        let ticker = ''
+        if(typeof(e)==='string'){
+            ticker = e;
+        }
+        else{
         e.preventDefault();
         e.stopPropagation();
         e.preventDefault();
-        let quantity = rewadPotDetail?.rewardTokenAmount;
+        ticker = e.target.value;
+    }
         let dataToSend = {};
+        let quantity = rewadPotDetail?.rewardTokenAmount;
         if(rewadPotDetail?.potType === 'LOTTERYPOT' || rewadPotDetail?.assetType==='NFT'){
             if(quantity > 0) {
                 dataToSend = {
-                tokenId: e.target.value,
+                tokenId: ticker,
                 quantity: quantity
                 }
             }
@@ -407,7 +422,7 @@ const AddPot = () => {
                                                 min={currentDate}
                                                 value={potStatusCheck ? currentDate : startDate || ''}
                                                 onChange={({ target }) => setStartDate(target.value)}
-                                                disabled={id && rewadPotDetail?.isActive}
+                                                disabled={id && (rewadPotDetail?.potStatus !=='UPCOMING') }
                                                 >
                                                 </Form.Control>
                                             <Form.Control.Feedback type="invalid">
@@ -420,7 +435,7 @@ const AddPot = () => {
                                             <TimePicker 
                                             value={potStatusCheck ? currentTime : startDateTime|| ''} 
                                             onChange={(e) => { setStartDateTime(e);console.log(e)}} 
-                                            disabled={rewadPotDetail?.isActive || (potStatusCheck && !id)}
+                                            disabled={id && (rewadPotDetail?.potStatus !=='UPCOMING') }
                                             />
                                         </Form.Group>
 
@@ -493,6 +508,7 @@ const AddPot = () => {
                                         setRewardPotDetail({ ...rewadPotDetail, potType: potType,assetType:e.target.value });
                                       }}
                                     value={rewadPotDetail.assetType}
+                                    disabled={id && (rewadPotDetail?.potStatus !=='UPCOMING') }
                                     >
                                         <option value="" disabled>Select Assest Type</option>
                                         <option value="NFT">NFT</option>
@@ -517,6 +533,7 @@ const AddPot = () => {
                                         setRewardPotDetail({ ...rewadPotDetail, assetType:assetType ,potType:e.target.value });
                                       }}
                                     value={rewadPotDetail.potType || ''}
+                                    disabled={id && (rewadPotDetail?.potStatus !=='UPCOMING') }
                                     >
                                     <option value="" disabled>Select Pot Type</option>
                                     <option value="LOTTERYPOT">Lottery pot</option>
@@ -582,7 +599,8 @@ const AddPot = () => {
                     
                         <div>
                         <button type="primary" className="add-pot-submit-button" style={{marginLeft:'20px'}} onClick={()=>navigate('/pool-listing')}><span></span><span></span><span></span>Close</button>
-                        {id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
+                        {id && nftExists && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Update Pot</button>}
+                        {id && !nftExists && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Check Nft</button>}
                         {!id && <button type="submit" disabled={disable} className="add-pot-submit-button" ><span></span><span></span><span></span>Add Pot</button>}
                         </div>
                 </Form>

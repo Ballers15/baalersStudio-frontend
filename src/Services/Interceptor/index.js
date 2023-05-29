@@ -53,8 +53,6 @@ axiosInstance.interceptors.response.use(
             if (error.response.status === 401 && error.response.data ) {
                 // alert(error?.response?.data?.message || 'error code 401 detected!!')
 				// console.log("calling error 401")
-                toast.dismiss()
-                toast.error('Authentication failed')
                 if(user!==null)
                     logout()
                 return Promise.reject(error.response.data?.message);

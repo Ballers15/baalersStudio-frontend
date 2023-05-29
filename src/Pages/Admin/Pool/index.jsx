@@ -493,7 +493,7 @@ const PoolListing = () => {
                             <td>{user?.walletAddress?.length>12 && toTitleCase(user?.walletAddress.slice(0,5)+'...'+user?.walletAddress.slice(-5))}
                             {' '}{' '}{' '}{' '}
                                     <span className='fa fa-copy' title='copy address' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.walletAddress); toast.dismiss(); toast.info( 'Copied Succesfully'); }}></span></td>  
-                            {potType === 'REWARDPOT' ? <td>{user?.nftHolded}</td> : <td>{(user.lotteryWon).toString()}</td>}
+                            {potType === 'REWARDPOT' ? <td>{user?.nftHolded}</td> : <td>{toTitleCase((user.lotteryWon).toString())}</td>}
                            {potType === 'REWARDPOT' && <td>{(user?.rewardedTokenAmount)}</td>}
                             <td>{user?.status}</td>
                         </tr>  
