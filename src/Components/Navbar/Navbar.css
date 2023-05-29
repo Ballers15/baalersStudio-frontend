@@ -200,9 +200,12 @@ button#dropdown-button-dark-example1 {
     .navbar-expand-lg .navbar-nav .notification .dropdown-menu{
         right: -8rem;
     }
+    .navbar-expand-lg .navbar-nav .adminNav.nav-link {
+        font-size: 12px;
+    }
     .navbar-expand-lg .navbar-nav .nav-link {
         margin-left: 13px;
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 
