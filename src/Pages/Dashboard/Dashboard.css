@@ -239,7 +239,14 @@ h5 {
   /* text-transform: uppercase; */
   z-index: 0;
 }
-
+.rewardHead{
+  left: -49px; 
+  color: #110929;
+  opacity: .5;
+}
+.collectionText{
+  left: -82px;
+}
 .faqHead {
   font-family: "Valorant";
   font-weight: 800;
@@ -288,9 +295,9 @@ h5 {
 .balrHead {
   font-family: "Valorant";
   font-weight: 800;
-  font-size: 64px;
+  font-size: 80px;
   position: absolute;
-  right: -2%;
+  right: -5%;
   margin: auto;
   top: -28%;
   color: #831EC3;
@@ -2372,11 +2379,7 @@ ul li {
   .positionAbs {
     bottom: 9rem;
   }
-
-  .balrHead {
-    right: -1%;
-  }
-
+ 
   .thirdSlide .sCaption {
     width: 44%;
   }
@@ -2829,7 +2832,7 @@ ul li {
   .heading2,
   .balrHead,
   .faqHead {
-    font-size: 56px;
+    font-size: 62px;
   }
 
   .heading {

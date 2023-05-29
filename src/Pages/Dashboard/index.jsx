@@ -693,7 +693,7 @@ const Dashboard = () => {
                     </div>
                     <div className="positionRelative mb-4 headWth">
                       <h2 className="heading">REWARD</h2>
-                      <h2 className="heading2">REWARD</h2>
+                      <h2 className="heading2 rewardHead">REWARD</h2>
                     </div>
 
                     <div className="py-5">
@@ -856,7 +856,7 @@ const Dashboard = () => {
                       <LazyLoadImage src={arrowUp} alt="Arrow" className="arrowUp" />
                       <div className="nftCollectionHead mt-5 headWth mx-auto">
                         <h2 className="heading">NFT COLLECTION</h2>
-                        <h2 className="heading2">NFT COLLECTION</h2>
+                        <h2 className="heading2 collectionText">NFT COLLECTION</h2>
                       </div>
                     </div>
                   </div>
