@@ -362,9 +362,6 @@ const PoolListing = () => {
      */
     const getPotUsers = async (data) =>{
         setPotType(data?.potType)
-        setWalletAddressFilter('')
-        setEmailFilter('')
-        setPotIdForUser(data)
         let dataToSend = {
             potId: data._id,
         }
@@ -420,6 +417,13 @@ const PoolListing = () => {
     }
 
 
+    const resetUsers = (e) => {
+        e.preventDefault();
+        setWalletAddressFilter('')
+        setEmailFilter('')
+        getPotUsers(potIdForUser)
+    }
+
     const handleClaimStatus = (pot) => {
         setClaimModal(true);
         setPotDetails(pot);
@@ -452,19 +456,21 @@ const PoolListing = () => {
                 </Modal.Header>
                 <Modal.Body>
                  <div className="searchTag">
-                    <Form className="d-flex" onSubmit={filterPotUser} onReset={()=>{getPotUsers(potIdForUser)}}>
+                    <Form className="d-flex" onSubmit={(e)=>{filterPotUser(e)}} onReset={(e)=>{resetUsers(e)}}>
                         <Form.Control
                         type="search"
                         placeholder="Search with Email"
                         className="me-2"
                         aria-label="Search"
                         onChange={({ target }) => setEmailFilter(target.value)}
+                        value = {emailFilter}
                         />
                          <Form.Control
                         type="search"
                         placeholder="Search with Wallet Address"
                         className="me-2"
                         aria-label="Search"
+                        value = {walletAddressFilter}
                         onChange={({ target }) => setWalletAddressFilter(target.value)}
                         />
                     <Button className="" type="submit">Search</Button>
@@ -599,7 +605,7 @@ const PoolListing = () => {
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                     <td>{pot?.rewardTokenAmount}</td>
-                                    <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                    <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                 <i className="fa fa-eye" />
                                             </span></td>
                                     <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)} </td>
@@ -705,7 +711,7 @@ const PoolListing = () => {
                                         <td>{pot?.endDate?.split('T')[0]}</td>
                                         <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                         <td>{pot?.rewardTokenAmount}</td>
-                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                     <i className="fa fa-eye " />
                                                 </span></td>
                                         <td>{pot?.potAmountCollected?.$numberDecimal}</td>
@@ -809,7 +815,7 @@ const PoolListing = () => {
                                         <td>{pot?.endDate?.split('T')[0]}</td>
                                         <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                         <td>{pot?.rewardTokenAmount}</td>
-                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot)}}>
+                                        <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                     <i className="fa fa-eye " />
                                                 </span></td>
                                         <td>{formatNumberDecimal(pot?.potAmountCollected?.$numberDecimal)}</td>
