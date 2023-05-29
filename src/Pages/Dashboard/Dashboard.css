@@ -162,7 +162,7 @@ h5 {
   justify-content: center;
   position: relative;
   /* padding-top: 7rem;  */
-  background: url("../../Assest/img/reward.png") #260059;
+  background: url("../../Assest/img/reward.webp") #260059;
   background-size: 66%;
   background-position: 0% 5rem;
   background-repeat: no-repeat;
@@ -254,7 +254,13 @@ h5 {
   z-index: 0;
 
 }
-
+.boldText{
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
 .nice-header {
   position: relative;
   /* height: 300px; */
@@ -3317,7 +3323,7 @@ ul li {
     margin-top: 1.5rem;
     padding: 0 1.5rem;
   }
-  .mob-content h4 { 
+  .mob-content h4, .boldText { 
     font-size: 16px;
 }
   b,
