@@ -297,11 +297,22 @@ form .signUp-google a:hover::before, form .signUp-google a:hover::after,
         margin-bottom: 3rem; 
         height: 100%;
     }
-    .signup-box {  
+    .signup-box .form-control {
+        font-size: 15px;
+    }
+    .signup-box, .login-box {  
         left: 0;
         right: 0; 
         margin: auto;
         width: 86%;
+        z-index: 99;
+    }
+    .forgot-page-wrapper:before, .Login-component::before, .signup-page-wrapper::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #00000042;
     }
   }
   @media (max-width: 380px){
