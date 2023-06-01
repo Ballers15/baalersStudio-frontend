@@ -585,7 +585,8 @@ const PoolListing = () => {
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Claim Expiry Date</th>
-                            <th>Reward Amount</th>
+                            <th>Reward Amount $</th>
+                            <th>Token Amount</th>
                             <th>Users Count </th>
                             <th>Game Cash Burned</th>                     
                             <th>Contract Address</th>
@@ -605,6 +606,7 @@ const PoolListing = () => {
                                     <td>{pot?.endDate?.split('T')[0]}</td>
                                     <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                     <td>{pot?.rewardTokenAmount}</td>
+                                    <td>{pot?.rewardTokenQuantity ? pot?.rewardTokenQuantity : "NA"}</td>
                                     <td> {pot?.userCount}<span className="eyeIcon" title="View User" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                 <i className="fa fa-eye" />
                                             </span></td>
@@ -691,7 +693,8 @@ const PoolListing = () => {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Claim Expiry Date</th>
-                                <th>Reward Amount</th>
+                                <th>Reward Amount $</th>
+                                <th>Token Amount</th>
                                 <th>Users Count </th>
                                 <th>Game Cash Burned</th>                        
                                 <th>Contract Address</th>
@@ -711,6 +714,7 @@ const PoolListing = () => {
                                         <td>{pot?.endDate?.split('T')[0]}</td>
                                         <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                         <td>{pot?.rewardTokenAmount}</td>
+                                        <td>{pot?.rewardTokenQuantity ? pot?.rewardTokenQuantity : "NA"}</td>
                                         <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                     <i className="fa fa-eye " />
                                                 </span></td>
@@ -797,7 +801,8 @@ const PoolListing = () => {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Claim Expiry Date</th>
-                                <th>Reward Amount</th>
+                                <th>Reward Amount $</th>
+                                <th>Token Amount</th>
                                 <th>Users Count </th>
                                 <th>Game Cash Burned</th>                        
                                 <th>Contract Address</th>
@@ -815,6 +820,7 @@ const PoolListing = () => {
                                         <td>{pot?.endDate?.split('T')[0]}</td>
                                         <td>{pot?.claimExpiryDate?.split('T')[0]}</td>
                                         <td>{pot?.rewardTokenAmount}</td>
+                                        <td>{pot?.rewardTokenQuantity ? pot?.rewardTokenQuantity : "NA"}</td>
                                         <td> {pot?.userCount} <span title="View User" className="eyeIcon" onClick={() => {viewUserShow(true); getPotUsers(pot); setPotIdForUser(pot) }}>
                                                     <i className="fa fa-eye " />
                                                 </span></td>
