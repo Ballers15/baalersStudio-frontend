@@ -40,9 +40,9 @@ import arrowDown from '../../Assest/img/arrowDown.svg'
 import ellipse from '../../Assest/img/ellipse.png'
 import ellipse2 from '../../Assest/img/ellipse2.png'
 import ellipse3 from '../../Assest/img/ellipse3.png'
-import house from '../../Assest/img/house.png'
+import house from '../../Assest/img/house.webp'
 import house1 from '../../Assest/img/house1.webp'
-import houseMob from '../../Assest/img/houseMob.png'
+import houseMob from '../../Assest/img/houseMob.webp'
 import houseMob1 from '../../Assest/img/houseMob1.webp'
 import starL from '../../Assest/img/starL.svg'
 import starM from '../../Assest/img/starM.svg'
@@ -440,7 +440,7 @@ const Dashboard = () => {
                               </div>
                             </div>
                             <div className="col-sm-7 text-right mob-center">
-                              <img
+                              <LazyLoadImage
                                 src={fatMan}
                                 alt="Italian_Mafia_Boss"
                                 width="558"
@@ -693,7 +693,7 @@ const Dashboard = () => {
                     </div>
                     <div className="positionRelative mb-4 headWth">
                       <h2 className="heading">REWARD</h2>
-                      <h2 className="heading2">REWARD</h2>
+                      <h2 className="heading2 rewardHead">REWARD</h2>
                     </div>
 
                     <div className="py-5">
@@ -761,9 +761,9 @@ const Dashboard = () => {
                     <div className="col-sm-7 my-auto">
                       <div className="mob-content">
                         <div className="mb-5">
-                          <h4>
+                          <div className="boldText">
                             <b>Work hard, play hard, and party even harder.</b>{' '}
-                          </h4>
+                          </div>
                           <p className="text-font"> </p>
                           <p className="text-font">
                             Assemble your gang and join the Baller's community
@@ -796,7 +796,7 @@ const Dashboard = () => {
                     </div>
                     <div className="col-sm-5">
                       <div className="dancingImg">
-                        <img
+                        <LazyLoadImage
                           src={SneefDog}
                           alt="Snoopdog"
                           width="413"
@@ -856,7 +856,7 @@ const Dashboard = () => {
                       <LazyLoadImage src={arrowUp} alt="Arrow" className="arrowUp" />
                       <div className="nftCollectionHead mt-5 headWth mx-auto">
                         <h2 className="heading">NFT COLLECTION</h2>
-                        <h2 className="heading2">NFT COLLECTION</h2>
+                        <h2 className="heading2 collectionText">NFT COLLECTION</h2>
                       </div>
                     </div>
                   </div>

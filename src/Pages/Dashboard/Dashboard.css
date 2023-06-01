@@ -162,7 +162,7 @@ h5 {
   justify-content: center;
   position: relative;
   /* padding-top: 7rem;  */
-  background: url("../../Assest/img/reward.png") #260059;
+  background: url("../../Assest/img/reward.webp") #260059;
   background-size: 66%;
   background-position: 0% 5rem;
   background-repeat: no-repeat;
@@ -239,7 +239,14 @@ h5 {
   /* text-transform: uppercase; */
   z-index: 0;
 }
-
+.rewardHead{
+  left: -49px; 
+  color: #110929;
+  opacity: .5;
+}
+.collectionText{
+  left: -82px;
+}
 .faqHead {
   font-family: "Valorant";
   font-weight: 800;
@@ -254,7 +261,13 @@ h5 {
   z-index: 0;
 
 }
-
+.boldText{
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
 .nice-header {
   position: relative;
   /* height: 300px; */
@@ -282,9 +295,9 @@ h5 {
 .balrHead {
   font-family: "Valorant";
   font-weight: 800;
-  font-size: 64px;
+  font-size: 80px;
   position: absolute;
-  right: -2%;
+  right: -5%;
   margin: auto;
   top: -28%;
   color: #831EC3;
@@ -717,6 +730,9 @@ width: 118px;
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .formFlex .form-control {
@@ -729,6 +745,7 @@ width: 118px;
   border-radius: 8px 0 0 8px;
   border-right: 0 !IMPORTANT;
   width: 400px;
+  text-align: left;
 }
 
 .subscribeBtn {
@@ -752,8 +769,9 @@ width: 118px;
 } */
 
 .valid-feedback, .formFlex .invalid-feedback  {
-  width: 66%;
+  /* width: 66%; */
   text-align: left;
+  padding-left: 0.85rem;
   position: absolute;
   font-size: 16px;
   margin-top: 0;
@@ -2361,11 +2379,7 @@ ul li {
   .positionAbs {
     bottom: 9rem;
   }
-
-  .balrHead {
-    right: -1%;
-  }
-
+ 
   .thirdSlide .sCaption {
     width: 44%;
   }
@@ -2818,7 +2832,7 @@ ul li {
   .heading2,
   .balrHead,
   .faqHead {
-    font-size: 56px;
+    font-size: 62px;
   }
 
   .heading {
@@ -3208,13 +3222,17 @@ ul li {
   padding: 1rem 0.5rem;
 }
   .valid-feedback,  .formFlex .invalid-feedback {
-    width: 78%;
+    /* width: 78%; */
     font-size: 12px;
     line-height: 16px;
 }
- 
+.formFlex {width: 100%;}
 .formFlex .form-control, .subscribeBtn { 
   font-size: 16px;
+}
+.formFlex .form-control{
+  font-size: 15px;
+  letter-spacing: 0.12em;
 }
   .playBtn a::before,
   .playBtn a::after,
@@ -3308,7 +3326,7 @@ ul li {
     margin-top: 1.5rem;
     padding: 0 1.5rem;
   }
-  .mob-content h4 { 
+  .mob-content h4, .boldText { 
     font-size: 16px;
 }
   b,
