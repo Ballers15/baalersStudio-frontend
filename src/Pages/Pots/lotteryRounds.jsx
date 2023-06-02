@@ -25,14 +25,13 @@ const LotteryRounds = (props) => {
     const [potId,setPotId] = useState('')
     const [claimedNft,setClaimedNft] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
-    const [buttonStatus, setButtonStatus] = useState(true)
     
     function SampleNextArrow(props) {
       const { className, style, onClick , buttonStatus} = props;
       return (
         <div
           className={className}
-          style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
+          style={{ ...style}}
           onClick={onClick}
         ><p className="finishText"><i className="fa fa-arrow-right" aria-hidden="true"></i> </p></div>
       );
@@ -42,7 +41,7 @@ const LotteryRounds = (props) => {
       return (
         <div
           className={className}
-          style={{ ...style }}
+          style={{ ...style}}
           onClick={onClick}
         ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p></div>
       );
@@ -55,8 +54,8 @@ const LotteryRounds = (props) => {
       slidesToShow: 1,
       centerMode: true,
       variableWidth: true, 
-      nextArrow: <SampleNextArrow buttonStatus={buttonStatus} />,
-      prevArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
       rtl: true,
       initialSlide: prevRoundsLength-1,
       responsive: [
@@ -202,7 +201,6 @@ const LotteryRounds = (props) => {
             potId: id
         }
         dispatch(setLoadingTrue());
-        setButtonStatus(false)
         try {
           const data = await wonLottery(dataToSend);
           dispatch(setLoadingFalse());
@@ -213,7 +211,6 @@ const LotteryRounds = (props) => {
             setUserWon(data?.data?.lotteryWon)
             setParticipated(data?.data?.participated)
             setClaimedNft(data?.data?.claimed)
-            setButtonStatus(true)
           }
         } catch (error) {
             toast.dismiss();

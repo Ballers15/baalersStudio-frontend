@@ -716,9 +716,9 @@ const Dashboard = () => {
                       </p>
                     </div>
                     <div className="innerBtn">
-                      <a href="/pool">
+                    <Link to='/pool'>
                         <span></span>View pool
-                      </a>
+                    </Link>
                     </div>
                   </div>
                 </div>

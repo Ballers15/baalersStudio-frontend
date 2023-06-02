@@ -5,7 +5,6 @@ import { useDispatch  } from "react-redux";
 import { setIsClaimedFalse, setLoadingFalse, setLoadingTrue, setUserData,   setWalletAddressValue } from "../Components/Redux/actions";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setIsClaimed, setLoading } from '../Components/Redux/reducer';
 
 const AuthContext = createContext(null);
 
@@ -46,7 +45,6 @@ export default function AuthProvide({ children }) {
       toast.dismiss()    
       toast.error(error ||'Something went worng during login');
       dispatch(setLoadingFalse());
-      setPassErrorMsg(error || 'Incorrect Password')
       navigate('/login')
     }
   }

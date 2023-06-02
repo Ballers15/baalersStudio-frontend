@@ -31,7 +31,6 @@ const Signup = () => {
   const [passValidation, setPassValidation] = useState(false)
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [isUserNameValid, setIsUserNameValid] = useState(false)
-  const [isOtpinvalid, setIsOtpInvalid] = useState(false)
 
   const [userDetails, setUserDetails] = useState(
     {
@@ -65,7 +64,7 @@ const Signup = () => {
   else{
     setEmailErrorMsg('Email is  required!')
     setIsEmailValid(false)
-  }
+    }
   }
 
 
@@ -215,11 +214,15 @@ const registerUsers = async () => {
    * @param e Event
    */
   const handleSubmitOtp = async (e) =>{
+    setValidated(true)
     e.preventDefault()
     e.stopPropagation()
     e.preventDefault()
     if(otp === '' || otp.length !== 6)  
-      setIsOtpInvalid(true)
+      {
+        toast.dismiss();
+        toast.error('OTP is required')
+      }
     if(otp.length === 6){
     let dataToSend= {
       email: userDetails.email,
@@ -234,18 +237,14 @@ const registerUsers = async () => {
         toast.dismiss();
         toast.error(otp?.error?.message || 'Something went worng in OTP verify')
       } else {
-        // 
-        // toast.success(otp?.message || 'OTP Verified Successfully')
         setErrorMsg(null)
         if(otp?.status === 200){
           signup()
         }
       }
     } catch (error) {
-      
       toast.dismiss();
       toast.error(error?.response?.data?.message || 'Something went worng in OTP verify')
-      setErrorMsg('Invalid OTP')
       dispatch(setLoadingFalse());
     }
   }    
@@ -336,7 +335,7 @@ const registerUsers = async () => {
    * Calls checkUsername() function when focus changes
    * @param e Event
    */
-  const handleBlur = (e) => {
+  const handleBlur = () => {
     if(userDetails.userName!== '' && userDetails.userName.trim()!=='')
     checkUsername();
   }
@@ -405,7 +404,6 @@ const registerUsers = async () => {
 
                 
             { isUserNameValid ===  true && response === true 
-            // {response === false
             && <Form noValidate validated={validated} onSubmit={handleSubmitOtp} className="otpVerify">
                <h2 className="login-head">Verify  <br/>code</h2>
                <p>A 6-digit code has been sent to your mail id.
@@ -414,17 +412,13 @@ const registerUsers = async () => {
                <OtpInput 
                   inputType='tel'
                   value={otp}
-                  onChange={(e)=>{setOtp(e);setIsOtpInvalid(false)}}
+                  onChange={(e)=>{setOtp(e)}}
                   numInputs={6} 
                   renderInput={(props) => <input {...props} />}
                 />     
                    <Form.Control
                       type='hidden'
-                      isInvalid = {isOtpinvalid}
                       />
-                      <Form.Control.Feedback type="invalid">
-                          OTP is required!
-                    </Form.Control.Feedback> 
               </FormGroup>
                 <span className="invalid-feedback">{errorMsg}</span>       
               <div className="playBtn">  <button type="submit" > <span></span> verify  </button> </div>
@@ -433,8 +427,6 @@ const registerUsers = async () => {
                   <a onClick={(e)=>reSendOtp(e)}> <span>Resend</span></a> 
                 </div>
           </Form> }
-
-          
         </div>
         
         

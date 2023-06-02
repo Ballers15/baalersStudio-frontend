@@ -2,7 +2,6 @@ import axios from "axios";
 import { environment } from "../../Environments/environment";
 import { store } from "../../Components/Redux/store";
 import { setIsClaimedFalse, setLoadingFalse, setUserData, setWalletAddressValue } from "../../Components/Redux/actions";
-import { toast } from "react-toastify";
 
 let user=null
 
@@ -58,8 +57,6 @@ axiosInstance.interceptors.response.use(
                 return Promise.reject(error.response.data?.message);
             }
         }
-		console.log(error, "rejected")
-
         return Promise.reject(error);
     }
 );

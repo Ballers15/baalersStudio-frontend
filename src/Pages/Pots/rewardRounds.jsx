@@ -23,14 +23,13 @@ const RewardRounds = (props) => {
     const [potId,setPotId] = useState('')
     const [claimed,setClaimed] = useState(false)
     const [intervalId, setIntervalId] = useState(null);
-    const [buttonStatus, setButtonStatus] = useState(true)
 
     function SampleNextArrow(props) {
       const { className, style, onClick, buttonStatus } = props;
       return (
         <div
           className={className}
-          style={{ ...style, visibility: buttonStatus ? "visible" : "hidden" }}
+          style={{ ...style}}
           onClick={onClick}
         ><p className="finishText"><i className="fa fa-arrow-right" aria-hidden="true"></i></p></div>
       );
@@ -40,7 +39,7 @@ const RewardRounds = (props) => {
       return (
         <div
           className={className}
-          style={{ ...style, }}
+          style={{ ...style}}
           onClick={onClick}
         ><p className="finishText"><i className="fa fa-arrow-left" aria-hidden="true"></i> </p></div>
       );
@@ -53,8 +52,8 @@ const RewardRounds = (props) => {
       slidesToShow: 1,
       centerMode: true,
       variableWidth: true, 
-      nextArrow: <SampleNextArrow buttonStatus={buttonStatus}/>,
-      prevArrow: <SamplePrevArrow buttonStatus={buttonStatus}/>,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
       rtl: true,
       initialSlide: prevRoundsLength-1,
       responsive: [
@@ -204,7 +203,6 @@ const RewardRounds = (props) => {
             potId: id
         }
         dispatch(setLoadingTrue());
-        setButtonStatus(false)
         try {
           const data = await isRewardClaimed(dataToSend);
           dispatch(setLoadingFalse());
@@ -217,7 +215,6 @@ const RewardRounds = (props) => {
             setParticipated(partcicipate)
             let claim = (data?.data?.claimed)
             setClaimed(claim)
-            setButtonStatus(true)
           }
         } catch (error) {
           toast.dismiss();

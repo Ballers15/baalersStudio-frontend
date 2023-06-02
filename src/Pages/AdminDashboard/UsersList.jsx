@@ -96,7 +96,7 @@ const UsersList = () => {
       }
     } catch (error) {
       toast.dismiss();
-      toast.error('Something went worngin getting user wallet details')
+      toast.error('Something went worng in getting user wallet details')
       dispatch(setLoadingFalse());
     }
      
@@ -120,7 +120,7 @@ const UsersList = () => {
         toast.error(userStatus?.message)
       } else {
         toast.dismiss();
-        toast.success(userStatus?.message)
+        toast.success("User Status Updated")
         handleCloseModal()
         getUsers()
       }
@@ -213,7 +213,6 @@ const UsersList = () => {
                   
                 </tbody>
             </Table>
-              
             </Modal.Body>
                
           </Modal>
@@ -318,7 +317,7 @@ const UsersList = () => {
                       <tr key={user?._id}>
                         <td className='sNoWth'>{((currentPage-1)*10)+index + 1}</td>
                         <td>{user?.userName}</td>
-                        <td className='d-flex justify-content-between'><span title={user?.email} className='emailWth'>{user?.email } </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
+                        <td className='d-flex justify-content-between'><span title={user?.email} className='emailWth'>{user?.email} </span> <span className='fa fa-copy' title='copy email' style={{ cursor: "pointer" }} onClick={() => { navigator.clipboard.writeText(user?.email); toast.dismiss(); toast.info( 'Email Copied !!');}}></span></td>
                         <td>{user?.provider}</td>
                         <td>{user?.createdAt?.split('T')[0]}</td>
                         <td>
