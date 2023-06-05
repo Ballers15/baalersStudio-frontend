@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { Col, Row, Form } from 'react-bootstrap'
+import { useState } from 'react'
+import { Row, Form } from 'react-bootstrap'
 import {  useNavigate } from 'react-router-dom'
 import { changePassword, forgotPassword, forgotPasswordLink } from '../../Services/User'
 import './forgotpassword.css'

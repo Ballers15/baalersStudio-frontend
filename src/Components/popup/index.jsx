@@ -9,13 +9,6 @@ import { formatNumberDecimal } from "../functions";
 
 const Popup = (props) => { 
 
-    let color='#FCDA41';
-
-    if(props.potType === 'LOTTERYPOT')
-      {
-        color = '#3531BB'
-      }
-
     return (
         <React.Fragment>
 

@@ -11,7 +11,7 @@ feature/admin
 
 feature/admin
 
-## Version 0.0.1
+## Version 0.0.2
 
 View Current Version Updates [linky](./VERSION.md)
 
@@ -21,7 +21,7 @@ Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app 
 
 ## Staging server
 
-[Staging Server](https://demo.ballers.fun/).
+[Staging Server](https://dev.ballers.fun/).
 
 ## Code scaffolding
 

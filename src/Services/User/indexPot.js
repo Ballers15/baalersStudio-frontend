@@ -71,12 +71,6 @@ export function lotteryWithdrawl(data) {
   return (axiosInstance.post(url + 'user/v1/update/lottery/withdrawl',  data).then( res => res.data))
 }
 
-//     "potId":"64005b92cef436093454f6c8",   
-//     "walletAddress":"0xd946F28962A96C45d9Bc16F16ca50d8350296A4E",
-//     "txnHash":"0x60a53080ee77cb0fd421c355423993ef13c5017c87a041a85c061149b6002542",
-//     "withdrawlId":"6400b2d83916c0e1eebb3ca8" 
-
-
 /**
  * Get leader board data of current active lottery pot
  * @param data Object
