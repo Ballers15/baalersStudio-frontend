@@ -44,17 +44,15 @@
 * `SmartContract_ABI.js`: Contains claim NFT abi, calim token abi & standard token abi.
 * `smartContractHandler.js`: Contains functions to initiate a transaction in metamask wallet.
 
-# functions.js
+## functions.js
 * `functions.js`: Function to format a large decimal number.
 
-# Environments
+## Environments
 * `environment.js`: Contains staging nft data, api url contract addresses and game url.
 * `environment.prod.js`: Contains production nft data, api url contract addresses and game url.
 
-# font
+## font
 * `Valorant-Font.ttf`: Font file
-
-# Pages
 
 ## About
 * `index.jsx`: About us page
