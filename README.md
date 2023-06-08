@@ -1,7 +1,11 @@
 # Ballers
 
+## Description
 Gaming Portal - Reward withdrawal portal.
 This project was generated with [REACT LIBRARY](https://github.com/facebook/react) version ^18.2.0.
+
+## Prerequisites
+Make sure you have installed all of the following prerequisites on your development machine: Git - Download & Install Git. OSX and Linux machines typically have this already installed. Version 18.2.0 Reactjs - Download & Install Reactjs and the npm package manager.
 
 ## Updated Branch
 
@@ -14,6 +18,22 @@ feature/admin
 ## Version 0.0.2
 
 View Current Version Updates [linky](./VERSION.md)
+
+## Get Started
+
+Get started developing...
+
+```shell
+# clone backend in your local system
+git clone git@bitbucket.org:4321r/ballers-frontend.git
+
+#Latest branch
+git checkout feature/admin
+# install dependencies
+npm install
+# run in development mode
+npm start
+```
 
 ## Development server
 
