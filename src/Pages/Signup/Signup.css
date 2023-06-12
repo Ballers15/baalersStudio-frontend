@@ -1,0 +1,325 @@
+.signup-page-wrapper{
+    background-image: url(../../Assest/img/loginBg.png);
+    height: 100vh; 
+    width: 100vw; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Inter', sans-serif;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.signup-box{
+   
+    border-radius: 16px;
+    box-sizing: border-box; 
+    width: 426px;
+    height: 492px;
+    margin-right: 10%; 
+    height: auto;
+}
+
+.signup-page-wrapper .invalid-feedback{
+    position: absolute;
+    margin-top: 2px;
+}
+.signup-page-wrapper  .small-lable.form-label{
+    margin-bottom: 0.25rem;
+    color: #ECE8E1;
+}
+
+.custom-error-msg{
+    width: 100%;
+    margin-top: 0.25rem;
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #FF0000;
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
+.custom-success-msg{
+    width: 100%;
+    margin-top: 0.25rem;
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #3fd68f;
+    position: absolute;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
+.signup-page-container{
+    display: flex;
+    align-items: flex-start;
+}
+.signup-page-container .signUpbackBtn{
+    margin-right: 2rem;
+    margin-top: 0.5rem;
+}
+/* .signup-page-container{
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: left; 
+} */
+
+/* .signup-page-wrapper .playBtn{
+    margin-top: 3rem;
+}
+.signup-page-wrapper .playBtn a{
+    width: 100%;
+    position: relative;
+}
+.signup-page-wrapper .playBtn a::before, .signup-page-wrapper .playBtn a::after, .signup-page-wrapper .playBtn a span::before, .signup-page-wrapper .playBtn a span::after{
+    width: 182px;
+}
+.signup-page-wrapper .playBtn a:hover::before, .signup-page-wrapper .playBtn a:hover::after, .signup-page-wrapper .playBtn a:hover span::before, .signup-page-wrapper .playBtn a:hover span::after{
+    width: 161px;
+} */
+.signup-submit-button{
+    cursor: pointer;
+    width: 30%;
+    height: 54px;
+    /* float: */
+    background: #FFFFFF;
+    border-radius: 8px; 
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+.alreadyAcc a{
+    font-size: 16px;
+    color: #ECE8E1;
+    line-height: 20px;
+    font-weight: 700;
+    text-decoration: none
+}
+.alreadyAcc{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    letter-spacing: 0.2em;
+    color: #ECE8E1;
+}
+.otpVerify p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%; 
+    letter-spacing: 0.2em;
+    color: #ECE8E1;
+    margin-bottom: 3rem;
+}
+/* #partitioned {
+    padding-left: 15px;
+    letter-spacing: 42px;
+    border: 0;
+    background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 50px 1px;
+    background-repeat: repeat-x;
+    background-position-x: 35px;
+    width: 220px;
+    outline : none;
+  } */
+
+  .otp-input{
+    background-color: #FFFFFF;
+  }
+  .otpVerify input {
+    width: 44px !important;
+    height: 44px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 4px; 
+    color: #ECE8E1;
+    font-weight: 400;
+    font-size: 30px; 
+    font-family: "Valorant"; 
+    padding-top: 7px;
+    margin-right: 23px;
+}
+form .playBtn button::before, form .playBtn button::after, form .playBtn button span::before, form .playBtn button span::after {
+    width: 140px;
+}
+form .playBtn button:hover::before, form .playBtn button:hover::after, form .playBtn button:hover span::before, form .playBtn button:hover span::after {
+    width: 124px;
+}
+form .signUp-google a {
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+    background: transparent;
+    letter-spacing: 2px;
+    padding: 1rem 2.68rem 0.85rem;
+    color: #fff !important;
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109.84%;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    padding: 0.85rem 2rem 0.65rem;
+    font-size: 18px;
+    line-height: 100%;
+    width: 100%;
+    position: relative;
+    border: 0;
+}
+.signUp-google{
+    position: relative; 
+    text-align: center;
+}
+.signUp-google a{
+    display: block;
+}
+.signUp-google a::before {
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+.signUp-google a::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.signUp-google a::before, .signUp-google a::after,
+ .signUp-google a span::before, .signUp-google a span::after {
+    width: 96px;
+}
+
+.signUp-google a::before, .signUp-google a::after, .signUp-google a span::before, .signUp-google a span::after {
+    content: '';
+    position: absolute;
+    width: 134px;
+    height: 45px;
+    background: transparent;
+    /* transition: all 1s ease; */
+    margin: -4px;
+}
+.signUp-google a span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.signUp-google a span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+form .signUp-google a:hover::before, form .signUp-google a:hover::after,
+ form .signUp-google a:hover span::before, form .signUp-google a:hover span::after{
+    width: 120px;
+    transform: scale(1.25);
+}
+.gIcon{
+    width: 18px;
+    margin-right: 7px;
+}
+.divider{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    opacity: .8;
+}
+.line-left{
+    width: 46%;
+    height: 1px;
+    border-radius: 20px;
+    background: #fff;
+    margin-right: 8px;
+}
+.line-right{
+    width: 46%;
+    height: 1px;
+    border-radius: 20px;
+    background: #fff;
+    margin-left: 8px;
+}
+@media (min-width: 1300px) {
+    .signup-box { 
+        width: 455px;
+    }    
+}
+
+@media (max-width: 1300px) {
+    .signup-box .form-control {
+        font-size: 14px; 
+        line-height: 16px;
+    }
+    
+    .login-head { 
+        font-size: 34px;
+        line-height: 110%;
+    }
+    
+    form .playBtn {
+        margin-top: 2rem;
+    }
+    
+    .alreadyAcc { 
+        margin-top: 2rem;
+    }
+    
+    .invalid-feedback {
+        color: red;
+        font-size: 10px;
+    }
+}
+  @media (max-width: 850px) {
+  
+     
+    .signup-box { 
+        width: 50%; 
+        right: 0; 
+    }
+  }
+   
+  @media (max-width: 480px) {
+    .signup-page-container { 
+        display: block;
+    }
+    .signup-page-container .signUpbackBtn { 
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .signup-page-wrapper{ 
+        margin-bottom: 3rem; 
+        height: 100%;
+    }
+    .signup-box .form-control {
+        font-size: 15px;
+    }
+    .signup-box, .login-box {  
+        left: 0;
+        right: 0; 
+        margin: auto;
+        width: 86%;
+        z-index: 99;
+    }
+    .forgot-page-wrapper:before, .Login-component::before, .signup-page-wrapper::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #00000042;
+    }
+  }
+  @media (max-width: 380px){
+    .alreadyAcc{
+        letter-spacing: 0.16em; 
+    }
+    .alreadyAcc a {
+        font-size: 15px;
+    }
+  }

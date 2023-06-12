@@ -1,0 +1,266 @@
+.pool{ 
+    background-image: url(../../Assest/img/slide3.webp);
+    height: 100vh;
+    bottom: 0;
+    top: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: #ECE8E1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+} 
+.pool #four { 
+    transform: translate(122%, 100%);
+}
+.pool .slideStar{
+    position: absolute;
+}
+.pool .slideStar #two {
+    transform: translate(208%, 348%);
+}
+.pool .slideStar #three {
+    transform: translate(1085%, 400%);
+}
+.pool #five {
+    transform: translate(710%,286%);
+} 
+
+.pool .thirdSlide .sCaption{
+    width: 30rem;
+}
+.pool .poolBtn {
+    width: 100%;
+}
+.pool .secondText {
+    left: 0;
+    /* width: 16%; */
+}
+
+.pool .firstText {
+    right: 5rem;
+    top: 32%;
+}
+.pool:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    opacity: .4;
+  }
+  .pool .thirdSlide {
+    height: 61vh; 
+}
+ 
+.shareBtn.newBtn {
+    position: relative;
+    margin-top: 2rem;
+    padding: 0;
+    margin-left: 8rem;
+}
+.shareBtn.newBtn a{
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+    background: #ECE8E1;
+    letter-spacing: 2px;
+    padding: 1rem 2.68rem 0.85rem;
+    color: #121B26 !important;
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109.84%;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    white-space: nowrap;     
+}
+.shareBtn.newBtn a::before, .shareBtn.newBtn a::after, .shareBtn.newBtn a span::before,
+ .shareBtn.newBtn a span::after{
+    content: '';
+    position: absolute;
+    width: 96px;
+    height: 45px;
+    background: transparent;
+    /* transition: all 1s ease; */
+    margin: -4px;
+    /* transition: all .25s ease-out; */
+    /* -webkit-mix-blend-mode: hue; */
+}
+
+.shareBtn.newBtn a::before{
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+.shareBtn.newBtn a:hover::before, .shareBtn.newBtn a:hover::after, .shareBtn.newBtn a:hover span::before, 
+.shareBtn.newBtn a:hover span::after {
+    width: 82px;
+    transform: scale(1.25);
+}
+
+@media (min-width: 1750px){
+    .pool .secondText {
+        left: 0;
+        /* width: 12%; */
+    }
+}
+@media (min-width: 1900px){
+    .pool .thirdSlide .sCaption {
+        width: 40%;
+    }
+    .pool .poolBtn {
+        width: 90%;
+    }
+}
+@media (min-width: 2000px){
+    .shareBtn.newBtn a {
+        padding: 1.5rem 3.68rem 1.25rem;
+        font-size: 26px;
+    }
+    .pool .thirdSlide .sCaption {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1500px){
+    .shareBtn.newBtn {
+        margin-left: 0;
+    }
+    .shareBtn.newBtn a{     
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 18px;
+        line-height: 100%;}
+    .pool .secondText {
+        left: 2rem;
+        /* width: 14%; */
+    }
+    
+    .pool .logoSlider {
+         
+        bottom: 0;
+    }
+}
+
+@media (max-width: 1300px){
+    .shareBtn.newBtn { 
+        right: -39px;
+    }
+    .shareBtn.newBtn a {
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 16px;
+    }
+}
+@media (min-width:1200px) and (max-width: 1281px){
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 1182px){
+    .playBtn a { 
+        padding: 0.85rem 2rem 0.65rem;
+        font-size: 16px;
+    }
+}
+@media (max-width: 1024px){
+    .pool .secondText {
+        left: 0rem;
+        /* width: 17%; */
+    }
+    .pool .poolBtn {
+        width: 74%;
+    }
+    
+    
+}
+@media (min-width:768px) and (max-width: 900px){
+    .pool .firstText {
+        right: 0rem;
+        top: 21%;
+    }
+    .pool .secondText {
+        left: -3rem;
+        /* width: 22%; */
+        bottom: 10rem;
+    }
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 480px){
+    .poolScreen .thirdSlide .poolBtn{
+        bottom: 6rem;
+    }
+    .shareBtn.newBtn a::before, .shareBtn.newBtn a::after, .shareBtn.newBtn a span::before, 
+    .shareBtn.newBtn a span::after {
+        width: 60px;
+    }
+    .pool .thirdSlide .sCaption{
+        height: 100%;
+    }
+    .pool .poolBtn {
+        width: 100%;
+    }
+    
+    .pool .poolBtn .playBtn {
+        width: 47%;
+    }
+    .pool .thirdSlide {
+        height: 65vh;
+        width: 84%;
+    }
+    .shareBtn.newBtn { 
+        width: 54%;
+    }
+    .poolScreen .secondText {
+        left: -3rem;
+        /* width: 42%; */
+        bottom: 7rem;
+    }
+    .pool .firstText { 
+        right: -2.65rem;
+        top: 23%;
+        width: 40%;
+    }
+    .pool .thirdSlide .sCaption {
+        width: 96%;
+    }
+}
+@media (max-width: 400px){
+   .poolScreen .secondText {
+        left: -3.75rem;
+    }
+}
+@media (max-width: 380px){
+    .pool .firstText { 
+        top: 27%;    
+    }
+    .poolScreen .secondText {
+        left: -3rem !important;
+    }
+    .poolScreen .thirdSlide .poolBtn {
+        bottom: 3rem;
+    }
+}

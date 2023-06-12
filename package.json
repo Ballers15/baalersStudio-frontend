@@ -3,15 +3,49 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@casl/ability": "^6.4.0",
+    "@casl/react": "^3.1.0",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@ionic/react": "^6.6.1",
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.2",
+    "big.js": "^6.2.1",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.2.1",
+    "ethers": "^5.7.2",
+    "font-awesome": "^4.7.0",
+    "gsap": "^3.11.4",
+    "history": "^5.3.0",
+    "jquery": "^3.6.3",
+    "mdb-react-ui-kit": "^5.1.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
+    "react-bootstrap-time-picker": "^2.0.1",
+    "react-card-slide": "^1.0.13",
+    "react-chartjs-2": "^5.2.0",
+    "react-datetime": "^3.2.0",
     "react-dom": "^18.2.0",
+    "react-lazy-load-image-component": "^1.5.6",
+    "react-modal-video": "^2.0.0",
+    "react-multi-carousel": "^2.8.2",
+    "react-otp-input": "^3.0.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-slick": "^0.29.0",
+    "react-time-picker": "^5.1.0",
+    "react-timeit": "^1.2.12",
+    "react-timekeeper": "^1.0.0",
+    "react-toastify": "^9.1.2",
+    "react-tooltip": "^5.5.1",
+    "redux-persist": "^6.0.0",
+    "web-vitals": "^2.1.4",
+    "web3": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,7 +57,11 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "eqeqeq": "off",
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": {
     "production": [

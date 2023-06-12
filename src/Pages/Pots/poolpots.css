@@ -1,0 +1,1109 @@
+.lotteryPool{
+    /* position: relative; */
+    overflow: hidden; 
+}
+.lotteryPool .playBtn a {
+    padding: 0.75rem 2rem 0.65rem;
+    background: transparent;
+    color: #fff !important;
+}
+.ht100{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.pt8{padding-top: 8rem;}
+p{font-family: 'Inter', sans-serif;}
+.img-responsive{width: 100%;}
+.potsHead{ 
+    /* background-image: url(../../Assest/img/slide3.webp); */
+    height: 100vh;
+    bottom: 0;
+    top: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    color: #ECE8E1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+} 
+ /* Works for Chrome, Safari, Edge, Opera */
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+
+ /* Works for Firefox */
+ input[type="number"] {
+   -moz-appearance: textfield;
+ }
+/* .lotteryPool #four { 
+    transform: translate(122%, 100%);
+}
+.lotteryPool .slideStar{
+    position: absolute;
+}
+.lotteryPool .slideStar #two {
+    transform: translate(208%, 348%);
+}
+.lotteryPool .slideStar #three {
+    transform: translate(1085%, 400%);
+}
+.lotteryPool #five {
+    transform: translate(710%,286%);
+}  */
+
+.lotteryPool .thirdSlide .sCaption{
+    width: 50%;
+    height: auto;
+    position: relative;
+}
+.lotteryPool .poolBtn {
+    width: 100%;
+}
+
+
+.lotteryPool .firstText {
+    right: 5rem;
+    top: 32%;
+}
+.potsHead:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    opacity: .4;
+  }
+  /* .lotteryPool .thirdSlide {
+    height: 61vh; 
+} */
+.lotteryPool .sCaption h1{
+    font-size: 100px;
+    line-height: 110px;
+}
+.lotteryPool .sCaption .textHeader { 
+    width: 66%;
+    margin: auto;
+}
+.lotteryPool .poolBtn .playBtn a{
+    position: relative;
+}
+.howItWork{
+    background: url('../../Assest/img/Ellipse5.png') #110929; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%;
+}
+
+.disabled{
+  cursor: no-drop !important; 
+}
+
+a.disabled{
+    pointer-events: none; 
+  cursor: no-drop;
+  opacity: .7;
+}
+.howItWork::before {
+    content: "";
+    background: #110929;
+    transform: rotate(229deg);
+    position: absolute;
+    left: -6%;
+    top: -6%;
+    width: 205.36px;
+    height: 100.44px;
+    z-index: 0;
+}
+.howItWork::after {
+    content: "";
+    background: #11092d;
+    transform: rotate(46.41deg);
+    position: absolute;
+    right: -7%;
+    bottom: -10%;
+    width: 192.36px;
+    height: 65.44px;
+    z-index: 2;
+}
+.activePots{
+    background: #1f0147
+}
+.font6{
+    font-weight: 600;
+}
+.rewardBox{
+    width: 76%;
+}
+.table-responsive {
+  max-height: 59vh;
+  height: fit-content;
+}
+
+.lotteryPool table th{
+    font-weight: 500;
+    border: 0;
+    font-size: 16px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+.lotteryPool table td{
+    border-bottom: 0.5px solid #b0b0b059;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px; 
+    line-height: 35px;
+    font-family: "Valorant";
+    color: #fff;
+}
+.lotteryPool table .active td{
+    color: #FF80FF
+}
+.searchBox{
+    margin-top: 4rem;
+    margin-bottom: 3rem;}
+.searchBox h4{
+    font-size: 26px;
+    line-height: 30px;
+    font-family: "Valorant";
+    color: #fff;
+    margin-bottom: 0;
+    margin-right: 2rem;
+}
+.lotteryPool .searchBar, .lotteryPool .form-control:focus{
+    cursor: pointer;
+    color: #fff !important;
+    background: #110929 !important;
+    border: 1px solid #FF80FF;
+    box-shadow: none !important;
+    /* width: 460px; */
+    border-radius: 30px;
+    line-height: 40px;
+    font-size: 20px;
+}
+.searchIcon{
+    background: transparent !important;
+    border: 0;
+    position: absolute;
+    right: 50px;
+}
+
+.resetIcon{
+  background: transparent !important;
+  border: 0;
+  position: absolute;
+  right: 10px;
+}
+
+.countFont{
+    font-family: 'VALORANT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 98%;
+}
+.countFont sub {
+    bottom: 0;
+    left: -6px;
+}
+.undColor{
+    text-align: center;
+    letter-spacing: 4px;
+    font-family: 'Inter', sans-serif;
+    color: #FF80FF;
+    opacity: .8;
+    font-size: 18px;
+    font-weight: 700;
+}
+ .expDeal{
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 98%;
+    font-family: "Valorant";
+    margin-bottom: 0;
+ }
+.video {
+    width: 100%;
+    height: 500px;
+    margin: auto;
+    display: block;
+    border: none;
+  }
+  
+  .popup-btn {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 50px auto;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #fff;
+  }
+  .youtubeBox{
+    background: #0C0425;
+    border: 4px solid #472F8F;
+    height: 415px;
+  }
+  .youtubeBox:before {
+    content: "";
+    background: #110929;
+    transform: rotate(226deg);
+    position: absolute; 
+    width: 100px;
+    height: 122px;
+    z-index: 0; 
+    background: #110929;
+    border-right: 4px solid #472F8F;
+    bottom: -55px;
+    right: -42px;
+}
+  .video-popup {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    position: fixed;
+    left: 0;
+    top: 0; 
+    z-index: 999;
+  }
+  
+  .popup-bg {
+    background: rgb(0 0 0 / 63%); 
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+  }
+  
+  .popup-content {
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: auto;
+  }
+  @keyframes waves {
+    0% {
+      -webkit-transform: scale(0.2, 0.2);
+      transform: scale(0.2, 0.2);
+      opacity: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    }
+    50% {
+      opacity: 0.9;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    }
+    100% {
+      -webkit-transform: scale(0.9, 0.9);
+      transform: scale(0.9, 0.9);
+      opacity: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    }
+  }
+  
+ 
+  .waves {
+    
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgb(66 41 142 / 48%);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    border-radius: 100%;
+    right: -50px;
+    bottom: -50px;
+    z-index: 0;
+     -webkit-animation: waves 3s ease-in-out infinite;
+    animation: waves 3s ease-in-out infinite;
+  }
+          
+  .wave-1 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+  
+  .wave-2 {
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+  }
+  
+  .wave-3 {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+  }
+  
+  /* .popup-title {
+    padding: 30px;
+    margin: 0 auto;
+    color: red;
+    text-transform: uppercase;
+  } */
+  .close-btn{ 
+    text-align: center;
+    line-height: 31px;
+    cursor: pointer;
+    position: absolute;
+    color: #fff;
+    right: 4%;
+    z-index: 1;
+    font-size: 30px;
+    font-weight: 600;
+    top: 12%;
+    border: 1px solid #737373;
+    opacity: .8;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px; 
+  }
+  .close-btn:hover{
+    opacity: 1;
+    background: #fff;
+    color: #000;
+  }
+  .finishSlider {
+    padding: 6rem 0 4rem;
+    overflow-x: hidden;
+    /* position: relative; */
+    /* background: url('../../Assest/img/bgShade.png') #1f0147; 
+    background-repeat: no-repeat;
+    background-position: 100% 68%;
+    background-size: 35%; */
+}
+  .finishSlider .playBtn{
+    height: 50px;
+
+  }
+  /* .finishSlider .react-multi-carousel-list{
+    width: 68%; 
+    float: right;
+  } */
+  .prevCarousel{
+    background: transparent;
+    border: 0;
+    color: #fff;
+    margin-left: 7rem;
+  }
+  .nextCarousel{
+    background: transparent;
+    border: 0; 
+    margin-right: -5rem;
+  }
+  .finishSlider .prevCarousel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  .finishSlider .nextCarousel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .finishText{
+    height: auto;
+  }
+  /* .finishSlider .carousel-button-group.mb-4.gap-4{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  } */
+  .finishText .fa{
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    padding: 6px;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    line-height: 18px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  p.finishText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 20px;
+    font-family: "Valorant";
+    color: #fff;
+  }
+  .finishBtn{
+    /* margin-top: 5rem;
+    margin-left: 10rem; */
+    height: 125px;
+  }
+ 
+.ribbon {
+  position: absolute; 
+  line-height: 1.5;
+  padding: 0 1rem;
+  width: 135px;
+  top: 25px;
+  right: -30px;
+  text-align: center;
+  transform-origin: 50% 50%;
+  transform: rotateZ(45deg); 
+  background: linear-gradient(118.89deg, #9522EF 14.97%, #FF80FF 91.81%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #6200A3;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+  .roundDiv{    
+    position: relative;
+    overflow: hidden;
+    background: #110929;
+    border-radius: 0 8px 8px 0px;
+    padding: 20px 30px;
+    /* height: 252px; */
+    margin: auto 0;
+    margin-bottom: 0;
+    margin-right: 2.5rem;
+  }
+  .roundDiv h3{
+    font-size: 20px;
+    color: #ECE8E1;
+    margin-bottom: 0;
+  }
+  .roundDiv p span{
+    color: #ACACAC;
+    opacity: 0.8;
+    font-size: 12px;
+  }
+  .roundDiv p{
+    font-weight: 400;
+    line-height: 18px;
+    font-size: 18px;
+  }
+  .roundDiv img{
+    margin: auto;
+    border-radius: 50%;
+    width: 100%;
+    height: 80px;
+    width: 80px;
+    margin-bottom: 8px;
+  }
+  /* .react-multi-carousel-item{
+    width: 556px !important;
+  } */
+  .roundDiv .address{
+    color: #FF80FF;
+    opacity: 0.8;
+    font-size: 10px;
+    word-wrap: break-word;
+    line-height: 12px;
+  }
+  .winHead{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    color: #ECE8E1;
+  }
+  .winHead span{
+    border-bottom: 1px solid #438CE7;
+    width: 190px;
+    height: 4px;
+    margin-left: 20px;
+  }
+  #active-pot .innerBtn a{    
+    white-space: nowrap;
+  }
+  .expDate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .expDate p{
+    font-size: 12px;
+  }
+  .claimExpire span.countFont {
+    color: #FF80FF;
+    font-size: 13px;
+}
+
+.confirm-modal button {
+  border-radius: 30px;
+  padding: 0 30px;
+  background: transparent;
+  color: #fff;
+  margin: 10px;
+  border: 2px solid #FF80FF;
+  color: #FF80FF;
+}
+
+.confirm-modal button:hover{
+  background: #FF80FF;
+  color: #fff;
+}
+
+.slick-list {
+  width: 90%; 
+  margin: auto;
+  /* margin-right: 0; */
+}
+.slick-arrow{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+
+}
+ 
+.slick-next:before, .slick-prev:before{display: none;}
+  .slick-next{
+    right: 1rem;
+    width: 50px;
+  }
+  .slick-next .finishText .fa{
+    margin-left: 10px;
+    margin-right: 0;
+  }
+  .slick-prev{
+    left: 1rem;
+    width: 50px;
+  }
+.activeImg{
+    position: absolute;
+    left: 0;
+    right: 0.25rem;
+    margin: auto;
+    top: 15px;
+    top: 44px;
+    width: 24%;
+}
+.activeImg img{
+  width: 42%;
+}
+.activeImgReward{
+  position: absolute;
+  left: 0;
+  right: -5rem;
+  margin: auto;
+  top: 36px;
+  width: 23%;
+}
+
+.finishSlider .slick-list{
+  height: 300px;
+}
+p.noRoundText {
+  font-size: 15px;
+}
+.backBtn{
+  position: absolute;
+  top: 9rem;
+  left: 9rem;
+  cursor: pointer;
+}
+.earnText{
+  display: flex; 
+    justify-content: center;
+    color: #D168D9; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    font-family: "Valorant";
+}
+.earnText .sniff{
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 22px;
+  margin-top: 9.5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-shadow: .5px .5px #fff;
+}
+.earnText .sniff div:last-child{
+  font-size: 18px;
+  margin-top: 10px;
+} 
+.borderPink {
+  padding-top: 5px;
+  border-radius: 30px;
+  background: #110929;
+  border: 1px solid #FF80FF; 
+  font-family: "Valorant";
+  text-align: center;
+  color: #fff;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 29px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 5px 20px 0;
+}
+.borderPink input {
+  padding-top: 5px;
+  border-radius: 30px;
+  background: transparent;
+  width: 100%;
+  border: 0;  
+  color: #fff;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 29px; 
+  margin: 0 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+
+.searchTab{
+  border-radius: 30px;
+  background: #110929;
+  border: 1px solid #FF80FF; 
+  text-align: center;
+  color: #fff;
+  height: 52px;
+  outline: none !important;
+  font-size: 24px;
+line-height: 29px;
+font-family: "Valorant";
+font-weight: 400;
+text-align: left;
+padding: 5px 50px 0 22px;
+font-weight: 400px;
+}
+.searchTab::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+span.leaderboardInput {
+  font-size: 18px;
+  position: absolute;
+}
+
+
+ button[type="submit"].searchIcon {
+  text-indent: -999px;
+  overflow: hidden;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: inherit; 
+  background: transparent url("../../Assest/img/search.png") no-repeat 9px center !important; 
+  cursor: pointer;
+  opacity: 0.7;
+  position: relative;
+}
+
+ /* input.searchTab {
+   border: 1px solid #555;
+   width: 100%;
+   padding: 9px 4px 9px 40px;
+ } */
+.angleIcon {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
+.workArrowDown {
+  position: absolute;
+  right: 16%;
+  top: 66px;
+}
+  @media (min-width: 1600px) {
+    .winHead span { 
+      width: 255px;
+    }
+  }
+
+@media (min-width: 1900px){
+    .lotteryPool .sCaption {
+        width: 40%;
+    }
+    .lotteryPool .poolBtn {
+        width: 90%;
+    }
+}
+ 
+
+@media (max-width: 1500px){
+ 
+    .lotteryPool .logoSlider {
+         
+        bottom: 0;
+    }
+}
+@media (max-width: 1380px){
+  .lotteryPool .sCaption h1 {
+    font-size: 96px;
+  }
+}
+@media (max-width: 1300px){
+  .workArrowDown { 
+    right: 14%; 
+}
+  .lotteryPool .sCaption h1 {
+    font-size: 89px;
+  }
+}
+@media (min-width:1200px) and (max-width: 1281px){
+  .backBtn { 
+    left: 6rem;
+  }
+    .pool .poolBtn {
+        width: 78%;
+    }
+}
+@media (min-width:1023px) and (max-width: 1200px){
+  .howItWork::after {  
+    bottom: -4%;
+  }
+  .roundDiv { 
+    margin-right: 2.75rem; 
+}
+  p.finishText{
+    font-size: 20px;
+  }
+  .lotteryPool .thirdSlide .sCaption {
+    width: 72%;
+  }
+  .wthMob{
+    width: 40%;
+  }
+  .nextCarousel { 
+    margin-right: -8rem;
+}
+.winHead span { 
+  width: 96px;
+}
+
+}
+@media (max-width: 1024px){
+  .slick-list{
+    width: 84%;
+  }
+  .searchTab{
+    width: 100%;
+  }
+  .prevCarousel { 
+    margin-left: 2rem;
+}
+    .lotteryPool .poolBtn {
+        width: 74%;
+    }
+    
+    
+}
+@media (min-width:768px) and (max-width: 900px){
+  .howItWork::before{
+    left: -11%;
+  }
+  .cardwidth {
+    width: 86%;
+}
+  .earnText .sniff { 
+    font-size: 21px;    
+    margin-top: 4.5px;
+
+  }
+  .earnText { 
+    font-size: 18px;
+  }
+  .heading2{
+    font-size: 60px;
+  }
+  .youtubeBox { 
+    margin: 4rem 0 3rem;
+}
+    .backBtn {  
+      left: 5rem;
+    }
+    .undColor {
+      font-size: 16px;
+    }
+    .expDeal { 
+      font-size: 38px;
+    }
+    .ht100{min-height: 100%;}
+    .slick-slide .d-md-flex{
+      justify-content: center;
+    }
+    .roundDiv { 
+      margin-right: 2.75rem;
+      min-width: 310px;
+  }
+  .wthMob { 
+      margin-left: 1rem;
+  }
+  .countFont{
+    font-size: 28px;
+  }
+  .howItWork { 
+    background-size: 42%;
+    background-position: 100% -45%;
+}
+.workArrowDown { 
+  right: 7%;
+  top: 67px;
+}
+  p.finishText { 
+    font-size: 18px;
+  }
+  .nextCarousel{display: none;}
+  .wthMob{
+    width: 50%;
+  }
+  .winHead span { 
+    width: 106px;
+  }
+  .prevCarousel { 
+    margin-left: 1rem;
+}
+  .lotteryPool .thirdSlide .sCaption {
+    width: 90%;
+  }
+  .popup-content { 
+    width: 760px;
+  }
+  .howItWork::after { 
+    right: -7%;
+    bottom: -6%; 
+    height: 82.44px;
+  }
+    .lotteryPool .firstText {
+        right: 0rem;
+        top: 21%;
+    }
+   
+    
+    .lotteryPool .poolBtn {
+        width: 78%;
+    }
+}
+@media (max-width: 480px){
+  .finishText .fa { 
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 15px; 
+  }
+  .cardwidth{
+    /* width: 75%;  */
+    margin: 0 1rem;
+    width: 90%;
+    margin: auto;
+  }
+  .finishSlider .slick-list{
+    height: 500px;
+  }
+  .activeImgReward { 
+    right: -4rem; 
+    width: 25%;
+}
+  .workArrowDown{display: none;}
+  .d-flex.justify-content-end{
+    justify-content: center !important;
+  }
+  .borderPink{
+    margin: 15px 9px 0;
+  }
+  .borderPink input{
+    margin: 0;
+  }
+  span.leaderboardInput {
+    font-size: 15px;
+}
+.lotteryPool table td { 
+  font-size: 15px; 
+  padding: 0.5rem 0.75rem;
+}
+  .lotteryPool .poolBtn .playBtn {
+    width: 85%;
+  }
+  .countFont{
+    font-size: 30px;
+  }
+  .undColor{
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .earnText .sniff{ 
+    line-height: 20px; 
+    font-size: 21px;
+    margin-top: 2.5px;
+  }
+  .earnText { 
+    font-size: 18px;
+  }
+ 
+.lotteryPool .heading {
+  font-size: 35px;
+  line-height: 130%;
+  width: 76%;
+  margin: auto;
+}
+.headWth {
+  width: 100%;
+} 
+  .lotteryPool .heading2 {
+    font-size: 46px;
+    left: 0;
+    top: -28%;
+    line-height: 130%;
+}
+ .lotteryPool .activeImg { 
+    top: 33px;
+    width: 30%;
+}
+  .rewardBox {
+    width: 98%;
+}
+  .table-responsive {
+    max-height: 69vh;
+    height: fit-content;
+}
+  .backBtn { 
+    top: 7rem;
+    left: 1rem;
+  }
+  .slick-slide .wthMob {
+    width: 80%;
+  }
+ 
+.slick-next{
+  right: 0; 
+}
+.slick-prev{
+  left: .25em; 
+}
+.slick-list{
+  width: 80%;
+}
+
+  .searchBox { 
+    display: block;
+    text-align: center;
+}
+.searchBox h4 { 
+  margin-bottom: 1rem;
+}
+  .lotteryPool table td{
+    white-space: nowrap;
+  }
+  .wthMob{
+    width: 50%;
+  }
+  .roundDiv { 
+    padding: 15px 16px;
+    width: 280px;
+  }
+  .winHead span { 
+    width: 50px;
+  }
+  .roundDiv p span { 
+    font-size: 9px;
+  }
+  .roundDiv p { 
+    line-height: 16px;
+    font-size: 14px;
+}
+.roundDiv img { 
+  height: 50px;
+  width: 50px; 
+}
+  /* .finishSlider .react-multi-carousel-list{
+    width: 100%;
+  } */
+  /* .carousel-button-group{
+    display: none;
+  } */
+  .popup-content { 
+    width: 360px;
+  }
+  .pt8 {
+    padding-top: 3rem;
+} 
+.howItWork .ps-4{
+  padding-top: 2rem;
+  padding-left: 0 !important;
+}
+  .howItWork::after { 
+    right: -9%;
+    bottom: -3%;
+    width: 80.36px;
+    height: 61.44px; 
+}
+.howItWork::before { 
+  left: -14%;
+  top: -4%;
+  width: 90.36px;
+  height: 96.44px; 
+}
+    .lotteryPool .sCaption .textHeader {
+        width: 95%;
+    }
+    .thirdSlide .poolBtn{
+        bottom: 0;
+    }
+    .lotteryPool .sCaption h1 {
+        font-size: 53px;
+        line-height: 98px;
+    }
+    .lotteryPool .poolBtn {
+        width: 100%;
+        margin-top: 35px;
+    }  
+    .lotteryPool .thirdSlide .sCaption {
+        width: 96%;
+    }
+}
+@media (max-width: 400px){
+  .thirdSlide .poolBtn {
+    right: 1.5rem;
+}
+  .pool .secondText {
+    left: -4rem;
+  }
+
+  .lotteryPool .thirdSlide .poolBtn { 
+    right: 0;
+} 
+}
+@media (max-width: 380px){
+  
+  .lotteryPool .poolBtn .playBtn {
+    width: 85%;
+  }
+  
+  .lotteryPool .sCaption h1{
+    font-size: 48px;
+    line-height: 85px;
+  }
+  .earnText .sniff{
+    margin-left: .65rem;
+    margin-right: .65rem;
+
+  }
+}

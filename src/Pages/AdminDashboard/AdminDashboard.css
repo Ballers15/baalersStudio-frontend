@@ -1,0 +1,215 @@
+.admin-dashboard{
+    margin-top: 120px ;
+    color: white;
+    padding: 50px;
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
+}
+
+.users-listing{
+    padding: 50px; 
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
+}
+.users-list-filters{
+    margin-top: 100px;
+    color: #fff;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-evenly;
+    column-gap: 100px;
+    margin-bottom: 50px;
+}
+/* .users-list-filters input{
+    width: 200px;
+    height: 50px;
+    
+} */
+.users-list-filters input.form-control {
+    background: transparent;
+    color: #fff;
+}
+
+.users-lisitng-container{
+    color: #fff;
+  border-radius: 31px;
+  background: #110929; 
+             border-radius: 20px;
+background: #210e58;
+box-shadow: inset 45px -45px 42px #130834,
+            inset -45px 45px 42px #2f147c;
+    /* padding: 50px;
+    margin: auto;
+    background: linear-gradient(180deg, #2f147c 0%, rgba(17, 9, 41, 0.1) 145.5%);
+    border-radius: 31px;
+    background: #110929;
+    border-radius: 31px;
+    background: #210e58;
+    box-shadow: inset 45px -45px 42px #130834,
+              inset -45px 45px 42px #2f147c; */
+
+}
+
+/* .users-lisitng-container hr {
+    margin: 0 !important;
+    color: inherit;
+    border: 0;
+    border-top: 2px solid;
+    opacity: .25;
+  } */
+
+.users-listing-table-body, td, tfoot, th, .users-listing-table-head, tr{
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.users-listing-table{
+    color: #fff;
+    border-radius: 31px;
+    background: #110929;
+    border-radius: 31px;
+    background: #210e58;
+    box-shadow: inset 45px -45px 42px #130834,
+              inset -45px 45px 42px #2f147c;
+  }
+  
+  .users-listing-table-body {
+    display: block;
+    height: 352px;
+    overflow: auto;
+    margin-bottom: 30px;
+    padding: 0;
+  }
+ 
+ 
+.users-listing-table-head, .users-listing-table-body tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
+  }
+  
+  .users-listing hr {
+    margin: 0 !important;
+    color: inherit;
+    border: 0;
+    border-top: 2px solid;
+    opacity: .25;
+  }
+  .viewWallet td {
+    border-bottom: 0;
+}
+.viewWallet td, .viewWallet th{
+    font-size: 1rem;
+}
+.viewWallet .modal-content{
+    padding: 0;
+  }
+  .viewWallet .modal-content .modal-body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .viewWallet select.form-select {
+    background: transparent;
+    color: #fff;
+    border: 0;
+    text-align: center;
+    background-image: url(../../Assest/img/dropdown.png);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    box-shadow: none !important;
+}
+.viewWallet option,  .admin-dashboard option {
+    color: #fff;
+}
+input[type="date"] {
+    position: relative; 
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+  }
+  
+  input[type="date"]:before {
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    /* top: 12px; */
+    right: 0.75rem;
+    color: #fff;
+    /* cursor: pointer; */
+  }
+  .emailWth{
+    white-space: nowrap;
+    min-width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    margin-right: 14px;
+    text-align: left;
+  }
+  .pieCard, .graphCard{
+    height: 400px; 
+  }
+  .pieCard canvas{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .admin-dashboard .card{
+    background: #2b1273;
+    border: .5px solid #110929;
+    padding: 1rem;
+    min-height: 140px;
+    margin: 1rem 0;
+    border-radius: 20px;    
+    box-shadow: rgb(0 0 0 / 45%) 1.95px 1.95px 2.6px;
+    background: #210e58;
+    box-shadow: inset 45px -45px 42px #130834, inset -45px 45px 42px #2f147c;
+  }
+  .admin-dashboard .card h4{
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .admin-dashboard .card .dataFont{    
+    font-size: 16px;
+    color: #d3d3d3;
+
+  }
+  .admin-dashboard .form-select{
+    margin: auto;
+    margin-right: 0;
+    background: transparent;
+    color: #fff;
+    width:14%;
+    background-image: url(../../Assest/img/dropdown.png);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    box-shadow: none !important;
+  }
+   .form-control::placeholder {
+        
+        /* Firefox, Chrome, Opera */
+        color: #fffefd ;
+    }
+      
+    .form-control:-ms-input-placeholder {
+        
+        /* Internet Explorer 10-11 */
+        color: #fffefd ;
+    }
+      
+    .form-control::-ms-input-placeholder {
+        
+        /* Microsoft Edge */
+        color: #fffefd ;
+    }

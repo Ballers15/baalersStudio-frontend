@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Ballers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+Gaming Portal - Reward withdrawal portal.
+This project was generated with [REACT LIBRARY](https://github.com/facebook/react) version ^18.2.0.
 
-## Available Scripts
+## Prerequisites
+Make sure you have installed all of the following prerequisites on your development machine: Git - Download & Install Git. OSX and Linux machines typically have this already installed. Version 18.2.0 Reactjs - Download & Install Reactjs and the npm package manager.
 
-In the project directory, you can run:
+## Updated Branch
 
-### `npm start`
+feature/admin
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Working Branch
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+feature/admin
 
-### `npm test`
+## Version 0.0.2
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+View Current Version Updates [linky](./VERSION.md)
 
-### `npm run build`
+## Get Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Get started developing...
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```shell
+# clone backend in your local system
+git clone git@bitbucket.org:4321r/ballers-frontend.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#Latest branch
+git checkout feature/admin
+# install dependencies
+npm install
+# run in development mode
+npm start
+```
 
-### `npm run eject`
+## Development server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Staging server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[Staging Server](https://dev.ballers.fun/).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Code scaffolding
 
-## Learn More
+Format used is pure javascript, to make modules and component create manual folder and filer inside this folder with extention .js to run it as a component
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run `npm build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Code Splitting
+## Running unit tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Unit Testing: Use a testing library such as Jest or Mocha to test individual components and their functionality in isolation.
 
-### Analyzing the Bundle Size
+## Running end-to-end tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+End-to-End Testing: Test the entire app as a user would by automating user interactions with tools like Selenium or Puppeteer.
 
-### Making a Progressive Web App
+## Further help
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To get more help on the React Library use `npm help` or go check out the [REACT README](https://github.com/facebook/react#readme).

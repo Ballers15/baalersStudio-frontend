@@ -1,3 +1,11 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap'); */
+@font-face {
+  font-family: "Valorant";
+  src: local("Valorant"),
+   url("../public/font/valorant/Valorant-Font.ttf") format("truetype");
+  font-weight: bold;
+ }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,8 +14,138 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+::placeholder {
+  color: #ab34c5;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#back-to-top .top { z-index: 999; position: fixed; margin: 0px; color: #fff; background: #260059; position: fixed; bottom: 15px; right: 25px; z-index: 999; font-size: 26px; width: 50px; height: 50px; text-align: center; line-height: 50px; border-radius: 90px; -webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
+#back-to-top .top:hover { background: #1d1366; color: #fff; -webkit-box-shadow: 0px 0px 30px 0px rgba(34, 34, 34, 0.1); -moz-box-shadow: 0px 0px 30px 0px rgba(34, 34, 34, 0.1); box-shadow: 0px 0px 30px 0px rgba(34, 34, 34, 0.1); }
+
+li{list-style: none;}
+.loader--hide {
+  display: none;
+}
+
+.Toastify__progress-bar{
+  height: 0 !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success,
+.Toastify__toast-theme--colored.Toastify__toast--info,.Toastify__toast-theme--colored.Toastify__toast--error, .Toastify__toast-theme--colored.Toastify__toast--default{
+  background: transparent !important;
+  padding: 24px 8px; 
+  box-shadow: none;
+}
+.Toastify__toast-body > div:last-child { 
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF; 
+}
+.Toastify__close-button path {
+  transform: translate(0, -0);
+}
+
+
+.Toastify__toast--default .Toastify__toast-body {  
+  background: #f8f8f8;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 60px;
+  max-height: 800px;
+}
+.Toastify__toast--default .Toastify__toast-body > div:last-child{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: black;
+}
+.Toastify__spinner{
+  border-right-color: #000;
+}
+.Toastify__toast--success .Toastify__toast-body {  
+  background: #76BF4C;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 60px;
+  max-height: 800px;
+}
+.Toastify__toast--success .Toastify__close-button{
+  background: #055816;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px; 
+  top: 15px;
+  position: absolute;
+  right: 8px; 
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Toastify__toast--success .Toastify--animate-icon{
+  background-image: url('Assest/img/toasterGreen.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.Toastify .Toastify__toast-icon { 
+  width: 39px;
+}
+.Toastify .Toastify__toast-container--top-right {
+  top: 3em;
+  right: 0em;
+}
+/* .Toastify__toast-theme--colored.Toastify__toast--error{
+  background: transparent !important;
+  padding: 24px 8px; 
+} */
+.Toastify__toast--error .Toastify--animate-icon{
+  background-image: url('Assest/img/toasterRed.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.Toastify__toast--error .Toastify__toast-body {  
+  background: #F64B3C;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 60px;
+  max-height: 800px;
+}
+.Toastify__toast--error .Toastify__close-button{
+  background: #C81912;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px; 
+  top: 15px;
+  position: absolute;
+  right: 8px; 
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Toastify__toast--info .Toastify__toast-body{
+  background: #3498db;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 60px;
+  max-height: 800px;
+}
+.Toastify__toast--info .Toastify__close-button{
+  background: #017dd0;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px; 
+  top: 15px;
+  position: absolute;
+  right: 8px; 
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

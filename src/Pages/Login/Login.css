@@ -1,0 +1,247 @@
+.Login-component {
+    background-image: url(../../Assest/img/loginBg.png);
+    height: 100vh; 
+    width: 100vw; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Inter', sans-serif;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.login-box{
+    box-sizing: border-box; 
+    width: 380px;
+    height: 492px;
+    margin-right: 10%; 
+    height: auto;
+}
+
+.login-head{
+    /* position: absolute; */
+    /* width: 100%;
+    height: 18px; */
+    /* left: 171px; */ 
+    /* text-align: center;  */
+    font-family: 'VALORANT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 120%;
+    color: #ECE8E1;
+}
+.form-control {    
+    color: #ECE8E1 !important;
+    border-radius: 0; 
+    box-shadow: none !important;
+    background: transparent !important;
+    border: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.25em;
+    border-bottom: 1.5px solid #FFFFFF;
+    
+}
+form{
+    position: relative;
+}
+label.form-check-label, .alreadyAcc {
+    color: #ECE8E1;
+    font-size: 14px;
+    line-height: 18px;  
+}
+.invalid-feedback{
+    text-align: right;
+    letter-spacing: 0.2em;
+    color: #FF0000;
+    right: 0;
+    font-size: 12px;
+    line-height: 15px;
+}
+form .playBtn{
+    margin-top: 3rem;
+}
+form .playBtn button{
+    position: absolute;
+    text-decoration: none;
+    text-align: center;
+    background: #ECE8E1;
+    letter-spacing: 2px;
+    padding: 1rem 2.68rem 0.85rem;
+    color: #121B26 !important;
+    font-family: "Valorant";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109.84%;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    padding: 0.85rem 2rem 0.65rem;
+    font-size: 18px;
+    line-height: 100%;
+    width: 100%;
+    position: relative;
+}
+/* .login-email-lable{
+    position: absolute;
+    width: 45px;
+    height: 21px; 
+    bottom: 54px;
+} */
+
+/* .login-password-lable{
+    position: absolute;
+    width: 45px;
+    height: 21px; 
+    bottom: 52px;
+} */
+
+/* .login-form-lable{ 
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+.login-email-input{
+    box-sizing: border-box;
+    position: absolute;
+    width: 401px;
+    height: 54px;
+    left: 65px;
+    color: #FFFFFF;
+    top: 136px;
+    border: 1px solid #9D9D9D;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.9);
+} */
+
+/* .login-password-input{
+    box-sizing: border-box;
+    position: absolute;
+    width: 401px;
+    height: 54px;
+    left: 65px;
+    color: #FFFFFF;
+    top: 246px;
+    border: 1px solid #9D9D9D;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.9);
+} */
+
+/* .login-submit-button{
+    cursor: pointer;
+    position: absolute;
+    width: 175px;
+    height: 54px;
+    left: 65px;
+    top: 336px;
+    background: #FFFFFF;
+    border-radius: 8px; 
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+} */
+
+.login-forget-password{
+    /* cursor: pointer;  
+    display: flex;  */
+    font-size: 14px;
+    line-height: 18px; 
+    letter-spacing: 0.2em; 
+    text-align: right;
+    margin-top: 3rem;
+}
+.login-forget-password a{
+    color: #ECE8E1;
+    text-decoration: none;
+}
+
+.login-signup-tag{
+    /* position: absolute; */
+    width: 120px;
+    height: 16px;
+    left: 200px;
+    top: 436px; 
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    
+}
+
+.login-signup-tag-danger{
+    cursor: pointer;
+    /* position: absolute; */
+    width: 90px;
+    height: 16px;
+    left: 322px;
+    top: 436px; 
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #FF4655;
+}
+
+/* .form-control{
+    padding: 0.8rem 0.75rem !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+} */
+form .playBtn button::before, form .playBtn button::after, form .playBtn button span::before, form .playBtn button span::after{
+    width: 182px;
+    content: '';
+    position: absolute; 
+    height: 45px;
+    background: transparent;  
+    margin: -4px;
+}
+form .playBtn button:hover::before, form .playBtn button:hover::after, form .playBtn button:hover span::before, form .playBtn button:hover span::after{
+    width: 161px;
+    transform: scale(1.25);
+}
+form .playBtn button::after {
+    top: -2px;
+    right: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+form .playBtn button::before{
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+form .playBtn button span::before {
+    bottom: -2px;
+    left: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-left: 2px solid #ECE8E1;
+}
+form .playBtn button span::after {
+    bottom: -2px;
+    right: -2px;
+    border-bottom: 2px solid #ECE8E1;
+    border-right: 2px solid #ECE8E1;
+}
+@media (max-width: 480px){
+    .login-box {  
+        margin: auto;
+        width: 86%;
+    }
+}
